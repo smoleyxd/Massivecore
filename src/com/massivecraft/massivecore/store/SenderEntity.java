@@ -215,7 +215,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 	
 	public String getIp()
 	{
-		return MixinPlayed.get().getIp(this.getId());
+		return MixinPlayed.get().getIp(this.sender);
 	}
 	
 	public boolean isVisible()
