@@ -552,6 +552,17 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return true;
 	}
 	
+	public int getPageParameterIndex()
+	{
+		int pageParamIndex = 0;
+		for (Parameter param : this.getParameters())
+		{
+			if (param.getName().equals("page")) return pageParamIndex;
+			pageParamIndex++;
+		}
+		return -1;
+	}
+	
 	// -------------------------------------------- //
 	// PARAMETERS > COUNT
 	// -------------------------------------------- //
