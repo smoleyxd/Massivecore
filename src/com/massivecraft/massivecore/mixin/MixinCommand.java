@@ -33,6 +33,9 @@ public class MixinCommand extends Mixin
 		CommandSender sender = IdUtil.getSender(senderObject);
 		if (sender == null) return false;
 		
+		// Discard the unwanted /
+		commandLine = commandLine.startsWith("/") ? commandLine.substring(1) : commandLine;
+		
 		// Great! Let's do it!
 		Bukkit.getServer().dispatchCommand(sender, commandLine);
 		return true;
