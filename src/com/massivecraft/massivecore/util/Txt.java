@@ -698,8 +698,8 @@ public class Txt
 			// If a valid index has been identified, Set the new page number there
 			if (pageParamIndex > -1 && pageParamIndex < arguments.size()) arguments.set(pageParamIndex, number);
 			
-			// If unable to find valid page parameter, add the new page as a leading argument (fallback)
-			else arguments.add(0, number);
+			// If unable to find valid page parameter, add the new page as a trailing argument (fallback)
+			else arguments.add(number);
 
 			commandLine = command.getCommandLine(arguments);
 		}
