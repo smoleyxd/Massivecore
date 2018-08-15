@@ -1,20 +1,20 @@
 package com.massivecraft.massivecore.store;
 
-import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.collections.MassiveMap;
+import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
-import com.massivecraft.massivecore.xlib.mongodb.BasicDBObject;
-import com.massivecraft.massivecore.xlib.mongodb.DB;
-import com.massivecraft.massivecore.xlib.mongodb.DBCollection;
-import com.massivecraft.massivecore.xlib.mongodb.DBCursor;
 import com.massivecraft.massivecore.xlib.mongodb.MongoClient;
 import com.massivecraft.massivecore.xlib.mongodb.MongoClientURI;
+import com.massivecraft.massivecore.xlib.mongodb.MongoNamespace;
+import com.massivecraft.massivecore.xlib.mongodb.client.FindIterable;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoCollection;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,10 +29,9 @@ public class DriverMongo extends DriverAbstract
 	public final static String ID_FIELD = "_id";
 	public final static String MTIME_FIELD = "_mtime";
 	
-	public final static BasicDBObject dboEmpty = new BasicDBObject();
-	public final static BasicDBObject dboKeysId = new BasicDBObject().append(ID_FIELD, 1);
-	public final static BasicDBObject dboKeysMtime = new BasicDBObject().append(MTIME_FIELD, 1);
-	public final static BasicDBObject dboKeysIdandMtime = new BasicDBObject().append(ID_FIELD, 1).append(MTIME_FIELD, 1);
+	public final static Document dboKeysId = new Document().append(ID_FIELD, 1);
+	public final static Document dboKeysMtime = new Document().append(MTIME_FIELD, 1);
+	public final static Document dboKeysIdandMtime = new Document().append(ID_FIELD, 1).append(MTIME_FIELD, 1);
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -49,19 +48,19 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public Db getDb(String uri)
 	{
-		DB db = this.getDbInner(uri);
+		MongoDatabase db = this.getDbInner(uri);
 		return new DbMongo(this, db);
 	}
 	
 	@Override
 	public boolean dropDb(Db db)
 	{
-		if ( ! (db instanceof DbMongo)) throw new IllegalArgumentException("db");
-		DbMongo dbMongo = (DbMongo)db;
+		if (!(db instanceof DbMongo)) throw new IllegalArgumentException("db");
+		DbMongo dbMongo = (DbMongo) db;
 		
 		try
 		{
-			dbMongo.db.dropDatabase();
+			dbMongo.db.drop();
 			return true;
 		}
 		catch (Exception e)
@@ -73,7 +72,13 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public Set<String> getCollnames(Db db)
 	{
-		Set<String> ret = ((DbMongo)db).db.getCollectionNames();
+		Set<String> ret = new HashSet<>();
+		
+		for (String col : ((DbMongo) db).db.listCollectionNames())
+		{
+			ret.add(col);
+		}
+		
 		ret.remove("system.indexes");
 		ret.remove("system.users");
 		return ret;
@@ -85,8 +90,8 @@ public class DriverMongo extends DriverAbstract
 		if (!this.getCollnames(db).contains(from)) return false;
 		if (this.getCollnames(db).contains(to)) return false;
 		
-		DB mdb = ((DbMongo)db).db;
-		mdb.getCollection(from).rename(to);
+		MongoDatabase mdb = ((DbMongo) db).db;
+		mdb.getCollection(from).renameCollection(new MongoNamespace(mdb.getName(), to));
 		
 		return true;
 	}
@@ -94,47 +99,55 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public boolean containsId(Coll<?> coll, String id)
 	{
-		DBCollection dbcoll = fixColl(coll);
-		DBCursor cursor = dbcoll.find(new BasicDBObject(ID_FIELD, id));
-		return cursor.count() != 0;
+		MongoCollection dbcoll = fixColl(coll);
+		return dbcoll.find(new Document(ID_FIELD, id)).first() != null;
 	}
 	
 	@Override
 	public long getMtime(Coll<?> coll, String id)
 	{
-		DBCollection dbcoll = fixColl(coll);
+		MongoCollection dbcoll = fixColl(coll);
 		
-		BasicDBObject found = (BasicDBObject)dbcoll.findOne(new BasicDBObject(ID_FIELD, id), dboKeysMtime);
+		Document found = (Document) dbcoll.find(new Document(ID_FIELD, id)).projection(dboKeysMtime).first();
 		if (found == null) return 0;
 		
 		// In case there is no _mtime set we assume 1337.
 		// NOTE: We can not use 0 since that one is reserved for errors.
 		// Probably a manual database addition by the server owner.
-		long mtime = found.getLong(MTIME_FIELD, 1337L);
+		Object mtime = found.get(MTIME_FIELD);
 		
+		mtime = cleanMtime(mtime);
+		
+		return mtime == null ? 1337L : (Long) mtime;
+	}
+	
+	private Object cleanMtime(Object mtime)
+	{
+		if (! (mtime instanceof Long) && mtime != null) {
+			if (mtime instanceof Integer) {
+				mtime = ((Integer) mtime).longValue();
+			}
+			else {
+				System.out.println("ERROR - Invalid mtime");
+				mtime = null;
+			}
+		}
 		return mtime;
 	}
 	
 	@Override
 	public Collection<String> getIds(Coll<?> coll)
 	{
-		List<String> ret = null;
+		List<String> ret;
 		
-		DBCollection dbcoll = fixColl(coll);
+		MongoCollection dbcoll = fixColl(coll);
 		
-		DBCursor cursor = dbcoll.find(dboEmpty, dboKeysId);
-		try
-		{
-			ret = new ArrayList<>(cursor.count());
-			while (cursor.hasNext())
-			{
-				Object remoteId = cursor.next().get(ID_FIELD);
-				ret.add(remoteId.toString());
-			}
-		}
-		finally
-		{
-			cursor.close();
+		FindIterable found = dbcoll.find().projection(dboKeysId);
+		
+		ret = new ArrayList<>((int) dbcoll.countDocuments());
+		
+		for (Object doc : found) {
+			ret.add(((Document)doc).get(ID_FIELD).toString());
 		}
 		
 		return ret;
@@ -143,55 +156,52 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public Map<String, Long> getId2mtime(Coll<?> coll)
 	{
-		Map<String, Long> ret = null;
+		Map<String, Long> ret;
 		
-		DBCollection dbcoll = fixColl(coll);
+		MongoCollection dbcoll = fixColl(coll);
 		
-		DBCursor cursor = dbcoll.find(dboEmpty, dboKeysIdandMtime);
-		try
-		{
-			ret = new HashMap<>(cursor.count());
-			while (cursor.hasNext())
-			{
-				BasicDBObject raw = (BasicDBObject)cursor.next();
-				Object remoteId = raw.get(ID_FIELD);
-				
-				// In case there is no _mtime set we assume 1337.
-				// NOTE: We can not use 0 since that one is reserved for errors.
-				// Probably a manual database addition by the server owner.
-				long mtime = raw.getLong(MTIME_FIELD, 1337L);
-				
-				ret.put(remoteId.toString(), mtime);
-			}
-		}
-		finally
-		{
-			cursor.close();
+		FindIterable found = dbcoll.find().projection(dboKeysIdandMtime);
+		
+		ret = new HashMap<>((int)dbcoll.countDocuments());
+		
+		for (Object doc : found) {
+			Document raw = (Document) doc;
+			Object remoteId = raw.get(ID_FIELD);
+			Object mtime = raw.get(MTIME_FIELD);
+			
+			mtime = cleanMtime(mtime);
+			
+			// In case there is no _mtime set we assume 1337.
+			// NOTE: We can not use 0 since that one is reserved for errors.
+			// Probably a manual database addition by the server owner.
+			//Long mtime = raw.getLong(MTIME_FIELD);
+			
+			ret.put(remoteId.toString(), mtime == null ? 1337L : (Long)mtime);
 		}
 		
 		return ret;
 	}
-
+	
 	@Override
 	public Entry<JsonObject, Long> load(Coll<?> coll, String id)
 	{
-		DBCollection dbcoll = fixColl(coll);
-		BasicDBObject raw = (BasicDBObject)dbcoll.findOne(new BasicDBObject(ID_FIELD, id));
+		MongoCollection dbcoll = fixColl(coll);
+		Document raw = (Document) dbcoll.find(new Document(ID_FIELD, id)).first();
 		return loadRaw(raw);
 	}
 	
-	public Entry<JsonObject, Long> loadRaw(BasicDBObject raw)
+	public Entry<JsonObject, Long> loadRaw(Document raw)
 	{
 		if (raw == null) return new SimpleEntry<>(null, 0L);
 		
 		// Throw away the id field
-		raw.removeField(ID_FIELD);
+		raw.remove(ID_FIELD);
 		
 		// In case there is no _mtime set we assume 1337.
 		// NOTE: We can not use 0 since that one is reserved for errors.
 		// Probably a manual database addition by the server owner.
 		long mtime = 1337L;
-		Object mtimeObject = raw.removeField(MTIME_FIELD);
+		Object mtimeObject = raw.remove(MTIME_FIELD);
 		if (mtimeObject != null)
 		{
 			mtime = ((Number)mtimeObject).longValue();
@@ -207,74 +217,65 @@ public class DriverMongo extends DriverAbstract
 	public Map<String, Entry<JsonObject, Long>> loadAll(Coll<?> coll)
 	{
 		// Declare Ret
-		Map<String, Entry<JsonObject, Long>> ret = null;
+		Map<String, Entry<JsonObject, Long>> ret;
 		
 		// Fix Coll
-		DBCollection dbcoll = fixColl(coll);
+		MongoCollection dbcoll = fixColl(coll);
 		
 		// Find All
-		DBCursor cursor = dbcoll.find();
+		FindIterable found = dbcoll.find();
 		
-		try
-		{
-			// Create Ret
-			ret = new MassiveMap<>(cursor.count());
+		// Create Ret
+		ret = new MassiveMap<>((int) dbcoll.countDocuments());
+		
+		// For Each Found
+		for (Object doc : found) {
+			Document raw = (Document) doc;
 			
-			// For Each Found
-			while (cursor.hasNext())
-			{
-				BasicDBObject raw = (BasicDBObject)cursor.next();
-				
-				// Get ID
-				Object rawId = raw.removeField(ID_FIELD);
-				if (rawId == null) continue;
-				String id = rawId.toString();
-				
-				// Get Entry
-				Entry<JsonObject, Long> entry = loadRaw(raw);
-				// NOTE: The entry can be a failed one with null and 0.
-				// NOTE: We add it anyways since it's an informative failure.
-				// NOTE: This is supported by our defined specification.
-				
-				// Add
-				ret.put(id, entry);
-			}
+			// Get ID
+			Object rawId = raw.remove(ID_FIELD);
+			if (rawId == null) continue;
+			String id = rawId.toString();
 			
-		}
-		finally
-		{
-			cursor.close();
+			// Get Entry
+			Entry<JsonObject, Long> entry = loadRaw(raw);
+			// NOTE: The entry can be a failed one with null and 0.
+			// NOTE: We add it anyways since it's an informative failure.
+			// NOTE: This is supported by our defined specification.
+			
+			// Add
+			ret.put(id, entry);
 		}
 		
 		// Return Ret
 		return ret;
 	}
-
+	
 	@Override
 	public long save(Coll<?> coll, String id, JsonObject data)
-	{		
-		DBCollection dbcoll = fixColl(coll);
+	{
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		
-		BasicDBObject dbo = new BasicDBObject();
+		Document doc = new Document();
 		
 		long mtime = System.currentTimeMillis();
-		dbo.put(ID_FIELD, id);
-		dbo.put(MTIME_FIELD, mtime);
+		doc.put(ID_FIELD, id);
+		doc.put(MTIME_FIELD, mtime);
 		
-		GsonMongoConverter.gson2MongoObject(data, dbo);
+		GsonMongoConverter.gson2MongoObject(data, doc);
 		
-		dbcoll.save(dbo, MassiveCoreMConf.get().getMongoDbWriteConcernSave());
-
+		dbcoll.replaceOne(new Document(ID_FIELD, id), doc);
+		
 		return mtime;
 	}
-
+	
 	@Override
 	public void delete(Coll<?> coll, String id)
 	{
-		DBCollection dbcoll = fixColl(coll);
-		dbcoll.remove(new BasicDBObject(ID_FIELD, id), MassiveCoreMConf.get().getMongoDbWriteConcernDelete());
+		MongoCollection dbcoll = fixColl(coll);
+		dbcoll.deleteOne(new Document(ID_FIELD, id));
 	}
-
+	
 	@Override
 	public boolean supportsPusher()
 	{
@@ -292,13 +293,13 @@ public class DriverMongo extends DriverAbstract
 	// UTIL
 	//----------------------------------------------//
 	
-	protected static DBCollection fixColl(Coll<?> coll)
+	protected static MongoCollection fixColl(Coll<?> coll)
 	{
-		return (DBCollection) coll.getCollDriverObject();
+		return (MongoCollection) coll.getCollDriverObject();
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected DB getDbInner(String uri)
+	protected MongoDatabase getDbInner(String uri)
 	{
 		MongoClientURI muri = new MongoClientURI(uri);
 		
@@ -307,15 +308,10 @@ public class DriverMongo extends DriverAbstract
 			// TODO: Create one of these per collection? Really? Perhaps I should cache.
 			MongoClient mongoClient = new MongoClient(muri);
 			
-			DB db = mongoClient.getDB(muri.getDatabase());
+			MongoDatabase db = mongoClient.getDatabase(muri.getDatabase());
 			
 			if (muri.getUsername() == null) return db;
-			
-			if ( ! db.authenticate(muri.getUsername(), muri.getPassword()))
-			{
-				//log(Level.SEVERE, "... db authentication failed.");
-				return null;
-			}
+
 			return db;
 		}
 		catch (Exception e)

@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.store;
 
+import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.bson.types.ObjectId;
 import com.massivecraft.massivecore.xlib.gson.JsonArray;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
@@ -8,10 +9,9 @@ import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.internal.LazilyParsedNumber;
 import com.massivecraft.massivecore.xlib.mongodb.BasicDBList;
-import com.massivecraft.massivecore.xlib.mongodb.BasicDBObject;
-import com.massivecraft.massivecore.xlib.mongodb.DBObject;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 
 public final class GsonMongoConverter
@@ -37,7 +37,7 @@ public final class GsonMongoConverter
 		return key;
 	}
 	
-	public static BasicDBObject gson2MongoObject(JsonElement inElement, BasicDBObject out)
+	public static Document gson2MongoObject(JsonElement inElement, Document out)
 	{
 		JsonObject in = inElement.getAsJsonObject();
 		for (Entry<String, JsonElement> entry : in.entrySet())
@@ -60,9 +60,9 @@ public final class GsonMongoConverter
 		return out;
 	}
 	
-	public static BasicDBObject gson2MongoObject(JsonElement inElement)
+	public static Document gson2MongoObject(JsonElement inElement)
 	{
-		return gson2MongoObject(inElement, new BasicDBObject());
+		return gson2MongoObject(inElement, new Document());
 	}
 	
 	public static BasicDBList gson2MongoArray(JsonElement inElement)
@@ -142,23 +142,23 @@ public final class GsonMongoConverter
 		return key;
 	}
 	
-	public static JsonObject mongo2GsonObject(DBObject inObject)
+	public static JsonObject mongo2GsonObject(Document in)
 	{
-		if (!(inObject instanceof BasicDBObject)) throw new IllegalArgumentException("Expected BasicDBObject as argument type!");
-		BasicDBObject in = (BasicDBObject)inObject;
+		//if (!(inObject instanceof BasicDBObject)) throw new IllegalArgumentException("Expected BasicDBObject as argument type!");
+		//BasicDBObject in = (BasicDBObject)inObject;
 		
 		JsonObject jsonObject = new JsonObject();
 		for (Entry<String, Object> entry : in.entrySet())
 		{
 			String key = mongo2GsonKey(entry.getKey());
 			Object val = entry.getValue();
-			if (val instanceof BasicDBList)
+			if (val instanceof ArrayList)
 			{
-				jsonObject.add(key, mongo2GsonArray((BasicDBList)val));
+				jsonObject.add(key, mongo2GsonArray((ArrayList)val));
 			}
-			else if (val instanceof BasicDBObject)
+			else if (val instanceof Document)
 			{
-				jsonObject.add(key, mongo2GsonObject((BasicDBObject)val));
+				jsonObject.add(key, mongo2GsonObject((Document) val));
 			}
 			else
 			{
@@ -168,21 +168,20 @@ public final class GsonMongoConverter
 		return jsonObject;
 	}
 	
-	public static JsonArray mongo2GsonArray(DBObject inObject)
+	public static JsonArray mongo2GsonArray(ArrayList in)
 	{
-		if (!(inObject instanceof BasicDBList)) throw new IllegalArgumentException("Expected BasicDBList as argument type!");
-		BasicDBList in = (BasicDBList)inObject;
+		
 		JsonArray jsonArray = new JsonArray();
 		for (int i = 0; i < in.size(); i++)
 		{
 			Object object = in.get(i);
-			if (object instanceof BasicDBList)
+			if (object instanceof ArrayList)
 			{
-				jsonArray.add(mongo2GsonArray((BasicDBList) object));
+				jsonArray.add(mongo2GsonArray((ArrayList) object));
 			}
-			else if (object instanceof BasicDBObject)
+			else if (object instanceof Document)
 			{
-				jsonArray.add(mongo2GsonObject((BasicDBObject) object));
+				jsonArray.add(mongo2GsonObject((Document) object));
 			}
 			else
 			{ 
