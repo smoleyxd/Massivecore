@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.store;
 
+import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
@@ -9,6 +10,7 @@ import com.massivecraft.massivecore.xlib.mongodb.MongoNamespace;
 import com.massivecraft.massivecore.xlib.mongodb.client.FindIterable;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoCollection;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
+import com.massivecraft.massivecore.xlib.mongodb.client.model.ReplaceOptions;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class DriverMongo extends DriverAbstract
 	public final static Document dboKeysId = new Document().append(ID_FIELD, 1);
 	public final static Document dboKeysMtime = new Document().append(MTIME_FIELD, 1);
 	public final static Document dboKeysIdandMtime = new Document().append(ID_FIELD, 1).append(MTIME_FIELD, 1);
+	
+	public final static ReplaceOptions replaceOptions = new ReplaceOptions().upsert(true);
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -256,6 +260,8 @@ public class DriverMongo extends DriverAbstract
 	{
 		MongoCollection<Document> dbcoll = fixColl(coll);
 		
+		dbcoll = dbcoll.withWriteConcern(MassiveCoreMConf.get().getMongoDbWriteConcernSave());
+		
 		Document doc = new Document();
 		
 		long mtime = System.currentTimeMillis();
@@ -264,7 +270,7 @@ public class DriverMongo extends DriverAbstract
 		
 		GsonMongoConverter.gson2MongoObject(data, doc);
 		
-		dbcoll.replaceOne(new Document(ID_FIELD, id), doc);
+		dbcoll.replaceOne(new Document(ID_FIELD, id), doc, replaceOptions);
 		
 		return mtime;
 	}
@@ -273,6 +279,8 @@ public class DriverMongo extends DriverAbstract
 	public void delete(Coll<?> coll, String id)
 	{
 		MongoCollection dbcoll = fixColl(coll);
+		dbcoll = dbcoll.withWriteConcern(MassiveCoreMConf.get().getMongoDbWriteConcernDelete());
+		
 		dbcoll.deleteOne(new Document(ID_FIELD, id));
 	}
 	
