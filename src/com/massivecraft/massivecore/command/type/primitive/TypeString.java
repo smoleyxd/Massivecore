@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.command.type.primitive;
 
 import com.massivecraft.massivecore.command.type.TypeAbstract;
+import com.massivecraft.massivecore.mixin.MixinChatFilter;
 import org.bukkit.command.CommandSender;
 
 import java.util.Collection;
@@ -14,7 +15,23 @@ public class TypeString extends TypeAbstract<String>
 	
 	private static TypeString i = new TypeString();
 	public static TypeString get() { return i; }
+	private static TypeString filteredInstance = new TypeString() {
+		@Override
+		public boolean isFiltered()
+		{
+			return true;
+		}
+	};
+	public static TypeString getFiltered() { return filteredInstance;}
 	public TypeString() { super(String.class); }
+	
+	// -------------------------------------------- //
+	// FILTER
+	// -------------------------------------------- //
+	
+	private boolean filtered = false;
+	public boolean isFiltered() { return this.filtered; }
+	public void setFiltered(boolean filtered) { this.filtered = filtered; }
 	
 	// -------------------------------------------- //
 	// OVERRIDE
@@ -29,6 +46,10 @@ public class TypeString extends TypeAbstract<String>
 	@Override
 	public String read(String arg, CommandSender sender)
 	{
+		if (this.isFiltered())
+		{
+			arg = MixinChatFilter.get().modify(sender, arg);
+		}
 		return arg;
 	}
 	
