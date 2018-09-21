@@ -2,6 +2,7 @@ package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.adapter.AdapterBackstringSet;
 import com.massivecraft.massivecore.adapter.AdapterBannerPatterns;
+import com.massivecraft.massivecore.adapter.AdapterCacheEntity;
 import com.massivecraft.massivecore.adapter.AdapterEntry;
 import com.massivecraft.massivecore.adapter.AdapterEntityInternalMap;
 import com.massivecraft.massivecore.adapter.AdapterInventory;
@@ -151,6 +152,7 @@ public class MassiveCore extends MassivePlugin
 		ret.registerTypeAdapter(PS.class, PSAdapter.get());
 		ret.registerTypeAdapter(Sound.class, AdapterSound.get());
 		ret.registerTypeAdapter(UUID.class, AdapterUUID.get());
+		ret.registerTypeAdapter(CacheEntity.class, AdapterCacheEntity.get());
 
 		// Mson
 		ret.registerTypeAdapter(Mson.class, AdapterMson.get());
