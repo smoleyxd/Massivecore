@@ -13,17 +13,21 @@ public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 	
 	public CacheEntity(Class<C> collClass)
 	{
-		this.collClass = collClass;
+		this(collClass, null);
 	}
+	
+	public CacheEntity(Class<C> collClass, String entityId)
+	{
+		this.collClass = collClass;
+		this.entityId = entityId;
+	}
+	
+	// -------------------------------------------- //
+	// COLL
+	// -------------------------------------------- //
 	
 	private transient Class<C> collClass = null;
 	public Class<C> getCollClass() { return this.collClass; }
-	
-	private String entityId = null;
-	public String getEntityId() { return this.entityId; }
-	public void setEntityId(String entityId) { this.entityId = entityId; }
-	
-	private transient E cacheUsedEntity = null;
 	
 	private transient Coll<E> coll = null;
 	public Coll<E> getColl() { this.calculateColl(); return this.coll; }
@@ -32,6 +36,31 @@ public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 		if (coll != null) return;
 		this.coll = ReflectionUtil.getSingletonInstance(this.getCollClass());
 	}
+	
+	// -------------------------------------------- //
+	// ENTITY ID
+	// -------------------------------------------- //
+	
+	private String entityId = null;
+	public String getEntityId() { return this.entityId; }
+	
+	/**
+	 * Sets the entity id to track
+	 * @param entityId the new id for the target entity
+	 * @return true if the new id is different from the previous one, false otherwise
+	 */
+	public boolean setEntityId(String entityId)
+	{
+		if (MUtil.equals(this.entityId, entityId)) return false;
+		this.entityId = entityId;
+		return true;
+	}
+	
+	// -------------------------------------------- //
+	// ENTITY
+	// -------------------------------------------- //
+	
+	private transient E cacheUsedEntity = null;
 	
 	public E getUsedEntity()
 	{
