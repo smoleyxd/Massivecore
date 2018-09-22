@@ -23,6 +23,17 @@ public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 	}
 	
 	// -------------------------------------------- //
+	// LOAD
+	// -------------------------------------------- //
+	
+	public CacheEntity<C, E> load(CacheEntity<C, E> other)
+	{
+		// I don't think we would have a case in which we have reason to change Coll objects while in use
+		this.entityId = other.entityId;
+		return this;
+	}
+	
+	// -------------------------------------------- //
 	// COLL
 	// -------------------------------------------- //
 	
