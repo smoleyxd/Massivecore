@@ -1,6 +1,6 @@
 package com.massivecraft.massivecore.store;
 
-import com.massivecraft.massivecore.xlib.mongodb.DB;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
 
 public class DbMongo extends DbAbstract
 {
@@ -8,7 +8,7 @@ public class DbMongo extends DbAbstract
 	// FIELDS
 	// -------------------------------------------- //
 
-	public DB db;
+	public MongoDatabase db;
 	
 	protected DriverMongo driver;
 	@Override public DriverMongo getDriver() { return driver; }
@@ -17,7 +17,7 @@ public class DbMongo extends DbAbstract
 	// CONSTRUCTORS
 	// -------------------------------------------- //
 	
-	public DbMongo(DriverMongo driver, DB db)
+	public DbMongo(DriverMongo driver, MongoDatabase db)
 	{
 		this.driver = driver;
 		this.db = db;
