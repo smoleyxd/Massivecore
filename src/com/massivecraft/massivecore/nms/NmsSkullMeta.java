@@ -1,12 +1,16 @@
 package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.Couple;
+import com.massivecraft.massivecore.item.ContainerGameProfileProperty;
 import com.massivecraft.massivecore.mixin.Mixin;
 import com.massivecraft.massivecore.util.IdData;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 
 public class NmsSkullMeta extends Mixin
@@ -84,6 +88,36 @@ public class NmsSkullMeta extends Mixin
 		
 		// Return Ret
 		return new Couple<>(retName, retId);
+	}
+	
+	public <T> T createGameProfile(UUID id, String name)
+	{
+		return null;
+	}
+	
+	public <T> T getGameProfile(SkullMeta meta)
+	{
+		return null;
+	}
+	
+	public void setGameProfile(SkullMeta meta, Object gameProfile)
+	{
+		// No-op here
+	}
+	
+	public <T> T getPropertyMap(Object profile)
+	{
+		return null;
+	}
+	
+	public Collection<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties(Object propertyMap)
+	{
+		return Collections.emptyList();
+	}
+	
+	public void setGameProfileProperties(Object propertyMap, Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
+	{
+		// No-op here
 	}
 	
 }
