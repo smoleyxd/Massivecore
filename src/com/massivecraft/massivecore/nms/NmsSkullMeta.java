@@ -130,4 +130,9 @@ public class NmsSkullMeta extends Mixin
 		return null;
 	}
 	
+	public UUID getGameProfileId(Object gameprofile)
+	{
+		throw notImplemented();
+	}
+	
 }

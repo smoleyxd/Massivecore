@@ -72,7 +72,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Boolean DEFAULT_SCALING = false;
 	public static final transient List<DataPotionEffect> DEFAULT_POTION_EFFECTS = Collections.emptyList();
 	public static final transient String DEFAULT_SKULL = null;
-	public static final transient List<Map.Entry<String, ContainerGameProfileProperty>> DEFAULT_GAMEPROFILE_PROPERTIES = Collections.emptyList();
+	public static final transient ContainerGameProfile DEFAULT_GAMEPROFILE = null;
+	public static final transient List<Map.Entry<String, ContainerGameProfileProperty>> DEFAULT_GAMEPROFILE_PROPERTIES = new MassiveList<>();
 	public static final transient DataFireworkEffect DEFAULT_FIREWORK_EFFECT = null;
 	public static final transient List<DataFireworkEffect> DEFAULT_FIREWORK_EFFECTS = Collections.emptyList();
 	public static final transient Integer DEFAULT_FIREWORK_FLIGHT = 0;
@@ -189,6 +190,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private String skull = null;
 	public String getSkull() { return get(this.skull, DEFAULT_SKULL); }
 	public DataItemStack setSkull(String skull) { this.skull = set(skull, DEFAULT_SKULL); return this; }
+	
+	private ContainerGameProfile containerGameProfile = null;
+	public ContainerGameProfile getContainerGameProfile() { return get(this.containerGameProfile, DEFAULT_GAMEPROFILE); }
+	public DataItemStack setContainerGameProfile(ContainerGameProfile containerGameProfile) { this.containerGameProfile = set(containerGameProfile, DEFAULT_GAMEPROFILE); return this; }
 	
 	private List<Map.Entry<String, ContainerGameProfileProperty>> gameProfileProperties = null;
 	public List<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties() { return get(this.gameProfileProperties, DEFAULT_GAMEPROFILE_PROPERTIES); }

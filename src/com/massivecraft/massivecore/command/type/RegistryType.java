@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.collections.ExceptionSet;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.WorldExceptionSet;
+import com.massivecraft.massivecore.command.TypeContainerGameProfile;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.type.combined.TypeDataBannerPattern;
@@ -363,6 +364,7 @@ public class RegistryType
 		register(TypeWorldType.get());
 		
 		register(TypeContainerGameProfileProperty.get());
+		register(TypeContainerGameProfile.get());
 		
 		// Bukkit
 		register(TypeDestination.get());

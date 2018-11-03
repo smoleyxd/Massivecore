@@ -80,6 +80,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		this.fieldGameProfileId = ReflectionUtil.getField(this.classGameProfile, "id");
 		this.fieldGameProfileName = ReflectionUtil.getField(this.classGameProfile, "name");
 		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(this.classGameProfile, "properties");
+		if (this.fieldGameProfilePropertyMap == null) throw new NullPointerException("fieldGameProfilePropertyMap");
 		this.classPropertyMap = this.fieldGameProfilePropertyMap.getType();
 		this.constructorPropertyMap = ReflectionUtil.getConstructor(this.classPropertyMap);
 		
@@ -97,7 +98,16 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		this.methodPropertyMapClear = ReflectionUtil.getMethod(classDeclaringPropertyMapClear, "clear");
 		
 		Class<?> classDeclaringPropertyMapPut = ReflectionUtil.getSuperclassDeclaringMethod(this.classPropertyMap, true, "put");
-		this.methodPropertyMapPut = ReflectionUtil.getMethod(classDeclaringPropertyMapPut, "put");
+		Method[] methodsDeclaredInPut = classDeclaringPropertyMapPut.getDeclaredMethods();
+		for (Method method : methodsDeclaredInPut)
+		{
+			if (!method.getName().equals("put")) continue;
+			
+			this.methodPropertyMapPut = method;
+			break;
+		}
+		if (this.methodPropertyMapPut == null) throw new NullPointerException("methodPropertyMapPut");
+		//this.methodPropertyMapPut = ReflectionUtil.getMethod(classDeclaringPropertyMapPut, "put");
 	}
 	
 	// -------------------------------------------- //
@@ -149,7 +159,8 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		return ReflectionUtil.getField(this.fieldGameProfileName, gameProfile);
 	}
 	
-	protected UUID getGameProfileId(Object gameProfile)
+	@Override
+	public UUID getGameProfileId(Object gameProfile)
 	{
 		return ReflectionUtil.getField(this.fieldGameProfileId, gameProfile);
 	}
@@ -175,6 +186,8 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	@Override
 	public <T> T getPropertyMap(Object profile)
 	{
+		if (profile == null) return (T) this.createPropertyMap();
+		//if (profile == null) throw new NullPointerException("profile");
 		return ReflectionUtil.getField(this.fieldGameProfilePropertyMap, profile);
 	}
 	
