@@ -362,6 +362,8 @@ public class RegistryType
 		register(TypeVillagerProfession.get());
 		register(TypeWorldType.get());
 		
+		register(TypeContainerGameProfileProperty.get());
+		
 		// Bukkit
 		register(TypeDestination.get());
 		register(TypeItemStack.get());
