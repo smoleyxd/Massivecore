@@ -135,4 +135,9 @@ public class NmsSkullMeta extends Mixin
 		throw notImplemented();
 	}
 	
+	public String getGameProfileName(Object gameProfile)
+	{
+		throw notImplemented();
+	}
+	
 }

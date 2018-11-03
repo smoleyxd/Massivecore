@@ -154,7 +154,8 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	// GAMEPROFILE > GET
 	// -------------------------------------------- //
 	
-	protected String getGameProfileName(Object gameProfile)
+	@Override
+	public String getGameProfileName(Object gameProfile)
 	{
 		return ReflectionUtil.getField(this.fieldGameProfileName, gameProfile);
 	}
