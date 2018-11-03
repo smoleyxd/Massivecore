@@ -1,6 +1,5 @@
 package com.massivecraft.massivecore.util;
 
-import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.comparator.ComparatorNaturalOrder;
 import com.massivecraft.massivecore.predicate.Predicate;
@@ -248,8 +247,6 @@ public class ReflectionUtil
 			}
 			catch (Throwable t)
 			{
-				MassiveCore.get().log("instance not compatible " + c.getCanonicalName());
-				t.printStackTrace();
 				// Not Compatible
 			}
 		}

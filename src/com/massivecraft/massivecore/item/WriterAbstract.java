@@ -22,15 +22,12 @@ import java.util.List;
 //
 // TIP: Simply set to Object if you are not using a certain generic.
 //
-// base object writing from, base object writing to, specific object writing from, specific object writing to, field object from, field object to, data object
 public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 {
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	// classCA is specific class writing from
-	// classCB is specific class writing to
 	public WriterAbstract(Class<CA> classCA, Class<CB> classCB)
 	{
 		this.classCA = classCA;
@@ -59,7 +56,6 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	
 	// These are the actually functional child writers.
 	// This list should only contain writers that passed the setup routine.
-	// specific class writing from, specific class writing to, any, any, any, any, data class
 	private List<WriterAbstract<CA, CB, ?, ?, ?, ?, D>> writers = new MassiveList<>();
 	public List<WriterAbstract<CA, CB, ?, ?, ?, ?, D>> getWriters() { return this.writers; }
 
@@ -89,7 +85,6 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 			
 			if ( ! writer.isActive()) writer.setActive(this.getActivePlugin());
 			
-			// specific class writing from, specific class writing to, any, any, any, any, data class
 			if (add) this.getWriters().add((WriterAbstract<CA, CB, ?, ?, ?, ?, D>)writer);
 		}
 		catch (Throwable t)
@@ -170,13 +165,11 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// CREATE
 	// -------------------------------------------- //
 
-	// create BaseObject writing from
 	public OA createOA()
 	{
 		return null;
 	}
-	
-	// create BaseObject writing to
+
 	public OB createOB()
 	{
 		return null;
@@ -186,11 +179,9 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// CLASSES
 	// -------------------------------------------- //
 	
-	// specific class, writing from
 	private final Class<CA> classCA;
 	public Class<CA> getClassCA() { return this.classCA; }
-	
-	// specific class, writing to
+
 	private final Class<CB> classCB;
 	public Class<CB> getClassCB() { return this.classCB; }
 
@@ -202,7 +193,6 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// In those cases we don't want a crash.
 	// We rather silently continue.
 
-	// turn base object writing from into specific object writing from
 	@SuppressWarnings("unchecked")
 	public CA morphA(OA oa)
 	{
@@ -210,7 +200,6 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 		return (CA)oa;
 	}
 
-	// turn base object writing to into specific object writing to
 	@SuppressWarnings("unchecked")
 	public CB morphB(OB ob)
 	{
@@ -248,13 +237,12 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// -------------------------------------------- //
 	// WRITE
 	// -------------------------------------------- //
-	
+
 	public void write(OA oa, OB ob, boolean a2b)
 	{
 		this.write(oa, ob, null, a2b);
 	}
 	
-	// base object writing from, base object writing to, data object, ???
 	public void write(OA oa, OB ob, D d, boolean a2b)
 	{
 		// if ( ! this.isActive()) throw new IllegalStateException("not active " + this.getClass().getName());
@@ -296,25 +284,21 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// ACCESS
 	// -------------------------------------------- //
 
-	// get field object writing from by passing specific object writing from and data object
 	public FA getA(CA ca, D d)
 	{
 		return null;
 	}
 
-	// set<WritingFrom> (specific object writing from, field object writing from, data object)
 	public void setA(CA ca, FA fa, D d)
 	{
 
 	}
 
-	// get field object writing to from specific object writing to and data object
 	public FB getB(CB cb, D d)
 	{
 		return null;
 	}
 
-	
 	public void setB(CB cb, FB fb, D d)
 	{
 

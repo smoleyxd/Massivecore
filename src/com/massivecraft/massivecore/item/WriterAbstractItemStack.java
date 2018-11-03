@@ -4,8 +4,6 @@ import com.massivecraft.massivecore.nms.NmsItemStackCreate;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-// base object writing from, base object writing to, specific object writing from, specific object writing to, field object from, field object to, data object
-// dataitemstack, base writing to, dataitemstack, specific writing to, field writing from, field writing to, itemstack
 public abstract class WriterAbstractItemStack<OB, CB, FA, FB> extends WriterAbstract<DataItemStack, OB, DataItemStack, CB, FA, FB, ItemStack>
 {
 	// -------------------------------------------- //

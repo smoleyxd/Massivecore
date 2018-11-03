@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
-// TODO be able to construct a property map and be able to set it to the profile
 public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 {
 	// -------------------------------------------- //
@@ -43,7 +42,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	public Method methodPropertyMapEntries;
 	public Constructor<?> constructorPropertyMap;
 	
-	// TODO get this!
 	// com.mojang.authlib.properties
 	public Class<?> classProperty;
 	// name, value, signature
@@ -80,7 +78,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		this.fieldGameProfileId = ReflectionUtil.getField(this.classGameProfile, "id");
 		this.fieldGameProfileName = ReflectionUtil.getField(this.classGameProfile, "name");
 		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(this.classGameProfile, "properties");
-		if (this.fieldGameProfilePropertyMap == null) throw new NullPointerException("fieldGameProfilePropertyMap");
 		this.classPropertyMap = this.fieldGameProfilePropertyMap.getType();
 		this.constructorPropertyMap = ReflectionUtil.getConstructor(this.classPropertyMap);
 		
@@ -106,8 +103,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 			this.methodPropertyMapPut = method;
 			break;
 		}
-		if (this.methodPropertyMapPut == null) throw new NullPointerException("methodPropertyMapPut");
-		//this.methodPropertyMapPut = ReflectionUtil.getMethod(classDeclaringPropertyMapPut, "put");
 	}
 	
 	// -------------------------------------------- //
@@ -188,7 +183,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	public <T> T getPropertyMap(Object profile)
 	{
 		if (profile == null) return (T) this.createPropertyMap();
-		//if (profile == null) throw new NullPointerException("profile");
 		return ReflectionUtil.getField(this.fieldGameProfilePropertyMap, profile);
 	}
 	

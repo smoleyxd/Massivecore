@@ -70,8 +70,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	@Override
 	public void setB(SkullMeta cb, Object fb, ItemStack d)
 	{
-		if (cb == null) throw new NullPointerException("cb");
-		if (fb == null) throw new NullPointerException("fb");
+		if (cb == null) return;
 		
 		if (!cb.hasOwner()) return;
 		
