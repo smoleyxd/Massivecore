@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
+// TODO be able to construct a property map and be able to set it to the profile
 public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 {
 	// -------------------------------------------- //
@@ -40,6 +41,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	
 	public Class<?> classPropertyMap;
 	public Method methodPropertyMapEntries;
+	public Constructor<?> constructorPropertyMap;
 	
 	// TODO get this!
 	// com.mojang.authlib.properties
@@ -79,6 +81,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		this.fieldGameProfileName = ReflectionUtil.getField(this.classGameProfile, "name");
 		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(this.classGameProfile, "properties");
 		this.classPropertyMap = this.fieldGameProfilePropertyMap.getType();
+		this.constructorPropertyMap = ReflectionUtil.getConstructor(this.classPropertyMap);
 		
 		Class<?> classDeclaringPropertyMapEntries = ReflectionUtil.getSuperclassDeclaringMethod(this.classPropertyMap, true, "entries");
 		this.methodPropertyMapEntries = ReflectionUtil.getMethod(classDeclaringPropertyMapEntries,"entries");
@@ -175,6 +178,12 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		return ReflectionUtil.getField(this.fieldGameProfilePropertyMap, profile);
 	}
 	
+	@Override
+	public void setPropertyMap(Object profile, Object propertyMap)
+	{
+		ReflectionUtil.setField(this.fieldGameProfilePropertyMap, profile, propertyMap);
+	}
+	
 	// -------------------------------------------- //
 	// PROPERTYMAP >
 	// -------------------------------------------- //
@@ -188,7 +197,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	// PROPERTY > GET
 	// -------------------------------------------- //
 	
-	// TODO add a "setGameProfileProperties"
 	@Override
 	public Collection<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties(Object propertyMap)
 	{
@@ -221,6 +229,12 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	// -------------------------------------------- //
 	// PROPERTYMAP > SET
 	// -------------------------------------------- //
+	
+	@Override
+	public Object createPropertyMap()
+	{
+		return ReflectionUtil.invokeConstructor(this.constructorPropertyMap);
+	}
 	
 	@Override
 	public void setGameProfileProperties(Object propertyMap, Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)

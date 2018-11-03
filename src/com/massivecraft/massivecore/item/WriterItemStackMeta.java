@@ -34,6 +34,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			
 			// SKULL
 			WriterItemStackMetaSkull.class,
+			WriterItemStackMetaSkullProperties.class,
 			
 			// FIREWORK EFFECT
 			WriterItemStackMetaFireworkEffect.class,

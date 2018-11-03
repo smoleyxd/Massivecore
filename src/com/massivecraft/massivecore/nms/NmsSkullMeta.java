@@ -120,4 +120,14 @@ public class NmsSkullMeta extends Mixin
 		// No-op here
 	}
 	
+	public void setPropertyMap(Object profile, Object propertyMap)
+	{
+		// No-op hee
+	}
+	
+	public Object createPropertyMap()
+	{
+		return null;
+	}
+	
 }
