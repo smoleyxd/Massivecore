@@ -1,6 +1,5 @@
-package com.massivecraft.massivecore.command;
+package com.massivecraft.massivecore.command.type;
 
-import com.massivecraft.massivecore.command.type.TypeReflection;
 import com.massivecraft.massivecore.item.ContainerGameProfile;
 
 public class TypeContainerGameProfile extends TypeReflection<ContainerGameProfile>
