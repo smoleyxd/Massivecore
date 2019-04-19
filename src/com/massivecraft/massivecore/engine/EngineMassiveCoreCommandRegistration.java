@@ -11,6 +11,7 @@ import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -121,7 +122,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 			command.unregister(simpleCommandMap);
 			iter.remove();
 		}
-		
+		syncCommands();
 	}
 	
 	// -------------------------------------------- //
@@ -151,6 +152,28 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 		if (!(command instanceof MassiveCoreBukkitCommand)) return null;
 		MassiveCoreBukkitCommand mcbc = (MassiveCoreBukkitCommand)command;
 		return mcbc.getMassiveCommand();
+	}
+	
+	// -------------------------------------------- //
+	// 1.13 SYNC COMMANDS
+	// -------------------------------------------- //
+	
+	private static Method CRAFTSERVER_SYNC_COMMANDS = null;
+	private static boolean syncCommandsFailed = false;
+	private static Method getSyncCommandMethod() {
+		if (CRAFTSERVER_SYNC_COMMANDS != null || syncCommandsFailed) return CRAFTSERVER_SYNC_COMMANDS;
+		Class<?> clazz = Bukkit.getServer().getClass();
+		try {
+			CRAFTSERVER_SYNC_COMMANDS = ReflectionUtil.getMethod(clazz, "syncCommands");
+		} catch (Exception ex) {
+			syncCommandsFailed = true;
+		}
+		return CRAFTSERVER_SYNC_COMMANDS;
+	}
+	private static void syncCommands() {
+		Method sync = getSyncCommandMethod();
+		if (sync == null) return;
+		ReflectionUtil.invokeMethod(sync, Bukkit.getServer());
 	}
 
 }
