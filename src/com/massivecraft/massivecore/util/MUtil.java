@@ -24,6 +24,7 @@ import com.massivecraft.massivecore.util.extractor.ExtractorSenderId;
 import com.massivecraft.massivecore.util.extractor.ExtractorSenderName;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorld;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorldName;
+import com.massivecraft.massivecore.util.reference.ReferenceMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -67,11 +68,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1097,27 +1096,6 @@ public class MUtil
 	// MATERIAL FACTS
 	// -------------------------------------------- //
 	
-	// FOOD
-	
-	public final static Set<Material> FOOD_MATERIALS = new HashSet<>(MUtil.list(
-		Material.APPLE,
-		Material.BREAD,
-		Material.COOKED_BEEF,
-		Material.COOKED_CHICKEN,
-		Material.COOKED_FISH,
-		Material.COOKIE,
-		Material.GRILLED_PORK,
-		Material.GOLDEN_APPLE,
-		Material.MELON,
-		Material.MUSHROOM_SOUP,
-		Material.PORK,
-		Material.RAW_BEEF,
-		Material.RAW_CHICKEN,
-		Material.RAW_FISH,
-		Material.ROTTEN_FLESH,
-		Material.SPIDER_EYE
-	));
-	
 	// Archery
 	
 	public static boolean isArchery(Entity entity)
@@ -1139,17 +1117,9 @@ public class MUtil
 	
 	// Sword
 	
-	public static Set<Material> SWORD_MATERIALS = EnumSet.of(
-		Material.WOOD_SWORD,
-		Material.STONE_SWORD,
-		Material.IRON_SWORD,
-		Material.GOLD_SWORD,
-		Material.DIAMOND_SWORD
-	);
-	
 	public static boolean isSword(Material material)
 	{
-		return SWORD_MATERIALS.contains(material);
+		return ReferenceMaterial.getSwordMaterials().contains(material);
 	}
 	
 	public static boolean isSword(ItemStack item)
@@ -1179,17 +1149,9 @@ public class MUtil
 	
 	// Axe
 	
-	public static Set<Material> AXE_MATERIALS = EnumSet.of(
-		Material.WOOD_AXE,
-		Material.STONE_AXE,
-		Material.IRON_AXE,
-		Material.GOLD_AXE,
-		Material.DIAMOND_AXE
-	);
-	
 	public static boolean isAxe(Material material)
 	{
-		return AXE_MATERIALS.contains(material);
+		return ReferenceMaterial.getAxeMaterials().contains(material);
 	}
 	
 	public static boolean isAxe(ItemStack item)
@@ -1251,17 +1213,10 @@ public class MUtil
 	
 	// Pickaxe
 	
-	public static Set<Material> PICKAXE_MATERIALS = EnumSet.of(
-		Material.WOOD_PICKAXE,
-		Material.STONE_PICKAXE,
-		Material.IRON_PICKAXE,
-		Material.GOLD_PICKAXE,
-		Material.DIAMOND_PICKAXE
-	);
-		
 	public static boolean isPickaxe(Material material)
 	{
-		return PICKAXE_MATERIALS.contains(material);
+		return ReferenceMaterial.getPickaxeMaterials().contains(material);
+		//return PICKAXE_MATERIALS.contains(material);
 	}
 	
 	public static boolean isPickaxe(ItemStack item)
@@ -1285,17 +1240,9 @@ public class MUtil
 	
 	// Spade
 	
-	public static Set<Material> SPADE_MATERIALS = EnumSet.of(
-		Material.WOOD_SPADE,
-		Material.STONE_SPADE,
-		Material.IRON_SPADE,
-		Material.GOLD_SPADE,
-		Material.DIAMOND_SPADE
-	);
-			
 	public static boolean isSpade(Material material)
 	{
-		return SPADE_MATERIALS.contains(material);
+		return ReferenceMaterial.getSpadeMaterials().contains(material);
 	}
 		
 	public static boolean isSpade(ItemStack item)
@@ -1333,7 +1280,7 @@ public class MUtil
 		{
 			ret = Material.CAKE_BLOCK;
 		}
-		else if (FOOD_MATERIALS.contains(event.getMaterial()))
+		else if (ReferenceMaterial.getFoodMaterials().contains(event.getMaterial()))
 		{
 			ret = event.getMaterial();
 		}
