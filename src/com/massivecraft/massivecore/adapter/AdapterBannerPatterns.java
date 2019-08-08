@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
+import org.bukkit.DyeColor;
 
 import java.lang.reflect.Type;
 import java.util.Iterator;
@@ -76,10 +77,12 @@ public class AdapterBannerPatterns implements JsonDeserializer<MassiveListDef<Da
 				JsonElement idElement = iterator.next();
 				String id = idElement.getAsString();
 				dataBannerPattern.setId(id);
-				
+
 				JsonElement colorElement = iterator.next();
-				Integer color = colorElement.getAsInt();
-				dataBannerPattern.setColor(color);
+				// TODO see if I need to define an adapter or if it is fine using the enum adapter
+				DyeColor dyeColor = context.deserialize(colorElement, DyeColor.class);
+				//Integer color = colorElement.getAsInt();
+				dataBannerPattern.setColor(dyeColor);
 				
 				ret.add(dataBannerPattern);
 			}

@@ -27,7 +27,9 @@ import java.util.EnumSet
 // https://docs.google.com/document/d/1m4Nzhgo6CdiTxVzu1gqVGyQ24xsLkSpHqK8yxb33kuw/edit
 object ProviderOptimizedCollectionSafe {
 
-    fun <E: Enum<E>> enumSetOf(clazz: Class<E>, vararg names: String): EnumSet<E> {
+    fun <E: Enum<E>> enumSetOf(clazz: Class<E>, vararg names: String): EnumSet<E> = enumSetOf(clazz, names.toSet())
+
+    fun <E: Enum<E>> enumSetOf(clazz: Class<E>, names: Collection<String>): EnumSet<E> {
         val mapper = getEnumMapper(clazz)
         val ret = EnumSet.noneOf(clazz)
         return names.mapNotNullTo(ret, mapper)

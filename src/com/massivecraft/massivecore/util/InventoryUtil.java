@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.collections.MassiveList;
+import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.comparator.ComparatorComparable;
 import com.massivecraft.massivecore.comparator.ComparatorEntryValue;
 import com.massivecraft.massivecore.event.EventMassiveCoreLorePriority;
@@ -26,14 +27,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
+import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 public class InventoryUtil
@@ -921,7 +916,19 @@ public class InventoryUtil
 		// Repair
 		itemStack.setDurability((short) 0);
 	}
-	
+
+	private static final Set<String> nonRepairables = Collections.unmodifiableSet(MUtil.set(
+			"COAL",
+			"GOLDEN_APPLE",
+			"RAW_FISH",
+			"COOKED_FISH",
+			"INK_SACK",
+			"MAP",
+			"POTION",
+			"MONSTER_EGG",
+			"SKULL_ITEM"
+	));
+
 	public static boolean isRepairable(Material material)
 	{
 		// Blocks are never repairable.
@@ -930,16 +937,8 @@ public class InventoryUtil
 		
 		// This list was created by checking for the "B" notation on:
 		// http://minecraft.gamepedia.com/Data_values
-		if (material == Material.COAL) return false;
-		if (material == Material.GOLDEN_APPLE) return false;
-		if (material == Material.RAW_FISH) return false;
-		if (material == Material.COOKED_FISH) return false;
-		if (material == Material.INK_SACK) return false;
-		if (material == Material.MAP) return false;
-		if (material == Material.POTION) return false;
-		if (material == Material.MONSTER_EGG) return false;
-		if (material == Material.SKULL_ITEM) return false;
-		
+		if (nonRepairables.contains(material.name())) return false;
+
 		// This lines actually catches most of the specific lines above.
 		// However we add this in anyways for future compatibility.
 		if ( ! material.getData().equals(MaterialData.class)) return false;

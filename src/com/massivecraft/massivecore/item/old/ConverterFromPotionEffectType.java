@@ -1,7 +1,9 @@
-package com.massivecraft.massivecore.item;
+package com.massivecraft.massivecore.item.old;
 
+import com.massivecraft.massivecore.item.Converter;
 import org.bukkit.potion.PotionEffectType;
 
+@Deprecated
 public class ConverterFromPotionEffectType extends Converter<PotionEffectType, Integer>
 {
 	// -------------------------------------------- //
@@ -14,13 +16,13 @@ public class ConverterFromPotionEffectType extends Converter<PotionEffectType, I
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public Integer convert(PotionEffectType x)
 	{
 		if (x == null) return null;
-		return x.getId();
+		throw new UnsupportedOperationException("Magic number");
+		//return x.getId();
 	}
 
 }

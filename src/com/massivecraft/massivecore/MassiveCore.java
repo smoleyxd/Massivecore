@@ -1,24 +1,6 @@
 package com.massivecraft.massivecore;
 
-import com.massivecraft.massivecore.adapter.AdapterBackstringSet;
-import com.massivecraft.massivecore.adapter.AdapterBannerPatterns;
-import com.massivecraft.massivecore.adapter.AdapterCacheEntity;
-import com.massivecraft.massivecore.adapter.AdapterEntry;
-import com.massivecraft.massivecore.adapter.AdapterEntityInternalMap;
-import com.massivecraft.massivecore.adapter.AdapterInventory;
-import com.massivecraft.massivecore.adapter.AdapterItemStack;
-import com.massivecraft.massivecore.adapter.AdapterJsonElement;
-import com.massivecraft.massivecore.adapter.AdapterMassiveList;
-import com.massivecraft.massivecore.adapter.AdapterMassiveMap;
-import com.massivecraft.massivecore.adapter.AdapterMassiveSet;
-import com.massivecraft.massivecore.adapter.AdapterMassiveTreeMap;
-import com.massivecraft.massivecore.adapter.AdapterMassiveTreeSet;
-import com.massivecraft.massivecore.adapter.AdapterModdedEnumType;
-import com.massivecraft.massivecore.adapter.AdapterMson;
-import com.massivecraft.massivecore.adapter.AdapterMsonEvent;
-import com.massivecraft.massivecore.adapter.AdapterPlayerInventory;
-import com.massivecraft.massivecore.adapter.AdapterSound;
-import com.massivecraft.massivecore.adapter.AdapterUUID;
+import com.massivecraft.massivecore.adapter.*;
 import com.massivecraft.massivecore.collections.BackstringSet;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveListDef;
@@ -74,6 +56,7 @@ import org.bukkit.Sound;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffectType;
 
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
@@ -174,7 +157,10 @@ public class MassiveCore extends MassivePlugin
 		
 		// Storage
 		ret.registerTypeAdapter(EntityInternalMap.class, AdapterEntityInternalMap.get());
-		
+
+		// PotionEffectType
+		ret.registerTypeAdapter(PotionEffectType.class, AdapterPotionEffectType.get());
+
 		// Return
 		return ret;
 	}

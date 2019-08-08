@@ -3,7 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 
-public class WriterBannerPatternColor extends WriterAbstractBannerPattern<Integer, DyeColor>
+public class WriterBannerPatternColor extends WriterAbstractBannerPattern<DyeColor, DyeColor>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -14,8 +14,9 @@ public class WriterBannerPatternColor extends WriterAbstractBannerPattern<Intege
 	public WriterBannerPatternColor()
 	{
 		super("color");
-		this.setConverterTo(ConverterToDyeColor.get());
-		this.setConverterFrom(ConverterFromDyeColor.get());
+		// FIXME what is needed when a converter isn't used?
+		//this.setConverterTo(ConverterToDyeColor.get());
+		//this.setConverterFrom(ConverterFromDyeColor.get());
 	}
 	
 	// -------------------------------------------- //
@@ -23,13 +24,13 @@ public class WriterBannerPatternColor extends WriterAbstractBannerPattern<Intege
 	// -------------------------------------------- //
 	
 	@Override
-	public Integer getA(DataBannerPattern ca, Object d)
+	public DyeColor getA(DataBannerPattern ca, Object d)
 	{
 		return ca.getColor();
 	}
 	
 	@Override
-	public void setA(DataBannerPattern ca, Integer fa, Object d)
+	public void setA(DataBannerPattern ca, DyeColor fa, Object d)
 	{
 		ca.setColor(fa);
 	}

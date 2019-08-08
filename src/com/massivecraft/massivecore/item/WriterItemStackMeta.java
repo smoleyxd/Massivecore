@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.item.old.WriterItemStackMetaBannerBase;
+
 public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object, Object>
 {
 	// -------------------------------------------- //

@@ -1,8 +1,6 @@
 package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.collections.MassiveList;
-import com.massivecraft.massivecore.command.editor.annotation.EditorType;
-import com.massivecraft.massivecore.command.type.convert.TypeConverterPotionEffectType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -21,16 +19,13 @@ public class PotionEffectWrap
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
-	
-	@EditorType(TypeConverterPotionEffectType.class)
-	protected int id;
-	public int getId() { return this.id; }
-	public void setId(int id) { this.id = id; }
-	
-	@SuppressWarnings("deprecation")
-	public void setPotionEffectType(PotionEffectType potionEffectType) { this.setId(potionEffectType.getId());}
-	@SuppressWarnings("deprecation")
-	public PotionEffectType getPotionEffectType() { return PotionEffectType.getById(this.getId()); }
+
+	protected PotionEffectType id;
+	public PotionEffectType getId() { return this.id; }
+	public void setId(PotionEffectType id) { this.id = id; }
+
+	public void setPotionEffectType(PotionEffectType potionEffectType) { this.setId(potionEffectType);}
+	public PotionEffectType getPotionEffectType() { return this.getPotionEffectType(); }
 	
 	protected int amplifier;
 	public int getAmplifier() { return this.amplifier; }
@@ -55,7 +50,7 @@ public class PotionEffectWrap
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public PotionEffectWrap(int id, int amplifier, int duration, boolean ambient, boolean particles)
+	public PotionEffectWrap(PotionEffectType id, int amplifier, int duration, boolean ambient, boolean particles)
 	{
 		this.id = id;
 		this.amplifier = amplifier;
@@ -66,7 +61,8 @@ public class PotionEffectWrap
 	
 	public PotionEffectWrap()
 	{
-		this.id = 0;
+		// TODO see if this can be nulled safely instead of defaulting to speed
+		this.id = PotionEffectType.SPEED;
 		this.amplifier = 0;
 		this.duration = 0;
 		this.ambient = false;
@@ -76,21 +72,19 @@ public class PotionEffectWrap
 	// -------------------------------------------- //
 	// FROM BUKKIT
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	public static PotionEffectWrap valueOf(PotionEffect potionEffect)
 	{
-		return new PotionEffectWrap(potionEffect.getType().getId(), potionEffect.getAmplifier(), potionEffect.getDuration(), potionEffect.isAmbient(), true);
+		return new PotionEffectWrap(potionEffect.getType(), potionEffect.getAmplifier(), potionEffect.getDuration(), potionEffect.isAmbient(), true);
 	}
 	
 	// -------------------------------------------- //
 	// TO BUKKIT
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	public PotionEffect asPotionEffect()
 	{
-		return new PotionEffect(PotionEffectType.getById(id), this.duration, this.amplifier, this.ambient);
+		return new PotionEffect(id, this.duration, this.amplifier, this.ambient);
 	}
 	
 	public boolean addTo(LivingEntity entity)

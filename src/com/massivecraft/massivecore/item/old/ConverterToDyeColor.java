@@ -1,7 +1,9 @@
-package com.massivecraft.massivecore.item;
+package com.massivecraft.massivecore.item.old;
 
+import com.massivecraft.massivecore.item.Converter;
 import org.bukkit.DyeColor;
 
+@Deprecated
 public class ConverterToDyeColor extends Converter<Integer, DyeColor>
 {
 	// -------------------------------------------- //
@@ -14,13 +16,13 @@ public class ConverterToDyeColor extends Converter<Integer, DyeColor>
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public DyeColor convert(Integer x)
 	{
 		if (x == null) return null;
-		return DyeColor.getByDyeData(x.byteValue());
+		throw new UnsupportedOperationException("Magic number");
+		//return DyeColor.getByDyeData(x.byteValue());
 	}
 
 }

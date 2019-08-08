@@ -1,11 +1,15 @@
-package com.massivecraft.massivecore.item;
+package com.massivecraft.massivecore.item.old;
 
+import com.massivecraft.massivecore.item.DataItemStack;
+import com.massivecraft.massivecore.item.WriterAbstractItemStackMetaField;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 
-public class WriterItemStackMetaBannerBase extends WriterAbstractItemStackMetaField<BannerMeta, Integer, DyeColor>
+// This no longer is meta data but different materials
+@Deprecated
+public class WriterItemStackMetaBannerBase extends WriterAbstractItemStackMetaField<BannerMeta, DyeColor, DyeColor>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -16,9 +20,7 @@ public class WriterItemStackMetaBannerBase extends WriterAbstractItemStackMetaFi
 	public WriterItemStackMetaBannerBase()
 	{
 		super(BannerMeta.class);
-		this.setMaterial(Material.BANNER);
-		this.setConverterTo(ConverterToDyeColor.get());
-		this.setConverterFrom(ConverterFromDyeColor.get());
+		this.setMaterial(Material.LEGACY_BANNER); // FIXME pray this works for now, but change the writers to allow multiple materials
 	}
 	
 	// -------------------------------------------- //
@@ -26,13 +28,13 @@ public class WriterItemStackMetaBannerBase extends WriterAbstractItemStackMetaFi
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public DyeColor getA(DataItemStack ca, ItemStack d)
 	{
 		return ca.getBannerBase();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(DataItemStack ca, DyeColor fa, ItemStack d)
 	{
 		ca.setBannerBase(fa);
 	}

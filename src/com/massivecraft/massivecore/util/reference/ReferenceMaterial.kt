@@ -1,11 +1,12 @@
 package com.massivecraft.massivecore.util.reference
 
 import org.bukkit.Material
+import java.util.*
 
 object ReferenceMaterial {
 
     @JvmStatic
-    val pickaxeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+    val pickaxeMaterials: EnumSet<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "DIAMOND_PICKAXE",
             "GOLDEN_PICKAXE",
@@ -198,6 +199,14 @@ object ReferenceMaterial {
             "WHITE_TULIP",
             "WITHER_ROSE",
             "YELLOW_FLOWER"
+    )
+
+    @JvmStatic
+    val materialsSign: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "SIGN",
+            "SIGN_POST",
+            "WALL_SIGN"
     )
 
 }

@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.util;
 
+import com.massivecraft.massivecore.util.reference.ReferenceMaterial;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -242,12 +243,8 @@ public class SignUtil
 	public static boolean isSign(Material material)
 	{
 		if (material == null) throw new NullPointerException("material");
-		
-		if (material == Material.SIGN) return true;
-		if (material == Material.SIGN_POST) return true;
-		if (material == Material.WALL_SIGN) return true;
-		
-		return false;
+
+		return ReferenceMaterial.getMaterialsSign().contains(material);
 	}
 	
 	public static boolean isSign(Block block)

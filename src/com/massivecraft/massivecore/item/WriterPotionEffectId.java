@@ -3,7 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class WriterPotionEffectId extends WriterAbstractPotionEffect<Integer, PotionEffectType>
+public class WriterPotionEffectId extends WriterAbstractPotionEffect<PotionEffectType, PotionEffectType>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -14,8 +14,7 @@ public class WriterPotionEffectId extends WriterAbstractPotionEffect<Integer, Po
 	public WriterPotionEffectId()
 	{
 		super("type");
-		this.setConverterTo(ConverterToPotionEffectType.get());
-		this.setConverterFrom(ConverterFromPotionEffectType.get());
+		// when we don't have explicit converters, it uses a "return self casted" policy
 	}
 	
 	// -------------------------------------------- //
@@ -23,13 +22,13 @@ public class WriterPotionEffectId extends WriterAbstractPotionEffect<Integer, Po
 	// -------------------------------------------- //
 	
 	@Override
-	public Integer getA(DataPotionEffect ca, Object d)
+	public PotionEffectType getA(DataPotionEffect ca, Object d)
 	{
 		return ca.getId();
 	}
 	
 	@Override
-	public void setA(DataPotionEffect ca, Integer fa, Object d)
+	public void setA(DataPotionEffect ca, PotionEffectType fa, Object d)
 	{
 		ca.setId(fa);
 	}

@@ -6,7 +6,7 @@ import org.bukkit.block.Banner;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
-public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaField<BlockStateMeta, Integer, DyeColor>
+public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaField<BlockStateMeta, DyeColor, DyeColor>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -18,8 +18,6 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 	{
 		super(BlockStateMeta.class);
 		this.setMaterial(Material.SHIELD);
-		this.setConverterTo(ConverterToDyeColor.get());
-		this.setConverterFrom(ConverterFromDyeColor.get());
 	}
 	
 	// -------------------------------------------- //
@@ -27,13 +25,13 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public DyeColor getA(DataItemStack ca, ItemStack d)
 	{
 		return ca.getBannerBase();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(DataItemStack ca, DyeColor fa, ItemStack d)
 	{
 		ca.setBannerBase(fa);
 	}

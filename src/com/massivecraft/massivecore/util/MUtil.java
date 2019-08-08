@@ -1276,9 +1276,9 @@ public class MUtil
 		
 		Material ret = null;
 		
-		if (action == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.CAKE_BLOCK)
+		if (action == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.CAKE)
 		{
-			ret = Material.CAKE_BLOCK;
+			ret = Material.CAKE;
 		}
 		else if (ReferenceMaterial.getFoodMaterials().contains(event.getMaterial()))
 		{

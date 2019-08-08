@@ -1,8 +1,8 @@
 package com.massivecraft.massivecore.item;
 
-import org.bukkit.FireworkEffect.Type;
+import org.bukkit.FireworkEffect;
 
-public class ConverterToFireworkEffectType extends Converter<String, Type>
+public class ConverterToFireworkEffectType extends Converter<String, FireworkEffect.Type>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -16,10 +16,10 @@ public class ConverterToFireworkEffectType extends Converter<String, Type>
 	// -------------------------------------------- //
 	
 	@Override
-	public Type convert(String x)
+	public FireworkEffect.Type convert(String x)
 	{
 		if (x == null) return null;
-		return Type.valueOf(x);
+		return FireworkEffect.Type.valueOf(x);
 	}
 
 }

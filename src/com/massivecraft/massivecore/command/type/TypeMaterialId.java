@@ -5,7 +5,7 @@ import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 
-@SuppressWarnings("deprecation")
+@Deprecated
 public class TypeMaterialId extends TypeTransformer<Material, Integer> 
 {
 	// -------------------------------------------- //
@@ -23,7 +23,6 @@ public class TypeMaterialId extends TypeTransformer<Material, Integer>
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-	
 
 	@Override
 	public Integer innerToOuter(Material inner, CommandSender sender)
@@ -36,7 +35,8 @@ public class TypeMaterialId extends TypeTransformer<Material, Integer>
 	public Material outerToInner(Integer outer)
 	{
 		if (outer == null) return null;
-		return Material.getMaterial(outer);
+		throw new UnsupportedOperationException("You really shouldn't be using this");
+		//return Material.getMaterial(outer);
 	}
 	
 }

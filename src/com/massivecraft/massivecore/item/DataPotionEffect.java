@@ -3,10 +3,10 @@ package com.massivecraft.massivecore.item;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
-import com.massivecraft.massivecore.command.type.convert.TypeConverterPotionEffectType;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
 
@@ -21,6 +21,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	// -------------------------------------------- //
 	
 	public static final transient Integer DEFAULT_ID = null;
+	public static final transient PotionEffectType DEFAULT_TYPE = null;
 	public static final transient Integer DEFAULT_DURATION = 20 * 3 * 60;
 	public static final transient Integer DEFAULT_AMPLIFIER = 0;
 	public static final transient Boolean DEFAULT_AMBIENT = false;
@@ -30,11 +31,10 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
-	
-	@EditorType(value = TypeConverterPotionEffectType.class)
-	private Integer id = null;
-	public Integer getId() { return get(this.id, DEFAULT_ID); }
-	public DataPotionEffect setId(Integer id) { this.id = set(id, DEFAULT_ID); return this; }
+
+	private PotionEffectType id = null;
+	public PotionEffectType getId() { return get(this.id, DEFAULT_TYPE); }
+	public DataPotionEffect setId(PotionEffectType id) { this.id = set(id, DEFAULT_TYPE); return this; }
 	
 	private Integer duration = null;
 	public int getDuration() { return get(this.duration, DEFAULT_DURATION); }

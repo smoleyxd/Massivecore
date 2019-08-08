@@ -10,9 +10,7 @@ import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
-import com.massivecraft.massivecore.command.type.TypeMaterialId;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
-import com.massivecraft.massivecore.command.type.convert.TypeConverterDyeColor;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterEnchant;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterItemFlag;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
@@ -22,6 +20,7 @@ import com.massivecraft.massivecore.util.InventoryUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -79,7 +78,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Map<Integer, Integer> DEFAULT_STORED_ENCHANTS = Collections.emptyMap();
 	public static final transient Boolean DEFAULT_UNBREAKABLE = false;
 	public static final transient Set<String> DEFAULT_FLAGS = Collections.emptySet();
-	public static final transient Integer DEFAULT_BANNER_BASE = null;
+	public static final transient DyeColor DEFAULT_BANNER_BASE = DyeColor.WHITE;
 	public static final transient List<DataBannerPattern> DEFAULT_BANNER_PATTERNS = Collections.emptyList();
 	public static final transient String DEFAULT_POTION = "water";
 	public static final transient Map<Integer, DataItemStack> DEFAULT_INVENTORY = Collections.emptyMap();
@@ -97,8 +96,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	// FIELDS > BASIC
 	// -------------------------------------------- //
-	
-	@EditorType(value = TypeMaterialId.class)
+
+	// FIXME convert this to use the new values instead of magic numbers
+	// FIXME see if this works by just commenting it out?
+	//@EditorType(value = TypeMaterialId.class)
 	private String id = null;
 	public String getId() { return get(this.id, DEFAULT_ID); }
 	public DataItemStack setId(String id) { this.id = set(id, DEFAULT_ID); return this; }
@@ -128,6 +129,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// The Bukkit ItemMeta#getEnchants() is not sorted by the enchant id.
 	// There may be some sort of custom sorting order, I'm not sure.
 	// We are however enforcing sorting by the enchant id ourselves to be sure.
+	// FIXME convert this to use the new values instead of magic numbers
 	@EditorTypeInner({TypeConverterEnchant.class, TypeInteger.class})
 	private MassiveTreeMapDef<Integer, Integer, ComparatorSmart> enchants = null;
 	public Map<Integer, Integer> getEnchants() { return get(this.enchants, DEFAULT_ENCHANTS); }
@@ -222,7 +224,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	// FIELDS > STORED ENCHANTS
 	// -------------------------------------------- //
-	
+
+	// // FIXME convert this to use the new values instead of magic numbers
 	@EditorTypeInner({TypeConverterEnchant.class, TypeInteger.class})
 	@SerializedName("stored-enchants")
 	private MassiveTreeMapDef<Integer, Integer, ComparatorSmart> storedEnchants = null;
@@ -254,12 +257,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// SINCE: 1.8
 	// The integer is the dye color byte representation.
 	// Is actually nullable in Bukkit.
-	
-	@EditorType(TypeConverterDyeColor.class)
+
 	@SerializedName("banner-base")
-	private Integer bannerBase = null;
-	public Integer getBannerBase() { return get(this.bannerBase, DEFAULT_BANNER_BASE); }
-	public DataItemStack setBannerBase(Integer bannerBase) { this.bannerBase = set(bannerBase, DEFAULT_BANNER_BASE); return this; }
+	private DyeColor bannerBase = null;
+	public DyeColor getBannerBase() { return get(this.bannerBase, DEFAULT_BANNER_BASE); }
+	public DataItemStack setBannerBase(DyeColor bannerBase) { this.bannerBase = set(bannerBase, DEFAULT_BANNER_BASE); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > BANNER PATTERNS

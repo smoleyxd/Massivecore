@@ -19,7 +19,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	public WriterItemStackMetaSkullProperties()
 	{
 		super(SkullMeta.class);
-		this.setMaterial(Material.SKULL_ITEM);
+		this.setMaterial(Material.PLAYER_HEAD);
 		this.setConverterFrom(new Converter<Object, ContainerGameProfile>()
 		{
 			@Override

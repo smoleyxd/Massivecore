@@ -3,9 +3,9 @@ package com.massivecraft.massivecore.item;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterBannerPatternType;
-import com.massivecraft.massivecore.command.type.convert.TypeConverterDyeColor;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
+import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	// -------------------------------------------- //
 	
 	public static final transient String DEFAULT_ID = null;
-	public static final transient Integer DEFAULT_COLOR = null;
+	public static final transient DyeColor DEFAULT_COLOR = null;
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -31,11 +31,10 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	private String id = null;
 	public String getId() { return get(this.id, DEFAULT_ID); }
 	public DataBannerPattern setId(String id) { this.id = set(id, DEFAULT_ID); return this; }
-	
-	@EditorType(TypeConverterDyeColor.class)
-	private Integer color = null;
-	public Integer getColor() { return get(this.color, DEFAULT_COLOR); }
-	public DataBannerPattern setColor(Integer color) { this.color = set(color, DEFAULT_ID); return this; }
+
+	private DyeColor color = null;
+	public DyeColor getColor() { return get(this.color, DEFAULT_COLOR); }
+	public DataBannerPattern setColor(DyeColor color) { this.color = set(color, DEFAULT_ID); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

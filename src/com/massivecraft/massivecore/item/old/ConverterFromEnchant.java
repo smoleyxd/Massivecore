@@ -1,7 +1,9 @@
-package com.massivecraft.massivecore.item;
+package com.massivecraft.massivecore.item.old;
 
+import com.massivecraft.massivecore.item.Converter;
 import org.bukkit.enchantments.Enchantment;
 
+@Deprecated
 public class ConverterFromEnchant extends Converter<Enchantment, Integer>
 {
 	// -------------------------------------------- //
@@ -14,13 +16,13 @@ public class ConverterFromEnchant extends Converter<Enchantment, Integer>
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public Integer convert(Enchantment x)
 	{
 		if (x == null) return null;
-		return x.getId();
+		throw new UnsupportedOperationException("Magic number");
+		//return x.getId();
 	}
 
 }
