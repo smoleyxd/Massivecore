@@ -21,7 +21,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	// -------------------------------------------- //
 	
 	public static final transient String DEFAULT_ID = null;
-	public static final transient DyeColor DEFAULT_COLOR = null;
+	public static final transient DyeColor DEFAULT_COLOR = DyeColor.WHITE;
 	
 	// -------------------------------------------- //
 	// FIELDS
