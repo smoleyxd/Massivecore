@@ -1,7 +1,5 @@
 package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.item.old.ConverterFromEnchants;
-import com.massivecraft.massivecore.item.old.ConverterToEnchants;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -10,7 +8,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMetaField<EnchantmentStorageMeta, Map<Integer, Integer>, Map<Enchantment, Integer>>
+public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMetaField<EnchantmentStorageMeta, Map<Enchantment, Integer>, Map<Enchantment, Integer>>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -22,8 +20,8 @@ public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMe
 	{
 		super(EnchantmentStorageMeta.class);
 		this.setMaterial(Material.ENCHANTED_BOOK);
-		this.setConverterTo(ConverterToEnchants.get());
-		this.setConverterFrom(ConverterFromEnchants.get());
+		//this.setConverterTo(ConverterToEnchants.get());
+		//this.setConverterFrom(ConverterFromEnchants.get());
 	}
 
 	// -------------------------------------------- //
@@ -31,13 +29,13 @@ public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 
 	@Override
-	public Map<Integer, Integer> getA(DataItemStack ca, ItemStack d)
+	public Map<Enchantment, Integer> getA(DataItemStack ca, ItemStack d)
 	{
 		return ca.getStoredEnchants();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, Map<Integer, Integer> fa, ItemStack d)
+	public void setA(DataItemStack ca, Map<Enchantment, Integer> fa, ItemStack d)
 	{
 		ca.setStoredEnchants(fa);
 	}

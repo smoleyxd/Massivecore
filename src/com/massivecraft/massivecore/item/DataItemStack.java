@@ -10,6 +10,7 @@ import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
+import com.massivecraft.massivecore.command.type.TypeEnchantment;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterEnchant;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterItemFlag;
@@ -22,6 +23,7 @@ import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
@@ -62,7 +64,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Integer DEFAULT_DAMAGE = 0;
 	public static final transient String DEFAULT_NAME = null;
 	public static final transient List<String> DEFAULT_LORE = Collections.emptyList();
-	public static final transient Map<Integer, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
+	public static final transient Map<Enchantment, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
 	public static final transient Integer DEFAULT_REPAIRCOST = 0;
 	public static final transient String DEFAULT_TITLE = null;
 	public static final transient String DEFAULT_AUTHOR = null;
@@ -75,7 +77,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient DataFireworkEffect DEFAULT_FIREWORK_EFFECT = null;
 	public static final transient List<DataFireworkEffect> DEFAULT_FIREWORK_EFFECTS = Collections.emptyList();
 	public static final transient Integer DEFAULT_FIREWORK_FLIGHT = 0;
-	public static final transient Map<Integer, Integer> DEFAULT_STORED_ENCHANTS = Collections.emptyMap();
+	public static final transient Map<Enchantment, Integer> DEFAULT_STORED_ENCHANTS = Collections.emptyMap();
 	public static final transient Boolean DEFAULT_UNBREAKABLE = false;
 	public static final transient Set<String> DEFAULT_FLAGS = Collections.emptySet();
 	public static final transient DyeColor DEFAULT_BANNER_BASE = DyeColor.WHITE;
@@ -130,10 +132,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// There may be some sort of custom sorting order, I'm not sure.
 	// We are however enforcing sorting by the enchant id ourselves to be sure.
 	// FIXME convert this to use the new values instead of magic numbers
-	@EditorTypeInner({TypeConverterEnchant.class, TypeInteger.class})
-	private MassiveTreeMapDef<Integer, Integer, ComparatorSmart> enchants = null;
-	public Map<Integer, Integer> getEnchants() { return get(this.enchants, DEFAULT_ENCHANTS); }
-	public DataItemStack setEnchants(Map<Integer, Integer> enchants) { this.enchants = set(enchants, DEFAULT_ENCHANTS); return this; }
+	@EditorTypeInner({TypeEnchantment.class, TypeInteger.class})
+	private MassiveTreeMapDef<Enchantment, Integer, ComparatorSmart> enchants = null;
+	public Map<Enchantment, Integer> getEnchants() { return get(this.enchants, DEFAULT_ENCHANTS); }
+	public DataItemStack setEnchants(Map<Enchantment, Integer> enchants) { this.enchants = set(enchants, DEFAULT_ENCHANTS); return this; }
 	
 	private Integer repaircost = null;
 	public int getRepaircost() { return get(this.repaircost, DEFAULT_REPAIRCOST); }
@@ -226,11 +228,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 
 	// // FIXME convert this to use the new values instead of magic numbers
-	@EditorTypeInner({TypeConverterEnchant.class, TypeInteger.class})
+	@EditorTypeInner({TypeEnchantment.class, TypeInteger.class})
 	@SerializedName("stored-enchants")
-	private MassiveTreeMapDef<Integer, Integer, ComparatorSmart> storedEnchants = null;
-	public Map<Integer, Integer> getStoredEnchants() { return get(this.storedEnchants, DEFAULT_STORED_ENCHANTS); }
-	public DataItemStack setStoredEnchants(Map<Integer, Integer> storedEnchants) { this.storedEnchants = set(storedEnchants, DEFAULT_STORED_ENCHANTS); return this; }
+	private MassiveTreeMapDef<Enchantment, Integer, ComparatorSmart> storedEnchants = null;
+	public Map<Enchantment, Integer> getStoredEnchants() { return get(this.storedEnchants, DEFAULT_STORED_ENCHANTS); }
+	public DataItemStack setStoredEnchants(Map<Enchantment, Integer> storedEnchants) { this.storedEnchants = set(storedEnchants, DEFAULT_STORED_ENCHANTS); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > UNBREAKABLE

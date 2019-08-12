@@ -53,6 +53,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -160,6 +161,8 @@ public class MassiveCore extends MassivePlugin
 
 		// PotionEffectType
 		ret.registerTypeAdapter(PotionEffectType.class, AdapterPotionEffectType.get());
+
+		ret.registerTypeAdapter(Enchantment.class, AdapterEnchantment.get());
 
 		// Return
 		return ret;

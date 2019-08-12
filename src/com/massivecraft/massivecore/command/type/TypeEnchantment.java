@@ -80,8 +80,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public String getNameInner(Enchantment enchantment)
 	{
@@ -90,8 +89,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		if (rawnames != null) rawname = rawnames.get(0);
 		return Txt.getNicedEnumString(rawname);
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public Set<String> getNamesInner(Enchantment enchantment)
 	{
