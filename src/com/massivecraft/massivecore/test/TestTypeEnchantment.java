@@ -6,7 +6,6 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class TestTypeEnchantment extends Test
@@ -27,18 +26,11 @@ public class TestTypeEnchantment extends Test
 	{
 		final List<Enchantment> enchantments = new MassiveList<>(Arrays.asList(Enchantment.values()));
 		
-		for (Iterator<Enchantment> iterator = enchantments.iterator(); iterator.hasNext();)
-		{
-			Enchantment enchantment = iterator.next();
-			if (TypeEnchantment.ID_TO_RAWNAMES.containsKey(TypeEnchantment.enchantmentToId(enchantment)))
-			{
-				iterator.remove();
-			}
-		}
+		enchantments.removeIf(enchantment -> TypeEnchantment.ID_TO_RAWNAMES.containsKey(TypeEnchantment.enchantmentToKey(enchantment)));
 		
 		for (Enchantment enchantment : enchantments)
 		{
-			String issue = Txt.parse("<i>The enchantment <h>%s (%d)<i> lacks nicename in TypeEnchantment.", enchantment.getName(), TypeEnchantment.enchantmentToId(enchantment));
+			String issue = Txt.parse("<i>The enchantment <h>%s<i> lacks nicename in TypeEnchantment.", TypeEnchantment.enchantmentToKey(enchantment));
 			this.addIssue(issue);
 		}
 		

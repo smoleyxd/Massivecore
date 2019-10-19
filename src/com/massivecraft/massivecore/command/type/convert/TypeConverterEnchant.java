@@ -1,13 +1,12 @@
 package com.massivecraft.massivecore.command.type.convert;
 
 import com.massivecraft.massivecore.command.type.TypeEnchantment;
-import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
-import com.massivecraft.massivecore.item.old.ConverterFromEnchant;
-import com.massivecraft.massivecore.item.old.ConverterToEnchant;
+import com.massivecraft.massivecore.command.type.primitive.TypeString;
+import com.massivecraft.massivecore.item.ConverterFromEnchant;
+import com.massivecraft.massivecore.item.ConverterToEnchant;
 import org.bukkit.enchantments.Enchantment;
 
-@Deprecated
-public class TypeConverterEnchant extends TypeConverter<Enchantment, Integer> 
+public class TypeConverterEnchant extends TypeConverter<Enchantment, String>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -18,7 +17,7 @@ public class TypeConverterEnchant extends TypeConverter<Enchantment, Integer>
 	
 	public TypeConverterEnchant()
 	{
-		super(TypeEnchantment.get(), TypeInteger.get(), ConverterFromEnchant.get(), ConverterToEnchant.get());
+		super(TypeEnchantment.get(), TypeString.get(), ConverterFromEnchant.get(), ConverterToEnchant.get());
 	}
 	
 }

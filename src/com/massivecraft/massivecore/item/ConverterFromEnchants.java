@@ -1,11 +1,8 @@
-package com.massivecraft.massivecore.item.old;
+package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.item.ConverterDefault;
-import com.massivecraft.massivecore.item.ConverterMap;
 import org.bukkit.enchantments.Enchantment;
 
-@Deprecated
-public class ConverterFromEnchants extends ConverterMap<Enchantment, Integer, Integer, Integer>
+public class ConverterFromEnchants extends ConverterMap<Enchantment, Integer, String, Integer>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT

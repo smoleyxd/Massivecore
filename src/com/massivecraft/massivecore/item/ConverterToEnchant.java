@@ -1,10 +1,9 @@
-package com.massivecraft.massivecore.item.old;
+package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.item.Converter;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
-@Deprecated
-public class ConverterToEnchant extends Converter<Integer, Enchantment>
+public class ConverterToEnchant extends Converter<String, Enchantment>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -18,11 +17,10 @@ public class ConverterToEnchant extends Converter<Integer, Enchantment>
 	// -------------------------------------------- //
 
 	@Override
-	public Enchantment convert(Integer x)
+	public Enchantment convert(String x)
 	{
 		if (x == null) return null;
-		throw new UnsupportedOperationException("Magic numbers are no longer supported");
-		//return Enchantment.getById(x);
+		return Enchantment.getByKey(NamespacedKey.minecraft(x));
 	}
 
 }

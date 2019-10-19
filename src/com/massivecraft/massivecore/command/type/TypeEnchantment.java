@@ -19,49 +19,52 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	// -------------------------------------------- //
 	// http://minecraft.gamepedia.com/Enchanting#Enchantments
 	
-	// TODO convert the digit strings to the keys used in modern minecraft
 	// The first name is taken from the wiki. Those names are those people think of.
-	// The second name is the Bukkit enum name.
+	// The second name is the Spigot key name.
 	// Thereafter comes assorted extras
 	public static Map<String, List<String>> ID_TO_RAWNAMES = new MassiveMap<String, List<String>>(
-		"0", new MassiveList<>("Protection", "PROTECTION_ENVIRONMENTAL"),
-		"1", new MassiveList<>("Fire Protection", "PROTECTION_FIRE"),
-		"2", new MassiveList<>("Feather Falling", "PROTECTION_FALL", "FallProtection"),
-		"3", new MassiveList<>("Blast Protection", "PROTECTION_EXPLOSIONS", "ExplosionProtection"),
-		"4", new MassiveList<>("Projectile Protection", "PROTECTION_PROJECTILE", "ProjectileProtection"),
-		"5", new MassiveList<>("Respiration", "OXYGEN", "Breathing"),
-		"6", new MassiveList<>("Aqua Affinity", "WATER_WORKER"),
-		"7", new MassiveList<>("Thorns", "THORNS"),
-		"8", new MassiveList<>("Depth Strider", "DEPTH_STRIDER"),
-		"9", new MassiveList<>("Frost Walker", "FROST_WALKER"),
-		"10", new MassiveList<>("Curse of Binding", "BINDING_CURSE"),
-		"16", new MassiveList<>("Sharpness", "DAMAGE_ALL"),
-		"17", new MassiveList<>("Smite", "DAMAGE_UNDEAD"),
-		"18", new MassiveList<>("Bane of Arthropods", "DAMAGE_ARTHROPODS", "BaneArthropods", "Arthropods"),
-		"19", new MassiveList<>("Knockback", "KNOCKBACK"),
-		"20", new MassiveList<>("Fire Aspect", "FIRE_ASPECT"),
-		"21", new MassiveList<>("Looting", "LOOT_BONUS_MOBS"),
-		"22", new MassiveList<>("Sweeping Edge", "SWEEPING_EDGE"),
-		"32", new MassiveList<>("Efficiency", "DIG_SPEED"),
-		"33", new MassiveList<>("Silk Touch", "SILK_TOUCH"),
-		"34", new MassiveList<>("Unbreaking", "DURABILITY"),
-		"35", new MassiveList<>("Fortune", "LOOT_BONUS_BLOCKS"),
-		"48", new MassiveList<>("Power", "ARROW_DAMAGE"),
-		"49", new MassiveList<>("Punch", "ARROW_KNOCKBACK"),
-		"50", new MassiveList<>("Flame", "ARROW_FIRE"),
-		"51", new MassiveList<>("Infinity", "ARROW_INFINITE", "ArrowInfinity"),
-		"61", new MassiveList<>("Luck of the Sea", "LUCK", "LuckOfSea", "LuckTheSea", "LuckSea"),
-		"62", new MassiveList<>("Lure", "LURE"),
-		"70", new MassiveList<>("Mending", "MENDING"),
-		"71", new MassiveList<>("Curse of Vanishing", "VANISHING_CURSE")
+		"protection", new MassiveList<>("Protection", "PROTECTION_ENVIRONMENTAL"),
+		"fire_protection", new MassiveList<>("Fire Protection", "PROTECTION_FIRE"),
+		"feather_falling", new MassiveList<>("Feather Falling", "PROTECTION_FALL", "FallProtection"),
+		"blast_protection", new MassiveList<>("Blast Protection", "PROTECTION_EXPLOSIONS", "ExplosionProtection"),
+		"projectile_protection", new MassiveList<>("Projectile Protection", "PROTECTION_PROJECTILE", "ProjectileProtection"),
+		"respiration", new MassiveList<>("Respiration", "OXYGEN", "Breathing"),
+		"aqua_affinity", new MassiveList<>("Aqua Affinity", "WATER_WORKER"),
+		"thorns", new MassiveList<>("Thorns", "THORNS"),
+		"depth_strider", new MassiveList<>("Depth Strider", "DEPTH_STRIDER"),
+		"frost_walker", new MassiveList<>("Frost Walker", "FROST_WALKER"),
+		"binding_curse", new MassiveList<>("Curse of Binding", "BINDING_CURSE", "BindingCurse"),
+		"sharpness", new MassiveList<>("Sharpness", "DAMAGE_ALL"),
+		"smite", new MassiveList<>("Smite", "DAMAGE_UNDEAD"),
+		"bane_of_arthropods", new MassiveList<>("Bane of Arthropods", "DAMAGE_ARTHROPODS", "BaneArthropods", "Arthropods"),
+		"knockback", new MassiveList<>("Knockback", "KNOCKBACK"),
+		"fire_aspect", new MassiveList<>("Fire Aspect", "FIRE_ASPECT"),
+		"looting", new MassiveList<>("Looting", "LOOT_BONUS_MOBS"),
+		"sweeping", new MassiveList<>("Sweeping Edge", "SWEEPING_EDGE"),
+		"efficiency", new MassiveList<>("Efficiency", "DIG_SPEED"),
+		"silk_touch", new MassiveList<>("Silk Touch", "SILK_TOUCH"),
+		"unbreaking", new MassiveList<>("Unbreaking", "DURABILITY"),
+		"fortune", new MassiveList<>("Fortune", "LOOT_BONUS_BLOCKS"),
+		"power", new MassiveList<>("Power", "ARROW_DAMAGE"),
+		"punch", new MassiveList<>("Punch", "ARROW_KNOCKBACK"),
+		"flame", new MassiveList<>("Flame", "ARROW_FIRE"),
+		"infinity", new MassiveList<>("Infinity", "ARROW_INFINITE", "ArrowInfinity"),
+		"luck_of_the_sea", new MassiveList<>("Luck of the Sea", "LUCK", "LuckOfSea", "LuckTheSea", "LuckSea"),
+		"lure", new MassiveList<>("Lure", "LURE"),
+		"mending", new MassiveList<>("Mending", "MENDING"),
+		"vanishing_curse", new MassiveList<>("Curse of Vanishing", "VANISHING_CURSE"),
+		"loyalty", new MassiveList<>("Loyalty", "LOYALTY"),
+		"impaling", new MassiveList<>("Impaling", "IMPALING"),
+		"riptide", new MassiveList<>("Riptide", "RIPTIDE"),
+		"channeling", new MassiveList<>("Channeling", "CHANNELING")
 	);
 	
-	public static String enchantmentToId(Enchantment enchantment) {
+	public static String enchantmentToKey(Enchantment enchantment) {
 		return enchantment.getKey().getKey();
 	}
 	
-	public static Enchantment enchantmentFromId(String id) {
-		return Enchantment.getByKey(NamespacedKey.minecraft(id));
+	public static Enchantment enchantmentFromKey(String key) {
+		return Enchantment.getByKey(NamespacedKey.minecraft(key));
 	}
 	
 	// -------------------------------------------- //
@@ -70,7 +73,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	
 	private static TypeEnchantment i = new TypeEnchantment();
 	public static TypeEnchantment get() { return i; }
-	public TypeEnchantment()
+	private TypeEnchantment()
 	{
 		super(Enchantment.class);
 		this.setVisualColor(ChatColor.AQUA);
@@ -84,8 +87,8 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	@Override
 	public String getNameInner(Enchantment enchantment)
 	{
-		String rawname = enchantment.getName();
-		List<String> rawnames = ID_TO_RAWNAMES.get(enchantmentToId(enchantment));
+		String rawname = enchantment.getKey().getKey();
+		List<String> rawnames = ID_TO_RAWNAMES.get(enchantmentToKey(enchantment));
 		if (rawnames != null) rawname = rawnames.get(0);
 		return Txt.getNicedEnumString(rawname);
 	}
@@ -98,9 +101,9 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		
 		// Fill
 		List<String> raws = new MassiveList<>();
-		List<String> rawnames = ID_TO_RAWNAMES.get(enchantmentToId(enchantment));
+		List<String> rawnames = ID_TO_RAWNAMES.get(enchantmentToKey(enchantment));
 		if (rawnames != null) raws.addAll(rawnames);
-		raws.add(enchantment.getName());
+		raws.add(enchantment.getKey().getKey());
 		for (String raw : raws)
 		{
 			ret.add(Txt.getNicedEnumString(raw));
@@ -113,7 +116,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	@Override
 	public String getIdInner(Enchantment enchantment)
 	{
-		return enchantmentToId(enchantment);
+		return enchantmentToKey(enchantment);
 	}
 
 }

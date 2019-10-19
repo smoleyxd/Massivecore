@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMetaField<EnchantmentStorageMeta, Map<Enchantment, Integer>, Map<Enchantment, Integer>>
+public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMetaField<EnchantmentStorageMeta, Map<String, Integer>, Map<Enchantment, Integer>>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -29,13 +29,13 @@ public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 
 	@Override
-	public Map<Enchantment, Integer> getA(DataItemStack ca, ItemStack d)
+	public Map<String, Integer> getA(DataItemStack ca, ItemStack d)
 	{
 		return ca.getStoredEnchants();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, Map<Enchantment, Integer> fa, ItemStack d)
+	public void setA(DataItemStack ca, Map<String, Integer> fa, ItemStack d)
 	{
 		ca.setStoredEnchants(fa);
 	}
