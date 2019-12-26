@@ -61,7 +61,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_ID = Material.AIR.name();
 	public static final transient Integer DEFAULT_COUNT = 1;
 	public static final transient Integer DEFAULT_DAMAGE = 0;
-	public static final transient String DEFAULT_NAME = null;
+	public static final transient String DEFAULT_NAME = "";
 	public static final transient List<String> DEFAULT_LORE = Collections.emptyList();
 	public static final transient Map<String, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
 	public static final transient Integer DEFAULT_REPAIRCOST = 0;
@@ -92,7 +92,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 1;
+	private int version = 2;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC

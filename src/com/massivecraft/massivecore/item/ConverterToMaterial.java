@@ -19,8 +19,8 @@ public class ConverterToMaterial extends Converter<String, Material>
 	public Material convert(String x)
 	{
 		if (x == null) return null;
-		Material ret = Material.getMaterial(x);
-		if (ret == null) throw new NullPointerException(x);
+		Material ret = Material.getMaterial(x.toUpperCase());
+		if (ret == null) throw new NullPointerException(x.toUpperCase());
 		return ret;
 	}
 

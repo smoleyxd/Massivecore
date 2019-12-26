@@ -20,8 +20,8 @@ public class WriterItemStackMetaStoredEnchants extends WriterAbstractItemStackMe
 	{
 		super(EnchantmentStorageMeta.class);
 		this.setMaterial(Material.ENCHANTED_BOOK);
-		//this.setConverterTo(ConverterToEnchants.get());
-		//this.setConverterFrom(ConverterFromEnchants.get());
+		this.setConverterTo(ConverterToEnchants.get());
+		this.setConverterFrom(ConverterFromEnchants.get());
 	}
 
 	// -------------------------------------------- //
