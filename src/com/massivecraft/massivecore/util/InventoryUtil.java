@@ -2,7 +2,6 @@ package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.collections.MassiveList;
-import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.comparator.ComparatorComparable;
 import com.massivecraft.massivecore.comparator.ComparatorEntryValue;
 import com.massivecraft.massivecore.event.EventMassiveCoreLorePriority;
@@ -25,11 +24,17 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
-import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class InventoryUtil
 {
@@ -935,20 +940,9 @@ public class InventoryUtil
 		// Only items take damage in Minecraft.
 		if (material.isBlock()) return false;
 		
-		// This list was created by checking for the "B" notation on:
-		// http://minecraft.gamepedia.com/Data_values
-		if (nonRepairables.contains(material.name())) return false;
-
-		// This lines actually catches most of the specific lines above.
-		// However we add this in anyways for future compatibility.
-		if ( ! material.getData().equals(MaterialData.class)) return false;
-		
 		// We may also not repair things that can not take any damage.
 		// NOTE: MaxDurability should be renamed to MaxDamage.
-		if (material.getMaxDurability() == 0) return false;
-		
-		// Otherwise repairable
-		return true;
+		return material.getMaxDurability() != 0;
 	}
 	
 	public static boolean isPotion(ItemStack itemStack)

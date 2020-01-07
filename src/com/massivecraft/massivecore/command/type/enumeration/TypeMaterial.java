@@ -22,14 +22,15 @@ public class TypeMaterial extends TypeEnum<Material>
 		);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public Set<String> getIdsInner(Material value)
 	{
 		Set<String> ret = new MassiveSet<>(super.getIdsInner(value));
 		
-		String id = String.valueOf(value.getId());
-		ret.add(id);
+		if (!value.isLegacy()) {
+			String key = value.getKey().getKey();
+			ret.add(key);
+		}
 		
 		return ret;
 	}
