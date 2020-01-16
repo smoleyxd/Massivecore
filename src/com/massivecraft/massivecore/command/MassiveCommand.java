@@ -1455,7 +1455,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			ret.addAll(Txt.getStartsWithIgnoreCase(child.getAliases(), token));
 		}
 		
-		return addSpaceAtEnd(ret);
+		return ret;
 	}
 	
 	protected List<String> getTabCompletionsArg(List<String> args, CommandSender sender)
@@ -1466,27 +1466,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if ( ! this.hasParameterForIndex(index)) return Collections.emptyList();
 		Type<?> type = this.getParameterType(index);
 		
-		List<String> ret = type.getTabListFiltered(sender, args.get(index));
-		
-		// If the type allows space after tab and this is not the last possible argument...
-		if (type.allowSpaceAfterTab() && this.hasParameterForIndex(args.size()))
-		{
-			// ...we will sometimes add a space at the end. Depending on list size.
-			ret = addSpaceAtEnd(ret);
-		}
-		
-		return ret;
-	}
-	
-	protected static List<String> addSpaceAtEnd(List<String> suggestions)
-	{
-		if (suggestions.size() != 1) return suggestions;
-
-		// Get the suggestion.
-		String suggestion = suggestions.get(0);
-		// Add the space at the end.
-		suggestion += ' ';
-		return Collections.singletonList(suggestion);
+		return type.getTabListFiltered(sender, args.get(index));
 	}
 	
 	// -------------------------------------------- //
