@@ -10,6 +10,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.material.MaterialData;
 import org.bukkit.potion.PotionEffectType;
 
@@ -78,38 +79,47 @@ public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 	// -------------------------------------------- //
 	
 	@Override
-	public void migrateInner(JsonObject entity)
-	{
+	public void migrateInner(JsonObject entity) {
 		// Get the legacy id
 		JsonElement jsonId = entity.get("id");
 		if (jsonId == null || jsonId.isJsonNull()) return;
 		String legacy = jsonId.getAsString();
-		
-		if (!legacy.startsWith(LEGACY_PREFIX))
-		{
+
+		if (!legacy.startsWith(LEGACY_PREFIX)) {
 			legacy = LEGACY_PREFIX + legacy;
 		}
-		
+
 		// Get the damage
 		JsonPrimitive jsonDamage = entity.getAsJsonPrimitive("damage");
 		int damage = 0;
-		if (jsonDamage != null && jsonDamage.isNumber())
-		{
+		if (jsonDamage != null && jsonDamage.isNumber()) {
 			damage = jsonDamage.getAsInt();
 		}
-		
+
 		Material legacyMaterial = Material.getMaterial(legacy);
 		if (legacyMaterial == null) return;
-		
+
 		MaterialData legacyData = new MaterialData(legacyMaterial, (byte) damage);
-		
+
 		try
 		{
 			Material newMaterial = Bukkit.getUnsafe().fromLegacy(legacyData);
-			
+
+			if (newMaterial == Material.AIR) {
+				try {
+					BlockData blockData = Bukkit.getUnsafe().fromLegacy(legacyMaterial, (byte) damage);
+					newMaterial = blockData.getMaterial();
+					if (newMaterial == Material.AIR) throw new Exception("AIR");
+				}
+				catch(Exception ignored) {
+					newMaterial = Bukkit.getUnsafe().fromLegacy(legacyMaterial);
+				}
+			}
+
+			if (newMaterial == Material.AIR) throw new Exception("AIR");
+
 			// White Bed Edgecase
 			// Bukkit seems to be converting White beds to Red beds because of the 0 damage value.
-			
 			if (newMaterial == Material.RED_BED && damage != 14) newMaterial = Material.WHITE_BED;
 			
 			entity.addProperty("id", newMaterial.getKey().getKey().toUpperCase());
@@ -117,10 +127,10 @@ public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 		}
 		catch (Exception e)
 		{
-			entity.add("id", new JsonPrimitive(Material.PAPER.getKey().getKey()));
-			entity.add("name", new JsonPrimitive("§b☢Error Migrating '" + legacy + "' - Message Birb☢"));
-			entity.remove("damage");
-			System.out.println("Error migrating '" + legacy + "' - Paper placed.");
+				entity.add("id", new JsonPrimitive(Material.PAPER.getKey().getKey()));
+				entity.add("name", new JsonPrimitive("§b☢Error Migrating '" + legacy + "' - Message Birb☢"));
+				entity.remove("damage");
+				System.out.println("Error migrating '" + legacy + "' - Paper placed.");
 		}
 		
 		for (String key : MUtil.list("enchants", "stored-enchants"))
