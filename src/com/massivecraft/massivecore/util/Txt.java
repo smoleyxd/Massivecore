@@ -538,7 +538,7 @@ public class Txt
 		
 		// Math
 		Mson title = mson(obj, Mson.SPACE, "[<]", String.valueOf(pageHumanBased), "/", String.valueOf(pagecount), "[>]");
-		int centerlen = ".[ ".length() + title.length() + " ].".length();
+		int centerlen = ".[ ".length() + ChatColor.stripColor(title.toPlain(false)).length() + " ].".length();
 		int pivot = titleizeLine.length() / 2;
 		int eatLeft = (centerlen / 2) - titleizeBalance;
 		int eatRight = (centerlen - eatLeft) + titleizeBalance;
