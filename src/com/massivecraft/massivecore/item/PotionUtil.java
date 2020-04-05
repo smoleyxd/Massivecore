@@ -79,7 +79,7 @@ public class PotionUtil
 		.put("strong_poison", new PotionData(PotionType.POISON, false, true))
 		.put("strong_regeneration", new PotionData(PotionType.REGEN, false, true))
 		.put("strong_strength", new PotionData(PotionType.STRENGTH, false, true))
-		.put("strong_slowness", new PotionData(PotionType.SLOWNESS, true, true))
+		.put("strong_slowness", new PotionData(PotionType.SLOWNESS, false, true))
 		.put("strong_turtle_master", new PotionData(PotionType.TURTLE_MASTER, false, true))
 		
 		// EXTENDABLE
