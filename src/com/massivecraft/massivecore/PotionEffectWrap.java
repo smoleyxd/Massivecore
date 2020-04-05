@@ -25,7 +25,7 @@ public class PotionEffectWrap
 	public void setId(PotionEffectType id) { this.id = id; }
 
 	public void setPotionEffectType(PotionEffectType potionEffectType) { this.setId(potionEffectType);}
-	public PotionEffectType getPotionEffectType() { return this.getPotionEffectType(); }
+	public PotionEffectType getPotionEffectType() { return this.getId(); }
 	
 	protected int amplifier;
 	public int getAmplifier() { return this.amplifier; }
