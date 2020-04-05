@@ -68,6 +68,8 @@ public class PotionUtil
 		.put("strength", new PotionData(PotionType.STRENGTH, false, false))
 		.put("weakness", new PotionData(PotionType.WEAKNESS, false, false))
 		.put("luck", new PotionData(PotionType.LUCK, false, false))
+		.put("turtle_master", new PotionData(PotionType.TURTLE_MASTER, false, false))
+		.put("slow_falling", new PotionData(PotionType.SLOW_FALLING, false, false))
 		
 		// UPGRADABLE
 		.put("strong_leaping", new PotionData(PotionType.JUMP, false, true))
@@ -77,6 +79,8 @@ public class PotionUtil
 		.put("strong_poison", new PotionData(PotionType.POISON, false, true))
 		.put("strong_regeneration", new PotionData(PotionType.REGEN, false, true))
 		.put("strong_strength", new PotionData(PotionType.STRENGTH, false, true))
+		.put("strong_slowness", new PotionData(PotionType.SLOWNESS, true, true))
+		.put("strong_turtle_master", new PotionData(PotionType.TURTLE_MASTER, false, true))
 		
 		// EXTENDABLE
 		.put("long_night_vision", new PotionData(PotionType.NIGHT_VISION, true, false))
@@ -90,6 +94,8 @@ public class PotionUtil
 		.put("long_regeneration", new PotionData(PotionType.REGEN, true, false))
 		.put("long_strength", new PotionData(PotionType.STRENGTH, true, false))
 		.put("long_weakness", new PotionData(PotionType.WEAKNESS, true, false))
+		.put("long_turtle_master", new PotionData(PotionType.TURTLE_MASTER, true, false))
+		.put("long_slow_falling", new PotionData(PotionType.SLOW_FALLING, true, false))
 	
 	// BUILD
 	.build();
