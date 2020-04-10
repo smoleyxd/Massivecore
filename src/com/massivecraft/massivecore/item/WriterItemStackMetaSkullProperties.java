@@ -60,7 +60,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	@Override
 	public Object getB(SkullMeta cb, ItemStack d)
 	{
-		if (!cb.hasOwner()) return null;
+		//if (!cb.hasOwner()) return null;
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		return nms.getGameProfile(cb);
 	}
@@ -72,7 +72,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	{
 		if (cb == null) return;
 		
-		if (!cb.hasOwner()) return;
+		//if (!cb.hasOwner()) return;
 		
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		

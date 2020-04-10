@@ -19,7 +19,7 @@ public class WriterItemStackMetaSkull extends WriterAbstractItemStackMetaField<S
 	public WriterItemStackMetaSkull()
 	{
 		super(SkullMeta.class);
-		this.setMaterial(Material.LEGACY_SKULL_ITEM); // TODO which skulls is this for?
+		this.setMaterial(Material.PLAYER_HEAD);
 	}
 	
 	// -------------------------------------------- //
