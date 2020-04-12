@@ -112,7 +112,7 @@ public class EngineMassiveCoreMain extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-	public void chatTabComplete(PlayerChatTabCompleteEvent event)
+	public void chatTabComplete(PlayerChatTabCompleteEvent event) // FIXME deal with this
 	{
 		// So the player is watching ...
 		Player watcher = event.getPlayer();

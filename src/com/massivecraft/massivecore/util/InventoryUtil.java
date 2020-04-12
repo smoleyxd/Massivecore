@@ -231,7 +231,7 @@ public class InventoryUtil
 	// WEAPON
 	
 	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") // FIXME deal with this
 	public static ItemStack getWeapon(Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -241,14 +241,14 @@ public class InventoryUtil
 		return ret;
 
 	}
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") // FIXME deal with this
 	public static void setWeapon(Inventory inventory, ItemStack weapon)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return;
 		playerInventory.setItemInHand(weapon);
 	}
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") // FIXME deal with this
 	public static ItemStack getWeapon(HumanEntity human)
 	{
 		if (human == null) return null;
@@ -256,7 +256,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") // FIXME deal with this
 	public static void setWeapon(HumanEntity human, ItemStack weapon)
 	{
 		if (human == null) return;
@@ -548,12 +548,14 @@ public class InventoryUtil
 					return InventoryAlter.get(give, take);
 					
 				// Neither give nor take
+				// FIXME merge these cases
 				case NOTHING: return InventoryAlter.NONE;
 				case CLONE_STACK: return InventoryAlter.NONE;
 				case DROP_ALL_CURSOR: return InventoryAlter.NONE;
 				case DROP_ONE_CURSOR: return InventoryAlter.NONE;
 	
 				// Take
+				// FIXME merge these cases
 				case PICKUP_ALL: return InventoryAlter.TAKE;
 				case PICKUP_HALF: return InventoryAlter.TAKE;
 				case PICKUP_ONE: return InventoryAlter.TAKE;
@@ -565,6 +567,7 @@ public class InventoryUtil
 				case DROP_ALL_SLOT: return InventoryAlter.TAKE;
 				
 				// Give
+				// FIXME merge these cases
 				case PLACE_ALL: return InventoryAlter.GIVE;
 				case PLACE_ONE: return InventoryAlter.GIVE;
 				case PLACE_SOME: return InventoryAlter.GIVE;
@@ -895,7 +898,8 @@ public class InventoryUtil
 	{
 		return !isNothing(itemStack);
 	}
-	
+
+	// FIXME use modern logic
 	public static void repair(ItemStack itemStack)
 	{
 		// Check Null

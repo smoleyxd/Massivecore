@@ -5,7 +5,7 @@ website: ${project.url}
 description: ${project.description}
 authors: [Cayorion]
 load: startup
-api-version: 1.13
+api-version: 1.15
 permissions:
 # -------------------------------------------- #
 # THE REAL NODES

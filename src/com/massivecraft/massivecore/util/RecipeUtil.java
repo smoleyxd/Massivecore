@@ -68,7 +68,8 @@ public class RecipeUtil
 	// ------------------------------------------- //
 	// SHAPELESS
 	// -------------------------------------------- //
-	
+
+	// TODO check this out
 	@SuppressWarnings("deprecation")
 	public static ShapelessRecipe createShapeless(ItemStack result, Object... objects)
 	{

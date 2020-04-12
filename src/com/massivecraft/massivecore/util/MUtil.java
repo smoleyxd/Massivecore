@@ -834,7 +834,9 @@ public class MUtil
 		}
 		throw new IllegalArgumentException("The chat color code " + chatColorCode + " is not yet supported!");
 	}
-	
+
+	// TODO deal with the deprecation
+	// TODO deal with the duplicate branches
 	@SuppressWarnings("deprecation")
 	public static ChatColor getChatColor(DyeColor dyeColor)
 	{
@@ -1118,7 +1120,9 @@ public class MUtil
 		if (item == null) return false;
 		return isSword(item.getType());
 	}
-	
+
+	// FIXME this really should be reconsidered
+	//  perhaps default to main hand or allow specification otherwise?
 	public static boolean isSword(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1150,7 +1154,9 @@ public class MUtil
 		if (item == null) return false;
 		return isAxe(item.getType());
 	}
-	
+
+	// FIXME this really should be reconsidered
+	//  perhaps default to main hand or allow specification otherwise?
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1177,7 +1183,9 @@ public class MUtil
 		if (item == null) return true;
 		return InventoryUtil.isNothing(item);
 	}
-	
+
+	// FIXME this really should be reconsidered
+	//  perhaps default to main hand or allow specification otherwise?
 	public static boolean isUnarmed(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1215,7 +1223,9 @@ public class MUtil
 		if (item == null) return false;
 		return isPickaxe(item.getType());
 	}
-		
+
+	// FIXME this really should be reconsidered
+	//  perhaps default to main hand or allow specification otherwise?
 	public static boolean isPickaxe(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1241,7 +1251,9 @@ public class MUtil
 		if (item == null) return false;
 		return isSpade(item.getType());
 	}
-			
+
+	// FIXME this really should be reconsidered
+	//  perhaps default to main hand or allow specification otherwise?
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1338,6 +1350,7 @@ public class MUtil
 	 */
 	public static int getPotionEffectBits(ItemStack item)
 	{
+		// FIXME this shouldn't be really used anymore
 		return item.getDurability() & 0x3F;
 	}
 	
@@ -1349,9 +1362,12 @@ public class MUtil
 	 */
 	public static boolean isWaterPotion(ItemStack item)
 	{
+		// FIXME use modern logic
 		return getPotionEffectBits(item) == 0;
 	}
-	
+
+	// FIXME deal with this
+	// FIXME use modern logic
 	@SuppressWarnings("deprecation")
 	public static List<PotionEffect> getPotionEffects(ItemStack itemStack)
 	{
@@ -1373,7 +1389,8 @@ public class MUtil
 		
 		return ret;
 	}
-	
+
+	// TODO update this
 	public static final Set<PotionEffectType> HARMFUL_POTION_EFFECTS = Collections.unmodifiableSet(MUtil.set(
 		PotionEffectType.BLINDNESS,
 		PotionEffectType.CONFUSION,
@@ -1748,7 +1765,7 @@ public class MUtil
 	/**
 	 * @deprecated use equalsishNumber
 	 */
-	@Deprecated
+	@Deprecated // FIXME actually remove uses of this
 	public static boolean equalsish(Number number1, Number number2)
 	{
 		return equalsishNumber(number1, number2);

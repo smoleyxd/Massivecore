@@ -339,6 +339,7 @@ public class IdUtil implements Listener, Runnable
 	// Do not call this manually.
 	// It should only be called on plugin enable.
 
+	// FIXME deal with this
 	@SuppressWarnings("deprecation")
 	public static void setup()
 	{
