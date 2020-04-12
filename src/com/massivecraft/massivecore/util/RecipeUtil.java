@@ -44,15 +44,17 @@ public class RecipeUtil
 	// ------------------------------------------- //
 	// CIRCULAR
 	// -------------------------------------------- //
-	
+
+	@Deprecated
 	public static void addCircular(Material material, int maxData)
 	{
-		ItemStack[] items = new ItemStack[maxData];
-		for (int i = 0; i < maxData; i++)
-		{
-			items[i] = new ItemStack(material, 1, (short) i);
-		}
-		addCircular(items);
+		throw new UnsupportedOperationException("Use com.massivecraft.massivecore.util.RecipeUtil.addCircular(org.bukkit.inventory.ItemStack...) instead");
+//		ItemStack[] items = new ItemStack[maxData];
+//		for (int i = 0; i < maxData; i++)
+//		{
+//			items[i] = new ItemStack(material, 1, (short) i);
+//		}
+//		addCircular(items);
 	}
 	
 	public static void addCircular(ItemStack... items)
