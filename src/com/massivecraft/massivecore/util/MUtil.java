@@ -1121,14 +1121,13 @@ public class MUtil
 		return isSword(item.getType());
 	}
 
-	// FIXME this really should be reconsidered
-	//  perhaps default to main hand or allow specification otherwise?
+	// Main hand should be safe as long as swords don't function from offhand TODO verify
 	public static boolean isSword(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isSword(lentity.getEquipment().getItemInHand());
+		return isSword(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isSword(EntityDamageByEntityEvent event)
@@ -1155,14 +1154,14 @@ public class MUtil
 		return isAxe(item.getType());
 	}
 
-	// FIXME this really should be reconsidered
-	//  perhaps default to main hand or allow specification otherwise?
+	// Main hand should be safe if axes aren't used from the offhand
+	// TODO verify that
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isAxe(lentity.getEquipment().getItemInHand());
+		return isAxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isAxe(EntityDamageByEntityEvent event)
@@ -1184,14 +1183,13 @@ public class MUtil
 		return InventoryUtil.isNothing(item);
 	}
 
-	// FIXME this really should be reconsidered
-	//  perhaps default to main hand or allow specification otherwise?
+	// Main hand should be safe since only primary hand is used for unarmed combat
 	public static boolean isUnarmed(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isUnarmed(lentity.getEquipment().getItemInHand());
+		return isUnarmed(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isUnarmed(EntityDamageByEntityEvent event)
@@ -1224,14 +1222,13 @@ public class MUtil
 		return isPickaxe(item.getType());
 	}
 
-	// FIXME this really should be reconsidered
-	//  perhaps default to main hand or allow specification otherwise?
+	// Main hand should be safe since the pickaxe doesn't operate from offhand
 	public static boolean isPickaxe(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isPickaxe(lentity.getEquipment().getItemInHand());
+		return isPickaxe(lentity.getEquipment().getItemInMainHand());
 	}
 		
 	public static boolean isPickaxe(BlockBreakEvent event)
@@ -1254,6 +1251,8 @@ public class MUtil
 
 	// FIXME this really should be reconsidered
 	//  perhaps default to main hand or allow specification otherwise?
+	//  This might be problematic if a shovel can be used from the offhand
+	//  The intent of this should be made more clear
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
