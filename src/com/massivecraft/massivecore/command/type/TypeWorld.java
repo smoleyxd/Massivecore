@@ -36,7 +36,7 @@ public class TypeWorld extends TypeAbstractChoice<World>
 	@Override
 	public String getIdInner(World value)
 	{
-		return null;
+		return value.getName();
 	}
 
 	@Override
