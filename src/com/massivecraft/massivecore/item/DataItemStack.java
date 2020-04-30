@@ -23,6 +23,7 @@ import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
@@ -85,6 +86,9 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Map<Integer, DataItemStack> DEFAULT_INVENTORY = Collections.emptyMap();
 	public static final transient Integer DEFAULT_POTION_COLOR = null;
 	public static final transient Integer DEFAULT_MAP_COLOR = null;
+	public static final transient TropicalFish.Pattern DEFAULT_FISH_PATTERN = null;
+	public static final transient DyeColor DEFAULT_FISH_PATTERN_COLOR = null;
+	public static final transient DyeColor DEFAULT_FISH_BODY_COLOR = null;
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -314,6 +318,23 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
 	
 	// -------------------------------------------- //
+	// FIELDS > TROPICAL FISH BUCKET
+	// -------------------------------------------- //
+	// Since 1.13
+	
+	private TropicalFish.Pattern fishPattern = null;
+	public TropicalFish.Pattern getFishPattern() { return get(this.fishPattern, DEFAULT_FISH_PATTERN); }
+	public DataItemStack setFishPattern(TropicalFish.Pattern fishPattern) { this.fishPattern = set(fishPattern, DEFAULT_FISH_PATTERN); return this; }
+	
+	private DyeColor fishPatternColor = null;
+	public DyeColor getFishPatternColor() { return get(this.fishPatternColor, DEFAULT_FISH_PATTERN_COLOR); }
+	public DataItemStack setFishPatternColor(DyeColor fishPatternColor) { this.fishPatternColor = set(fishPatternColor, DEFAULT_FISH_PATTERN_COLOR); return this; }
+	
+	private DyeColor fishBodyColor = null;
+	public DyeColor getFishBodyColor() { return get(this.fishBodyColor, DEFAULT_FISH_BODY_COLOR); }
+	public DataItemStack setFishBodyColor(DyeColor fishBodyColor) { this.fishBodyColor = set(fishBodyColor, DEFAULT_FISH_BODY_COLOR); return this; }
+	
+	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
@@ -521,7 +542,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor()
+			this.getMapColor(), that.getMapColor(),
+			this.getFishPattern(), that.getFishPattern(),
+			this.getFishBodyColor(), that.getFishBodyColor(),
+			this.getFishPatternColor(), that.getFishPatternColor()
 		);
 	}
 	
@@ -557,7 +581,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor()
+			this.getMapColor(), that.getMapColor(),
+			this.getFishPattern(), that.getFishPattern(),
+			this.getFishBodyColor(), that.getFishBodyColor(),
+			this.getFishPatternColor(), that.getFishPatternColor()
 		);
 	}
 	
@@ -600,7 +627,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor()
+			this.getMapColor(), that.getMapColor(),
+			this.getFishPattern(), that.getFishPattern(),
+			this.getFishBodyColor(), that.getFishBodyColor(),
+			this.getFishPatternColor(), that.getFishPatternColor()
 		);
 	}
 	
@@ -641,7 +671,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(),
 			this.getInventory(),
 			this.getPotionColor(),
-			this.getMapColor()
+			this.getMapColor(),
+			this.getFishPattern(),
+			this.getFishBodyColor(),
+			this.getFishPatternColor()
 		);
 	}
 	

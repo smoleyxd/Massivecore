@@ -65,9 +65,14 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// POTION
 			WriterItemStackMetaPotion.class,
 			WriterItemStackMetaPotionColor.class,
-				
+			
 			// INVENTORY
-			WriterItemStackMetaInventory.class
+			WriterItemStackMetaInventory.class,
+			
+			// TROPICAL FISH BUCKET
+			WriterItemStackMetaFishPattern.class,
+			WriterItemStackMetaFishPatternColor.class,
+			WriterItemStackMetaFishBodyColor.class
 		);
 	}
 	

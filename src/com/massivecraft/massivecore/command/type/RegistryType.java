@@ -39,6 +39,7 @@ import com.massivecraft.massivecore.command.type.enumeration.TypeRabbitType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeSkeletonType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeSound;
 import com.massivecraft.massivecore.command.type.enumeration.TypeSpawnReason;
+import com.massivecraft.massivecore.command.type.enumeration.TypeTropicalFishPattern;
 import com.massivecraft.massivecore.command.type.enumeration.TypeVillagerProfession;
 import com.massivecraft.massivecore.command.type.enumeration.TypeWorldType;
 import com.massivecraft.massivecore.command.type.primitive.TypeBooleanTrue;
@@ -319,6 +320,7 @@ public class RegistryType
 		register(TypeOcelotType.get());
 		register(TypeParticle.get());
 		register(TypeSpawnReason.get());
+		register(TypeTropicalFishPattern.get());
 		
 		// 1.7 Compat
 		try
