@@ -1496,7 +1496,7 @@ public class MUtil
 		int toIndex = ret.size()-1;
 		if (limit != null)
 		{
-			toIndex = offset+limit;
+			toIndex = fromIndex+limit;
 		}
 		
 		// Clean args

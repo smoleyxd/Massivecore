@@ -134,8 +134,8 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 	@Override public List<E> getAll(Predicate<? super E> where, Comparator<? super E> orderby) { return MUtil.transform(this.getAll(), where, orderby); }
 	@Override public List<E> getAll(Predicate<? super E> where, Integer limit, Integer offset) { return MUtil.transform(this.getAll(), where, limit, offset); }
 	@Override public List<E> getAll(Predicate<? super E> where, Integer limit) { return MUtil.transform(this.getAll(), where, limit); }
-	@Override public List<E> getAll(Comparator<? super E> orderby, Integer limit, Integer offset) { return MUtil.transform(this.getAll(), limit, offset); }
-	@Override public List<E> getAll(Comparator<? super E> orderby, Integer limit) { return MUtil.transform(this.getAll(), limit); }
+	@Override public List<E> getAll(Comparator<? super E> orderby, Integer limit, Integer offset) { return MUtil.transform(this.getAll(), orderby, limit, offset); }
+	@Override public List<E> getAll(Comparator<? super E> orderby, Integer limit) { return MUtil.transform(this.getAll(), orderby, limit); }
 	@Override public List<E> getAll(Predicate<? super E> where) { return MUtil.transform(this.getAll(), where); }
 	@Override public List<E> getAll(Comparator<? super E> orderby) { return MUtil.transform(this.getAll(), orderby); }
 	@Override public List<E> getAll(Integer limit, Integer offset) { return MUtil.transform(this.getAll(), limit, offset); }
