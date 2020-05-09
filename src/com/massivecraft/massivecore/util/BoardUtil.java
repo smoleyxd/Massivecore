@@ -349,13 +349,23 @@ public class BoardUtil extends Engine
 	
 	public static Objective createObjective(Scoreboard board, String id)
 	{
-		return board.registerNewObjective(id, OBJECTIVE_CRITERIA_DUMMY);
+		return createObjective(board, id, OBJECTIVE_CRITERIA_DUMMY);
+	}
+	
+	public static Objective createObjective(Scoreboard board, String id, String criteria)
+	{
+		return board.registerNewObjective(id, criteria);
 	}
 	
 	public static Objective getObjective(Scoreboard board, String id, boolean creative)
 	{
+		return getObjective(board, id, OBJECTIVE_CRITERIA_DUMMY, creative);
+	}
+	
+	public static Objective getObjective(Scoreboard board, String id, String criteria, boolean creative)
+	{
 		Objective objective = board.getObjective(id);
-		if (objective == null && creative) objective = createObjective(board, id);
+		if (objective == null && creative) objective = createObjective(board, id, criteria);
 		return objective;
 	}
 	
