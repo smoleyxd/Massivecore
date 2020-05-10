@@ -23,6 +23,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -31,10 +32,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InventoryUtil
 {
@@ -454,26 +454,12 @@ public class InventoryUtil
 	
 	public static void updateSoon(final HumanEntity human)
 	{
-		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				update(human);
-			}
-		});
+		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), () -> update(human));
 	}
 	
 	public static void updateLater(final HumanEntity human)
 	{
-		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				update(human);
-			}
-		}, 1);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), () -> update(human), 1);
 	}
 	
 	// -------------------------------------------- //
@@ -913,36 +899,12 @@ public class InventoryUtil
 	{
 		// Check Null
 		if (isNothing(itemStack)) return;
-		
-		// Check Repairable
-		Material material = itemStack.getType();
-		if ( ! isRepairable(material)) return;
-		
-		// Repair
-		itemStack.setDurability((short) 0);
-	}
 
-	private static final Set<String> nonRepairables = Collections.unmodifiableSet(MUtil.set(
-			"COAL",
-			"GOLDEN_APPLE",
-			"RAW_FISH",
-			"COOKED_FISH",
-			"INK_SACK",
-			"MAP",
-			"POTION",
-			"MONSTER_EGG",
-			"SKULL_ITEM"
-	));
+		ItemMeta meta = getMeta(itemStack);
+		if (meta == null) return;
 
-	public static boolean isRepairable(Material material)
-	{
-		// Blocks are never repairable.
-		// Only items take damage in Minecraft.
-		if (material.isBlock()) return false;
-		
-		// We may also not repair things that can not take any damage.
-		// NOTE: MaxDurability should be renamed to MaxDamage.
-		return material.getMaxDurability() != 0;
+		if (!(meta instanceof Damageable)) return;
+		Damageable damageable = (Damageable) meta;
 	}
 	
 	public static boolean isPotion(ItemStack itemStack)
@@ -996,7 +958,7 @@ public class InventoryUtil
 			InventoryHolder holder = inventory.getHolder();
 			int size = inventory.getSize();
 			if (inventory instanceof PlayerInventory) size = SIZE_PLAYER_STORAGE;
-			String title = inventory.getTitle();
+			String title = inventory.getType().getDefaultTitle();
 			ret = MixinInventory.get().createInventory(holder, size, title);
 		}
 		
@@ -1224,7 +1186,7 @@ public class InventoryUtil
 		List<Entry<String, Integer>> entries = event.getLore();
 		// Note: Comparator cast is necessary for Maven to compile, even if the IDE doesn't complain.
 		Comparator<Entry<? super String, ? super Integer>> comparator = (Comparator) ComparatorEntryValue.get(ComparatorComparable.get());
-		Collections.sort(entries, comparator);
+		entries.sort(comparator);
 
 		List<String> ret = new MassiveList<>();
 		for (Entry<String, Integer> entry : entries)
@@ -1258,23 +1220,19 @@ public class InventoryUtil
 	// Return true on change
 	public static boolean removeLoreMatching(ItemStack item, Predicate<String> predicate)
 	{
-		if (predicate == null) throw new NullPointerException("prefix");
+		if (predicate == null) throw new NullPointerException("predicate");
 
 		List<String> lore = getLore(item);
 		if (lore == null) return false;
 
-		boolean ret = false;
-		for (Iterator<String> it = lore.iterator(); it.hasNext();)
+		List<String> newLore = lore.stream().filter(predicate).collect(Collectors.toList());
+		if (lore.size() != newLore.size())
 		{
-			String line = it.next();
-			if (!predicate.apply(line)) continue;
-			it.remove();
-			ret = true;
+			setLore(item, lore);
+			return true;
 		}
 
-		setLore(item, lore);
-
-		return ret;
+		return false;
 	}
 
 	public static boolean removeLoreWithPrefix(ItemStack item, String prefix)
@@ -1284,19 +1242,12 @@ public class InventoryUtil
 
 	public static List<String> getLoreMatching(ItemStack item, Predicate<String> predicate)
 	{
-		if (predicate == null) throw new NullPointerException("prefix");
+		if (predicate == null) throw new NullPointerException("predicate");
 
 		List<String> lore = getLore(item);
 		if (lore == null) return null;
 
-		for (Iterator<String> it = lore.iterator(); it.hasNext();)
-		{
-			String line = it.next();
-			if (predicate.apply(line)) continue;
-			it.remove();
-		}
-
-		return lore;
+		return lore.stream().filter(predicate).collect(Collectors.toList());
 	}
 
 	public static List<String> getLoreWithPrefix(ItemStack item, String prefix)

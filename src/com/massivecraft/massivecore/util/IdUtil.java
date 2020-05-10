@@ -13,6 +13,7 @@ import com.massivecraft.massivecore.store.SenderEntity;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
@@ -27,7 +28,6 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -94,7 +94,7 @@ public class IdUtil implements Listener, Runnable
 	// IdData storage. Maintaining relation between name and id.
 	
 	// The full set
-	private static Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<IdData, Boolean>());
+	private static Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<>());
 	public static Set<IdData> getDatas() { return datas; }
 	
 	// Id Index
@@ -264,7 +264,12 @@ public class IdUtil implements Listener, Runnable
 	{
 		update(id, name, System.currentTimeMillis(), presence);
 	}
-	
+
+	public static void update(IdData data)
+	{
+		update(data.getId(), data.getName(), data.getMillis(), null);
+	}
+
 	public static void update(final String id, final String name, final long millis, SenderPresence presence)
 	{
 		// First Null Check
@@ -353,14 +358,7 @@ public class IdUtil implements Listener, Runnable
 		loadDatas();
 		
 		// Since Console initially does not exist we schedule the register.
-		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				register(getConsole());
-			}
-		});
+		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), () -> register(getConsole()));
 		
 		// Cachefile
 		long ticks = 20*60; // 5min
@@ -481,6 +479,12 @@ public class IdUtil implements Listener, Runnable
 			String id = getIdFromSender((CommandSender) senderObject);
 			return getIdToData().get(id);
 		}
+
+		// OfflinePlayer (UUID recurse)
+		if (senderObject instanceof OfflinePlayer)
+		{
+			return getData(((OfflinePlayer) senderObject).getUniqueId());
+		}
 		
 		// UUID
 		if (senderObject instanceof UUID)
@@ -537,6 +541,12 @@ public class IdUtil implements Listener, Runnable
 		
 		// CommandSender
 		// Handled at "Already Done"
+
+		// OfflinePlayer
+		if (senderObject instanceof OfflinePlayer)
+		{
+			return getSender(((OfflinePlayer) senderObject).getUniqueId());
+		}
 		
 		// UUID
 		if (senderObject instanceof UUID)
@@ -601,6 +611,9 @@ public class IdUtil implements Listener, Runnable
 			String id = sender.getName();
 			return MUtil.asUuid(id);
 		}
+
+		// OfflinePlayer
+		if (senderObject instanceof OfflinePlayer) return ((OfflinePlayer) senderObject).getUniqueId();
 		
 		// UUID
 		// Handled at "Already Done"
@@ -658,6 +671,9 @@ public class IdUtil implements Listener, Runnable
 		
 		// Command Sender
 		if (senderObject instanceof CommandSender) return getIdFromSender((CommandSender) senderObject);
+
+		// OfflinePlayer
+		// Handled at "Data"
 		
 		// UUID
 		if (senderObject instanceof UUID) return getIdFromUuid((UUID) senderObject);
@@ -752,6 +768,21 @@ public class IdUtil implements Listener, Runnable
 		
 		// Return Null
 		return null;
+	}
+
+	public static OfflinePlayer getOfflinePlayer(Object senderObject)
+	{
+		// Null Return
+		if (senderObject == null) return null;
+
+		// Already done
+		if (senderObject instanceof OfflinePlayer) return (OfflinePlayer) senderObject;
+
+		//
+		UUID uuid = getUuid(senderObject);
+		if (uuid == null) return null;
+
+		return Bukkit.getOfflinePlayer(uuid);
 	}
 	
 	public static String getNameFromSender(CommandSender sender)

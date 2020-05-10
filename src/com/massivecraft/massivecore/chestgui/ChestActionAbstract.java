@@ -16,7 +16,7 @@ public class ChestActionAbstract implements ChestAction
 	{
 		Player player = IdUtil.getAsPlayer(event.getWhoClicked());
 		if (MUtil.isntPlayer(player)) return false;
-		
+
 		return onClick(event, player);
 	}
 	
@@ -24,5 +24,5 @@ public class ChestActionAbstract implements ChestAction
 	{
 		return false;
 	}
-	
+
 }

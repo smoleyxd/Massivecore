@@ -38,7 +38,7 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 	public String fixIdOrThrow(Object oid) throws IllegalArgumentException
 	{
 		String ret = this.fixId(oid);
-		if (ret == null) throw new IllegalArgumentException(String.valueOf(oid) + " is not a valid id.");
+		if (ret == null) throw new IllegalArgumentException(oid + " is not a valid id.");
 		return ret;
 	}
 	
@@ -195,7 +195,7 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 	{
 		try
 		{
-			return this.getEntityClass().newInstance();
+			return this.getEntityClass().getDeclaredConstructor().newInstance();
 		}
 		catch (Exception e)
 		{
@@ -253,7 +253,7 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 			if (id == null) return null;
 			if (this.getIdToEntity().containsKey(id)) return null;
 		}
-		
+
 		// PRE
 		this.preAttach(entity, id);
 		
@@ -263,7 +263,6 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 		
 		// Attach
 		this.getIdToEntityRaw().put(id, entity);
-		
 		// Identify Modification
 		if (noteModification)
 		{

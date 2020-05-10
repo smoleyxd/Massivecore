@@ -204,9 +204,21 @@ object ReferenceMaterial {
     @JvmStatic
     val materialsSign: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
-            "SIGN",
-            "SIGN_POST",
-            "WALL_SIGN"
+            "SIGN", // Minecraft 1.?
+            "SIGN_POST", // Minecraft 1.?
+            "WALL_SIGN", // Minecraft 1.?
+            "ACACIA_SIGN", // Minecraft 1.14
+            "ACACIA_WALL_SIGN", // Minecraft 1.14
+            "BIRCH_SIGN", // Minecraft 1.14
+            "BIRCH_WALL_SIGN", // Minecraft 1.14
+            "DARK_OAK_SIGN", // Minecraft 1.14
+            "DARK_OAK_WALL_SIGN", // Minecraft 1.14
+            "JUNGLE_SIGN", // Minecraft 1.14
+            "JUNGLE_WALL_SIGN", // Minecraft 1.14
+            "OAK_SIGN", // Minecraft 1.14
+            "OAK_WALL_SIGN", // Minecraft 1.14
+            "SPRUCE_SIGN", // Minecraft 1.14
+            "SPRUCE_WALL_SIGN" // Minecraft 1.14
     )
 
 }

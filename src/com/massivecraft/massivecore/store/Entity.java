@@ -1,6 +1,5 @@
 package com.massivecraft.massivecore.store;
 
-import com.massivecraft.massivecore.ConfServer;
 import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
@@ -49,19 +48,17 @@ public class Entity<E extends Entity<E>> extends EntityInternal<E>
 		this.lastStackTraceChanged = null;
 	}
 
-
-	
 	// -------------------------------------------- //
 	// ATTACH AND DETACH
 	// -------------------------------------------- //
-	
+
 	@SuppressWarnings("unchecked")
 	public String attach(EntityContainer<E> container)
 	{
 		if (!(container instanceof Coll)) throw new IllegalArgumentException(container.getClass().getName() + " is not a Coll.");
 		return container.attach((E) this);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public E detach()
 	{

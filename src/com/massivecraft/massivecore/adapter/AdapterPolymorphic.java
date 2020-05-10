@@ -6,7 +6,6 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
-import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 
@@ -56,9 +55,9 @@ public class AdapterPolymorphic<T> implements JsonDeserializer<T>, JsonSerialize
 			throw new JsonParseException("A polymorph must be have a \"+VALUE+\" field.");
 		}
 		
-		String type = ((JsonPrimitive)jsonObject.get(TYPE)).getAsString();
+		String type = jsonObject.get(TYPE).getAsString();
 		
-		Class<?> typeClass = null;
+		Class<?> typeClass;
 		try
 		{
 			typeClass = Class.forName(type);

@@ -122,8 +122,8 @@ public class PlayerUtil extends Engine
 	
 	public static void setLastDamageMillis(Player player, long millis)
 	{
-		if (MUtil.isntPlayer(player)) return;
 		if (player == null) return;
+		if (MUtil.isntPlayer(player)) return;
 		idToLastDamageMillis.put(player.getUniqueId(), millis);
 	}
 	

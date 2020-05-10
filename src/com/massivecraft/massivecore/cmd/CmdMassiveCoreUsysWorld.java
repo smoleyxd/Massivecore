@@ -15,7 +15,7 @@ public class CmdMassiveCoreUsysWorld extends MassiveCoreCommand
 	{
 		// Parameters
 		this.addParameter(TypeString.get(), "world").setDesc("the world to move");
-		this.addParameter(TypeString.get(), "universe").setDesc("the universe to move the world ro");
+		this.addParameter(TypeString.get(), "universe").setDesc("the universe to move the world to");
 		this.addParameter(TypeMultiverse.get(), "multiverse").setDesc("the multiverse of the universe to move the world to");
 	}
 	
@@ -28,7 +28,7 @@ public class CmdMassiveCoreUsysWorld extends MassiveCoreCommand
 	{
 		String worldName = this.readArg();
 		String universe = this.readArg();
-		Multiverse multiverse = (Multiverse) this.readArg();
+		Multiverse multiverse = this.readArg();
 		
 		if (!multiverse.containsUniverse(universe))
 		{

@@ -19,8 +19,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ReflectionUtil
@@ -216,7 +214,7 @@ public class ReflectionUtil
 	{
 		try
 		{
-			return (T) clazz.newInstance();
+			return (T) clazz.getDeclaredConstructor().newInstance();
 		}
 		catch (Exception e)
 		{
@@ -417,33 +415,23 @@ public class ReflectionUtil
 	
 	public static Class<?> getSuperclassDeclaringMethod(Class<?> clazz, boolean includeSelf, final String methodName)
 	{
-		return getSuperclassPredicate(clazz, includeSelf, new Predicate<Class<?>>()
-		{
-			@Override
-			public boolean apply(Class<?> clazz)
+		return getSuperclassPredicate(clazz, includeSelf, clazz1 -> {
+			for (Method method : clazz1.getDeclaredMethods())
 			{
-				for (Method method : clazz.getDeclaredMethods())
-				{
-					if (method.getName().equals(methodName)) return true;
-				}
-				return false;
+				if (method.getName().equals(methodName)) return true;
 			}
+			return false;
 		});
 	}
 	
 	public static Class<?> getSuperclassDeclaringField(Class<?> clazz, boolean includeSelf, final String fieldName)
 	{
-		return getSuperclassPredicate(clazz, includeSelf, new Predicate<Class<?>>()
-		{
-			@Override
-			public boolean apply(Class<?> clazz)
+		return getSuperclassPredicate(clazz, includeSelf, clazz1 -> {
+			for (Field field : clazz1.getDeclaredFields())
 			{
-				for (Field field : clazz.getDeclaredFields())
-				{
-					if (field.getName().equals(fieldName)) return true;
-				}
-				return false;
+				if (field.getName().equals(fieldName)) return true;
 			}
+			return false;
 		});
 	}
 
@@ -498,14 +486,7 @@ public class ReflectionUtil
 			throw new RuntimeException(ex);
 		}
 		
-		Collections.sort(ret, new Comparator<Class<?>>()
-		{
-			@Override
-			public int compare(Class<?> class1, Class<?> class2)
-			{
-				return ComparatorNaturalOrder.get().compare(class1.getName(), class2.getName());
-			}
-		});
+		ret.sort((class1, class2) -> ComparatorNaturalOrder.get().compare(class1.getName(), class2.getName()));
 
 		return ret;
 	}
@@ -520,7 +501,7 @@ public class ReflectionUtil
 		if (t instanceof RuntimeException) return (RuntimeException) t;
 		
 		// Invocation
-		if (t instanceof InvocationTargetException) return asRuntimeException(((InvocationTargetException)t).getCause());
+		if (t instanceof InvocationTargetException) return asRuntimeException(t.getCause());
 		
 		// Rest
 		return new IllegalStateException(t.getClass().getSimpleName() + ": " + t.getMessage());

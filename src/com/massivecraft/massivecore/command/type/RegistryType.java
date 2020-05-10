@@ -276,10 +276,7 @@ public class RegistryType
 	// -------------------------------------------- //
 	// DEFAULTS
 	// -------------------------------------------- //
-	// NOTE: As of 2016-05-17 about 15% of all servers are still using 1.7.x.
-	// With this in mind there are some try catch clauses.
-	// We catch NoClassDefFoundError and silently move along on those servers.
-	
+
 	public static void registerAll()
 	{
 		// Primitive
@@ -306,6 +303,7 @@ public class RegistryType
 		// Enum
 		register(TypeBiome.get());
 		register(TypeChatColor.get());
+		register(TypeDamageModifier.get());
 		register(TypeDifficulty.get());
 		register(TypeDyeColor.get());
 		register(TypeEntityType.get());
@@ -316,51 +314,16 @@ public class RegistryType
 		register(TypeHorseColor.get());
 		register(TypeHorseStyle.get());
 		register(TypeHorseVariant.get());
+		register(TypeLlamaColor.get());
 		register(TypeMaterial.get());
 		register(TypeOcelotType.get());
+		register(TypeParrotVariant.get());
 		register(TypeParticle.get());
-		register(TypeSpawnReason.get());
-		register(TypeTropicalFishPattern.get());
-		
-		// 1.7 Compat
-		try
-		{
-			register(TypeRabbitType.get());
-		}
-		catch (Throwable t)
-		{
-			
-		}
-		
-		try
-		{
-			register(TypeDamageModifier.get());
-		}
-		catch (Throwable t)
-		{
-			
-		}
-		
-		try
-		{
-			register(TypeLlamaColor.get());
-		}
-		catch (Throwable t)
-		{
-			
-		}
-		
-		try
-		{
-			register(TypeParrotVariant.get());
-		}
-		catch (Throwable t)
-		{
-		
-		}
-		
+		register(TypeRabbitType.get());
 		register(TypeSkeletonType.get());
 		register(TypeSound.get());
+		register(TypeSpawnReason.get());
+		register(TypeTropicalFishPattern.get());
 		register(TypeVillagerProfession.get());
 		register(TypeWorldType.get());
 		

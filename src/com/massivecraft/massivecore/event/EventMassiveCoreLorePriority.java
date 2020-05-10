@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.event;
 
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.predicate.Predicate;
+import com.massivecraft.massivecore.predicate.PredicateJPredicate;
 import org.bukkit.ChatColor;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
@@ -87,25 +88,13 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	public void setPriorityByPrefix(final String prefix, int priority)
 	{
-		Predicate<String> predicate = new Predicate<String>()
-		{
-			@Override public boolean apply(String type)
-			{
-				return type.startsWith(prefix);
-			}
-		};
+		Predicate<String> predicate = prefix::startsWith;
 		this.setPriorityByPredicate(predicate, priority);
 	}
 
 	public void setPriorityByRegex(final Pattern pattern, int priority)
 	{
-		Predicate<String> predicate = new Predicate<String>()
-		{
-			@Override public boolean apply(String type)
-			{
-				return pattern.matcher(type).matches();
-			}
-		};
+		Predicate<String> predicate = PredicateJPredicate.get(pattern.asPredicate());
 		this.setPriorityByPredicate(predicate, priority);
 	}
 

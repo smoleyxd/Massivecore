@@ -239,7 +239,7 @@ public class SignUtil
 	// -------------------------------------------- //
 	// IS SIGN
 	// -------------------------------------------- //
-	
+
 	public static boolean isSign(Material material)
 	{
 		if (material == null) throw new NullPointerException("material");

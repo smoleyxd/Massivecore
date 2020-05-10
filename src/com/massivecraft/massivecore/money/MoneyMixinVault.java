@@ -7,7 +7,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.Collection;
 
-@SuppressWarnings("deprecation")
 public class MoneyMixinVault extends MoneyMixinAbstract
 {
 	// -------------------------------------------- //

@@ -993,7 +993,9 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 
 	public void setupAddChildren()
 	{
-		for (Field field : this.getClassOrEnclosing(this).getDeclaredFields())
+		if (this instanceof MassiveCommandDeprecated) return;
+
+		for (Field field : getClassOrEnclosing(this).getDeclaredFields())
 		{
 			ReflectionUtil.makeAccessible(field);
 			Class<?> fieldType = field.getType();
@@ -1008,13 +1010,12 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 
 	public void setupChildren()
 	{
-		for (MassiveCommand child : this.getChildren())
-		{
-			if (child.isSetupEnabled()) child.setup();
-		}
+		this.getChildren().stream()
+			.filter(MassiveCommand::isSetupEnabled)
+			.forEach(MassiveCommand::setup);
 	}
 	
-	private Class<?> getClassOrEnclosing(Object object)
+	private static Class<?> getClassOrEnclosing(Object object)
 	{
 		Class<?> clazz =  object.getClass();
 		Class<?> enclosingClass = clazz.getEnclosingClass();
@@ -1027,7 +1028,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (this.isRoot()) return null;
 
 		// ... get name of parent ...
-		String parentName = this.getClassOrEnclosing(this.getParent()).getSimpleName();
+		String parentName = getClassOrEnclosing(this.getParent()).getSimpleName();
 
 		// ... and only try if the names match ...
 		String name = this.getClass().getSimpleName();
@@ -1051,7 +1052,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (basePrefix == null) return null;
 
 		// Only try if the name matches with the expected prefix ...
-		String name = getClassOrEnclosing(this).getSimpleName(); //this.getClass().getSimpleName();
+		String name = getClassOrEnclosing(this).getSimpleName();
 		if ( ! name.startsWith(basePrefix)) return null;
 
 		// ... and remove the prefix  ...
@@ -1274,41 +1275,10 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	
 	public Mson getTemplate(boolean addDesc, boolean onlyFirstAlias, CommandSender sender)
 	{
-		// Create Ret
-		Mson ret = TEMPLATE_CORE;
-		
-		// Get commands
-		List<MassiveCommand> commands = this.getChain(true);
-		
-		// Add commands
-		boolean first = true;
-		for (MassiveCommand command : commands)
-		{
-			Mson mson = null;
-			
-			if (first && onlyFirstAlias)
-			{
-				mson = mson(command.getAliases().get(0));
-			}
-			else
-			{
-				mson = mson(Txt.implode(command.getAliases(), ","));
-			}
-			
-			if (sender != null && ! command.isRequirementsMet(sender, false))
-			{
-				mson = mson.color(ChatColor.RED);
-			}
-			else
-			{
-				mson = mson.color(ChatColor.AQUA);
-			}
-			
-			if ( ! first) ret = ret.add(Mson.SPACE);
-			ret = ret.add(mson); 
-			first = false;
-		}
+		// Get base
+		Mson ret = this.getTemplateChain(onlyFirstAlias, sender);
 
+		List<MassiveCommand> commands = this.getChain(true);
 		// Check if last command is parentCommand and make command suggestable/clickable
 		if (commands.get(commands.size() - 1).isParent())
 		{
@@ -1334,6 +1304,63 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		}
 		
 		// Return Ret
+		return ret;
+	}
+
+	public Mson getTemplateWithArgs(CommandSender sender, String... args)
+	{
+		return this.getTemplateWithArgs(sender, MUtil.list(args));
+	}
+
+	public Mson getTemplateWithArgs(CommandSender sender, List<String> args)
+	{
+		Mson ret = this.getTemplateChain(true, sender);
+
+		for (String arg : args)
+		{
+			ret = ret.add(Mson.SPACE);
+			ret = ret.add(mson(arg).color(ChatColor.DARK_AQUA));
+		}
+
+		return ret;
+	}
+
+	public Mson getTemplateChain(boolean onlyFirstAlias, CommandSender sender)
+	{
+		Mson ret = TEMPLATE_CORE;
+
+		// Get commands
+		List<MassiveCommand> commands = this.getChain(true);
+
+		// Add commands
+		boolean first = true;
+		for (MassiveCommand command : commands)
+		{
+			Mson mson = null;
+
+			if (first && onlyFirstAlias)
+			{
+				mson = mson(command.getAliases().get(0));
+			}
+			else
+			{
+				mson = mson(Txt.implode(command.getAliases(), ","));
+			}
+
+			if (sender != null && ! command.isRequirementsMet(sender, false))
+			{
+				mson = mson.color(ChatColor.RED);
+			}
+			else
+			{
+				mson = mson.color(ChatColor.AQUA);
+			}
+
+			if ( ! first) ret = ret.add(Mson.SPACE);
+			ret = ret.add(mson);
+			first = false;
+		}
+
 		return ret;
 	}
 	

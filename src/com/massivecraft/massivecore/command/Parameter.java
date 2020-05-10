@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.command;
 import com.massivecraft.massivecore.command.type.Type;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import com.massivecraft.massivecore.mson.Mson;
+import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -183,6 +184,8 @@ public class Parameter<T>
 			ret = mson("[" + this.getName() + def + "]");
 		}
 
+		if (this.hasDesc()) ret = ret.tooltip(Txt.upperCaseFirst(this.getDesc()));
+
 		return ret;
 	}
 	
@@ -193,7 +196,7 @@ public class Parameter<T>
 	public static Parameter<Integer> getPage()
 	{
 		// We can't use a singleton because people might want to set a description.
-		return new Parameter<>(1, TypeInteger.get(), "page", "1");
+		return new Parameter<>(1, TypeInteger.get(), "page", "1").setDesc("page");
 	}
 	
 }

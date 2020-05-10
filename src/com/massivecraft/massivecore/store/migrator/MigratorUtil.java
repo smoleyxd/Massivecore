@@ -2,7 +2,6 @@ package com.massivecraft.massivecore.store.migrator;
 
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
-import com.massivecraft.massivecore.command.Parameter;
 import com.massivecraft.massivecore.store.EntityInternalMap;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
@@ -11,7 +10,6 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
-import org.bukkit.inventory.Inventory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -350,11 +348,9 @@ public class MigratorUtil
 			Class<?> superClass = ReflectionUtil.getSuperclassDeclaringField(entityClass, true, name);
 			
 			// Try find field if it has a different serialisation name
-			if (superClass == null)
-			{
+			if (superClass == null) {
 				Field field = tryFindField(entityClass, name);
-				if (field != null)
-				{
+				if (field != null) {
 					name = field.getName();
 					superClass = entityClass;
 				}

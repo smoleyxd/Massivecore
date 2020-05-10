@@ -1,9 +1,12 @@
 package com.massivecraft.massivecore.chestgui;
 
-import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.SoundEffect;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
+import com.massivecraft.massivecore.MassiveCoreMConf;
+import org.bukkit.Bukkit;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,6 +35,14 @@ public class ChestGui
 		gui.add();
 		
 		return gui;
+	}
+	public static ChestGui get(InventoryEvent event)
+	{
+		if (event == null) throw new NullPointerException("event");
+
+		Inventory inventory = event.getInventory();
+		if (inventory == null) return null;
+		return get(inventory);
 	}
 	
 	private static void add(Inventory inventory, ChestGui gui) { inventoryToGui.put(inventory, gui); }
@@ -77,6 +88,7 @@ public class ChestGui
 	public ChestAction setAction(int index, ChestAction action) { return this.indexToAction.put(index, action); }
 	public ChestAction setAction(int index, String command) { return this.setAction(index, new ChestActionCommand(command)); }
 	public ChestAction getAction(int index) { return this.indexToAction.get(index); }
+	public ChestAction getAction(InventoryClickEvent event) { return this.getAction(event.getSlot()); }
 	
 	// -------------------------------------------- //
 	// LAST ACTION
@@ -165,6 +177,29 @@ public class ChestGui
 	public ChestGui()
 	{
 		
+	}
+
+	public static ChestGui constructFromButtons(List<? extends ChestButton> buttons, String title)
+	{
+		int size = buttons.size();
+		int modulo = size % 9;
+		if (modulo != 0)
+		{
+			size = size + 9 - modulo;
+		}
+
+		Inventory inventory = Bukkit.createInventory(null, size, title);
+		ChestGui gui = getCreative(inventory);
+
+		for (int i = 0; i < buttons.size(); i++)
+		{
+			ChestButton button = buttons.get(i);
+
+			inventory.setItem(i, button.getItem());
+			gui.setAction(i, button.getAction());
+		}
+
+		return gui;
 	}
 	
 }

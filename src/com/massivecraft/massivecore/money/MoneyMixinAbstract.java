@@ -32,9 +32,9 @@ public abstract class MoneyMixinAbstract implements MoneyMixin
 		// OK! I'll have to calculate :P
 		int factor = (int) Math.round(Math.pow(10, fractionalDigits));
 		amount = amount * factor;
-		amount = Math.ceil(amount);
+		amount = moneyCeil(amount);
 		amount = amount / factor;
-		
+
 		return amount;
 	}
 	
@@ -65,7 +65,7 @@ public abstract class MoneyMixinAbstract implements MoneyMixin
 	}
 	public boolean move(String fromId, String toId, String byId, double amount)
 	{
-		return this.move(fromId, toId, byId, amount, Collections.<String>emptyList(), null);
+		return this.move(fromId, toId, byId, amount, Collections.emptyList(), null);
 	}
 	
 	// -------------------------------------------- //

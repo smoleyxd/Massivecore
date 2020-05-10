@@ -172,9 +172,8 @@ public final class GsonMongoConverter
 	{
 		
 		JsonArray jsonArray = new JsonArray();
-		for (int i = 0; i < in.size(); i++)
+		for (Object object : in)
 		{
-			Object object = in.get(i);
 			if (object instanceof ArrayList)
 			{
 				jsonArray.add(mongo2GsonArray((ArrayList) object));

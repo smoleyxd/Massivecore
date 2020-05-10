@@ -17,11 +17,7 @@ import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateElementGarbage;
 import com.massivecraft.massivecore.predicate.PredicateElementSignificant;
 import com.massivecraft.massivecore.util.extractor.Extractor;
-import com.massivecraft.massivecore.util.extractor.ExtractorPlayer;
-import com.massivecraft.massivecore.util.extractor.ExtractorPlayerName;
-import com.massivecraft.massivecore.util.extractor.ExtractorSender;
 import com.massivecraft.massivecore.util.extractor.ExtractorSenderId;
-import com.massivecraft.massivecore.util.extractor.ExtractorSenderName;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorld;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorldName;
 import com.massivecraft.massivecore.util.reference.ReferenceMaterial;
@@ -78,6 +74,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 public class MUtil
@@ -495,14 +493,7 @@ public class MUtil
 		Collections.reverse(trace);
 		
 		// Eat Garbage
-		for (Iterator<StackTraceElement> iterator = trace.iterator(); iterator.hasNext();)
-		{
-			StackTraceElement element = iterator.next();
-			if (PredicateElementGarbage.get().apply(element))
-			{
-				iterator.remove();
-			}
-		}
+		trace.removeIf(PredicateElementGarbage.get());
 		
 		// Unreverse
 		Collections.reverse(trace);
@@ -1435,7 +1426,7 @@ public class MUtil
 	// -------------------------------------------- //
 	// TRANSFORM
 	// -------------------------------------------- //
-	
+
 	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit, Integer offset)
 	{
 		// Collection
@@ -1482,7 +1473,7 @@ public class MUtil
 		// ORDERBY
 		if (orderby != null)
 		{
-			Collections.sort(ret, orderby);
+			ret.sort(orderby);
 		}
 		
 		// LIMIT AND OFFSET
@@ -1601,13 +1592,8 @@ public class MUtil
 		{
 			K key = entry.getKey();
 			V value = entry.getValue();
-			
-			Set<K> set = ret.get(value);
-			if (set == null)
-			{
-				set = new HashSet<>();
-				ret.put(value, set);
-			}
+
+			Set<K> set = ret.computeIfAbsent(value, k -> new HashSet<>());
 			set.add(key);
 		}
 		
@@ -1767,6 +1753,18 @@ public class MUtil
 	{
 		return equalsishNumber(number1, number2);
 	}
+
+	// -------------------------------------------- //
+	// SET IF DIFFERENT
+	// -------------------------------------------- //
+
+	public static <T> boolean setIfDifferent(T value, Supplier<T> getter, Consumer<T> setter)
+	{
+		T currentVal = getter.get();
+		if (currentVal == value) return false;
+		setter.accept(value);
+		return true;
+	}
 	
 	// -------------------------------------------- //
 	// SORTING
@@ -1795,22 +1793,17 @@ public class MUtil
 	public static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map, final boolean ascending)
 	{
 		SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<>(
-			new Comparator<Map.Entry<K, V>>()
-			{
-				@Override
-				public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2)
+			(e1, e2) -> {
+				int res;
+				if (ascending)
 				{
-					int res;
-					if (ascending)
-					{
-						res = e1.getValue().compareTo(e2.getValue());
-					}
-					else
-					{
-						res = e2.getValue().compareTo(e1.getValue());
-					}
-					return res != 0 ? res : 1;
+					res = e1.getValue().compareTo(e2.getValue());
 				}
+				else
+				{
+					res = e2.getValue().compareTo(e1.getValue());
+				}
+				return res != 0 ? res : 1;
 			}
 		);
 		sortedEntries.addAll(map.entrySet());
@@ -1820,6 +1813,7 @@ public class MUtil
 	// -------------------------------------------- //
 	// MATH
 	// -------------------------------------------- //
+
 	public static <T extends Number> T limitNumber(T d, T min, T max)
 	{
 		if (d.doubleValue() < min.doubleValue())
@@ -1867,25 +1861,16 @@ public class MUtil
 	protected static Map<Class<?>, Map<String, Set<Extractor>>> classesPropertiesExtractors = new HashMap<>();
 	protected static Map<String, Set<Extractor>> getPropertiesExtractors(Class<?> propertyClass)
 	{
-		Map<String, Set<Extractor>> ret = classesPropertiesExtractors.get(propertyClass);
-		if (ret == null)
-		{
-			ret = new HashMap<>();
-			classesPropertiesExtractors.put(propertyClass, ret);
-		}
-		return ret;
+		classesPropertiesExtractors.computeIfAbsent(propertyClass, x -> new HashMap<>());
+		return classesPropertiesExtractors.get(propertyClass);
 	}
 	
 	protected static Set<Extractor> getExtractors(Class<?> propertyClass, String propertyName)
 	{
 		Map<String, Set<Extractor>> propertiesExtractors = getPropertiesExtractors(propertyClass);
-		Set<Extractor> ret = propertiesExtractors.get(propertyName);
-		if (ret == null)
-		{
-			ret = new HashSet<>();
-			propertiesExtractors.put(propertyName, ret);
-		}
-		return ret;
+
+		propertiesExtractors.computeIfAbsent(propertyName, x -> new HashSet<>());
+		return propertiesExtractors.get(propertyName);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -1911,18 +1896,11 @@ public class MUtil
 	
 	static
 	{
-		registerExtractor(CommandSender.class, "sender", ExtractorSender.get());
-		registerExtractor(String.class, "senderId", ExtractorSenderId.get());
-		
-		registerExtractor(Player.class, "player", ExtractorPlayer.get());
-		registerExtractor(String.class, "playerName", ExtractorPlayerName.get());
-		
 		registerExtractor(World.class, "world", ExtractorWorld.get());
 		registerExtractor(String.class, "worldName", ExtractorWorldName.get());
 		
 		// The accountId extractor is used for the money mixin.
-		// For now we act on the name instead of the ID since vault needs names.
-		registerExtractor(String.class, "accountId", ExtractorSenderName.get());
+		registerExtractor(String.class, "accountId", ExtractorSenderId.get());
 	}
 	
 }

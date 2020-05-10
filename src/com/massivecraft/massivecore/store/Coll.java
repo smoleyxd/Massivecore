@@ -405,7 +405,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 	{
 		if (id == null) throw new NullPointerException("id");
 		if (!local && !remote) throw new IllegalArgumentException("Must be either remote or local.");
-		
+
 		Modification current = this.identifiedModifications.get(id);
 		// DEBUG
 		// if (Bukkit.isPrimaryThread())
@@ -422,8 +422,8 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		}
 		
 		boolean existsLocal = (localEntity != null);
-		boolean existsRemote = remote ? (remoteMtime != 0) : true;
-		
+		boolean existsRemote = !remote || (remoteMtime != 0);
+
 		// So we don't have this anywhere?
 		if ( ! existsLocal && ! existsRemote) return Modification.UNKNOWN;
 		
@@ -506,9 +506,9 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 	public Modification syncIdFixed(String id, final Modification suppliedModification, Entry<JsonObject, Long> remoteEntry)
 	{
 		if (id == null) throw new NullPointerException("id");
-		
+
 		Modification modification = getActualModification(id, suppliedModification, remoteEntry);
-		
+
 		if (MStore.DEBUG_ENABLED) this.getPlugin().log((this.getDebugName() + " syncronising " + modification + " (" + suppliedModification + ") on " + id));
 		
 		// DEBUG
@@ -567,7 +567,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 	private Modification getActualModification(String id, Modification modification,  Entry<JsonObject, Long> remoteEntry)
 	{
 		if (id == null) throw new NullPointerException("id");
-		
+
 		if (modification != null && !modification.isUnknown())
 		{
 			return modification;
@@ -580,7 +580,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		// or by the poller. This way we are certain, that all local changes where .changed() is not called
 		// they are found by the poller and then reported appropriately.
 		Modification actualModification = this.examineIdFixed(id, remoteMtime, false, true);
-		
+
 		if (actualModification == Modification.NONE && (modification == Modification.UNKNOWN_CHANGED || modification == Modification.UNKNOWN_LOG))
 		{
 			actualModification = Modification.LOCAL_ALTER;
@@ -829,7 +829,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		// Id
 		if (id == null) id = this.calculateId();
 		this.id = id;
-		String[] idParts = this.id.split("\\@");
+		String[] idParts = this.id.split("@");
 		this.basename = idParts[0];
 		if (idParts.length > 1)
 		{
@@ -850,10 +850,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		this.identifiedModifications = new ConcurrentHashMap<>();
 		
 		// Tasks
-		this.tickTask = new Runnable()
-		{
-			@Override public void run() { Coll.this.onTick(); }
-		};
+		this.tickTask = Coll.this::onTick;
 	}
 	
 	public Coll(String id)
@@ -910,7 +907,9 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 	
 	public Db calculateDb()
 	{
-		return MStore.getDb();
+		Db db = MStore.getDb();
+		if (db == null) throw new NullPointerException("db");
+		return db;
 	}
 	
 	@Override

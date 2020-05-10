@@ -72,7 +72,7 @@ public interface EntityContainer<E>
 	List<E> getAll(Comparator<? super E> orderby);
 	List<E> getAll(Integer limit, Integer offset);
 	List<E> getAll(Integer limit);
-	
+
 	// -------------------------------------------- //
 	// BEHAVIOR
 	// -------------------------------------------- //

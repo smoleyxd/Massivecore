@@ -19,7 +19,6 @@ import org.bukkit.util.Vector;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
@@ -508,7 +507,7 @@ public final class PS implements Serializable, Comparable<PS>
 	public static Integer calcBlockCoord(Double location, Integer block, Integer chunk)
 	{
 		if (block != null) return block;
-		if (location != null) return (int) Location.locToBlock(location);
+		if (location != null) return Location.locToBlock(location);
 		if (chunk != null) return chunk * 16;
 		return null;
 	}

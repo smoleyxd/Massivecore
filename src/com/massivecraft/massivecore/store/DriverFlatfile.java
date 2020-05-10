@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.store;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.util.DiscUtil;
+import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParser;
 
@@ -14,8 +15,6 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -150,19 +149,26 @@ public class DriverFlatfile extends DriverAbstract
 		return loadFile(file);
 	}
 	
-	public Entry<JsonObject, Long> loadFile(File file)
+	public static Entry<JsonObject, Long> loadFile(File file)
 	{
 		long mtime = file.lastModified();
-		JsonObject raw = loadFileJson(file);
+		JsonObject raw = loadFileJsonObject(file);
 		
 		return new SimpleEntry<>(raw, mtime);
 	}
 	
-	public JsonObject loadFileJson(File file)
+	public static JsonObject loadFileJsonObject(File file)
+	{
+		JsonElement ret = loadFileJson(file);
+		if (ret == null) return null;
+		return ret.getAsJsonObject();
+	}
+
+	public static JsonElement loadFileJson(File file)
 	{
 		String content = DiscUtil.readCatch(file);
 		if (content == null) return null;
-		
+
 		content = content.trim();
 		if (content.length() == 0) return null;
 		
