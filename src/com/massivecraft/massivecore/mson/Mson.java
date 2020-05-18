@@ -1011,7 +1011,7 @@ public class Mson implements Serializable
 			if (replacement == null) matcher.appendReplacement(currentString, match);
 			
 			// Add the string
-			else if (replacement.isTextOnly()) matcher.appendReplacement(currentString, replacement.getText().replaceAll("\\$","\\\\\\$"));
+			else if (replacement.isTextOnly()) matcher.appendReplacement(currentString, replacement.getText());
 			
 			// Add the mson
 			else
