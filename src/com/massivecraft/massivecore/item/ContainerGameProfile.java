@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.util.MUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,19 @@ public class ContainerGameProfile
 	public List<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties()
 	{
 		return DataItemStack.get(this.gameProfileProperties, GAMEPROFILEPROPERTIESDEFAULT);
+	}
+	
+	@Override
+	public boolean equals(Object object)
+	{
+		if ( ! (object instanceof ContainerGameProfile)) return false;
+		ContainerGameProfile that = (ContainerGameProfile)object;
+		
+		return MUtil.equals(
+			this.getUuid(), that.getUuid(),
+			this.getName(), that.getName(),
+			this.getGameProfileProperties(), that.getGameProfileProperties()
+		);
 	}
 	
 }
