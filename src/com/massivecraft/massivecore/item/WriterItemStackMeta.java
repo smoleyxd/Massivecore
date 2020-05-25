@@ -28,7 +28,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaColor.class,
 			
 			// MAP
-			WriterItemStackMetaScaling.class,
+			WriterItemStackMetaMapScaling.class,
 			WriterItemStackMetaMapColor.class,
 			
 			// POTION EFFECTS

@@ -17,7 +17,7 @@ public class WriterItemStackMetaMapColor extends WriterAbstractItemStackMetaFiel
 	public WriterItemStackMetaMapColor()
 	{
 		super(MapMeta.class);
-		this.setMaterial(Material.MAP);
+		this.setMaterial(Material.FILLED_MAP);
 		this.setConverterTo(ConverterToColor.get());
 		this.setConverterFrom(ConverterFromColor.get());
 	}
