@@ -904,7 +904,17 @@ public class InventoryUtil
 		if (meta == null) return;
 
 		if (!(meta instanceof Damageable)) return;
-		Damageable damageable = (Damageable) meta;
+		
+		((Damageable) meta).setDamage(0);
+		itemStack.setItemMeta(meta);
+	}
+	
+	public static boolean isRepairable(Material material)
+	{
+		ItemMeta meta = getMeta(new ItemStack(material));
+		if (meta == null) return false;
+		
+		return (meta instanceof Damageable);
 	}
 	
 	public static boolean isPotion(ItemStack itemStack)
