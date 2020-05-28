@@ -184,7 +184,7 @@ public class Progressbar
 	
 	public static String colorParse(String string, String colorTag, String color)
 	{
-		if (string == null) throw new NullPointerException("string");
+		if (string == null) return null;
 		string = string.replace(colorTag, color);
 		string = Txt.parse(string);
 		return string;

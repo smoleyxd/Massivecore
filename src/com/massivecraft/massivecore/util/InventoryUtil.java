@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.event.EventMassiveCoreLorePriority;
 import com.massivecraft.massivecore.item.DataItemStack;
 import com.massivecraft.massivecore.mixin.MixinInventory;
 import com.massivecraft.massivecore.predicate.Predicate;
+import com.massivecraft.massivecore.predicate.PredicateNot;
 import com.massivecraft.massivecore.predicate.PredicateStringStartsWith;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -1235,10 +1236,10 @@ public class InventoryUtil
 		List<String> lore = getLore(item);
 		if (lore == null) return false;
 
-		List<String> newLore = lore.stream().filter(predicate).collect(Collectors.toList());
+		List<String> newLore = lore.stream().filter(PredicateNot.get(predicate)).collect(Collectors.toList());
 		if (lore.size() != newLore.size())
 		{
-			setLore(item, lore);
+			setLore(item, newLore);
 			return true;
 		}
 
