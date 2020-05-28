@@ -88,7 +88,7 @@ public class SenderColl<E extends SenderEntity<E>> extends Coll<E> implements Se
 			ret = IdUtil.getId(oid);
 		}
 		
-		if (this.isLowercasing())
+		if (this.isLowercasing() && ret != null)
 		{
 			ret = ret.toLowerCase();
 		}
