@@ -107,7 +107,8 @@ public abstract class TypeSenderIdAbstract<T> extends TypeAbstract<T>
 	{
 		// arg --> senderId
 		String senderId = this.getSenderIdFor(arg);
-		if (senderId == null) throwError(arg);
+		// All of our subclasses return null if senderId is null.
+		// Thus we don't need to check for that being null, but only check ret.
 
 		// If presence is online or local and the target is not visible for the sender then throw an error.
 		if
