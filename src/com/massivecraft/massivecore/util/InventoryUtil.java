@@ -912,7 +912,7 @@ public class InventoryUtil
 	
 	public static boolean isRepairable(Material material)
 	{
-		ItemMeta meta = getMeta(new ItemStack(material));
+		ItemMeta meta = createMeta(new ItemStack(material));
 		if (meta == null) return false;
 		
 		return (meta instanceof Damageable);
