@@ -121,7 +121,7 @@ public class EventMassiveCorePlayerUpdate extends EventMassiveCore
 	
 	public static double getMaxHealth(Player player, boolean current)
 	{
-		if ( ! current) player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue();
+		if ( ! current) return player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue();
 
 		return player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
 	}
