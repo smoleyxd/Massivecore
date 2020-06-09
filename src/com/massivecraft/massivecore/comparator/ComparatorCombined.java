@@ -18,7 +18,7 @@ public class ComparatorCombined<T> extends ComparatorAbstract<T>
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private List<Comparator<? super T>> comparators = null;
+	private List<Comparator<? super T>> comparators;
 	public List<Comparator<? super T>> getComparators() { return this.comparators; }
 	public ComparatorCombined<T> setComparators(List<Comparator<? super T>> comparators) { this.comparators = comparators; return this; }
 	

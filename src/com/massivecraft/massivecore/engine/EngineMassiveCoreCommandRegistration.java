@@ -99,7 +99,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 			
 			// ... and finally register it.
 			Plugin plugin = command.getPlugin();
-			String pluginName = (plugin != null ? plugin.getName() : "MassiveCore");
+			String pluginName = plugin.getName();
 			simpleCommandMap.register(pluginName, command);
 		}
 		

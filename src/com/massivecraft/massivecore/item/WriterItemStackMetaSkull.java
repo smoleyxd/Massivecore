@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import com.massivecraft.massivecore.Couple;
 import com.massivecraft.massivecore.nms.NmsSkullMeta;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -42,18 +43,20 @@ public class WriterItemStackMetaSkull extends WriterAbstractItemStackMetaField<S
 	@Override
 	public String getB(SkullMeta cb, ItemStack d)
 	{
-		return cb.getOwner();
+		OfflinePlayer owningPlayer = cb.getOwningPlayer();
+		if (owningPlayer == null) return null;
+		return owningPlayer.getName();
 	}
 
 	@Override
 	public void setB(SkullMeta cb, String fb, ItemStack d)
 	{
 		String name = fb;
-		UUID id = null;
+		UUID id;
 		
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		
-		Couple<String, UUID> resolved = nms.resolve(name, id);
+		Couple<String, UUID> resolved = nms.resolve(name, null);
 		name = resolved.getFirst();
 		id = resolved.getSecond();
 		

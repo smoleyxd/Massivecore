@@ -79,7 +79,7 @@ public class TimeDiffUtil
 			// Parse the count
 			String countString = matcherPart.group(1);
 			String countStringFixed = countString.replaceAll("[+\\s]", "");
-			long count = 0;
+			long count;
 			try
 			{
 				count = Long.parseLong(countStringFixed);

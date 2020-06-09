@@ -2,39 +2,11 @@ package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.xlib.guava.collect.BiMap;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableBiMap;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
-@SuppressWarnings("deprecation")
 public class PotionUtil
 {
-	public static PotionData toPotionData(int damage)
-	{
-		try
-		{
-			Potion potion = Potion.fromDamage(damage);
-			PotionType type = potion.getType();
-			boolean extended = potion.hasExtendedDuration();
-			boolean upgraded = (potion.getLevel() >= 2);
-			
-			// This section serves two purposes:
-			// 1. Avoid slow exceptions over for invalid damage values.
-			// 2. Lenient upgrade to Minecraft 1.9. Keep what we can.
-			// If a potion was both upgraded and extended we keep the upgraded and remove the extended.
-			if (type == null) return null;
-			if (extended && ! type.isExtendable()) return null;
-			if (upgraded && ! type.isUpgradeable()) return null;
-			if (upgraded && extended) extended = false;
-			
-			return new PotionData(type, extended, upgraded);
-		}
-		catch (Exception e)
-		{
-			return null;
-		}
-	}
-	
 	public static PotionData toPotionData(String potionString)
 	{
 		if (potionString == null) return null;

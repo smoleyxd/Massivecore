@@ -117,9 +117,8 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		UUID id = event.getUniqueId();
 		PlayerState state = PlayerState.LOGASYNC;
-		boolean delayed = false;
 		PlayerState replaceable = PlayerState.LEFT;
-		this.setState(id, state, delayed, replaceable);
+		this.setState(id, state, false, replaceable);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -130,9 +129,8 @@ public class EngineMassiveCorePlayerState extends Engine
 		
 		UUID id = event.getUniqueId();
 		PlayerState state = PlayerState.LEFT;
-		boolean delayed = false; // We would actually like to delay but this only works properly for synchronous events.
 		PlayerState replaceable = PlayerState.LOGASYNC;
-		this.setState(id, state, delayed, replaceable);
+		this.setState(id, state, false, replaceable);
 	}
 	
 	// -------------------------------------------- //
@@ -145,9 +143,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LOGSYNC;
-		boolean delayed = false;
-		PlayerState replaceable = null;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, false, null);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -158,9 +154,8 @@ public class EngineMassiveCorePlayerState extends Engine
 		
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LEFT;
-		boolean delayed = true;
 		PlayerState replaceable = PlayerState.LOGSYNC;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, true, replaceable);
 	}
 	
 	// -------------------------------------------- //
@@ -173,9 +168,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.JOINING;
-		boolean delayed = false;
-		PlayerState replaceable = null;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, false, null);
 	}
 	
 	// -------------------------------------------- //
@@ -188,9 +181,8 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.JOINED;
-		boolean delayed = true;
 		PlayerState replaceable = PlayerState.JOINING;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, true, replaceable);
 	}
 	
 	// -------------------------------------------- //
@@ -203,9 +195,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LEAVING;
-		boolean delayed = false;
-		PlayerState replaceable = null;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, false, null);
 	}
 	
 	// -------------------------------------------- //
@@ -218,9 +208,8 @@ public class EngineMassiveCorePlayerState extends Engine
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LEFT;
-		boolean delayed = true;
 		PlayerState replaceable = PlayerState.LEAVING;
-		this.setState(player, state, delayed, replaceable);
+		this.setState(player, state, true, replaceable);
 	}
 	
 }

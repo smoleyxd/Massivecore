@@ -252,9 +252,7 @@ public class MassiveCore extends MassivePlugin
 	@Override
 	public List<Class<?>> getClassesActiveColls()
 	{
-		List<Class<?>> ret = this.getClassesActive(null, Coll.class);
-
-		return ret;
+		return this.getClassesActive(null, Coll.class);
 	}
 	
 	@Override

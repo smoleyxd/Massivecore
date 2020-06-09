@@ -10,7 +10,7 @@ public class DestinationSimple extends DestinationAbstract
 	// FIELDS
 	// -------------------------------------------- //
 	
-	protected PS ps = null;
+	protected PS ps;
 	public void setPs(PS ps) { this.ps = ps; }
 	
 	// -------------------------------------------- //

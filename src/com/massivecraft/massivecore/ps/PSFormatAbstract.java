@@ -86,7 +86,7 @@ public class PSFormatAbstract implements PSFormat
 	{
 		List<String> ret = new ArrayList<>();
 		
-		Object val = null;
+		Object val;
 		
 		val = ps.getWorld();
 		if (val != null)

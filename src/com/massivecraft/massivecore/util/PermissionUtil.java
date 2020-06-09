@@ -98,8 +98,7 @@ public class PermissionUtil
 		if (object instanceof Permission) return (Permission)object;
 		
 		String permissionId = asPermissionId(object);
-		Permission permission = getPermission(false, permissionId);
-		return permission;
+		return getPermission(false, permissionId);
 	}
 	
 	// -------------------------------------------- //
@@ -348,7 +347,7 @@ public class PermissionUtil
 		Permission permissionBukkit = asPermission(permission);
 		if (permissionBukkit == null) return Lang.PERM_DEFAULT_DESCRIPTION;
 		String ret = getPermissionDescription(permissionBukkit);
-		if (ret == null || ret.isEmpty()) ret = Lang.PERM_DEFAULT_DESCRIPTION;
+		if (ret.isEmpty()) ret = Lang.PERM_DEFAULT_DESCRIPTION;
 		return ret;
 	}
 	
@@ -492,7 +491,7 @@ public class PermissionUtil
 		before.putAll(permissions);
 		
 		Permissible permissible = attachment.getPermissible();
-		if (permissible != null) permissible.recalculatePermissions();
+		permissible.recalculatePermissions();
 		
 		return true;
 	}

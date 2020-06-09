@@ -72,14 +72,13 @@ public class RecipeUtil
 	// -------------------------------------------- //
 
 	// TODO check this out
-	@SuppressWarnings("deprecation")
 	public static ShapelessRecipe createShapeless(ItemStack result, Object... objects)
 	{
 		ShapelessRecipe recipe = MixinRecipe.get().createShapeless(result);
 		
 		int quantity = 1;
 		int data = 0;
-		Material material = null;
+		Material material;
 		
 		for (Object object : objects)
 		{
@@ -102,7 +101,6 @@ public class RecipeUtil
 				
 				quantity = 1;
 				data = 0;
-				material = null;
 			}
 			else
 			{

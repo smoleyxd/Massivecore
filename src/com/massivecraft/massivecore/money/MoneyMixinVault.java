@@ -7,6 +7,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.Collection;
 
+@SuppressWarnings("deprecation")
 public class MoneyMixinVault extends MoneyMixinAbstract
 {
 	// -------------------------------------------- //
@@ -192,6 +193,8 @@ public class MoneyMixinVault extends MoneyMixinAbstract
 	// UTIL
 	// -------------------------------------------- //
 	
+	// Vault's decided to Deprecate these methods in favour of OfflinePlayers.
+	// I'm worried this is going to cause issues for non-player accounts like Factions.
 	public boolean ensureExists(String accountId)
 	{
 		Economy economy = this.getEconomy();

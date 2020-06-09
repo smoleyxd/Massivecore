@@ -86,7 +86,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 		{
 			constructor = ReflectionUtil.getConstructor(clazz);	
 		}
-		catch(Exception e)
+		catch(Exception ignored)
 		{
 			
 		}
@@ -626,7 +626,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	public boolean equals(T type1, T type2)
 	{
 		if (type1 == null) return type2 == null;
-		if (type2 == null) return type1 == null;
+		if (type2 == null) return false;
 		return this.equalsInner(type1, type2);
 	}
 	

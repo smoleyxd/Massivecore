@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.nms;
 
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class NmsSkullMetaFallback extends NmsSkullMeta
 	@Override
 	public void set(SkullMeta meta, String name, UUID id)
 	{
-		meta.setOwner(name);
+		meta.setOwningPlayer(Bukkit.getOfflinePlayer(id));
 	}
 	
 }

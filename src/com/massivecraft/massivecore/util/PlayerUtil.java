@@ -217,7 +217,6 @@ public class PlayerUtil extends Engine
 		Entity damager = MUtil.getLiableDamager(event);
 		Entity damagee = event.getEntity();
 		if (damager == null) return false;
-		if (damagee == null) return false;
 		final String id = damager.getUniqueId().toString() + damagee.getUniqueId().toString();
 		
 		// ... get current ...

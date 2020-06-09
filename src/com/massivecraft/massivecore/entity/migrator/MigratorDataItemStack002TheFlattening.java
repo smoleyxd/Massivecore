@@ -17,8 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static org.bukkit.Material.LEGACY_PREFIX;
-
+@SuppressWarnings("deprecation")
 public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 {
 	// -------------------------------------------- //
@@ -85,8 +84,8 @@ public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 		if (jsonId == null || jsonId.isJsonNull()) return;
 		String legacy = jsonId.getAsString();
 
-		if (!legacy.startsWith(LEGACY_PREFIX)) {
-			legacy = LEGACY_PREFIX + legacy;
+		if (!legacy.startsWith(Material.LEGACY_PREFIX)) {
+			legacy = Material.LEGACY_PREFIX + legacy;
 		}
 
 		// Get the damage

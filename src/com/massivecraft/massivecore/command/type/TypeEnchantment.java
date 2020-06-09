@@ -22,7 +22,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	// The first name is taken from the wiki. Those names are those people think of.
 	// The second name is the Spigot key name.
 	// Thereafter comes assorted extras
-	public static Map<String, List<String>> ID_TO_RAWNAMES = new MassiveMap<String, List<String>>(
+	public static Map<String, List<String>> ID_TO_RAWNAMES = new MassiveMap<>(
 		"protection", new MassiveList<>("Protection", "PROTECTION_ENVIRONMENTAL"),
 		"fire_protection", new MassiveList<>("Fire Protection", "PROTECTION_FIRE"),
 		"feather_falling", new MassiveList<>("Feather Falling", "PROTECTION_FALL", "FallProtection"),
@@ -56,7 +56,10 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"loyalty", new MassiveList<>("Loyalty", "LOYALTY"),
 		"impaling", new MassiveList<>("Impaling", "IMPALING"),
 		"riptide", new MassiveList<>("Riptide", "RIPTIDE"),
-		"channeling", new MassiveList<>("Channeling", "CHANNELING")
+		"channeling", new MassiveList<>("Channeling", "CHANNELING"),
+		"piercing", new MassiveList<>("Piercing", "PIERCING"),
+		"multishot", new MassiveList<>("Multishot", "MULTISHOT"),
+		"quick_charge", new MassiveList<>("Quick Charge", "QUICKCHARGE", "QuickCharge")
 	);
 	
 	public static String enchantmentToKey(Enchantment enchantment) {

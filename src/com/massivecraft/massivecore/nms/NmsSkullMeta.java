@@ -38,10 +38,7 @@ public class NmsSkullMeta extends Mixin
 	
 	public String getName(SkullMeta meta)
 	{
-		// throw notImplemented();
-		return meta.getOwner();
-		// NOTE: This one is actually this simple.
-		// Bukkit does all the work for us.
+		return meta.getOwningPlayer().getName();
 	}
 	
 	public UUID getId(SkullMeta meta)

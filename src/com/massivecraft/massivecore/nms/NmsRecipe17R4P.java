@@ -5,6 +5,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.Plugin;
 
+@SuppressWarnings("deprecation")
 public class NmsRecipe17R4P extends NmsRecipe
 {
 	// -------------------------------------------- //

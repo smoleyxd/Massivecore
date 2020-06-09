@@ -19,7 +19,7 @@ public class ComparatorIdentified extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Identified identified1 = null;
@@ -34,7 +34,6 @@ public class ComparatorIdentified extends ComparatorAbstract<Object>
 		String id1 = identified1.getId();
 		String id2 = identified2.getId();
 		ret = ComparatorComparable.get().compare(id1, id2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

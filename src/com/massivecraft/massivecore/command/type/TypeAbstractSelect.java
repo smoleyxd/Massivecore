@@ -46,8 +46,7 @@ public abstract class TypeAbstractSelect<T> extends TypeAbstract<T> implements A
 		T result = this.select(arg, sender);
 		if (result != null) return result;
 		
-		MassiveException exception = createExceptionForInvalidArg(arg, sender);
-		throw exception;
+		throw createExceptionForInvalidArg(arg, sender);
 	}
 	
 	public Collection<String> altNames(CommandSender sender)

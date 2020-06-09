@@ -30,11 +30,11 @@ public abstract class Property<O, V> implements Named
 	// TYPE
 	// -------------------------------------------- //
 	
-	protected Type<O> objectType = null;
+	protected Type<O> objectType;
 	public Type<O> getObjectType() { return this.objectType; }
 	public void setObjectType(Type<O> objectType) { this.objectType = objectType; }
 	
-	protected Type<V> valueType = null;
+	protected Type<V> valueType;
 	public Type<V> getValueType() { return this.valueType; }
 	public void setValueType(Type<V> valueType) { this.valueType = valueType; }
 	
@@ -62,7 +62,7 @@ public abstract class Property<O, V> implements Named
 	// NAME
 	// -------------------------------------------- //
 	
-	protected List<String> names = new MassiveList<>();
+	protected List<String> names;
 	public List<String> getNames() { return this.names; }
 	@Override public String getName() { return this.getNames().isEmpty() ? null : this.getNames().get(0); }
 	public void setName(String name) { this.names = new MassiveList<>(name); }

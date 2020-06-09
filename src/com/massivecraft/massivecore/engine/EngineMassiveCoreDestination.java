@@ -151,7 +151,7 @@ public class EngineMassiveCoreDestination extends Engine
 			String worldId = TypeWorldId.get().read(arg, sender);
 			return new DestinationWorld(worldId);
 		}
-		catch (Exception e)
+		catch (Exception ignored)
 		{
 			
 		}
@@ -178,7 +178,7 @@ public class EngineMassiveCoreDestination extends Engine
 			String playerId = TypeSenderId.get().read(arg, sender);
 			return new DestinationPlayer(playerId);
 		}
-		catch (Exception e)
+		catch (Exception ignored)
 		{
 			
 		}

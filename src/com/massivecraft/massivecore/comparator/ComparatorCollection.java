@@ -24,7 +24,7 @@ public class ComparatorCollection extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Collection<Object> collection1 = null;

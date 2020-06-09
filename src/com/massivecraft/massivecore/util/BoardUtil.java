@@ -264,15 +264,13 @@ public class BoardUtil extends Engine
 		
 		if (key instanceof String)
 		{
-			String string = (String)key;
-			return string;
+			return (String)key;
 		}
 		
 		if (key instanceof Player)
 		{
 			Player player = (Player)key;
-			String name = player.getName();
-			return name;
+			return player.getName();
 		}
 		
 		if (key instanceof Entity)
@@ -347,7 +345,12 @@ public class BoardUtil extends Engine
 	
 	public static Objective createObjective(Scoreboard board, String id, String criteria)
 	{
-		return board.registerNewObjective(id, criteria);
+		return createObjective(board, id, criteria, id);
+	}
+	
+	public static Objective createObjective(Scoreboard board, String id, String criteria, String displayName)
+	{
+		return board.registerNewObjective(id, criteria, displayName);
 	}
 	
 	public static Objective getObjective(Scoreboard board, String id, boolean creative)
@@ -357,8 +360,13 @@ public class BoardUtil extends Engine
 	
 	public static Objective getObjective(Scoreboard board, String id, String criteria, boolean creative)
 	{
+		return getObjective(board, id, criteria, id, creative);
+	}
+	
+	public static Objective getObjective(Scoreboard board, String id, String criteria, String displayName, boolean creative)
+	{
 		Objective objective = board.getObjective(id);
-		if (objective == null && creative) objective = createObjective(board, id, criteria);
+		if (objective == null && creative) objective = createObjective(board, id, criteria, displayName);
 		return objective;
 	}
 	
@@ -910,16 +918,17 @@ public class BoardUtil extends Engine
 		Team team = createTeam(board, id);
 		
 		// Fill
-		Boolean persistent = PERSONAL_DEFAULT_PERSISTENT;
-		String name = PERSONAL_DEFAULT_NAME;
-		String prefix = PERSONAL_DEFAULT_PREFIX;
-		String suffix = PERSONAL_DEFAULT_SUFFIX;
-		Boolean friendlyFireEnabled = PERSONAL_DEFAULT_FRIENDLY_FIRE_ENABLED;
-		Boolean friendlyTruesightEnabled = PERSONAL_DEFAULT_FRIENDLY_TRUESIGHT_ENABLED;
-		Map<TeamOptionKey, TeamOptionValue> options = PERSONAL_DEFAULT_OPTIONS;
-		Set<String> members = Collections.singleton(id);
-		
-		setTeam(team, persistent, name, prefix, suffix, friendlyFireEnabled, friendlyTruesightEnabled, options, members);
+		setTeam(
+			team,
+			PERSONAL_DEFAULT_PERSISTENT,
+			PERSONAL_DEFAULT_NAME,
+			PERSONAL_DEFAULT_PREFIX,
+			PERSONAL_DEFAULT_SUFFIX,
+			PERSONAL_DEFAULT_FRIENDLY_FIRE_ENABLED,
+			PERSONAL_DEFAULT_FRIENDLY_TRUESIGHT_ENABLED,
+			PERSONAL_DEFAULT_OPTIONS,
+			Collections.singleton(id)
+		);
 		
 		// Return
 		return team;

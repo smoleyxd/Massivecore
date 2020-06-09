@@ -178,18 +178,15 @@ public class DriverFlatfile extends DriverAbstract
 	@Override
 	public Map<String, Entry<JsonObject, Long>> loadAll(Coll<?> coll)
 	{
-		// Create Ret
-		Map<String, Entry<JsonObject, Long>> ret = null;
-		
 		// Get Directory
 		File directory = getDirectory(coll);
-		if ( ! directory.isDirectory()) return ret;
+		if ( ! directory.isDirectory()) return null;
 		
 		// Find All
 		File[] files = directory.listFiles(JsonFileFilter.get());
 		
 		// Create Ret
-		ret = new MassiveMap<>(files.length);
+		Map<String, Entry<JsonObject, Long>> ret = new MassiveMap<>(files.length);
 		
 		// For Each Found
 		for (File file : files)
@@ -216,7 +213,7 @@ public class DriverFlatfile extends DriverAbstract
 	{
 		File file = fileFromId(coll, id);
 		String content = coll.getGson().toJson(data);
-		if (DiscUtil.writeCatch(file, content) == false) return 0;
+		if (!DiscUtil.writeCatch(file, content)) return 0;
 		return file.lastModified();
 	}
 	
@@ -296,8 +293,7 @@ public class DriverFlatfile extends DriverAbstract
 	public static File fileFromId(Coll<?> coll, String id)
 	{
 		File collDir = getDirectory(coll);
-		File idFile = new File(collDir, id + DOTJSON);
-		return idFile;
+		return new File(collDir, id + DOTJSON);
 	}
 
 }

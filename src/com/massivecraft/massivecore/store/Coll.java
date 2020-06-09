@@ -455,14 +455,14 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 				if (this.examineHasLocalAlterFixed(id, localEntity)) return Modification.LOCAL_ALTER;
 			}
 			// ...if we look for remote changes, and it wasn't default
-			else if (remote && !localEntity.getLastDefault())
+			else if (!localEntity.getLastDefault())
 			{
 				//...then it was remotely detached.
 				return Modification.REMOTE_DETACH;
 			}
 		}
 		// If we just have it remotely and look for remote changes. It was attached there.
-		else if (remote && existsRemote)
+		else if (remote)
 		{
 			return Modification.REMOTE_ATTACH;
 		}
@@ -484,7 +484,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		}
 		
 		JsonObject lastRaw = entity.getLastRaw();
-		JsonObject currentRaw = null;
+		JsonObject currentRaw;
 		
 		try
 		{

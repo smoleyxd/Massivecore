@@ -47,11 +47,13 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.lang.reflect.Method;
@@ -834,33 +836,30 @@ public class MUtil
 		}
 		throw new IllegalArgumentException("The chat color code " + chatColorCode + " is not yet supported!");
 	}
-
-	// TODO deal with the deprecation
+	
 	// TODO deal with the duplicate branches
-	@SuppressWarnings("deprecation")
 	public static ChatColor getChatColor(DyeColor dyeColor)
 	{
-		int woolColorCode = dyeColor.getWoolData();
-		
-		switch (woolColorCode)
+		switch (dyeColor)
 		{
-			case 0x0: return ChatColor.WHITE;
-			case 0x1: return ChatColor.GOLD;
-			case 0x2: return ChatColor.LIGHT_PURPLE;
-			case 0x3: return ChatColor.AQUA;
-			case 0x4: return ChatColor.YELLOW;
-			case 0x5: return ChatColor.GREEN;
-			case 0x6: return ChatColor.LIGHT_PURPLE;
-			case 0x7: return ChatColor.DARK_GRAY;
-			case 0x8: return ChatColor.GRAY;
-			case 0x9: return ChatColor.DARK_AQUA;
-			case 0xA: return ChatColor.DARK_PURPLE;
-			case 0xB: return ChatColor.BLUE;
-			case 0xC: return ChatColor.GRAY;
-			case 0xD: return ChatColor.DARK_GREEN;
-			case 0xE: return ChatColor.RED;
-			case 0xF: return ChatColor.BLACK;
+			case WHITE: return ChatColor.WHITE;
+			case ORANGE: return ChatColor.GOLD;
+			case MAGENTA: return ChatColor.LIGHT_PURPLE;
+			case LIGHT_BLUE: return ChatColor.AQUA;
+			case YELLOW: return ChatColor.YELLOW;
+			case LIME: return ChatColor.GREEN;
+			case PINK: return ChatColor.LIGHT_PURPLE;
+			case GRAY: return ChatColor.DARK_GRAY;
+			case LIGHT_GRAY: return ChatColor.GRAY;
+			case CYAN: return ChatColor.DARK_AQUA;
+			case PURPLE: return ChatColor.DARK_PURPLE;
+			case BLUE: return ChatColor.BLUE;
+			case BROWN: return ChatColor.GRAY;
+			case GREEN: return ChatColor.DARK_GREEN;
+			case RED: return ChatColor.RED;
+			case BLACK: return ChatColor.BLACK;
 		}
+		
 		throw new IllegalArgumentException("The dye color " + dyeColor + " is not yet supported!");
 	}
 
@@ -1205,7 +1204,7 @@ public class MUtil
 	
 	public static boolean isAxe(BlockBreakEvent event)
 	{
-		return isAxe(InventoryUtil.getWeapon(event.getPlayer()));
+		return isAxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
 	
 	// Pickaxe
@@ -1233,7 +1232,7 @@ public class MUtil
 		
 	public static boolean isPickaxe(BlockBreakEvent event)
 	{
-		return isPickaxe(InventoryUtil.getWeapon(event.getPlayer()));
+		return isPickaxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
 	
 	// Spade
@@ -1263,7 +1262,7 @@ public class MUtil
 			
 	public static boolean isSpade(BlockBreakEvent event)
 	{
-		return isSpade(InventoryUtil.getWeapon(event.getPlayer()));
+		return isSpade(InventoryUtil.getMainHand(event.getPlayer()));
 	}
 		
 	// -------------------------------------------- //
@@ -1347,6 +1346,7 @@ public class MUtil
 	 * @param item item
 	 * @return new bits
 	 */
+	@Deprecated
 	public static int getPotionEffectBits(ItemStack item)
 	{
 		// FIXME this shouldn't be really used anymore
@@ -1359,15 +1359,18 @@ public class MUtil
 	 * @param item the item to check
 	 * @return true if it's a water vial
 	 */
+	@Deprecated
 	public static boolean isWaterPotion(ItemStack item)
 	{
-		// FIXME use modern logic
-		return getPotionEffectBits(item) == 0;
+		ItemMeta itemMeta = item.getItemMeta();
+		if (!(itemMeta instanceof PotionMeta)) return false;
+		
+		return ((PotionMeta)itemMeta).getBasePotionData().getType() == PotionType.WATER;
 	}
 
 	// FIXME deal with this
 	// FIXME use modern logic
-	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	public static List<PotionEffect> getPotionEffects(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
@@ -1655,7 +1658,7 @@ public class MUtil
 		if (coll.size() == 0) return null;
 		if (coll.size() == 1) return coll.iterator().next();
 		
-		List<T> list = null;
+		List<T> list;
 		if (coll instanceof List<?>)
 		{
 			list = (List<T>)coll;

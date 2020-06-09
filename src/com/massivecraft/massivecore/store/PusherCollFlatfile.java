@@ -35,7 +35,6 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private final String folderUri;
 	private final WatchService watcher;
 	private final Map<WatchKey, Path> keys;
 	private final Coll<?> coll;
@@ -214,7 +213,7 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 	{
 		Db db = coll.getDb();
 		if ( ! (db instanceof DbFlatfile)) throw new IllegalArgumentException("Coll doesn't use flatfile database");
-		this.folderUri = db.getDbName() + "/" + coll.getBasename();
+		String folderUri = db.getDbName() + "/" + coll.getBasename();
 		this.watcher = FileSystems.getDefault().newWatchService();
 		this.keys = new HashMap<>();
 		this.coll = coll;
@@ -222,7 +221,7 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 		// We must make sure that the paths exists,
 		// otherwise we cannot register to listen for changes.
 		// So now we'll have some empty directories.
-		Path path = Paths.get(this.folderUri);
+		Path path = Paths.get(folderUri);
 		path.toFile().mkdirs();
 		this.register(path);
 	}

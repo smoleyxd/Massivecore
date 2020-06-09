@@ -306,7 +306,6 @@ public class DriverMongo extends DriverAbstract
 		return (MongoCollection) coll.getCollDriverObject();
 	}
 	
-	@SuppressWarnings("deprecation")
 	protected MongoDatabase getDbInner(String uri)
 	{
 		MongoClientURI muri = new MongoClientURI(uri);

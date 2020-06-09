@@ -1,8 +1,6 @@
 package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
-import com.massivecraft.massivecore.command.editor.annotation.EditorType;
-import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.potion.PotionEffect;
@@ -26,7 +24,6 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	public static final transient Integer DEFAULT_AMPLIFIER = 0;
 	public static final transient Boolean DEFAULT_AMBIENT = false;
 	public static final transient Boolean DEFAULT_PARTICLES = true;
-	public static final transient Integer DEFAULT_COLOR = null;
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -52,12 +49,6 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	private Boolean particles = null;
 	public boolean isParticles() { return get(this.particles, DEFAULT_PARTICLES); }
 	public DataPotionEffect setParticles(boolean particles) { this.particles = set(particles, DEFAULT_PARTICLES); return this; }
-	
-	// SINCE: 1.9
-	@EditorType(TypeConverterColor.class)
-	private Integer color = null;
-	public Integer getColor() { return get(this.color, DEFAULT_COLOR); }
-	public DataPotionEffect setColor(Integer color) { this.color = set(color, DEFAULT_COLOR); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -110,8 +101,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 			this.getDuration(), that.getDuration(),
 			this.getAmplifier(), that.getAmplifier(),
 			this.isAmbient(), that.isAmbient(),
-			this.isParticles(), that.isParticles(),
-			this.getColor(), that.getColor()
+			this.isParticles(), that.isParticles()
 		);
 	}
 	
@@ -127,8 +117,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 			this.getDuration(), that.getDuration(),
 			this.getAmplifier(), that.getAmplifier(),
 			this.isAmbient(), that.isAmbient(),
-			this.isParticles(), that.isParticles(),
-			this.getColor(), that.getColor()
+			this.isParticles(), that.isParticles()
 		);
 	}
 	
@@ -140,8 +129,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 			this.getDuration(),
 			this.getAmplifier(),
 			this.isAmbient(),
-			this.isParticles(),
-			this.getColor()
+			this.isParticles()
 		);
 	}
 	

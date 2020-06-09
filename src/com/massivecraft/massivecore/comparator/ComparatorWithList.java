@@ -14,7 +14,7 @@ public class ComparatorWithList<T> extends ComparatorAbstract<T>
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private List<T> list = null;
+	private List<T> list;
 	public List<T> getList() { return this.list; }
 	public ComparatorWithList<T> setList(List<T> list) { this.list = list; return this; }
 	

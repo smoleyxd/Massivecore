@@ -31,7 +31,7 @@ public abstract class Task extends Engine
 	public void addCondition(Supplier<Boolean> condition) { this.conditions.add(condition); }
 	public boolean areConditionsMet()
 	{
-		return conditions.stream().map(Supplier::get).allMatch(b -> b == true);
+		return conditions.stream().map(Supplier::get).allMatch(b -> b);
 	}
 
 	// -------------------------------------------- //

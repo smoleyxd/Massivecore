@@ -31,14 +31,7 @@ public class CmdMassiveCoreUsysAspectList extends MassiveCoreCommand
 		int page = this.readArg();
 		
 		// Pager Create
-		Pager<Aspect> pager = new Pager<>(this, "Aspect List", page, AspectColl.get().getAllRegistered(), new Stringifier<Aspect>()
-		{
-			@Override
-			public String toString(Aspect aspect, int index)
-			{
-				return Txt.parse("<h>" + aspect.getId() + " <white>--> <h>" + aspect.getMultiverse().getId());
-			}
-		}); 
+		Pager<Aspect> pager = new Pager<>(this, "Aspect List", page, AspectColl.get().getAllRegistered(), (Stringifier<Aspect>) (aspect, index) -> Txt.parse("<h>" + aspect.getId() + " <white>--> <h>" + aspect.getMultiverse().getId()));
 		
 		// Pager Message
 		pager.message();

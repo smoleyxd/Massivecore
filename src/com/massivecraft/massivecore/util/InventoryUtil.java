@@ -231,7 +231,8 @@ public class InventoryUtil
 	// WEAPON
 	
 	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
-	@SuppressWarnings("deprecation") // FIXME deal with this
+	// @SuppressWarnings("deprecation") // FIXME deal with this
+	@Deprecated
 	public static ItemStack getWeapon(Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -241,14 +242,16 @@ public class InventoryUtil
 		return ret;
 
 	}
-	@SuppressWarnings("deprecation") // FIXME deal with this
+	// @SuppressWarnings("deprecation") // FIXME deal with this
+	@Deprecated
 	public static void setWeapon(Inventory inventory, ItemStack weapon)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return;
 		playerInventory.setItemInHand(weapon);
 	}
-	@SuppressWarnings("deprecation") // FIXME deal with this
+	// @SuppressWarnings("deprecation") // FIXME deal with this
+	@Deprecated
 	public static ItemStack getWeapon(HumanEntity human)
 	{
 		if (human == null) return null;
@@ -256,7 +259,8 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
-	@SuppressWarnings("deprecation") // FIXME deal with this
+	// @SuppressWarnings("deprecation") // FIXME deal with this
+	@Deprecated
 	public static void setWeapon(HumanEntity human, ItemStack weapon)
 	{
 		if (human == null) return;
@@ -265,6 +269,7 @@ public class InventoryUtil
 	
 	// SHIELD
 	
+	@Deprecated
 	public static ItemStack getShield(Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -277,6 +282,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
+	@Deprecated
 	public static void setShield(Inventory inventory, ItemStack shield)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -287,15 +293,75 @@ public class InventoryUtil
 		
 		inventory.setItem(INDEX_PLAYER_SHIELD, shield);
 	}
+	@Deprecated
 	public static ItemStack getShield(HumanEntity human)
 	{
 		if (human == null) return null;
 		return getShield(human.getInventory());
 	}
+	@Deprecated
 	public static void setShield(HumanEntity human, ItemStack shield)
 	{
 		if (human == null) return;
 		setShield(human.getInventory(), shield);
+	}
+	
+	// MAIN HAND
+	
+	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
+	public static ItemStack getMainHand(Inventory inventory)
+	{
+		PlayerInventory playerInventory = asPlayerInventory(inventory);
+		if (playerInventory == null) return null;
+		ItemStack ret = playerInventory.getItemInMainHand();
+		ret = clean(ret);
+		return ret;
+		
+	}
+	public static void setMainHand(Inventory inventory, ItemStack weapon)
+	{
+		PlayerInventory playerInventory = asPlayerInventory(inventory);
+		if (playerInventory == null) return;
+		playerInventory.setItemInMainHand(weapon);
+	}
+	public static ItemStack getMainHand(HumanEntity human)
+	{
+		if (human == null) return null;
+		return getMainHand(human.getInventory());
+	}
+	public static void setMainHand(HumanEntity human, ItemStack weapon)
+	{
+		if (human == null) return;
+		setMainHand(human.getInventory(), weapon);
+	}
+	
+	// OFF HAND
+	
+	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
+	public static ItemStack getOffHand(Inventory inventory)
+	{
+		PlayerInventory playerInventory = asPlayerInventory(inventory);
+		if (playerInventory == null) return null;
+		ItemStack ret = playerInventory.getItemInOffHand();
+		ret = clean(ret);
+		return ret;
+		
+	}
+	public static void setOffHand(Inventory inventory, ItemStack weapon)
+	{
+		PlayerInventory playerInventory = asPlayerInventory(inventory);
+		if (playerInventory == null) return;
+		playerInventory.setItemInOffHand(weapon);
+	}
+	public static ItemStack getOffHand(HumanEntity human)
+	{
+		if (human == null) return null;
+		return getOffHand(human.getInventory());
+	}
+	public static void setOffHand(HumanEntity human, ItemStack weapon)
+	{
+		if (human == null) return;
+		setOffHand(human.getInventory(), weapon);
 	}
 	
 	// -------------------------------------------- //
@@ -418,10 +484,7 @@ public class InventoryUtil
 		int max = SIZE_PLAYER_EXTRA;
 		max = Math.min(max, contents.length - INDEX_PLAYER_EXTRA_FROM);
 		
-		for (int i = 0; i < max; i++)
-		{
-			ret[i] = contents[INDEX_PLAYER_EXTRA_FROM + i];
-		}
+		if (max >= 0) System.arraycopy(contents, INDEX_PLAYER_EXTRA_FROM, ret, 0, max);
 		
 		clean(ret);
 		return ret;
@@ -536,7 +599,9 @@ public class InventoryUtil
 			switch (action)
 			{
 				// What is the best thing to do?
-				case UNKNOWN: return InventoryAlter.BOTH;
+				case UNKNOWN:
+				case SWAP_WITH_CURSOR:
+					return InventoryAlter.BOTH;
 				
 				// Possibly both
 				case HOTBAR_SWAP:
@@ -549,30 +614,31 @@ public class InventoryUtil
 					
 				// Neither give nor take
 				// FIXME merge these cases
-				case NOTHING: return InventoryAlter.NONE;
-				case CLONE_STACK: return InventoryAlter.NONE;
-				case DROP_ALL_CURSOR: return InventoryAlter.NONE;
-				case DROP_ONE_CURSOR: return InventoryAlter.NONE;
-	
+				case NOTHING:
+				case CLONE_STACK:
+				case DROP_ONE_CURSOR:
+				case DROP_ALL_CURSOR:
+					return InventoryAlter.NONE;
+				
 				// Take
 				// FIXME merge these cases
-				case PICKUP_ALL: return InventoryAlter.TAKE;
-				case PICKUP_HALF: return InventoryAlter.TAKE;
-				case PICKUP_ONE: return InventoryAlter.TAKE;
-				case PICKUP_SOME: return InventoryAlter.TAKE;
-				case MOVE_TO_OTHER_INVENTORY: return InventoryAlter.TAKE;
-				case COLLECT_TO_CURSOR:return InventoryAlter.TAKE;
-				case HOTBAR_MOVE_AND_READD: return InventoryAlter.TAKE;
-				case DROP_ONE_SLOT: return InventoryAlter.TAKE;
-				case DROP_ALL_SLOT: return InventoryAlter.TAKE;
+				case PICKUP_ALL:
+				case DROP_ALL_SLOT:
+				case DROP_ONE_SLOT:
+				case HOTBAR_MOVE_AND_READD:
+				case COLLECT_TO_CURSOR:
+				case MOVE_TO_OTHER_INVENTORY:
+				case PICKUP_SOME:
+				case PICKUP_ONE:
+				case PICKUP_HALF:
+					return InventoryAlter.TAKE;
 				
 				// Give
-				// FIXME merge these cases
-				case PLACE_ALL: return InventoryAlter.GIVE;
-				case PLACE_ONE: return InventoryAlter.GIVE;
-				case PLACE_SOME: return InventoryAlter.GIVE;
-				case SWAP_WITH_CURSOR: return InventoryAlter.BOTH;
-
+				case PLACE_ALL:
+				case PLACE_SOME:
+				case PLACE_ONE:
+					return InventoryAlter.GIVE;
+				
 			}
 			throw new RuntimeException("Unsupported action: " + action);
 		}
@@ -963,7 +1029,7 @@ public class InventoryUtil
 		if (inventory == null) return null;
 		
 		// Create
-		Inventory ret = null;
+		Inventory ret;
 		if (inventory instanceof PlayerInventory && playerSupport)
 		{
 			ret = MixinInventory.get().createPlayerInventory();

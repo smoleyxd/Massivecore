@@ -183,10 +183,6 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 		else
 		{
 			Collection<T> suggestions = null;
-			Mson format = SUGGEST_FORMAT;
-			Mson comma = SUGGEST_COMMMA;
-			Mson and = SUGGEST_AND;
-			Mson dot = SUGGEST_DOT;
 			
 			if (suggestAmbiguous)
 			{
@@ -198,7 +194,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 				suggestions = all;
 				message = MESSAGE_COLON_ALL;
 			}
-			else if (suggestLevenshtein)
+			else
 			{
 				suggestions = this.getMatches(options, arg, true);
 				message = MESSAGE_COLON_SIMILAR;
@@ -220,7 +216,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 				{
 					visuals.add(this.getVisualMson(value, sender));
 				}
-				exception.addMessage(Mson.mson(message, Mson.implodeCommaAndDot(visuals, format, comma, and, dot)));
+				exception.addMessage(Mson.mson(message, Mson.implodeCommaAndDot(visuals, SUGGEST_FORMAT, SUGGEST_COMMMA, SUGGEST_AND, SUGGEST_DOT)));
 			}
 		}
 		

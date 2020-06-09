@@ -56,14 +56,7 @@ public abstract class BasicCommandSender extends PermissibleBase implements Comm
 		registerImmediately();
 		
 		// Register Later
-		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				ME.registerImmediately();
-			}
-		});
+		Bukkit.getScheduler().scheduleSyncDelayedTask(MassiveCore.get(), () -> ME.registerImmediately());
 	}
 	
 	public void registerImmediately()

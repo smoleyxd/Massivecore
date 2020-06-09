@@ -153,10 +153,8 @@ public class Multiverse extends Entity<Multiverse>
 	{
 		Set<String> orig = this.uw.get(universe);
 		if (orig == null) return null;
-
-		Set<String> ret = new TreeSet<>(orig);
 		
-		return ret;
+		return new TreeSet<>(orig);
 	}
 	
 	public boolean removeWorld(String worldName)

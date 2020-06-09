@@ -89,7 +89,7 @@ public class PotionEffectWrap
 	
 	public boolean addTo(LivingEntity entity)
 	{
-		return entity.addPotionEffect(this.asPotionEffect(), true);
+		return entity.addPotionEffect(this.asPotionEffect());
 	}
 	
 	// -------------------------------------------- //

@@ -8,6 +8,7 @@ import org.bukkit.material.MaterialData;
 import java.util.Collections;
 import java.util.Set;
 
+@SuppressWarnings("deprecation")
 public class NmsRepairable17R4P extends NmsRepairable
 {
 	// -------------------------------------------- //

@@ -30,8 +30,7 @@ public class DestinationUtil
 		if (block == null) return null;
 		
 		Location oldLocation = livingEntity.getLocation();
-		Location targetLocation = moveLocationToBlock(oldLocation, block);
-		return targetLocation;
+		return moveLocationToBlock(oldLocation, block);
 	}
 	
 	public static Location getThereLocation(LivingEntity livingEntity)
@@ -43,8 +42,7 @@ public class DestinationUtil
 		if (block == null) return null;
 		
 		Location oldLocation = livingEntity.getLocation();
-		Location targetLocation = moveLocationToBlock(oldLocation, block);
-		return targetLocation;
+		return moveLocationToBlock(oldLocation, block);
 	}
 	
 	public static Location getJumpLocation(LivingEntity livingEntity)
@@ -56,8 +54,7 @@ public class DestinationUtil
 		if (block == null) return null;
 		
 		Location oldLocation = livingEntity.getLocation();
-		Location targetLocation = moveUp(moveLocationToBlock(oldLocation, block));
-		return targetLocation;
+		return moveUp(moveLocationToBlock(oldLocation, block));
 	}
 	
 	public static BlockIterator createHeadlessIterator(LivingEntity livingEntity)

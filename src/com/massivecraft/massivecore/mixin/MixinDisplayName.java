@@ -37,13 +37,10 @@ public class MixinDisplayName extends Mixin
 		String ret = null;
 		
 		// Bukkit
-		if (ret == null)
+		Player player = IdUtil.getPlayer(senderObject);
+		if (player != null)
 		{
-			Player player = IdUtil.getPlayer(senderObject);
-			if (player != null)
-			{
-				ret = player.getDisplayName(); 
-			}
+			ret = player.getDisplayName();
 		}
 		
 		// Fixed Name

@@ -523,15 +523,15 @@ public class ReflectionUtil
 	}
 	
 	// Example: 1
-	private static int versionMajor = Integer.valueOf(getVersionRawPart(0).substring(1));
+	private static int versionMajor = Integer.parseInt(getVersionRawPart(0).substring(1));
 	public static int getVersionMajor() { return versionMajor; }
 	
 	// Example: 9
-	private static int versionMinor = Integer.valueOf(getVersionRawPart(1));
+	private static int versionMinor = Integer.parseInt(getVersionRawPart(1));
 	public static int getVersionMinor() { return versionMinor; }
 	
 	// Example: 4
-	private static int versionRelease = Integer.valueOf(getVersionRawPart(2).substring(1));
+	private static int versionRelease = Integer.parseInt(getVersionRawPart(2).substring(1));
 	public static int getVersionRelease() { return versionRelease; }
 	
 	// -------------------------------------------- //

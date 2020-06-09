@@ -56,7 +56,7 @@ public class MixinTeleport extends Mixin
 		ps = PS.valueOf(player.getLocation()).with(ps);
 		
 		// Bukkit Location
-		Location location = null;
+		Location location;
 		try
 		{
 			location = ps.asBukkitLocation();
@@ -78,7 +78,7 @@ public class MixinTeleport extends Mixin
 		EngineMassiveCoreTeleportMixinCause.get().setMixinCausedTeleportIncoming(false);
 		
 		// Bukkit velocity
-		Vector velocity = null;
+		Vector velocity;
 		try
 		{
 			velocity = ps.asBukkitVelocity();

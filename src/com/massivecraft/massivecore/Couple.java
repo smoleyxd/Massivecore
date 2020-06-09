@@ -96,6 +96,7 @@ public class Couple<A, B> implements Entry<A, B>, Cloneable, Serializable
 	// CLONE
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public Couple<A, B> clone()
 	{

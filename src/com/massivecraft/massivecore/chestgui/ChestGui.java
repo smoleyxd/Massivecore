@@ -41,7 +41,6 @@ public class ChestGui
 		if (event == null) throw new NullPointerException("event");
 
 		Inventory inventory = event.getInventory();
-		if (inventory == null) return null;
 		return get(inventory);
 	}
 	

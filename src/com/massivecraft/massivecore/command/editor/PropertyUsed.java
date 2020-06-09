@@ -29,7 +29,7 @@ public class PropertyUsed<V> extends Property<CommandSender, V>
 	// Such as when we edit the same instance all the time, such as a configuration.
 	// Most of the time these methods will however be overridden.
 	
-	private V used = null;
+	private V used;
 	
 	@Override
 	public V getRaw(CommandSender sender)
