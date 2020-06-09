@@ -26,6 +26,12 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	public static final transient Boolean DEFAULT_PARTICLES = true;
 	
 	// -------------------------------------------- //
+	// FIELDS: VERSION
+	// -------------------------------------------- //
+	
+	public int version = 1;
+	
+	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 
