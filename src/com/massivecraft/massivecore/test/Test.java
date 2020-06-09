@@ -33,13 +33,18 @@ public abstract class Test extends Engine
 		
 		this.test();
 		
-		if (this.issues.isEmpty()) return;
+		
 		
 		Object message;
 		
-		message = Txt.parse("<b>Issues Detected by %s in %s", this.getClass().getSimpleName(), this.getActivePlugin().getName());
-		message = Txt.titleize(message);
-		MixinMessage.get().messageOne(IdUtil.CONSOLE_ID, message);
+		if (this.issues.isEmpty()) {
+			message = Txt.parse("<g>NO Issues Detected by %s in %s", this.getClass().getSimpleName(), this.getActivePlugin().getName());
+		}
+		else {
+			message = Txt.parse("<b>%d Issues Detected by %s in %s", issues.size(), this.getClass().getSimpleName(), this.getActivePlugin().getName());
+		}
+		
+		MixinMessage.get().messageOne(IdUtil.CONSOLE_ID, Txt.titleize(message));
 		
 		for (Object issue : issues)
 		{
@@ -48,7 +53,7 @@ public abstract class Test extends Engine
 		
 		try
 		{
-			Thread.sleep(20000L);
+			if (!this.issues.isEmpty()) Thread.sleep(20000L);
 		}
 		catch (InterruptedException ignored)
 		{
