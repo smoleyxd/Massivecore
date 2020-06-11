@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.command.editor.annotation.EditorEditable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.potion.PotionEffect;
@@ -29,7 +31,9 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	// FIELDS: VERSION
 	// -------------------------------------------- //
 	
-	public int version = 1;
+	@EditorEditable(false)
+	@EditorVisible(false)
+	private int version = 1;
 	
 	// -------------------------------------------- //
 	// FIELDS
