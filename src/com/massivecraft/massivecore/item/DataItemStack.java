@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.collections.MassiveTreeMapDef;
 import com.massivecraft.massivecore.collections.MassiveTreeSetDef;
 import com.massivecraft.massivecore.command.editor.annotation.EditorEditable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.command.editor.annotation.EditorNullable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
@@ -80,7 +81,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Map<String, Integer> DEFAULT_STORED_ENCHANTS = Collections.emptyMap();
 	public static final transient Boolean DEFAULT_UNBREAKABLE = false;
 	public static final transient Set<String> DEFAULT_FLAGS = Collections.emptySet();
-	public static final transient DyeColor DEFAULT_BANNER_BASE = DyeColor.WHITE;
+	public static final transient DyeColor DEFAULT_BANNER_BASE = null;
 	public static final transient List<DataBannerPattern> DEFAULT_BANNER_PATTERNS = Collections.emptyList();
 	public static final transient String DEFAULT_POTION = "water";
 	public static final transient Map<Integer, DataItemStack> DEFAULT_INVENTORY = Collections.emptyMap();
@@ -262,6 +263,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// Is actually nullable in Bukkit.
 
 	@SerializedName("banner-base")
+	@EditorNullable(true)
 	private DyeColor bannerBase = null;
 	public DyeColor getBannerBase() { return get(this.bannerBase, DEFAULT_BANNER_BASE); }
 	public DataItemStack setBannerBase(DyeColor bannerBase) { this.bannerBase = set(bannerBase, DEFAULT_BANNER_BASE); return this; }
