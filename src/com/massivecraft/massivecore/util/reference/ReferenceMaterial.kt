@@ -114,6 +114,7 @@ object ReferenceMaterial {
             "TROPICAL_FISH"
     )
 
+    @JvmStatic
     val materialsVegetation: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "ACACIA_LEAVES",
