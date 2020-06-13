@@ -46,6 +46,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -1229,7 +1230,7 @@ public class MUtil
 		LivingEntity lentity = (LivingEntity)entity;
 		return isPickaxe(lentity.getEquipment().getItemInMainHand());
 	}
-		
+	
 	public static boolean isPickaxe(BlockBreakEvent event)
 	{
 		return isPickaxe(InventoryUtil.getMainHand(event.getPlayer()));
@@ -1241,7 +1242,7 @@ public class MUtil
 	{
 		return ReferenceMaterial.getSpadeMaterials().contains(material);
 	}
-		
+	
 	public static boolean isSpade(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1259,10 +1260,33 @@ public class MUtil
 		LivingEntity lentity = (LivingEntity)entity;
 		return isSpade(lentity.getEquipment().getItemInHand());
 	}
-			
+	
 	public static boolean isSpade(BlockBreakEvent event)
 	{
 		return isSpade(InventoryUtil.getMainHand(event.getPlayer()));
+	}
+	
+	// Hoe
+	
+	public static boolean isHoe(Material material)
+	{
+		return ReferenceMaterial.getHoeMaterials().contains(material);
+	}
+	
+	public static boolean isHoe(ItemStack item)
+	{
+		if (item == null) return false;
+		return isHoe(item.getType());
+	}
+	
+	public static boolean isHoe(Entity entity)
+	{
+		if (entity == null) return false;
+		if (!(entity instanceof LivingEntity)) return false;
+		LivingEntity lentity = (LivingEntity)entity;
+		EntityEquipment inv = lentity.getEquipment();
+		if (inv == null) return false;
+		return isHoe(inv.getItemInMainHand()) || isHoe(inv.getItemInOffHand());
 	}
 		
 	// -------------------------------------------- //

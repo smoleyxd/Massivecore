@@ -6,7 +6,7 @@ import java.util.*
 object ReferenceMaterial {
 
     @JvmStatic
-    val pickaxeMaterials: EnumSet<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+    val pickaxeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "DIAMOND_PICKAXE",
             "GOLDEN_PICKAXE",
@@ -54,6 +54,17 @@ object ReferenceMaterial {
             "STONE_SPADE",
             "WOODEN_SHOVEL",
             "WOOD_SPADE"
+    )
+
+    @JvmStatic
+    val hoeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_HOE",
+            "GOLDEN_HOE",
+            "GOLD_HOE",
+            "IRON_HOE",
+            "STONE_HOE",
+            "WOODEN_HOE"
     )
 
     @JvmStatic
