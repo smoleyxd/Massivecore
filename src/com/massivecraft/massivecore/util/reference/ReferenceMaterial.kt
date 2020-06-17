@@ -68,6 +68,51 @@ object ReferenceMaterial {
     )
 
     @JvmStatic
+    val helmetMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_HELMET",
+            "GOLDEN_HELMET",
+            "GOLD_HELMET",
+            "IRON_HELMET",
+            "LEATHER_HELMET",
+            "CHAINMAIL_HELMET",
+            "TURTLE_HELMET"
+    )
+
+    @JvmStatic
+    val chestplateMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_CHESTPLATE",
+            "GOLDEN_CHESTPLATE",
+            "GOLD_CHESTPLATE",
+            "IRON_CHESTPLATE",
+            "LEATHER_CHESTPLATE",
+            "CHAINMAIL_CHESTPLATE"
+    )
+
+    @JvmStatic
+    val leggingsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_LEGGINGS",
+            "GOLDEN_LEGGINGS",
+            "GOLD_LEGGINGS",
+            "IRON_LEGGINGS",
+            "LEATHER_LEGGINGS",
+            "CHAINMAIL_LEGGINGS"
+    )
+
+    @JvmStatic
+    val bootsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_BOOTS",
+            "GOLDEN_BOOTS",
+            "GOLD_BOOTS",
+            "IRON_BOOTS",
+            "LEATHER_BOOTS",
+            "CHAINMAIL_BOOTS"
+    )
+
+    @JvmStatic
     val foodMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "APPLE",
@@ -149,7 +194,6 @@ object ReferenceMaterial {
             "DEAD_BRAIN_CORAL_FAN",
             "DEAD_BUBBLE_CORAL",
             "DEAD_BUBBLE_CORAL_FAN",
-            "DEAD_BUSH",
             "DEAD_BUSH",
             "DEAD_FIRE_CORAL",
             "DEAD_FIRE_CORAL_FAN",

@@ -1288,6 +1288,71 @@ public class MUtil
 		if (inv == null) return false;
 		return isHoe(inv.getItemInMainHand()) || isHoe(inv.getItemInOffHand());
 	}
+	
+	// Helmet
+	
+	public static boolean isHelmet(Material material)
+	{
+		return ReferenceMaterial.getHelmetMaterials().contains(material);
+	}
+	
+	public static boolean isHelmet(ItemStack item)
+	{
+		if (item == null) return false;
+		return isHelmet(item.getType());
+	}
+	
+	// Chestplate
+	
+	public static boolean isChestplate(Material material)
+	{
+		return ReferenceMaterial.getChestplateMaterials().contains(material);
+	}
+	
+	public static boolean isChestplate(ItemStack item)
+	{
+		if (item == null) return false;
+		return isChestplate(item.getType());
+	}
+	
+	// Leggings
+	
+	public static boolean isLeggings(Material material)
+	{
+		return ReferenceMaterial.getLeggingsMaterials().contains(material);
+	}
+	
+	public static boolean isLeggings(ItemStack item)
+	{
+		if (item == null) return false;
+		return isLeggings(item.getType());
+	}
+	
+	// Boots
+	
+	public static boolean isBoots(Material material)
+	{
+		return ReferenceMaterial.getBootsMaterials().contains(material);
+	}
+	
+	public static boolean isBoots(ItemStack item)
+	{
+		if (item == null) return false;
+		return isBoots(item.getType());
+	}
+	
+	// Armor
+	
+	public static boolean isArmor(Material material)
+	{
+		return isHelmet(material) || isChestplate(material) || isLeggings(material) || isBoots(material);
+	}
+	
+	public static boolean isArmor(ItemStack item)
+	{
+		if (item == null) return false;
+		return isArmor(item.getType());
+	}
 		
 	// -------------------------------------------- //
 	// EVENT DERP
