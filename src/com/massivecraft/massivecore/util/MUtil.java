@@ -1853,6 +1853,15 @@ public class MUtil
 		return Math.abs(number1.doubleValue() - number2.doubleValue()) < EQUALSISH_EPSILON;
 	}
 
+	/**
+	 * @deprecated use equalsishNumber
+	 */
+	@Deprecated // FIXME actually remove uses of this
+	public static boolean equalsish(Number number1, Number number2)
+	{
+		return equalsishNumber(number1, number2);
+	}
+
 	// -------------------------------------------- //
 	// SET IF DIFFERENT
 	// -------------------------------------------- //
