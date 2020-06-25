@@ -12,6 +12,7 @@ public enum MassiveCorePerm implements Identified
 	BASECOMMAND,
 	TEST,
 	ID,
+	UPDATECOMMANDS,
 	VERSION,
 	HEARSOUND,
 	STORE,

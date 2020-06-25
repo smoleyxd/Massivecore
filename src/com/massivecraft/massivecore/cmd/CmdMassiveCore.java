@@ -27,6 +27,7 @@ public class CmdMassiveCore extends MassiveCoreCommand
 	public CmdMassiveCoreStore cmdMassiveCoreMStore = new CmdMassiveCoreStore();
 	public CmdMassiveCoreId cmdMassiveCoreId = new CmdMassiveCoreId();
 	public CmdMassiveCoreTest cmdMassiveCoreTest = new CmdMassiveCoreTest();
+	public CmdMassiveCoreUpdatecommands cmdMassiveCoreUpdatecommands = new CmdMassiveCoreUpdatecommands();
 	public CmdMassiveCoreHearsound cmdMassiveCoreHearsound = new CmdMassiveCoreHearsound();
 	public CmdMassiveCoreBuffer cmdMassiveCoreBuffer = new CmdMassiveCoreBuffer();
 	public CmdMassiveCoreCmdurl cmdMassiveCoreCmdurl = new CmdMassiveCoreCmdurl();
