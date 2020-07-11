@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.item;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
@@ -17,6 +18,7 @@ public class WriterItemStackMetaRecipes extends WriterAbstractItemStackMetaField
 	public WriterItemStackMetaRecipes()
 	{
 		super(KnowledgeBookMeta.class);
+		this.setMaterial(Material.KNOWLEDGE_BOOK);
 		this.setConverterTo(ConverterToNamespacedKeys.get());
 		this.setConverterFrom(ConverterFromNamespacedKeys.get());
 	}

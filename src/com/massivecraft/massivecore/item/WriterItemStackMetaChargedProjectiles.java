@@ -44,6 +44,7 @@ public class WriterItemStackMetaChargedProjectiles extends WriterAbstractItemSta
 	{
 		// Null
 		if (cb == null) return null;
+		if (!cb.hasChargedProjectiles()) return null;
 		return cb.getChargedProjectiles().toArray(new ItemStack[0]);
 	}
 
