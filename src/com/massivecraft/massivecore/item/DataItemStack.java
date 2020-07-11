@@ -555,9 +555,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -572,10 +575,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -594,9 +598,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -611,10 +618,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -640,9 +648,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			// this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -657,10 +668,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -684,9 +696,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(),
 			this.getTitle(),
 			this.getAuthor(),
+			this.getGeneration(),
 			this.getPages(),
 			this.getColor(),
 			this.isScaling(),
+			this.getMapColor(),
+			this.getMapName(),
 			this.getPotionEffects(),
 			this.getSkull(),
 			this.getContainerGameProfile(),
@@ -701,10 +716,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(),
 			this.getInventory(),
 			this.getPotionColor(),
-			this.getMapColor(),
 			this.getFishPattern(),
 			this.getFishBodyColor(),
-			this.getFishPatternColor()
+			this.getFishPatternColor(),
+			this.getChargedProjectiles(),
+			this.getRecipes()
 		);
 	}
 	
