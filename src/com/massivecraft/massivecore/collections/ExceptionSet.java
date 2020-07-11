@@ -41,7 +41,7 @@ public class ExceptionSet
 	{
 		this.standard = standard;
 		if (exceptions.length == 0) return;
-		Collection<String> strings = stringifyAll((Object[]) exceptions);
+		Collection<String> strings = stringifyAll(exceptions);
 		this.exceptions.addAll(strings);
 	}
 	

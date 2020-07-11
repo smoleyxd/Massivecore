@@ -34,9 +34,6 @@ public class TypeLlamaColor extends TypeEnum<Color>
 			case CREAMY:
 				return ChatColor.GRAY;
 			
-			case WHITE:
-				return ChatColor.WHITE;
-			
 			case BROWN:
 				return ChatColor.GOLD;
 			

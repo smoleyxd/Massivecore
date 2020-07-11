@@ -154,8 +154,7 @@ public final class SoundEffect implements Serializable
 			if (other.soundId != null) return false;
 		}
 		else if (!soundId.equals(other.soundId)) return false;
-		if (Float.floatToIntBits(volume) != Float.floatToIntBits(other.volume)) return false;
-		return true;
+		return Float.floatToIntBits(volume) == Float.floatToIntBits(other.volume);
 	}
 	
 }

@@ -116,7 +116,7 @@ public class TimeDiffUtil
 		
 		for (TimeUnit unit : units)
 		{
-			long count = (long) Math.floor(millisLeft / unit.millis);
+			long count = millisLeft / unit.millis;
 			if (count < 1) continue;
 			millisLeft -= unit.millis*count;
 			ret.put(unit, count);

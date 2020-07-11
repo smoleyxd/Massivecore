@@ -50,17 +50,15 @@ public class IdAndName
 		if (obj == null) return false;
 		if (!(obj instanceof IdAndName)) return false;
 		IdAndName other = (IdAndName) obj;
+		
 		if (id == null)
 		{
 			if (other.id != null) return false;
 		}
 		else if (!id.equals(other.id)) return false;
-		if (name == null)
-		{
-			if (other.name != null) return false;
-		}
-		else if (!name.equals(other.name)) return false;
-		return true;
+		
+		if (name == null) return other.name == null;
+		else return name.equals(other.name);
 	}	
 	
 }

@@ -1,7 +1,6 @@
 package com.massivecraft.massivecore.util.reference
 
 import org.bukkit.Material
-import java.util.*
 
 object ReferenceMaterial {
 

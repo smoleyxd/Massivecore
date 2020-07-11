@@ -48,13 +48,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.metadata.Metadatable;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.lang.reflect.Method;
@@ -408,8 +405,7 @@ public class MUtil
 	public static boolean isSender(Object object)
 	{
 		if (!(object instanceof CommandSender)) return false;
-		if (isNpc(object)) return false;
-		return true;
+		return !isNpc(object);
 	}
 	public static boolean isntSender(Object object)
 	{
@@ -874,6 +870,7 @@ public class MUtil
 	// Or they may instantly die. For this reason we take inspiration from MCMMO who rolled their own setDamage function.
 	// This method sets the BASE damage modifier and scales all other modifiers proportionally.
 	
+	@SuppressWarnings("deprecation")
 	public static void setDamage(EntityDamageEvent event, double newDamage)
 	{
 		// Check New Damage
@@ -925,6 +922,7 @@ public class MUtil
 		// No Change?
 		if (equalsishNumber(factor, 1)) return;
 		
+		//noinspection deprecation
 		for (DamageModifier modifier : DamageModifier.values())
 		{
 			// Is this modifier used in the event?
@@ -1248,17 +1246,13 @@ public class MUtil
 		if (item == null) return false;
 		return isSpade(item.getType());
 	}
-
-	// FIXME this really should be reconsidered
-	//  perhaps default to main hand or allow specification otherwise?
-	//  This might be problematic if a shovel can be used from the offhand
-	//  The intent of this should be made more clear
+	
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isSpade(lentity.getEquipment().getItemInHand());
+		return isSpade(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isSpade(BlockBreakEvent event)
@@ -1426,72 +1420,42 @@ public class MUtil
 	// -------------------------------------------- //
 	// POTION DERP
 	// -------------------------------------------- //
-	
-	/**
-	 * Get just the potion effect bits. This is to work around bugs with potion parsing.
-	 * Workaround created by the WorldGuard team: https://github.com/sk89q/worldguard/commit/8dec32fa6a1238a11743cea8b8302a6c9d2aaa55
-	 * This issue is reported as BUKKIT-4612 "Potion.fromItemStack causes IllegalArgumentException: Instant potions cannot be extended"
-	 *
-	 * @param item item
-	 * @return new bits
-	 */
-	@Deprecated
-	public static int getPotionEffectBits(ItemStack item)
-	{
-		// FIXME this shouldn't be really used anymore
-		return item.getDurability() & 0x3F;
-	}
-	
-	/**
-	 * Checks if the given potion is a vial of water.
-	 *
-	 * @param item the item to check
-	 * @return true if it's a water vial
-	 */
-	@Deprecated
-	public static boolean isWaterPotion(ItemStack item)
-	{
-		ItemMeta itemMeta = item.getItemMeta();
-		if (!(itemMeta instanceof PotionMeta)) return false;
-		
-		return ((PotionMeta)itemMeta).getBasePotionData().getType() == PotionType.WATER;
-	}
 
 	// FIXME deal with this
 	// FIXME use modern logic
-	// @SuppressWarnings("deprecation")
-	public static List<PotionEffect> getPotionEffects(ItemStack itemStack)
+	public static List<PotionEffectType> getPotionEffects(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
 		if (itemStack.getType() != Material.POTION) return null;
 
-		List<PotionEffect> ret = new ArrayList<>();
+		List<PotionEffectType> ret = new ArrayList<>();
 		
-		if (isWaterPotion(itemStack)) return ret;
+		PotionMeta meta = InventoryUtil.createMeta(itemStack);
+		ret.add(meta.getBasePotionData().getType().getEffectType());
 		
-		Potion potion = Potion.fromDamage(getPotionEffectBits(itemStack));
-		ret.addAll(potion.getEffects());
-		
-		PotionMeta meta = (PotionMeta) itemStack.getItemMeta();
 		if (meta.hasCustomEffects())
 		{
-			ret.addAll(meta.getCustomEffects());
+			for (PotionEffect potionEffect : meta.getCustomEffects()) {
+				ret.add(potionEffect.getType());
+			}
 		}
 		
 		return ret;
 	}
-
-	// TODO update this
+	
 	public static final Set<PotionEffectType> HARMFUL_POTION_EFFECTS = Collections.unmodifiableSet(MUtil.set(
-		PotionEffectType.BLINDNESS,
-		PotionEffectType.CONFUSION,
-		PotionEffectType.HARM,
-		PotionEffectType.HUNGER,
-		PotionEffectType.POISON,
 		PotionEffectType.SLOW,
 		PotionEffectType.SLOW_DIGGING,
+		PotionEffectType.HARM,
+		PotionEffectType.CONFUSION,
+		PotionEffectType.BLINDNESS,
+		PotionEffectType.HUNGER,
 		PotionEffectType.WEAKNESS,
-		PotionEffectType.WITHER
+		PotionEffectType.POISON,
+		PotionEffectType.WITHER,
+		PotionEffectType.LEVITATION,
+		PotionEffectType.UNLUCK,
+		PotionEffectType.BAD_OMEN
 	));
 	
 	public static boolean isHarmfulPotion(PotionEffectType potionEffectType)
@@ -1507,10 +1471,10 @@ public class MUtil
 	
 	public static boolean isHarmfulPotion(ItemStack itemStack)
 	{
-		List<PotionEffect> potionEffects = getPotionEffects(itemStack);
+		List<PotionEffectType> potionEffects = getPotionEffects(itemStack);
 		if (potionEffects == null) return false;
 		
-		for (PotionEffect potionEffect : potionEffects)
+		for (PotionEffectType potionEffect : potionEffects)
 		{
 			if (isHarmfulPotion(potionEffect)) return true;
 		}

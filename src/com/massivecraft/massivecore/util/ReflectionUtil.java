@@ -613,7 +613,7 @@ public class ReflectionUtil
 			if (!(type instanceof ParameterizedType)) return null;
 			type = ((ParameterizedType) type).getRawType();
 		}
-		return (Class) type;
+		return (Class<?>) type;
 	}
 	
 }

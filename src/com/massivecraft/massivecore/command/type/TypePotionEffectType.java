@@ -29,7 +29,7 @@ public class TypePotionEffectType extends TypeAbstractChoice<PotionEffectType>
 	@Override
 	public String getIdInner(PotionEffectType value)
 	{
-		return String.valueOf(value.getId());
+		return value.getName();
 	}
 	
 }

@@ -143,9 +143,7 @@ public abstract class TypeSenderIdAbstract<T> extends TypeAbstract<T>
 		if (MUtil.isUuid(arg)) return true;
 		
 		// Check data presence. This handles specials like "@console".
-		if (IdUtil.getRegistryIdToSender().containsKey(arg)) return true;
-		
-		return false;
+		return IdUtil.getRegistryIdToSender().containsKey(arg);
 	}
 	
 	@Override

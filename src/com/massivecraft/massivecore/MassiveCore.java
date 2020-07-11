@@ -171,8 +171,7 @@ public class MassiveCore extends MassivePlugin
 	{
 		String taskServerId = getTaskServerId();
 		if (taskServerId == null) return true;
-		if (getServerId().equals(taskServerId)) return true;
-		return false;
+		return getServerId().equals(taskServerId);
 	}
 	
 	// -------------------------------------------- //
@@ -207,8 +206,8 @@ public class MassiveCore extends MassivePlugin
 	public void onEnableInner()
 	{
 		// This is safe since all plugins using Persist should bukkit-depend this plugin.
-		// Note this one must be before preEnable. dooh.
-		// TODO: Create something like "deinit all" (perhaps a forloop) to readd this.
+		// Note this one must be before preEnable..
+		// TODO: Create something like "de-init all" (perhaps a forloop) to re-add this.
 		// TODO: Test and ensure reload compat.
 		// Coll.instances.clear();
 		

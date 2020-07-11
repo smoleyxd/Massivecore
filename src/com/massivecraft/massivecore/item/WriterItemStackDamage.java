@@ -1,6 +1,5 @@
 package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.util.InventoryUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,14 +33,14 @@ public class WriterItemStackDamage extends WriterAbstractItemStackField<Integer,
 	public Integer getB(ItemStack cb, ItemStack d)
 	{
 		ItemMeta meta = cb.getItemMeta();
-		return (meta == null || !(meta instanceof Damageable)) ? 0 : ((Damageable) meta).getDamage();
+		return (!(meta instanceof Damageable)) ? 0 : ((Damageable) meta).getDamage();
 	}
 
 	@Override
 	public void setB(ItemStack cb, Integer fb, ItemStack d)
 	{
 		ItemMeta meta = cb.getItemMeta();
-		if (meta != null && meta instanceof Damageable) {
+		if (meta instanceof Damageable) {
 			((Damageable) meta).setDamage(fb);
 			cb.setItemMeta(meta);
 		}

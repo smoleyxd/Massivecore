@@ -45,7 +45,9 @@ public class ExtractorLogic
 	public static CommandSender sender(SignChangeEvent o) { return o.getPlayer(); }
 	public static CommandSender sender(EnchantItemEvent o) { return o.getEnchanter(); }
 	public static CommandSender sender(PrepareItemEnchantEvent o) { return o.getEnchanter(); }
-	public static CommandSender sender(Entity o) { if (o != null) return o; return null; }
+	public static CommandSender sender(Entity o) {
+		return o;
+	}
 	public static CommandSender sender(EntityEvent o) { return sender(o.getEntity()); }
 	public static CommandSender sender(InventoryClickEvent o) { return sender(o.getWhoClicked()); }
 	public static CommandSender sender(InventoryCloseEvent o) { return sender(o.getPlayer()); }
@@ -186,10 +188,7 @@ public class ExtractorLogic
 		World world = worldFromObject(o);
 		if (world != null) return world.getName();
 		
-		String ret = worldNameViaPsMixin(o);
-		if (ret != null) return ret;
-
-		return null;
+		return worldNameViaPsMixin(o);
 	}
 	
 	public static String worldNameViaPsMixin(Object senderObject)

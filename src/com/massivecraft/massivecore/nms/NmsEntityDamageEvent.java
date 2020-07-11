@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class NmsEntityDamageEvent extends Mixin
 {
 	// -------------------------------------------- //

@@ -1,9 +1,7 @@
 package com.massivecraft.massivecore.entity.migrator;
 
 import com.massivecraft.massivecore.item.DataPotionEffect;
-import com.massivecraft.massivecore.store.migrator.Migrator;
 import com.massivecraft.massivecore.store.migrator.MigratorRoot;
-import com.massivecraft.massivecore.xlib.gson.JsonObject;
 
 public class MigratorDataPotionEffect001RemoveColour extends MigratorRoot
 {
@@ -16,11 +14,6 @@ public class MigratorDataPotionEffect001RemoveColour extends MigratorRoot
 	private MigratorDataPotionEffect001RemoveColour()
 	{
 		super(DataPotionEffect.class);
-		this.addInnerMigrator(new Migrator() {
-			@Override
-			public void migrate(JsonObject entity) {
-				entity.remove("color");
-			}
-		});
+		this.addInnerMigrator(entity -> entity.remove("color"));
 	}
 }

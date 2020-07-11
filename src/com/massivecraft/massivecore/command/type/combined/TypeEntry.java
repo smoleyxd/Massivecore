@@ -68,10 +68,7 @@ public class TypeEntry<K, V> extends TypeCombined<Entry<K, V>>
 		// Compare Values
 		V value1 = type1.getValue();
 		V value2 = type2.getValue();
-		if ( ! this.getValueType().equals(value1, value2)) return false;
-		
-		// Done
-		return true;
+		return this.getValueType().equals(value1, value2);
 	}
 
 }

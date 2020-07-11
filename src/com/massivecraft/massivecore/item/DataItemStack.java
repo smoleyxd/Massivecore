@@ -26,6 +26,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta.Generation;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -69,9 +70,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Integer DEFAULT_REPAIRCOST = 0;
 	public static final transient String DEFAULT_TITLE = null;
 	public static final transient String DEFAULT_AUTHOR = null;
+	public static final transient Generation DEFAULT_GENERATION = null;
 	public static final transient List<String> DEFAULT_PAGES = Collections.emptyList();
 	public static final transient Integer DEFAULT_COLOR = Bukkit.getItemFactory().getDefaultLeatherColor().asRGB();
 	public static final transient Boolean DEFAULT_SCALING = false;
+	public static final transient Integer DEFAULT_MAP_COLOR = null;
+	public static final transient String DEFAULT_MAP_NAME = null;
 	public static final transient List<DataPotionEffect> DEFAULT_POTION_EFFECTS = Collections.emptyList();
 	public static final transient String DEFAULT_SKULL = null;
 	public static final transient ContainerGameProfile DEFAULT_GAMEPROFILE = null;
@@ -86,10 +90,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_POTION = "water";
 	public static final transient Map<Integer, DataItemStack> DEFAULT_INVENTORY = Collections.emptyMap();
 	public static final transient Integer DEFAULT_POTION_COLOR = null;
-	public static final transient Integer DEFAULT_MAP_COLOR = null;
 	public static final transient TropicalFish.Pattern DEFAULT_FISH_PATTERN = null;
 	public static final transient DyeColor DEFAULT_FISH_PATTERN_COLOR = null;
 	public static final transient DyeColor DEFAULT_FISH_BODY_COLOR = null;
+	public static final transient Map<Integer, DataItemStack> DEFAULT_CHARGEDPROJECTILES = Collections.emptyMap();
+	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -156,6 +161,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public String getAuthor() { return get(this.author, DEFAULT_AUTHOR); }
 	public DataItemStack setAuthor(String author) { this.author = set(author, DEFAULT_AUTHOR); return this; }
 	
+	private Generation generation = null;
+	public Generation getGeneration() { return get(this.generation, DEFAULT_GENERATION); }
+	public DataItemStack setGeneration(Generation generation) { this.generation = set(generation, DEFAULT_GENERATION); return this; }
+	
 	@EditorTypeInner(TypeStringParsed.class)
 	private MassiveListDef<String> pages = null;
 	public List<String> getPages() { return get(this.pages, DEFAULT_PAGES); }
@@ -177,6 +186,15 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Boolean scaling = null;
 	public boolean isScaling() { return get(this.scaling, DEFAULT_SCALING); }
 	public DataItemStack setScaling(boolean scaling) { this.scaling = set(scaling, DEFAULT_SCALING); return this; }
+	
+	@EditorType(TypeConverterColor.class)
+	private Integer mapColor = null;
+	public Integer getMapColor() { return get(this.mapColor, DEFAULT_MAP_COLOR); }
+	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
+	
+	private String mapName = null;
+	public String getMapName() { return get(this.mapName, DEFAULT_MAP_NAME); }
+	public DataItemStack setMapName(String mapName) { this.mapName = set(mapName, DEFAULT_MAP_NAME); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > POTION EFFECTS
@@ -310,16 +328,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setPotionColor(Integer potionColor) { this.potionColor = set(potionColor, DEFAULT_POTION_COLOR); return this; }
 	
 	// -------------------------------------------- //
-	// FIELDS > MAP COLOR
-	// -------------------------------------------- //
-	// Since 1.11
-	
-	@EditorType(TypeConverterColor.class)
-	private Integer mapColor = null;
-	public Integer getMapColor() { return get(this.mapColor, DEFAULT_MAP_COLOR); }
-	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
-	
-	// -------------------------------------------- //
 	// FIELDS > TROPICAL FISH BUCKET
 	// -------------------------------------------- //
 	// Since 1.13
@@ -335,6 +343,26 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private DyeColor fishBodyColor = null;
 	public DyeColor getFishBodyColor() { return get(this.fishBodyColor, DEFAULT_FISH_BODY_COLOR); }
 	public DataItemStack setFishBodyColor(DyeColor fishBodyColor) { this.fishBodyColor = set(fishBodyColor, DEFAULT_FISH_BODY_COLOR); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > CHARGED PROJECTILES
+	// -------------------------------------------- //
+	// SINCE: 1.14
+	
+	@EditorVisible(false)
+	private Map<Integer, DataItemStack> chargedProjectiles = null;
+	public Map<Integer, DataItemStack> getChargedProjectiles() { return get(this.chargedProjectiles, DEFAULT_CHARGEDPROJECTILES); }
+	public DataItemStack setChargedProjectiles(Map<Integer, DataItemStack> chargedProjectiles) { this.chargedProjectiles = set(chargedProjectiles, DEFAULT_CHARGEDPROJECTILES); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > LEATHER ARMOR
+	// -------------------------------------------- //
+	// SINCE: 1.13
+	
+	@EditorTypeInner(TypeStringParsed.class)
+	private MassiveListDef<String> recipes = null;
+	public List<String> getRecipes() { return get(this.recipes, DEFAULT_RECIPES); }
+	public DataItemStack setRecipes(Collection<String> recipes) { this.recipes = set(recipes, DEFAULT_RECIPES); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

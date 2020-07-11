@@ -141,16 +141,11 @@ public class MassiveCoreMSponsorInfo extends Entity<MassiveCoreMSponsorInfo>
 				return;
 			}
 			final String json = Txt.implode(lines, "\n");
-			Bukkit.getScheduler().runTask(MassiveCore.get(), new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					MassiveCoreMSponsorInfo web = MassiveCore.get().getGson().fromJson(json, MassiveCoreMSponsorInfo.class);
-					MassiveCoreMSponsorInfo live = MassiveCoreMSponsorInfo.get();
-					live.load(web);
-					live.changed();
-				}
+			Bukkit.getScheduler().runTask(MassiveCore.get(), () -> {
+				MassiveCoreMSponsorInfo web = MassiveCore.get().getGson().fromJson(json, MassiveCoreMSponsorInfo.class);
+				MassiveCoreMSponsorInfo live = MassiveCoreMSponsorInfo.get();
+				live.load(web);
+				live.changed();
 			});
 		});
 	}

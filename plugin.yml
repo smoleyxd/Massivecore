@@ -4,9 +4,9 @@ version: ${project.version}
 website: ${project.url}
 description: ${project.description}
 authors: [Cayorion]
-load: startup
+load: STARTUP
 softdepend: [Vault]
-api-version: 1.15
+api-version: "1.15"
 permissions:
 # -------------------------------------------- #
 # THE REAL NODES

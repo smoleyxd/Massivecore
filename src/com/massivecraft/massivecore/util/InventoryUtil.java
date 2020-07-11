@@ -233,7 +233,6 @@ public class InventoryUtil
 	
 	// DEPRECATED IN FAVOUR OF getMainHand
 	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
-	// @SuppressWarnings("deprecation") // FIXME deal with this
 	@Deprecated
 	public static ItemStack getWeapon(Inventory inventory)
 	{
@@ -244,7 +243,6 @@ public class InventoryUtil
 		return ret;
 
 	}
-	// @SuppressWarnings("deprecation") // FIXME deal with this
 	@Deprecated
 	public static void setWeapon(Inventory inventory, ItemStack weapon)
 	{
@@ -252,7 +250,6 @@ public class InventoryUtil
 		if (playerInventory == null) return;
 		playerInventory.setItemInHand(weapon);
 	}
-	// @SuppressWarnings("deprecation") // FIXME deal with this
 	@Deprecated
 	public static ItemStack getWeapon(HumanEntity human)
 	{
@@ -261,7 +258,6 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
-	// @SuppressWarnings("deprecation") // FIXME deal with this
 	@Deprecated
 	public static void setWeapon(HumanEntity human, ItemStack weapon)
 	{

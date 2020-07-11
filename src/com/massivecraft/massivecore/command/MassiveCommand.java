@@ -326,7 +326,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	public <T extends MassiveCommand> T addChild(MassiveCommand child)
 	{
 		// NoChange
-		if (this.getChildren().indexOf(child) != -1) return (T) this;
+		if (this.getChildren().contains(child)) return (T) this;
 			
 		// Apply
 		return this.addChild(child, this.getChildren().size());
@@ -494,9 +494,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (sender == null) return true;
 		
 		if (!this.isVisibleTo(sender)) return false;
-		if (!this.isRequirementsMet(sender, false)) return false;
-		
-		return true;
+		return this.isRequirementsMet(sender, false);
 	}
 	
 	// -------------------------------------------- //
@@ -548,8 +546,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	{
 		if (index < 0) return false;
 		if (this.isConcatenating() && this.getConcatenationIndex() < index) index = this.getConcatenationIndex();
-		if (this.getParameters().size() <= index) return false;
-		return true;
+		return this.getParameters().size() > index;
 	}
 	
 	public int getPageParameterIndex()
@@ -1565,8 +1562,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	{
 		if (idx < 0) return false;
 		if (idx+1 > this.getArgs().size()) return false;
-		if (this.getArgs().get(idx) == null) return false;
-		return true;
+		return this.getArgs().get(idx) != null;
 	}
 	
 	public boolean argIsSet()
