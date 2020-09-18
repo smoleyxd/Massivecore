@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.command.type.primitive;
 
+import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 
@@ -23,7 +24,7 @@ public class TypeStringParsed extends TypeString
 	}
 	
 	@Override
-	public String read(String arg, CommandSender sender)
+	public String read(String arg, CommandSender sender) throws MassiveException
 	{
 		return Txt.parse(super.read(arg, sender));
 	}
