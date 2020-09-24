@@ -11,7 +11,7 @@ public class AspectColl extends Coll<Aspect>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static AspectColl i = new AspectColl();
+	private static final AspectColl i = new AspectColl();
 	public static AspectColl get() { return i; }
 
 	// -------------------------------------------- //
