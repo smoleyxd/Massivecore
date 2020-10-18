@@ -18,6 +18,7 @@ import com.massivecraft.massivecore.predicate.PredicateElementGarbage;
 import com.massivecraft.massivecore.predicate.PredicateElementSignificant;
 import com.massivecraft.massivecore.util.extractor.Extractor;
 import com.massivecraft.massivecore.util.extractor.ExtractorSenderId;
+import com.massivecraft.massivecore.util.extractor.ExtractorSenderName;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorld;
 import com.massivecraft.massivecore.util.extractor.ExtractorWorldName;
 import com.massivecraft.massivecore.util.reference.ReferenceMaterial;
@@ -1971,8 +1972,9 @@ public class MUtil
 		registerExtractor(World.class, "world", ExtractorWorld.get());
 		registerExtractor(String.class, "worldName", ExtractorWorldName.get());
 		
-		// The accountId extractor is used for the money mixin.
+		// The accountName extractor is used for the money mixin.
 		registerExtractor(String.class, "accountId", ExtractorSenderId.get());
+		registerExtractor(String.class, "accountName", ExtractorSenderName.get());
 	}
 	
 }
