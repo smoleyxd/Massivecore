@@ -19,7 +19,7 @@ public class ComparatorPrioritized extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Prioritized prioritized1 = null;
@@ -35,7 +35,6 @@ public class ComparatorPrioritized extends ComparatorAbstract<Object>
 		int priority2 = prioritized2.getPriority();
 		
 		ret = Integer.compare(priority1, priority2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

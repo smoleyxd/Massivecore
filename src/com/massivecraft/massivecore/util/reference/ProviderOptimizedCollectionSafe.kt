@@ -13,7 +13,7 @@ import java.util.EnumSet
 // TODO TraitTruceSpider
 // TODO TraitTruceWitch
 // TODO TraitTruceGhast
-// TODO TraitTruceSilme
+// TODO TraitTruceSlime
 // TODO TraitTruceSilverfish
 // TODO TraitTruceUndead
 // TODO TraitTruceCreeper

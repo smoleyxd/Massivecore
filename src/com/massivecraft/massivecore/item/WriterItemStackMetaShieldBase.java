@@ -40,8 +40,7 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 	public DyeColor getB(BlockStateMeta cb, ItemStack d)
 	{
 		// Get
-		boolean creative = false;
-		Banner banner = getBanner(cb, creative);
+		Banner banner = getBanner(cb, false);
 		if (banner == null) return null;
 		
 		// Return

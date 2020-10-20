@@ -89,8 +89,8 @@ public class WebUtil
 	public static List<String> getLines(URL url) throws IOException
 	{
 		HttpURLConnection uc = null;
-		InputStream is = null;
-		InputStreamReader isr = null;
+		InputStream is;
+		InputStreamReader isr;
 		BufferedReader br = null;
 		
 		try
@@ -103,7 +103,7 @@ public class WebUtil
 			br = new BufferedReader(isr);
 			
 			List<String> lines = new ArrayList<>();
-			String line = null;
+			String line;
 			while ( (line = br.readLine()) != null )
 			{
 				lines.add(line);

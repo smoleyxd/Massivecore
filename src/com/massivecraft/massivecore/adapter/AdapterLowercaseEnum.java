@@ -61,8 +61,7 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 		if (json == null) return null;
 		if (json.equals(JsonNull.INSTANCE)) return null;
 		
-		T ret = this.getEnumValueFrom(json);
-		return ret;
+		return this.getEnumValueFrom(json);
 	}
 
 	// -------------------------------------------- //
@@ -93,8 +92,7 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 	public T[] getEnumValues()
 	{
 		Class<T> clazz = this.getClazz();
-		T[] ret = clazz.getEnumConstants();
-		return ret;
+		return clazz.getEnumConstants();
 	}
 	
 	// -------------------------------------------- //

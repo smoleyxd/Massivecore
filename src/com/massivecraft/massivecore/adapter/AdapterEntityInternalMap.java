@@ -31,11 +31,8 @@ public class AdapterEntityInternalMap implements JsonDeserializer<EntityInternal
 		// Get value
 		Map<String, ?> contents = src.getIdToEntity();
 
-		// Create ret
-		JsonElement ret = context.serialize(contents);
-
 		// Return Ret
-		return ret;
+		return context.serialize(contents);
 	}
 	
 	@Override

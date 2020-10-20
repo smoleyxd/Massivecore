@@ -11,7 +11,7 @@ public class AspectColl extends Coll<Aspect>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static AspectColl i = new AspectColl();
+	private static final AspectColl i = new AspectColl();
 	public static AspectColl get() { return i; }
 
 	// -------------------------------------------- //
@@ -33,7 +33,7 @@ public class AspectColl extends Coll<Aspect>
 		List<Aspect> ret = new ArrayList<>();
 		for (Aspect aspect : this.getAll())
 		{
-			if (aspect.isRegistered() == false) continue;
+			if (!aspect.isRegistered()) continue;
 			ret.add(aspect);
 		}
 		return ret;
@@ -44,7 +44,7 @@ public class AspectColl extends Coll<Aspect>
 		List<Aspect> ret = new ArrayList<>();
 		for (Aspect aspect : this.getAll())
 		{
-			if (aspect.isRegistered() == false) continue;
+			if (!aspect.isRegistered()) continue;
 			if ((aspect.getMultiverse() != multiverse) == normal) continue;
 			ret.add(aspect);
 		}

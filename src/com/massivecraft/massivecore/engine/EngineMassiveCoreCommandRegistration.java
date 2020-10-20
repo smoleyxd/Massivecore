@@ -27,8 +27,8 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	public static EngineMassiveCoreCommandRegistration get() { return i; }
 	public EngineMassiveCoreCommandRegistration()
 	{
-		long interval = Long.getLong("MassiveCoreCommandRegistrationPeriod", 20L); // default to every second
-		this.setPeriod(interval); // Every second
+		long interval = Long.getLong("MassiveCoreCommandRegistrationPeriod", 20L * 60L * 60L); // default to every hour
+		this.setPeriod(interval);
 	}
 	
 	// -------------------------------------------- //
@@ -99,7 +99,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 			
 			// ... and finally register it.
 			Plugin plugin = command.getPlugin();
-			String pluginName = (plugin != null ? plugin.getName() : "MassiveCore");
+			String pluginName = plugin.getName();
 			simpleCommandMap.register(pluginName, command);
 		}
 		

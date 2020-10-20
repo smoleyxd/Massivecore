@@ -140,14 +140,13 @@ public class IdUtil implements Listener, Runnable
 	{
 		if (sender == null) throw new NullPointerException("sender");
 		String id = getId(sender);
-		String name = id;
-		IdData data = new IdData(id, name);
+		IdData data = new IdData(id, id);
 		
 		registryIdToSender.put(id, sender);
 		registrySenderToId.put(sender, id);
 		
 		// Update data before the event is ran so that data is available.
-		update(id, name, SenderPresence.LOCAL);
+		update(id, id, SenderPresence.LOCAL);
 		
 		EventMassiveCoreSenderRegister event = new EventMassiveCoreSenderRegister(sender, data);
 		event.run();
@@ -157,15 +156,14 @@ public class IdUtil implements Listener, Runnable
 	{
 		if (sender == null) throw new NullPointerException("sender");
 		String id = getId(sender);
-		String name = id;
-		IdData data = new IdData(id, name);
+		IdData data = new IdData(id, id);
 		
 		Object removed = registryIdToSender.remove(id);
 		registrySenderToId.remove(sender);
 		if (removed == null) return;
 		
 		// Update data before the event is ran so that data is available.
-		update(id, name, SenderPresence.OFFLINE);
+		update(id, id, SenderPresence.OFFLINE);
 		
 		EventMassiveCoreSenderUnregister event = new EventMassiveCoreSenderUnregister(sender, data);
 		event.run();
@@ -279,7 +277,7 @@ public class IdUtil implements Listener, Runnable
 		// The millis must be newer than the previous millis for the update to continue.
 		Long previousMillis = null;
 		Long idMillis = getMillis(id);
-		if (idMillis != null && (previousMillis == null || idMillis < previousMillis))
+		if (idMillis != null)
 		{
 			previousMillis = idMillis;
 		}
@@ -298,7 +296,7 @@ public class IdUtil implements Listener, Runnable
 			{
 				presence = maintainedIds.getPresence(id);
 			}
-			else if (name != null)
+			else
 			{
 				presence = maintainedNames.getPresence(name);
 			}
@@ -339,7 +337,7 @@ public class IdUtil implements Listener, Runnable
 	// Do not call this manually.
 	// It should only be called on plugin enable.
 
-	@SuppressWarnings("deprecation")
+	// FIXME deal with this
 	public static void setup()
 	{
 		// Time: Start
@@ -362,7 +360,7 @@ public class IdUtil implements Listener, Runnable
 		
 		// Cachefile
 		long ticks = 20*60; // 5min
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(MassiveCore.get(), get(), ticks, ticks);
+		Bukkit.getScheduler().runTaskTimerAsynchronously(MassiveCore.get(), get(), ticks, ticks);
 		
 		// Register Event Listeners
 		Bukkit.getPluginManager().registerEvents(get(), MassiveCore.get());
@@ -636,8 +634,7 @@ public class IdUtil implements Listener, Runnable
 		{
 			String id = data.getId();
 			if (id == null) return null;
-			UUID uuid = MUtil.asUuid(id);
-			return uuid;	
+			return MUtil.asUuid(id);
 		}
 		
 		// Return Null
@@ -902,8 +899,7 @@ public class IdUtil implements Listener, Runnable
 		MassiveCore.get().log(Txt.parse("<i>Loading Registry datas..."));
 		for (String id : registryIdToSender.keySet())
 		{
-			String name = id;
-			update(id, name, SenderPresence.LOCAL);
+			update(id, id, SenderPresence.LOCAL);
 		}
 		
 		MassiveCore.get().log(Txt.parse("<i>Saving Cachefile..."));
@@ -936,8 +932,7 @@ public class IdUtil implements Listener, Runnable
 			content = content.trim();
 			if (content.length() == 0) return new HashSet<>();
 			
-			Set<IdData> ret = MassiveCore.gson.fromJson(content, CACHEFILE_TYPE);
-			return ret;
+			return MassiveCore.gson.fromJson(content, CACHEFILE_TYPE);
 		}
 	}
 	

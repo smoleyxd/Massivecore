@@ -52,7 +52,7 @@ public final class AdapterModdedEnumType<T extends Enum<T>> extends TypeAdapter<
 				if (annotation != null) {
 					name = annotation.value();
 				}
-			} catch (NoSuchFieldException ex) {} // MassiveCore
+			} catch (NoSuchFieldException ignored) {} // MassiveCore
 			nameToConstant.put(name, constant);
 			constantToName.put(constant, name);
 		}

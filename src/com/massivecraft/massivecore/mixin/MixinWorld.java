@@ -99,7 +99,7 @@ public class MixinWorld extends Mixin
 		
 		spawnPs = spawnPs.withWorld(world.getName());
 		
-		Location location = null;
+		Location location;
 		try
 		{
 			location = spawnPs.asBukkitLocation(true);

@@ -38,7 +38,7 @@ public class ConverterSet<EX, EY> extends Converter<Iterable<EX>, Set<EY>>
 		// Fill
 		for (EX ex : exs)
 		{
-			EY ey = null;
+			EY ey;
 			try
 			{
 				ey = this.getConverterElement().convert(ex);

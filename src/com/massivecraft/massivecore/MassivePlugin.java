@@ -279,13 +279,12 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		if (object instanceof Class<?>)
 		{
 			Class<?> clazz = (Class<?>)object;
-			if ( ! Active.class.isAssignableFrom(clazz)) throw new IllegalArgumentException("Not Active Class: " + (clazz == null ? "NULL" : clazz));
+			if ( ! Active.class.isAssignableFrom(clazz)) throw new IllegalArgumentException("Not Active Class: " + clazz);
 
 			Object instance = ReflectionUtil.getSingletonInstance(clazz);
-			if ( ! (instance instanceof Active)) throw new IllegalArgumentException("Not Active Instance: " + (instance == null ? "NULL" : instance) + " for object: " + (object == null ? "NULL" : object));
-
-			Active active = (Active)instance;
-			return active;
+			if ( ! (instance instanceof Active)) throw new IllegalArgumentException("Not Active Instance: " + instance + " for object: " + object);
+			
+			return (Active)instance;
 		}
 
 		// No success
@@ -349,7 +348,7 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 
 	public List<Class<?>> getClassesActiveNms()
 	{
-		return getClassesActive("nms", Mixin.class, (Predicate<Class<?>>) clazz -> {
+		return getClassesActive("nms", Mixin.class, clazz -> {
 			try
 			{
 				ReflectionUtil.getField(clazz, "d");
@@ -406,8 +405,10 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		return getClassesActive("entity.migrator", MigratorRoot.class);
 	}
 
-	public List<Class<?>> getClassesActive(Class<? extends Active> superClass, Predicate<Class<?>>... predicates)
+	@SafeVarargs
+	public final List<Class<?>> getClassesActive(Class<? extends Active> superClass, Predicate<Class<?>>... predicates)
 	{
+		// FIXME Should we not be using those predicates here?
 		return getClassesActive(superClass.getSimpleName().toLowerCase(), superClass);
 	}
 
@@ -421,7 +422,7 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		
 		Predicate predicateCombined = predicates.length > 0 ? PredicateAnd.get(predicates) : x -> true;
 		Predicate<Class<?>> predicateNotAbstract = type -> !Modifier.isAbstract(type.getModifiers());
-		Predicate<Class<?>> predicateSubclass = type -> superClass.isAssignableFrom(type);
+		Predicate<Class<?>> predicateSubclass = superClass::isAssignableFrom;
 		Predicate<Class<?>> predicateSingleton = PredicateIsClassSingleton.get();
 
 		return ReflectionUtil.getPackageClasses(packageName, this.getClassLoader(), true, predicateCombined, predicateNotAbstract, predicateSubclass, predicateSingleton);
@@ -441,7 +442,7 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 	{
 		String imploded = Txt.implode(msg, " ");
 		ConsoleCommandSender console = Bukkit.getConsoleSender();
-		if (level == Level.INFO && console != null)
+		if (level == Level.INFO)
 		{
 			MixinMessage.get().messageOne(console, this.logPrefixColored + imploded);
 		}

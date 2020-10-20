@@ -57,18 +57,7 @@ public class WriterItemStackMetaPotion extends WriterAbstractItemStackMetaField<
 			// Create
 			PotionData potionData = null;
 			
-			// Fill > Old
-			int damage = ca.getDamage();
-			if (damage != DataItemStack.DEFAULT_DAMAGE)
-			{
-				potionData = PotionUtil.toPotionData(damage);
-				if (potionData != null)
-				{
-					d.setDurability((short)0);
-				}
-			}
-			
-			// Fill > New / Default
+			// Fill
 			if (potionData == null)
 			{
 				String potionString = ca.getPotion();

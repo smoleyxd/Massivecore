@@ -129,34 +129,24 @@ public class MassiveCoreMSponsorInfo extends Entity<MassiveCoreMSponsorInfo>
 	
 	public static void updateInner()
 	{
-		Bukkit.getScheduler().runTaskAsynchronously(MassiveCore.get(), new Runnable()
-		{
-			@Override
-			public void run()
+		Bukkit.getScheduler().runTaskAsynchronously(MassiveCore.get(), () -> {
+			List<String> lines;
+			try
 			{
-				List<String> lines;
-				try
-				{
-					lines = WebUtil.getLines(SPONSOR_INFO_URL);
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-					return;
-				}
-				final String json = Txt.implode(lines, "\n");
-				Bukkit.getScheduler().runTask(MassiveCore.get(), new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						MassiveCoreMSponsorInfo web = MassiveCore.get().getGson().fromJson(json, MassiveCoreMSponsorInfo.class);
-						MassiveCoreMSponsorInfo live = MassiveCoreMSponsorInfo.get();
-						live.load(web);
-						live.changed();
-					}
-				});
+				lines = WebUtil.getLines(SPONSOR_INFO_URL);
 			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+				return;
+			}
+			final String json = Txt.implode(lines, "\n");
+			Bukkit.getScheduler().runTask(MassiveCore.get(), () -> {
+				MassiveCoreMSponsorInfo web = MassiveCore.get().getGson().fromJson(json, MassiveCoreMSponsorInfo.class);
+				MassiveCoreMSponsorInfo live = MassiveCoreMSponsorInfo.get();
+				live.load(web);
+				live.changed();
+			});
 		});
 	}
 	

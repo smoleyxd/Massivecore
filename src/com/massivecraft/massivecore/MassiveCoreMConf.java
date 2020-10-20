@@ -128,7 +128,7 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	@EditorType(TypeMillisDiff.class)
 	public volatile long millisBetweenRemotePollWithoutPusher = TimeUnit.MILLIS_PER_SECOND * 10;
 	@EditorType(TypeMillisDiff.class)
-	public volatile long millisBetweenRemotePollWithPusher = TimeUnit.MILLIS_PER_MINUTE * 1;
+	public volatile long millisBetweenRemotePollWithPusher = TimeUnit.MILLIS_PER_MINUTE;
 	
 	@EditorType(TypeBooleanOn.class)
 	public boolean warnOnLocalAlter = false;
@@ -143,12 +143,14 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	// How often should the task run?
 	// When set to 0 this feature is disabled. Meaning no cleaning will be done.
 	// Default: 1 day (Per default once a day.)
+	@EditorType(TypeMillisDiff.class)
 	public long cleanTaskPeriodMillis = TimeUnit.MILLIS_PER_DAY;
 	
 	// This is used to decide at what time of the day the task will run.
 	// For Example: If the taskPeriodMillis is 24 hours:
 	// Set it to 0 for UTC midnight.
 	// Set it to 3600000 for UTC midnight + 1 hour.
+	@EditorType(TypeMillisDiff.class)
 	public long cleanTaskOffsetMillis = 0;
 	
 	// When did the task last run?

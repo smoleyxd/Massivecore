@@ -45,7 +45,9 @@ public class ExtractorLogic
 	public static CommandSender sender(SignChangeEvent o) { return o.getPlayer(); }
 	public static CommandSender sender(EnchantItemEvent o) { return o.getEnchanter(); }
 	public static CommandSender sender(PrepareItemEnchantEvent o) { return o.getEnchanter(); }
-	public static CommandSender sender(Entity o) { if (o instanceof CommandSender) return (CommandSender)o; return null; }
+	public static CommandSender sender(Entity o) {
+		return o;
+	}
 	public static CommandSender sender(EntityEvent o) { return sender(o.getEntity()); }
 	public static CommandSender sender(InventoryClickEvent o) { return sender(o.getWhoClicked()); }
 	public static CommandSender sender(InventoryCloseEvent o) { return sender(o.getPlayer()); }
@@ -55,7 +57,7 @@ public class ExtractorLogic
 	public static CommandSender sender(VehicleDestroyEvent o) { return sender(o.getAttacker()); }
 	public static CommandSender sender(VehicleEnterEvent o) { return sender(o.getEntered()); }
 	public static CommandSender sender(VehicleExitEvent o) { return sender(o.getExited()); }
-	public static CommandSender sender(VehicleEvent o) { return sender(o.getVehicle().getPassenger()); }
+	public static CommandSender sender(VehicleEvent o) { return sender(o.getVehicle().getPassengers().get(0)); }
 	
 	public static CommandSender senderFromObject(Object o)
 	{
@@ -72,7 +74,6 @@ public class ExtractorLogic
 		if (o instanceof SignChangeEvent) return sender((SignChangeEvent)o);
 		if (o instanceof EnchantItemEvent) return sender((EnchantItemEvent)o);
 		if (o instanceof PrepareItemEnchantEvent) return sender((PrepareItemEnchantEvent)o);
-		if (o instanceof Entity) return sender((Entity)o);
 		if (o instanceof EntityEvent) return sender((EntityEvent)o);
 		if (o instanceof InventoryClickEvent) return sender((InventoryClickEvent)o);
 		if (o instanceof InventoryCloseEvent) return sender((InventoryCloseEvent)o);
@@ -138,10 +139,9 @@ public class ExtractorLogic
 	
 	public static String playerNameFromObject(Object o)
 	{
-		String senderId = senderNameFromObject(o);
 		//if (SenderUtil.isPlayerId(senderId)) return senderId;
 		//return null;
-		return senderId;
+		return senderNameFromObject(o);
 	}
 	
 	// -------------------------------------------- //
@@ -188,10 +188,7 @@ public class ExtractorLogic
 		World world = worldFromObject(o);
 		if (world != null) return world.getName();
 		
-		String ret = worldNameViaPsMixin(o);
-		if (ret != null) return ret;
-
-		return null;
+		return worldNameViaPsMixin(o);
 	}
 	
 	public static String worldNameViaPsMixin(Object senderObject)

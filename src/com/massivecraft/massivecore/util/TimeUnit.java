@@ -64,8 +64,7 @@ public class TimeUnit implements Comparable<TimeUnit>
 	
 	public static TreeSet<TimeUnit> getSpecific(TimeUnit... timeUnits)
 	{
-		TreeSet<TimeUnit> ret = new TreeSet<>(Arrays.asList(timeUnits));
-		return ret;
+		return new TreeSet<>(Arrays.asList(timeUnits));
 	}
 	
 	public static TimeUnit get(String timeUnitString)

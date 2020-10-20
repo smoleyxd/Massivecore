@@ -78,6 +78,7 @@ public class Triple<A, B, C> implements Cloneable, Serializable
 	// CLONE
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public Triple<A, B, C> clone()
 	{

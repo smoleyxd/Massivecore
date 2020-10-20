@@ -86,9 +86,7 @@ public class EntityInternal<E extends EntityInternal<E>> implements Identified
 		EntityContainer<E> container = this.getContainer();
 		if (container == null) return false;
 		
-		if (!container.isLive()) return false;
-		
-		return true;
+		return container.isLive();
 	}
 	
 	public void changed()

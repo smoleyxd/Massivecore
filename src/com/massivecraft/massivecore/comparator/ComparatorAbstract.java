@@ -68,7 +68,7 @@ public abstract class ComparatorAbstract<T> implements Comparator<T>
 	private int compareSystem(T object1, T object2)
 	{	
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Null
 		if (object1 == null && object2 == null) return 0;

@@ -1,8 +1,6 @@
 package com.massivecraft.massivecore.mixin;
 
 import com.massivecraft.massivecore.nms.NmsRepairable;
-import com.massivecraft.massivecore.util.InventoryUtil;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class MixinRepairable extends Mixin

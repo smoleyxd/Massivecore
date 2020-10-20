@@ -41,7 +41,6 @@ public class ChestGui
 		if (event == null) throw new NullPointerException("event");
 
 		Inventory inventory = event.getInventory();
-		if (inventory == null) return null;
 		return get(inventory);
 	}
 	
@@ -134,13 +133,13 @@ public class ChestGui
 	public void setSoundClick(SoundEffect soundClick) { this.soundClick = soundClick; }
 	
 	// The sound you should hear when opening the GUI.
-	private SoundEffect soundOpen = SoundEffect.valueOf("CHEST_OPEN", 0.75f, 1.0f);
+	private SoundEffect soundOpen = SoundEffect.valueOf("BLOCK_CHEST_OPEN", 0.75f, 1.0f);
 	public SoundEffect getSoundOpen() { return this.soundOpen; }
 	public void setSoundOpen(SoundEffect soundOpen) { this.soundOpen = soundOpen; }
 	
 	// The sound you should hear when closing the GUI.
 	// This sound will be skipped if another inventory was opened by the GUI action.
-	private SoundEffect soundClose = SoundEffect.valueOf("CHEST_CLOSE", 0.75f, 1.0f);
+	private SoundEffect soundClose = SoundEffect.valueOf("BLOCK_CHEST_CLOSE", 0.75f, 1.0f);
 	public SoundEffect getSoundClose() { return this.soundClose; }
 	public void setSoundClose(SoundEffect soundClose) { this.soundClose= soundClose; }
 	

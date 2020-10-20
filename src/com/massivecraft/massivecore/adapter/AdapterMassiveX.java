@@ -85,7 +85,7 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 			// ... then deserialize it as if it were the regular Java collection!
 			// SUPER TYPE x2 EXAMPLE: MassiveListDef --> MassiveList --> ArrayList
 			Object parent = context.deserialize(json, getSuperType(getSuperType(ptype)));
-			return create(parent, def, json, type, context);
+			return create(parent, true, json, type, context);
 		}
 		// If this a regular Massive structure and not a Def ...
 		else
@@ -102,7 +102,7 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 				// ... then deserialize it as if it were the regular java collection!
 				// SUPER TYPE x1 EXAMPLE: MassiveList --> ArrayList
 				Object parent = context.deserialize(json, getSuperType(ptype));
-				return create(parent, def, json, type, context);
+				return create(parent, false, json, type, context);
 			}
 		}
 	}

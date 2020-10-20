@@ -18,7 +18,7 @@ public class ComparatorComparable extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Comparable<Object> comparable1 = null;
@@ -31,7 +31,6 @@ public class ComparatorComparable extends ComparatorAbstract<Object>
 		
 		// Compare
 		ret = comparable1.compareTo(comparable2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

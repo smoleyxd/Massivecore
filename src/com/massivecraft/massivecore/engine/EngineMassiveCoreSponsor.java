@@ -53,14 +53,9 @@ public class EngineMassiveCoreSponsor extends Engine
 
 		// We delay informing the console.
 		// This is because the console may not exist when this engine is activated.
-		Bukkit.getScheduler().runTask(this.getPlugin(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				ConsoleCommandSender console = IdUtil.getConsole();
-				inform(console);
-			}
+		Bukkit.getScheduler().runTask(this.getPlugin(), () -> {
+			ConsoleCommandSender console = IdUtil.getConsole();
+			inform(console);
 		});
 	}
 	
@@ -140,14 +135,7 @@ public class EngineMassiveCoreSponsor extends Engine
 		
 		// Schedule
 		int delayTicks = (IdUtil.isConsole(sender) ? MassiveCoreMSponsorInfo.get().consoleDelayTicks : MassiveCoreMSponsorInfo.get().ingameDelayTicks);
-		Bukkit.getScheduler().runTaskLater(this.getPlugin(), new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				informInner(sender);
-			}
-		}, delayTicks);
+		Bukkit.getScheduler().runTaskLater(this.getPlugin(), () -> informInner(sender), delayTicks);
 	}
 	
 	public void informInner(CommandSender sender)

@@ -269,8 +269,7 @@ public abstract class TypeTransformer<I, O> extends TypeAbstract<O>
 	public O read(String arg, CommandSender sender) throws MassiveException
 	{
 		I inner = this.getInner().read(arg, sender);
-		O outer = innerToOuter(inner, sender);
-		return outer;
+		return innerToOuter(inner, sender);
 	}
 	
 	// -------------------------------------------- //

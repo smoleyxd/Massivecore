@@ -22,7 +22,7 @@ public class ComparatorMap extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Map<Object, Object> map1 = null;
@@ -37,7 +37,6 @@ public class ComparatorMap extends ComparatorAbstract<Object>
 		Set<Entry<Object, Object>> entries1 = map1.entrySet();
 		Set<Entry<Object, Object>> entries2 = map2.entrySet();
 		ret = ComparatorCollection.get().compare(entries1, entries2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

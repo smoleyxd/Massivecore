@@ -27,6 +27,7 @@ public class TypeMaterial extends TypeEnum<Material>
 	{
 		Set<String> ret = new MassiveSet<>(super.getIdsInner(value));
 		
+		//noinspection deprecation
 		if (!value.isLegacy()) {
 			String key = value.getKey().getKey();
 			ret.add(key);

@@ -1,12 +1,11 @@
 package com.massivecraft.massivecore.util.reference
 
 import org.bukkit.Material
-import java.util.*
 
 object ReferenceMaterial {
 
     @JvmStatic
-    val pickaxeMaterials: EnumSet<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+    val pickaxeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "DIAMOND_PICKAXE",
             "GOLDEN_PICKAXE",
@@ -57,6 +56,62 @@ object ReferenceMaterial {
     )
 
     @JvmStatic
+    val hoeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_HOE",
+            "GOLDEN_HOE",
+            "GOLD_HOE",
+            "IRON_HOE",
+            "STONE_HOE",
+            "WOODEN_HOE"
+    )
+
+    @JvmStatic
+    val helmetMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_HELMET",
+            "GOLDEN_HELMET",
+            "GOLD_HELMET",
+            "IRON_HELMET",
+            "LEATHER_HELMET",
+            "CHAINMAIL_HELMET",
+            "TURTLE_HELMET"
+    )
+
+    @JvmStatic
+    val chestplateMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_CHESTPLATE",
+            "GOLDEN_CHESTPLATE",
+            "GOLD_CHESTPLATE",
+            "IRON_CHESTPLATE",
+            "LEATHER_CHESTPLATE",
+            "CHAINMAIL_CHESTPLATE"
+    )
+
+    @JvmStatic
+    val leggingsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_LEGGINGS",
+            "GOLDEN_LEGGINGS",
+            "GOLD_LEGGINGS",
+            "IRON_LEGGINGS",
+            "LEATHER_LEGGINGS",
+            "CHAINMAIL_LEGGINGS"
+    )
+
+    @JvmStatic
+    val bootsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material::class.java,
+            "DIAMOND_BOOTS",
+            "GOLDEN_BOOTS",
+            "GOLD_BOOTS",
+            "IRON_BOOTS",
+            "LEATHER_BOOTS",
+            "CHAINMAIL_BOOTS"
+    )
+
+    @JvmStatic
     val foodMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "APPLE",
@@ -103,6 +158,7 @@ object ReferenceMaterial {
             "TROPICAL_FISH"
     )
 
+    @JvmStatic
     val materialsVegetation: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
             "ACACIA_LEAVES",
@@ -124,7 +180,7 @@ object ReferenceMaterial {
             "BUBBLE_CORAL",
             "BUBBLE_CORAL_FAN",
             "CACTUS",
-            "CARROT",
+            "CARROTS",
             "CHORUS_FLOWER",
             "CHORUS_PLANT",
             "COCOA",
@@ -137,7 +193,6 @@ object ReferenceMaterial {
             "DEAD_BRAIN_CORAL_FAN",
             "DEAD_BUBBLE_CORAL",
             "DEAD_BUBBLE_CORAL_FAN",
-            "DEAD_BUSH",
             "DEAD_BUSH",
             "DEAD_FIRE_CORAL",
             "DEAD_FIRE_CORAL_FAN",
@@ -155,6 +210,7 @@ object ReferenceMaterial {
             "HORN_CORAL_FAN",
             "JUNGLE_LEAVES",
             "JUNGLE_SAPLING",
+            "KELP",
             "LARGE_FERN",
             "LEAVES",
             "LEAVES_2",
@@ -165,6 +221,7 @@ object ReferenceMaterial {
             "MELON",
             "MELON_BLOCK",
             "MELON_STEM",
+            "NETHER_WART",
             "OAK_LEAVES",
             "OAK_SAPLING",
             "ORANGE_TULIP",
@@ -172,7 +229,7 @@ object ReferenceMaterial {
             "PEONY",
             "PINK_TULIP",
             "POPPY",
-            "POTATO",
+            "POTATOES",
             "PUMPKIN",
             "PUMPKIN_STEM",
             "RED_MUSHROOM",
@@ -193,8 +250,12 @@ object ReferenceMaterial {
             "TALL_SEAGRASS",
             "TUBE_CORAL",
             "TUBE_CORAL_FAN",
+            "TWISTING_VINES",
+            "TWISTING_VINES_PLANT",
             "VINE",
             "WATER_LILY",
+            "WEEPING_VINES",
+            "WEEPING_VINES_PLANT",
             "WHEAT",
             "WHITE_TULIP",
             "WITHER_ROSE",

@@ -43,7 +43,7 @@ public class ConverterMap<KX, VX, KY, VY> extends Converter<Map<KX, VX>, Map<KY,
 		// Fill
 		for (Entry<KX, VX> entry : mapx.entrySet())
 		{
-			KY ky = null;
+			KY ky;
 			KX kx = entry.getKey();
 			try
 			{
@@ -55,7 +55,7 @@ public class ConverterMap<KX, VX, KY, VY> extends Converter<Map<KX, VX>, Map<KY,
 				continue;
 			}
 			
-			VY vy = null;
+			VY vy;
 			VX vx = entry.getValue();
 			try
 			{

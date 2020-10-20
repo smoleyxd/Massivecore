@@ -142,7 +142,7 @@ public class CommandEditAbstract<O, V> extends MassiveCommand
 	protected void attemptSetPerform(V after)
 	{
 		String descProperty = this.getProperty().getDisplayName();
-		Mson descObject = this.getObjectVisual();
+		Mson descObject;
 		Mson descValue = this.getInheritedVisual();
 		
 		// Create messages

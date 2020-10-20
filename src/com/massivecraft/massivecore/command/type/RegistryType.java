@@ -18,8 +18,8 @@ import com.massivecraft.massivecore.command.type.container.TypeList;
 import com.massivecraft.massivecore.command.type.container.TypeMap;
 import com.massivecraft.massivecore.command.type.container.TypeSet;
 import com.massivecraft.massivecore.command.type.enumeration.TypeBiome;
+import com.massivecraft.massivecore.command.type.enumeration.TypeBookGeneration;
 import com.massivecraft.massivecore.command.type.enumeration.TypeChatColor;
-import com.massivecraft.massivecore.command.type.enumeration.TypeDamageModifier;
 import com.massivecraft.massivecore.command.type.enumeration.TypeDifficulty;
 import com.massivecraft.massivecore.command.type.enumeration.TypeDyeColor;
 import com.massivecraft.massivecore.command.type.enumeration.TypeEntityType;
@@ -29,14 +29,11 @@ import com.massivecraft.massivecore.command.type.enumeration.TypeFireworkEffectT
 import com.massivecraft.massivecore.command.type.enumeration.TypeGameMode;
 import com.massivecraft.massivecore.command.type.enumeration.TypeHorseColor;
 import com.massivecraft.massivecore.command.type.enumeration.TypeHorseStyle;
-import com.massivecraft.massivecore.command.type.enumeration.TypeHorseVariant;
 import com.massivecraft.massivecore.command.type.enumeration.TypeLlamaColor;
 import com.massivecraft.massivecore.command.type.enumeration.TypeMaterial;
-import com.massivecraft.massivecore.command.type.enumeration.TypeOcelotType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeParrotVariant;
 import com.massivecraft.massivecore.command.type.enumeration.TypeParticle;
 import com.massivecraft.massivecore.command.type.enumeration.TypeRabbitType;
-import com.massivecraft.massivecore.command.type.enumeration.TypeSkeletonType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeSound;
 import com.massivecraft.massivecore.command.type.enumeration.TypeSpawnReason;
 import com.massivecraft.massivecore.command.type.enumeration.TypeTropicalFishPattern;
@@ -109,8 +106,7 @@ public class RegistryType
 				if (annotationType != null)
 				{
 					Class<?> typeClass = annotationType.value();
-					Type<?> type = ReflectionUtil.getSingletonInstance(typeClass);
-					return type;
+					return ReflectionUtil.getSingletonInstance(typeClass);
 				}
 			}
 			catch (Throwable t)
@@ -302,8 +298,8 @@ public class RegistryType
 		
 		// Enum
 		register(TypeBiome.get());
+		register(TypeBookGeneration.get());
 		register(TypeChatColor.get());
-		register(TypeDamageModifier.get());
 		register(TypeDifficulty.get());
 		register(TypeDyeColor.get());
 		register(TypeEntityType.get());
@@ -313,14 +309,11 @@ public class RegistryType
 		register(TypeGameMode.get());
 		register(TypeHorseColor.get());
 		register(TypeHorseStyle.get());
-		register(TypeHorseVariant.get());
 		register(TypeLlamaColor.get());
 		register(TypeMaterial.get());
-		register(TypeOcelotType.get());
 		register(TypeParrotVariant.get());
 		register(TypeParticle.get());
 		register(TypeRabbitType.get());
-		register(TypeSkeletonType.get());
 		register(TypeSound.get());
 		register(TypeSpawnReason.get());
 		register(TypeTropicalFishPattern.get());

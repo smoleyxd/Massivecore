@@ -37,7 +37,7 @@ public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 	// COLL
 	// -------------------------------------------- //
 	
-	private transient Class<C> collClass = null;
+	private transient Class<C> collClass;
 	public Class<C> getCollClass() { return this.collClass; }
 	
 	private transient Coll<E> coll = null;
@@ -52,7 +52,7 @@ public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 	// ENTITY ID
 	// -------------------------------------------- //
 	
-	private String entityId = null;
+	private String entityId;
 	public String getEntityId() { return this.entityId; }
 	
 	/**

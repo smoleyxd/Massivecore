@@ -26,11 +26,10 @@ public class TypePotionEffectType extends TypeAbstractChoice<PotionEffectType>
 		return value.getName();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public String getIdInner(PotionEffectType value)
 	{
-		return String.valueOf(value.getId());
+		return value.getName();
 	}
 	
 }

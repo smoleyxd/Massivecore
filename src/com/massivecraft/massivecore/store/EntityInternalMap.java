@@ -48,9 +48,7 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 		EntityInternal<?> entity = this.getEntity();
 		if (entity == null) return false;
 		
-		if (!entity.isLive()) return false;
-		
-		return true;
+		return entity.isLive();
 	}
 	
 	// -------------------------------------------- //

@@ -149,10 +149,7 @@ public class MigratorUtil
 		}
 
 
-		if (!jsonRepresentation.containsKey(actualType))
-		{
-			return actualType;
-		}
+		if (!jsonRepresentation.containsKey(actualType)) return actualType;
 		return jsonRepresentation.get(actualType);
 	}
 
@@ -236,7 +233,7 @@ public class MigratorUtil
 	{
 		boolean migrated = false;
 		Type classType = jsonType != null ? jsonType : realType;
-		migrated = migrateClass(classType, object) | migrated;
+		migrated = migrateClass(classType, object);
 		if (jsonType != null) migrated = migrateFields(jsonType, object) | migrated;
 		return migrated;
 	}
@@ -269,7 +266,7 @@ public class MigratorUtil
 		JsonElement value = array.get(1);
 
 		boolean migrated = false;
-		migrated = migrate(keyType, key) | migrated;
+		migrated = migrate(keyType, key);
 		migrated = migrate(valueType, value) | migrated;
 		return migrated;
 	}
@@ -277,7 +274,7 @@ public class MigratorUtil
 	private static boolean migrateList(Class<?> clazz, Type jsonType, JsonArray array)
 	{
 
-		Type elementType = null;
+		Type elementType;
 
 		if (clazz.isArray())
 		{
@@ -466,8 +463,7 @@ public class MigratorUtil
 
 			try
 			{
-				ParameterizedType ret = getParameterizedType(superClass);
-				return ret;
+				return getParameterizedType(superClass);
 			}
 			catch (RuntimeException ex)
 			{

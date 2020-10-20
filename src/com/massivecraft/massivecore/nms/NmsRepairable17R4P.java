@@ -8,6 +8,7 @@ import org.bukkit.material.MaterialData;
 import java.util.Collections;
 import java.util.Set;
 
+@SuppressWarnings("deprecation")
 public class NmsRepairable17R4P extends NmsRepairable
 {
 	// -------------------------------------------- //
@@ -40,10 +41,7 @@ public class NmsRepairable17R4P extends NmsRepairable
 
 		// We may also not repair things that can not take any damage.
 		// NOTE: MaxDurability should be renamed to MaxDamage.
-		if (material.getMaxDurability() == 0) return false;
-
-		// Otherwise repairable
-		return true;
+		return material.getMaxDurability() != 0;
 	}
 
 	private static final Set<String> nonRepairables = Collections.unmodifiableSet(MUtil.set(

@@ -25,7 +25,7 @@ public class EventMassiveCoreDestination extends EventMassiveCore
 	protected final CommandSender sender;
 	public CommandSender getSender() { return this.sender; }
 	
-	public Destination destination = null;
+	public Destination destination;
 	public Destination getDestination() { return this.destination; }
 	public void setDestination(Destination destination) { this.destination = destination; }
 	

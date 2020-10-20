@@ -49,7 +49,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	public DataBannerPattern(Object pattern)
 	{
 		if ( ! (pattern instanceof Pattern)) throw new IllegalArgumentException("pattern");
-		this.write((Pattern)pattern, false);
+		this.write(pattern, false);
 	}
 	
 	// -------------------------------------------- //

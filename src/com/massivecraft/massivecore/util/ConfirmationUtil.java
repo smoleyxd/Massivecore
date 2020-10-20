@@ -119,7 +119,7 @@ public class ConfirmationUtil
 		{
 			throw getException(object);
 		}
-		else if (hasConfirmationString && hasTypedConfirmationString)
+		else if (hasConfirmationString)
 		{
 			// If they typed the wrong thing
 			String typedString = object.argAt(idx);
@@ -130,7 +130,7 @@ public class ConfirmationUtil
 			}
 			// Otherwise do nothing, because success
 		}
-		else if (!hasConfirmationString && hasTypedOther)
+		else
 		{
 			String confirmationString = createConfirmationString(object, sender);
 			MixinMessage.get().msgOne(sender, "<i>Created confirmation text <h>%s<i> for you.", confirmationString);

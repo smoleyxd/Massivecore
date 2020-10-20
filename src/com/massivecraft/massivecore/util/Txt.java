@@ -564,13 +564,11 @@ public class Txt
 
 		if (eatLeft < pivot)
 		{
-			Mson ret = mson(
+			return mson(
 				mson(titleizeLine.substring(0, pivot - eatLeft)).color(ChatColor.GOLD),
 				centerMson,
 				mson(titleizeLine.substring(pivot + eatRight)).color(ChatColor.GOLD)
 			);
-
-			return ret;
 		}
 		else
 		{
@@ -680,15 +678,13 @@ public class Txt
 			end = setFlipPageCommand(end, pageHumanBased, pagecount, args, command);
 		}
 		
-		Mson flipMson = mson(
+		return mson(
 			backward,
 			start,
 			mson("/").color(ChatColor.GOLD),
 			end,
 			forward
 		);
-		
-		return flipMson;
 	}
 	
 	private static Mson setFlipPageCommand(Mson mson, int pageHumanBased, int destinationPage, List<String> args, MassiveCommand command)
@@ -921,7 +917,7 @@ public class Txt
 				}
 				citing = !citing;
 			}
-			else if (citing == false && c == ' ')
+			else if (!citing && c == ' ')
 			{
 				if (token.length() > 0)
 				{

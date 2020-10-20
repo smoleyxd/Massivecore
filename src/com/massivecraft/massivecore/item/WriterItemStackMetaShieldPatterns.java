@@ -1,7 +1,6 @@
 package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.collections.MassiveList;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Banner;
 import org.bukkit.block.banner.Pattern;
@@ -50,8 +49,7 @@ public class WriterItemStackMetaShieldPatterns extends WriterAbstractItemStackMe
 	public List<Pattern> getB(BlockStateMeta cb, ItemStack d)
 	{
 		// Get
-		boolean creative = false;
-		Banner banner = getBanner(cb, creative);
+		Banner banner = getBanner(cb, false);
 		if (banner == null) return null;
 		
 		// Return
@@ -74,9 +72,9 @@ public class WriterItemStackMetaShieldPatterns extends WriterAbstractItemStackMe
 		banner.setPatterns(fb);
 		
 		// Ensure Base
-		if (banner.getBaseColor() == null && !banner.getPatterns().isEmpty())
+		if (banner.getBaseColor() == null)
 		{
-			banner.setBaseColor(DyeColor.BLACK);
+			banner.getPatterns();
 		}
 		
 		// Set

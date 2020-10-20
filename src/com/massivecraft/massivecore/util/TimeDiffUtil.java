@@ -79,7 +79,7 @@ public class TimeDiffUtil
 			// Parse the count
 			String countString = matcherPart.group(1);
 			String countStringFixed = countString.replaceAll("[+\\s]", "");
-			long count = 0;
+			long count;
 			try
 			{
 				count = Long.parseLong(countStringFixed);
@@ -116,7 +116,7 @@ public class TimeDiffUtil
 		
 		for (TimeUnit unit : units)
 		{
-			long count = (long) Math.floor(millisLeft / unit.millis);
+			long count = millisLeft / unit.millis;
 			if (count < 1) continue;
 			millisLeft -= unit.millis*count;
 			ret.put(unit, count);
@@ -150,7 +150,7 @@ public class TimeDiffUtil
 	// FORMAT
 	// -------------------------------------------- //
 	
-	public static final String FORMAT_ENTRY_VERBOOSE = Txt.parse("<v>%1$d<k>%3$s");
+	public static final String FORMAT_ENTRY_VERBOOSE = Txt.parse("<v>%1$d <k>%3$s");
 	public static final String FORMAT_COMMA_VERBOOSE = "%s, ";
 	public static final String FORMAT_AND_VERBOOSE = " %sand ";
 	

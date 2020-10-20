@@ -36,7 +36,7 @@ public abstract class EventMassiveCore extends Event implements Runnable, Cancel
 	
 	public EventMassiveCore()
 	{
-		
+		super(!Bukkit.isPrimaryThread()); // TODO - Is this incredibly dangerous?
 	}
 	
 	public EventMassiveCore(boolean isAsync)

@@ -83,12 +83,10 @@ public class CmdMassiveCoreCmdurl extends MassiveCoreCommand
 						}
 					}
 				});
-				return;
 			}
 			catch (final Exception e)
 			{
 				sync(() -> MixinMessage.get().msgOne(commander, "<b>%s: %s", e.getClass().getSimpleName(), e.getMessage()));
-				return;
 			}
 		});
 	}

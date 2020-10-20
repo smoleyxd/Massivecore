@@ -46,10 +46,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.metadata.Metadatable;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
@@ -405,8 +405,7 @@ public class MUtil
 	public static boolean isSender(Object object)
 	{
 		if (!(object instanceof CommandSender)) return false;
-		if (isNpc(object)) return false;
-		return true;
+		return !isNpc(object);
 	}
 	public static boolean isntSender(Object object)
 	{
@@ -835,30 +834,29 @@ public class MUtil
 		throw new IllegalArgumentException("The chat color code " + chatColorCode + " is not yet supported!");
 	}
 	
-	@SuppressWarnings("deprecation")
+	// TODO deal with the duplicate branches
 	public static ChatColor getChatColor(DyeColor dyeColor)
 	{
-		int woolColorCode = dyeColor.getWoolData();
-		
-		switch (woolColorCode)
+		switch (dyeColor)
 		{
-			case 0x0: return ChatColor.WHITE;
-			case 0x1: return ChatColor.GOLD;
-			case 0x2: return ChatColor.LIGHT_PURPLE;
-			case 0x3: return ChatColor.AQUA;
-			case 0x4: return ChatColor.YELLOW;
-			case 0x5: return ChatColor.GREEN;
-			case 0x6: return ChatColor.LIGHT_PURPLE;
-			case 0x7: return ChatColor.DARK_GRAY;
-			case 0x8: return ChatColor.GRAY;
-			case 0x9: return ChatColor.DARK_AQUA;
-			case 0xA: return ChatColor.DARK_PURPLE;
-			case 0xB: return ChatColor.BLUE;
-			case 0xC: return ChatColor.GRAY;
-			case 0xD: return ChatColor.DARK_GREEN;
-			case 0xE: return ChatColor.RED;
-			case 0xF: return ChatColor.BLACK;
+			case WHITE: return ChatColor.WHITE;
+			case ORANGE: return ChatColor.GOLD;
+			case MAGENTA: return ChatColor.LIGHT_PURPLE;
+			case LIGHT_BLUE: return ChatColor.AQUA;
+			case YELLOW: return ChatColor.YELLOW;
+			case LIME: return ChatColor.GREEN;
+			case PINK: return ChatColor.LIGHT_PURPLE;
+			case GRAY: return ChatColor.DARK_GRAY;
+			case LIGHT_GRAY: return ChatColor.GRAY;
+			case CYAN: return ChatColor.DARK_AQUA;
+			case PURPLE: return ChatColor.DARK_PURPLE;
+			case BLUE: return ChatColor.BLUE;
+			case BROWN: return ChatColor.GRAY;
+			case GREEN: return ChatColor.DARK_GREEN;
+			case RED: return ChatColor.RED;
+			case BLACK: return ChatColor.BLACK;
 		}
+		
 		throw new IllegalArgumentException("The dye color " + dyeColor + " is not yet supported!");
 	}
 
@@ -872,6 +870,7 @@ public class MUtil
 	// Or they may instantly die. For this reason we take inspiration from MCMMO who rolled their own setDamage function.
 	// This method sets the BASE damage modifier and scales all other modifiers proportionally.
 	
+	@SuppressWarnings("deprecation")
 	public static void setDamage(EntityDamageEvent event, double newDamage)
 	{
 		// Check New Damage
@@ -923,6 +922,7 @@ public class MUtil
 		// No Change?
 		if (equalsishNumber(factor, 1)) return;
 		
+		//noinspection deprecation
 		for (DamageModifier modifier : DamageModifier.values())
 		{
 			// Is this modifier used in the event?
@@ -1118,13 +1118,14 @@ public class MUtil
 		if (item == null) return false;
 		return isSword(item.getType());
 	}
-	
+
+	// Main hand should be safe as long as swords don't function from offhand TODO verify
 	public static boolean isSword(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isSword(lentity.getEquipment().getItemInHand());
+		return isSword(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isSword(EntityDamageByEntityEvent event)
@@ -1150,13 +1151,15 @@ public class MUtil
 		if (item == null) return false;
 		return isAxe(item.getType());
 	}
-	
+
+	// Main hand should be safe if axes aren't used from the offhand
+	// TODO verify that
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isAxe(lentity.getEquipment().getItemInHand());
+		return isAxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isAxe(EntityDamageByEntityEvent event)
@@ -1177,13 +1180,14 @@ public class MUtil
 		if (item == null) return true;
 		return InventoryUtil.isNothing(item);
 	}
-	
+
+	// Main hand should be safe since only primary hand is used for unarmed combat
 	public static boolean isUnarmed(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isUnarmed(lentity.getEquipment().getItemInHand());
+		return isUnarmed(lentity.getEquipment().getItemInMainHand());
 	}
 	
 	public static boolean isUnarmed(EntityDamageByEntityEvent event)
@@ -1199,7 +1203,7 @@ public class MUtil
 	
 	public static boolean isAxe(BlockBreakEvent event)
 	{
-		return isAxe(InventoryUtil.getWeapon(event.getPlayer()));
+		return isAxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
 	
 	// Pickaxe
@@ -1215,18 +1219,19 @@ public class MUtil
 		if (item == null) return false;
 		return isPickaxe(item.getType());
 	}
-		
+
+	// Main hand should be safe since the pickaxe doesn't operate from offhand
 	public static boolean isPickaxe(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isPickaxe(lentity.getEquipment().getItemInHand());
+		return isPickaxe(lentity.getEquipment().getItemInMainHand());
 	}
-		
+	
 	public static boolean isPickaxe(BlockBreakEvent event)
 	{
-		return isPickaxe(InventoryUtil.getWeapon(event.getPlayer()));
+		return isPickaxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
 	
 	// Spade
@@ -1235,24 +1240,112 @@ public class MUtil
 	{
 		return ReferenceMaterial.getSpadeMaterials().contains(material);
 	}
-		
+	
 	public static boolean isSpade(ItemStack item)
 	{
 		if (item == null) return false;
 		return isSpade(item.getType());
 	}
-			
+	
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
 		if (!(entity instanceof LivingEntity)) return false;
 		LivingEntity lentity = (LivingEntity)entity;
-		return isSpade(lentity.getEquipment().getItemInHand());
+		return isSpade(lentity.getEquipment().getItemInMainHand());
 	}
-			
+	
 	public static boolean isSpade(BlockBreakEvent event)
 	{
-		return isSpade(InventoryUtil.getWeapon(event.getPlayer()));
+		return isSpade(InventoryUtil.getMainHand(event.getPlayer()));
+	}
+	
+	// Hoe
+	
+	public static boolean isHoe(Material material)
+	{
+		return ReferenceMaterial.getHoeMaterials().contains(material);
+	}
+	
+	public static boolean isHoe(ItemStack item)
+	{
+		if (item == null) return false;
+		return isHoe(item.getType());
+	}
+	
+	public static boolean isHoe(Entity entity)
+	{
+		if (entity == null) return false;
+		if (!(entity instanceof LivingEntity)) return false;
+		LivingEntity lentity = (LivingEntity)entity;
+		EntityEquipment inv = lentity.getEquipment();
+		if (inv == null) return false;
+		return isHoe(inv.getItemInMainHand()) || isHoe(inv.getItemInOffHand());
+	}
+	
+	// Helmet
+	
+	public static boolean isHelmet(Material material)
+	{
+		return ReferenceMaterial.getHelmetMaterials().contains(material);
+	}
+	
+	public static boolean isHelmet(ItemStack item)
+	{
+		if (item == null) return false;
+		return isHelmet(item.getType());
+	}
+	
+	// Chestplate
+	
+	public static boolean isChestplate(Material material)
+	{
+		return ReferenceMaterial.getChestplateMaterials().contains(material);
+	}
+	
+	public static boolean isChestplate(ItemStack item)
+	{
+		if (item == null) return false;
+		return isChestplate(item.getType());
+	}
+	
+	// Leggings
+	
+	public static boolean isLeggings(Material material)
+	{
+		return ReferenceMaterial.getLeggingsMaterials().contains(material);
+	}
+	
+	public static boolean isLeggings(ItemStack item)
+	{
+		if (item == null) return false;
+		return isLeggings(item.getType());
+	}
+	
+	// Boots
+	
+	public static boolean isBoots(Material material)
+	{
+		return ReferenceMaterial.getBootsMaterials().contains(material);
+	}
+	
+	public static boolean isBoots(ItemStack item)
+	{
+		if (item == null) return false;
+		return isBoots(item.getType());
+	}
+	
+	// Armor
+	
+	public static boolean isArmor(Material material)
+	{
+		return isHelmet(material) || isChestplate(material) || isLeggings(material) || isBoots(material);
+	}
+	
+	public static boolean isArmor(ItemStack item)
+	{
+		if (item == null) return false;
+		return isArmor(item.getType());
 	}
 		
 	// -------------------------------------------- //
@@ -1327,63 +1420,42 @@ public class MUtil
 	// -------------------------------------------- //
 	// POTION DERP
 	// -------------------------------------------- //
-	
-	/**
-	 * Get just the potion effect bits. This is to work around bugs with potion parsing.
-	 * Workaround created by the WorldGuard team: https://github.com/sk89q/worldguard/commit/8dec32fa6a1238a11743cea8b8302a6c9d2aaa55
-	 * This issue is reported as BUKKIT-4612 "Potion.fromItemStack causes IllegalArgumentException: Instant potions cannot be extended"
-	 *
-	 * @param item item
-	 * @return new bits
-	 */
-	public static int getPotionEffectBits(ItemStack item)
-	{
-		return item.getDurability() & 0x3F;
-	}
-	
-	/**
-	 * Checks if the given potion is a vial of water.
-	 *
-	 * @param item the item to check
-	 * @return true if it's a water vial
-	 */
-	public static boolean isWaterPotion(ItemStack item)
-	{
-		return getPotionEffectBits(item) == 0;
-	}
-	
-	@SuppressWarnings("deprecation")
-	public static List<PotionEffect> getPotionEffects(ItemStack itemStack)
+
+	// FIXME deal with this
+	// FIXME use modern logic
+	public static List<PotionEffectType> getPotionEffects(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
 		if (itemStack.getType() != Material.POTION) return null;
 
-		List<PotionEffect> ret = new ArrayList<>();
+		List<PotionEffectType> ret = new ArrayList<>();
 		
-		if (isWaterPotion(itemStack)) return ret;
+		PotionMeta meta = InventoryUtil.createMeta(itemStack);
+		ret.add(meta.getBasePotionData().getType().getEffectType());
 		
-		Potion potion = Potion.fromDamage(getPotionEffectBits(itemStack));
-		ret.addAll(potion.getEffects());
-		
-		PotionMeta meta = (PotionMeta) itemStack.getItemMeta();
 		if (meta.hasCustomEffects())
 		{
-			ret.addAll(meta.getCustomEffects());
+			for (PotionEffect potionEffect : meta.getCustomEffects()) {
+				ret.add(potionEffect.getType());
+			}
 		}
 		
 		return ret;
 	}
 	
 	public static final Set<PotionEffectType> HARMFUL_POTION_EFFECTS = Collections.unmodifiableSet(MUtil.set(
-		PotionEffectType.BLINDNESS,
-		PotionEffectType.CONFUSION,
-		PotionEffectType.HARM,
-		PotionEffectType.HUNGER,
-		PotionEffectType.POISON,
 		PotionEffectType.SLOW,
 		PotionEffectType.SLOW_DIGGING,
+		PotionEffectType.HARM,
+		PotionEffectType.CONFUSION,
+		PotionEffectType.BLINDNESS,
+		PotionEffectType.HUNGER,
 		PotionEffectType.WEAKNESS,
-		PotionEffectType.WITHER
+		PotionEffectType.POISON,
+		PotionEffectType.WITHER,
+		PotionEffectType.LEVITATION,
+		PotionEffectType.UNLUCK,
+		PotionEffectType.BAD_OMEN
 	));
 	
 	public static boolean isHarmfulPotion(PotionEffectType potionEffectType)
@@ -1399,10 +1471,10 @@ public class MUtil
 	
 	public static boolean isHarmfulPotion(ItemStack itemStack)
 	{
-		List<PotionEffect> potionEffects = getPotionEffects(itemStack);
+		List<PotionEffectType> potionEffects = getPotionEffects(itemStack);
 		if (potionEffects == null) return false;
 		
-		for (PotionEffect potionEffect : potionEffects)
+		for (PotionEffectType potionEffect : potionEffects)
 		{
 			if (isHarmfulPotion(potionEffect)) return true;
 		}
@@ -1639,7 +1711,7 @@ public class MUtil
 		if (coll.size() == 0) return null;
 		if (coll.size() == 1) return coll.iterator().next();
 		
-		List<T> list = null;
+		List<T> list;
 		if (coll instanceof List<?>)
 		{
 			list = (List<T>)coll;
@@ -1748,7 +1820,7 @@ public class MUtil
 	/**
 	 * @deprecated use equalsishNumber
 	 */
-	@Deprecated
+	@Deprecated // FIXME actually remove uses of this
 	public static boolean equalsish(Number number1, Number number2)
 	{
 		return equalsishNumber(number1, number2);

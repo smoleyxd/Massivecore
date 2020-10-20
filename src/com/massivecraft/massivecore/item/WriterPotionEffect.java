@@ -15,8 +15,7 @@ public class WriterPotionEffect extends WriterAbstractPotionEffect<Object, Objec
 			WriterPotionEffectDuraction.class,
 			WriterPotionEffectAmplifier.class,
 			WriterPotionEffectAmbient.class,
-			WriterPotionEffectParticles.class,
-			WriterPotionEffectColor.class
+			WriterPotionEffectParticles.class
 		);
 	}
 	

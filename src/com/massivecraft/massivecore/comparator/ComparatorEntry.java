@@ -20,7 +20,7 @@ public class ComparatorEntry extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Entry<Object, Object> entry1 = null;
@@ -41,7 +41,6 @@ public class ComparatorEntry extends ComparatorAbstract<Object>
 		Object value1 = entry1.getValue();
 		Object value2 = entry2.getValue();
 		ret = ComparatorSmart.get().compare(value1, value2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

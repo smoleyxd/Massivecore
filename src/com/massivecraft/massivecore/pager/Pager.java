@@ -186,7 +186,7 @@ public class Pager<T>
 		if ( ! this.isValid(number)) return null;
 		
 		// Forge list from collection
-		List<T> items = null;
+		List<T> items;
 		if (this.getItems() instanceof List)
 		{
 			items = (List<T>) this.getItems();

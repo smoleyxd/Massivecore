@@ -19,7 +19,7 @@ public class ComparatorNamed extends ComparatorAbstract<Object>
 	public int compareInner(Object object1, Object object2)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Instance Of
 		Named named1 = null;
@@ -34,7 +34,6 @@ public class ComparatorNamed extends ComparatorAbstract<Object>
 		String name1 = named1.getName();
 		String name2 = named2.getName();
 		ret = ComparatorNaturalOrder.get().compare(name1, name2);
-		if (ret != 0) return ret;
 		
 		// Return
 		return ret;

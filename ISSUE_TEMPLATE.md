@@ -15,7 +15,7 @@
 <!-- As developers we need to know how to trigger the bug before we can fix it. -->
 1. First I did this.
 2. Next I did that.
-3. Finally this happened.
+3. Finally, this happened.
 
 ## Observed Results
 <!-- Tell us what actually happened. -->

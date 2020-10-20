@@ -68,7 +68,7 @@ public class PriorityLines implements Prioritized, Comparable<PriorityLines>
 	public int compareTo(PriorityLines that)
 	{
 		// Create
-		int ret = 0;
+		int ret;
 		
 		// Fill
 		ret = ComparatorPrioritized.get().compare(this, that);

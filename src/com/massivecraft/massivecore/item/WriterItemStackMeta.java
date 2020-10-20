@@ -1,7 +1,5 @@
 package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.item.old.WriterItemStackMetaBannerBase;
-
 public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object, Object>
 {
 	// -------------------------------------------- //
@@ -22,6 +20,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// BOOK
 			WriterItemStackMetaTitle.class,
 			WriterItemStackMetaAuthor.class,
+			WriterItemStackMetaGeneration.class,
 			WriterItemStackMetaPages.class,
 			
 			// LEATHER ARMOR
@@ -30,6 +29,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// MAP
 			WriterItemStackMetaMapScaling.class,
 			WriterItemStackMetaMapColor.class,
+			WriterItemStackMetaMapName.class,
 			
 			// POTION EFFECTS
 			WriterItemStackMetaPotionEffects.class,
@@ -55,7 +55,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaFlags.class,
 			
 			// BANNER
-			WriterItemStackMetaBannerBase.class,
+			//WriterItemStackMetaBannerBase.class,
 			WriterItemStackMetaBannerPatterns.class,
 			
 			// SHIELD
@@ -72,7 +72,16 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// TROPICAL FISH BUCKET
 			WriterItemStackMetaFishPattern.class,
 			WriterItemStackMetaFishPatternColor.class,
-			WriterItemStackMetaFishBodyColor.class
+			WriterItemStackMetaFishBodyColor.class,
+			
+			// CROSSBOW
+			WriterItemStackMetaChargedProjectiles.class,
+			
+			// KNOWLEDGE BOOK
+			WriterItemStackMetaRecipes.class,
+			
+			// SUSPICIOUS STEW
+			WriterItemStackMetaSuspiciousStewEffects.class
 		);
 	}
 	

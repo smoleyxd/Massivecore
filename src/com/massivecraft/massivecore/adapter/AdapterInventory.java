@@ -84,9 +84,9 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		JsonObject jsonInventory = new JsonObject();
 		
 		// These variables are used in loops and repetitive logic.
-		ItemStack itemStack = null;
-		JsonElement jsonItemStack = null;
-		String index = null;
+		ItemStack itemStack;
+		JsonElement jsonItemStack;
+		String index;
 		
 		// Every inventory has a content part.
 		ItemStack[] itemStacks = src.getContents();
@@ -171,17 +171,17 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		JsonObject jsonInventory = json.getAsJsonObject();
 		
 		// The return value
-		Inventory ret = null;
+		Inventory ret;
 		
 		// These variables are used in loops and repetitive logic.
-		ItemStack itemStack = null;
-		JsonElement jsonItemStack = null;
+		ItemStack itemStack;
+		JsonElement jsonItemStack;
 		
 		// There must be a size entry!
 		if ( ! jsonInventory.has(SIZE)) return null;
 		
 		JsonPrimitive jsonSize = jsonInventory.get(SIZE).getAsJsonPrimitive();
-		int size = 0;
+		int size;
 		
 		// What size/type is it?
 		if (jsonSize.isString() && jsonSize.getAsString().equals(PLAYER))
@@ -256,8 +256,7 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		JsonElement jsonItemStack = jsonInventory.get(idx);
 		if (jsonItemStack == null) return null;
 		
-		ItemStack ret = MassiveCore.gson.fromJson(jsonItemStack, ItemStack.class);
-		return ret;
+		return MassiveCore.gson.fromJson(jsonItemStack, ItemStack.class);
 	}
 	
 	// -------------------------------------------- //

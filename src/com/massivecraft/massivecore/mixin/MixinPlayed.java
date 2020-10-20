@@ -39,7 +39,6 @@ public class MixinPlayed extends Mixin
 		UUID uuid = IdUtil.getUuid(senderObject);
 		if (uuid == null) return null;
 		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-		if (offlinePlayer == null) return null;
 		
 		Long ret = offlinePlayer.getFirstPlayed();
 		if (ret == 0) ret = null;
@@ -58,7 +57,6 @@ public class MixinPlayed extends Mixin
 		UUID uuid = IdUtil.getUuid(senderObject);
 		if (uuid == null) return null;
 		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-		if (offlinePlayer == null) return null;
 		
 		Long ret = offlinePlayer.getLastPlayed();
 		if (ret == 0) ret = null;

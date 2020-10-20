@@ -37,7 +37,7 @@ public class ConverterListImmutable<EX, EY> extends Converter<Iterable<EX>, Immu
 		// Fill
 		for (EX ex : exs)
 		{
-			EY ey = null;
+			EY ey;
 			try
 			{
 				ey = this.getConverterElement().convert(ex);

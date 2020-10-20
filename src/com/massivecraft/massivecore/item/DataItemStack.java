@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.collections.MassiveTreeMapDef;
 import com.massivecraft.massivecore.collections.MassiveTreeSetDef;
 import com.massivecraft.massivecore.command.editor.annotation.EditorEditable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.command.editor.annotation.EditorNullable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
@@ -25,6 +26,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta.Generation;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -68,9 +70,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Integer DEFAULT_REPAIRCOST = 0;
 	public static final transient String DEFAULT_TITLE = null;
 	public static final transient String DEFAULT_AUTHOR = null;
+	public static final transient Generation DEFAULT_GENERATION = null;
 	public static final transient List<String> DEFAULT_PAGES = Collections.emptyList();
 	public static final transient Integer DEFAULT_COLOR = Bukkit.getItemFactory().getDefaultLeatherColor().asRGB();
 	public static final transient Boolean DEFAULT_SCALING = false;
+	public static final transient Integer DEFAULT_MAP_COLOR = null;
+	public static final transient String DEFAULT_MAP_NAME = null;
 	public static final transient List<DataPotionEffect> DEFAULT_POTION_EFFECTS = Collections.emptyList();
 	public static final transient String DEFAULT_SKULL = null;
 	public static final transient ContainerGameProfile DEFAULT_GAMEPROFILE = null;
@@ -80,15 +85,16 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Map<String, Integer> DEFAULT_STORED_ENCHANTS = Collections.emptyMap();
 	public static final transient Boolean DEFAULT_UNBREAKABLE = false;
 	public static final transient Set<String> DEFAULT_FLAGS = Collections.emptySet();
-	public static final transient DyeColor DEFAULT_BANNER_BASE = DyeColor.WHITE;
+	public static final transient DyeColor DEFAULT_BANNER_BASE = null;
 	public static final transient List<DataBannerPattern> DEFAULT_BANNER_PATTERNS = Collections.emptyList();
 	public static final transient String DEFAULT_POTION = "water";
 	public static final transient Map<Integer, DataItemStack> DEFAULT_INVENTORY = Collections.emptyMap();
 	public static final transient Integer DEFAULT_POTION_COLOR = null;
-	public static final transient Integer DEFAULT_MAP_COLOR = null;
 	public static final transient TropicalFish.Pattern DEFAULT_FISH_PATTERN = null;
 	public static final transient DyeColor DEFAULT_FISH_PATTERN_COLOR = null;
 	public static final transient DyeColor DEFAULT_FISH_BODY_COLOR = null;
+	public static final transient Map<Integer, DataItemStack> DEFAULT_CHARGEDPROJECTILES = Collections.emptyMap();
+	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -96,7 +102,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 2;
+	private int version = 3;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -155,6 +161,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public String getAuthor() { return get(this.author, DEFAULT_AUTHOR); }
 	public DataItemStack setAuthor(String author) { this.author = set(author, DEFAULT_AUTHOR); return this; }
 	
+	private Generation generation = null;
+	public Generation getGeneration() { return get(this.generation, DEFAULT_GENERATION); }
+	public DataItemStack setGeneration(Generation generation) { this.generation = set(generation, DEFAULT_GENERATION); return this; }
+	
 	@EditorTypeInner(TypeStringParsed.class)
 	private MassiveListDef<String> pages = null;
 	public List<String> getPages() { return get(this.pages, DEFAULT_PAGES); }
@@ -176,6 +186,15 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Boolean scaling = null;
 	public boolean isScaling() { return get(this.scaling, DEFAULT_SCALING); }
 	public DataItemStack setScaling(boolean scaling) { this.scaling = set(scaling, DEFAULT_SCALING); return this; }
+	
+	@EditorType(TypeConverterColor.class)
+	private Integer mapColor = null;
+	public Integer getMapColor() { return get(this.mapColor, DEFAULT_MAP_COLOR); }
+	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
+	
+	private String mapName = null;
+	public String getMapName() { return get(this.mapName, DEFAULT_MAP_NAME); }
+	public DataItemStack setMapName(String mapName) { this.mapName = set(mapName, DEFAULT_MAP_NAME); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > POTION EFFECTS
@@ -262,6 +281,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// Is actually nullable in Bukkit.
 
 	@SerializedName("banner-base")
+	@EditorNullable(true)
 	private DyeColor bannerBase = null;
 	public DyeColor getBannerBase() { return get(this.bannerBase, DEFAULT_BANNER_BASE); }
 	public DataItemStack setBannerBase(DyeColor bannerBase) { this.bannerBase = set(bannerBase, DEFAULT_BANNER_BASE); return this; }
@@ -308,16 +328,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setPotionColor(Integer potionColor) { this.potionColor = set(potionColor, DEFAULT_POTION_COLOR); return this; }
 	
 	// -------------------------------------------- //
-	// FIELDS > MAP COLOR
-	// -------------------------------------------- //
-	// Since 1.11
-	
-	@EditorType(TypeConverterColor.class)
-	private Integer mapColor = null;
-	public Integer getMapColor() { return get(this.mapColor, DEFAULT_MAP_COLOR); }
-	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
-	
-	// -------------------------------------------- //
 	// FIELDS > TROPICAL FISH BUCKET
 	// -------------------------------------------- //
 	// Since 1.13
@@ -333,6 +343,26 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private DyeColor fishBodyColor = null;
 	public DyeColor getFishBodyColor() { return get(this.fishBodyColor, DEFAULT_FISH_BODY_COLOR); }
 	public DataItemStack setFishBodyColor(DyeColor fishBodyColor) { this.fishBodyColor = set(fishBodyColor, DEFAULT_FISH_BODY_COLOR); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > CHARGED PROJECTILES
+	// -------------------------------------------- //
+	// SINCE: 1.14
+	
+	@EditorVisible(false)
+	private Map<Integer, DataItemStack> chargedProjectiles = null;
+	public Map<Integer, DataItemStack> getChargedProjectiles() { return get(this.chargedProjectiles, DEFAULT_CHARGEDPROJECTILES); }
+	public DataItemStack setChargedProjectiles(Map<Integer, DataItemStack> chargedProjectiles) { this.chargedProjectiles = set(chargedProjectiles, DEFAULT_CHARGEDPROJECTILES); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > LEATHER ARMOR
+	// -------------------------------------------- //
+	// SINCE: 1.13
+	
+	@EditorTypeInner(TypeStringParsed.class)
+	private MassiveListDef<String> recipes = null;
+	public List<String> getRecipes() { return get(this.recipes, DEFAULT_RECIPES); }
+	public DataItemStack setRecipes(Collection<String> recipes) { this.recipes = set(recipes, DEFAULT_RECIPES); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -525,9 +555,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -542,10 +575,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -564,9 +598,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -581,10 +618,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -610,9 +648,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			// this.getRepaircost(), that.getRepaircost(),
 			this.getTitle(), that.getTitle(),
 			this.getAuthor(), that.getAuthor(),
+			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
+			this.getMapColor(), that.getMapColor(),
+			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
@@ -627,10 +668,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(), that.getPotion(),
 			this.getInventory(), that.getInventory(),
 			this.getPotionColor(), that.getPotionColor(),
-			this.getMapColor(), that.getMapColor(),
 			this.getFishPattern(), that.getFishPattern(),
 			this.getFishBodyColor(), that.getFishBodyColor(),
-			this.getFishPatternColor(), that.getFishPatternColor()
+			this.getFishPatternColor(), that.getFishPatternColor(),
+			this.getChargedProjectiles(), that.getChargedProjectiles(),
+			this.getRecipes(), that.getRecipes()
 		);
 	}
 	
@@ -654,9 +696,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getRepaircost(),
 			this.getTitle(),
 			this.getAuthor(),
+			this.getGeneration(),
 			this.getPages(),
 			this.getColor(),
 			this.isScaling(),
+			this.getMapColor(),
+			this.getMapName(),
 			this.getPotionEffects(),
 			this.getSkull(),
 			this.getContainerGameProfile(),
@@ -671,10 +716,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getPotion(),
 			this.getInventory(),
 			this.getPotionColor(),
-			this.getMapColor(),
 			this.getFishPattern(),
 			this.getFishBodyColor(),
-			this.getFishPatternColor()
+			this.getFishPatternColor(),
+			this.getChargedProjectiles(),
+			this.getRecipes()
 		);
 	}
 	

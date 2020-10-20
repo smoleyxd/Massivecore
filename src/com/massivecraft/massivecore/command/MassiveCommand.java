@@ -326,7 +326,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	public <T extends MassiveCommand> T addChild(MassiveCommand child)
 	{
 		// NoChange
-		if (this.getChildren().indexOf(child) != -1) return (T) this;
+		if (this.getChildren().contains(child)) return (T) this;
 			
 		// Apply
 		return this.addChild(child, this.getChildren().size());
@@ -494,9 +494,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (sender == null) return true;
 		
 		if (!this.isVisibleTo(sender)) return false;
-		if (!this.isRequirementsMet(sender, false)) return false;
-		
-		return true;
+		return this.isRequirementsMet(sender, false);
 	}
 	
 	// -------------------------------------------- //
@@ -548,8 +546,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	{
 		if (index < 0) return false;
 		if (this.isConcatenating() && this.getConcatenationIndex() < index) index = this.getConcatenationIndex();
-		if (this.getParameters().size() <= index) return false;
-		return true;
+		return this.getParameters().size() > index;
 	}
 	
 	public int getPageParameterIndex()
@@ -820,16 +817,15 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		args:
 		for (String arg : args)
 		{
-			parameters:
 			for (int i = 0; i < this.getParameters().size(); i++)
 			{
 				Type<?> type = this.getParameterType(i);
 				
-				if (ret[i] != null) continue parameters; // If that index is already filled.
+				if (ret[i] != null) continue; // If that index is already filled.
 				
 				// We do in fact want to allow null args.
 				// Those are used by us in some special circumstances.
-				if (arg != null && ! type.isValid(arg, sender)) continue parameters; // If this arg isn't valid for that index.
+				if (arg != null && !type.isValid(arg, sender)) continue; // If this arg isn't valid for that index.
 				
 				ret[i] = arg;
 				continue args; // That arg is now set :)
@@ -1068,7 +1064,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (permName.isEmpty()) permName = "BASECOMMAND";
 
 		// Create ret
-		T ret = null;
+		T ret;
 
 		// Try non-lenient
 		ret = getPerm(permName, false, permClass);
@@ -1145,8 +1141,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 				// Crap!
 				else
 				{
-					Mson base = null;
-					Collection<MassiveCommand> suggestions = null;
+					Mson base;
+					Collection<MassiveCommand> suggestions;
 					
 					if (matches.isEmpty())
 					{
@@ -1336,7 +1332,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		boolean first = true;
 		for (MassiveCommand command : commands)
 		{
-			Mson mson = null;
+			Mson mson;
 
 			if (first && onlyFirstAlias)
 			{
@@ -1566,8 +1562,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	{
 		if (idx < 0) return false;
 		if (idx+1 > this.getArgs().size()) return false;
-		if (this.getArgs().get(idx) == null) return false;
-		return true;
+		return this.getArgs().get(idx) != null;
 	}
 	
 	public boolean argIsSet()

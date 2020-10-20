@@ -50,7 +50,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 		String b = object2.toString();
 
 		int ia = 0, ib = 0;
-		int nza = 0, nzb = 0;
+		int nza, nzb;
 		char ca, cb;
 		int result;
 
@@ -166,7 +166,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 				if (bias == 0)
 					bias = +1;
 			}
-			else if (ca == 0 && cb == 0)
+			else if (ca == 0)
 			{
 				return bias;
 			}

@@ -61,7 +61,6 @@ public class MetadataSimple extends MetadataValueAdapter
 	{
 		if (metadatable == null) return null;
 		List<MetadataValue> metaValues = metadatable.getMetadata(key);
-		if (metaValues == null) return null;
 		if (metaValues.isEmpty()) return null;
 		return metaValues.get(0);
 	}

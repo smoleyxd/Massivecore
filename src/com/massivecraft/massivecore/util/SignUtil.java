@@ -192,7 +192,6 @@ public class SignUtil
 		if (blocks == null) return null;
 		
 		List<String> lines = getLines(blocks);
-		if (lines == null) return null;
 		
 		if (title != null)
 		{

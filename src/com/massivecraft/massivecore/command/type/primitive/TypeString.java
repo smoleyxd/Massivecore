@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.command.type.primitive;
 
+import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.TypeAbstract;
 import com.massivecraft.massivecore.mixin.MixinChatFilter;
 import org.bukkit.command.CommandSender;
@@ -44,7 +45,7 @@ public class TypeString extends TypeAbstract<String>
 	}
 	
 	@Override
-	public String read(String arg, CommandSender sender)
+	public String read(String arg, CommandSender sender) throws MassiveException
 	{
 		if (this.isFiltered())
 		{

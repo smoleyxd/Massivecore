@@ -112,8 +112,7 @@ public class TypeStringCommand extends TypeAbstract<String>
 	public static Map<String, Command> getKnownCommands()
 	{
 		SimpleCommandMap simpleCommandMap = EngineMassiveCoreCommandRegistration.getSimpleCommandMap();
-		Map<String, Command> knownCommands = EngineMassiveCoreCommandRegistration.getSimpleCommandMapDotKnownCommands(simpleCommandMap);
-		return knownCommands;
+		return EngineMassiveCoreCommandRegistration.getSimpleCommandMapDotKnownCommands(simpleCommandMap);
 	}
 	
 	public static Command getCommand(String name)

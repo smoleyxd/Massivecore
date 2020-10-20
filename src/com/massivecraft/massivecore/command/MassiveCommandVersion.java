@@ -55,7 +55,7 @@ public class MassiveCommandVersion extends MassiveCommand
 		
 		String authors = null;
 		List<String> authorList = pdf.getAuthors();
-		if (authorList != null && authorList.size() > 0)
+		if (authorList.size() > 0)
 		{
 			authors = Txt.implodeCommaAndDot(authorList, "<aqua>%s", "<i>, ", " <i>and ", "");
 			authors = Txt.parse(authors);

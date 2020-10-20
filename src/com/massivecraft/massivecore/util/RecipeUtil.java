@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.mixin.MixinRecipe;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
@@ -45,38 +46,27 @@ public class RecipeUtil
 	// CIRCULAR
 	// -------------------------------------------- //
 	
-	public static void addCircular(Material material, int maxData)
-	{
-		ItemStack[] items = new ItemStack[maxData];
-		for (int i = 0; i < maxData; i++)
-		{
-			items[i] = new ItemStack(material, 1, (short) i);
-		}
-		addCircular(items);
-	}
-	
 	public static void addCircular(ItemStack... items)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
 			int next = (i+1) % items.length;
 			ItemStack item = items[i];
-			addShapeless(items[next], item.getDurability(), item.getAmount(), item.getType());
+			addShapeless(items[next], item.getAmount(), item.getType());
 		}
 	}
 	
 	// ------------------------------------------- //
 	// SHAPELESS
 	// -------------------------------------------- //
-	
-	@SuppressWarnings("deprecation")
+
+	// TODO check this out
 	public static ShapelessRecipe createShapeless(ItemStack result, Object... objects)
 	{
 		ShapelessRecipe recipe = MixinRecipe.get().createShapeless(result);
 		
 		int quantity = 1;
-		int data = 0;
-		Material material = null;
+		Material material;
 		
 		for (Object object : objects)
 		{
@@ -86,20 +76,18 @@ public class RecipeUtil
 				{
 					quantity = (Integer) object;
 				}
-				else
-				{
-					data = ((Number)object).intValue();
-				}
 			}
 			else if (object instanceof Material)
 			{
 				material = (Material)object;
 				
-				recipe.addIngredient(quantity, material, data);
+				recipe.addIngredient(quantity, material);
 				
 				quantity = 1;
-				data = 0;
-				material = null;
+			}
+			else if (object instanceof RecipeChoice)
+			{
+				recipe.addIngredient((RecipeChoice) object);
 			}
 			else
 			{
