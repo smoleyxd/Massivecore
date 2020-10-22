@@ -27,6 +27,8 @@ public class NmsChat116R1P extends NmsChatAbstract
 	protected Enum<?> enumChatMessageTypeGameInfo;
 	protected Enum<?> enumChatMessageTypeSystem;
 	
+	protected UUID systemUUID = new UUID(0,0);
+	
 	// -------------------------------------------- //
 	// SETUP
 	// -------------------------------------------- //
@@ -94,8 +96,7 @@ public class NmsChat116R1P extends NmsChatAbstract
 			Player player = (Player)sendee;
 			String raw = mson.toRaw();
 			Object component = toComponent(raw);
-			// TODO: Should this UUID represent the Sendee or the Sender? IDK!
-			Object packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChat, component, this.enumChatMessageTypeSystem, player.getUniqueId());
+			Object packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChat, component, this.enumChatMessageTypeSystem, systemUUID);
 			NmsBasics.get().sendPacket(player, packet);
 		}
 		else
@@ -110,19 +111,8 @@ public class NmsChat116R1P extends NmsChatAbstract
 	// -------------------------------------------- //
 	
 	@Override
-	public void sendActionbarRaw(Object sendeeObject, String raw)
-	{
-		Player player = IdUtil.getPlayer(sendeeObject);
-		if (player == null) return;
-		
-		Object component = toComponent(raw);
-		Object packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChat, component, this.enumChatMessageTypeGameInfo, player.getUniqueId());
-		NmsBasics.get().sendPacket(player, packet);
-	}
-	
-	@Override
 	public <T> T constructActionBarPacket(Object component) {
-		throw notImplemented();
+		return ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChatType, component, this.enumChatMessageTypeGameInfo, systemUUID);
 	}
 	
 }
