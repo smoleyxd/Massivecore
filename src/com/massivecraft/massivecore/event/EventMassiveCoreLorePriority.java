@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.event;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateJPredicate;
+import com.massivecraft.massivecore.util.InventoryUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
@@ -56,10 +57,11 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	private static List<Entry<String, Integer>> getLoreEntries(ItemStack item)
 	{
-		ItemMeta meta = item.getItemMeta();
+		ItemMeta meta = InventoryUtil.getMeta(item);
 		if ( ! meta.hasLore()) return Collections.emptyList();
 
 		List<Entry<String, Integer>> ret = new MassiveList<>();
+		//noinspection ConstantConditions
 		for (String line : meta.getLore())
 		{
 			ret.add(new SimpleEntry<>(line, PRIORITY_DEFAULT));

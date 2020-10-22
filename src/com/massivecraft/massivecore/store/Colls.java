@@ -53,11 +53,7 @@ public abstract class Colls<C extends Coll<E>, E extends Entity<E>> implements A
 		{
 			this.getColls();
 		}
-		else
-		{
-			// TODO: Uuuuuh
-		}
-	}
+}
 	
 	private MassivePlugin plugin = null;
 	@Override

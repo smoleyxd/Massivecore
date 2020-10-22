@@ -83,6 +83,7 @@ public class ChestGui
 	
 	private Map<Integer, ChestAction> indexToAction = new MassiveMap<>();
 	public Map<Integer, ChestAction> getIndexToAction() { return this.indexToAction; }
+	@SuppressWarnings("SuspiciousMethodCalls")
 	public ChestAction removeAction(ItemStack item) { return this.indexToAction.remove(item); }
 	public ChestAction setAction(int index, ChestAction action) { return this.indexToAction.put(index, action); }
 	public ChestAction setAction(int index, String command) { return this.setAction(index, new ChestActionCommand(command)); }

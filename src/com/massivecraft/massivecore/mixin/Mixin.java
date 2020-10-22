@@ -226,8 +226,20 @@ public class Mixin extends Engine
 		"113R1", "Minecraft 1.13.0 --> ? [1_13_R1]",
 		"113R1P", "Minecraft 1.13.0+ [1_13_R1+]",
 		
+		"113R2", "Minecraft 1.13.2 --> ? [1_13_R2]",
+		"113R2P", "Minecraft 1.13.2+ [1_13_R2+]",
+		
+		"114R1", "Minecraft 1.14.0 --> ? [1_14_R1]",
+		"114R1P", "Minecraft 1.14.0+ [1_14_R1+]",
+		
 		"115R1", "Minecraft 1.15.0 --> ? [1_15_R1]",
-		"115R1P", "Minecraft 1.15.0+ [1_15_R1+]"
+		"115R1P", "Minecraft 1.15.0+ [1_15_R1+]",
+		
+		"116R1", "Minecraft 1.16.0 --> ? [1_16_R1]",
+		"116R1P", "Minecraft 1.16.0+ [1_16_R1+]",
+		
+		"116R2", "Minecraft 1.16.2 --> ? [1_16_R2]",
+		"116R2P", "Minecraft 1.16.2+ [1_16_R2+]"
 	);
 	
 	public String createName()

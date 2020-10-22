@@ -154,7 +154,7 @@ public class ReflectionUtil
 	@SuppressWarnings("unchecked")
 	public static <T> T invokeMethod(Method method, Object target)
 	{
-		return (T) invokeMethod(method, target, EMPTY_ARRAY_OF_OBJECT);
+		return invokeMethod(method, target, EMPTY_ARRAY_OF_OBJECT);
 	}
 	
 	// -------------------------------------------- //
@@ -202,7 +202,7 @@ public class ReflectionUtil
 	@SuppressWarnings("unchecked")
 	public static <T> T invokeConstructor(Constructor<?> constructor)
 	{
-		return (T) invokeConstructor(constructor, EMPTY_ARRAY_OF_OBJECT);
+		return invokeConstructor(constructor, EMPTY_ARRAY_OF_OBJECT);
 	}
 	
 	// -------------------------------------------- //

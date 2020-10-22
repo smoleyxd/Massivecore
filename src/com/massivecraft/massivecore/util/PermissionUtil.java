@@ -56,7 +56,7 @@ public class PermissionUtil
 	// ENSURE HAS
 	// -------------------------------------------- //
 	
-	// TODO: This methodology I don't beleive in any more.
+	// TODO: This methodology I don't believe in any more.
 	// TODO: Rework and improve technology.
 	
 	public static void ensureHas(Permissible permissible, String permissionName)

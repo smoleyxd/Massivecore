@@ -54,15 +54,9 @@ public class WriterItemStackMetaPotion extends WriterAbstractItemStackMetaField<
 		{
 			// DESERIALIZE
 			
-			// Create
-			PotionData potionData = null;
-			
-			// Fill
-			if (potionData == null)
-			{
-				String potionString = ca.getPotion();
-				potionData = PotionUtil.toPotionData(potionString);
-			}
+			// Create & Fill
+			String potionString = ca.getPotion();
+			PotionData potionData = PotionUtil.toPotionData(potionString);
 			
 			// Set
 			cb.setBasePotionData(potionData);

@@ -806,7 +806,7 @@ public class InventoryUtil
 			if (slotType == SlotType.CRAFTING) return null;
 			if (slotType == SlotType.ARMOR) return null;
 			if (slotType == SlotType.RESULT) return null;
-			if (currentItem.getType() == Material.AIR) return null;
+			if (currentItem == null || currentItem.getType() == Material.AIR) return null;
 			return currentItem;
 		}
 		else
@@ -1315,7 +1315,7 @@ public class InventoryUtil
 
 	public static List<String> getSortedLore(ItemStack item)
 	{
-		if ( ! item.getItemMeta().hasLore()) return Collections.emptyList();
+		if ( ! getMeta(item).hasLore()) return Collections.emptyList();
 
 		EventMassiveCoreLorePriority event = new EventMassiveCoreLorePriority(item);
 		event.run();
@@ -1336,7 +1336,7 @@ public class InventoryUtil
 	public static void sortLore(ItemStack item)
 	{
 		if (item == null) return;
-		if ( ! item.getItemMeta().hasLore()) return;
+		if ( ! getMeta(item).hasLore()) return;
 
 		List<String> lore = getSortedLore(item);
 		InventoryUtil.setLore(item, lore);

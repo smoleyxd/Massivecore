@@ -41,6 +41,7 @@ public class ExceptionSet
 	{
 		this.standard = standard;
 		if (exceptions.length == 0) return;
+		//noinspection ConfusingArgumentToVarargsMethod
 		Collection<String> strings = stringifyAll(exceptions);
 		this.exceptions.addAll(strings);
 	}

@@ -66,16 +66,10 @@ public class WriterItemStackMetaShieldPatterns extends WriterAbstractItemStackMe
 		// Get
 		boolean creative = (fb != null && !fb.isEmpty());
 		Banner banner = getBanner(cb, creative);
-		if (banner == null) return;
+		if (banner == null || fb == null) return;
 		
 		// Change
 		banner.setPatterns(fb);
-		
-		// Ensure Base
-		if (banner.getBaseColor() == null)
-		{
-			banner.getPatterns();
-		}
 		
 		// Set
 		setBanner(cb, banner);

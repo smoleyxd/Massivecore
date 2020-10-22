@@ -65,7 +65,7 @@ public abstract class WriterAbstractItemStackMeta<OB, CB, FA, FB> extends Writer
 		
 		// Dodge Update NPE
 		// FIXME This wasn't working in 1.13
-		if (banner.getBaseColor() == null) return;
+		//if (banner.getBaseColor() == null) return;
 		
 		// Update with Force without Physics
 		banner.update(true, false);

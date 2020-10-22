@@ -53,7 +53,7 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 		// Get
 		boolean creative = (fb != null);
 		Banner banner = getBanner(cb, creative);
-		if (banner == null) return;
+		if (banner == null || fb == null) return;
 		
 		// Change
 		banner.setBaseColor(fb);

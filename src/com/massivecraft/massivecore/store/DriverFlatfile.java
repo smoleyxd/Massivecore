@@ -172,7 +172,7 @@ public class DriverFlatfile extends DriverAbstract
 		content = content.trim();
 		if (content.length() == 0) return null;
 		
-		return new JsonParser().parse(content).getAsJsonObject();
+		return JsonParser.parseString(content).getAsJsonObject();
 	}
 	
 	@Override

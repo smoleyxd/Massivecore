@@ -79,6 +79,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	
 	private static String readDisableCode() {
 		InputStream inputStream = MassiveCore.get().getResource("sponsor-disable-code");
+		if (inputStream == null) return "";
 		Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
 		return scanner.hasNext() ? scanner.next().trim() : "";
 	}

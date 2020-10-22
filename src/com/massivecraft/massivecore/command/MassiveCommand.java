@@ -1471,6 +1471,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 
 		// ... else check the children.
 		List<String> ret = new ArrayList<>();
+		//noinspection ConstantConditions
 		String token = args.get(args.size()-1).toLowerCase();
 		for (MassiveCommand child : this.getChildren())
 		{

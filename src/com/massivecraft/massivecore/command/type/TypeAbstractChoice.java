@@ -149,7 +149,6 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 		boolean suggestNone = false;
 		boolean suggestAmbiguous = false;
 		boolean suggestAll = false;
-		boolean suggestLevenshtein = false;
 		
 		// Nothing Found
 		String message;
@@ -157,7 +156,6 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 		{
 			message = String.format(MESSAGE_MATCH_NOTHING, this.getName(), arg);
 			exception.addMessage(message);
-			suggestLevenshtein = true;
 		}
 		// Ambiguous
 		else
@@ -182,7 +180,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 		}
 		else
 		{
-			Collection<T> suggestions = null;
+			Collection<T> suggestions;
 			
 			if (suggestAmbiguous)
 			{

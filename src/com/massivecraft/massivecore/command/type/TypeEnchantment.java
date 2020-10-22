@@ -59,7 +59,8 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"channeling", new MassiveList<>("Channeling", "CHANNELING"),
 		"piercing", new MassiveList<>("Piercing", "PIERCING"),
 		"multishot", new MassiveList<>("Multishot", "MULTISHOT"),
-		"quick_charge", new MassiveList<>("Quick Charge", "QUICKCHARGE", "QuickCharge")
+		"quick_charge", new MassiveList<>("Quick Charge", "QUICKCHARGE", "QuickCharge"),
+		"soul_speed", new MassiveList<>("Soul Speed", "SOULSPEED", "SoulSpeed")
 	);
 	
 	public static String enchantmentToKey(Enchantment enchantment) {

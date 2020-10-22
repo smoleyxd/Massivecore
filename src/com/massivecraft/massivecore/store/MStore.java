@@ -58,7 +58,7 @@ public class MStore
 	public static boolean equal(JsonElement one, JsonElement two)
 	{
 		if (one == null) return two == null;
-		if (two == null) return one == null;
+		if (two == null) return false;
 		
 		return GsonEqualsChecker.equals(one, two);
 	}

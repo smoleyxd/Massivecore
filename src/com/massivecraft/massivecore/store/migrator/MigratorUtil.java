@@ -231,7 +231,7 @@ public class MigratorUtil
 
 	private static boolean migrateObject(Type realType, Type jsonType, JsonObject object)
 	{
-		boolean migrated = false;
+		boolean migrated;
 		Type classType = jsonType != null ? jsonType : realType;
 		migrated = migrateClass(classType, object);
 		if (jsonType != null) migrated = migrateFields(jsonType, object) | migrated;
@@ -265,7 +265,7 @@ public class MigratorUtil
 		JsonElement key = array.get(0);
 		JsonElement value = array.get(1);
 
-		boolean migrated = false;
+		boolean migrated;
 		migrated = migrate(keyType, key);
 		migrated = migrate(valueType, value) | migrated;
 		return migrated;

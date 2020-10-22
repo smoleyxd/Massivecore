@@ -20,7 +20,7 @@ public class RecipeUtil
 	public static ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
 	{
 		ItemStack ret = new ItemStack(material, amount);
-		PotionMeta meta = (PotionMeta)ret.getItemMeta();
+		PotionMeta meta = InventoryUtil.getMeta(ret);
 		PotionData data = new PotionData(type, extended, upgraded);
 		meta.setBasePotionData(data);
 		ret.setItemMeta(meta);
