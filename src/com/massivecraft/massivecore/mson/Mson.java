@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.mson;
 
+import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.adapter.AdapterLowercaseEnum;
 import com.massivecraft.massivecore.adapter.AdapterMsonEventFix;
 import com.massivecraft.massivecore.collections.MassiveList;
@@ -26,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,8 +38,8 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 
 	private static final transient long serialVersionUID = 1L;
-
-	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("\u00A7");
+	
+	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<code>\u00A7[0-9a-fk-or]))|(?=<(?<hex>(#[a-fA-F0-9]{6}))>)");
 	
 	public static final transient AdapterLowercaseEnum<ChatColor> ADAPTER_LOWERCASE_CHAT_COLOR = AdapterLowercaseEnum.get(ChatColor.class);
 	public static final transient AdapterLowercaseEnum<MsonEventAction> ADAPTER_LOWERCASE_MSON_EVENT_ACTION = AdapterLowercaseEnum.get(MsonEventAction.class);
@@ -122,10 +124,19 @@ public class Mson implements Serializable
 	public String getText() { return this.text; }
 
 	// FIELD: Color of the mson
-	private final ChatColor color;
-	public ChatColor getColor() { return this.color; }
-	public ChatColor getEffectiveColor() { return color != null ? color : getInheritedColor(); }
-	public ChatColor getInheritedColor() { return hasParent() ? getParent().getEffectiveColor() : null; }
+	private final String color;
+	public String getColor() { return this.color; }
+	public String getEffectiveColor() { return color != null ? color : getInheritedColor(); }
+	public String getInheritedColor() { return hasParent() ? getParent().getEffectiveColor() : null; }
+	public ChatColor getEffectiveColorCode() {
+		try {
+			return ChatColor.valueOf(getEffectiveColor().toUpperCase());
+		}
+		catch (Exception ignored) {
+			return getInheritedColorCode();
+		}
+	}
+	public ChatColor getInheritedColorCode() { return hasParent() ? getParent().getEffectiveColorCode() : null; }
 
 	// FIELD: bold
 	private final Boolean bold;
@@ -254,6 +265,7 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	public Mson text(String text) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	public Mson color(String color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	public Mson color(ChatColor color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	public Mson bold(Boolean bold) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	public Mson italic(Boolean italic) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
@@ -295,6 +307,7 @@ public class Mson implements Serializable
 		return ret.createTooltip(tooltip, prefix + insertionString);
 	}
 	public Mson insertionString (String insertionString) { return this.insertionString(insertionString, null); }
+	public Mson extra(Mson extra) { return extra(new Mson[] {extra}); }
 	public Mson extra(List<Mson> extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	public Mson extra(Mson[] extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra == null ? null : ImmutableList.copyOf(extra), parent); }
 	public Mson parent(Mson parent) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
@@ -389,7 +402,7 @@ public class Mson implements Serializable
 		if (style == ChatColor.UNDERLINE) return this.underlined(true);
 		if (style == ChatColor.STRIKETHROUGH) return this.strikethrough(true);
 		if (style == ChatColor.MAGIC) return this.obfuscated(true);
-		if (style.isColor()) return this.color(style);
+		if (style.isColor()) return this.color(style.name().toLowerCase());
 		
 		throw new UnsupportedOperationException(style.name());
 	}
@@ -403,7 +416,7 @@ public class Mson implements Serializable
 
 	public Mson stripStyle()
 	{
-		Mson ret = Mson.valueOf(text, null, null, null, null, null, null, clickEvent, hoverEvent, insertion, null, parent);
+		Mson ret = Mson.valueOf(text, (String)null, null, null, null, null, null, clickEvent, hoverEvent, insertion, null, parent);
 		
 		if (this.hasExtra())
 		{
@@ -453,7 +466,7 @@ public class Mson implements Serializable
 	// Text
 	Mson(String text)
 	{
-		this(text, null, null, null, null, null, null, null, null, null, null, null);
+		this(text, (String) null, null, null, null, null, null, null, null, null, null, null);
 	}
 	
 	public static Mson mson(String text)
@@ -462,13 +475,19 @@ public class Mson implements Serializable
 	}
 	
 	// Full
-	Mson(String text, ChatColor color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	Mson(String text, String color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
 	{
 		// Text
 		this.text = Objects.requireNonNull(text);
 		
 		// Color
-		if (color != null && ! color.isColor()) throw new IllegalArgumentException(color.name() + " is not a color");
+		if (color != null) {
+			if (!color.startsWith("#")) {
+				ChatColor chatColor = ChatColor.valueOf(color.toUpperCase());
+				if (!chatColor.isColor()) throw new IllegalArgumentException(chatColor.name() + " is not a color");
+			}
+			color = color.toLowerCase();
+		}
 		this.color = color;
 		
 		// Format
@@ -523,7 +542,17 @@ public class Mson implements Serializable
 		this.parent = parent;
 	}
 	
+	Mson(String text, ChatColor color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	{
+		this(text, color == null ? null : color.name().toLowerCase(), bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
+	}
+	
 	public static Mson valueOf(String text, ChatColor color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	{
+		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
+	}
+	
+	public static Mson valueOf(String text, String color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
 	{
 		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
@@ -560,7 +589,14 @@ public class Mson implements Serializable
 			if (msons.isEmpty()) return mson();
 			if (msons.size() == 1) return msons.get(0);
 			
-			return mson().extra(msons);
+			Mson mson = mson();
+			
+			for (int i = msons.size()-1; i >= 0; i--) {
+				if (mson == null) mson = msons.get(i);
+				else mson = msons.get(i).extra(mson);
+			}
+			
+			return mson;
 		}
 		else if (part instanceof Object[])
 		{
@@ -620,13 +656,9 @@ public class Mson implements Serializable
 		// We split at color/format change.
 		String[] parts = PATTERN_PARSE_PREFIX.split(message);
 
-		// Since we start with a color, the first element will be empty.
-		// We don't want that empty element.
-		parts = Arrays.copyOfRange(parts, 1, parts.length);
-
 		List<Mson> msons = new MassiveList<>();
 
-		ChatColor latestColor = null;
+		String latestColor = null;
 		Boolean bold = null;
 		Boolean italic = null;
 		Boolean underlined = null;
@@ -635,24 +667,44 @@ public class Mson implements Serializable
 
 		for (String part : parts)
 		{
-			ChatColor color = ChatColor.getByChar(part.charAt(0));
-			String text = part.substring(1);
+			Matcher matcher = PATTERN_PARSE_PREFIX.matcher(part);
 			
-			if ((color != null && color.isColor()) || color == ChatColor.RESET)
+			String text;
+			
+			if (matcher.find())
 			{
-				latestColor = color;
-				bold = null;
-				italic = null;
-				underlined = null;
-				strikethrough = null;
-				obfuscated = null;
+				if (matcher.group("code") != null)
+				{
+					ChatColor color = ChatColor.getByChar(part.charAt(1));
+					text = part.substring(2);
+					
+					if ((color != null && color.isColor()) || color == ChatColor.RESET)
+					{
+						latestColor = color.name().toLowerCase();
+						bold = null;
+						italic = null;
+						underlined = null;
+						strikethrough = null;
+						obfuscated = null;
+					}
+					if (color == ChatColor.RESET) latestColor = null;
+					else if (color == ChatColor.BOLD) bold = true;
+					else if (color == ChatColor.ITALIC) italic = true;
+					else if (color == ChatColor.UNDERLINE) underlined = true;
+					else if (color == ChatColor.STRIKETHROUGH) strikethrough = true;
+					else if (color == ChatColor.MAGIC) obfuscated = true;
+				}
+				else
+				{
+					latestColor = matcher.group("hex");
+					// The group matches just the hex, but we also need to remove the chevrons.
+					text = part.substring(latestColor.length()+2);
+				}
 			}
-			if (color == ChatColor.RESET) latestColor = null;
-			else if (color == ChatColor.BOLD) bold = true;
-			else if (color == ChatColor.ITALIC) italic = true;
-			else if (color == ChatColor.UNDERLINE) underlined = true;
-			else if (color == ChatColor.STRIKETHROUGH) strikethrough = true;
-			else if (color == ChatColor.MAGIC) obfuscated = true;
+			else {
+				MassiveCore.get().log(Level.WARNING,"No Match found parsing MSON");
+				continue;
+			}
 			
 			// Don't add empty msons.
 			if (text.isEmpty()) continue;
@@ -1149,13 +1201,21 @@ public class Mson implements Serializable
 	{
 		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), mson());
 	}
+	public static Mson implodeCommaAndDot(final Collection<?> objects, String color)
+	{
+		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), DOT.color(color));
+	}
+	public static Mson implodeCommaAnd(final Collection<?> objects, String  color)
+	{
+		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), mson());
+	}
 	public static Mson implodeCommaAndDot(final Collection<?> objects)
 	{
-		return implodeCommaAndDot(objects, null);
+		return implodeCommaAndDot(objects, (String) null);
 	}
 	public static Mson implodeCommaAnd(final Collection<?> objects)
 	{
-		return implodeCommaAnd(objects, null);
+		return implodeCommaAnd(objects, (String) null);
 	}
 	
 	// -------------------------------------------- //
@@ -1308,7 +1368,7 @@ public class Mson implements Serializable
 			// http://minecraft.gamepedia.com/Formatting_codes#Formatting_codes
 			if (styled)
 			{
-				if (this.getEffectiveColor() != null) builder.append(this.getEffectiveColor());
+				if (this.getEffectiveColorCode() != null) builder.append(this.getEffectiveColorCode());
 				if (this.isEffectiveBold() != null && this.isEffectiveBold()) builder.append(ChatColor.BOLD);
 				if (this.isEffectiveItalic() != null && this.isEffectiveItalic()) builder.append(ChatColor.ITALIC);
 				if (this.isEffectiveUnderlined() != null && this.isEffectiveUnderlined()) builder.append(ChatColor.UNDERLINE);
