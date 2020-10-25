@@ -38,7 +38,7 @@
         <!-- Vault -->
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
-            <artifactId>Vault</artifactId>
+            <artifactId>VaultAPI</artifactId>
         </dependency>
         <!-- Kotlin -->
         <dependency>
