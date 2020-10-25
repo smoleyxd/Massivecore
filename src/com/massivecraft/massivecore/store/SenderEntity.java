@@ -44,7 +44,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 		String id = this.getId();
 		if (id == null) return;
 		this.sender = IdUtil.getSender(id);
-		this.senderInitiated = true;
+		if (this.sender != null) this.senderInitiated = true;
 	}
 
 	@Override public String getName()
