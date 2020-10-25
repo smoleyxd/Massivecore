@@ -8,7 +8,7 @@ public class MassiveCoreMConfColl extends Coll<MassiveCoreMConf>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MassiveCoreMConfColl i = new MassiveCoreMConfColl();
+	private static final MassiveCoreMConfColl i = new MassiveCoreMConfColl();
 	public static MassiveCoreMConfColl get() { return i; }
 	private MassiveCoreMConfColl()
 	{

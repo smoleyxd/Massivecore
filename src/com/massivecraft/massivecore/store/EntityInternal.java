@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.xlib.gson.Gson;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
+@SuppressWarnings("CanBeFinal")
 public class EntityInternal<E extends EntityInternal<E>> implements Identified
 {
 	// -------------------------------------------- //

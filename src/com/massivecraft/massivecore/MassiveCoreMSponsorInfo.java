@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+@SuppressWarnings("CanBeFinal")
 public class MassiveCoreMSponsorInfo extends Entity<MassiveCoreMSponsorInfo>
 {
 	// -------------------------------------------- //

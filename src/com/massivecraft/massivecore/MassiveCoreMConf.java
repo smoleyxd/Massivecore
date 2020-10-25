@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("CanBeFinal")
 @EditorName("config")
 public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 {

@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class NmsEntityGet18R1P extends NmsEntityGet
 {
 	// -------------------------------------------- //

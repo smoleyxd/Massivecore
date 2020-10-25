@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 {
 	// -------------------------------------------- //

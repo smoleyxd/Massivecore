@@ -8,6 +8,7 @@ import java.util.List;
 
 // Self referencing generic.
 // http://www.angelikalanger.com/GenericsFAQ/FAQSections/ProgrammingIdioms.html#FAQ206
+@SuppressWarnings("CanBeFinal")
 public class Entity<E extends Entity<E>> extends EntityInternal<E>
 {
 	// -------------------------------------------- //

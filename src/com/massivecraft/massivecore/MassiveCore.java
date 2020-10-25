@@ -93,8 +93,8 @@ public class MassiveCore extends MassivePlugin
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Random random = new Random();
-	public static Gson gson = getMassiveCoreGsonBuilder().create();
+	public static final Random random = new Random();
+	public static final Gson gson = getMassiveCoreGsonBuilder().create();
 	
 	public static GsonBuilder getMassiveCoreGsonBuilder()
 	{

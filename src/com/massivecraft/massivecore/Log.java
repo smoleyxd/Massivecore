@@ -25,7 +25,7 @@ public class Log
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private Map<String, Object> fields = new MassiveMap<>();
+	private final Map<String, Object> fields = new MassiveMap<>();
 	public Map<String, Object> getFields() { return this.fields; }
 	
 	// -------------------------------------------- //

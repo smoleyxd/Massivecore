@@ -67,7 +67,7 @@ public class Button
 	public Button setError(String error) { this.error = error; return this; }
 	
 	// Requirements to always be validated.
-	private List<Requirement> requirements = new MassiveList<>();
+	private final List<Requirement> requirements = new MassiveList<>();
 	public List<Requirement> getRequirements() { return this.requirements; }
 	public Button addRequirements(Collection<Requirement> requirements) { this.requirements.addAll(requirements); return this; }
 	public Button addRequirements(Requirement... requirements) { this.addRequirements(Arrays.asList(requirements)); return this; }

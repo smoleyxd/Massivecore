@@ -13,10 +13,10 @@ public class SimpleConfig
 	// FIELDS
 	// -------------------------------------------- //
 	
-	protected transient Plugin plugin;
+	protected final transient Plugin plugin;
 	protected Plugin getPlugin() { return this.plugin; }
 	
-	protected transient File file;
+	protected final transient File file;
 	protected File getFile() { return this.file; }
 	
 	public SimpleConfig(Plugin plugin, File file)

@@ -8,7 +8,7 @@ public class MassiveCoreTaskDeleteFiles implements Runnable
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MassiveCoreTaskDeleteFiles i = new MassiveCoreTaskDeleteFiles();
+	private static final MassiveCoreTaskDeleteFiles i = new MassiveCoreTaskDeleteFiles();
 	public static MassiveCoreTaskDeleteFiles get() { return i; }
 	
 	// -------------------------------------------- //

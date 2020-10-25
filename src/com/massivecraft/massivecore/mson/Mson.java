@@ -706,9 +706,6 @@ public class Mson implements Serializable
 				continue;
 			}
 			
-			// Don't add empty msons.
-			if (text.isEmpty()) continue;
-			
 			Mson mson = Mson.valueOf(text, latestColor, bold, italic, underlined, strikethrough, obfuscated, null, null, null, null, null);
 
 			msons.add(mson);

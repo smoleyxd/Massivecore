@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class NmsItemStackTooltip18R1P extends NmsItemStackTooltip
 {
 	// -------------------------------------------- //

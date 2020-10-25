@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 
+@SuppressWarnings("CanBeFinal")
 public class CacheEntity<C extends Coll<E>, E extends Entity<E>>
 {
 	// -------------------------------------------- //

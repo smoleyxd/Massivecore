@@ -8,7 +8,7 @@ public class MultiverseColl extends Coll<Multiverse>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MultiverseColl i = new MultiverseColl();
+	private static final MultiverseColl i = new MultiverseColl();
 	public static MultiverseColl get() { return i; }
 	private MultiverseColl()
 	{

@@ -8,7 +8,7 @@ public class MassiveCoreMSponsorInfoColl extends Coll<MassiveCoreMSponsorInfo>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MassiveCoreMSponsorInfoColl i = new MassiveCoreMSponsorInfoColl();
+	private static final MassiveCoreMSponsorInfoColl i = new MassiveCoreMSponsorInfoColl();
 	public static MassiveCoreMSponsorInfoColl get() { return i; }
 	private MassiveCoreMSponsorInfoColl()
 	{

@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+@SuppressWarnings("CanBeFinal")
 public class Multiverse extends Entity<Multiverse>
 {	
 	// -------------------------------------------- //

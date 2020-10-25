@@ -6,6 +6,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.lang.reflect.Constructor;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class NmsPlayerInventoryCreate17R4P extends NmsPlayerInventoryCreate
 {
 	// -------------------------------------------- //

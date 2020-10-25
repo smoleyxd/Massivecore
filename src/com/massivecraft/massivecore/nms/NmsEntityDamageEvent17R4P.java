@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "FieldCanBeLocal"})
 public class NmsEntityDamageEvent17R4P extends NmsEntityDamageEvent
 {
 	// -------------------------------------------- //
