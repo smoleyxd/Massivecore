@@ -55,6 +55,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 
+import java.awt.Color;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -859,6 +860,37 @@ public class MUtil
 		}
 		
 		throw new IllegalArgumentException("The dye color " + dyeColor + " is not yet supported!");
+	}
+	
+	// -------------------------------------------- //
+	// COLOR CODE FROM HEX
+	// -------------------------------------------- //
+	
+	public static ChatColor getNearestChatColor(String hex) {
+		
+		Color color = new Color(Integer.decode(hex));
+		
+		ChatColor nearest = null;
+		Double distance = null;
+		
+		for(ChatColor chatColor : ChatColor.values()) {
+			
+			if (!chatColor.isColor()) continue;
+			
+			Color checkColor = chatColor.asBungee().getColor();
+			int deltaR = color.getRed() - checkColor.getRed();
+			int deltaG = color.getGreen() - checkColor.getGreen();
+			int deltaB = color.getBlue() - checkColor.getBlue();
+			
+			double delta = Math.sqrt((deltaR * deltaR) + (deltaG * deltaG) + (deltaB * deltaB));
+			if (distance == null || delta < distance) {
+				nearest = chatColor;
+				distance = delta;
+			}
+		}
+		
+		return nearest;
+		
 	}
 
 	// -------------------------------------------- //

@@ -86,8 +86,6 @@ public class CmdMassiveCoreTest extends MassiveCoreCommand
 		
 	public void inform(String key, ItemStack... items)
 	{
-		
-		
 		message(mson(key, ": ", visualize(items)));
 	}
 	

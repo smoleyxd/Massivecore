@@ -129,12 +129,17 @@ public class Mson implements Serializable
 	public String getEffectiveColor() { return color != null ? color : getInheritedColor(); }
 	public String getInheritedColor() { return hasParent() ? getParent().getEffectiveColor() : null; }
 	public ChatColor getEffectiveColorCode() {
-		try {
-			return ChatColor.valueOf(getEffectiveColor().toUpperCase());
+		if (color != null) {
+			try
+			{
+				if (color.startsWith("#")) {
+					return MUtil.getNearestChatColor(color);
+				}
+				return ChatColor.valueOf(getEffectiveColor().toUpperCase());
+			}
+			catch (Exception ignored) { }
 		}
-		catch (Exception ignored) {
-			return getInheritedColorCode();
-		}
+		return getInheritedColorCode();
 	}
 	public ChatColor getInheritedColorCode() { return hasParent() ? getParent().getEffectiveColorCode() : null; }
 
@@ -438,7 +443,7 @@ public class Mson implements Serializable
 	public Mson enforced()
 	{
 		return valueOf(
-			this.getText(), 
+			this.getText(),
 			this.getEffectiveColor(),
 			this.isEffectiveBold(),
 			this.isEffectiveItalic(),
@@ -512,7 +517,7 @@ public class Mson implements Serializable
 		type = MsonEventType.HOVER;
 		event = this.getEvent(type);
 		if (event != null && event.getType() != type) throw new IllegalArgumentException(event.getAction().name() + " is not of type " + type);
-				
+		
 		
 		// Insertionstring
 		this.insertion = insertionString;
@@ -589,14 +594,7 @@ public class Mson implements Serializable
 			if (msons.isEmpty()) return mson();
 			if (msons.size() == 1) return msons.get(0);
 			
-			Mson mson = mson();
-			
-			for (int i = msons.size()-1; i >= 0; i--) {
-				if (mson == null) mson = msons.get(i);
-				else mson = msons.get(i).extra(mson);
-			}
-			
-			return mson;
+			return mson().extra(msons);
 		}
 		else if (part instanceof Object[])
 		{
@@ -705,6 +703,9 @@ public class Mson implements Serializable
 				MassiveCore.get().log(Level.WARNING,"No Match found parsing MSON");
 				continue;
 			}
+			
+			// Don't add empty msons.
+			if (text.isEmpty()) continue;
 			
 			Mson mson = Mson.valueOf(text, latestColor, bold, italic, underlined, strikethrough, obfuscated, null, null, null, null, null);
 
@@ -974,7 +975,7 @@ public class Mson implements Serializable
 
 		return ret;
 	}
-		
+	
 	public Mson replaceAll(String regex, String replacement)
 	{
 		if (regex == null) throw new NullPointerException("regex");
