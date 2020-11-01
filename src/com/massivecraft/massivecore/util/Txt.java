@@ -460,7 +460,7 @@ public class Txt
 		
 		if (itemStack.hasItemMeta())
 		{
-			ItemMeta itemMeta = InventoryUtil.getMeta(itemStack);
+			ItemMeta itemMeta = InventoryUtil.createMeta(itemStack);
 			if (itemMeta.hasDisplayName())
 			{
 				return color.toString() + ChatColor.ITALIC.toString() + itemMeta.getDisplayName();

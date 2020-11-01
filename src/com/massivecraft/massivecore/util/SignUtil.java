@@ -106,7 +106,7 @@ public class SignUtil
 	}
 	
 	// -------------------------------------------- //
-	// SPECIAL PERMISSON FIX
+	// SPECIAL PERMISSION FIX
 	// -------------------------------------------- //
 	// Returns true if the result is a special sign of with the specified title.
 	

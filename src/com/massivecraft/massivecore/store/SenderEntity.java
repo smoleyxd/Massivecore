@@ -125,7 +125,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 	}
 	
 	// -------------------------------------------- //
-	// CONVENIENCE: PERMISSON
+	// CONVENIENCE: PERMISSION
 	// -------------------------------------------- //
 	
 	public Boolean hasPermission(Object permission, Boolean unsure, boolean verboose)

@@ -1315,7 +1315,7 @@ public class InventoryUtil
 
 	public static List<String> getSortedLore(ItemStack item)
 	{
-		if ( ! getMeta(item).hasLore()) return Collections.emptyList();
+		if ( ! createMeta(item).hasLore()) return Collections.emptyList();
 
 		EventMassiveCoreLorePriority event = new EventMassiveCoreLorePriority(item);
 		event.run();
@@ -1336,7 +1336,7 @@ public class InventoryUtil
 	public static void sortLore(ItemStack item)
 	{
 		if (item == null) return;
-		if ( ! getMeta(item).hasLore()) return;
+		if ( ! createMeta(item).hasLore()) return;
 
 		List<String> lore = getSortedLore(item);
 		InventoryUtil.setLore(item, lore);

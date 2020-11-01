@@ -57,7 +57,7 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	private static List<Entry<String, Integer>> getLoreEntries(ItemStack item)
 	{
-		ItemMeta meta = InventoryUtil.getMeta(item);
+		ItemMeta meta = InventoryUtil.createMeta(item);
 		if ( ! meta.hasLore()) return Collections.emptyList();
 
 		List<Entry<String, Integer>> ret = new MassiveList<>();
