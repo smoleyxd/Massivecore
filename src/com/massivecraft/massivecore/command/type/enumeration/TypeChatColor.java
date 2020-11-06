@@ -25,5 +25,4 @@ public class TypeChatColor extends TypeEnum<ChatColor>
 	{
 		return value;
 	}
-
 }
