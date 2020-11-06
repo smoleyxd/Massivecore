@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.engine;
 
 import com.massivecraft.massivecore.Engine;
+import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.command.MassiveCommand;
 import com.massivecraft.massivecore.command.MassiveCoreBukkitCommand;
 import com.massivecraft.massivecore.util.ReflectionUtil;
@@ -29,6 +30,12 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	{
 		long interval = Long.getLong("MassiveCoreCommandRegistrationPeriod", 20L * 60L * 60L); // default to every hour
 		this.setPeriod(interval);
+		
+		Bukkit.getScheduler().runTaskLater(
+			MassiveCore.get(),
+			EngineMassiveCoreCommandRegistration::updateRegistrations,
+			100
+		);
 	}
 	
 	// -------------------------------------------- //
