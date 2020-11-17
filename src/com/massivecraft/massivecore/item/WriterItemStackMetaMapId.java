@@ -1,25 +1,23 @@
 package com.massivecraft.massivecore.item;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MapMeta;
 
-public class WriterItemStackMetaMapColor extends WriterAbstractItemStackMetaField<MapMeta, Integer, Color>
+@SuppressWarnings("deprecation")
+public class WriterItemStackMetaMapId extends WriterAbstractItemStackMetaField<MapMeta, Integer, Integer>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static final WriterItemStackMetaMapColor i = new WriterItemStackMetaMapColor();
-	public static WriterItemStackMetaMapColor get() { return i; }
+	private static final WriterItemStackMetaMapId i = new WriterItemStackMetaMapId();
+	public static WriterItemStackMetaMapId get() { return i; }
 	
-	public WriterItemStackMetaMapColor()
+	public WriterItemStackMetaMapId()
 	{
 		super(MapMeta.class);
 		this.setMaterial(Material.FILLED_MAP);
-		this.setConverterTo(ConverterToColor.get());
-		this.setConverterFrom(ConverterFromColor.get());
 	}
 	
 	// -------------------------------------------- //
@@ -29,25 +27,25 @@ public class WriterItemStackMetaMapColor extends WriterAbstractItemStackMetaFiel
 	@Override
 	public Integer getA(DataItemStack ca, ItemStack d)
 	{
-		return ca.getMapColor();
+		return ca.getMapId();
 	}
 
 	@Override
 	public void setA(DataItemStack ca, Integer fa, ItemStack d)
 	{
-		ca.setMapColor(fa);
+		ca.setMapId(fa);
 	}
 
 	@Override
-	public Color getB(MapMeta cb, ItemStack d)
+	public Integer getB(MapMeta cb, ItemStack d)
 	{
-		return cb.hasColor() ? cb.getColor() : null;
+		return cb.hasMapId() ? cb.getMapId() : null;
 	}
 
 	@Override
-	public void setB(MapMeta cb, Color fb, ItemStack d)
+	public void setB(MapMeta cb, Integer fb, ItemStack d)
 	{
-		cb.setColor(fb);
+		cb.setMapId(fb);
 	}
 	
 }

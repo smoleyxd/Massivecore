@@ -76,6 +76,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Boolean DEFAULT_SCALING = false;
 	public static final transient Integer DEFAULT_MAP_COLOR = null;
 	public static final transient String DEFAULT_MAP_NAME = null;
+	public static final transient Integer DEFAULT_MAP_ID = null;
 	public static final transient List<DataPotionEffect> DEFAULT_POTION_EFFECTS = Collections.emptyList();
 	public static final transient String DEFAULT_SKULL = null;
 	public static final transient ContainerGameProfile DEFAULT_GAMEPROFILE = null;
@@ -191,6 +192,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Integer mapColor = null;
 	public Integer getMapColor() { return get(this.mapColor, DEFAULT_MAP_COLOR); }
 	public DataItemStack setMapColor(Integer mapColor) { this.mapColor = set(mapColor, DEFAULT_MAP_COLOR); return this; }
+	
+	private Integer mapId = null;
+	public Integer getMapId() { return get(this.mapId, DEFAULT_MAP_ID); }
+	public DataItemStack setMapId(Integer mapId) { this.mapId = set(mapId, DEFAULT_MAP_ID); return this; }
 	
 	private String mapName = null;
 	public String getMapName() { return get(this.mapName, DEFAULT_MAP_NAME); }
@@ -560,6 +565,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
+			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
@@ -603,6 +609,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
+			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
@@ -653,6 +660,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getColor(), that.getColor(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
+			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
 			this.getSkull(), that.getSkull(),
@@ -701,6 +709,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getColor(),
 			this.isScaling(),
 			this.getMapColor(),
+			this.getMapId(),
 			this.getMapName(),
 			this.getPotionEffects(),
 			this.getSkull(),
