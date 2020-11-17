@@ -38,7 +38,7 @@ public class WriterItemStackMetaMapName extends WriterAbstractItemStackMetaField
 	@Override
 	public String getB(MapMeta cb, ItemStack d)
 	{
-		return cb.getLocationName();
+		return cb.hasLocationName() ? cb.getLocationName() : null;
 	}
 
 	@Override
