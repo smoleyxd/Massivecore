@@ -45,7 +45,7 @@ public class WriterItemStackMetaMapId extends WriterAbstractItemStackMetaField<M
 	@Override
 	public void setB(MapMeta cb, Integer fb, ItemStack d)
 	{
-		cb.setMapId(fb);
+		if (fb != null) cb.setMapId(fb);
 	}
 	
 }
