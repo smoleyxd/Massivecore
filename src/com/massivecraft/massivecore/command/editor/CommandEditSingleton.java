@@ -27,7 +27,7 @@ public class CommandEditSingleton<O> extends CommandEditProperties<O, O>
 	// UTIL
 	// -------------------------------------------- //
 	
-	private static <O> EditSettings<O> createEditSettings(O object, Type<O> typeObject)
+	public static <O> EditSettings<O> createEditSettings(O object, Type<O> typeObject)
 	{
 		EditSettings<O> ret = new EditSettings<>(typeObject);
 		
@@ -38,7 +38,7 @@ public class CommandEditSingleton<O> extends CommandEditProperties<O, O>
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <O> Type<O> getType(O object)
+	public static <O> Type<O> getType(O object)
 	{
 		if (object == null) throw new NullPointerException("object");
 
