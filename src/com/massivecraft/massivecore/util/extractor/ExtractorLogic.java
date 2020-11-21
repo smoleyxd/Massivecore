@@ -4,10 +4,12 @@ import com.massivecraft.massivecore.mixin.MixinSenderPs;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -162,6 +164,7 @@ public class ExtractorLogic
 		if (o instanceof Entity) return world((Entity)o);
 		if (o instanceof PlayerEvent) return world((PlayerEvent)o);
 		if (o instanceof PS) return world((PS)o);
+		if (o instanceof ConsoleCommandSender) return Bukkit.getWorlds().get(0);
 		
 		return null;
 	}
