@@ -329,6 +329,7 @@ public class RegistryType
 		
 		register(TypeDataBannerPattern.get());
 		register(TypePotionEffectType.get());
+		register(TypeEnchantment.get());
 		register(TypeDataPotionEffect.get());
 		register(TypeDataFireworkEffect.get());
 		register(TypeDataItemStack.get());
