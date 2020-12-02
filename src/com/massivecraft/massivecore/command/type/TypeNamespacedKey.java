@@ -17,7 +17,7 @@ public class TypeNamespacedKey extends TypeAbstract<NamespacedKey>
 	
 	private static TypeNamespacedKey i = new TypeNamespacedKey();
 	public static TypeNamespacedKey get() { return i; }
-	public TypeNamespacedKey() { super(String.class); }
+	public TypeNamespacedKey() { super(NamespacedKey.class); }
 	
 	// -------------------------------------------- //
 	// OVERRIDE
