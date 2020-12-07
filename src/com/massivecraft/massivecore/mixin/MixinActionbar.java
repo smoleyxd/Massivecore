@@ -43,9 +43,9 @@ public class MixinActionbar extends Mixin
 		NmsChat.get().sendActionbarMessage(watcherObject, message);
 	}
 
-	public void sendActionbarMsg(Object watcherObject, String msg)
+	public void sendActionbarMsg(Object watcherObject, String msg, Object... args)
 	{
-		NmsChat.get().sendActionbarMsg(watcherObject, msg);
+		NmsChat.get().sendActionbarMsg(watcherObject, msg, args);
 	}
 
 }

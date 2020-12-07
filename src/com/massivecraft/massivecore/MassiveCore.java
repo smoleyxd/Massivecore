@@ -52,7 +52,9 @@ import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -136,14 +138,15 @@ public class MassiveCore extends MassivePlugin
 		ret.registerTypeAdapter(Sound.class, AdapterSound.get());
 		ret.registerTypeAdapter(UUID.class, AdapterUUID.get());
 		ret.registerTypeAdapter(CacheEntity.class, AdapterCacheEntity.get());
-
+		ret.registerTypeAdapter(NamespacedKey.class, AdapterNamespacedKey.get());
+		
 		// Mson
 		ret.registerTypeAdapter(Mson.class, AdapterMson.get());
 		ret.registerTypeAdapter(MsonEvent.class, AdapterMsonEvent.get());
 		
 		// Banner Patterns Upgrade Adapter
 		// NOTE: Must come after the "MassiveContainers" section for priority.
-		Type typeBannerPatterns = new TypeToken<MassiveListDef<DataBannerPattern>>(){}.getType();
+		Type typeBannerPatterns = new TypeToken<MassiveListDef<DataBannerPattern>>() {}.getType();
 		ret.registerTypeAdapter(typeBannerPatterns, AdapterBannerPatterns.get());
 		
 		// ItemStack
@@ -157,10 +160,13 @@ public class MassiveCore extends MassivePlugin
 		
 		// Storage
 		ret.registerTypeAdapter(EntityInternalMap.class, AdapterEntityInternalMap.get());
-
+		
 		// PotionEffectType
 		ret.registerTypeAdapter(PotionEffectType.class, AdapterPotionEffectType.get());
-
+		
+		// Enchantment
+		ret.registerTypeAdapter(Enchantment.class, AdapterEnchantment.get());
+		
 		// Return
 		return ret;
 	}
@@ -226,10 +232,10 @@ public class MassiveCore extends MassivePlugin
 		
 		// Activate
 		this.activateAuto();
-
+		
 		// These must be activated after nms
 		this.activate(
-
+			
 			// Writer,
 			WriterItemStack.class,
 			
@@ -237,7 +243,7 @@ public class MassiveCore extends MassivePlugin
 			PlayerUtil.class,
 			BoardUtil.class
 		);
-
+		
 		// Start the examine threads
 		// Start AFTER initializing the MConf, because they rely on the MConf.
 		if (ConfServer.localPollingEnabled) ModificationPollerLocal.get().start();
@@ -247,7 +253,7 @@ public class MassiveCore extends MassivePlugin
 		MassiveCoreTaskDeleteFiles.get().run();
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, MassiveCoreTaskDeleteFiles.get());
 	}
-
+	
 	@Override
 	public List<Class<?>> getClassesActiveColls()
 	{
@@ -269,10 +275,10 @@ public class MassiveCore extends MassivePlugin
 	public List<Class<?>> getClassesActiveMixins()
 	{
 		List<Class<?>> ret = super.getClassesActiveMixins();
-
+		
 		ret.remove(MixinEvent.class);
 		ret.add(0, MixinEvent.class);
-
+		
 		return ret;
 	}
 	
@@ -290,5 +296,5 @@ public class MassiveCore extends MassivePlugin
 		MassiveCoreTaskDeleteFiles.get().run();
 		IdUtil.saveCachefileDatas();
 	}
-
+	
 }

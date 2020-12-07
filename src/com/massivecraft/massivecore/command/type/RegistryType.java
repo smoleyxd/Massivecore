@@ -329,12 +329,13 @@ public class RegistryType
 		
 		register(TypeDataBannerPattern.get());
 		register(TypePotionEffectType.get());
+		register(TypeNamespacedKey.get());
+		register(TypeEnchantment.get());
 		register(TypeDataPotionEffect.get());
 		register(TypeDataFireworkEffect.get());
 		register(TypeDataItemStack.get());
 		
 		register(TypePermission.get());
-		//register(TypePotionEffectType.get());
 		register(TypePS.get());
 		register(TypeWorld.get());
 		register(TypePotionEffectWrap.get());

@@ -21,8 +21,9 @@ public class ConverterToNamespacedKey extends Converter<String, NamespacedKey>
 	{
 		if (x == null) return null;
 		String[] parts = x.toLowerCase().split(":");
+		if (parts.length == 1) return NamespacedKey.minecraft(parts[0]);
 		if (parts[0].equals(NamespacedKey.MINECRAFT)) return NamespacedKey.minecraft(parts[1]);
-		else return new NamespacedKey(parts[0], parts[1]);
+		return new NamespacedKey(parts[0], parts[1]);
 	}
 
 }
