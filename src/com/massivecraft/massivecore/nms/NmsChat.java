@@ -115,9 +115,9 @@ public class NmsChat extends Mixin
 		this.sendActionbarRaw(sendeeObject, message);
 	}
 
-	public void sendActionbarMsg(Object sendeeObject, String msg)
+	public void sendActionbarMsg(Object sendeeObject, String msg, Object... args)
 	{
-		String message = Txt.parse(msg);
+		String message = Txt.parse(msg, args);
 		
 		this.sendActionbarMessage(sendeeObject, message);
 	}
