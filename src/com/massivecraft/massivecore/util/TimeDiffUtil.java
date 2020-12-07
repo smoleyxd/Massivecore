@@ -98,9 +98,10 @@ public class TimeDiffUtil
 			}
 			
 			// Add to the return map
-			if (ret.put(unit, count) != null)
+			Long old = ret.put(unit, count);
+			if (old != null)
 			{
-				throw new Exception("Multiple "+unit.singularName+" entries is not allowed.");
+				ret.put(unit, count+old);
 			}
 		}
 		
