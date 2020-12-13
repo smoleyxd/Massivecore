@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.item.DataItemStack;
 import com.massivecraft.massivecore.mixin.MixinInventory;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateNot;
+import com.massivecraft.massivecore.predicate.PredicateStringEndsWith;
 import com.massivecraft.massivecore.predicate.PredicateStringStartsWith;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -1376,6 +1377,11 @@ public class InventoryUtil
 	{
 		return removeLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
+	
+	public static boolean removeLoreWithSuffix(ItemStack item, String suffix)
+	{
+		return removeLoreMatching(item, PredicateStringEndsWith.get(suffix));
+	}
 
 	public static List<String> getLoreMatching(ItemStack item, Predicate<String> predicate)
 	{
@@ -1391,5 +1397,9 @@ public class InventoryUtil
 	{
 		return getLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
-
+	
+	public static List<String> getLoreWithSuffix(ItemStack item, String suffix)
+	{
+		return getLoreMatching(item, PredicateStringEndsWith.get(suffix));
+	}
 }

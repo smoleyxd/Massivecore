@@ -23,8 +23,17 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	public static int PRIORITY_DEFAULT = 0;
 
-	// Any lore added by a MassiveX plugin should start with this string and then be followed by its own unique sequence of characters.
-	public static String LORE_PREFIX = ChatColor.BLACK.toString() + ChatColor.GOLD + ChatColor.WHITE;
+	// Any lore added by a MassiveX plugin should end with this hex string and then be preceded by its own unique hex colour.
+	public static String LORE_SUFFIX = String.format(
+		"%sx%s%s%s%s%s%s ",
+		ChatColor.COLOR_CHAR,
+		ChatColor.BLACK,
+		ChatColor.GOLD,
+		ChatColor.WHITE,
+		ChatColor.BLACK,
+		ChatColor.GOLD,
+		ChatColor.WHITE
+	);
 
 	// -------------------------------------------- //
 	// REQUIRED EVENT CODE
@@ -90,8 +99,12 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	public void setPriorityByPrefix(final String prefix, int priority)
 	{
-		Predicate<String> predicate = prefix::startsWith;
-		this.setPriorityByPredicate(predicate, priority);
+		this.setPriorityByPredicate(prefix::startsWith, priority);
+	}
+	
+	public void setPriorityBySuffix(final String suffix, int priority)
+	{
+		this.setPriorityByPredicate(suffix::endsWith, priority);
 	}
 
 	public void setPriorityByRegex(final Pattern pattern, int priority)

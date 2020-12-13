@@ -201,6 +201,7 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	public boolean loreSortOnInventoryOpen = false;
 
 	public Map<String, Integer> lorePrioritiesPrefix = new MassiveMap<>();
+	public Map<String, Integer> lorePrioritiesSuffix = new MassiveMap<>();
 	public Map<String, Integer> lorePrioritiesRegex = new MassiveMap<>();
 
 }

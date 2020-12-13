@@ -61,6 +61,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 	public void setLorePriorities(EventMassiveCoreLorePriority event)
 	{
 		this.setPrioritiesPrefix(event);
+		this.setPrioritiesSuffix(event);
 		this.setPrioritiesRegex(event);
 	}
 
@@ -81,6 +82,16 @@ public class EngineMassiveCoreLorePriority extends Engine
 			String prefix = prefixEntry.getKey();
 			int priority = prefixEntry.getValue();
 			event.setPriorityByPrefix(prefix, priority);
+		}
+	}
+	
+	public void setPrioritiesSuffix(EventMassiveCoreLorePriority event)
+	{
+		for (Entry<String, Integer> suffixEntry : MassiveCoreMConf.get().lorePrioritiesSuffix.entrySet())
+		{
+			String suffix = suffixEntry.getKey();
+			int priority = suffixEntry.getValue();
+			event.setPriorityBySuffix(suffix, priority);
 		}
 	}
 
