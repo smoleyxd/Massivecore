@@ -16,7 +16,7 @@ public class PredicateStringEndsWith implements Predicate<String>
 	public PredicateStringEndsWith(String suffix)
 	{
 		if (suffix == null) throw new NullPointerException("suffix");
-		this.suffix = suffix;
+		this.suffix = suffix.toLowerCase();
 	}
 
 	// -------------------------------------------- //
@@ -27,7 +27,7 @@ public class PredicateStringEndsWith implements Predicate<String>
 	public boolean apply(String str)
 	{
 		if (str == null) return false;
-		return str.endsWith(suffix);
+		return str.toLowerCase().endsWith(suffix);
 	}
 	
 }

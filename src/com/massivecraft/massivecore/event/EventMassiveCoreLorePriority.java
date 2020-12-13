@@ -99,12 +99,12 @@ public class EventMassiveCoreLorePriority extends EventMassiveCore
 
 	public void setPriorityByPrefix(final String prefix, int priority)
 	{
-		this.setPriorityByPredicate(prefix::startsWith, priority);
+		this.setPriorityByPredicate(lore -> lore.startsWith(prefix), priority);
 	}
 	
 	public void setPriorityBySuffix(final String suffix, int priority)
 	{
-		this.setPriorityByPredicate(suffix::endsWith, priority);
+		this.setPriorityByPredicate(lore -> lore.endsWith(suffix), priority);
 	}
 
 	public void setPriorityByRegex(final Pattern pattern, int priority)

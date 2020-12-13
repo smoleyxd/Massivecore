@@ -16,7 +16,7 @@ public class PredicateStringStartsWith implements Predicate<String>
 	public PredicateStringStartsWith(String prefix)
 	{
 		if (prefix == null) throw new NullPointerException("prefix");
-		this.prefix = prefix;
+		this.prefix = prefix.toLowerCase();
 	}
 
 	// -------------------------------------------- //
@@ -27,7 +27,7 @@ public class PredicateStringStartsWith implements Predicate<String>
 	public boolean apply(String str)
 	{
 		if (str == null) return false;
-		return str.startsWith(prefix);
+		return str.toLowerCase().startsWith(prefix);
 	}
 	
 }
