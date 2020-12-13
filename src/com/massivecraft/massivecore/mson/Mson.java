@@ -39,7 +39,7 @@ public class Mson implements Serializable
 
 	private static final transient long serialVersionUID = 1L;
 	
-	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<code>\u00A7[0-9a-fk-or]))|(?=<(?<hex>(#[a-fA-F0-9]{6}))>)");
+	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<vhex>(\u00A7x(?:\u00A7[a-fA-F0-9]){6})))|(?=(?<!\u00A7x(?:\u00A7[a-fA-F0-9]){0,5})(?<code>\u00A7[0-9a-fk-or]))|(?=<(?<mhex>(#[a-fA-F0-9]{6}))>)");
 	
 	public static final transient AdapterLowercaseEnum<ChatColor> ADAPTER_LOWERCASE_CHAT_COLOR = AdapterLowercaseEnum.get(ChatColor.class);
 	public static final transient AdapterLowercaseEnum<MsonEventAction> ADAPTER_LOWERCASE_MSON_EVENT_ACTION = AdapterLowercaseEnum.get(MsonEventAction.class);
@@ -671,7 +671,14 @@ public class Mson implements Serializable
 			
 			if (matcher.find())
 			{
-				if (matcher.group("code") != null)
+				if (matcher.group("vhex") != null) {
+					latestColor = matcher.group("vhex");
+					text = part.substring(latestColor.length());
+					
+					latestColor = latestColor.replace("\u00A7x", "#");
+				  	latestColor = latestColor.replace("\u00A7", "");
+				}
+				else if (matcher.group("code") != null)
 				{
 					ChatColor color = ChatColor.getByChar(part.charAt(1));
 					text = part.substring(2);
@@ -692,12 +699,13 @@ public class Mson implements Serializable
 					else if (color == ChatColor.STRIKETHROUGH) strikethrough = true;
 					else if (color == ChatColor.MAGIC) obfuscated = true;
 				}
-				else
+				else if (matcher.group("mhex") != null)
 				{
-					latestColor = matcher.group("hex");
+					latestColor = matcher.group("mhex");
 					// The group matches just the hex, but we also need to remove the chevrons.
 					text = part.substring(latestColor.length()+2);
 				}
+				else text = part;
 			}
 			else {
 				MassiveCore.get().log(Level.WARNING,"No Match found parsing MSON");
