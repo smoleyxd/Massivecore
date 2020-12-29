@@ -11,7 +11,7 @@ public class MixinCombatFlag extends Mixin
 	public static MixinCombatFlag get() { return i; }
 	
 	// -------------------------------------------- //
-	// METHODS
+	// IF FLAGGED
 	// -------------------------------------------- //
 	
 	public boolean isFlagged(Object senderObject)
@@ -29,5 +29,13 @@ public class MixinCombatFlag extends Mixin
 	{
 		return false;
 	}
-
+	
+	// -------------------------------------------- //
+	// SET FLAGGED
+	// -------------------------------------------- //
+	
+	public void setFlagged(Object senderObject, boolean flagged) { }
+	
+	public void setFlaggedTo(Object senderObject, Long flaggedTo) { }
+	
 }
