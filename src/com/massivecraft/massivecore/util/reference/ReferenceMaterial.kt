@@ -7,6 +7,7 @@ object ReferenceMaterial {
     @JvmStatic
     val pickaxeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_PICKAXE",
             "DIAMOND_PICKAXE",
             "GOLDEN_PICKAXE",
             "GOLD_PICKAXE",
@@ -19,6 +20,7 @@ object ReferenceMaterial {
     @JvmStatic
     val swordMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_SWORD",
             "DIAMOND_SWORD",
             "GOLDEN_SWORD",
             "GOLD_SWORD",
@@ -31,6 +33,7 @@ object ReferenceMaterial {
     @JvmStatic
     val axeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_AXE",
             "DIAMOND_AXE",
             "GOLDEN_AXE",
             "GOLD_AXE",
@@ -43,6 +46,7 @@ object ReferenceMaterial {
     @JvmStatic
     val spadeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_SHOVEL",
             "DIAMOND_SHOVEL",
             "DIAMOND_SPADE",
             "GOLDEN_SHOVEL",
@@ -58,6 +62,7 @@ object ReferenceMaterial {
     @JvmStatic
     val hoeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_HOE",
             "DIAMOND_HOE",
             "GOLDEN_HOE",
             "GOLD_HOE",
@@ -69,6 +74,7 @@ object ReferenceMaterial {
     @JvmStatic
     val helmetMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_HELMET",
             "DIAMOND_HELMET",
             "GOLDEN_HELMET",
             "GOLD_HELMET",
@@ -81,6 +87,7 @@ object ReferenceMaterial {
     @JvmStatic
     val chestplateMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_CHESTPLATE",
             "DIAMOND_CHESTPLATE",
             "GOLDEN_CHESTPLATE",
             "GOLD_CHESTPLATE",
@@ -92,6 +99,7 @@ object ReferenceMaterial {
     @JvmStatic
     val leggingsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_LEGGINGS",
             "DIAMOND_LEGGINGS",
             "GOLDEN_LEGGINGS",
             "GOLD_LEGGINGS",
@@ -103,6 +111,7 @@ object ReferenceMaterial {
     @JvmStatic
     val bootsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
             Material::class.java,
+            "NETHERITE_BOOTS",
             "DIAMOND_BOOTS",
             "GOLDEN_BOOTS",
             "GOLD_BOOTS",
