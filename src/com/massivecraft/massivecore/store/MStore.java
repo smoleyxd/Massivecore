@@ -39,6 +39,7 @@ public class MStore
 	static
 	{
 		registerDriver(DriverMongo.get());
+		registerDriver(DriverMongoSrv.get());
 		registerDriver(DriverFlatfile.get());
 	}
 	
