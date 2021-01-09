@@ -43,7 +43,7 @@ public class DriverMongo extends DriverAbstract
 	
 	protected static DriverMongo i = new DriverMongo();
 	public static DriverMongo get() { return i; }
-	private DriverMongo() { super("mongodb"); }
+	DriverMongo() { super("mongodb"); }
 	
 	// -------------------------------------------- //
 	// IMPLEMENTATION
