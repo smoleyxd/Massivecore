@@ -21,6 +21,8 @@ public class ConfServer extends SimpleConfig
 	
 	public static boolean localPollingEnabled = true;
 	
+	public static boolean collTickAsync = false;
+	
 	public static String serverid = UUID.randomUUID().toString();
 	
 	public static String dburi = "default";

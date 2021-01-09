@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.engine;
 
+import com.massivecraft.massivecore.ConfServer;
 import com.massivecraft.massivecore.Engine;
 import com.massivecraft.massivecore.store.Coll;
 
@@ -14,6 +15,7 @@ public class EngineMassiveCoreCollTick extends Engine
 	public EngineMassiveCoreCollTick()
 	{
 		this.setPeriod(1L);
+		this.setSync(!ConfServer.collTickAsync);
 	}
 	
 	// -------------------------------------------- //
