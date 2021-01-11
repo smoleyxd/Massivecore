@@ -49,6 +49,7 @@ public class NmsChat116R1P extends NmsChatAbstract
 		// CHAT(0),
 		// SYSTEM(1),
 		// GAME_INFO(2);
+		this.constructorPacketPlayOutChatType = ReflectionUtil.getConstructor(this.classPacketPlayOutChat, this.classIChatBaseComponent, this.classChatMessageType, UUID.class);
 	}
 	
 	// -------------------------------------------- //
