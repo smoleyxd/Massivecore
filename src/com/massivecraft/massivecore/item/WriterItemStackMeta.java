@@ -25,7 +25,11 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			
 			// LEATHER ARMOR
 			WriterItemStackMetaColor.class,
-			
+
+			// COMPASS
+			WriterItemStackMetaLodestone.class,
+			WriterItemStackMetaLodestoneTracked.class,
+
 			// MAP
 			WriterItemStackMetaMapScaling.class,
 			WriterItemStackMetaMapColor.class,

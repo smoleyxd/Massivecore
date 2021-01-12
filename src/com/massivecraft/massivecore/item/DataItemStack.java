@@ -12,17 +12,20 @@ import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
 import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
 import com.massivecraft.massivecore.command.type.TypeMaterialKey;
+import com.massivecraft.massivecore.command.type.TypePS;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterEnchant;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterItemFlag;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import com.massivecraft.massivecore.command.type.primitive.TypeStringParsed;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
+import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.InventoryUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
@@ -73,6 +76,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Generation DEFAULT_GENERATION = null;
 	public static final transient List<String> DEFAULT_PAGES = Collections.emptyList();
 	public static final transient Integer DEFAULT_COLOR = Bukkit.getItemFactory().getDefaultLeatherColor().asRGB();
+	public static final transient PS DEFAULT_LODESTONE = null;
+	public static final transient Boolean DEFAULT_TRACKING_LODESTONE = false;
 	public static final transient Boolean DEFAULT_SCALING = false;
 	public static final transient Integer DEFAULT_MAP_COLOR = null;
 	public static final transient String DEFAULT_MAP_NAME = null;
@@ -179,6 +184,20 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Integer color = null;
 	public Integer getColor() { return get(this.color, DEFAULT_COLOR); }
 	public DataItemStack setColor(int color) { this.color = set(color, DEFAULT_COLOR); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > COMPASS
+	// SINCE: 1.16
+	// -------------------------------------------- //
+	
+	@EditorType(TypePS.class)
+	private PS lodestone = null;
+	public PS getLodestone() { return get(this.lodestone, DEFAULT_LODESTONE); }
+	public DataItemStack setLodestone(PS ps) { this.lodestone = set(ps, DEFAULT_LODESTONE); return this; }
+	
+	private boolean lodestoneTracked = false;
+	public boolean isLodestoneTracked() { return lodestoneTracked; }
+	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = bool; return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > MAP
@@ -563,6 +582,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
+			this.getLodestone(), that.getLodestone(),
+			this.isLodestoneTracked(), that.isLodestoneTracked(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
 			this.getMapId(), that.getMapId(),
@@ -607,6 +628,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
+			this.getLodestone(), that.getLodestone(),
+			this.isLodestoneTracked(), that.isLodestoneTracked(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
 			this.getMapId(), that.getMapId(),
@@ -658,6 +681,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
+			this.getLodestone(), that.getLodestone(),
+			this.isLodestoneTracked(), that.isLodestoneTracked(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
 			this.getMapId(), that.getMapId(),
@@ -707,6 +732,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(),
 			this.getPages(),
 			this.getColor(),
+			this.getLodestone(),
+			this.isLodestoneTracked(),
 			this.isScaling(),
 			this.getMapColor(),
 			this.getMapId(),
