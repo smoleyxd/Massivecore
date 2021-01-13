@@ -384,9 +384,9 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public PS getLodestone() { return get(this.lodestone, DEFAULT_LODESTONE); }
 	public DataItemStack setLodestone(PS ps) { this.lodestone = set(ps, DEFAULT_LODESTONE); return this; }
 	
-	private boolean lodestoneTracked = false;
-	public boolean isLodestoneTracked() { return lodestoneTracked; }
-	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = bool; return this; }
+	private Boolean lodestoneTracked = null;
+	public Boolean isLodestoneTracked() { return get(this.lodestoneTracked, DEFAULT_TRACKING_LODESTONE); }
+	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = set(bool, DEFAULT_TRACKING_LODESTONE); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
