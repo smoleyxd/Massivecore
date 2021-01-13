@@ -16,7 +16,9 @@ import com.massivecraft.massivecore.command.type.TypePS;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterColor;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterEnchant;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterItemFlag;
+import com.massivecraft.massivecore.command.type.convert.TypeConverterNamespacedKey;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
+import com.massivecraft.massivecore.command.type.primitive.TypeObject.TypeObjectRaw;
 import com.massivecraft.massivecore.command.type.primitive.TypeStringParsed;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.ps.PS;
@@ -25,7 +27,6 @@ import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
@@ -67,6 +68,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_ID = Material.AIR.name();
 	public static final transient Integer DEFAULT_COUNT = 1;
 	public static final transient Integer DEFAULT_DAMAGE = 0;
+	public static final transient Map<String, Object> DEFAULT_PERSISTENTDATA = Collections.emptyMap();
 	public static final transient String DEFAULT_NAME = "";
 	public static final transient List<String> DEFAULT_LORE = Collections.emptyList();
 	public static final transient Map<String, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
@@ -126,6 +128,16 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Integer damage = null;
 	public int getDamage() { return get(this.damage, DEFAULT_DAMAGE); }
 	public DataItemStack setDamage(int damage) { this.damage = set(damage, DEFAULT_DAMAGE); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > PERSISTENT DATA
+	// -------------------------------------------- //
+	
+	@EditorEditable(false)
+	@EditorTypeInner({TypeConverterNamespacedKey.class, TypeObjectRaw.class})
+	private MassiveTreeMapDef<String, Object, ComparatorSmart> persistentData = null;
+	public Map<String, Object> getPersistentData() { return get(this.persistentData, DEFAULT_PERSISTENTDATA); }
+	public DataItemStack setPersistentData(Map<String, Object> persistentData) { this.persistentData = set(persistentData, DEFAULT_PERSISTENTDATA); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > UNSPECIFIC

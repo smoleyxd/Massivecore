@@ -16,11 +16,6 @@ public class TypeObject<T> extends TypeAbstract<T>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	/*private static TypeObject<Object> i = new TypeObject<Object>();
-	
-	@SuppressWarnings("unchecked")
-	public static <T> TypeObject<T> get() { return (TypeObject<T>) i; }*/
-	
 	public static <T> TypeObject<T> get(Class<T> clazz) { return new TypeObject<>(clazz); }
 	
 	public TypeObject(Class<T> clazz)
@@ -56,5 +51,21 @@ public class TypeObject<T> extends TypeAbstract<T>
 	{
 		return Collections.emptySet();
 	}
-
+	
+	// -------------------------------------------- //
+	// TYPE OBJECT: OBJECT
+	// -------------------------------------------- //
+	
+	public static class TypeObjectRaw extends TypeObject<Object>
+	{
+		// -------------------------------------------- //
+		// INSTANCE & CONSTRUCT
+		// -------------------------------------------- //
+	
+		private static TypeObject<Object> i = new TypeObjectRaw();
+		public static TypeObject<Object> get() { return i; }
+		
+		public TypeObjectRaw() { super(Object.class); }
+	}
+	
 }

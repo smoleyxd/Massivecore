@@ -17,6 +17,9 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaEnchants.class,
 			WriterItemStackMetaRepaircost.class,
 			
+			// PERSISTENT DATA
+			WriterItemStackMetaPersistentData.class,
+			
 			// BOOK
 			WriterItemStackMetaTitle.class,
 			WriterItemStackMetaAuthor.class,
