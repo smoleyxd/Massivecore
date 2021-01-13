@@ -58,6 +58,7 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	public PS getB(CompassMeta cb, ItemStack d) {
 		if (!cb.hasLodestone()) return null;
 		PS ps = PS.valueOf(cb.getLodestone());
+		if (ps == null) return null;
 		
 		PersistentDataContainer pdc = cb.getPersistentDataContainer();
 		return ps.withWorld(
@@ -67,6 +68,10 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	
 	@Override
 	public void setB(CompassMeta cb, PS fb, ItemStack d) {
+		if (fb == null) {
+			cb.setLodestone(null);
+			return;
+		}
 		
 		World world = Bukkit.getWorld(fb.getWorld());
 		if (world == null) {
