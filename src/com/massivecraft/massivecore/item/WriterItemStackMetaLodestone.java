@@ -1,12 +1,17 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.ps.PS;
-import org.bukkit.Location;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
-public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaField<CompassMeta, PS, Location>
+public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaField<CompassMeta, PS, PS>
 {
 	
 	// -------------------------------------------- //
@@ -27,10 +32,14 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	{
 		super(CompassMeta.class);
 		this.setMaterial(Material.COMPASS);
-		this.setConverterTo(ConverterToLocation.get());
-		this.setConverterFrom(ConverterFromLocation.get());
 	}
+	
+	// -------------------------------------------- //
+	// CONSTANTS
+	// -------------------------------------------- //
 
+	public static NamespacedKey NSK_LODESTONE_WORLD = new NamespacedKey(MassiveCore.get(), "lodestone_world");
+	
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
@@ -46,14 +55,27 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	}
 	
 	@Override
-	public Location getB(CompassMeta cb, ItemStack d) {
+	public PS getB(CompassMeta cb, ItemStack d) {
 		if (!cb.hasLodestone()) return null;
-		return cb.getLodestone();
+		PS ps = PS.valueOf(cb.getLodestone());
+		
+		PersistentDataContainer pdc = cb.getPersistentDataContainer();
+		return ps.withWorld(
+			pdc.getOrDefault(NSK_LODESTONE_WORLD, PersistentDataType.STRING, ps.getWorld())
+		);
 	}
 	
 	@Override
-	public void setB(CompassMeta cb, Location fb, ItemStack d) {
-		cb.setLodestone(fb);
+	public void setB(CompassMeta cb, PS fb, ItemStack d) {
+		
+		World world = Bukkit.getWorld(fb.getWorld());
+		if (world == null) {
+			fb = fb.withWorld(Bukkit.getWorlds().get(0).getName());
+			PersistentDataContainer pdc = cb.getPersistentDataContainer();
+			pdc.set(NSK_LODESTONE_WORLD, PersistentDataType.STRING, fb.getWorld());
+		}
+		
+		cb.setLodestone(fb.asBukkitLocation());
 	}
 	
 }
