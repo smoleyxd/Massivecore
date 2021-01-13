@@ -186,20 +186,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setColor(int color) { this.color = set(color, DEFAULT_COLOR); return this; }
 	
 	// -------------------------------------------- //
-	// FIELDS > COMPASS
-	// SINCE: 1.16
-	// -------------------------------------------- //
-	
-	@EditorType(TypePS.class)
-	private PS lodestone = null;
-	public PS getLodestone() { return get(this.lodestone, DEFAULT_LODESTONE); }
-	public DataItemStack setLodestone(PS ps) { this.lodestone = set(ps, DEFAULT_LODESTONE); return this; }
-	
-	private boolean lodestoneTracked = false;
-	public boolean isLodestoneTracked() { return lodestoneTracked; }
-	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = bool; return this; }
-	
-	// -------------------------------------------- //
 	// FIELDS > MAP
 	// -------------------------------------------- //
 	
@@ -379,7 +365,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setChargedProjectiles(Map<Integer, DataItemStack> chargedProjectiles) { this.chargedProjectiles = set(chargedProjectiles, DEFAULT_CHARGEDPROJECTILES); return this; }
 	
 	// -------------------------------------------- //
-	// FIELDS > LEATHER ARMOR
+	// FIELDS > KNOWLEDGE BOOK
 	// -------------------------------------------- //
 	// SINCE: 1.13
 	
@@ -387,6 +373,20 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private MassiveListDef<String> recipes = null;
 	public List<String> getRecipes() { return get(this.recipes, DEFAULT_RECIPES); }
 	public DataItemStack setRecipes(Collection<String> recipes) { this.recipes = set(recipes, DEFAULT_RECIPES); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > COMPASS
+	// -------------------------------------------- //
+	// SINCE: 1.16
+	
+	@EditorType(TypePS.class)
+	private PS lodestone = null;
+	public PS getLodestone() { return get(this.lodestone, DEFAULT_LODESTONE); }
+	public DataItemStack setLodestone(PS ps) { this.lodestone = set(ps, DEFAULT_LODESTONE); return this; }
+	
+	private boolean lodestoneTracked = false;
+	public boolean isLodestoneTracked() { return lodestoneTracked; }
+	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = bool; return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

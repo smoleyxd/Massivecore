@@ -18,6 +18,7 @@ public class ConverterToLocation extends Converter<PS, Location>
 
     @Override
     public Location convert(PS ps) {
+        if (ps == null) return null;
         return ps.asBukkitLocation();
     }
 }

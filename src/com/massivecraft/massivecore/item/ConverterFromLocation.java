@@ -19,6 +19,7 @@ public class ConverterFromLocation extends Converter<Location, PS>
     @Override
     public PS convert(Location location)
     {
+        if (location == null) return null;
         return PS.valueOf(location);
     }
 }
