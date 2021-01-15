@@ -43,7 +43,6 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaPotionEffects.class,
 			
 			// SKULL
-			WriterItemStackMetaSkull.class,
 			WriterItemStackMetaSkullProperties.class,
 			
 			// FIREWORK EFFECT

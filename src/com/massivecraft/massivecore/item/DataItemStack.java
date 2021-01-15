@@ -85,7 +85,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_MAP_NAME = null;
 	public static final transient Integer DEFAULT_MAP_ID = null;
 	public static final transient List<DataPotionEffect> DEFAULT_POTION_EFFECTS = Collections.emptyList();
-	public static final transient String DEFAULT_SKULL = null;
 	public static final transient ContainerGameProfile DEFAULT_GAMEPROFILE = null;
 	public static final transient DataFireworkEffect DEFAULT_FIREWORK_EFFECT = null;
 	public static final transient List<DataFireworkEffect> DEFAULT_FIREWORK_EFFECTS = Collections.emptyList();
@@ -110,7 +109,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 3;
+	private int version = 4;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -231,10 +230,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	// FIELDS > SKULL
 	// -------------------------------------------- //
-	
-	private String skull = null;
-	public String getSkull() { return get(this.skull, DEFAULT_SKULL); }
-	public DataItemStack setSkull(String skull) { this.skull = set(skull, DEFAULT_SKULL); return this; }
 	
 	private ContainerGameProfile containerGameProfile = null;
 	public ContainerGameProfile getContainerGameProfile() { return get(this.containerGameProfile, DEFAULT_GAMEPROFILE); }
@@ -602,7 +597,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
-			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
 			this.getFireworkEffect(), that.getFireworkEffect(),
 			this.getFireworkEffects(), that.getFireworkEffects(),
@@ -649,7 +643,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
-			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
 			this.getFireworkEffect(), that.getFireworkEffect(),
 			this.getFireworkEffects(), that.getFireworkEffects(),
@@ -703,7 +696,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getMapId(), that.getMapId(),
 			this.getMapName(), that.getMapName(),
 			this.getPotionEffects(), that.getPotionEffects(),
-			this.getSkull(), that.getSkull(),
 			this.getContainerGameProfile(), that.getContainerGameProfile(),
 			this.getFireworkEffect(), that.getFireworkEffect(),
 			this.getFireworkEffects(), that.getFireworkEffects(),
@@ -755,7 +747,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getMapId(),
 			this.getMapName(),
 			this.getPotionEffects(),
-			this.getSkull(),
 			this.getContainerGameProfile(),
 			this.getFireworkEffect(),
 			this.getFireworkEffects(),
