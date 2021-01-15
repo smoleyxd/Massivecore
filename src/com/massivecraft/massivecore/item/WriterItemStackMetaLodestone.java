@@ -5,7 +5,6 @@ import com.massivecraft.massivecore.ps.PS;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -41,6 +40,14 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	public static NamespacedKey NSK_LODESTONE_WORLD = new NamespacedKey(MassiveCore.get(), "lodestone_world");
 	
 	// -------------------------------------------- //
+	// UTIL
+	// -------------------------------------------- //
+	
+	private String getRootWorldName() {
+		return Bukkit.getWorlds().get(0).getName();
+	}
+	
+	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
 	
@@ -62,10 +69,10 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 		if (ps == null) return null;
 		
 		PersistentDataContainer pdc = cb.getPersistentDataContainer();
+		String targetWorld = pdc.getOrDefault(NSK_LODESTONE_WORLD, PersistentDataType.STRING, ps.getWorld());
 		
-		return ps.withWorld(
-			pdc.getOrDefault(NSK_LODESTONE_WORLD, PersistentDataType.STRING, ps.getWorld())
-		);
+		if (ps.getWorld().equals(getRootWorldName())) return ps.withWorld(targetWorld);
+		return ps;
 	}
 	
 	@Override
@@ -75,14 +82,9 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 			return;
 		}
 		
-		PersistentDataContainer pdc = cb.getPersistentDataContainer();
-		World world = Bukkit.getWorld(fb.getWorld());
-		
-		if (world == null) {
-			pdc.set(NSK_LODESTONE_WORLD, PersistentDataType.STRING, fb.getWorld());
-			fb = fb.withWorld(Bukkit.getWorlds().get(0).getName());
-		}
-		else pdc.remove(NSK_LODESTONE_WORLD);
+		// Write the PS's world to the
+		cb.getPersistentDataContainer().set(NSK_LODESTONE_WORLD, PersistentDataType.STRING, fb.getWorld());
+		if (Bukkit.getWorld(fb.getWorld()) == null) fb = fb.withWorld(getRootWorldName());
 		
 		cb.setLodestone(fb.asBukkitLocation());
 	}
