@@ -4,8 +4,6 @@ import com.massivecraft.massivecore.mixin.MixinCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import java.security.InvalidParameterException;
-
 public class ChestActionCommand extends ChestActionAbstract
 {
 	// -------------------------------------------- //
@@ -16,7 +14,6 @@ public class ChestActionCommand extends ChestActionAbstract
 	
 	public void setCommand(String command)
 	{
-		if ( ! command.startsWith("/")) throw new InvalidParameterException("Commands start with \"/\". Do include the leading slash.");
 		this.command = command;
 	}
 	
