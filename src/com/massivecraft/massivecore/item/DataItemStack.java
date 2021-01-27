@@ -231,6 +231,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// FIELDS > SKULL
 	// -------------------------------------------- //
 	
+	@EditorNullable(true)
 	private ContainerGameProfile containerGameProfile = null;
 	public ContainerGameProfile getContainerGameProfile() { return get(this.containerGameProfile, DEFAULT_GAMEPROFILE); }
 	public DataItemStack setContainerGameProfile(ContainerGameProfile containerGameProfile) { this.containerGameProfile = set(containerGameProfile, DEFAULT_GAMEPROFILE); return this; }
@@ -240,6 +241,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	
 	@SerializedName("firework-effect")
+	@EditorNullable(true)
 	private DataFireworkEffect fireworkEffect = null;
 	public DataFireworkEffect getFireworkEffect() { return get(this.fireworkEffect, DEFAULT_FIREWORK_EFFECT); }
 	public DataItemStack setFireworkEffect(DataFireworkEffect fireworkEffect) { this.fireworkEffect = set(fireworkEffect, DEFAULT_FIREWORK_EFFECT); return this; }
