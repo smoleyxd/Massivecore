@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.MassiveCore;
+import com.massivecraft.massivecore.adapter.AdapterInventory;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.comparator.ComparatorComparable;
 import com.massivecraft.massivecore.comparator.ComparatorEntryValue;
@@ -15,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -662,7 +664,11 @@ public class InventoryUtil
 				
 				// Possibly both
 				case HOTBAR_SWAP:
-					ItemStack hotbar = event.getView().getBottomInventory().getItem(event.getHotbarButton());
+					int slotNum;
+					if (event.getClick() == ClickType.SWAP_OFFHAND) slotNum = AdapterInventory.INDEX_PLAYER_SHIELD;
+					else slotNum = event.getHotbarButton();
+					
+					ItemStack hotbar = event.getView().getBottomInventory().getItem(slotNum);
 					ItemStack current = event.getCurrentItem();
 					boolean give = isSomething(hotbar);
 					boolean take = isSomething(current);
