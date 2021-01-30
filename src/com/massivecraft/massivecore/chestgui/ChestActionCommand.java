@@ -22,10 +22,10 @@ public class ChestActionCommand extends ChestActionAbstract
 		return this.command;
 	}
 	
+	// TODO consider removing this or getCommand since they are now identical
 	public String getCommandLine()
 	{
-		if (this.command == null) return null;
-		return this.command.substring(1);
+		return this.command;
 	}
 	
 	// -------------------------------------------- //
