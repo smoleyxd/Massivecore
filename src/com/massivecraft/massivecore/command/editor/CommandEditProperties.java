@@ -16,13 +16,6 @@ public class CommandEditProperties<O, V> extends CommandEditAbstract<O, V>
 		// Show
 		this.addChild(new CommandEditShow<>(parentSettings, childProperty));
 		
-		// Create / Delete
-		if (childProperty.isNullable())
-		{
-			this.addChild(new CommandEditCreate<>(parentSettings, childProperty));
-			this.addChild(new CommandEditDelete<>(parentSettings, childProperty));
-		}
-		
 		// Parameters
 		if (childProperty.isEditable())
 		{
