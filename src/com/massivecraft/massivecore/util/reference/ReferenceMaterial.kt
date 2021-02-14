@@ -288,7 +288,11 @@ object ReferenceMaterial {
             "OAK_SIGN", // Minecraft 1.14
             "OAK_WALL_SIGN", // Minecraft 1.14
             "SPRUCE_SIGN", // Minecraft 1.14
-            "SPRUCE_WALL_SIGN" // Minecraft 1.14
+            "SPRUCE_WALL_SIGN", // Minecraft 1.14
+            "CRIMSON_SIGN", // Minecraft 1.16
+            "CRIMSON_WALL_SIGN", // Minecraft 1.16
+            "WARPED_SIGN", // Minecraft 1.16
+            "WARPED_WALL_SIGN" // Minecraft 1.16
     )
 
 }
