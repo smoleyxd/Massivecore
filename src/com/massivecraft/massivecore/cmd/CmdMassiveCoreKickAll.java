@@ -28,8 +28,8 @@ public class CmdMassiveCoreKickAll extends MassiveCoreCommand
 	public CmdMassiveCoreKickAll()
 	{
 		// Parameters
-		this.addParameter(TypeBooleanTrue.get(), "include self").setDesc("include sender");
-		this.addParameter(TypeString.getFiltered(), "reason", true).setDesc("reason for the kick");
+		this.addParameter(TypeBooleanTrue.get(), "include self", "true").setDesc("include sender");
+		this.addParameter(TypeString.getFiltered(), "reason", "null", true).setDesc("reason for the kick");
 	}
 
 	// -------------------------------------------- //
@@ -41,7 +41,7 @@ public class CmdMassiveCoreKickAll extends MassiveCoreCommand
 	{
 		// Args
 		boolean includeSender = this.readArg(true);
-		String kickReason = Txt.parse(this.readArg("Kicked by server."));
+		String kickReason = Txt.parse((String) this.readArg(null));
 
 		// Apply
 		for (Player player : MUtil.getOnlinePlayers())
@@ -51,7 +51,9 @@ public class CmdMassiveCoreKickAll extends MassiveCoreCommand
 		}
 
 		//Inform
-		MassiveCore.get().log(Txt.parse("%s kicked all players: Players online: %d", sender.getName(), MUtil.getOnlinePlayers().size()));
+		String output = Txt.parse("%s kicked all players. Players online: %d", sender.getName(), MUtil.getOnlinePlayers().size());
+		msg(output);
+		MassiveCore.get().log(output);
 	}
 
 }
