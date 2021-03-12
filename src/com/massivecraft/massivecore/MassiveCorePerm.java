@@ -45,6 +45,7 @@ public enum MassiveCorePerm implements Identified
 	CONFIG,
 	SPONSOR,
 	CLICK,
+	KICK_ALL,
 	NOTPDELAY,
 	VARIABLE_BOOK,
 	VARIABLE_BUFFER,

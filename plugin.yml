@@ -47,6 +47,7 @@ permissions:
   massivecore.config: {description: edit config, default: false}
   massivecore.sponsor: {description: toggle sponsor message, default: false}
   massivecore.click: {description: click, default: false}
+  massivecore.kick.all: {description: kick all players, default: false}
   massivecore.version: {description: diplay plugin version, default: false}
 # misc
   massivecore.notpdelay: {description: teleport without delay, default: false}
@@ -93,6 +94,7 @@ permissions:
       massivecore.config: true
       massivecore.sponsor: true
       massivecore.click: true
+      massivecore.kick.all: true
       massivecore.version: true
       massivecore.notpdelay: true
       massivecore.variable.book: true
