@@ -1,12 +1,13 @@
-package com.massivecraft.massivecore.util.reference
+package com.massivecraft.massivecore.util.reference;
 
-import org.bukkit.Material
+import org.bukkit.Material;
 
-object ReferenceMaterial {
+import java.util.Set;
 
-    @JvmStatic
-    val pickaxeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+public class ReferenceMaterial {
+
+    private static Set<Material> pickaxeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_PICKAXE",
             "DIAMOND_PICKAXE",
             "GOLDEN_PICKAXE",
@@ -15,11 +16,11 @@ object ReferenceMaterial {
             "STONE_PICKAXE",
             "WOODEN_PICKAXE",
             "WOOD_PICKAXE"
-    )
+    );
+    public static Set<Material> getPickaxeMaterials() { return pickaxeMaterials; }
 
-    @JvmStatic
-    val swordMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> swordMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_SWORD",
             "DIAMOND_SWORD",
             "GOLDEN_SWORD",
@@ -28,11 +29,11 @@ object ReferenceMaterial {
             "STONE_SWORD",
             "WOODEN_SWORD",
             "WOOD_SWORD"
-    )
+    );
+    public static Set<Material> getSwordMaterials() { return swordMaterials; }
 
-    @JvmStatic
-    val axeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> axeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_AXE",
             "DIAMOND_AXE",
             "GOLDEN_AXE",
@@ -41,11 +42,11 @@ object ReferenceMaterial {
             "STONE_AXE",
             "WOODEN_AXE",
             "WOOD_AXE"
-    )
+    );
+    public static Set<Material> getAxeMaterials() { return axeMaterials; }
 
-    @JvmStatic
-    val spadeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> spadeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_SHOVEL",
             "DIAMOND_SHOVEL",
             "DIAMOND_SPADE",
@@ -57,11 +58,11 @@ object ReferenceMaterial {
             "STONE_SPADE",
             "WOODEN_SHOVEL",
             "WOOD_SPADE"
-    )
+    );
+    public static Set<Material> getSpadeMaterials() { return spadeMaterials; }
 
-    @JvmStatic
-    val hoeMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> hoeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_HOE",
             "DIAMOND_HOE",
             "GOLDEN_HOE",
@@ -69,11 +70,11 @@ object ReferenceMaterial {
             "IRON_HOE",
             "STONE_HOE",
             "WOODEN_HOE"
-    )
+    );
+    public static Set<Material> getHoeMaterials() { return hoeMaterials; }
 
-    @JvmStatic
-    val helmetMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> helmetMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_HELMET",
             "DIAMOND_HELMET",
             "GOLDEN_HELMET",
@@ -82,11 +83,11 @@ object ReferenceMaterial {
             "LEATHER_HELMET",
             "CHAINMAIL_HELMET",
             "TURTLE_HELMET"
-    )
+    );
+    public static Set<Material> getHelmetMaterials() { return helmetMaterials; }
 
-    @JvmStatic
-    val chestplateMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> chestplateMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_CHESTPLATE",
             "DIAMOND_CHESTPLATE",
             "GOLDEN_CHESTPLATE",
@@ -94,11 +95,11 @@ object ReferenceMaterial {
             "IRON_CHESTPLATE",
             "LEATHER_CHESTPLATE",
             "CHAINMAIL_CHESTPLATE"
-    )
+    );
+    public static Set<Material> getChestplateMaterials() { return chestplateMaterials; }
 
-    @JvmStatic
-    val leggingsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> leggingsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_LEGGINGS",
             "DIAMOND_LEGGINGS",
             "GOLDEN_LEGGINGS",
@@ -106,11 +107,11 @@ object ReferenceMaterial {
             "IRON_LEGGINGS",
             "LEATHER_LEGGINGS",
             "CHAINMAIL_LEGGINGS"
-    )
+    );
+    public static Set<Material> getLeggingsMaterials() { return leggingsMaterials; }
 
-    @JvmStatic
-    val bootsMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> bootsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "NETHERITE_BOOTS",
             "DIAMOND_BOOTS",
             "GOLDEN_BOOTS",
@@ -118,11 +119,11 @@ object ReferenceMaterial {
             "IRON_BOOTS",
             "LEATHER_BOOTS",
             "CHAINMAIL_BOOTS"
-    )
+    );
+    public static Set<Material> getBootsMaterials() { return bootsMaterials; }
 
-    @JvmStatic
-    val foodMaterials: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> foodMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "APPLE",
             "BAKED_POTATO",
             "BEETROOT_SOUP",
@@ -165,11 +166,11 @@ object ReferenceMaterial {
             "SUSPICIOUS_STEW",
             "SWEET_BERRIES",
             "TROPICAL_FISH"
-    )
+    );
+    public static Set<Material> getFoodMaterials() { return foodMaterials; }
 
-    @JvmStatic
-    val materialsVegetation: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> materialsVegetation = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "ACACIA_LEAVES",
             "ACACIA_SAPLING",
             "ALLIUM",
@@ -269,11 +270,11 @@ object ReferenceMaterial {
             "WHITE_TULIP",
             "WITHER_ROSE",
             "YELLOW_FLOWER"
-    )
+    );
+    public static Set<Material> getMaterialsVegetation() { return materialsVegetation; }
 
-    @JvmStatic
-    val materialsSign: Set<Material> = ProviderOptimizedCollectionSafe.enumSetOf(
-            Material::class.java,
+    private static Set<Material> materialsSign = ProviderOptimizedCollectionSafe.enumSetOf(
+            Material.class,
             "SIGN", // Minecraft 1.?
             "SIGN_POST", // Minecraft 1.?
             "WALL_SIGN", // Minecraft 1.?
@@ -293,6 +294,6 @@ object ReferenceMaterial {
             "CRIMSON_WALL_SIGN", // Minecraft 1.16
             "WARPED_SIGN", // Minecraft 1.16
             "WARPED_WALL_SIGN" // Minecraft 1.16
-    )
-
+    );
+    public static Set<Material> getMaterialsSign() { return materialsSign; }
 }
