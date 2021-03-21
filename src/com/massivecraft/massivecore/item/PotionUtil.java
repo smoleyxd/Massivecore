@@ -1,9 +1,12 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.xlib.guava.collect.BiMap;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableBiMap;
 import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 
 public class PotionUtil
 {
@@ -72,4 +75,30 @@ public class PotionUtil
 	// BUILD
 	.build();
 	
+	public static String friendlyPotionEffectName(PotionEffectType unfriendlyPotionEffectType) {
+			if (unfriendlyPotionEffectType == PotionEffectType.FAST_DIGGING)
+				return "Haste";
+			if (unfriendlyPotionEffectType == PotionEffectType.DAMAGE_RESISTANCE)
+				return "Resistance";
+			if (unfriendlyPotionEffectType == PotionEffectType.CONFUSION)
+				return "Nausea";
+			if (unfriendlyPotionEffectType == PotionEffectType.HARM)
+				return "Instant Damage";
+			if (unfriendlyPotionEffectType == PotionEffectType.HEAL)
+				return "Instant Health";
+			if (unfriendlyPotionEffectType == PotionEffectType.INCREASE_DAMAGE)
+				return "Strength";
+			if (unfriendlyPotionEffectType == PotionEffectType.JUMP)
+				return "Jump Boost";
+			if (unfriendlyPotionEffectType == PotionEffectType.SLOW)
+				return "Slowness";
+			if (unfriendlyPotionEffectType == PotionEffectType.SLOW_DIGGING)
+				return "Mining Fatigue";
+			if (unfriendlyPotionEffectType == PotionEffectType.UNLUCK)
+				return "Bad Luck";
+			if (unfriendlyPotionEffectType == null)
+				return "Null";
+			
+			return Txt.getNicedEnumString(unfriendlyPotionEffectType.getName(), " ");
+		}
 }
