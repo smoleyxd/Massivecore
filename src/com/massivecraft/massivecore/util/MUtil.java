@@ -424,11 +424,6 @@ public class MUtil
 	{
 		return !isPlayer(object);
 	}
-	public static boolean aintPlayer(Object object)
-	{
-		System.out.println("Yeeee haww!");
-		return !isPlayer(object);
-	}
 	
 	// -------------------------------------------- //
 	// STACK TRACE: GET
