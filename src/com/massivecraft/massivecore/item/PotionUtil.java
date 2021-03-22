@@ -1,9 +1,12 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.xlib.guava.collect.BiMap;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableBiMap;
 import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 
 public class PotionUtil
 {
@@ -72,4 +75,34 @@ public class PotionUtil
 	// BUILD
 	.build();
 	
+	public static String friendlyPotionEffectName(PotionEffectType unfriendlyPotionEffectType)
+	{
+		String unfriendlyPotionEffectTypeString = unfriendlyPotionEffectType.getName();
+		
+		switch (unfriendlyPotionEffectTypeString)
+		{
+			case "FAST_DIGGING":
+				return "Haste";
+			case "DAMAGE_RESISTANCE":
+				return "Resistance";
+			case "CONFUSION":
+				return "Nausea";
+			case "HARM":
+				return "Instant Damage";
+			case "HEAL":
+				return "Instant Health";
+			case "INCREASE_DAMAGE":
+				return "Strength";
+			case "JUMP":
+				return "Jump Boost";
+			case "SLOW":
+				return "Slowness";
+			case "SLOW_DIGGING":
+				return "Mining Fatigue";
+			case "UNLUCK":
+				return "Bad Luck";
+			default:
+				return Txt.getNicedEnumString(unfriendlyPotionEffectTypeString, " ");
+		}
+	}
 }
