@@ -75,30 +75,34 @@ public class PotionUtil
 	// BUILD
 	.build();
 	
-	public static String friendlyPotionEffectName(PotionEffectType unfriendlyPotionEffectType) {
-			if (unfriendlyPotionEffectType == PotionEffectType.FAST_DIGGING)
+	public static String friendlyPotionEffectName(PotionEffectType unfriendlyPotionEffectType)
+	{
+		String unfriendlyPotionEffectTypeString = unfriendlyPotionEffectType.getName();
+		
+		switch (unfriendlyPotionEffectTypeString)
+		{
+			case "FAST_DIGGING":
 				return "Haste";
-			if (unfriendlyPotionEffectType == PotionEffectType.DAMAGE_RESISTANCE)
+			case "DAMAGE_RESISTANCE":
 				return "Resistance";
-			if (unfriendlyPotionEffectType == PotionEffectType.CONFUSION)
+			case "CONFUSION":
 				return "Nausea";
-			if (unfriendlyPotionEffectType == PotionEffectType.HARM)
+			case "HARM":
 				return "Instant Damage";
-			if (unfriendlyPotionEffectType == PotionEffectType.HEAL)
+			case "HEAL":
 				return "Instant Health";
-			if (unfriendlyPotionEffectType == PotionEffectType.INCREASE_DAMAGE)
+			case "INCREASE_DAMAGE":
 				return "Strength";
-			if (unfriendlyPotionEffectType == PotionEffectType.JUMP)
+			case "JUMP":
 				return "Jump Boost";
-			if (unfriendlyPotionEffectType == PotionEffectType.SLOW)
+			case "SLOW":
 				return "Slowness";
-			if (unfriendlyPotionEffectType == PotionEffectType.SLOW_DIGGING)
+			case "SLOW_DIGGING":
 				return "Mining Fatigue";
-			if (unfriendlyPotionEffectType == PotionEffectType.UNLUCK)
+			case "UNLUCK":
 				return "Bad Luck";
-			if (unfriendlyPotionEffectType == null)
-				return "Null";
-			
-			return Txt.getNicedEnumString(unfriendlyPotionEffectType.getName(), " ");
+			default:
+				return Txt.getNicedEnumString(unfriendlyPotionEffectTypeString, " ");
 		}
+	}
 }
