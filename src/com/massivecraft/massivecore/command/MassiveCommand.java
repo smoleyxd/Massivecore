@@ -1427,8 +1427,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			// First a space
 			ret.append(' ');
 			
+			// If arg needs wrapping, start quote
+			if (arg.contains(" ")) ret.append("\"");
+			
 			// Then the arg
 			ret.append(arg);
+			
+			// If arg needs wrapping, end quote
+			if (arg.contains(" ")) ret.append("\"");
 		}
 		
 		// Return ret

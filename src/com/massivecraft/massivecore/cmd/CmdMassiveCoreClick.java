@@ -22,6 +22,7 @@ public class CmdMassiveCoreClick extends MassiveCoreCommand
 	{
 		// Parameters
 		this.addParameter(null, TypeStringCommand.get(), "command", "none", true).setDesc("the command to perform");
+		this.setTokenizing(false);
 	}
 	
 	// -------------------------------------------- //
