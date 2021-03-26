@@ -9,6 +9,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.NotNull;
 
 // NOTE: This utility targets 1.9 and will crash on older servers.
 public class RecipeUtil
@@ -17,7 +18,7 @@ public class RecipeUtil
 	// POTION
 	// -------------------------------------------- //
 	
-	public static ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
+	public static @NotNull ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
 	{
 		ItemStack ret = new ItemStack(material, amount);
 		PotionMeta meta = InventoryUtil.createMeta(ret);

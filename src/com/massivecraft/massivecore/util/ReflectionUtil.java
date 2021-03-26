@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.predicate.PredicateAnd;
 import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath;
 import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath.ClassInfo;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.Contract;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -48,7 +49,8 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	// MAKE ACCESSIBLE
 	// -------------------------------------------- //
-	
+
+	@Contract("null -> fail")
 	public static void makeAccessible(Field field)
 	{
 		try
@@ -65,7 +67,8 @@ public class ReflectionUtil
 			throw asRuntimeException(e);
 		}
 	}
-	
+
+	@Contract("null -> fail")
 	public static void makeAccessible(Method method)
 	{
 		try
@@ -78,7 +81,8 @@ public class ReflectionUtil
 			throw asRuntimeException(e);
 		}
 	}
-	
+
+	@Contract("null -> fail")
 	public static void makeAccessible(Constructor<?> constructor)
 	{
 		try

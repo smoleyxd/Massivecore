@@ -54,6 +54,9 @@ import org.bukkit.metadata.Metadatable;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.Color;
 import java.lang.reflect.Method;
@@ -181,14 +184,14 @@ public class MUtil
 	// GET NEARBY PLAYERS
 	// -------------------------------------------- //
 	
-	public static Set<Player> getNearbyPlayers(Entity entity, double raidus, boolean includeSelf)
+	public static Set<Player> getNearbyPlayers(@NotNull Entity entity, double raidus, boolean includeSelf)
 	{
 		Set<Player> ret = getNearbyPlayers(entity.getLocation(), raidus);
 		if (isPlayer(entity) && !includeSelf) ret.remove(entity);
 		return ret;
 	}
 	
-	public static Set<Player> getNearbyPlayers(Location location, double radius)
+	public static @NotNull Set<Player> getNearbyPlayers(@NotNull Location location, double radius)
 	{
 		// Create
 		Set<Player> ret = new MassiveSet<>();
@@ -249,6 +252,7 @@ public class MUtil
 	// UUID
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static UUID asUuid(String string)
 	{
 		// Null
@@ -268,7 +272,7 @@ public class MUtil
 		}
 	}
 	
-	public static boolean isUuid(String string)
+	public static boolean isUuid(@Nullable String string)
 	{
 		return asUuid(string) != null;
 	}
@@ -277,14 +281,15 @@ public class MUtil
 	// CONTAINS COMMAND
 	// -------------------------------------------- //
 	
-	public static boolean containsCommand(String needle, ExceptionSet haystack)
+	public static boolean containsCommand(String needle, @NotNull ExceptionSet haystack)
 	{
 		boolean ret = haystack.isStandard();
 		if (containsCommand(needle, haystack.exceptions)) ret = !ret; 
 		return ret;
 	}
 	
-	public static boolean containsCommand(String needle, Iterable<String> haystack)
+	@Contract("null, _ -> false")
+	public static boolean containsCommand(String needle, @NotNull Iterable<String> haystack)
 	{
 		if (needle == null) return false;
 		needle = prepareCommand(needle);
@@ -313,6 +318,7 @@ public class MUtil
 		return false;
 	}
 	
+	@Contract("null -> null")
 	private static String prepareCommand(String string)
 	{
 		if (string == null) return null;
@@ -326,6 +332,7 @@ public class MUtil
 	// IP
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static String getIp(CommandSender sender)
 	{
 		if (!(sender instanceof Player)) return null;
@@ -341,6 +348,7 @@ public class MUtil
 		return null;
 	}
 	
+	@Contract("null -> null")
 	public static String getIp(InetSocketAddress address)
 	{
 		if (address == null) return null;
@@ -355,12 +363,13 @@ public class MUtil
 		return ret;
 	}
 	
-	public static String getIp(PlayerLoginEvent event)
+	public static String getIp(@NotNull PlayerLoginEvent event)
 	{
 		InetAddress address = event.getAddress();
 		return getIp(address);
 	}
 	
+	@Contract("null -> null")
 	public static String getIp(InetAddress address)
 	{
 		if (address == null) return null;
@@ -373,6 +382,7 @@ public class MUtil
 	}
 	
 	public static Pattern PATTERN_IPV4 = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+	@Contract("null -> false")
 	public static boolean isIp(String string)
 	{
 		if (string == null) return false;
@@ -383,6 +393,7 @@ public class MUtil
 	// IS(NT) NPC, SENDER, PLAYER
 	// -------------------------------------------- //
 	
+	@Contract("null -> false")
 	public static boolean isNpc(Object object)
 	{
 		if ( ! (object instanceof Metadatable)) return false;
@@ -399,27 +410,32 @@ public class MUtil
 		}
 		
 	}
+	@Contract("null -> true")
 	public static boolean isntNpc(Object object)
 	{
 		return !isNpc(object);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isSender(Object object)
 	{
 		if (!(object instanceof CommandSender)) return false;
 		return !isNpc(object);
 	}
+	@Contract("null -> true")
 	public static boolean isntSender(Object object)
 	{
 		return !isSender(object);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isPlayer(Object object)
 	{
 		if (!(object instanceof Player)) return false;
 		if (isNpc(object)) return false;
 		return true;
 	}
+	@Contract("null -> true")
 	public static boolean isntPlayer(Object object)
 	{
 		return !isPlayer(object);
@@ -429,7 +445,8 @@ public class MUtil
 	// STACK TRACE: GET
 	// -------------------------------------------- //
 	
-	public static List<StackTraceElement> getStackTrace(Thread thread, int skip)
+	@Contract("_, _ -> new")
+	public static @NotNull List<StackTraceElement> getStackTrace(@NotNull Thread thread, int skip)
 	{
 		// Cut away this method.
 		// Cut away system line.
@@ -441,7 +458,7 @@ public class MUtil
 		return new MassiveList<>(Arrays.asList(elements));
 	}
 	
-	public static List<StackTraceElement> getStackTrace(Thread thread)
+	public static @NotNull List<StackTraceElement> getStackTrace(@NotNull Thread thread)
 	{
 		int skip = 0;
 		
@@ -452,7 +469,7 @@ public class MUtil
 		return getStackTrace(thread, skip);
 	}
 	
-	public static List<StackTraceElement> getStackTrace(int skip)
+	public static @NotNull List<StackTraceElement> getStackTrace(int skip)
 	{
 		// Cut away this method.
 		// We already know it's going to be the current thread.
@@ -463,7 +480,7 @@ public class MUtil
 		return getStackTrace(thread, skip);
 	}
 	
-	public static List<StackTraceElement> getStackTrace()
+	public static @NotNull List<StackTraceElement> getStackTrace()
 	{
 		// Cut away this method.
 		// We already know it's going to be the current thread.
@@ -478,7 +495,7 @@ public class MUtil
 	// STACK TRACE: CUT
 	// -------------------------------------------- //
 	
-	public static void cutStackTrace(List<StackTraceElement> trace)
+	public static void cutStackTrace(@NotNull List<StackTraceElement> trace)
 	{
 		// Cut Significant
 		int index = 0;
@@ -504,7 +521,7 @@ public class MUtil
 	// STACK TRACE STRING: MANY
 	// -------------------------------------------- //
 	
-	public static List<String> getStackTraceStrings(List<StackTraceElement> stackTrace, boolean color)
+	public static @NotNull List<String> getStackTraceStrings(@NotNull List<StackTraceElement> stackTrace, boolean color)
 	{
 		List<String> ret = new MassiveList<>();
 		
@@ -515,26 +532,26 @@ public class MUtil
 		
 		return ret;
 	}
-	public static List<String> getStackTraceStrings(int skip, boolean color)
+	public static @NotNull List<String> getStackTraceStrings(int skip, boolean color)
 	{
 		skip++;
 		return getStackTraceStrings(getStackTrace(skip), color);
 	}
-	public static List<String> getStackTraceStrings(boolean color)
+	public static @NotNull List<String> getStackTraceStrings(boolean color)
 	{
 		return getStackTraceStrings(0, color);
 	}
 	
-	public static String getStackTraceString(List<StackTraceElement> stackTrace, boolean color)
+	public static @NotNull String getStackTraceString(@NotNull List<StackTraceElement> stackTrace, boolean color)
 	{
 		return Txt.implode(getStackTraceStrings(stackTrace, color), "\n");
 	}
-	public static String getStackTraceString(int skip, boolean color)
+	public static @NotNull String getStackTraceString(int skip, boolean color)
 	{
 		skip++;
 		return getStackTraceString(getStackTrace(skip), color);
 	}
-	public static String getStackTraceString(boolean color)
+	public static @NotNull String getStackTraceString(boolean color)
 	{
 		return getStackTraceString(0, color);
 	}
@@ -544,7 +561,7 @@ public class MUtil
 	// -------------------------------------------- //
 	
 	// Same as the Java8 source but with color option.
-	public static String getStackTraceString(StackTraceElement element, boolean color)
+	public static @NotNull String getStackTraceString(@NotNull StackTraceElement element, boolean color)
 	{
 		ChatColor separatorColor = ChatColor.GRAY;
 		ChatColor classColor = ChatColor.YELLOW;
@@ -629,7 +646,7 @@ public class MUtil
 	// LIST OPERATIONS
 	// -------------------------------------------- //
 	
-	public static <T> List<T> repeat(T object, int times)
+	public static <T> @NotNull List<T> repeat(T object, int times)
 	{
 		List<T> ret = new ArrayList<>(times);
 		for (int i = 1; i <= times; i++)
@@ -638,7 +655,7 @@ public class MUtil
 		}
 		return ret;
 	}
-	public static List<Integer> range(int from, int to)
+	public static @NotNull List<Integer> range(int from, int to)
 	{
 		List<Integer> ret = new MassiveList<>(to - from);
 		for (int i = from; i < to; i++)
@@ -648,25 +665,25 @@ public class MUtil
 		return ret;
 	}
 	
-	public static void keepLeft(List<?> list, int maxlength)
+	public static void keepLeft(@NotNull List<?> list, int maxlength)
 	{
 		if (list.size() <= maxlength) return;
 		list.subList(maxlength, list.size()).clear();
 	}
 	
-	public static void keepRight(List<?> list, int maxlength)
+	public static void keepRight(@NotNull List<?> list, int maxlength)
 	{
 		if (list.size() <= maxlength) return;
 		list.subList(0, maxlength).clear();
 	}
 	
-	public static <T> void padLeft(List<T> list, T object, int length)
+	public static <T> void padLeft(@NotNull List<T> list, T object, int length)
 	{
 		if (list.size() >= length) return;
 		list.addAll(0, repeat(object, length - list.size()));
 	}
 	
-	public static <T> void padRight(List<T> list, T object, int length)
+	public static <T> void padRight(@NotNull List<T> list, T object, int length)
 	{
 		if (list.size() >= length) return;
 		list.addAll(repeat(object, length - list.size()));
@@ -676,7 +693,7 @@ public class MUtil
 	// MAP OPERATIONS
 	// -------------------------------------------- //
 	
-	public static void keepLeft(Map<?, ?> map, int maxSize)
+	public static void keepLeft(@NotNull Map<?, ?> map, int maxSize)
 	{
 		int i = 0;
 		Iterator<?> iter = map.entrySet().iterator();
@@ -692,6 +709,7 @@ public class MUtil
 	// ITERABLE MATH
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public static <T extends Number> double getSum(Iterable<T> numbers)
 	{
 		if (numbers == null) throw new NullPointerException("numbers");
@@ -705,6 +723,7 @@ public class MUtil
 		return sum;
 	}
 	
+	@Contract("null -> fail")
 	public static <T extends Number> double getAverage(Iterable<T> numbers)
 	{
 		if (numbers == null) throw new NullPointerException("numbers");
@@ -726,21 +745,21 @@ public class MUtil
 	// TABLE OPERATIONS
 	// -------------------------------------------- //
 	
-	public static <T> List<List<T>> rotateLeft(List<List<T>> rows)
+	public static <T> @NotNull List<List<T>> rotateLeft(@NotNull List<List<T>> rows)
 	{
 		List<List<T>> ret = transpose(rows);
 		flipVertically(ret);
 		return ret;
 	}
 	
-	public static <T> List<List<T>> rotateRight(List<List<T>> rows)
+	public static <T> @NotNull List<List<T>> rotateRight(@NotNull List<List<T>> rows)
 	{
 		List<List<T>> ret = transpose(rows);
 		flipHorizontally(ret);
 		return ret;
 	}
 	
-	public static <T> List<List<T>> transpose(List<List<T>> rows)
+	public static <T> @NotNull List<List<T>> transpose(@NotNull List<List<T>> rows)
 	{
 		List<List<T>> ret = new ArrayList<>();
 		
@@ -759,7 +778,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <T> void flipHorizontally(List<List<T>> rows)
+	public static <T> void flipHorizontally(@NotNull List<List<T>> rows)
 	{
 		for (List<T> row : rows)
 		{
@@ -806,6 +825,7 @@ public class MUtil
 		throw new IllegalArgumentException("The chat color " + chatColor.name() + " is not yet supported!");
 	}
 	
+	@Contract(pure = true)
 	public static ChatColor getChatColor(int chatColorCode)
 	{
 		switch (chatColorCode)
@@ -837,6 +857,7 @@ public class MUtil
 	}
 	
 	// TODO deal with the duplicate branches
+	@Contract(pure = true)
 	public static ChatColor getChatColor(DyeColor dyeColor)
 	{
 		switch (dyeColor)
@@ -904,7 +925,7 @@ public class MUtil
 	// This method sets the BASE damage modifier and scales all other modifiers proportionally.
 	
 	@SuppressWarnings("deprecation")
-	public static void setDamage(EntityDamageEvent event, double newDamage)
+	public static void setDamage(@NotNull EntityDamageEvent event, double newDamage)
 	{
 		// Check New Damage
 		if ( ! isFinite(newDamage)) throw new IllegalStateException("not finite newDamage: " + newDamage);
@@ -947,7 +968,7 @@ public class MUtil
 	}
 	
 	// Same as above but scales directly.
-	public static void scaleDamage(EntityDamageEvent event, double factor)
+	public static void scaleDamage(@NotNull EntityDamageEvent event, double factor)
 	{
 		// Clean Input
 		if ( ! isFinite(factor)) throw new IllegalStateException("not finite factor: " + factor);
@@ -967,6 +988,7 @@ public class MUtil
 	}
 	
 	// isFinite check recreation to be compatible with java 1.7/1.6
+	@Contract(pure = true)
 	public static boolean isFinite(double d)
 	{
 		 return Math.abs(d) <= Double.MAX_VALUE;
@@ -976,6 +998,7 @@ public class MUtil
 	// PICK
 	// -------------------------------------------- //
 	
+	@Contract("_, null -> null")
 	public static <T> T regexPickFirstVal(String input, Map<String, T> regex2val)
 	{
 		if (regex2val == null) return null;
@@ -992,6 +1015,7 @@ public class MUtil
 		return ret;
 	}
 	
+	@Contract("_, null -> null")
 	public static <E, T> T equalsPickFirstVal(E input, Map<E, T> thing2val)
 	{
 		if (thing2val == null) return null;
@@ -1008,7 +1032,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <T> T recurseResolveMap(T input, Map<T, T> map)
+	public static <T> T recurseResolveMap(T input, @NotNull Map<T, T> map)
 	{
 		T output = map.get(input);
 		if (output == null) return input;
@@ -1019,12 +1043,12 @@ public class MUtil
 	// GET BLOCKS
 	// -------------------------------------------- //
 	
-	public static List<Block> getBlocks(Location location, int halfWidth)
+	public static @NotNull List<Block> getBlocks(Location location, int halfWidth)
 	{
 		return getBlocks(location.getBlock(), halfWidth);
 	}
 	
-	public static List<Block> getBlocks(Block block, int halfWidth)
+	public static @NotNull List<Block> getBlocks(Block block, int halfWidth)
 	{
 		int xmin = block.getX() - halfWidth;
 		int ymin = block.getY() - halfWidth;
@@ -1037,7 +1061,7 @@ public class MUtil
 		return getBlocks(block.getWorld(), xmin, ymin, zmin, xmax, ymax, zmax);
 	}
 	
-	public static List<Block> getBlocks(World world, int xmin, int ymin, int zmin, int xmax, int ymax, int zmax)
+	public static @NotNull List<Block> getBlocks(World world, int xmin, int ymin, int zmin, int xmax, int ymax, int zmax)
 	{
 		List<Block> blocks = new ArrayList<>();
 		
@@ -1059,12 +1083,12 @@ public class MUtil
 	// LOCATIONS COMPARISON
 	// -------------------------------------------- //
 	
-	public static boolean isSameBlock(PlayerMoveEvent event)
+	public static boolean isSameBlock(@NotNull PlayerMoveEvent event)
 	{
 		return isSameBlock(event.getFrom(), event.getTo());
 	}
 	
-	public static boolean isSameBlock(Location one, Location two)
+	public static boolean isSameBlock(@NotNull Location one, @NotNull Location two)
 	{
 		if (one.getBlockX() != two.getBlockX()) return false;
 		if (one.getBlockZ() != two.getBlockZ()) return false;
@@ -1072,12 +1096,12 @@ public class MUtil
 		return one.getWorld().equals(two.getWorld());
 	}
 	
-	public static boolean isSameChunk(PlayerMoveEvent event)
+	public static boolean isSameChunk(@NotNull PlayerMoveEvent event)
 	{
 		return isSameChunk(event.getFrom(), event.getTo());
 	}
 	
-	public static boolean isSameChunk(Location one, Location two)
+	public static boolean isSameChunk(@NotNull Location one, @NotNull Location two)
 	{
 		if (one.getBlockX() >> 4 != two.getBlockX() >> 4) return false;
 		if (one.getBlockZ() >> 4 != two.getBlockZ() >> 4) return false;
@@ -1089,7 +1113,7 @@ public class MUtil
 	// FACE AND YAW
 	// -------------------------------------------- //
 	
-	public static Float getYaw(BlockFace face)
+	public static @Nullable Float getYaw(@NotNull BlockFace face)
 	{
 		switch (face)
 		{
@@ -1122,17 +1146,19 @@ public class MUtil
 	
 	// Archery
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isArchery(Entity entity)
 	{
 		if (entity == null) return false;
 		return entity instanceof Arrow;
 	}
 	
-	public static boolean isArchery(EntityDamageByEntityEvent event)
+	public static boolean isArchery(@NotNull EntityDamageByEntityEvent event)
 	{
 		return isArchery(event.getDamager());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isArchery(EntityDamageEvent event)
 	{
 		if ( ! (event instanceof EntityDamageByEntityEvent)) return false;
@@ -1146,6 +1172,7 @@ public class MUtil
 		return ReferenceMaterial.getSwordMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isSword(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1153,6 +1180,7 @@ public class MUtil
 	}
 
 	// Main hand should be safe as long as swords don't function from offhand TODO verify
+	@Contract("null -> false")
 	public static boolean isSword(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1161,11 +1189,12 @@ public class MUtil
 		return isSword(lentity.getEquipment().getItemInMainHand());
 	}
 	
-	public static boolean isSword(EntityDamageByEntityEvent event)
+	public static boolean isSword(@NotNull EntityDamageByEntityEvent event)
 	{
 		return isSword(event.getDamager());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isSword(EntityDamageEvent event)
 	{
 		if ( ! (event instanceof EntityDamageByEntityEvent)) return false;
@@ -1179,6 +1208,7 @@ public class MUtil
 		return ReferenceMaterial.getAxeMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isAxe(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1187,6 +1217,7 @@ public class MUtil
 
 	// Main hand should be safe if axes aren't used from the offhand
 	// TODO verify that
+	@Contract("null -> false")
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1195,11 +1226,12 @@ public class MUtil
 		return isAxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
-	public static boolean isAxe(EntityDamageByEntityEvent event)
+	public static boolean isAxe(@NotNull EntityDamageByEntityEvent event)
 	{
 		return isAxe(event.getDamager());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isAxe(EntityDamageEvent event)
 	{
 		if ( ! (event instanceof EntityDamageByEntityEvent)) return false;
@@ -1208,6 +1240,7 @@ public class MUtil
 	
 	// Unarmed
 	
+	@Contract("null -> true")
 	public static boolean isUnarmed(ItemStack item)
 	{
 		if (item == null) return true;
@@ -1215,6 +1248,7 @@ public class MUtil
 	}
 
 	// Main hand should be safe since only primary hand is used for unarmed combat
+	@Contract("null -> false")
 	public static boolean isUnarmed(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1223,18 +1257,19 @@ public class MUtil
 		return isUnarmed(lentity.getEquipment().getItemInMainHand());
 	}
 	
-	public static boolean isUnarmed(EntityDamageByEntityEvent event)
+	public static boolean isUnarmed(@NotNull EntityDamageByEntityEvent event)
 	{
 		return isUnarmed(event.getDamager());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isUnarmed(EntityDamageEvent event)
 	{
 		if ( ! (event instanceof EntityDamageByEntityEvent)) return false;
 		return isUnarmed((EntityDamageByEntityEvent)event);
 	}
 	
-	public static boolean isAxe(BlockBreakEvent event)
+	public static boolean isAxe(@NotNull BlockBreakEvent event)
 	{
 		return isAxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
@@ -1247,6 +1282,7 @@ public class MUtil
 		//return PICKAXE_MATERIALS.contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isPickaxe(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1254,6 +1290,7 @@ public class MUtil
 	}
 
 	// Main hand should be safe since the pickaxe doesn't operate from offhand
+	@Contract("null -> false")
 	public static boolean isPickaxe(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1262,7 +1299,7 @@ public class MUtil
 		return isPickaxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
-	public static boolean isPickaxe(BlockBreakEvent event)
+	public static boolean isPickaxe(@NotNull BlockBreakEvent event)
 	{
 		return isPickaxe(InventoryUtil.getMainHand(event.getPlayer()));
 	}
@@ -1274,12 +1311,14 @@ public class MUtil
 		return ReferenceMaterial.getSpadeMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isSpade(ItemStack item)
 	{
 		if (item == null) return false;
 		return isSpade(item.getType());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1300,12 +1339,14 @@ public class MUtil
 		return ReferenceMaterial.getHoeMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isHoe(ItemStack item)
 	{
 		if (item == null) return false;
 		return isHoe(item.getType());
 	}
 	
+	@Contract("null -> false")
 	public static boolean isHoe(Entity entity)
 	{
 		if (entity == null) return false;
@@ -1323,6 +1364,7 @@ public class MUtil
 		return ReferenceMaterial.getHelmetMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isHelmet(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1336,6 +1378,7 @@ public class MUtil
 		return ReferenceMaterial.getChestplateMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isChestplate(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1349,6 +1392,7 @@ public class MUtil
 		return ReferenceMaterial.getLeggingsMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isLeggings(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1362,6 +1406,7 @@ public class MUtil
 		return ReferenceMaterial.getBootsMaterials().contains(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isBoots(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1369,12 +1414,14 @@ public class MUtil
 	}
 	
 	// Armor
-	
+
+	@Contract("null -> false")
 	public static boolean isArmor(Material material)
 	{
 		return isHelmet(material) || isChestplate(material) || isLeggings(material) || isBoots(material);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isArmor(ItemStack item)
 	{
 		if (item == null) return false;
@@ -1386,7 +1433,7 @@ public class MUtil
 	// -------------------------------------------- //
 	
 	// Note that this one is unstable and invalid. It cannot catch all cases.
-	public static Material getEatenMaterial(PlayerInteractEvent event)
+	public static @Nullable Material getEatenMaterial(@NotNull PlayerInteractEvent event)
 	{
 		Action action = event.getAction();
 		if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return null;
@@ -1405,18 +1452,19 @@ public class MUtil
 		return ret;
 	}
 	
-	public static boolean isCombatEvent(EntityDamageEvent event)
+	public static boolean isCombatEvent(@NotNull EntityDamageEvent event)
 	{
 		if (event.getCause() != DamageCause.ENTITY_ATTACK && event.getCause() != DamageCause.PROJECTILE) return false;
 		return event instanceof EntityDamageByEntityEvent;
 	}
 	
-	public static boolean isCloseCombatEvent(EntityDamageEvent event)
+	public static boolean isCloseCombatEvent(@NotNull EntityDamageEvent event)
 	{
 		if (event.getCause() != DamageCause.ENTITY_ATTACK) return false;
 		return event instanceof EntityDamageByEntityEvent;
 	}
 	
+	@Contract("null -> null")
 	public static Entity getLiableDamager(EntityDamageEvent event)
 	{
 		if (!(event instanceof EntityDamageByEntityEvent)) return null;
@@ -1436,7 +1484,7 @@ public class MUtil
 	}
 	
 	
-	public static String kickReason(PlayerQuitEvent event)
+	public static @Nullable String kickReason(@NotNull PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return null;
@@ -1445,7 +1493,7 @@ public class MUtil
 		return EngineMassiveCoreMain.kickedPlayerReasons.get(uuid);
 	}
 	
-	public static boolean causedByKick(PlayerQuitEvent event)
+	public static boolean causedByKick(@NotNull PlayerQuitEvent event)
 	{
 		return kickReason(event) != null;
 	}
@@ -1456,6 +1504,7 @@ public class MUtil
 
 	// FIXME deal with this
 	// FIXME use modern logic
+	@Contract("null -> null")
 	public static List<PotionEffectType> getPotionEffects(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
@@ -1491,11 +1540,13 @@ public class MUtil
 		PotionEffectType.BAD_OMEN
 	));
 	
+	@Contract(pure = true)
 	public static boolean isHarmfulPotion(PotionEffectType potionEffectType)
 	{
 		return HARMFUL_POTION_EFFECTS.contains(potionEffectType);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isHarmfulPotion(PotionEffect potionEffect)
 	{
 		if (potionEffect == null) return false;
@@ -1514,7 +1565,7 @@ public class MUtil
 		return false;
 	}
 	
-	public static boolean isHarmfulPotion(ThrownPotion thrownPotion)
+	public static boolean isHarmfulPotion(@NotNull ThrownPotion thrownPotion)
 	{
 		return isHarmfulPotion(thrownPotion.getItem());
 	}
@@ -1532,7 +1583,7 @@ public class MUtil
 	// TRANSFORM
 	// -------------------------------------------- //
 
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit, Integer offset)
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit, Integer offset)
 	{
 		// Collection
 		Collection<T> collection = null;
@@ -1619,23 +1670,23 @@ public class MUtil
 		
 		return new ArrayList<>(ret.subList(fromIndex, toIndex));
 	}
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where) { return transform(items, where, null, null, null); }
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby) { return transform(items, where, orderby, null, null); }
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit) { return transform(items, where, orderby, limit, null); }
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit) { return transform(items, where, null, limit, null); }
-	public static <T> List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit, Integer offset) { return transform(items, where, null, limit, offset); }
-	public static <T> List<T> transform(Iterable<T> items, Comparator<? super T> orderby) { return transform(items, null, orderby, null, null); }
-	public static <T> List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit) { return transform(items, null, orderby, limit, null); }
-	public static <T> List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit, Integer offset) { return transform(items, null, orderby, limit, offset); }
-	public static <T> List<T> transform(Iterable<T> items, Integer limit) { return transform(items, null, null, limit, null); }
-	public static <T> List<T> transform(Iterable<T> items, Integer limit, Integer offset) { return transform(items, null, null, limit, offset); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where) { return transform(items, where, null, null, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby) { return transform(items, where, orderby, null, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit) { return transform(items, where, orderby, limit, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit) { return transform(items, where, null, limit, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit, Integer offset) { return transform(items, where, null, limit, offset); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby) { return transform(items, null, orderby, null, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit) { return transform(items, null, orderby, limit, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit, Integer offset) { return transform(items, null, orderby, limit, offset); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Integer limit) { return transform(items, null, null, limit, null); }
+	public static <T> @NotNull List<T> transform(Iterable<T> items, Integer limit, Integer offset) { return transform(items, null, null, limit, offset); }
 	
 	// -------------------------------------------- //
 	// SIMPLE CONSTRUCTORS
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public static <T> List<T> list(T... items)
+	public static <T> @NotNull List<T> list(T... items)
 	{
 		List<T> ret = new MassiveList<>(items.length);
 		Collections.addAll(ret, items);
@@ -1643,20 +1694,21 @@ public class MUtil
 	}
 	
 	@SafeVarargs
-	public static <T> Set<T> set(T... items)
+	public static <T> @NotNull Set<T> set(T... items)
 	{
 		Set<T> ret = new MassiveSet<>(items.length);
 		Collections.addAll(ret, items);
 		return ret;
 	}
 	
-	public static Set<String> treeset(String... items)
+	@Contract("_ -> new")
+	public static @NotNull Set<String> treeset(String... items)
 	{
 		return new MassiveTreeSet<String, ComparatorCaseInsensitive>(ComparatorCaseInsensitive.get(), Arrays.asList(items));
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <K, V> Map<K, V> map(K key1, V value1, Object... objects)
+	public static <K, V> @NotNull Map<K, V> map(K key1, V value1, Object... objects)
 	{
 		Map<K, V> ret = new MassiveMap<>();
 		
@@ -1673,7 +1725,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <K, V> Map<V, K> flippedMap(Map<K, V> map)
+	public static <K, V> @NotNull Map<V, K> flippedMap(Map<K, V> map)
 	{
 		Map<V, K> ret = new MassiveMap<>();
 		
@@ -1689,7 +1741,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <K, V> Map<V, Set<K>> reverseIndex(Map<K, V> map)
+	public static <K, V> @NotNull Map<V, Set<K>> reverseIndex(@NotNull Map<K, V> map)
 	{
 		Map<V, Set<K>> ret = new MassiveMap<>();
 		
@@ -1709,7 +1761,8 @@ public class MUtil
 	// COLLECTION MANIPULATION
 	// -------------------------------------------- //
 	
-	public static <T> T removeByIndex(Collection<T> coll, int index)
+	@Contract("null, _ -> fail")
+	public static <T> @Nullable T removeByIndex(Collection<T> coll, int index)
 	{
 		if (coll == null) throw new NullPointerException("coll");
 		
@@ -1739,7 +1792,7 @@ public class MUtil
 	// LE NICE RANDOM
 	// -------------------------------------------- //
 	
-	public static <T> T random(Collection<T> coll)
+	public static <T> @Nullable T random(@NotNull Collection<T> coll)
 	{
 		if (coll.size() == 0) return null;
 		if (coll.size() == 1) return coll.iterator().next();
@@ -1758,7 +1811,7 @@ public class MUtil
 		return list.get(index);
 	}
 	
-	public static <T> List<T> randomSubset(Collection<T> coll, int count)
+	public static <T> @NotNull List<T> randomSubset(Collection<T> coll, int count)
 	{
 		// Clean Input
 		if (count < 0) count = 0;
@@ -1775,7 +1828,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <E> List<E> random(List<E> list, int count)
+	public static <E> @NotNull List<E> random(@NotNull List<E> list, int count)
 	{
 		// Create Ret
 		List<E> ret = new MassiveList<>();
@@ -1797,6 +1850,7 @@ public class MUtil
 	// EQUALS
 	// -------------------------------------------- //
 	
+	@Contract(value = "null, null -> true; null, !null -> false; !null, null -> false", pure = true)
 	public static boolean equals(Object object1, Object object2)
 	{
 		if (object1 == null) return object2 == null;
@@ -1807,6 +1861,7 @@ public class MUtil
 
 
 	
+	@Contract("null -> fail")
 	public static boolean equals(Object... objects)
 	{
 		if (objects == null) throw new NullPointerException("objects");
@@ -1842,6 +1897,7 @@ public class MUtil
 		return equals(o1, o2);
 	}
 
+	@Contract("null, null -> true; null, !null -> false; !null, null -> false")
 	public static boolean equalsishNumber(Number number1, Number number2)
 	{
 		if (number1 == null) return number2 == null;
@@ -1863,7 +1919,7 @@ public class MUtil
 	// SET IF DIFFERENT
 	// -------------------------------------------- //
 
-	public static <T> boolean setIfDifferent(T value, Supplier<T> getter, Consumer<T> setter)
+	public static <T> boolean setIfDifferent(T value, @NotNull Supplier<T> getter, Consumer<T> setter)
 	{
 		T currentVal = getter.get();
 		if (currentVal == value) return false;
@@ -1890,12 +1946,12 @@ public class MUtil
 	}*/
 	
 	// http://stackoverflow.com/questions/2864840/treemap-sort-by-value
-	public static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map)
+	public static <K,V extends Comparable<? super V>> @NotNull SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map)
 	{
 		return entriesSortedByValues(map, true);
 	}
 	
-	public static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map, final boolean ascending)
+	public static <K,V extends Comparable<? super V>> @NotNull SortedSet<Map.Entry<K,V>> entriesSortedByValues(@NotNull Map<K,V> map, final boolean ascending)
 	{
 		SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<>(
 			(e1, e2) -> {
@@ -1919,7 +1975,7 @@ public class MUtil
 	// MATH
 	// -------------------------------------------- //
 
-	public static <T extends Number> T limitNumber(T d, T min, T max)
+	public static <T extends Number> @NotNull T limitNumber(@NotNull T d, @NotNull T min, T max)
 	{
 		if (d.doubleValue() < min.doubleValue())
 		{

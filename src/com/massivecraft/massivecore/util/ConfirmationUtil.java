@@ -12,6 +12,8 @@ import com.massivecraft.massivecore.mson.Mson;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,7 @@ public class ConfirmationUtil
 	// DERP
 	// -------------------------------------------- //
 
+	@Contract("null -> fail")
 	private static Map<CommandSender, String> getConfirmationMap(Object obj)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -38,7 +41,8 @@ public class ConfirmationUtil
 		return objectToConfirmationMap.get(obj);
 	}
 
-	public static String createConfirmationString(Object obj, CommandSender sender)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public static @NotNull String createConfirmationString(Object obj, CommandSender sender)
 	{
 		if (obj == null) throw new NullPointerException("obj");
 		if (sender == null) throw new NullPointerException("sender");
@@ -51,6 +55,7 @@ public class ConfirmationUtil
 		return str;
 	}
 
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail")
 	public static void scheduleRemove(Object obj, CommandSender sender, long seconds)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -59,6 +64,7 @@ public class ConfirmationUtil
 		Bukkit.getScheduler().runTaskLater(MassiveCore.get(), () -> removeConfirmationString(obj, sender), 20L * seconds);
 	}
 
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static boolean removeConfirmationString(Object obj, CommandSender sender)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -67,6 +73,7 @@ public class ConfirmationUtil
 		return getConfirmationMap(obj).remove(sender) != null;
 	}
 
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static String getConfirmationString(Object obj, CommandSender sender)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -75,6 +82,7 @@ public class ConfirmationUtil
 		return getConfirmationMap(obj).get(sender);
 	}
 
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail; !null, !null, null -> fail")
 	public static boolean isConfirmationString(Object obj, CommandSender sender, String str)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -84,6 +92,7 @@ public class ConfirmationUtil
 		return str.equals(getConfirmationString(obj, sender));
 	}
 
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static boolean hasConfirmationString(Object obj, CommandSender sender)
 	{
 		if (obj == null) throw new NullPointerException("obj");
@@ -92,6 +101,7 @@ public class ConfirmationUtil
 		return getConfirmationMap(obj).containsKey(sender);
 	}
 
+	@Contract("null -> fail")
 	public static void tryConfirm(MassiveCommand object) throws MassiveException
 	{
 		if (object == null) throw new NullPointerException("object");
@@ -140,7 +150,7 @@ public class ConfirmationUtil
 
 	}
 
-	private static int getConfirmationIdx(MassiveCommand command)
+	private static int getConfirmationIdx(@NotNull MassiveCommand command)
 	{
 		int idx = -1;
 		for (int i = 0; i < command.getParameters().size(); i++)
@@ -155,7 +165,7 @@ public class ConfirmationUtil
 		return idx;
 	}
 
-	private static MassiveException getException(MassiveCommand command)
+	private static MassiveException getException(@NotNull MassiveCommand command)
 	{
 		CommandSender sender = command.sender;
 		if (sender == null) throw new NullPointerException("sender");

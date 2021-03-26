@@ -3,6 +3,9 @@ package com.massivecraft.massivecore.util;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.MassiveSet;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -30,27 +33,32 @@ public class ContainerUtil
 	// -------------------------------------------- //
 	// IS > CORE
 	// -------------------------------------------- //
-	
+
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isContainer(Object container)
 	{
 		return isCollection(container) || isMap(container);
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isCollection(Object container)
 	{
 		return container instanceof Collection;
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isMap(Object container)
 	{
 		return container instanceof Map;
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isList(Object container)
 	{
 		return container instanceof List;
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isSet(Object container)
 	{
 		return container instanceof Set;
@@ -59,17 +67,20 @@ public class ContainerUtil
 	// -------------------------------------------- //
 	// IS > BEHAVIOR
 	// -------------------------------------------- //
-	
+
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isIndexed(Object container)
 	{
 		return isOrdered(container) || isSorted(container);
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isOrdered(Object container)
 	{
 		return container instanceof List || container instanceof LinkedHashMap || container instanceof LinkedHashSet;
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isSorted(Object container)
 	{
 		return container instanceof SortedSet || container instanceof SortedMap;
@@ -79,29 +90,33 @@ public class ContainerUtil
 	// AS > CORE
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	@SuppressWarnings("unchecked")
-	public static <C extends Collection<?>> C asCollection(Object container)
+	public static <C extends Collection<?>> @Nullable C asCollection(@Nullable Object container)
 	{
 		if ( ! isCollection(container)) return null;
 		return (C)container;
 	}
 	
+	@Contract(pure = true)
 	@SuppressWarnings("unchecked")
-	public static <M extends Map<?, ?>> M asMap(Object container)
+	public static <M extends Map<?, ?>> @Nullable M asMap(@Nullable Object container)
 	{
 		if ( ! isMap(container)) return null;
 		return (M)container;
 	}
 	
+	@Contract(pure = true)
 	@SuppressWarnings("unchecked")
-	public static <S extends Set<?>> S asSet(Object container)
+	public static <S extends Set<?>> @Nullable S asSet(@Nullable Object container)
 	{
 		if ( ! isSet(container)) return null;
 		return (S)container;
 	}
 	
+	@Contract(pure = true)
 	@SuppressWarnings("unchecked")
-	public static <L extends List<?>> L asList(Object container)
+	public static <L extends List<?>> @Nullable L asList(@Nullable Object container)
 	{
 		if ( ! isList(container)) return null;
 		return (L)container;
@@ -111,6 +126,7 @@ public class ContainerUtil
 	// METHODS > SIZE
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public static boolean isEmpty(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
@@ -130,6 +146,7 @@ public class ContainerUtil
 		throw new IllegalArgumentException(container.getClass().getName() + " is not a container.");
 	}
 	
+	@Contract("null -> fail")
 	public static int size(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
@@ -153,8 +170,9 @@ public class ContainerUtil
 	// METHODS > GET
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	@SuppressWarnings("unchecked")
-	public static <E> Collection<E> getElements(Object container)
+	public static <E> @NotNull Collection<E> getElements(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
 		
@@ -177,6 +195,7 @@ public class ContainerUtil
 	// METHODS > SET
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public static void clear(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
@@ -198,12 +217,13 @@ public class ContainerUtil
 		throw new IllegalArgumentException(container.getClass().getName() + " is not a container.");
 	}
 	
-	public static void setElements(Object container, Iterable<?> elements)
+	public static void setElements(@NotNull Object container, @NotNull Iterable<?> elements)
 	{
 		clear(container);
 		addElements(container, elements);
 	}
 	
+	@Contract("null, _ -> fail")
 	@SuppressWarnings("unchecked")
 	public static boolean addElement(Object container, Object element)
 	{
@@ -228,6 +248,7 @@ public class ContainerUtil
 		throw new IllegalArgumentException(container.getClass().getName() + " is not a container.");
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static void addElements(Object container, Iterable<?> elements)
 	{
 		if (container == null) throw new NullPointerException("container");
@@ -243,7 +264,7 @@ public class ContainerUtil
 	// ADDITIONS & DELETIONS
 	// -------------------------------------------- //
 	
-	public static <E> Collection<E> getAdditions(Object before, Object after)
+	public static <E> @NotNull Collection<E> getAdditions(@NotNull Object before, @NotNull Object after)
 	{
 		Collection<E> elements = ContainerUtil.getElements(after);
 		Set<E> ret = new MassiveSet<>(elements);
@@ -251,7 +272,7 @@ public class ContainerUtil
 		return ret;
 	}
 	
-	public static <E> Collection<E> getDeletions(Object before, Object after)
+	public static <E> @NotNull Collection<E> getDeletions(@NotNull Object before, @NotNull Object after)
 	{
 		Collection<E> elements = ContainerUtil.getElements(before);
 		Set<E> ret = new MassiveSet<>(elements);
@@ -265,7 +286,7 @@ public class ContainerUtil
 
 	// For this method we must make a distinction between list and set.
 	@SuppressWarnings("unchecked")
-	public static <V> V getCopy(V container)
+	public static <V> @Nullable V getCopy(@Nullable V container)
 	{
 		List<Object> list = asList(container);
 		if (list != null)

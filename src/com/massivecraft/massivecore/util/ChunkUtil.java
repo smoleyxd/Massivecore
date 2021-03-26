@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.util;
 import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.ps.PS;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -12,7 +14,7 @@ public class ChunkUtil
 	// GET AREAS
 	// -------------------------------------------- //
 
-	public static Set<PS> getChunksCircle(PS center, int radius)
+	public static @NotNull Set<PS> getChunksCircle(@NotNull PS center, int radius)
 	{
 		// Common Startup
 		final Set<PS> chunks = new MassiveSet<>();
@@ -38,7 +40,7 @@ public class ChunkUtil
 		return chunks;
 	}
 
-	public static Set<PS> getChunksSquare(PS center, int radius)
+	public static @NotNull Set<PS> getChunksSquare(@NotNull PS center, int radius)
 	{
 		// Common Startup
 		final Set<PS> chunks = new MassiveSet<>();
@@ -61,7 +63,7 @@ public class ChunkUtil
 		return chunks;
 	}
 
-	public static Set<PS> getChunkArea(PS startingPoint, Predicate<PS> matcher, int max)
+	public static @NotNull Set<PS> getChunkArea(PS startingPoint, Predicate<PS> matcher, int max)
 	{
 		Set<PS> set = new MassiveSet<>();
 		set.add(startingPoint);
@@ -69,6 +71,7 @@ public class ChunkUtil
 		return set;
 	}
 
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail")
 	public static void floodSearch(Set<PS> set, Predicate<PS> matcher, int max)
 	{
 		// Clean

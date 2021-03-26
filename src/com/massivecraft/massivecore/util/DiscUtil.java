@@ -1,5 +1,9 @@
 package com.massivecraft.massivecore.util;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +24,7 @@ public class DiscUtil
 	// BYTE 
 	// -------------------------------------------- //
 	
-	public static byte[] readBytes(File file) throws IOException
+	public static byte[] readBytes(@NotNull File file) throws IOException
 	{
 		int length = (int) file.length();
 		byte[] output = new byte[length];
@@ -35,7 +39,7 @@ public class DiscUtil
 		return output;
 	}
 	
-	public static void writeBytes(File file, byte[] bytes) throws IOException
+	public static void writeBytes(@NotNull File file, byte[] bytes) throws IOException
 	{
 		File parent = file.getParentFile();
 		if (parent != null && !parent.exists()) parent.mkdirs();
@@ -48,12 +52,13 @@ public class DiscUtil
 	// STRING
 	// -------------------------------------------- //
 	
-	public static void write(File file, String content) throws IOException
+	public static void write(@NotNull File file, @NotNull String content) throws IOException
 	{
 		writeBytes(file, utf8(content));
 	}
 	
-	public static String read(File file) throws IOException
+	@Contract("_ -> new")
+	public static @NotNull String read(@NotNull File file) throws IOException
 	{
 		return utf8(readBytes(file));
 	}
@@ -75,7 +80,7 @@ public class DiscUtil
 		}
 	}
 	
-	public static String readCatch(File file)
+	public static @Nullable String readCatch(File file)
 	{
 		try
 		{
@@ -91,7 +96,7 @@ public class DiscUtil
 	// FILE DELETION
 	// -------------------------------------------- //
 	
-	public static boolean deleteRecursive(File path) throws FileNotFoundException
+	public static boolean deleteRecursive(@NotNull File path) throws FileNotFoundException
 	{
 		if ( ! path.exists()) throw new FileNotFoundException(path.getAbsolutePath());
 		boolean ret = true;
@@ -109,12 +114,14 @@ public class DiscUtil
 	// UTF8 ENCODE AND DECODE
 	// -------------------------------------------- //
 	
-	public static byte[] utf8(String string)
+	@Contract(pure = true)
+	public static byte[] utf8(@NotNull String string)
 	{
 		return string.getBytes(StandardCharsets.UTF_8);
 	}
 	
-	public static String utf8(byte[] bytes)
+	@Contract(value = "_ -> new", pure = true)
+	public static @NotNull String utf8(byte[] bytes)
 	{
 		return new String(bytes, StandardCharsets.UTF_8);
 	}

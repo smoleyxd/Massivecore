@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.util;
 
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class PeriodUtil
 		return ret;
 	}
 	
-	public static void setMillis(Object object, Long millis)
+	public static void setMillis(Object object, @Nullable Long millis)
 	{
 		if (millis == null || millis == 0)
 		{
@@ -45,7 +47,7 @@ public class PeriodUtil
 		return ret;
 	}
 	
-	public static void setTicks(Object object, Long ticks)
+	public static void setTicks(Object object, @Nullable Long ticks)
 	{
 		if (ticks == null || ticks == 0)
 		{
@@ -61,6 +63,7 @@ public class PeriodUtil
 	// RANDOM SIMPLE
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public static long getPeriod(long length, long now)
 	{
 		return now / length;

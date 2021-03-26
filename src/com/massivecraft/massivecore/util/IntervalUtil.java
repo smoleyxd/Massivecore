@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.MassiveCore;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
@@ -11,6 +13,7 @@ public class IntervalUtil
 	// PARSING SIMPLE
 	// -------------------------------------------- //
 	
+	@Contract("null, _ -> param2")
 	public static Double parseDouble(String str, Double def)
 	{
 		if (str == null) return def;
@@ -24,6 +27,7 @@ public class IntervalUtil
 		}
 	}
 	
+	@Contract("null, _ -> param2")
 	public static Integer parseInteger(String str, Integer def)
 	{
 		if (str == null) return def;
@@ -37,7 +41,8 @@ public class IntervalUtil
 		}
 	}
 	
-	public static boolean isValidInterval(String interval)
+	@Contract(pure = true)
+	public static boolean isValidInterval(@NotNull String interval)
 	{
 		return interval.matches("^.+to.+$");
 	}
@@ -46,7 +51,8 @@ public class IntervalUtil
 	// PARSING ADVANCED
 	// -------------------------------------------- //
 	
-	public static Entry<Double, Double> parseDoubleInterval(String interval, Double dmin, Double dmax)
+	@Contract("null, _, _ -> new")
+	public static @NotNull Entry<Double, Double> parseDoubleInterval(String interval, Double dmin, Double dmax)
 	{
 		if (interval == null)
 		{
@@ -67,7 +73,8 @@ public class IntervalUtil
 		return new SimpleEntry<>(single, single);
 	}
 	
-	public static Entry<Integer, Integer> parseIntegerInterval(String interval, Integer dmin, Integer dmax)
+	@Contract("null, _, _ -> new")
+	public static @NotNull Entry<Integer, Integer> parseIntegerInterval(String interval, Integer dmin, Integer dmax)
 	{
 		if (interval == null)
 		{
@@ -107,14 +114,14 @@ public class IntervalUtil
 		return min + MassiveCore.random.nextDouble() * (max - min);
 	}
 	
-	public static int randomIntegerFromInterval(Entry<Integer, Integer> interval)
+	public static int randomIntegerFromInterval(@NotNull Entry<Integer, Integer> interval)
 	{
 		int min = interval.getKey();
 		int max = interval.getValue();
 		return random(min, max);
 	}
 	
-	public static double randomDoubleFromInterval(Entry<Double, Double> interval)
+	public static double randomDoubleFromInterval(@NotNull Entry<Double, Double> interval)
 	{
 		double min = interval.getKey();
 		double max = interval.getValue();
