@@ -1488,7 +1488,8 @@ public class MUtil
 		PotionEffectType.WITHER,
 		PotionEffectType.LEVITATION,
 		PotionEffectType.UNLUCK,
-		PotionEffectType.BAD_OMEN
+		PotionEffectType.BAD_OMEN,
+		PotionEffectType.SLOW_FALLING
 	));
 	
 	public static boolean isHarmfulPotion(PotionEffectType potionEffectType)
