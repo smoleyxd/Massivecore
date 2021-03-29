@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.ps;
 
 import com.massivecraft.massivecore.mixin.MixinWorld;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class PSFormatAbstract implements PSFormat
 	// UTIL
 	// -------------------------------------------- //
 	
-	public List<String> formatEntries(PS ps)
+	public List<String> formatEntries(@NotNull PS ps)
 	{
 		List<String> ret = new ArrayList<>();
 		
