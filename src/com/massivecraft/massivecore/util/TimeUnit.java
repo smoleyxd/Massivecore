@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.util;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,9 +38,10 @@ public class TimeUnit implements Comparable<TimeUnit>
 	// -------------------------------------------- //
 		
 	private static final TreeSet<TimeUnit> all = new TreeSet<>();
-	public static TreeSet<TimeUnit> getAll() { return new TreeSet<>(all); }
+	@Contract(" -> new")
+	public static @NotNull TreeSet<TimeUnit> getAll() { return new TreeSet<>(all); }
 	
-	public static TreeSet<TimeUnit> getAllBut(TimeUnit... timeUnits)
+	public static @NotNull TreeSet<TimeUnit> getAllBut(TimeUnit... timeUnits)
 	{
 		TreeSet<TimeUnit> ret = new TreeSet<>(all);
 		for (TimeUnit timeUnit : timeUnits)

@@ -132,7 +132,7 @@ public class IntervalUtil
 	// RANDOM COMBINED
 	// -------------------------------------------- //
 	
-	public static Double randomDoubleFromInterval(String data, Double def)
+	public static Double randomDoubleFromInterval(@NotNull String data, Double def)
 	{
 		if (isValidInterval(data))
 		{
@@ -145,7 +145,7 @@ public class IntervalUtil
 		}
 	}
 	
-	public static Integer randomIntegerFromInterval(String data, Integer def)
+	public static Integer randomIntegerFromInterval(@NotNull String data, Integer def)
 	{
 		if (isValidInterval(data))
 		{

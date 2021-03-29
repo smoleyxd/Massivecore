@@ -47,7 +47,7 @@ public class RecipeUtil
 	// CIRCULAR
 	// -------------------------------------------- //
 	
-	public static void addCircular(ItemStack... items)
+	public static void addCircular(ItemStack @NotNull ... items)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
@@ -62,7 +62,7 @@ public class RecipeUtil
 	// -------------------------------------------- //
 
 	// TODO check this out
-	public static ShapelessRecipe createShapeless(ItemStack result, Object... objects)
+	public static ShapelessRecipe createShapeless(ItemStack result, Object @NotNull ... objects)
 	{
 		ShapelessRecipe recipe = MixinRecipe.get().createShapeless(result);
 		

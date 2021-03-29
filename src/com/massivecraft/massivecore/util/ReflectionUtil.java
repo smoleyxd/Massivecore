@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath;
 import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath.ClassInfo;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -99,8 +101,9 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	// METHOD
 	// -------------------------------------------- //
-	
-	public static Method getMethod(Class<?> clazz, String name, Class<?>... parameterTypes)
+
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail")
+	public static @NotNull Method getMethod(Class<?> clazz, String name, @NotNull Class<?>... parameterTypes)
 	{
 		try
 		{
@@ -113,13 +116,15 @@ public class ReflectionUtil
 			throw asRuntimeException(e);
 		}
 	}
-	
+
+	@Contract("null, _ -> false; !null, null -> false")
 	public static boolean hasMethod(Class<?> clazz, String name)
 	{
 		return hasMethod(clazz, name, EMPTY_ARRAY_OF_CLASS);
 	}
-	
-	public static boolean hasMethod(Class<?> clazz, String name, Class<?>... parameterTypes)
+
+	@Contract("null, _, _ -> false; !null, null, _ -> false")
+	public static boolean hasMethod(Class<?> clazz, String name, @NotNull Class<?>... parameterTypes)
 	{
 		try
 		{
@@ -131,14 +136,15 @@ public class ReflectionUtil
 			return false;
 		}
 	}
-	
-	public static Method getMethod(Class<?> clazz, String name)
+
+	public static @NotNull Method getMethod(@NotNull Class<?> clazz, @NotNull String name)
 	{
 		return getMethod(clazz, name, EMPTY_ARRAY_OF_CLASS);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T invokeMethod(Method method, Object target, Object... arguments)
+	@Contract("null, _, _ -> fail")
+	public static <T> T invokeMethod(Method method, @Nullable Object target, Object... arguments)
 	{
 		try
 		{
@@ -150,13 +156,12 @@ public class ReflectionUtil
 		}
 	}
 	
-	public static <T> T invokeMethod(Method method, Object target, Object argument)
+	public static <T> T invokeMethod(@NotNull Method method, @Nullable Object target, @Nullable Object argument)
 	{
 		return invokeMethod(method, target, new Object[]{argument});
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> T invokeMethod(Method method, Object target)
+	public static <T> T invokeMethod(@NotNull Method method, @Nullable Object target)
 	{
 		return invokeMethod(method, target, EMPTY_ARRAY_OF_OBJECT);
 	}
@@ -166,7 +171,8 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public static <T> Constructor<T> getConstructor(Class<?> clazz, Class<?>... parameterTypes)
+	@Contract("null, _ -> fail")
+	public static <T> @NotNull Constructor<T> getConstructor(Class<?> clazz, Class<?>... parameterTypes)
 	{
 		try
 		{	
@@ -180,13 +186,14 @@ public class ReflectionUtil
 		}
 	}
 	
-	public static <T> Constructor<T> getConstructor(Class<?> clazz)
+	public static <T> @NotNull Constructor<T> getConstructor(@NotNull Class<?> clazz)
 	{
 		return getConstructor(clazz, EMPTY_ARRAY_OF_CLASS);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T invokeConstructor(Constructor<?> constructor, Object... arguments)
+	@Contract("null, _ -> fail")
+	public static <T> @NotNull T invokeConstructor(Constructor<?> constructor, Object... arguments)
 	{
 		try
 		{
@@ -198,13 +205,14 @@ public class ReflectionUtil
 		}
 	}
 	
-	public static <T> T invokeConstructor(Constructor<?> constructor, Object argument)
+	@Contract("null, _ -> fail")
+	public static <T> @NotNull T invokeConstructor(Constructor<?> constructor, Object argument)
 	{
 		return invokeConstructor(constructor, new Object[]{argument});
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> T invokeConstructor(Constructor<?> constructor)
+	@Contract("null -> fail")
+	public static <T> @NotNull T invokeConstructor(Constructor<?> constructor)
 	{
 		return invokeConstructor(constructor, EMPTY_ARRAY_OF_OBJECT);
 	}
@@ -214,7 +222,8 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T newInstance(Class<?> clazz)
+	@Contract("null -> fail")
+	public static <T> @NotNull T newInstance(Class<?> clazz)
 	{
 		try
 		{
@@ -230,7 +239,7 @@ public class ReflectionUtil
 	// SINGLETON INSTANCE
 	// -------------------------------------------- //
 	
-	public static <T> T getSingletonInstance(Class<?> clazz)
+	public static <T> @NotNull T getSingletonInstance(@NotNull Class<?> clazz)
 	{
 		Method get = getMethod(clazz, "get");
 		T ret = invokeMethod(get, null);
@@ -498,7 +507,7 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	// AS RUNTIME EXCEPTION
 	// -------------------------------------------- //
-	
+
 	public static RuntimeException asRuntimeException(Throwable t)
 	{
 		// Runtime
@@ -542,7 +551,7 @@ public class ReflectionUtil
 	// FORCE LOAD CLASSES
 	// -------------------------------------------- //
 	
-	public static void forceLoadClasses(Class<?>... classes)
+	public static void forceLoadClasses(@NotNull Class<?>... classes)
 	{
 		for (Class<?> clazz : classes)
 		{
@@ -552,7 +561,7 @@ public class ReflectionUtil
 	
 	// We chose this "weird" string in startsWith to avoid getting optimized away by the JIT compiler.
 	// It will never start with this string, but the JIT can't be sure of that.
-	public static void forceLoadClass(Class<?> clazz)
+	public static void forceLoadClass(@NotNull Class<?> clazz)
 	{
 		String className = clazz.getSimpleName();
 		if (className.startsWith("Spaces are not allowed in class names."))
@@ -594,6 +603,7 @@ public class ReflectionUtil
 		return false;
 	}
 	
+	@Contract("null, _ -> false; !null, null -> false")
 	public static boolean isRawTypeAssignableFrom(Type a, Type b)
 	{
 		if (a == null || b == null) return false;
@@ -608,7 +618,7 @@ public class ReflectionUtil
 		return classifiedA.isAssignableFrom(classifiedB);
 	}
 	
-	private static Class<?> classify(Type type)
+	private static @Nullable Class<?> classify(Type type)
 	{
 		// Use loop structure rather than recursion to avoid stack size issues
 		while (!(type instanceof Class))

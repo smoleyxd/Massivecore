@@ -184,7 +184,7 @@ public class MUtil
 	// GET NEARBY PLAYERS
 	// -------------------------------------------- //
 	
-	public static Set<Player> getNearbyPlayers(@NotNull Entity entity, double raidus, boolean includeSelf)
+	public static @NotNull Set<Player> getNearbyPlayers(@NotNull Entity entity, double raidus, boolean includeSelf)
 	{
 		Set<Player> ret = getNearbyPlayers(entity.getLocation(), raidus);
 		if (isPlayer(entity) && !includeSelf) ret.remove(entity);
@@ -795,7 +795,7 @@ public class MUtil
 	// COLOR INT CODE
 	// -------------------------------------------- //
 	
-	public static int getChatColorCode(ChatColor chatColor)
+	public static int getChatColorCode(@NotNull ChatColor chatColor)
 	{
 		switch (chatColor)
 		{
@@ -858,7 +858,7 @@ public class MUtil
 	
 	// TODO deal with the duplicate branches
 	@Contract(pure = true)
-	public static ChatColor getChatColor(DyeColor dyeColor)
+	public static ChatColor getChatColor(@NotNull DyeColor dyeColor)
 	{
 		switch (dyeColor)
 		{
@@ -1043,12 +1043,12 @@ public class MUtil
 	// GET BLOCKS
 	// -------------------------------------------- //
 	
-	public static @NotNull List<Block> getBlocks(Location location, int halfWidth)
+	public static @NotNull List<Block> getBlocks(@NotNull Location location, int halfWidth)
 	{
 		return getBlocks(location.getBlock(), halfWidth);
 	}
 	
-	public static @NotNull List<Block> getBlocks(Block block, int halfWidth)
+	public static @NotNull List<Block> getBlocks(@NotNull Block block, int halfWidth)
 	{
 		int xmin = block.getX() - halfWidth;
 		int ymin = block.getY() - halfWidth;
@@ -1113,6 +1113,7 @@ public class MUtil
 	// FACE AND YAW
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public static @Nullable Float getYaw(@NotNull BlockFace face)
 	{
 		switch (face)
@@ -1327,7 +1328,7 @@ public class MUtil
 		return isSpade(lentity.getEquipment().getItemInMainHand());
 	}
 	
-	public static boolean isSpade(BlockBreakEvent event)
+	public static boolean isSpade(@NotNull BlockBreakEvent event)
 	{
 		return isSpade(InventoryUtil.getMainHand(event.getPlayer()));
 	}
@@ -1725,7 +1726,7 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <K, V> @NotNull Map<V, K> flippedMap(Map<K, V> map)
+	public static <K, V> @NotNull Map<V, K> flippedMap(@NotNull Map<K, V> map)
 	{
 		Map<V, K> ret = new MassiveMap<>();
 		

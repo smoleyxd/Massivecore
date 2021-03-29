@@ -24,7 +24,7 @@ public class DiscUtil
 	// BYTE 
 	// -------------------------------------------- //
 	
-	public static byte[] readBytes(@NotNull File file) throws IOException
+	public static byte @NotNull [] readBytes(@NotNull File file) throws IOException
 	{
 		int length = (int) file.length();
 		byte[] output = new byte[length];
@@ -79,7 +79,8 @@ public class DiscUtil
 			return false;
 		}
 	}
-	
+
+	@Contract("null -> null")
 	public static @Nullable String readCatch(File file)
 	{
 		try

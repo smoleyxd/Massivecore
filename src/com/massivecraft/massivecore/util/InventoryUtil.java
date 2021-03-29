@@ -91,7 +91,7 @@ public class InventoryUtil
 	}
 	
 	@SafeVarargs
-	public static <T> T[] concat(T[] first, T[]... rest)
+	public static <T> T[] concat(T @NotNull [] first, T[]... rest)
 	{
 		int totalLength = first.length;
 		for (T[] array : rest)
@@ -118,7 +118,7 @@ public class InventoryUtil
 		return item;
 	}
 	
-	public static void clean(ItemStack[] items)
+	public static void clean(ItemStack @NotNull [] items)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
@@ -386,7 +386,7 @@ public class InventoryUtil
 	
 	// EQUIPMENT SLOTS
 	
-	public static ItemStack getSlot(Inventory inventory, EquipmentSlot slot)
+	public static @Nullable ItemStack getSlot(@Nullable Inventory inventory, @NotNull EquipmentSlot slot)
 	{
 		switch (slot) {
 			case HEAD:
@@ -405,7 +405,7 @@ public class InventoryUtil
 		
 		throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
 	}
-	public static void setSlot(Inventory inventory, ItemStack item, EquipmentSlot slot)
+	public static void setSlot(@Nullable Inventory inventory, ItemStack item, @NotNull EquipmentSlot slot)
 	{
 		switch (slot) {
 			case HEAD:
@@ -431,12 +431,12 @@ public class InventoryUtil
 		throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
 	}
 	@Contract("null, _ -> null")
-	public static ItemStack getSlot(HumanEntity human, EquipmentSlot slot)
+	public static ItemStack getSlot(HumanEntity human, @NotNull EquipmentSlot slot)
 	{
 		if (human == null) return null;
 		return getSlot(human.getInventory(), slot);
 	}
-	public static void setSlot(@Nullable HumanEntity human, ItemStack item, EquipmentSlot slot)
+	public static void setSlot(@Nullable HumanEntity human, ItemStack item, @NotNull EquipmentSlot slot)
 	{
 		if (human == null) return;
 		setSlot(human.getInventory(), item, slot);
@@ -533,7 +533,7 @@ public class InventoryUtil
 	}
 	
 	// Armor contents has always been implemented the same way and can be used directly.
-	public static ItemStack[] getContentsArmor(@Nullable Inventory inventory)
+	public static ItemStack @Nullable [] getContentsArmor(@Nullable Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return null;
@@ -554,7 +554,7 @@ public class InventoryUtil
 	// The extra contents was added in 1.9.
 	// It is then at the very end of all of the contents.
 	// Slot 40 and forward even though it currently is just a single slot.
-	public static ItemStack[] getContentsExtra(@Nullable Inventory inventory)
+	public static ItemStack @Nullable [] getContentsExtra(@Nullable Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return null;
@@ -654,9 +654,8 @@ public class InventoryUtil
 	{
 		return getAlter(event).isAltering();
 	}
-	
-	@Contract("null -> fail")
-	public static InventoryAlter getAlter(InventoryInteractEvent event)
+
+	public static InventoryAlter getAlter(@NotNull InventoryInteractEvent event)
 	{
 		if (event instanceof InventoryClickEvent)
 		{
@@ -751,7 +750,7 @@ public class InventoryUtil
 	// If you drag it into your own inventory you are not really taking anything.
 	// If you drag into the top inventory however, you may both give and take.
 	// You "take" by dragging over an existing item.
-	private static InventoryAlter getAlter(InventoryDragEvent event)
+	private static @NotNull InventoryAlter getAlter(@NotNull InventoryDragEvent event)
 	{
 		// Create
 		boolean giving = false;
@@ -808,7 +807,7 @@ public class InventoryUtil
 		}
 		
 		@Contract(pure = true)
-		public static InventoryAlter get(boolean giving, boolean taking)
+		public static @NotNull InventoryAlter get(boolean giving, boolean taking)
 		{
 			if (giving && taking) return BOTH;
 			if (giving) return GIVE;
@@ -869,9 +868,8 @@ public class InventoryUtil
 	// We never ever clone or modify the ItemStacks in any way. 
 	// This means that the amount within the ItemStack key is irrelevant.
 	// We can also avoid all kinds of oddities related to ItemStack equals and compare in the Bukkit API.
-	
-	@Contract("null -> !null")
-	public static List<Entry<ItemStack, Integer>> getChanges(InventoryInteractEvent event)
+
+	public static @NotNull List<Entry<ItemStack, Integer>> getChanges(@Nullable InventoryInteractEvent event)
 	{
 		if (event instanceof InventoryClickEvent)
 		{
@@ -987,7 +985,7 @@ public class InventoryUtil
 	// DEBUG
 	// -------------------------------------------- //
 	
-	public static void debug(InventoryClickEvent event)
+	public static void debug(@NotNull InventoryClickEvent event)
 	{
 		System.out.println("===== DEBUG START =====");
 		System.out.println("event.getAction() " + event.getAction());
@@ -1112,7 +1110,7 @@ public class InventoryUtil
 		return new ItemStack(itemStack);
 	}
 	
-	public static ItemStack[] clone(ItemStack[] itemStacks)
+	public static ItemStack @NotNull [] clone(ItemStack @NotNull [] itemStacks)
 	{
 		ItemStack[] ret = new ItemStack[itemStacks.length];
 		for (int i = 0; i < itemStacks.length; i++)
@@ -1425,12 +1423,12 @@ public class InventoryUtil
 		return false;
 	}
 
-	public static boolean removeLoreWithPrefix(ItemStack item, String prefix)
+	public static boolean removeLoreWithPrefix(@Nullable ItemStack item, String prefix)
 	{
 		return removeLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
 	
-	public static boolean removeLoreWithSuffix(ItemStack item, String suffix)
+	public static boolean removeLoreWithSuffix(@Nullable ItemStack item, String suffix)
 	{
 		return removeLoreMatching(item, PredicateStringEndsWith.get(suffix));
 	}

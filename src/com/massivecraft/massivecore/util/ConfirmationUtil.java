@@ -165,7 +165,7 @@ public class ConfirmationUtil
 		return idx;
 	}
 
-	private static MassiveException getException(@NotNull MassiveCommand command)
+	private static @NotNull MassiveException getException(@NotNull MassiveCommand command)
 	{
 		CommandSender sender = command.sender;
 		if (sender == null) throw new NullPointerException("sender");

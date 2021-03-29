@@ -201,7 +201,7 @@ public class PlayerUtil extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void isDuplicateDeathEventLowest(PlayerDeathEvent event)
+	public void isDuplicateDeathEventLowest(@NotNull PlayerDeathEvent event)
 	{
 		isDuplicateDeathEvent(event);
 	}
@@ -235,7 +235,7 @@ public class PlayerUtil extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void isDuplicateDamageEventLowest(EntityDamageByEntityEvent event)
+	public void isDuplicateDamageEventLowest(@NotNull EntityDamageByEntityEvent event)
 	{
 		isDuplicateDamageEvent(event);
 	}
@@ -271,7 +271,7 @@ public class PlayerUtil extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void isDuplicateArmSwingEventLowest(PlayerAnimationEvent event)
+	public void isDuplicateArmSwingEventLowest(@NotNull PlayerAnimationEvent event)
 	{
 		isDuplicateArmSwingEvent(event);
 	}

@@ -26,6 +26,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -115,14 +116,14 @@ public class IdUtil implements Listener, Runnable
 
 	private static SenderMap maintainedIds = new SenderMap();
 	public static SenderMap getMaintainedIds() { return maintainedIds; }
-	public static Set<String> getIds(SenderPresence presence, SenderType type)
+	public static @NotNull @UnmodifiableView Set<String> getIds(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		return maintainedIds.getValues(presence, type);
 	}
 	
 	private static SenderMap maintainedNames = new SenderMap();
 	public static SenderMap getMaintainedNames() { return maintainedNames; }
-	public static Set<String> getNames(SenderPresence presence, SenderType type)
+	public static @NotNull @UnmodifiableView Set<String> getNames(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		return maintainedNames.getValues(presence, type);
 	}
@@ -134,10 +135,12 @@ public class IdUtil implements Listener, Runnable
 	// It's assumed that the getName() returns the name which is also the id.
 	
 	private static Map<String, CommandSender> registryIdToSender = new ConcurrentHashMap<>();
-	public static Map<String, CommandSender> getRegistryIdToSender() { return Collections.unmodifiableMap(registryIdToSender); }
+	@Contract(value = " -> new", pure = true)
+	public static @NotNull @UnmodifiableView Map<String, CommandSender> getRegistryIdToSender() { return Collections.unmodifiableMap(registryIdToSender); }
 	
 	private static Map<CommandSender, String> registrySenderToId = new ConcurrentHashMap<>();
-	public static Map<CommandSender, String> getRegistrySenderToId() { return Collections.unmodifiableMap(registrySenderToId); }
+	@Contract(value = " -> new", pure = true)
+	public static @NotNull @UnmodifiableView Map<CommandSender, String> getRegistrySenderToId() { return Collections.unmodifiableMap(registrySenderToId); }
 	
 	@Contract("null -> fail")
 	public static void register(CommandSender sender)
@@ -322,7 +325,7 @@ public class IdUtil implements Listener, Runnable
 		addData(data, presence);
 	}
 	
-	private static void removeIdAndNameRecurse(String id, String name)
+	private static void removeIdAndNameRecurse(@Nullable String id, @Nullable String name)
 	{
 		String otherId = null;
 		String otherName = null;
@@ -520,7 +523,8 @@ public class IdUtil implements Listener, Runnable
 	{
 		return Bukkit.getConsoleSender();
 	}
-	
+
+	@Contract("null -> null")
 	public static Player getPlayer(Object senderObject)
 	{
 		return getAsPlayer(getSender(senderObject));
@@ -731,7 +735,7 @@ public class IdUtil implements Listener, Runnable
 	}
 	
 	@Contract(pure = true)
-	public static String getIdFromUuid(UUID uuid)
+	public static String getIdFromUuid(@NotNull UUID uuid)
 	{
 		return uuid.toString();
 	}
@@ -801,9 +805,8 @@ public class IdUtil implements Listener, Runnable
 
 		return Bukkit.getOfflinePlayer(uuid);
 	}
-	
-	@Contract("null -> !null")
-	public static String getNameFromSender(CommandSender sender)
+
+	public static String getNameFromSender(@NotNull CommandSender sender)
 	{
 		if (sender instanceof ConsoleCommandSender) return CONSOLE_ID;
 		return sender.getName();
@@ -892,7 +895,8 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// CONVENIENCE GAME-MODE
 	// -------------------------------------------- //
-	
+
+	@Contract("null, _ -> param2")
 	public static GameMode getGameMode(@Nullable Object object, GameMode def)
 	{
 		Player player = getPlayer(object);
@@ -900,6 +904,7 @@ public class IdUtil implements Listener, Runnable
 		return player.getGameMode();
 	}
 
+	@Contract("null, _, _ -> param3")
 	public static boolean isGameMode(@Nullable Object object, GameMode gm, boolean def)
 	{
 		Player player = getPlayer(object);
@@ -976,7 +981,7 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// This data source is simply based on the players currently online
 	
-	public static @NotNull Set<IdData> getLocalPlayerDatas()
+	public static @NotNull Set<@NotNull IdData> getLocalPlayerDatas()
 	{
 		Set<IdData> ret = new MassiveSet<>();
 		

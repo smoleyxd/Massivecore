@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.collections.MassiveSet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -147,7 +148,7 @@ public class ContainerUtil
 	}
 	
 	@Contract("null -> fail")
-	public static int size(Object container)
+	public static @Range(from = 0, to = Integer.MAX_VALUE) int size(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
 		
