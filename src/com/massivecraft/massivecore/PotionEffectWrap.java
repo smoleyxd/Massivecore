@@ -4,6 +4,8 @@ import com.massivecraft.massivecore.collections.MassiveList;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -73,7 +75,8 @@ public class PotionEffectWrap
 	// FROM BUKKIT
 	// -------------------------------------------- //
 
-	public static PotionEffectWrap valueOf(PotionEffect potionEffect)
+	@Contract("_ -> new")
+	public static @NotNull PotionEffectWrap valueOf(@NotNull PotionEffect potionEffect)
 	{
 		return new PotionEffectWrap(potionEffect.getType(), potionEffect.getAmplifier(), potionEffect.getDuration(), potionEffect.isAmbient(), true);
 	}
@@ -82,12 +85,12 @@ public class PotionEffectWrap
 	// TO BUKKIT
 	// -------------------------------------------- //
 
-	public PotionEffect asPotionEffect()
+	public @NotNull PotionEffect asPotionEffect()
 	{
 		return new PotionEffect(id, this.duration, this.amplifier, this.ambient);
 	}
 	
-	public boolean addTo(LivingEntity entity)
+	public boolean addTo(@NotNull LivingEntity entity)
 	{
 		return entity.addPotionEffect(this.asPotionEffect());
 	}
@@ -96,7 +99,7 @@ public class PotionEffectWrap
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static List<PotionEffectWrap> getEffects(LivingEntity entity)
+	public static @NotNull List<PotionEffectWrap> getEffects(@NotNull LivingEntity entity)
 	{
 		// Create Ret
 		List<PotionEffectWrap> ret = new MassiveList<>();
@@ -111,7 +114,7 @@ public class PotionEffectWrap
 		return ret;
 	}
 	
-	public static void removeEffects(LivingEntity entity)
+	public static void removeEffects(@NotNull LivingEntity entity)
 	{
 		// For each active potion effect ...
 		for (PotionEffect potionEffect : entity.getActivePotionEffects())
@@ -121,7 +124,7 @@ public class PotionEffectWrap
 		}
 	}
 	
-	public static void addEffects(LivingEntity entity, Iterable<? extends PotionEffectWrap> potionEffectWraps)
+	public static void addEffects(@NotNull LivingEntity entity, @NotNull Iterable<? extends PotionEffectWrap> potionEffectWraps)
 	{
 		// For each supplied potion effect wrap ...
 		for (PotionEffectWrap potionEffectWrap : potionEffectWraps)
@@ -131,7 +134,7 @@ public class PotionEffectWrap
 		}
 	}
 	
-	public static void setEffects(LivingEntity entity, Collection<? extends PotionEffectWrap> potionEffectWraps)
+	public static void setEffects(@NotNull LivingEntity entity, @NotNull Collection<? extends PotionEffectWrap> potionEffectWraps)
 	{
 		// Remove ...
 		removeEffects(entity);
@@ -144,7 +147,7 @@ public class PotionEffectWrap
 	// TO STRING
 	// -------------------------------------------- //
 	
-	public String getListLine()
+	public @NotNull String getListLine()
 	{
 		// Create Ret
 		StringBuilder ret = new StringBuilder();
