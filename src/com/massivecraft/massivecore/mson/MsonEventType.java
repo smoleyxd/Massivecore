@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.mson;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public abstract class MsonEventType
 {
 	// -------------------------------------------- //
@@ -8,14 +11,16 @@ public abstract class MsonEventType
 
 	public static MsonEventType CLICK = new MsonEventType()
 	{
+		@Contract(pure = true)
 		@Override
-		public MsonEvent get(Mson mson)
+		public MsonEvent get(@NotNull Mson mson)
 		{
 			return mson.clickEvent;
 		}
 
+		@Contract("_, _ -> new")
 		@Override
-		public Mson set(Mson mson, MsonEvent event)
+		public @NotNull Mson set(@NotNull Mson mson, MsonEvent event)
 		{
 			return Mson.valueOf(
 				mson.getText(),
@@ -36,14 +41,16 @@ public abstract class MsonEventType
 	
 	public static MsonEventType HOVER = new MsonEventType()
 	{
+		@Contract(pure = true)
 		@Override
-		public MsonEvent get(Mson mson)
+		public MsonEvent get(@NotNull Mson mson)
 		{
 			return mson.hoverEvent;
 		}
 		
+		@Contract("_, _ -> new")
 		@Override
-		public Mson set(Mson mson, MsonEvent event)
+		public @NotNull Mson set(@NotNull Mson mson, MsonEvent event)
 		{
 			return Mson.valueOf(
 				mson.getText(),
