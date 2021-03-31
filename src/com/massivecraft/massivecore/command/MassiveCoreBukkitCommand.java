@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +29,7 @@ public class MassiveCoreBukkitCommand extends Command implements PluginIdentifia
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public MassiveCoreBukkitCommand(String name, MassiveCommand massiveCommand)
+	public MassiveCoreBukkitCommand(String name, @NotNull MassiveCommand massiveCommand)
 	{
 		super(
 			name,

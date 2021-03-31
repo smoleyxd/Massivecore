@@ -26,6 +26,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -448,7 +451,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return ret;
 	}
 	
-	private static Set<MassiveCommand> getRelevantCommands(Iterable<MassiveCommand> commands, CommandSender sender)
+	private static @NotNull Set<MassiveCommand> getRelevantCommands(@NotNull Iterable<MassiveCommand> commands, CommandSender sender)
 	{
 		Set<MassiveCommand> ret = new MassiveSet<>();
 		for (MassiveCommand command : commands)
@@ -1011,7 +1014,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			.forEach(MassiveCommand::setup);
 	}
 	
-	private static Class<?> getClassOrEnclosing(Object object)
+	private static @NotNull Class<?> getClassOrEnclosing(@NotNull Object object)
 	{
 		Class<?> clazz =  object.getClass();
 		Class<?> enclosingClass = clazz.getEnclosingClass();
@@ -1077,7 +1080,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		throw new RuntimeException("Could not find permission matching: " + permName);
 	}
 
-	protected static <T extends Enum<T>> T getPerm(String permName, boolean lenient, Class<T> permClass)
+	protected static <T extends Enum<T>> @Nullable T getPerm(String permName, boolean lenient, Class<T> permClass)
 	{
 		permName = getPermCompareString(permName, lenient);
 		for (T perm : TypeEnum.getEnumValues(permClass))
@@ -1088,7 +1091,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return null;
 	}
 
-	protected static String getPermCompareString(String permName, boolean lenient)
+	@Contract("_, false -> param1")
+	protected static @NotNull String getPermCompareString(@NotNull String permName, boolean lenient)
 	{
 		if (lenient)
 		{
@@ -1229,7 +1233,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// CALL VALIDATION
 	// -------------------------------------------- //
 	
-	public boolean isArgsValid(List<String> args, CommandSender sender)
+	public boolean isArgsValid(@NotNull List<String> args, CommandSender sender)
 	{
 		if (args.size() < this.getParameterCountRequired(sender))
 		{
@@ -1308,7 +1312,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return this.getTemplateWithArgs(sender, MUtil.list(args));
 	}
 
-	public Mson getTemplateWithArgs(CommandSender sender, List<String> args)
+	public Mson getTemplateWithArgs(CommandSender sender, @NotNull List<String> args)
 	{
 		Mson ret = this.getTemplateChain(true, sender);
 
@@ -1438,7 +1442,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
  	// -------------------------------------------- //
 	// TAB
 	// -------------------------------------------- //
-	
+
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public List<String> getTabCompletions(List<String> args, CommandSender sender)
 	{
 		if (args == null) throw new NullPointerException("args");
@@ -1455,7 +1460,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		}
 	}
 	
-	protected List<String> getTabCompletionsChild(List<String> args, CommandSender sender)
+	protected List<String> getTabCompletionsChild(@NotNull List<String> args, CommandSender sender)
 	{
 		// If this isn't the last argument ...
 		if (args.size() != 1)
@@ -1533,22 +1538,23 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	
 	// CONVENIENCE MSON
 	
-	public static Mson mson()
+	@Contract(pure = true)
+	public static @NotNull Mson mson()
 	{
 		return Mson.mson();
 	}
 	
-	public static Mson mson(Object... parts)
+	public static @NotNull Mson mson(Object @NotNull ... parts)
 	{
 		return Mson.mson(parts);
 	}
-	
-	public static List<Mson> msons(Object... parts)
+
+	public static @NotNull List<Mson> msons(Object @NotNull ... parts)
 	{
 		return Mson.msons(parts);
 	}
 	
-	public static List<Mson> msons(Collection<?> parts)
+	public static @NotNull List<Mson> msons(@NotNull Collection<?> parts)
 	{
 		return Mson.msons(parts);
 	}
