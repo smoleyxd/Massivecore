@@ -500,7 +500,7 @@ public class Txt
 	
 	private final static String titleizeLine = repeat("_", 52);
 	private final static int titleizeBalance = -1;
-	public static Mson titleize(Object obj)
+	public static @NotNull Mson titleize(Object obj)
 	{
 		Mson title = mson(obj);
 		if (title.getColor() == null) title = title.color(ChatColor.DARK_GREEN);
@@ -526,12 +526,13 @@ public class Txt
 			return center;
 	}
 	
-	public static Mson getMessageEmpty()
+	@Contract(" -> new")
+	public static @NotNull Mson getMessageEmpty()
 	{
 		return mson("Sorry, no pages available.").color(ChatColor.YELLOW);
 	}
 	
-	public static Mson getMessageInvalid(int size)
+	public static @NotNull Mson getMessageInvalid(int size)
 	{
 		if (size == 0)
 		{
@@ -547,7 +548,7 @@ public class Txt
 		}
 	}
 	
-	public static Mson titleizeMson(Object obj, int pagecount, int pageHumanBased, MassiveCommand command, List<String> args)
+	public static @NotNull Mson titleizeMson(Object obj, int pagecount, int pageHumanBased, @Nullable MassiveCommand command, List<String> args)
 	{
 		if (command == null)
 		{
@@ -587,33 +588,33 @@ public class Txt
 		}
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title)
 	{
 		return getPage(lines, pageHumanBased, title, null, null, null);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, CommandSender sender)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @Nullable CommandSender sender)
 	{
 		return getPage(lines, pageHumanBased, title, sender, null, null);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, MassiveCommand command)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @NotNull MassiveCommand command)
 	{
 		return getPage(lines, pageHumanBased, title, command, command.getArgs());
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @NotNull MassiveCommand command, List<String> args)
 	{
 		return getPage(lines, pageHumanBased, title, command.sender, command, args);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, CommandSender sender, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @Nullable CommandSender sender, @Nullable MassiveCommand command, @Nullable List<String> args)
 	{
 		return getPage(lines, pageHumanBased, title, (sender == null || sender instanceof Player) ? Txt.PAGEHEIGHT_PLAYER : Txt.PAGEHEIGHT_CONSOLE, command, args);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, int pageheight, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, int pageheight, @Nullable MassiveCommand command, @Nullable List<String> args)
 	{
 		// Create Ret
 		List<Mson> ret = new MassiveList<>();
@@ -667,7 +668,7 @@ public class Txt
 		return ret;
 	}
 	
-	private static Mson getFlipSection(int pagecount, int pageHumanBased, List<String> args, MassiveCommand command)
+	private static @NotNull Mson getFlipSection(int pagecount, int pageHumanBased, List<String> args, MassiveCommand command)
 	{
 		// Construct Mson
 		Mson start = mson(String.valueOf(pageHumanBased)).color(ChatColor.GOLD);
@@ -698,7 +699,7 @@ public class Txt
 		);
 	}
 	
-	private static Mson setFlipPageCommand(Mson mson, int pageHumanBased, int destinationPage, List<String> args, MassiveCommand command)
+	private static @NotNull Mson setFlipPageCommand(@NotNull Mson mson, int pageHumanBased, int destinationPage, @Nullable List<String> args, MassiveCommand command)
 	{
 		// Create the command line
 		String number = String.valueOf(destinationPage);
@@ -746,7 +747,7 @@ public class Txt
 	// Describing Time
 	// -------------------------------------------- //
 	
-	public static String getTimeDeltaDescriptionRelNow(long millis)
+	public static @NotNull String getTimeDeltaDescriptionRelNow(long millis)
 	{
 		String ret = "";
 		
@@ -784,7 +785,7 @@ public class Txt
 	// FORMATTING CANDY
 	// -------------------------------------------- //
 	
-	public static String parenthesize(String string)
+	public static @NotNull String parenthesize(String string)
 	{
 		return Txt.parse("<silver>(%s<silver>)", string);
 	}
@@ -797,6 +798,7 @@ public class Txt
 	// The UFT-8 "smart" alternatives look quite bad.
 	// http://www.fileformat.info/info/unicode/block/general_punctuation/list.htm
 	
+	@Contract("null -> null; !null -> !null")
 	public static String removeSmartQuotes(String string)
 	{
 		if (string == null) return null;
@@ -829,7 +831,7 @@ public class Txt
 	// String comparison
 	// -------------------------------------------- //
 	
-	public static String getBestCIStart(Collection<String> candidates, String start)
+	public static String getBestCIStart(@NotNull Collection<@NotNull String> candidates, @NotNull String start)
 	{
 		String ret = null;
 		int best = 0;
@@ -860,7 +862,7 @@ public class Txt
 	// FILTER
 	// -------------------------------------------- //
 	
-	public static <T> List<T> getFiltered(Iterable<T> elements, Predicate<T> predicate)
+	public static <T> @NotNull List<T> getFiltered(@NotNull Iterable<T> elements, @NotNull Predicate<T> predicate)
 	{
 		// Create Ret
 		List<T> ret = new ArrayList<>();
@@ -876,17 +878,17 @@ public class Txt
 		return ret;
 	}
 	
-	public static <T> List<T> getFiltered(T[] elements, Predicate<T> predicate)
+	public static <T> @NotNull List<T> getFiltered(T @NotNull [] elements, @NotNull Predicate<T> predicate)
 	{
 		return getFiltered(Arrays.asList(elements), predicate);
 	}
 	
-	public static List<String> getStartsWithIgnoreCase(Iterable<String> elements, String prefix)
+	public static @NotNull List<String> getStartsWithIgnoreCase(@NotNull Iterable<String> elements, String prefix)
 	{
 		return getFiltered(elements, PredicateStartsWithIgnoreCase.get(prefix));
 	}
 	
-	public static List<String> getStartsWithIgnoreCase(String[] elements, String prefix)
+	public static @NotNull List<String> getStartsWithIgnoreCase(String @NotNull [] elements, String prefix)
 	{
 		return getStartsWithIgnoreCase(Arrays.asList(elements), prefix);
 	}
@@ -895,7 +897,7 @@ public class Txt
 	// Tokenization
 	// -------------------------------------------- //
 	
-	public static List<String> tokenizeArguments(String str)
+	public static @NotNull List<@NotNull String> tokenizeArguments(@NotNull String str)
 	{
 		List<String> ret = new ArrayList<>();
 		StringBuilder token = null;
@@ -961,7 +963,7 @@ public class Txt
 	// If the centerpiece is multiple Strings it concatenates prefix + suffix and then appends the centerpice at the end.
 	// This algorithm is used in the editor system.
 	
-	public static List<String> prepondfix(String prefix, List<String> strings, String suffix)
+	public static @NotNull List<String> prepondfix(@Nullable String prefix, @NotNull List<String> strings, @Nullable String suffix)
 	{
 		// Create
 		List<String> ret = new MassiveList<>();
@@ -983,7 +985,7 @@ public class Txt
 		return ret;
 	}
 	
-	public static String prepondfix(String prefix, String string, String suffix)
+	public static @NotNull String prepondfix(@Nullable String prefix, String string, @Nullable String suffix)
 	{
 		List<String> strings = Arrays.asList(PATTERN_NEWLINE.split(string));
 		List<String> ret = prepondfix(prefix, strings, suffix);
