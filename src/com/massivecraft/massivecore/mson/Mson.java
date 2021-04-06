@@ -657,7 +657,7 @@ public class Mson implements Serializable
 	}
 
 	@Contract("null -> fail")
-	public static @NotNull List<Mson> msons(Iterable<?> parts)
+	public static @NotNull List<@NotNull Mson> msons(Iterable<?> parts)
 	{
 		if (parts == null) throw new NullPointerException("parts");
 
@@ -675,7 +675,7 @@ public class Mson implements Serializable
 	// PARSE & FORMAT
 	// -------------------------------------------- //
 	
-	public static @NotNull Mson fromParsedMessages(@NotNull Collection<String> messages)
+	public static @NotNull Mson fromParsedMessages(@NotNull Collection<@NotNull String> messages)
 	{
 		List<Mson> extra = new MassiveList<>(messages.size());
 		for (String message : messages)
@@ -779,7 +779,7 @@ public class Mson implements Serializable
 
 	// Parse redirects, convert to Mson directly
 	public static @NotNull Mson parse(@NotNull String string) { return Mson.fromParsedMessage(Txt.parse(string)); }
-	public static @NotNull Mson parse(@NotNull Collection<String> strings) { return Mson.fromParsedMessages(Txt.parse(strings)); }
+	public static @NotNull Mson parse(@NotNull Collection<@NotNull String> strings) { return Mson.fromParsedMessages(Txt.parse(strings)); }
 	public static @NotNull Mson parse(String format, Object... args) { return Mson.fromParsedMessage(Txt.parse(format, args)); }
 
 	@Contract("_, _ -> new")
@@ -936,7 +936,7 @@ public class Mson implements Serializable
 	}
 
 	@Contract("null -> fail")
-	public @NotNull List<Mson> split(String regex)
+	public @NotNull List<@NotNull Mson> split(String regex)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		
@@ -944,7 +944,7 @@ public class Mson implements Serializable
 	}
 
 	@Contract("null -> fail")
-	public @NotNull List<Mson> split(Pattern pattern)
+	public @NotNull List<@NotNull Mson> split(Pattern pattern)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		
@@ -954,7 +954,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	private Mson splitInner(@NotNull Pattern pattern, List<Mson> ret, Mson recent)
+	private @NotNull Mson splitInner(@NotNull Pattern pattern, @NotNull List<@NotNull Mson> ret, Mson recent)
 	{
 		String[] parts = pattern.split(this.getText(), -1);
 		
@@ -1190,7 +1190,7 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	// Implode simple
-	public static @NotNull Mson implode(final Object @NotNull [] list, final Mson glue, final Mson format)
+	public static @NotNull Mson implode(final @Nullable Object @NotNull [] list, final Mson glue, final @Nullable Mson format)
 	{
 		List<Mson> parts = new MassiveList<>();
 		for (int i = 0; i < list.length; i++)
@@ -1212,15 +1212,15 @@ public class Mson implements Serializable
 		return Mson.mson(parts);
 	}
 
-	public static @NotNull Mson implode(final Object[] list, final Mson glue)
+	public static @NotNull Mson implode(final @Nullable Object @NotNull [] list, final Mson glue)
 	{
 		return implode(list, glue, null);
 	}
-	public static @NotNull Mson implode(final @NotNull Collection<?> coll, final Mson glue, final Mson format)
+	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue, final @Nullable Mson format)
 	{
 		return implode(coll.toArray(new Object[0]), glue, format);
 	}
-	public static @NotNull Mson implode(final Collection<?> coll, final Mson glue)
+	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue)
 	{
 		return implode(coll, glue, null);
 	}
@@ -1405,7 +1405,7 @@ public class Mson implements Serializable
 		return raw;
 	}
 	
-	public static @NotNull List<@NotNull String> toPlain(@NotNull Iterable<Mson> iterable, boolean styled)
+	public static @NotNull List<@NotNull String> toPlain(@NotNull Iterable<@NotNull Mson> iterable, boolean styled)
 	{
 		List<String> ret = new MassiveList<>();
 		
