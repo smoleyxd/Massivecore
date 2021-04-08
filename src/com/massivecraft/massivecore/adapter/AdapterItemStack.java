@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 
@@ -32,14 +33,14 @@ public class AdapterItemStack implements JsonDeserializer<ItemStack>, JsonSerial
 	// -------------------------------------------- //
 
 	@Override
-	public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context)
+	public JsonElement serialize(ItemStack src, Type typeOfSrc, @NotNull JsonSerializationContext context)
 	{
 		DataItemStack dataItemStack = new DataItemStack(src);
 		return context.serialize(dataItemStack);
 	}
 
 	@Override
-	public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+	public ItemStack deserialize(JsonElement json, Type typeOfT, @NotNull JsonDeserializationContext context) throws JsonParseException
 	{
 		DataItemStack dataItemStack = context.deserialize(json, DataItemStack.class);
 		return dataItemStack.toBukkit();

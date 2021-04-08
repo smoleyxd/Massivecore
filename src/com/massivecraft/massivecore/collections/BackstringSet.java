@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.collections;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.RegistryType;
 import com.massivecraft.massivecore.command.type.Type;
+import org.jetbrains.annotations.Contract;
 
 import java.util.AbstractSet;
 import java.util.Arrays;
@@ -26,12 +27,14 @@ public class BackstringSet<T> extends AbstractSet<T>
 	// CONVTERT
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	private T convertFromString(String string) throws MassiveException
 	{
 		if (string == null) return null;
 		return this.type.read(string);
 	}
 	
+	@Contract("null -> null")
 	@SuppressWarnings("unchecked")
 	private String convertToString(Object object)
 	{
@@ -150,6 +153,7 @@ public class BackstringSet<T> extends AbstractSet<T>
 		return this.stringSet.size();
 	}
 
+	@Contract(pure = true)
 	@Override
 	public boolean contains(Object object)
 	{

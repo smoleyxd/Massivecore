@@ -3,6 +3,9 @@ package com.massivecraft.massivecore.command.requirement;
 import com.massivecraft.massivecore.command.MassiveCommand;
 import com.massivecraft.massivecore.mixin.MixinMessage;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 
@@ -26,6 +29,7 @@ public abstract class RequirementAbstract implements Requirement, Serializable
 		return this.createErrorMessage(sender, null);
 	}
 	
+	@Contract("null -> !null")
 	public static String getDesc(MassiveCommand command)
 	{
 		if (command == null) return "do that";
@@ -36,14 +40,14 @@ public abstract class RequirementAbstract implements Requirement, Serializable
 	// BULK
 	// -------------------------------------------- //
 	
-	public static boolean isRequirementsMet(Iterable<Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
+	public static boolean isRequirementsMet(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
 	{
 		String error = getRequirementsError(requirements, sender, command, verboose);
 		if (error != null && verboose) MixinMessage.get().messageOne(sender, error);
 		return error == null;
 	}
 	
-	public static String getRequirementsError(Iterable<Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
+	public static @Nullable String getRequirementsError(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
 	{
 		for (Requirement requirement : requirements)
 		{

@@ -15,6 +15,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -78,7 +80,7 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 	// IMPLEMENTATION
 	// -------------------------------------------- //
 	
-	public static JsonElement toJson(Inventory src)
+	public static @NotNull JsonElement toJson(@NotNull Inventory src)
 	{
 		// The return value is this object:
 		JsonObject jsonInventory = new JsonObject();
@@ -164,7 +166,7 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		return jsonInventory;
 	}
 	
-	public static Inventory fromJson(JsonElement json)
+	public static @Nullable Inventory fromJson(@NotNull JsonElement json)
 	{
 		// If must be an object!
 		if ( ! json.isJsonObject()) return null;
@@ -250,7 +252,7 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		return ret;
 	}
 	
-	private static ItemStack getItemStack(JsonObject jsonInventory, String idx)
+	private static @Nullable ItemStack getItemStack(@NotNull JsonObject jsonInventory, String idx)
 	{
 		// Get jsonItemStack
 		JsonElement jsonItemStack = jsonInventory.get(idx);

@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveTreeMap;
 import com.massivecraft.massivecore.collections.MassiveTreeMapDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class AdapterMassiveTreeMap extends AdapterMassiveX<MassiveTreeMap<?, ?, 
 	// GET COMPARATOR
 	// -------------------------------------------- //
 	
-	public static Object getComparator(Type typeOfT)
+	public static @NotNull Object getComparator(Type typeOfT)
 	{
 		return getNewArgumentInstance(typeOfT, 2);
 	}

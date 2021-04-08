@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackId extends WriterAbstractItemStackField<String, Material>
 {
@@ -22,25 +23,25 @@ public class WriterItemStackId extends WriterAbstractItemStackField<String, Mate
 	// -------------------------------------------- //
 
 	@Override
-	public String getA(DataItemStack ca, ItemStack d)
+	public String getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getId();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, String fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, String fa, ItemStack d)
 	{
 		ca.setId(fa);
 	}
 	
 	@Override
-	public Material getB(ItemStack cb, ItemStack d)
+	public Material getB(@NotNull ItemStack cb, ItemStack d)
 	{
 		return cb.getType();
 	}
 	
 	@Override
-	public void setB(ItemStack cb, Material fb, ItemStack d)
+	public void setB(@NotNull ItemStack cb, Material fb, ItemStack d)
 	{
 		cb.setType(fb);
 	}

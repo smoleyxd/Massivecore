@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaPotionColor extends WriterAbstractItemStackMetaField<PotionMeta, Integer, Color>
 {
@@ -27,25 +28,25 @@ public class WriterItemStackMetaPotionColor extends WriterAbstractItemStackMetaF
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public Integer getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getPotionColor();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Integer fa, ItemStack d)
 	{
 		ca.setPotionColor(fa);
 	}
 
 	@Override
-	public Color getB(PotionMeta cb, ItemStack d)
+	public Color getB(@NotNull PotionMeta cb, ItemStack d)
 	{
 		return cb.getColor();
 	}
 
 	@Override
-	public void setB(PotionMeta cb, Color fb, ItemStack d)
+	public void setB(@NotNull PotionMeta cb, Color fb, ItemStack d)
 	{
 		cb.setColor(fb);
 	}

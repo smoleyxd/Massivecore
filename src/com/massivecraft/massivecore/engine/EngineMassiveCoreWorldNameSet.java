@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Set;
@@ -50,13 +51,13 @@ public class EngineMassiveCoreWorldNameSet extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onWorldLoad(WorldLoadEvent event)
+	public void onWorldLoad(@NotNull WorldLoadEvent event)
 	{
 		this.worldNamesInner.add(event.getWorld().getName());
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-	public void onWorldUnload(WorldUnloadEvent event)
+	public void onWorldUnload(@NotNull WorldUnloadEvent event)
 	{
 		this.worldNamesInner.remove(event.getWorld().getName());
 	}

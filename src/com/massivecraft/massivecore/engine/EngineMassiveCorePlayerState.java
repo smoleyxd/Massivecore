@@ -11,6 +11,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.UUID;
@@ -46,7 +48,8 @@ public class EngineMassiveCorePlayerState extends Engine
 	// -------------------------------------------- //
 	
 	private Map<UUID, PlayerState> idToState = new ConcurrentHashMap<>();
-	
+
+	@Contract("null -> fail")
 	public PlayerState getState(Player player)
 	{
 		if (player == null) throw new NullPointerException("player");
@@ -54,7 +57,8 @@ public class EngineMassiveCorePlayerState extends Engine
 		UUID id = player.getUniqueId();
 		return this.getState(id);
 	}
-	
+
+	@Contract("null -> fail")
 	public PlayerState getState(UUID id)
 	{
 		if (id == null) throw new NullPointerException("id");
@@ -113,7 +117,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// AsyncPlayerPreLoginEvent: LOWEST and MONITOR
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void logasync(AsyncPlayerPreLoginEvent event)
+	public void logasync(@NotNull AsyncPlayerPreLoginEvent event)
 	{
 		UUID id = event.getUniqueId();
 		PlayerState state = PlayerState.LOGASYNC;
@@ -122,7 +126,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void logasyncMonitor(AsyncPlayerPreLoginEvent event)
+	public void logasyncMonitor(@NotNull AsyncPlayerPreLoginEvent event)
 	{
 		// If the player was denied entrance they are now offline.
 		if (event.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED) return;
@@ -139,7 +143,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// PlayerLoginEvent: LOWEST and MONITOR DELAYED
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void logsync(PlayerLoginEvent event)
+	public void logsync(@NotNull PlayerLoginEvent event)
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LOGSYNC;
@@ -147,7 +151,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void logsyncMonitor(PlayerLoginEvent event)
+	public void logsyncMonitor(@NotNull PlayerLoginEvent event)
 	{
 		// If the player was denied entrance they are now offline.
 		if (event.getResult() == PlayerLoginEvent.Result.ALLOWED) return;
@@ -164,7 +168,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// PlayerJoinEvent: LOWEST
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void joining(PlayerJoinEvent event)
+	public void joining(@NotNull PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.JOINING;
@@ -177,7 +181,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// PlayerJoinEvent: MONITOR DELAYED
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void joined(PlayerJoinEvent event)
+	public void joined(@NotNull PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.JOINED;
@@ -191,7 +195,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// EventMassiveCorePlayerLeave: LOWEST
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void leaving(EventMassiveCorePlayerLeave event)
+	public void leaving(@NotNull EventMassiveCorePlayerLeave event)
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LEAVING;
@@ -204,7 +208,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// EventMassiveCorePlayerLeave: MONITOR DELAYED
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void left(EventMassiveCorePlayerLeave event)
+	public void left(@NotNull EventMassiveCorePlayerLeave event)
 	{
 		Player player = event.getPlayer();
 		PlayerState state = PlayerState.LEFT;

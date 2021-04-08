@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.item;
 
 import org.bukkit.FireworkEffect;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterFireworkEffectTrail extends WriterAbstractFireworkEffect<Boolean, Boolean>
 {
@@ -20,19 +21,19 @@ public class WriterFireworkEffectTrail extends WriterAbstractFireworkEffect<Bool
 	// -------------------------------------------- //
 	
 	@Override
-	public Boolean getA(DataFireworkEffect ca, Object d)
+	public Boolean getA(@NotNull DataFireworkEffect ca, Object d)
 	{
 		return ca.hasTrail();
 	}
 	
 	@Override
-	public void setA(DataFireworkEffect ca, Boolean fa, Object d)
+	public void setA(@NotNull DataFireworkEffect ca, Boolean fa, Object d)
 	{
 		ca.setTrail(fa);
 	}
 	
 	@Override
-	public Boolean getB(FireworkEffect cb, Object d)
+	public Boolean getB(@NotNull FireworkEffect cb, Object d)
 	{
 		return cb.hasTrail();
 	}

@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -49,7 +51,7 @@ public class FetcherById implements Callable<Map<Object, IdAndName>>
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Map<Object, IdAndName> fetch(Collection<UUID> ids) throws Exception
+	public static @NotNull Map<Object, IdAndName> fetch(@NotNull Collection<UUID> ids) throws Exception
 	{
 		// Create Tasks
 		final List<Callable<Map<UUID, IdAndName>>> tasks = new ArrayList<>();

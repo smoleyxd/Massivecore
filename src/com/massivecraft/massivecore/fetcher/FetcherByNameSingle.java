@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -72,12 +74,12 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Map<String, IdAndName> fetch(Collection<String> namesCollection) throws Exception
+	public static @NotNull Map<String, IdAndName> fetch(Collection<String> namesCollection) throws Exception
 	{
 		return fetch(namesCollection, true);
 	}
 	
-	public static Map<String, IdAndName> fetch(Collection<String> namesCollection, boolean rateLimiting) throws Exception
+	public static @NotNull Map<String, IdAndName> fetch(Collection<String> namesCollection, boolean rateLimiting) throws Exception
 	{
 		List<String> names = new ArrayList<>(namesCollection);
 		Map<String, IdAndName> ret = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -123,7 +125,7 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 		return ret;
 	}
 	
-	private static void writeBody(HttpURLConnection connection, String body) throws Exception
+	private static void writeBody(@NotNull HttpURLConnection connection, @NotNull String body) throws Exception
 	{
 		OutputStream stream = connection.getOutputStream();
 		stream.write(body.getBytes());
@@ -131,7 +133,7 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 		stream.close();
 	}
 	
-	private static HttpURLConnection createConnection() throws Exception
+	private static @NotNull HttpURLConnection createConnection() throws Exception
 	{
 		URL url = new URL(PROFILE_URL);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -145,12 +147,12 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 		return connection;
 	}
 	
-	private static UUID getUUID(String id)
+	private static @NotNull UUID getUUID(@NotNull String id)
 	{
 		return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-" +id.substring(20, 32));
 	}
 	
-	public static byte[] toBytes(UUID uuid)
+	public static byte @NotNull [] toBytes(@NotNull UUID uuid)
 	{
 		ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
 		byteBuffer.putLong(uuid.getMostSignificantBits());
@@ -158,7 +160,8 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 		return byteBuffer.array();
 	}
 
-	public static UUID fromBytes(byte[] array)
+	@Contract("_ -> new")
+	public static @NotNull UUID fromBytes(byte @NotNull [] array)
 	{
 		if (array.length != 16)
 		{

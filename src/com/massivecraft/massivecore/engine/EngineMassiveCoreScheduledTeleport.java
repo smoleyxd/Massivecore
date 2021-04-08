@@ -18,6 +18,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,7 +47,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 		return this.teleporteeIdToScheduledTeleport.containsValue(st);
 	}
 	
-	public ScheduledTeleport schedule(ScheduledTeleport st)
+	public ScheduledTeleport schedule(@NotNull ScheduledTeleport st)
 	{
 		ScheduledTeleport old = this.teleporteeIdToScheduledTeleport.get(st.getTeleporteeId());
 		if (old != null) old.unschedule();
@@ -58,7 +59,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 		return old;
 	}
 	
-	public boolean unschedule(ScheduledTeleport st)
+	public boolean unschedule(@NotNull ScheduledTeleport st)
 	{
 		ScheduledTeleport old = this.teleporteeIdToScheduledTeleport.get(st.getTeleporteeId());
 		if (old == null) return false;
@@ -104,7 +105,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void cancelTeleport(PlayerMoveEvent event)
+	public void cancelTeleport(@NotNull PlayerMoveEvent event)
 	{
 		if (MUtil.isSameBlock(event)) return;
 		
@@ -113,7 +114,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void cancelTeleport(EntityDamageEvent event)
+	public void cancelTeleport(@NotNull EntityDamageEvent event)
 	{
 		final Entity entity = event.getEntity();
 		if (MUtil.isntPlayer(entity)) return;
@@ -123,7 +124,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void cancelTeleport(PlayerDeathEvent event)
+	public void cancelTeleport(@NotNull PlayerDeathEvent event)
 	{
 		final Player player = event.getEntity();
 		if (MUtil.isntPlayer(player)) return;
@@ -141,7 +142,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void cancelTeleport(InventoryOpenEvent event)
+	public void cancelTeleport(@NotNull InventoryOpenEvent event)
 	{
 		final HumanEntity human = event.getPlayer();
 		if (MUtil.isntPlayer(human)) return;
@@ -151,7 +152,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void cancelTeleport(InventoryClickEvent event)
+	public void cancelTeleport(@NotNull InventoryClickEvent event)
 	{
 		final HumanEntity human = event.getWhoClicked();
 		if (MUtil.isntPlayer(human)) return;

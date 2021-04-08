@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.PermissionAttachment;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -51,7 +52,7 @@ public class NmsPermissions17R4P extends NmsPermissions
 	// -------------------------------------------- //
 	
 	@Override
-	public List<PermissionAttachment> getAttachments(PermissibleBase base)
+	public List<PermissionAttachment> getAttachments(@NotNull PermissibleBase base)
 	{
 		return ReflectionUtil.getField(this.fieldPermissibleBaseAttachments, base);
 	}
@@ -75,13 +76,13 @@ public class NmsPermissions17R4P extends NmsPermissions
 	// -------------------------------------------- //
 	
 	@Override
-	public Map<String, Boolean> getAttachmentPermissions(PermissionAttachment permissionAttachment)
+	public Map<String, Boolean> getAttachmentPermissions(@NotNull PermissionAttachment permissionAttachment)
 	{
 		return ReflectionUtil.getField(this.fieldAttachmentPermissions, permissionAttachment);
 	}
 	
 	@Override
-	public void setAttachmentPermissions(PermissionAttachment permissionAttachment, Map<String, Boolean> permissions)
+	public void setAttachmentPermissions(@NotNull PermissionAttachment permissionAttachment, Map<String, Boolean> permissions)
 	{
 		ReflectionUtil.setField(this.fieldAttachmentPermissions, permissionAttachment, permissions);
 	}

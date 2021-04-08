@@ -19,6 +19,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +83,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void setSenderReferencesLoginMonitor(PlayerLoginEvent event)
+	public void setSenderReferencesLoginMonitor(@NotNull PlayerLoginEvent event)
 	{
 		// Not all logins are successful.
 		// If the login fails we remove the reference next tick.
@@ -94,7 +95,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void setSenderReferencesQuitMonitor(PlayerQuitEvent event)
+	public void setSenderReferencesQuitMonitor(@NotNull PlayerQuitEvent event)
 	{
 		// PlayerQuitEvents are /probably/ trustworthy.
 		// We check ourselves the next tick just to be on the safe side.
@@ -102,14 +103,14 @@ public class EngineMassiveCoreDatabase extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void setSenderReferencesRegisterMonitor(EventMassiveCoreSenderRegister event)
+	public void setSenderReferencesRegisterMonitor(@NotNull EventMassiveCoreSenderRegister event)
 	{
 		// This one we can however trust.
 		setSenderReferences(event.getSender(), event.getSender(), null);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void setSenderReferencesUnregisterMonitor(EventMassiveCoreSenderUnregister event)
+	public void setSenderReferencesUnregisterMonitor(@NotNull EventMassiveCoreSenderUnregister event)
 	{
 		// This one we can however trust.
 		setSenderReferences(event.getSender(), null, null);
@@ -170,7 +171,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void massiveStoreLoginSync(AsyncPlayerPreLoginEvent event)
+	public void massiveStoreLoginSync(@NotNull AsyncPlayerPreLoginEvent event)
 	{
 		// DEBUG
 		// long before = System.nanoTime();
@@ -195,7 +196,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	
 	// Can not be cancelled.
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void massiveStoreLoginSync(PlayerLoginEvent event)
+	public void massiveStoreLoginSync(@NotNull PlayerLoginEvent event)
 	{
 		// Get player id ...
 		Player player = event.getPlayer();
@@ -219,7 +220,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void syncOnPlayerLeave(EventMassiveCorePlayerLeave event)
+	public void syncOnPlayerLeave(@NotNull EventMassiveCorePlayerLeave event)
 	{
 		final Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;

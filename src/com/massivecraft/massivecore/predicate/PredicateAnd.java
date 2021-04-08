@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.predicate;
 
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableList;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,9 +13,11 @@ public class PredicateAnd<T> implements Predicate<T>
 	// INSTANCE
 	// -------------------------------------------- //
 	
+	@Contract("_ -> new")
 	@SafeVarargs
-	public static <T> PredicateAnd<T> get(Predicate<? super T>... predicates) { return new PredicateAnd<>(predicates); }
-	public static <T> PredicateAnd<T> get(Collection<Predicate<? super T>> predicates) { return new PredicateAnd<>(predicates); }
+	public static <T> @NotNull PredicateAnd<T> get(Predicate<? super T>... predicates) { return new PredicateAnd<>(predicates); }
+	@Contract("_ -> new")
+	public static <T> @NotNull PredicateAnd<T> get(Collection<Predicate<? super T>> predicates) { return new PredicateAnd<>(predicates); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

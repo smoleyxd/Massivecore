@@ -1,18 +1,23 @@
 package com.massivecraft.massivecore.predicate;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public class PredicateStringEndsWith implements Predicate<String>
 {
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 
-	private final String suffix;
+	private final @NotNull String suffix;
 
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public static PredicateStringEndsWith get(String suffix) { return new PredicateStringEndsWith(suffix); }
+	@Contract("_ -> new")
+	public static @NotNull PredicateStringEndsWith get(@NotNull String suffix) { return new PredicateStringEndsWith(suffix); }
+	@Contract("null -> fail")
 	public PredicateStringEndsWith(String suffix)
 	{
 		if (suffix == null) throw new NullPointerException("suffix");

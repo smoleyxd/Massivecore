@@ -13,6 +13,7 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -43,7 +44,7 @@ public class EngineMassiveCoreCommandSet extends Engine
 	}
 	
 	
-	public <T extends Serializable> void setValue(EventMassiveCoreCommandSet<T> event) throws MassiveException
+	public <T extends Serializable> void setValue(@NotNull EventMassiveCoreCommandSet<T> event) throws MassiveException
 	{
 		String senderId = event.getSenderId();
 		String targetId = event.getTargetId();
@@ -79,7 +80,7 @@ public class EngineMassiveCoreCommandSet extends Engine
 		}
 	}
 	
-	public String getTargetDesc(String targetId, String watcherId, String name)
+	public String getTargetDesc(@NotNull String targetId, String watcherId, String name)
 	{
 		if (targetId.equals(watcherId))
 		{

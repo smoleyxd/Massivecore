@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.nms;
 
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public class NmsBoard18R1P extends NmsBoard17R4
@@ -30,7 +31,7 @@ public class NmsBoard18R1P extends NmsBoard17R4
 	// In 1.8 there were only name tag visibility.
 	
 	@Override
-	public TeamOptionValue getOption(Team team, TeamOptionKey key)
+	public TeamOptionValue getOption(@NotNull Team team, @NotNull TeamOptionKey key)
 	{
 		if (key != TeamOptionKey.NAME_TAG_VISIBILITY) return null;
 		NameTagVisibility bukkitValue = team.getNameTagVisibility();
@@ -38,7 +39,7 @@ public class NmsBoard18R1P extends NmsBoard17R4
 	}
 	
 	@Override
-	public void setOption(Team team, TeamOptionKey key, TeamOptionValue value)
+	public void setOption(@NotNull Team team, @NotNull TeamOptionKey key, @NotNull TeamOptionValue value)
 	{
 		if (key != TeamOptionKey.NAME_TAG_VISIBILITY) return;
 		NameTagVisibility bukkitValue = convert(value, NameTagVisibility.values());

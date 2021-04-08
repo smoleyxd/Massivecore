@@ -65,26 +65,26 @@ public class WriterItemStackMetaPersistentData extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 
 	@Override
-	public Map<String, Object> getA(DataItemStack ca, ItemStack d)
+	public Map<String, Object> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getPersistentData();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Map<String, Object> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Map<String, Object> fa, ItemStack d)
 	{
 		ca.setPersistentData(fa);
 	}
 
 	@Override
-	public Map<String, Object> getB(ItemMeta cb, ItemStack d)
+	public Map<String, Object> getB(@NotNull ItemMeta cb, ItemStack d)
 	{
 		PersistentDataContainer container = cb.getPersistentDataContainer();
 		return NmsPersistentData.get().getPersistentData(container);
 	}
 
 	@Override
-	public void setB(ItemMeta cb, Map<String, Object> fb, ItemStack d)
+	public void setB(@NotNull ItemMeta cb, Map<String, Object> fb, ItemStack d)
 	{
 		PersistentDataContainer container = cb.getPersistentDataContainer();
 		NmsPersistentData.get().setPersistentData(container, fb);

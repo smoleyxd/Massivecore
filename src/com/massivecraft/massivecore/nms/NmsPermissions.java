@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.mixin.Mixin;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.PermissionAttachment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class NmsPermissions extends Mixin
 	// BASE
 	// -------------------------------------------- //
 	
-	public List<PermissionAttachment> getAttachments(PermissibleBase base)
+	public List<PermissionAttachment> getAttachments(@NotNull PermissibleBase base)
 	{
 		throw this.notImplemented();
 	}
@@ -47,12 +48,12 @@ public class NmsPermissions extends Mixin
 	// ATTACHMENT
 	// -------------------------------------------- //
 	
-	public Map<String, Boolean> getAttachmentPermissions(PermissionAttachment permissionAttachment)
+	public Map<String, Boolean> getAttachmentPermissions(@NotNull PermissionAttachment permissionAttachment)
 	{
 		throw this.notImplemented();
 	}
 	
-	public void setAttachmentPermissions(PermissionAttachment permissionAttachment, Map<String, Boolean> permissions)
+	public void setAttachmentPermissions(@NotNull PermissionAttachment permissionAttachment, Map<String, Boolean> permissions)
 	{
 		throw this.notImplemented();
 	}

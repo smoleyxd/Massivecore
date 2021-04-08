@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"soul_speed", new MassiveList<>("Soul Speed", "SOULSPEED", "SoulSpeed")
 	);
 	
-	public static String enchantmentToKey(Enchantment enchantment) {
+	public static @NotNull String enchantmentToKey(@NotNull Enchantment enchantment) {
 		return enchantment.getKey().getKey();
 	}
 	

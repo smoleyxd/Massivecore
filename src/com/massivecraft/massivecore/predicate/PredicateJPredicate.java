@@ -1,12 +1,16 @@
 package com.massivecraft.massivecore.predicate;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public class PredicateJPredicate<T> implements Predicate<T>
 {
 	// -------------------------------------------- //
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	public static <T> PredicateJPredicate<T> get(java.util.function.Predicate<? super T> predicate) { return new PredicateJPredicate<>(predicate); }
+	@Contract(value = "_ -> new", pure = true)
+	public static <T> @NotNull PredicateJPredicate<T> get(java.util.function.Predicate<? super T> predicate) { return new PredicateJPredicate<>(predicate); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

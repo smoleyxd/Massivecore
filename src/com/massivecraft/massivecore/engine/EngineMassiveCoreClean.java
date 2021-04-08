@@ -10,6 +10,7 @@ import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +86,7 @@ public class EngineMassiveCoreClean extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority =  EventPriority.LOWEST, ignoreCancelled = true)
-	public void defaultMillis(EventMassiveCorePlayerCleanInactivityToleranceMillis event)
+	public void defaultMillis(@NotNull EventMassiveCorePlayerCleanInactivityToleranceMillis event)
 	{
 		event.getToleranceCauseMillis().put("Default", event.getColl().getCleanInactivityToleranceMillis());
 	}

@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.command.editor.Property;
 import com.massivecraft.massivecore.mson.Mson;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,16 +30,17 @@ public abstract class TypeTransformer<I, O> extends TypeAbstract<O>
 	public static final String PREFIX = UNKNOWN + " ";
 	public static final String MSON_PREFIX = UNKNOWN + " ";
 	
-	public static String prefix(String string)
+	@Contract(pure = true)
+	public static @NotNull String prefix(String string)
 	{
 		return PREFIX + string;
 	}
-	public static Mson prefix(Mson mson)
+	public static @NotNull Mson prefix(Mson mson)
 	{
 		return Mson.mson(MSON_PREFIX, mson);
 	}
 	
-	public static Set<String> prefix(Set<String> strings)
+	public static @NotNull Set<String> prefix(@NotNull Set<String> strings)
 	{
 		// Create
 		Set<String> ret = new MassiveSet<>(strings.size());
@@ -65,7 +68,7 @@ public abstract class TypeTransformer<I, O> extends TypeAbstract<O>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public TypeTransformer(Type<I> typeInner, Type<O> typeOuter)
+	public TypeTransformer(Type<I> typeInner, @NotNull Type<O> typeOuter)
 	{
 		super(typeOuter.getClazz());
 		this.setInnerTypes(typeInner, typeOuter);

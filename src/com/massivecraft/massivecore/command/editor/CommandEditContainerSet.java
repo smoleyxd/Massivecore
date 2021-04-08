@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CommandEditContainerSet<O, V> extends CommandEditContainerAbstract<
 	// -------------------------------------------- //
 	
 	@Override
-	public void alterElements(List<Object> elements) throws MassiveException
+	public void alterElements(@NotNull List<Object> elements) throws MassiveException
 	{
 		// Args
 		int index = this.readArg();

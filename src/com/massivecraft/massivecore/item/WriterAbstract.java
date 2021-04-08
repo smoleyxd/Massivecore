@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.command.type.primitive.TypeBooleanOn;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -284,22 +285,22 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// ACCESS
 	// -------------------------------------------- //
 
-	public FA getA(CA ca, D d)
+	public FA getA(@NotNull CA ca, D d)
 	{
 		return null;
 	}
 
-	public void setA(CA ca, FA fa, D d)
+	public void setA(@NotNull CA ca, FA fa, D d)
 	{
 
 	}
 
-	public FB getB(CB cb, D d)
+	public FB getB(@NotNull CB cb, D d)
 	{
 		return null;
 	}
 
-	public void setB(CB cb, FB fb, D d)
+	public void setB(@NotNull CB cb, FB fb, D d)
 	{
 
 	}

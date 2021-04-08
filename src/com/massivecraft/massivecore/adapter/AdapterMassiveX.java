@@ -9,6 +9,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import com.massivecraft.massivecore.xlib.gson.internal.$Gson$Types;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -130,12 +132,12 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static Class<?> getClazz(ParameterizedType ptype)
+	public static Class<?> getClazz(@NotNull ParameterizedType ptype)
 	{
 		return (Class<?>)ptype.getRawType();
 	}
 	
-	public static ParameterizedType getSuperType(ParameterizedType ptype)
+	public static @NotNull ParameterizedType getSuperType(@NotNull ParameterizedType ptype)
 	{
 		// ------- SELF -------
 		
@@ -164,7 +166,7 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 		return $Gson$Types.newParameterizedTypeWithOwner(null, sclazz, typeArguments);
 	}
 	
-	public static Object getNewArgumentInstance(Type type, int index)
+	public static @NotNull Object getNewArgumentInstance(Type type, int index)
 	{
 		ParameterizedType parameterizedType = (ParameterizedType) type;
 		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
@@ -179,6 +181,7 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 		}
 	}
 	
+	@Contract("null -> true")
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Object object)
 	{

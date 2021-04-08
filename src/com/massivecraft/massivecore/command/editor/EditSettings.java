@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.command.type.sender.TypeSender;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -114,7 +115,7 @@ public class EditSettings<O>
 	// CONSTRUCT > DELEGATE
 	// -------------------------------------------- //
 	
-	public <P> EditSettings(final EditSettings<P> parentSettings, final Property<P, O> childProperty)
+	public <P> EditSettings(final EditSettings<P> parentSettings, final @NotNull Property<P, O> childProperty)
 	{
 		this(childProperty.getValueType());
 		

@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class NmsRepairable17R4P extends NmsRepairable
 	// -------------------------------------------- //
 	
 	@Override
-	public boolean isRepairable(ItemStack itemStack)
+	public boolean isRepairable(@NotNull ItemStack itemStack)
 	{
 		Material material = itemStack.getType();
 
@@ -57,7 +58,7 @@ public class NmsRepairable17R4P extends NmsRepairable
 	));
 
 	@Override
-	protected void repairInner(ItemStack itemStack)
+	protected void repairInner(@NotNull ItemStack itemStack)
 	{
 		itemStack.setDurability((short) 0);
 	}

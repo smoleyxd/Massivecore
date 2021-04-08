@@ -13,6 +13,9 @@ import com.massivecraft.massivecore.util.ContainerUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -273,12 +276,13 @@ public abstract class TypeContainer<C, E> extends TypeAbstract<C>
 	// ARGS
 	// -------------------------------------------- //
 	
-	public static List<String> getArgs(String string)
+	@Contract("_ -> new")
+	public static @NotNull List<String> getArgs(String string)
 	{
 		return Arrays.asList(Txt.PATTERN_WHITESPACE.split(string, -1));
 	}
 	
-	public static String getLastArg(String string)
+	public static @Nullable String getLastArg(String string)
 	{
 		List<String> args = getArgs(string);
 		if (args.isEmpty()) return null;

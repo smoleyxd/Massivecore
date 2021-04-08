@@ -9,6 +9,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,8 @@ public class ChestGui
 	public static Map<Inventory, ChestGui> getInventoryToGui() { return inventoryToGui; }
 	
 	public static ChestGui get(Inventory inventory) { return inventoryToGui.get(inventory); }
-	public static ChestGui getCreative(Inventory inventory)
+	@Contract("null -> fail")
+	public static @NotNull ChestGui getCreative(Inventory inventory)
 	{
 		if (inventory == null) throw new NullPointerException("inventory");
 		
@@ -36,6 +39,7 @@ public class ChestGui
 		
 		return gui;
 	}
+	@Contract("null -> fail")
 	public static ChestGui get(InventoryEvent event)
 	{
 		if (event == null) throw new NullPointerException("event");
@@ -88,7 +92,7 @@ public class ChestGui
 	public ChestAction setAction(int index, ChestAction action) { return this.indexToAction.put(index, action); }
 	public ChestAction setAction(int index, String command) { return this.setAction(index, new ChestActionCommand(command)); }
 	public ChestAction getAction(int index) { return this.indexToAction.get(index); }
-	public ChestAction getAction(InventoryClickEvent event) { return this.getAction(event.getSlot()); }
+	public ChestAction getAction(@NotNull InventoryClickEvent event) { return this.getAction(event.getSlot()); }
 	
 	// -------------------------------------------- //
 	// LAST ACTION
@@ -179,7 +183,7 @@ public class ChestGui
 		
 	}
 
-	public static ChestGui constructFromButtons(List<? extends ChestButton> buttons, String title)
+	public static @NotNull ChestGui constructFromButtons(@NotNull List<? extends ChestButton> buttons, String title)
 	{
 		int size = buttons.size();
 		int modulo = size % 9;

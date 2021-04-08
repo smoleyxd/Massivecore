@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveTreeSet;
 import com.massivecraft.massivecore.collections.MassiveTreeSetDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -40,7 +41,7 @@ public class AdapterMassiveTreeSet extends AdapterMassiveX<MassiveTreeSet<?, ?>>
 	// GET COMPARATOR
 	// -------------------------------------------- //
 	
-	public static Object getComparator(Type typeOfT)
+	public static @NotNull Object getComparator(Type typeOfT)
 	{
 		return getNewArgumentInstance(typeOfT, 1);
 	}

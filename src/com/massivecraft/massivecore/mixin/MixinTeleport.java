@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class MixinTeleport extends Mixin
 {
@@ -49,7 +50,7 @@ public class MixinTeleport extends Mixin
 	// CORE LOGIC
 	// -------------------------------------------- //
 	
-	public static void teleportPlayer(Player player, PS ps) throws TeleporterException
+	public static void teleportPlayer(@NotNull Player player, @NotNull PS ps) throws TeleporterException
 	{
 		// Base the PS location on the entity location
 		ps = ps.getEntity(true);

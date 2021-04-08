@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.ps.PS;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class WorldExceptionSet extends ExceptionSet
 {
@@ -31,17 +32,17 @@ public class WorldExceptionSet extends ExceptionSet
 	// CONTAINS
 	// -------------------------------------------- //
 	
-	public boolean contains(PS ps)
+	public boolean contains(@NotNull PS ps)
 	{
 		return this.contains(ps.getWorld());
 	}
 	
-	public boolean contains(Location loc)
+	public boolean contains(@NotNull Location loc)
 	{
 		return this.contains(loc.getWorld());
 	}
 	
-	public boolean contains(Entity entity)
+	public boolean contains(@NotNull Entity entity)
 	{
 		return this.contains(entity.getWorld());
 	}

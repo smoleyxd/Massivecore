@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.item;
 
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackCount extends WriterAbstractItemStackField<Integer, Integer>
 {
@@ -16,25 +17,25 @@ public class WriterItemStackCount extends WriterAbstractItemStackField<Integer, 
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public Integer getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getCount();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Integer fa, ItemStack d)
 	{
 		ca.setCount(fa);
 	}
 
 	@Override
-	public Integer getB(ItemStack cb, ItemStack d)
+	public Integer getB(@NotNull ItemStack cb, ItemStack d)
 	{
 		return cb.getAmount();
 	}
 
 	@Override
-	public void setB(ItemStack cb, Integer fb, ItemStack d)
+	public void setB(@NotNull ItemStack cb, Integer fb, ItemStack d)
 	{
 		cb.setAmount(fb);
 	}

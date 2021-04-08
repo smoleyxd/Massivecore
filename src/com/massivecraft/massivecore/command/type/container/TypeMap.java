@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.command.type.container;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.command.type.Type;
 import com.massivecraft.massivecore.command.type.combined.TypeEntry;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,12 +15,14 @@ public class TypeMap<K, V> extends TypeContainer<Map<K, V>, Entry<K, V>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <K, V> TypeMap<K, V> get(Type<K> keyType, Type<V> valueType)
+	@Contract("_, _ -> new")
+	public static <K, V> @NotNull TypeMap<K, V> get(Type<K> keyType, Type<V> valueType)
 	{
 		return get(TypeEntry.get(keyType, valueType));
 	}
 	
-	public static <K, V> TypeMap<K, V> get(TypeEntry<K, V> entryType)
+	@Contract("_ -> new")
+	public static <K, V> @NotNull TypeMap<K, V> get(TypeEntry<K, V> entryType)
 	{
 		return new TypeMap<>(entryType);
 	}

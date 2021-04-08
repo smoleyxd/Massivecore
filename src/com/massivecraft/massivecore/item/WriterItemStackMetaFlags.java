@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -26,25 +27,25 @@ public class WriterItemStackMetaFlags extends WriterAbstractItemStackMetaField<I
 	// -------------------------------------------- //
 
 	@Override
-	public Set<String> getA(DataItemStack ca, ItemStack d)
+	public Set<String> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getFlags();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Set<String> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Set<String> fa, ItemStack d)
 	{
 		ca.setFlags(fa);
 	}
 
 	@Override
-	public Set<ItemFlag> getB(ItemMeta cb, ItemStack d)
+	public Set<ItemFlag> getB(@NotNull ItemMeta cb, ItemStack d)
 	{
 		return cb.getItemFlags();
 	}
 
 	@Override
-	public void setB(ItemMeta cb, Set<ItemFlag> fb, ItemStack d)
+	public void setB(@NotNull ItemMeta cb, Set<ItemFlag> fb, ItemStack d)
 	{
 		cb.addItemFlags(fb.toArray(new ItemFlag[0]));
 	}

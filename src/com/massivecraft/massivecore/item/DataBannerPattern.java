@@ -7,6 +7,8 @@ import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -46,6 +48,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	}
 	
 	// Minecraft 1.7 Compatibility
+	@Contract("null -> fail")
 	public DataBannerPattern(Object pattern)
 	{
 		if ( ! (pattern instanceof Pattern)) throw new IllegalArgumentException("pattern");
@@ -86,7 +89,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	// -------------------------------------------- //
 	
 	@Override
-	public int compareTo(DataBannerPattern that)
+	public int compareTo(@NotNull DataBannerPattern that)
 	{
 		return ComparatorSmart.get().compare(
 			this.getId(), that.getId(),
@@ -95,6 +98,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	}
 	
 	// TODO: Use compare instead to avoid bugs?
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

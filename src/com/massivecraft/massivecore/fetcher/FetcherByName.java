@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -49,7 +51,7 @@ public class FetcherByName implements Callable<Map<String, IdAndName>>
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Map<String, IdAndName> fetch(Collection<String> names) throws Exception
+	public static @NotNull Map<String, IdAndName> fetch(Collection<String> names) throws Exception
 	{
 		// Create batches
 		List<List<String>> batches = new ArrayList<>();
@@ -80,7 +82,7 @@ public class FetcherByName implements Callable<Map<String, IdAndName>>
 		return ret;
 	}
 	
-	public static <T> List<T> take(Collection<T> coll, int count)
+	public static <T> @NotNull List<T> take(@NotNull Collection<T> coll, int count)
 	{
 		List<T> ret = new ArrayList<>();
 		

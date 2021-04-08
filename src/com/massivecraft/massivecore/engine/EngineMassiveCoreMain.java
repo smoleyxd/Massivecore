@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,7 +46,7 @@ public class EngineMassiveCoreMain extends Engine
 	// It will cause non async chat events not to fire.
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void recipientChat(final AsyncPlayerChatEvent event)
+	public void recipientChat(final @NotNull AsyncPlayerChatEvent event)
 	{
 		// Return unless we are using the recipient chat event
 		if ( ! MassiveCoreMConf.get().recipientChatEventEnabled) return;
@@ -86,7 +87,7 @@ public class EngineMassiveCoreMain extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void permissionDeniedFormat(EventMassiveCorePermissionDeniedFormat event)
+	public void permissionDeniedFormat(@NotNull EventMassiveCorePermissionDeniedFormat event)
 	{
 		// If noone set a format already ...
 		if (event.hasFormat()) return;
@@ -104,7 +105,7 @@ public class EngineMassiveCoreMain extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-	public void explosionFx(EntityDamageByBlockEvent event)
+	public void explosionFx(@NotNull EntityDamageByBlockEvent event)
 	{
 		// If an entity is taking damage from a block explosion ...
 		DamageCause cause = event.getCause();
@@ -122,7 +123,7 @@ public class EngineMassiveCoreMain extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void after(PlayerTeleportEvent event)
+	public void after(@NotNull PlayerTeleportEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -131,7 +132,7 @@ public class EngineMassiveCoreMain extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void after(PlayerRespawnEvent event)
+	public void after(@NotNull PlayerRespawnEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -146,7 +147,7 @@ public class EngineMassiveCoreMain extends Engine
 	public static Map<UUID, String> kickedPlayerReasons = new HashMap<>();
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void causedByKick(PlayerKickEvent event)
+	public void causedByKick(@NotNull PlayerKickEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -156,7 +157,7 @@ public class EngineMassiveCoreMain extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void causedByKick(PlayerQuitEvent event)
+	public void causedByKick(@NotNull PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;

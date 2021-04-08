@@ -5,6 +5,8 @@ import com.massivecraft.massivecore.command.MassiveCommand;
 import com.massivecraft.massivecore.command.type.TypeItemStack;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class RequirementHasItemInHand extends RequirementAbstract
 {
@@ -17,17 +19,19 @@ public class RequirementHasItemInHand extends RequirementAbstract
 	private static RequirementHasItemInHand i = new RequirementHasItemInHand(TypeItemStack.get());
 	public static RequirementHasItemInHand get() { return i; }
 	
-	public static RequirementHasItemInHand get(TypeItemStack innerType) { return new RequirementHasItemInHand(innerType); }
-	public static RequirementHasItemInHand get(Material... materialWhitelist) { return get(TypeItemStack.get(materialWhitelist)); }
+	@Contract("_ -> new")
+	public static @NotNull RequirementHasItemInHand get(TypeItemStack innerType) { return new RequirementHasItemInHand(innerType); }
+	@Contract("_ -> new")
+	public static @NotNull RequirementHasItemInHand get(Material... materialWhitelist) { return get(TypeItemStack.get(materialWhitelist)); }
 	
-	public RequirementHasItemInHand(TypeItemStack innerType) { this.innerType = innerType; }
+	public RequirementHasItemInHand(@NotNull TypeItemStack innerType) { this.innerType = innerType; }
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
 	private final TypeItemStack innerType;
-	public TypeItemStack getInnerType() { return this.innerType; }
+	public @NotNull TypeItemStack getInnerType() { return this.innerType; }
 	
 	// -------------------------------------------- //
 	// OVERRIDE

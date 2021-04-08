@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaName extends WriterAbstractItemStackMetaField<ItemMeta, String, String>
 {
@@ -21,25 +22,25 @@ public class WriterItemStackMetaName extends WriterAbstractItemStackMetaField<It
 	// -------------------------------------------- //
 
 	@Override
-	public String getA(DataItemStack ca, ItemStack d)
+	public String getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getName();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, String fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, String fa, ItemStack d)
 	{
 		ca.setName(fa);
 	}
 
 	@Override
-	public String getB(ItemMeta cb, ItemStack d)
+	public String getB(@NotNull ItemMeta cb, ItemStack d)
 	{
 		return cb.getDisplayName();
 	}
 
 	@Override
-	public void setB(ItemMeta cb, String fb, ItemStack d)
+	public void setB(@NotNull ItemMeta cb, String fb, ItemStack d)
 	{
 		cb.setDisplayName(fb);
 	}

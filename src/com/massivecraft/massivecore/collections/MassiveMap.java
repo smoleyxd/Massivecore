@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -62,7 +64,7 @@ public class MassiveMap<K, V> extends LinkedHashMap<K, V>
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public static <K, V> MassiveMap<K, V> varargCreate(K key1, V value1, Object... objects)
+	public static <K, V> @NotNull MassiveMap<K, V> varargCreate(K key1, V value1, Object... objects)
 	{
 		MassiveMap<K, V> ret = new MassiveMap<>();
 		

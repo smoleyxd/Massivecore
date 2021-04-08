@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils;
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -59,7 +60,7 @@ public class NmsPersistentData116R3P extends NmsPersistentData
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getPersistentData(PersistentDataContainer persistentDataContainer) {
+	public Map<String, Object> getPersistentData(@NotNull PersistentDataContainer persistentDataContainer) {
 		try
 		{
 			return (Map<String, Object>) serializePersistentData.invoke(persistentDataContainer);
@@ -71,7 +72,7 @@ public class NmsPersistentData116R3P extends NmsPersistentData
 	}
 	
 	@Override
-	public void setPersistentData(PersistentDataContainer persistentDataContainer, Map<String, Object> data) {
+	public void setPersistentData(@NotNull PersistentDataContainer persistentDataContainer, Map<String, Object> data) {
 		try
 		{
 			Object deserialized = deserializeNBT.invoke(persistentDataContainer, data);

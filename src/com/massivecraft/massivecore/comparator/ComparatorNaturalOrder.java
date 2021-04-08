@@ -29,6 +29,8 @@ Check out the original at: https://github.com/paour/natorder/blob/master/Natural
 
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 {
 	// -------------------------------------------- //
@@ -43,7 +45,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 
 	@Override
-	public int compareInner(Object object1, Object object2)
+	public int compareInner(@NotNull Object object1, @NotNull Object object2)
 	{
 		// Martin Pool
 		String a = object1.toString();
@@ -173,7 +175,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 		}
 	}
 	
-	static char charAt(String s, int i)
+	static char charAt(@NotNull String s, int i)
 	{
 		if (i >= s.length())
 		{

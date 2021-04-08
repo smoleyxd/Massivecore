@@ -21,6 +21,8 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -433,12 +435,12 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	// This method performs an initial cleanup of suggestions.
 	// Currently we just throw away nulls and empty strings.
-	private static void cleanSuggestions(List<String> suggestions)
+	private static void cleanSuggestions(@NotNull List<String> suggestions)
 	{
 		suggestions.removeIf(suggestion -> suggestion == null || suggestion.isEmpty());
 	}
 	
-	public static List<String> prepareForSpaces(List<String> suggestions, String arg)
+	public static @NotNull List<String> prepareForSpaces(List<String> suggestions, String arg)
 	{
 		// This will get the common prefix for all passed in suggestions.
 		// This will allow us to tab complete some things with spaces
@@ -474,7 +476,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 		return ret;
 	}
 	
-	private static String getPrefix(List<String> suggestions)
+	private static @NotNull String getPrefix(@NotNull List<String> suggestions)
 	{
 		String prefix = null;
 		
@@ -491,6 +493,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	
 	// This method return a new string only including the first characters that are equal.
+	@Contract("null, _ -> param2; _, !null -> !null")
 	private static String getOkay(String original, String compared)
 	{
 		if (original == null) return compared;
@@ -511,7 +514,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 		return ret.toString();
 	}
 	
-	private static List<String> withoutPreAndSuffix(List<String> suggestions, String prefix)
+	@Contract("_, _ -> new")
+	private static @NotNull List<String> withoutPreAndSuffix(@NotNull List<String> suggestions, String prefix)
 	{
 		MassiveSet<String> ret = new MassiveSet<>(suggestions.size());
 		boolean includesPrefix = false; // Sometimes a suggestion is equal to the prefix.

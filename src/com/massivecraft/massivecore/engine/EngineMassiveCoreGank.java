@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -92,7 +93,7 @@ public class EngineMassiveCoreGank extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onEntityDamage(EntityDamageByEntityEvent event)
+	public void onEntityDamage(@NotNull EntityDamageByEntityEvent event)
 	{
 		// If an entity ...
 		Entity entity = event.getEntity();

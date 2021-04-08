@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 
@@ -24,7 +26,8 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	public static <T extends Enum<T>> AdapterLowercaseEnum<T> get(Class<T> clazz)
+	@Contract("_ -> new")
+	public static <T extends Enum<T>> @NotNull AdapterLowercaseEnum<T> get(@NotNull Class<T> clazz)
 	{
 		return new AdapterLowercaseEnum<>(clazz);
 	}
@@ -33,6 +36,7 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public AdapterLowercaseEnum(Class<T> clazz)
 	{
 		if (clazz == null) throw new IllegalArgumentException("clazz is null");

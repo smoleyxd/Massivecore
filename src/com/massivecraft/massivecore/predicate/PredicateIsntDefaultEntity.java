@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.predicate;
 
 import com.massivecraft.massivecore.store.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class PredicateIsntDefaultEntity implements Predicate<Entity<?>>
 {
@@ -16,7 +17,7 @@ public class PredicateIsntDefaultEntity implements Predicate<Entity<?>>
 	// -------------------------------------------- //
 
 	@Override
-	public boolean apply(Entity<?> entity)
+	public boolean apply(@NotNull Entity<?> entity)
 	{
 		return !entity.isDefault();
 	}

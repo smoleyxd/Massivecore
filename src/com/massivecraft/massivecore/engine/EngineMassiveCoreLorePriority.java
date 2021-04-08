@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map.Entry;
 
@@ -28,7 +29,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 	// -------------------------------------------- //
 
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-	public void sortItemLore(InventoryClickEvent event)
+	public void sortItemLore(@NotNull InventoryClickEvent event)
 	{
 		if (!MassiveCoreMConf.get().loreSortOnInventoryClick) return;
 
@@ -42,7 +43,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 	}
 
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-	public void sortItemLore(InventoryOpenEvent event)
+	public void sortItemLore(@NotNull InventoryOpenEvent event)
 	{
 		if (!MassiveCoreMConf.get().loreSortOnInventoryOpen) return;
 
@@ -58,14 +59,14 @@ public class EngineMassiveCoreLorePriority extends Engine
 	// -------------------------------------------- //
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void setLorePriorities(EventMassiveCoreLorePriority event)
+	public void setLorePriorities(@NotNull EventMassiveCoreLorePriority event)
 	{
 		this.setPrioritiesPrefix(event);
 		this.setPrioritiesSuffix(event);
 		this.setPrioritiesRegex(event);
 	}
 
-	public void setPrioritiesRegex(EventMassiveCoreLorePriority event)
+	public void setPrioritiesRegex(@NotNull EventMassiveCoreLorePriority event)
 	{
 		for (Entry<String, Integer> prefixEntry : MassiveCoreMConf.get().lorePrioritiesRegex.entrySet())
 		{
@@ -75,7 +76,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 		}
 	}
 
-	public void setPrioritiesPrefix(EventMassiveCoreLorePriority event)
+	public void setPrioritiesPrefix(@NotNull EventMassiveCoreLorePriority event)
 	{
 		for (Entry<String, Integer> prefixEntry : MassiveCoreMConf.get().lorePrioritiesPrefix.entrySet())
 		{
@@ -85,7 +86,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 		}
 	}
 	
-	public void setPrioritiesSuffix(EventMassiveCoreLorePriority event)
+	public void setPrioritiesSuffix(@NotNull EventMassiveCoreLorePriority event)
 	{
 		for (Entry<String, Integer> suffixEntry : MassiveCoreMConf.get().lorePrioritiesSuffix.entrySet())
 		{

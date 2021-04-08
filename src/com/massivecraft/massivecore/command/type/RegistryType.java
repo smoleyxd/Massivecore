@@ -51,6 +51,9 @@ import com.massivecraft.massivecore.command.type.sender.TypeSender;
 import com.massivecraft.massivecore.command.type.store.TypeAspect;
 import com.massivecraft.massivecore.command.type.store.TypeMultiverse;
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -66,6 +69,7 @@ public class RegistryType
 	
 	private static final Map<Class<?>, Type<?>> registry = new MassiveMap<>();
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static <T> void register(Class<T> clazz, Type<? super T> type)
 	{
 		if (clazz == null) throw new NullPointerException("clazz");
@@ -73,12 +77,14 @@ public class RegistryType
 		registry.put(clazz, type);
 	}
 	
+	@Contract("null -> fail")
 	public static <T> void register(Type<T> type)
 	{
 		if (type == null) throw new NullPointerException("type");
 		register(type.getClazz(), type);
 	}
 	
+	@Contract("null -> fail")
 	@SuppressWarnings("unchecked")
 	public static <T> Type<? super T> unregister(Class<T> clazz)
 	{
@@ -86,6 +92,7 @@ public class RegistryType
 		return (Type<T>) registry.remove(clazz);
 	}
 	
+	@Contract("null -> fail")
 	public static boolean isRegistered(Class<?> clazz)
 	{
 		if (clazz == null) throw new NullPointerException("clazz");
@@ -96,7 +103,8 @@ public class RegistryType
 	// GET TYPE
 	// -------------------------------------------- //
 	
-	public static Type<?> getType(Field field, java.lang.reflect.Type fieldType, boolean strictThrow)
+	@Contract("null, null, _ -> fail")
+	public static @Nullable Type<?> getType(Field field, java.lang.reflect.Type fieldType, boolean strictThrow)
 	{
 		if (field != null)
 		{
@@ -176,23 +184,23 @@ public class RegistryType
 		
 		throw new IllegalArgumentException("No Information Supplied");
 	}
-	
-	public static Type<?> getType(Field field, boolean strictThrow)
+
+	public static Type<?> getType(@NotNull Field field, boolean strictThrow)
 	{
 		return getType(field, null, strictThrow);
 	}
 	
-	public static Type<?> getType(java.lang.reflect.Type fieldType, boolean strictThrow)
+	public static Type<?> getType(@NotNull java.lang.reflect.Type fieldType, boolean strictThrow)
 	{
 		return getType(null, fieldType, strictThrow);
 	}
 	
-	public static Type<?> getType(Field field)
+	public static Type<?> getType(@NotNull Field field)
 	{
 		return getType(field, true);
 	}
 	
-	public static Type<?> getType(java.lang.reflect.Type fieldType)
+	public static Type<?> getType(@NotNull java.lang.reflect.Type fieldType)
 	{
 		return getType(fieldType, true);
 	}
@@ -200,8 +208,8 @@ public class RegistryType
 	// -------------------------------------------- //
 	// GET INNER TYPES
 	// -------------------------------------------- //
-	
-	public static List<Type<?>> getInnerTypes(Field field, java.lang.reflect.Type fieldType, int amountRequired)
+
+	public static @NotNull List<Type<?>> getInnerTypes(Field field, java.lang.reflect.Type fieldType, int amountRequired)
 	{
 		// Annotation
 		if (field != null)

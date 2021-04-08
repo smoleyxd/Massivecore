@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -232,7 +233,7 @@ public abstract class Property<O, V> implements Named
 		return ret;
 	}
 	
-	public static <O> List<Mson> getShowLines(O object, CommandSender sender, Collection<? extends Property<O, ?>> properties)
+	public static <O> @NotNull List<Mson> getShowLines(O object, CommandSender sender, @NotNull Collection<? extends Property<O, ?>> properties)
 	{
 		// Create
 		List<Mson> ret = new MassiveList<>();

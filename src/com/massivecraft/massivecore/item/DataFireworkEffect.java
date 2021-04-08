@@ -10,6 +10,8 @@ import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.FireworkEffect;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -105,7 +107,7 @@ public class DataFireworkEffect implements Comparable<DataFireworkEffect>
 	// -------------------------------------------- //
 	
 	@Override
-	public int compareTo(DataFireworkEffect that)
+	public int compareTo(@NotNull DataFireworkEffect that)
 	{
 		return ComparatorSmart.get().compare(
 			this.hasFlicker(), that.hasFlicker(),
@@ -118,6 +120,7 @@ public class DataFireworkEffect implements Comparable<DataFireworkEffect>
 	}
 	
 	// TODO: Use compare instead to avoid bugs?
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

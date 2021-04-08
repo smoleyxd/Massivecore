@@ -3,6 +3,9 @@ package com.massivecraft.massivecore.command.type;
 import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.MassiveException;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,17 +24,20 @@ public class TypeNullable<T> extends TypeWrapper<T>
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	public static <T> TypeNullable<T> get(Type<T> inner, Collection<String> nulls)
+	@Contract("_, _ -> new")
+	public static <T> @NotNull TypeNullable<T> get(@NotNull Type<T> inner, Collection<String> nulls)
 	{
 		return new TypeNullable<>(inner, nulls);
 	}
 	
-	public static <T> TypeNullable<T> get(Type<T> inner, String... nulls)
+	@Contract("_, _ -> new")
+	public static <T> @NotNull TypeNullable<T> get(@NotNull Type<T> inner, String... nulls)
 	{
 		return new TypeNullable<>(inner, nulls);
 	}
 	
-	public static <T> TypeNullable<T> get(Type<T> inner)
+	@Contract("_ -> new")
+	public static <T> @NotNull TypeNullable<T> get(@NotNull Type<T> inner)
 	{
 		return new TypeNullable<>(inner);
 	}
@@ -40,19 +46,19 @@ public class TypeNullable<T> extends TypeWrapper<T>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public TypeNullable(Type<T> inner, Collection<String> nulls)
+	public TypeNullable(@NotNull Type<T> inner, @Nullable Collection<String> nulls)
 	{
 		super(inner);
 		if (nulls == null) nulls = Collections.emptySet();
 		this.nulls = nulls;
 	}
 	
-	public TypeNullable(Type<T> inner, String... nulls)
+	public TypeNullable(@NotNull Type<T> inner, String... nulls)
 	{
 		this(inner, Arrays.asList(nulls));
 	}
 	
-	public TypeNullable(Type<T> inner)
+	public TypeNullable(@NotNull Type<T> inner)
 	{
 		this(inner, MassiveCore.NOTHING_REMOVE);
 	}

@@ -5,6 +5,8 @@ import com.massivecraft.massivecore.command.editor.CommandEditAbstract;
 import com.massivecraft.massivecore.command.editor.Property;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class RequirementEditorPropertyCreated extends RequirementAbstract
 {
@@ -21,7 +23,8 @@ public class RequirementEditorPropertyCreated extends RequirementAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static RequirementEditorPropertyCreated get(boolean createdTarget) { return new RequirementEditorPropertyCreated(createdTarget); }
+	@Contract("_ -> new")
+	public static @NotNull RequirementEditorPropertyCreated get(boolean createdTarget) { return new RequirementEditorPropertyCreated(createdTarget); }
 	public RequirementEditorPropertyCreated(boolean createdTarget)
 	{
 		this.createdTarget = createdTarget;

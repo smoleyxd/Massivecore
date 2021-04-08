@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.command.type.TypeAbstract;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
@@ -214,7 +215,7 @@ public abstract class TypeCombined<T> extends TypeAbstract<T>
 		return ret;
 	}
 	
-	private static void addSorted(List<Integer> list, Integer element)
+	private static void addSorted(@NotNull List<Integer> list, Integer element)
 	{
 		for (int index = 0; index < list.size(); index++)
 		{
@@ -459,7 +460,7 @@ public abstract class TypeCombined<T> extends TypeAbstract<T>
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static Pattern buildSeparatorsPattern(String separators)
+	public static @NotNull Pattern buildSeparatorsPattern(@NotNull String separators)
 	{
 		StringBuilder regex = new StringBuilder();
 		regex.append("[");
