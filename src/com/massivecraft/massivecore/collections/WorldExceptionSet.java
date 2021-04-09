@@ -23,7 +23,7 @@ public class WorldExceptionSet extends ExceptionSet
 	}
 	
 	@SafeVarargs
-	public <O> WorldExceptionSet(boolean standard, O... exceptions)
+	public <O> WorldExceptionSet(boolean standard, O @NotNull ... exceptions)
 	{
 		super(standard, exceptions);
 	}
