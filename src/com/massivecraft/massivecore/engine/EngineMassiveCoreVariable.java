@@ -33,6 +33,7 @@ public class EngineMassiveCoreVariable extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreVariable i = new EngineMassiveCoreVariable();
+	@Contract(pure = true)
 	public static EngineMassiveCoreVariable get() { return i; }
 	
 	// -------------------------------------------- //

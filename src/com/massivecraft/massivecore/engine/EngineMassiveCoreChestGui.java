@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.jetbrains.annotations.Contract;
 
 public class EngineMassiveCoreChestGui extends Engine
 {
@@ -23,6 +24,7 @@ public class EngineMassiveCoreChestGui extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreChestGui i = new EngineMassiveCoreChestGui();
+	@Contract(pure = true)
 	public static EngineMassiveCoreChestGui get() { return i; }
 	
 	// -------------------------------------------- //

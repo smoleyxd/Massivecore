@@ -18,6 +18,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -30,6 +31,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreScheduledTeleport i = new EngineMassiveCoreScheduledTeleport();
+	@Contract(pure = true)
 	public static EngineMassiveCoreScheduledTeleport get() { return i; }
 	public EngineMassiveCoreScheduledTeleport()
 	{

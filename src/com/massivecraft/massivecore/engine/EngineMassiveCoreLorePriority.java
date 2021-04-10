@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map.Entry;
@@ -22,6 +23,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreLorePriority i = new EngineMassiveCoreLorePriority();
+	@Contract(pure = true)
 	public static EngineMassiveCoreLorePriority get() { return i; }
 	
 	// -------------------------------------------- //

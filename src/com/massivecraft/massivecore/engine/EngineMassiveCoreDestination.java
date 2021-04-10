@@ -23,6 +23,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -36,6 +37,7 @@ public class EngineMassiveCoreDestination extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreDestination i = new EngineMassiveCoreDestination();
+	@Contract(pure = true)
 	public static EngineMassiveCoreDestination get() { return i; }
 	
 	// -------------------------------------------- //

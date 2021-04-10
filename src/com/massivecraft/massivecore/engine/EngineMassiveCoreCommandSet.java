@@ -13,6 +13,7 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class EngineMassiveCoreCommandSet extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreCommandSet i = new EngineMassiveCoreCommandSet();
+	@Contract(pure = true)
 	public static EngineMassiveCoreCommandSet get() { return i; }
 	
 	// -------------------------------------------- //

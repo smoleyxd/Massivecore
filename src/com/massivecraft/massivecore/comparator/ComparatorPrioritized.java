@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
 import com.massivecraft.massivecore.Prioritized;
+import org.jetbrains.annotations.Contract;
 
 public class ComparatorPrioritized extends ComparatorAbstract<Object>
 {
@@ -9,6 +10,7 @@ public class ComparatorPrioritized extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorPrioritized i = new ComparatorPrioritized();
+	@Contract(pure = true)
 	public static ComparatorPrioritized get() { return i; }
 	
 	// -------------------------------------------- //

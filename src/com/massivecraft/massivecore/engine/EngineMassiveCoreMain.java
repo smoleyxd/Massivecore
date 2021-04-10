@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class EngineMassiveCoreMain extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreMain i = new EngineMassiveCoreMain();
+	@Contract(pure = true)
 	public static EngineMassiveCoreMain get() { return i; }
 	
 	// -------------------------------------------- //

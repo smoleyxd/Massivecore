@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
 import com.massivecraft.massivecore.Named;
+import org.jetbrains.annotations.Contract;
 
 public class ComparatorNamed extends ComparatorAbstract<Object>
 {
@@ -9,6 +10,7 @@ public class ComparatorNamed extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorNamed i = new ComparatorNamed();
+	@Contract(pure = true)
 	public static ComparatorNamed get() { return i; }
 	
 	// -------------------------------------------- //

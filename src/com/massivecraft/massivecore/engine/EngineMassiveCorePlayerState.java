@@ -25,6 +25,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCorePlayerState i = new EngineMassiveCorePlayerState();
+	@Contract(pure = true)
 	public static EngineMassiveCorePlayerState get() { return i; }
 	
 	// -------------------------------------------- //

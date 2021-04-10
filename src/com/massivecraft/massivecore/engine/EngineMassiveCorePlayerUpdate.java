@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCorePlayerUpdate i = new EngineMassiveCorePlayerUpdate();
+	@Contract(pure = true)
 	public static EngineMassiveCorePlayerUpdate get() { return i; }
 	
 	// -------------------------------------------- //

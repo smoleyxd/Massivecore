@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class EngineMassiveCorePlayerLeave extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCorePlayerLeave i = new EngineMassiveCorePlayerLeave();
+	@Contract(pure = true)
 	public static EngineMassiveCorePlayerLeave get() { return i; }
 	
 	@Override

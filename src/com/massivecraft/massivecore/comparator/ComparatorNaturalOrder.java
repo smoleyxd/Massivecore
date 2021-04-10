@@ -29,6 +29,7 @@ Check out the original at: https://github.com/paour/natorder/blob/master/Natural
 
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
@@ -38,6 +39,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static transient ComparatorNaturalOrder i = new ComparatorNaturalOrder();
+	@Contract(pure = true)
 	public static ComparatorNaturalOrder get() { return i; }
 	
 	// -------------------------------------------- //

@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -20,6 +21,7 @@ public class EngineMassiveCoreWorldNameSet extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreWorldNameSet i = new EngineMassiveCoreWorldNameSet();
+	@Contract(pure = true)
 	public static EngineMassiveCoreWorldNameSet get() { return i; }
 	
 	// -------------------------------------------- //

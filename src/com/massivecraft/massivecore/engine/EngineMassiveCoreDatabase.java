@@ -19,6 +19,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreDatabase i = new EngineMassiveCoreDatabase();
+	@Contract(pure = true)
 	public static EngineMassiveCoreDatabase get() { return i; }
 	
 	// -------------------------------------------- //

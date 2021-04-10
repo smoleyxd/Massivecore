@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
 import com.massivecraft.massivecore.collections.MassiveList;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ public class ComparatorCollection extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorCollection i = new ComparatorCollection();
+	@Contract(pure = true)
 	public static ComparatorCollection get() { return i; }
 	
 	// -------------------------------------------- //

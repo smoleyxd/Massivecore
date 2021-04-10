@@ -38,6 +38,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreSponsor i = new EngineMassiveCoreSponsor();
+	@Contract(pure = true)
 	public static EngineMassiveCoreSponsor get() { return i; }
 	public EngineMassiveCoreSponsor()
 	{

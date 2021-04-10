@@ -26,6 +26,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreCommandRegistration i = new EngineMassiveCoreCommandRegistration();
+	@Contract(pure = true)
 	public static EngineMassiveCoreCommandRegistration get() { return i; }
 	public EngineMassiveCoreCommandRegistration()
 	{

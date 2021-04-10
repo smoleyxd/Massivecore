@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.engine;
 import com.massivecraft.massivecore.ConfServer;
 import com.massivecraft.massivecore.Engine;
 import com.massivecraft.massivecore.store.Coll;
+import org.jetbrains.annotations.Contract;
 
 public class EngineMassiveCoreCollTick extends Engine
 {
@@ -11,6 +12,7 @@ public class EngineMassiveCoreCollTick extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreCollTick i = new EngineMassiveCoreCollTick();
+	@Contract(pure = true)
 	public static EngineMassiveCoreCollTick get() { return i; }
 	public EngineMassiveCoreCollTick()
 	{
