@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.ParameterizedType;
@@ -28,6 +29,7 @@ public class AdapterBackstringSet implements JsonDeserializer<BackstringSet<?>>,
 	// -------------------------------------------- //
 	
 	private static final AdapterBackstringSet i = new AdapterBackstringSet();
+	@Contract(pure = true)
 	public static AdapterBackstringSet get() { return i; }
 	
 	// -------------------------------------------- //

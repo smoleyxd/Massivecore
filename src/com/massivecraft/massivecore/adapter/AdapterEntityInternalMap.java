@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.adapter;
 import com.massivecraft.massivecore.store.EntityInternal;
 import com.massivecraft.massivecore.store.EntityInternalMap;
 import com.massivecraft.massivecore.xlib.gson.*;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,6 +17,7 @@ public class AdapterEntityInternalMap implements JsonDeserializer<EntityInternal
 	// -------------------------------------------- //
 	
 	private static final AdapterEntityInternalMap i = new AdapterEntityInternalMap();
+	@Contract(pure = true)
 	public static AdapterEntityInternalMap get() { return i; }
 
 	// -------------------------------------------- //

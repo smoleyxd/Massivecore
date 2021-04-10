@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -17,6 +18,7 @@ public class AdapterPlayerInventory implements JsonDeserializer<PlayerInventory>
 	// -------------------------------------------- //
 	
 	private static final AdapterPlayerInventory i = new AdapterPlayerInventory();
+	@Contract(pure = true)
 	public static AdapterPlayerInventory get() { return i; }
 
 	// -------------------------------------------- //

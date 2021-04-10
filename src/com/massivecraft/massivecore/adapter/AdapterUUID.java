@@ -20,6 +20,7 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// -------------------------------------------- //
 	
 	private static final AdapterUUID i = new AdapterUUID();
+	@Contract(pure = true)
 	public static AdapterUUID get() { return i; }
 	
 	// -------------------------------------------- //
@@ -27,13 +28,13 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// -------------------------------------------- //
 	
 	@Override
-	public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context)
+	public JsonElement serialize(@NotNull UUID src, Type typeOfSrc, JsonSerializationContext context)
 	{
 		return convertUUIDToJsonPrimitive(src);
 	}
 	
 	@Override
-	public UUID deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+	public UUID deserialize(@NotNull JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 	{
 		return convertJsonElementToUUID(json);
 	}
@@ -42,6 +43,7 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// STATIC LOGIC
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public static String convertUUIDToString(@NotNull UUID uuid)
 	{
 		return uuid.toString();

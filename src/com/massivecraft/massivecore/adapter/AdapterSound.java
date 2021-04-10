@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.Sound;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,7 @@ public class AdapterSound implements JsonDeserializer<Sound>, JsonSerializer<Sou
 	// -------------------------------------------- //
 
 	private static final AdapterSound i = new AdapterSound();
+	@Contract(pure = true)
 	public static AdapterSound get() { return i; }
 	
 	// -------------------------------------------- //

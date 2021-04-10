@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,7 @@ public class AdapterItemStack implements JsonDeserializer<ItemStack>, JsonSerial
 	// -------------------------------------------- //
 
 	private static final AdapterItemStack i = new AdapterItemStack();
+	@Contract(pure = true)
 	public static AdapterItemStack get() { return i; }
 	
 	// -------------------------------------------- //

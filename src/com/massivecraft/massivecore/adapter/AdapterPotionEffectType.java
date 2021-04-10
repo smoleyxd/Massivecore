@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.adapter;
 
 import com.massivecraft.massivecore.xlib.gson.*;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -12,6 +13,7 @@ public class AdapterPotionEffectType implements JsonDeserializer<PotionEffectTyp
     // -------------------------------------------- //
 
     private static AdapterPotionEffectType i = new AdapterPotionEffectType();
+    @Contract(pure = true)
     public static AdapterPotionEffectType get() { return i; }
 
     // -------------------------------------------- //

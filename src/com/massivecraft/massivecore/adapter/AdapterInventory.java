@@ -15,8 +15,10 @@ import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -58,6 +60,7 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 	// -------------------------------------------- //
 	
 	private static final AdapterInventory i = new AdapterInventory();
+	@Contract(pure = true)
 	public static AdapterInventory get() { return i; }
 
 	// -------------------------------------------- //
@@ -268,7 +271,8 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 	// This is a modified copyOfRange implementation.
 	// Both boundaries are inclusive.
 	// It returns the original when possible.
-	public static <T> T[] range(T[] original, int from, int to)
+	@Contract(pure = true)
+	public static <T> T @NotNull [] range(T @NotNull [] original, @Range(from = 0, to = Integer.MAX_VALUE - 1) int from, @Range(from = 0, to = Integer.MAX_VALUE - 1) int to)
 	{
 		if (from == 0 && to == original.length - 1) return original;
 		return Arrays.copyOfRange(original, from, to + 1);

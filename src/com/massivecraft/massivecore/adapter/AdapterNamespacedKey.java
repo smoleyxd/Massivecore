@@ -11,6 +11,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.NamespacedKey;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -21,6 +22,7 @@ public class AdapterNamespacedKey implements JsonDeserializer<NamespacedKey>, Js
 	// -------------------------------------------- //
 
 	private static final AdapterNamespacedKey i = new AdapterNamespacedKey();
+	@Contract(pure = true)
 	public static AdapterNamespacedKey get() { return i; }
 	
 	// -------------------------------------------- //

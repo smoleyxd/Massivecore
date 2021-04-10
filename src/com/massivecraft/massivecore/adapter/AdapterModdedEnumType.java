@@ -8,6 +8,9 @@ import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
 import com.massivecraft.massivecore.xlib.gson.stream.JsonReader;
 import com.massivecraft.massivecore.xlib.gson.stream.JsonToken;
 import com.massivecraft.massivecore.xlib.gson.stream.JsonWriter;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -44,7 +47,7 @@ public final class AdapterModdedEnumType<T extends Enum<T>> extends TypeAdapter<
 	private final Map<String, T> nameToConstant = new HashMap<>();
 	private final Map<T, String> constantToName = new HashMap<>();
 
-	public AdapterModdedEnumType(Class<T> classOfT) {
+	public AdapterModdedEnumType(@NotNull Class<T> classOfT) {
 		for (T constant : classOfT.getEnumConstants()) {
 			String name = constant.name();
 			try { // MassiveCore - Ignore when the field can't be found since modified enums won't have it.
@@ -57,7 +60,7 @@ public final class AdapterModdedEnumType<T extends Enum<T>> extends TypeAdapter<
 			constantToName.put(constant, name);
 		}
 	}
-	public T read(JsonReader in) throws IOException {
+	public @Nullable T read(@NotNull JsonReader in) throws IOException {
 		if (in.peek() == JsonToken.NULL) {
 			in.nextNull();
 			return null;
@@ -65,13 +68,14 @@ public final class AdapterModdedEnumType<T extends Enum<T>> extends TypeAdapter<
 		return nameToConstant.get(in.nextString());
 	}
 
-	public void write(JsonWriter out, T value) throws IOException {
+	public void write(@NotNull JsonWriter out, T value) throws IOException {
 		out.value(value == null ? null : constantToName.get(value));
 	}
 
 	public static final TypeAdapterFactory ENUM_FACTORY = newEnumTypeHierarchyFactory();
 
-	public static <TT> TypeAdapterFactory newEnumTypeHierarchyFactory() {
+	@Contract(value = " -> new", pure = true)
+	public static <TT> @NotNull TypeAdapterFactory newEnumTypeHierarchyFactory() {
 		return new TypeAdapterFactory() {
 			@SuppressWarnings({"unchecked"})
 			public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {

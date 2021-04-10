@@ -166,7 +166,7 @@ public abstract class AdapterMassiveX<T> implements JsonDeserializer<T>, JsonSer
 		return $Gson$Types.newParameterizedTypeWithOwner(null, sclazz, typeArguments);
 	}
 	
-	public static @NotNull Object getNewArgumentInstance(Type type, int index)
+	public static @NotNull Object getNewArgumentInstance(@NotNull Type type, int index)
 	{
 		ParameterizedType parameterizedType = (ParameterizedType) type;
 		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
