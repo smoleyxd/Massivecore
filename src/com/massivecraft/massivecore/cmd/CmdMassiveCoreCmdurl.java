@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivecore.util.WebUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +22,7 @@ public class CmdMassiveCoreCmdurl extends MassiveCoreCommand
 	// -------------------------------------------- //
 	
 	private static CmdMassiveCoreCmdurl i = new CmdMassiveCoreCmdurl() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesCmdurl; } };
+	@Contract(pure = true)
 	public static CmdMassiveCoreCmdurl get() { return i; }
 	
 	// -------------------------------------------- //

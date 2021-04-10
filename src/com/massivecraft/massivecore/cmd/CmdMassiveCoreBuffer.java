@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.cmd;
 
 import com.massivecraft.massivecore.MassiveCoreMConf;
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class CmdMassiveCoreBuffer extends MassiveCoreCommand
 	// -------------------------------------------- //
 	
 	private static CmdMassiveCoreBuffer i = new CmdMassiveCoreBuffer() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesBuffer; } };
+	@Contract(pure = true)
 	public static CmdMassiveCoreBuffer get() { return i; }
 	
 	// -------------------------------------------- //
