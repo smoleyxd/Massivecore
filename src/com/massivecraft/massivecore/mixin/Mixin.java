@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -53,6 +54,7 @@ public class Mixin extends Engine
 	// It should be set in the base class constructor.
 	private String baseName = this.getDefaultClass().getSimpleName();
 	public String getBaseName() { return this.baseName; }
+	@Contract(mutates = "this")
 	public void setBaseName(String baseName) { this.baseName = baseName; }
 	
 	// This is the instance specific name.
@@ -60,6 +62,7 @@ public class Mixin extends Engine
 	// It could for example contain a version number.
 	private String name = this.createName();
 	public String getName() { return this.name; }
+	@Contract(mutates = "this")
 	public void setName(String name) { this.name = name; }
 	
 	// Is the Default counted as the Mixin being available?
@@ -78,7 +81,9 @@ public class Mixin extends Engine
 	private List<Class<?>> alternatives = new MassiveList<>();
 	public List<Class<?>> getAlternatives() { return this.alternatives; }
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends Mixin> T setAlternatives(List<Class<?>> alternatives) { this.alternatives = alternatives; return (T) this; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends Mixin> T setAlternatives(Class<?> @NotNull ... alternatives) { return this.setAlternatives(Arrays.asList(alternatives)); }
 	
 	// -------------------------------------------- //

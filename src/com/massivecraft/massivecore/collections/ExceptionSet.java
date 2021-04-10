@@ -91,7 +91,7 @@ public class ExceptionSet
 	// STRINGIFY ALL
 	// -------------------------------------------- //
 	
-	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(Object... exceptions)
+	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(Object @NotNull ... exceptions)
 	{
 		return stringifyAll(Arrays.asList(exceptions));
 	}

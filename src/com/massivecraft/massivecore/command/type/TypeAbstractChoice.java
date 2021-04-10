@@ -12,6 +12,8 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,7 +81,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 		}
 	}
 	@SafeVarargs
-	public final void setAll(T... all)
+	public final void setAll(T @NotNull ... all)
 	{
 		this.setAll(Arrays.asList(all));
 	}
@@ -87,11 +89,13 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 	// Options
 	protected Map<String, T> options = null;
 	public Map<String, T> getOptions() { return options; }
+	@Contract(mutates = "this")
 	public void setOptions(Map<String, T> options) { this.options = options; }
 	
 	// Tabs
 	protected Collection<String> tabs = null;
 	public Collection<String> getTabs() { return this.tabs; }
+	@Contract(mutates = "this")
 	public void setTabs(Collection<String> tabs) { this.tabs = tabs; }
 	
 	// -------------------------------------------- //
@@ -263,7 +267,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 	// MATCHES
 	// -------------------------------------------- //
 	
-	public List<T> getMatches(Map<String, T> options, String arg, boolean levenshtein)
+	public List<T> getMatches(@NotNull Map<String, T> options, String arg, boolean levenshtein)
 	{
 		// Create
 		List<T> ret = new MassiveList<>();
@@ -322,7 +326,7 @@ public abstract class TypeAbstractChoice<T> extends TypeAbstract<T> implements A
 	// OPTIONS
 	// -------------------------------------------- //
 	
-	public Map<String, T> createOptions(Iterable<T> all)
+	public Map<String, T> createOptions(@NotNull Iterable<T> all)
 	{
 		// Create
 		Map<String, T> ret = new MassiveMap<>();

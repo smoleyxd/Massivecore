@@ -28,7 +28,7 @@ public class CommandEditItemStacksOpen<O> extends CommandEditItemStacksAbstract<
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditItemStacksOpen(EditSettings<O> settings, Property<O, List<ItemStack>> property)
+	public CommandEditItemStacksOpen(@NotNull EditSettings<O> settings, @NotNull Property<O, List<ItemStack>> property)
 	{
 		// Super	
 		super(settings, property);

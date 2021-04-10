@@ -243,7 +243,7 @@ public abstract class TypeContainer<C, E> extends TypeAbstract<C>
 	// -------------------------------------------- //
 	
 	@Override
-	public boolean equalsInner(C container1, C container2)
+	public boolean equalsInner(@NotNull C container1, C container2)
 	{
 		List<E> ordered1 = this.getContainerElementsOrdered(container1);
 		List<E> ordered2 = this.getContainerElementsOrdered(container2);

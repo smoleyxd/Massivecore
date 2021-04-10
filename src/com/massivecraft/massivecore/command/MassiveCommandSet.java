@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.PermissionUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public abstract class MassiveCommandSet<T> extends MassiveCommand
 
 	private String permSetOther;
 	public String getPermSetOther() { return permSetOther; }
+	@Contract(mutates = "this")
 	public void setPermSetOther(String permSetOther) { this.permSetOther = permSetOther; }
 	public boolean hasPermSetOther() { return this.getPermSetOther() != null; }
 

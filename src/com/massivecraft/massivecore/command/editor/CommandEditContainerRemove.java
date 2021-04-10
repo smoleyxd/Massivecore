@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ public class CommandEditContainerRemove<O, V> extends CommandEditContainerAbstra
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerRemove(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerRemove(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property);

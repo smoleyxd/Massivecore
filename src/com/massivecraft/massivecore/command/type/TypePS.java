@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +26,7 @@ public class TypePS extends TypeAbstract<PS>
 	// -------------------------------------------- //
 	
 	private static TypePS i = new TypePS();
+	@Contract(pure = true)
 	public static TypePS get() { return i; }
 	public TypePS() { super(PS.class); }
 	

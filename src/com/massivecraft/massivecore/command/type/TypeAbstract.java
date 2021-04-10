@@ -108,14 +108,19 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override public <I extends Type<?>> I getInnerType() { return this.getInnerType(0); }
 	
 	@SuppressWarnings({ "unchecked"})
+	@Contract(mutates = "this")
 	@Override public void setInnerTypes(Collection<Type<?>> innerTypes) { this.innerTypes = new MassiveList(innerTypes); }
-	@Override public void setInnerTypes(Type<?>... innerTypes) { this.setInnerTypes(Arrays.asList(innerTypes)); }
-	
+	@Contract(mutates = "this")
+	@Override public void setInnerTypes(Type<?> @NotNull ... innerTypes) { this.setInnerTypes(Arrays.asList(innerTypes)); }
+
+	@Contract(mutates = "this")
 	@Override public void setInnerType(Type<?> innerType) { this.setInnerTypes(innerType); }
 	
 	private List<Integer> userOrder = null;
+	@Contract(mutates = "this")
 	@Override public void setUserOrder(List<Integer> userOrder) { this.userOrder = userOrder; }
-	@Override public void setUserOrder(Integer... userOrder) { this.setUserOrder(Arrays.asList(userOrder)); }
+	@Contract(mutates = "this")
+	@Override public void setUserOrder(Integer @NotNull ... userOrder) { this.setUserOrder(Arrays.asList(userOrder)); }
 	@Override public List<Integer> getUserOrder()
 	{
 		if (this.userOrder == null)
@@ -151,11 +156,14 @@ public abstract class TypeAbstract<T> implements Type<T>
 	public <I extends Property<T, ?>> List<I> getInnerProperties() { return (List<I>) this.innerProperties; }
 	@SuppressWarnings("unchecked")
 	public <I extends Property<T, ?>> I getInnerProperty(int index) { return (I) this.getInnerProperties().get(index); }
-	
+
+	@Contract(mutates = "this")
 	public <I extends Property<T, ?>> void setInnerProperties(Collection<I> innerProperties) { this.innerProperties = new MassiveList<>(innerProperties); }
 	@SafeVarargs
-	public final <I extends Property<T, ?>> void setInnerProperties(I... innerProperties) { this.setInnerProperties(Arrays.asList(innerProperties)); }
-	public void setInnerProperties(Class<T> clazz) { this.setInnerProperties(PropertyReflection.getAll(clazz, this)); }
+	@Contract(mutates = "this")
+	public final <I extends Property<T, ?>> void setInnerProperties(I @NotNull ... innerProperties) { this.setInnerProperties(Arrays.asList(innerProperties)); }
+	@Contract(mutates = "this")
+	public void setInnerProperties(@NotNull Class<T> clazz) { this.setInnerProperties(PropertyReflection.getAll(clazz, this)); }
 	
 	// -------------------------------------------- //
 	// WRITE SHOW
@@ -186,6 +194,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	protected ChatColor visualColor = COLOR_DEFAULT;
 	@Override
+	@Contract(mutates = "this")
 	public void setVisualColor(ChatColor color)
 	{
 		this.visualColor = color;
@@ -213,6 +222,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	protected boolean visualMsonOverridden = calcVisualMsonOverridden();
 	public boolean isVisualMsonOverridden() { return this.visualMsonOverridden; }
+	@Contract(mutates = "this")
 	public void setVisualMsonOverridden(boolean visualMsonOverridden) { this.visualMsonOverridden = visualMsonOverridden; }
 	public boolean calcVisualMsonOverridden()
 	{
@@ -588,6 +598,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	@SuppressWarnings("unchecked")
 	@Override
+	@Contract(mutates = "this")
 	public void setContainerComparator(Comparator<?> comparator) { this.elementComparator = (Comparator<Object>) comparator; }
 	
 	@Override
@@ -635,7 +646,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	
 	@Override 
-	public boolean equalsInner(T type1, T type2)
+	public boolean equalsInner(@NotNull T type1, T type2)
 	{
 		return type1.equals(type2);
 	}

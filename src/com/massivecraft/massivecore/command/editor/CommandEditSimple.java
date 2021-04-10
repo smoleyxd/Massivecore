@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.command.editor;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.Type;
 import com.massivecraft.massivecore.command.type.TypeNullable;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandEditSimple<O, V> extends CommandEditAbstract<O, V>
 {
@@ -10,7 +11,7 @@ public class CommandEditSimple<O, V> extends CommandEditAbstract<O, V>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditSimple(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditSimple(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super
 		super(settings, property, null);

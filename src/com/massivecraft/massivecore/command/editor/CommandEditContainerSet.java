@@ -12,7 +12,7 @@ public class CommandEditContainerSet<O, V> extends CommandEditContainerAbstract<
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerSet(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerSet(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property);

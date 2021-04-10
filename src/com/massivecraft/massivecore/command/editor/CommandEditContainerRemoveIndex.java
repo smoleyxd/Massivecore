@@ -12,7 +12,7 @@ public class CommandEditContainerRemoveIndex<O, V> extends CommandEditContainerA
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerRemoveIndex(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerRemoveIndex(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property);

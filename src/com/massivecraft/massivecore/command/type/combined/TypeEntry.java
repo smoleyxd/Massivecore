@@ -61,7 +61,7 @@ public class TypeEntry<K, V> extends TypeCombined<Entry<K, V>>
 	}
 	
 	@Override
-	public boolean equalsInner(Entry<K, V> type1, Entry<K, V> type2)
+	public boolean equalsInner(@NotNull Entry<K, V> type1, Entry<K, V> type2)
 	{
 		// Compare Keys
 		K key1 = type1.getKey();

@@ -53,7 +53,7 @@ public class TypeNullable<T> extends TypeWrapper<T>
 		this.nulls = nulls;
 	}
 	
-	public TypeNullable(@NotNull Type<T> inner, String... nulls)
+	public TypeNullable(@NotNull Type<T> inner, String @NotNull ... nulls)
 	{
 		this(inner, Arrays.asList(nulls));
 	}

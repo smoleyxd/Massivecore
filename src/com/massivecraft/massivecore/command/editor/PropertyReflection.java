@@ -120,7 +120,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <O, V> @NotNull PropertyReflection<O, V> get(final Field field, Type<O> typeObject)
+	public static <O, V> @NotNull PropertyReflection<O, V> get(final @NotNull Field field, Type<O> typeObject)
 	{
 		Type<V> typeValue = (Type<V>) RegistryType.getType(field);
 		
@@ -219,7 +219,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		return ret;
 	}
 	
-	public static boolean isInheritable(Field field)
+	public static boolean isInheritable(@NotNull Field field)
 	{
 		return getAnnotationValue(field, EditorInheritable.class, INHERITABLE_DEFAULT);
 	}

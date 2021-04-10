@@ -20,8 +20,8 @@ public class RequirementAnd extends RequirementAbstract
 	// -------------------------------------------- //
 	
 	@Contract("_ -> new")
-	public static @NotNull RequirementAnd get(Requirement... requirements) { return new RequirementAnd(requirements); }
-	public RequirementAnd(Requirement... requirements)
+	public static @NotNull RequirementAnd get(Requirement @NotNull ... requirements) { return new RequirementAnd(requirements); }
+	public RequirementAnd(Requirement @NotNull ... requirements)
 	{
 		this(Arrays.asList(requirements));
 	}

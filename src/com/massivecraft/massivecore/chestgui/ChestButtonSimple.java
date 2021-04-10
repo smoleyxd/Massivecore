@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.chestgui;
 
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 
 public class ChestButtonSimple implements ChestButton
 {
@@ -18,6 +19,7 @@ public class ChestButtonSimple implements ChestButton
 	// CONSTRUCT
 	// -------------------------------------------- //
 
+	@Contract(pure = true)
 	public ChestButtonSimple(ChestAction action, ItemStack item)
 	{
 		this.action = action;

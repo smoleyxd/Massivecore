@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -33,10 +34,12 @@ public abstract class Property<O, V> implements Named
 	
 	protected Type<O> objectType;
 	public Type<O> getObjectType() { return this.objectType; }
+	@Contract(mutates = "this")
 	public void setObjectType(Type<O> objectType) { this.objectType = objectType; }
 	
 	protected Type<V> valueType;
 	public Type<V> getValueType() { return this.valueType; }
+	@Contract(mutates = "this")
 	public void setValueType(Type<V> valueType) { this.valueType = valueType; }
 	
 	// -------------------------------------------- //
@@ -45,18 +48,22 @@ public abstract class Property<O, V> implements Named
 	
 	protected boolean visible = true;
 	public boolean isVisible() { return this.visible; }
+	@Contract(mutates = "this")
 	public void setVisible(boolean visible) { this.visible = visible; }
 	
 	protected boolean inheritable = true;
 	public boolean isInheritable() { return this.inheritable; }
+	@Contract(mutates = "this")
 	public void setInheritable(boolean inheritable) { this.inheritable = inheritable; }
 	
 	protected boolean editable = true;
 	public boolean isEditable() { return this.editable; }
+	@Contract(mutates = "this")
 	public void setEditable(boolean editable) { this.editable = editable; }
 	
 	protected boolean nullable = true;
 	public boolean isNullable() { return this.nullable; }
+	@Contract(mutates = "this")
 	public void setNullable(boolean nullable) { this.nullable = nullable; }
 	
 	// -------------------------------------------- //
@@ -66,7 +73,9 @@ public abstract class Property<O, V> implements Named
 	protected List<String> names;
 	public List<String> getNames() { return this.names; }
 	@Override public String getName() { return this.getNames().isEmpty() ? null : this.getNames().get(0); }
+	@Contract(mutates = "this")
 	public void setName(String name) { this.names = new MassiveList<>(name); }
+	@Contract(mutates = "this")
 	public void setNames(String... names) { this.names = new MassiveList<>(names); }
 	
 	// -------------------------------------------- //
@@ -76,9 +85,12 @@ public abstract class Property<O, V> implements Named
 	protected List<Requirement> requirements = new ArrayList<>();
 	
 	public List<Requirement> getRequirements() { return this.requirements; }
+	@Contract(mutates = "this")
 	public void setRequirements(List<Requirement> requirements) { this.requirements = requirements; }
+	@Contract(mutates = "this")
 	public void addRequirements(Collection<Requirement> requirements) { this.requirements.addAll(requirements); }
-	public void addRequirements(Requirement... requirements) { this.addRequirements(Arrays.asList(requirements)); }
+	@Contract(mutates = "this")
+	public void addRequirements(Requirement @NotNull ... requirements) { this.addRequirements(Arrays.asList(requirements)); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -91,7 +103,7 @@ public abstract class Property<O, V> implements Named
 		this.names = new MassiveList<>(names);
 	}
 	
-	public Property(Type<O> objectType, Type<V> valueType, String... names)
+	public Property(Type<O> objectType, Type<V> valueType, String @NotNull ... names)
 	{
 		this(objectType, valueType, Arrays.asList(names));
 	}

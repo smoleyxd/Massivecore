@@ -9,6 +9,7 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.ContainerUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.Collection;
@@ -21,7 +22,7 @@ public abstract class CommandEditContainerAbstract<O, V> extends CommandEditAbst
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerAbstract(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerAbstract(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super
 		super(settings, property, true);

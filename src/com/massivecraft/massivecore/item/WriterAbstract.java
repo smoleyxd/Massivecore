@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.command.type.primitive.TypeBooleanOn;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -46,14 +47,16 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// They are implicitly required for some ItemStack field writers. 
 	private List<Class<?>> dependencyClasses = new MassiveList<>();
 	public List<Class<?>> getDependencyClasses() { return this.dependencyClasses; }
-	public void addDependencyClasses(Class<?>... dependencyClasses) { this.getDependencyClasses().addAll(Arrays.asList(dependencyClasses)); }
+	@Contract(mutates = "this")
+	public void addDependencyClasses(Class<?> @NotNull ... dependencyClasses) { this.getDependencyClasses().addAll(Arrays.asList(dependencyClasses)); }
 
 	// This is the writer classes scheduled to be used at setup.
 	// We do not yet know if they are compatible with this Minecraft version.
 	// All, some or none of them may fail.
 	private List<Class<?>> writerClasses = new MassiveList<>();
 	public List<Class<?>> getWriterClasses() { return this.writerClasses; }
-	public void addWriterClasses(Class<?>... writerClasses) { this.getWriterClasses().addAll(Arrays.asList(writerClasses)); }
+	@Contract(mutates = "this")
+	public void addWriterClasses(Class<?> @NotNull ... writerClasses) { this.getWriterClasses().addAll(Arrays.asList(writerClasses)); }
 	
 	// These are the actually functional child writers.
 	// This list should only contain writers that passed the setup routine.

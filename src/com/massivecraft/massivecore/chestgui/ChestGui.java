@@ -22,6 +22,7 @@ public class ChestGui
 	// -------------------------------------------- //
 	
 	protected static final Map<Inventory, ChestGui> inventoryToGui = new MassiveMap<>();
+	@Contract(pure = true)
 	public static Map<Inventory, ChestGui> getInventoryToGui() { return inventoryToGui; }
 	
 	public static ChestGui get(Inventory inventory) { return inventoryToGui.get(inventory); }

@@ -12,12 +12,12 @@ public class CommandEditSingleton<O> extends CommandEditProperties<O, O>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditSingleton(O object)
+	public CommandEditSingleton(@NotNull O object)
 	{
 		this(object, getType(object));
 	}
 	
-	public CommandEditSingleton(O object, Type<O> typeObject)
+	public CommandEditSingleton(@NotNull O object, @NotNull Type<O> typeObject)
 	{
 		super(createEditSettings(object, typeObject), new PropertyThis<>(typeObject));
 		String name = typeObject.getName(object);
