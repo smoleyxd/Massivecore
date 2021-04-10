@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class MixinMessage extends Mixin
 	
 	private static MixinMessage d = new MixinMessage();
 	private static MixinMessage i = d;
+	@Contract(pure = true)
 	public static MixinMessage get() { return i; }
 	
 	// -------------------------------------------- //

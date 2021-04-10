@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class MixinTeleport extends Mixin
@@ -24,6 +25,7 @@ public class MixinTeleport extends Mixin
 	
 	private static MixinTeleport d = new MixinTeleport();
 	private static MixinTeleport i = d;
+	@Contract(pure = true)
 	public static MixinTeleport get() { return i; }
 
 	// -------------------------------------------- //

@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinGamemode extends Mixin
 {
@@ -12,6 +13,7 @@ public class MixinGamemode extends Mixin
 	
 	private static MixinGamemode d = new MixinGamemode();
 	private static MixinGamemode i = d;
+	@Contract(pure = true)
 	public static MixinGamemode get() { return i; }
 	
 	// -------------------------------------------- //

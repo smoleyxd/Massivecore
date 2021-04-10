@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +79,7 @@ public class Mixin extends Engine
 	public List<Class<?>> getAlternatives() { return this.alternatives; }
 	@SuppressWarnings("unchecked")
 	public <T extends Mixin> T setAlternatives(List<Class<?>> alternatives) { this.alternatives = alternatives; return (T) this; }
-	public <T extends Mixin> T setAlternatives(Class<?>... alternatives) { return this.setAlternatives(Arrays.asList(alternatives)); }
+	public <T extends Mixin> T setAlternatives(Class<?> @NotNull ... alternatives) { return this.setAlternatives(Arrays.asList(alternatives)); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -106,6 +107,7 @@ public class Mixin extends Engine
 	// It may throw upon incompatibility.
 	// --> Returns an object for easier provoking.
 	
+	@SuppressWarnings("UnusedReturnValue")
 	public Object provoke() throws Throwable
 	{
 		return null;

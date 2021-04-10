@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.mixin;
 
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinKick extends Mixin
 {
@@ -11,6 +12,7 @@ public class MixinKick extends Mixin
 	
 	private static MixinKick d = new MixinKick();
 	private static MixinKick i = d;
+	@Contract(pure = true)
 	public static MixinKick get() { return i; }
 	
 	// -------------------------------------------- //

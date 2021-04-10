@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.mixin;
 
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
 
 public class MixinChatFilter extends Mixin
 {
@@ -10,6 +11,7 @@ public class MixinChatFilter extends Mixin
 	
 	private static MixinChatFilter d = new MixinChatFilter();
 	private static MixinChatFilter i = d;
+	@Contract(pure = true)
 	public static MixinChatFilter get() { return i; }
 	
 	// -------------------------------------------- //

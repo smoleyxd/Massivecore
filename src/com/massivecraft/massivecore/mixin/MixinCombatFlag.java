@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.mixin;
 
+import org.jetbrains.annotations.Contract;
+
 public class MixinCombatFlag extends Mixin
 {
 	// -------------------------------------------- //
@@ -8,6 +10,7 @@ public class MixinCombatFlag extends Mixin
 	
 	private static MixinCombatFlag d = new MixinCombatFlag();
 	private static MixinCombatFlag i = d;
+	@Contract(pure = true)
 	public static MixinCombatFlag get() { return i; }
 	
 	// -------------------------------------------- //

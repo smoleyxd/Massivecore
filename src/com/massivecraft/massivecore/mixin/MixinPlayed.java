@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
 
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class MixinPlayed extends Mixin
 	
 	private static MixinPlayed d = new MixinPlayed();
 	private static MixinPlayed i = d;
+	@Contract(pure = true)
 	public static MixinPlayed get() { return i; }
 	
 	// -------------------------------------------- //

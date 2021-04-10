@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.mixin;
 
 import com.massivecraft.massivecore.event.EventMassiveCorePlayerLeave;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.jetbrains.annotations.Contract;
 
 public class MixinActual extends Mixin
 {
@@ -11,6 +12,7 @@ public class MixinActual extends Mixin
 	
 	private static MixinActual d = new MixinActual();
 	private static MixinActual i = d;
+	@Contract(pure = true)
 	public static MixinActual get() { return i; }
 	
 	// -------------------------------------------- //
