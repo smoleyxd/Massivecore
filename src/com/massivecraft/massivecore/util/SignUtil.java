@@ -285,7 +285,7 @@ public class SignUtil
 	// -------------------------------------------- //
 	
 	@Contract("null -> fail")
-	public static @NotNull List<String> getLines(List<Block> blocks)
+	public static @NotNull List<String> getLines(List<@NotNull Block> blocks)
 	{
 		if (blocks == null) throw new NullPointerException("blocks");
 		

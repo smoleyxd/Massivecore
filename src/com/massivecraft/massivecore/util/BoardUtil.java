@@ -20,6 +20,9 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +65,7 @@ public class BoardUtil extends Engine
 	// -------------------------------------------- //
 	
 	private static BoardUtil i = new BoardUtil();
+	@Contract(pure = true)
 	public static BoardUtil get() { return i; }
 	public BoardUtil()
 	{
@@ -74,10 +78,12 @@ public class BoardUtil extends Engine
 	
 	// All online players at the beginning of the tick.
 	private static Map<String, Player> players = Collections.emptyMap();
+	@Contract(pure = true)
 	public static Map<String, Player> getPlayers() { return players; }
 	
 	// The boards based off the players above.
 	private static Set<Scoreboard> boards = Collections.emptySet();
+	@Contract(pure = true)
 	public static Set<Scoreboard> getBoards() { return boards; }
 	
 	// Temporary Fake Fields
@@ -202,7 +208,7 @@ public class BoardUtil extends Engine
 	// ENSURE
 	// -------------------------------------------- //
 	
-	public static Scoreboard ensureBoard(Player player, boolean strict)
+	public static Scoreboard ensureBoard(@NotNull Player player, boolean strict)
 	{
 		Scoreboard board = getBoard(player);
 		
@@ -215,7 +221,7 @@ public class BoardUtil extends Engine
 		return board;
 	}
 	
-	public static Team ensureTeam(Scoreboard board, Player player, boolean strict)
+	public static Team ensureTeam(@NotNull Scoreboard board, @NotNull Player player, boolean strict)
 	{
 		Team team = getKeyTeam(board, player);
 		
@@ -249,7 +255,7 @@ public class BoardUtil extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void clean(final PlayerQuitEvent event)
+	public void clean(final @NotNull PlayerQuitEvent event)
 	{
 		Bukkit.getScheduler().runTask(this.getPlugin(), () -> clean(event.getPlayer()));
 	}
@@ -258,6 +264,7 @@ public class BoardUtil extends Engine
 	// KEY
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static String getKey(Object key)
 	{
 		if (key == null) return null;
@@ -289,12 +296,12 @@ public class BoardUtil extends Engine
 	// BOARD
 	// -------------------------------------------- //
 	
-	public static Scoreboard getBoard(Player player)
+	public static @NotNull Scoreboard getBoard(@NotNull Player player)
 	{
 		return player.getScoreboard();
 	}
 	
-	public static void setBoard(Player player, Scoreboard board)
+	public static void setBoard(@NotNull Player player, @NotNull Scoreboard board)
 	{
 		player.setScoreboard(board);
 	}
@@ -303,11 +310,12 @@ public class BoardUtil extends Engine
 	// BOARD > MAIN
 	// -------------------------------------------- //
 	
-	public static Scoreboard getBoardMain()
+	public static @NotNull Scoreboard getBoardMain()
 	{
 		return Bukkit.getScoreboardManager().getMainScoreboard();
 	}
 	
+	@Contract("null -> false")
 	public static boolean isBoardMain(Scoreboard board)
 	{
 		return getBoardMain().equals(board);
@@ -319,12 +327,13 @@ public class BoardUtil extends Engine
 	
 	private static Scoreboard BOARD_OUR = null;
 	
-	public static Scoreboard getBoardOur()
+	public static @NotNull Scoreboard getBoardOur()
 	{
 		if (BOARD_OUR == null) BOARD_OUR = Bukkit.getScoreboardManager().getNewScoreboard();
 		return BOARD_OUR;
 	}
 	
+	@Contract("null -> false")
 	public static boolean isBoardOur(Scoreboard board)
 	{
 		return getBoardOur().equals(board);
@@ -338,39 +347,39 @@ public class BoardUtil extends Engine
 	// http://minecraft.gamepedia.com/Scoreboard
 	public static final String OBJECTIVE_CRITERIA_DUMMY = "dummy";
 	
-	public static Objective createObjective(Scoreboard board, String id)
+	public static @NotNull Objective createObjective(@NotNull Scoreboard board, @NotNull String id)
 	{
 		return createObjective(board, id, OBJECTIVE_CRITERIA_DUMMY);
 	}
 	
-	public static Objective createObjective(Scoreboard board, String id, String criteria)
+	public static @NotNull Objective createObjective(@NotNull Scoreboard board, @NotNull String id, @NotNull String criteria)
 	{
 		return createObjective(board, id, criteria, id);
 	}
 	
-	public static Objective createObjective(Scoreboard board, String id, String criteria, String displayName)
+	public static @NotNull Objective createObjective(@NotNull Scoreboard board, @NotNull String id, @NotNull String criteria, @NotNull String displayName)
 	{
 		return board.registerNewObjective(id, criteria, displayName);
 	}
 	
-	public static Objective getObjective(Scoreboard board, String id, boolean creative)
+	public static Objective getObjective(@NotNull Scoreboard board, @NotNull String id, boolean creative)
 	{
 		return getObjective(board, id, OBJECTIVE_CRITERIA_DUMMY, creative);
 	}
 	
-	public static Objective getObjective(Scoreboard board, String id, String criteria, boolean creative)
+	public static Objective getObjective(@NotNull Scoreboard board, @NotNull String id, @NotNull String criteria, boolean creative)
 	{
 		return getObjective(board, id, criteria, id, creative);
 	}
 	
-	public static Objective getObjective(Scoreboard board, String id, String criteria, String displayName, boolean creative)
+	public static Objective getObjective(@NotNull Scoreboard board, @NotNull String id, @NotNull String criteria, @NotNull String displayName, boolean creative)
 	{
 		Objective objective = board.getObjective(id);
 		if (objective == null && creative) objective = createObjective(board, id, criteria, displayName);
 		return objective;
 	}
 	
-	public static void deleteObjective(Objective objective)
+	public static void deleteObjective(@Nullable Objective objective)
 	{
 		if (objective == null) return;
 		getTemporaryObjectives().remove(objective);
@@ -384,7 +393,7 @@ public class BoardUtil extends Engine
 		}
 	}
 	
-	public static void deleteObjective(Scoreboard board, String id)
+	public static void deleteObjective(@NotNull Scoreboard board, @NotNull String id)
 	{
 		Objective objective = board.getObjective(id);
 		deleteObjective(objective);
@@ -414,7 +423,7 @@ public class BoardUtil extends Engine
 	// OBJECTIVE > ID
 	// -------------------------------------------- //
 	
-	public static String getObjectiveId(Objective objective)
+	public static @NotNull String getObjectiveId(@NotNull Objective objective)
 	{
 		return objective.getName();
 	}
@@ -428,6 +437,7 @@ public class BoardUtil extends Engine
 		return ! getTemporaryObjectives().contains(objective);
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setObjectivePersistent(Objective objective, Boolean persistent)
 	{
 		if (persistent == null) return false;
@@ -446,12 +456,13 @@ public class BoardUtil extends Engine
 	// OBJECTIVE > NAME
 	// -------------------------------------------- //
 	
-	public static String getObjectiveName(Objective objective)
+	public static @NotNull String getObjectiveName(@NotNull Objective objective)
 	{
 		return objective.getDisplayName();
 	}
 	
-	public static boolean setObjectiveName(Objective objective, String name)
+	@Contract("_, null -> false")
+	public static boolean setObjectiveName(@NotNull Objective objective, String name)
 	{
 		if (name == null) return false;
 		String before = getObjectiveName(objective);
@@ -464,11 +475,12 @@ public class BoardUtil extends Engine
 	// OBJECTIVE > SLOT
 	// -------------------------------------------- //
 	
-	public static DisplaySlot getObjectiveSlot(Objective objective)
+	public static DisplaySlot getObjectiveSlot(@NotNull Objective objective)
 	{
 		return objective.getDisplaySlot();
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setObjectiveSlot(Objective objective, DisplaySlot slot)
 	{
 		if (slot == null) return false;
@@ -482,12 +494,13 @@ public class BoardUtil extends Engine
 	// OBJECTIVE > VALUE
 	// -------------------------------------------- //
 	
-	public static int getObjectiveValue(Objective objective, Object key)
+	public static int getObjectiveValue(@NotNull Objective objective, Object key)
 	{
 		Score score = objective.getScore(getKey(key));
 		return getScoreValue(score);
 	}
 	
+	@Contract("_, _, null -> false")
 	public static boolean setObjectiveValue(Objective objective, Object key, Integer value)
 	{
 		if (value == null) return false;
@@ -499,7 +512,7 @@ public class BoardUtil extends Engine
 	// OBJECTIVE > ENTRIES
 	// -------------------------------------------- //
 	
-	public static Map<String, Integer> getObjectiveEntries(Objective objective)
+	public static @NotNull Map<String, Integer> getObjectiveEntries(@NotNull Objective objective)
 	{
 		// Create
 		Map<String, Integer> ret = new MassiveMap<>();
@@ -516,6 +529,7 @@ public class BoardUtil extends Engine
 		return ret;
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setObjectiveEntries(Objective objective, Map<String, Integer> entries)
 	{
 		if (entries == null) return false;
@@ -545,11 +559,12 @@ public class BoardUtil extends Engine
 	// SCORE > VALUE
 	// -------------------------------------------- //
 	
-	public static int getScoreValue(Score score)
+	public static int getScoreValue(@NotNull Score score)
 	{
 		return score.getScore();
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setScoreValue(Score score, Integer value)
 	{
 		if (value == null) return false;
@@ -563,12 +578,12 @@ public class BoardUtil extends Engine
 	// TEAM
 	// -------------------------------------------- //
 	
-	public static Team createTeam(Scoreboard board, String id)
+	public static @NotNull Team createTeam(@NotNull Scoreboard board, String id)
 	{
 		return board.registerNewTeam(id);
 	}
 	
-	public static Team getTeam(Scoreboard board, String id, boolean creative)
+	public static Team getTeam(@NotNull Scoreboard board, String id, boolean creative)
 	{
 		Team team = board.getTeam(id);
 		if (team == null && creative) team = createTeam(board, id);
@@ -589,7 +604,7 @@ public class BoardUtil extends Engine
 		}
 	}
 	
-	public static void deleteTeam(Scoreboard board, String id)
+	public static void deleteTeam(@NotNull Scoreboard board, String id)
 	{
 		Team team = board.getTeam(id);
 		deleteTeam(team);
@@ -627,7 +642,7 @@ public class BoardUtil extends Engine
 	// TEAM > SEND
 	// -------------------------------------------- //
 	
-	public static void sendTeamUpdate(Team team)
+	public static void sendTeamUpdate(@NotNull Team team)
 	{
 		team.setDisplayName(team.getDisplayName());
 	}
@@ -636,7 +651,7 @@ public class BoardUtil extends Engine
 	// TEAM > ID
 	// -------------------------------------------- //
 	
-	public static String getTeamId(Team team)
+	public static @NotNull String getTeamId(@NotNull Team team)
 	{
 		return team.getName();
 	}
@@ -650,6 +665,7 @@ public class BoardUtil extends Engine
 		return ! getTemporaryTeams().contains(team);
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setTeamPersistent(Team team, Boolean persistent)
 	{
 		if (persistent == null) return false;
@@ -668,11 +684,12 @@ public class BoardUtil extends Engine
 	// TEAM > NAME
 	// -------------------------------------------- //
 	
-	public static String getTeamName(Team team)
+	public static @NotNull String getTeamName(@NotNull Team team)
 	{
 		return team.getDisplayName();
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setTeamName(Team team, String name)
 	{
 		if (name == null) return false;
@@ -686,12 +703,13 @@ public class BoardUtil extends Engine
 	// TEAM > PREFIX
 	// -------------------------------------------- //
 	
-	public static String getTeamPrefix(Team team)
+	public static @NotNull String getTeamPrefix(@NotNull Team team)
 	{
 		return team.getPrefix();
 	}
 	
-	public static boolean setTeamPrefix(Team team, String prefix)
+	@Contract("_, null -> false")
+	public static boolean setTeamPrefix(@NotNull Team team, String prefix)
 	{
 		if (prefix == null) return false;
 		String before = getTeamPrefix(team);
@@ -704,12 +722,13 @@ public class BoardUtil extends Engine
 	// TEAM > SUFFIX
 	// -------------------------------------------- //
 	
-	public static String getTeamSuffix(Team team)
+	public static @NotNull String getTeamSuffix(@NotNull Team team)
 	{
 		return team.getSuffix();
 	}
 	
-	public static boolean setTeamSuffix(Team team, String suffix)
+	@Contract("_, null -> false")
+	public static boolean setTeamSuffix(@NotNull Team team, String suffix)
 	{
 		if (suffix == null) return false;
 		String before = getTeamSuffix(team);
@@ -722,11 +741,12 @@ public class BoardUtil extends Engine
 	// TEAM > FRIENDLY FIRE ENABLED
 	// -------------------------------------------- //
 	
-	public static boolean isTeamFriendlyFireEnabled(Team team)
+	public static boolean isTeamFriendlyFireEnabled(@NotNull Team team)
 	{
 		return team.allowFriendlyFire();
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setTeamFriendlyFireEnabled(Team team, Boolean friendlyFireEnabled)
 	{
 		if (friendlyFireEnabled == null) return false;
@@ -740,11 +760,12 @@ public class BoardUtil extends Engine
 	// TEAM > FRIENDLY TRUESIGHT ENABLED
 	// -------------------------------------------- //
 	
-	public static boolean isTeamFriendlyTruesightEnabled(Team team)
+	public static boolean isTeamFriendlyTruesightEnabled(@NotNull Team team)
 	{
 		return team.canSeeFriendlyInvisibles();
 	}
 	
+	@Contract("_, null -> false")
 	public static boolean setTeamFriendlyTruesightEnabled(Team team, Boolean friendlyTruesightEnabled)
 	{
 		if (friendlyTruesightEnabled == null) return false;
@@ -758,12 +779,13 @@ public class BoardUtil extends Engine
 	// TEAM > OPTION
 	// -------------------------------------------- //
 	
-	public static TeamOptionValue getTeamOption(Team team, TeamOptionKey key)
+	public static TeamOptionValue getTeamOption(@NotNull Team team, @NotNull TeamOptionKey key)
 	{
 		return NmsBoard.get().getOption(team, key);
 	}
 	
-	public static boolean setTeamOption(Team team, TeamOptionKey key, TeamOptionValue value)
+	@Contract("_, _, null -> false")
+	public static boolean setTeamOption(@NotNull Team team, @NotNull TeamOptionKey key, TeamOptionValue value)
 	{
 		if (value == null) return false;
 		TeamOptionValue before = getTeamOption(team, key);
@@ -776,7 +798,7 @@ public class BoardUtil extends Engine
 	// TEAM > OPTIONS
 	// -------------------------------------------- //
 	
-	public static Map<TeamOptionKey, TeamOptionValue> getTeamOptions(Team team)
+	public static @NotNull Map<TeamOptionKey, TeamOptionValue> getTeamOptions(@NotNull Team team)
 	{
 		// Create
 		Map<TeamOptionKey, TeamOptionValue> ret = new MassiveMap<>();
@@ -793,7 +815,8 @@ public class BoardUtil extends Engine
 		return ret;
 	}
 	
-	public static boolean setTeamOptions(Team team, Map<TeamOptionKey, TeamOptionValue> options)
+	@Contract("_, null -> false")
+	public static boolean setTeamOptions(@NotNull Team team, Map<TeamOptionKey, TeamOptionValue> options)
 	{
 		if (options == null) return false;
 		
@@ -811,31 +834,32 @@ public class BoardUtil extends Engine
 	// TEAM > MEMBERS
 	// -------------------------------------------- //
 	
-	public static boolean addTeamMember(Team team, Object key)
+	public static boolean addTeamMember(@NotNull Team team, Object key)
 	{
 		if (isTeamMember(team, key)) return false;
 		NmsBoard.get().addMember(team, getKey(key));
 		return true;
 	}
 	
-	public static boolean removeTeamMember(Team team, Object key)
+	public static boolean removeTeamMember(@NotNull Team team, Object key)
 	{
 		if ( ! isTeamMember(team, key)) return false;
 		NmsBoard.get().removeMember(team, getKey(key));
 		return true;
 	}
 	
-	public static boolean isTeamMember(Team team, Object key)
+	public static boolean isTeamMember(@NotNull Team team, Object key)
 	{
 		return NmsBoard.get().isMember(team, getKey(key));
 	}
 	
-	public static Set<String> getTeamMembers(Team team)
+	public static Set<String> getTeamMembers(@NotNull Team team)
 	{
 		return NmsBoard.get().getMembers(team);
 	}
 	
-	public static boolean setTeamMembers(Team team, Set<String> members)
+	@Contract("_, null -> false")
+	public static boolean setTeamMembers(@NotNull Team team, Set<String> members)
 	{
 		if (members == null) return false;
 		Set<String> befores = getTeamMembers(team);
@@ -866,12 +890,12 @@ public class BoardUtil extends Engine
 	// Treating the team like a property of the key.
 	// Get and set the team for the key.
 	
-	public static Team getKeyTeam(Scoreboard board, Object key)
+	public static Team getKeyTeam(@NotNull Scoreboard board, @NotNull Object key)
 	{
 		return NmsBoard.get().getKeyTeam(board, getKey(key));
 	}
 	
-	public static void setKeyTeam(Scoreboard board, Object key, Team team)
+	public static void setKeyTeam(@NotNull Scoreboard board, @NotNull Object key, Team team)
 	{
 		Team before = getKeyTeam(board, key);
 		if (MUtil.equals(before, team)) return;
@@ -898,12 +922,13 @@ public class BoardUtil extends Engine
 		TeamOptionKey.NAME_TAG_VISIBILITY, TeamOptionValue.ALWAYS
 	);
 	
-	public static boolean isPersonalTeam(Scoreboard board, Object key)
+	public static boolean isPersonalTeam(@NotNull Scoreboard board, @NotNull Object key)
 	{
 		Team team = getKeyTeam(board, key);
 		return isPersonalTeam(team, key);
 	}
 	
+	@Contract("null, _ -> false")
 	public static boolean isPersonalTeam(Team team, Object key)
 	{
 		if (team == null) return false;
@@ -911,7 +936,7 @@ public class BoardUtil extends Engine
 		return id.equals(getKey(key));
 	}
 	
-	public static Team createPersonalTeam(Scoreboard board, Object key)
+	public static @NotNull Team createPersonalTeam(@NotNull Scoreboard board, Object key)
 	{
 		// Create
 		String id = getKey(key);
@@ -934,7 +959,7 @@ public class BoardUtil extends Engine
 		return team;
 	}
 	
-	public static Team getPersonalTeam(Scoreboard board, Object key, boolean creative)
+	public static Team getPersonalTeam(@NotNull Scoreboard board, Object key, boolean creative)
 	{
 		String id = getKey(key);
 		Team team = getTeam(board, id, false);
@@ -953,7 +978,7 @@ public class BoardUtil extends Engine
 		return team;
 	}
 	
-	public static void deletePersonalTeam(Scoreboard board, Object key)
+	public static void deletePersonalTeam(@NotNull Scoreboard board, Object key)
 	{
 		Team team = getPersonalTeam(board, key, false);
 		if ( ! isPersonalTeam(team, key)) return;

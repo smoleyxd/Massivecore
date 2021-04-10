@@ -86,7 +86,7 @@ public class EventUtil
 	/**
 	 * This is the for-loop part of SimplePluginManager#fireEvent
 	 */
-	public static void fireEventRegistration(Event event, @NotNull RegisteredListener registration)
+	public static void fireEventRegistration(@NotNull Event event, @NotNull RegisteredListener registration)
 	{
 		if (!registration.getPlugin().isEnabled()) return;
 

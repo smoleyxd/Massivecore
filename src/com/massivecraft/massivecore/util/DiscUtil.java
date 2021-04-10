@@ -39,7 +39,7 @@ public class DiscUtil
 		return output;
 	}
 	
-	public static void writeBytes(@NotNull File file, byte[] bytes) throws IOException
+	public static void writeBytes(@NotNull File file, byte @NotNull [] bytes) throws IOException
 	{
 		File parent = file.getParentFile();
 		if (parent != null && !parent.exists()) parent.mkdirs();
@@ -116,7 +116,7 @@ public class DiscUtil
 	// -------------------------------------------- //
 	
 	@Contract(pure = true)
-	public static byte[] utf8(@NotNull String string)
+	public static byte @NotNull [] utf8(@NotNull String string)
 	{
 		return string.getBytes(StandardCharsets.UTF_8);
 	}

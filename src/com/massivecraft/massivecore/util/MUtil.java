@@ -64,21 +64,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -664,25 +651,29 @@ public class MUtil
 		}
 		return ret;
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static void keepLeft(@NotNull List<?> list, int maxlength)
 	{
 		if (list.size() <= maxlength) return;
 		list.subList(maxlength, list.size()).clear();
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static void keepRight(@NotNull List<?> list, int maxlength)
 	{
 		if (list.size() <= maxlength) return;
 		list.subList(0, maxlength).clear();
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static <T> void padLeft(@NotNull List<T> list, T object, int length)
 	{
 		if (list.size() >= length) return;
 		list.addAll(0, repeat(object, length - list.size()));
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static <T> void padRight(@NotNull List<T> list, T object, int length)
 	{
 		if (list.size() >= length) return;
@@ -692,7 +683,8 @@ public class MUtil
 	// -------------------------------------------- //
 	// MAP OPERATIONS
 	// -------------------------------------------- //
-	
+
+	@Contract(mutates = "param1")
 	public static void keepLeft(@NotNull Map<?, ?> map, int maxSize)
 	{
 		int i = 0;
@@ -724,7 +716,7 @@ public class MUtil
 	}
 	
 	@Contract("null -> fail")
-	public static <T extends Number> double getAverage(Iterable<T> numbers)
+	public static <T extends Number> double getAverage(Iterable<@NotNull T> numbers)
 	{
 		if (numbers == null) throw new NullPointerException("numbers");
 		
@@ -778,15 +770,16 @@ public class MUtil
 		return ret;
 	}
 	
-	public static <T> void flipHorizontally(@NotNull List<List<T>> rows)
+	public static <T> void flipHorizontally(@NotNull List<@NotNull List<T>> rows)
 	{
 		for (List<T> row : rows)
 		{
 			Collections.reverse(row);
 		}
 	}
-	
-	public static <T> void flipVertically(List<List<T>> rows)
+
+	@Contract(mutates = "param1")
+	public static <T> void flipVertically(@NotNull List<List<T>> rows)
 	{
 		Collections.reverse(rows);
 	}
@@ -925,6 +918,7 @@ public class MUtil
 	// This method sets the BASE damage modifier and scales all other modifiers proportionally.
 	
 	@SuppressWarnings("deprecation")
+	@Contract(mutates = "param1")
 	public static void setDamage(@NotNull EntityDamageEvent event, double newDamage)
 	{
 		// Check New Damage
@@ -968,6 +962,7 @@ public class MUtil
 	}
 	
 	// Same as above but scales directly.
+	@Contract(mutates = "param1")
 	public static void scaleDamage(@NotNull EntityDamageEvent event, double factor)
 	{
 		// Clean Input
@@ -1061,7 +1056,7 @@ public class MUtil
 		return getBlocks(block.getWorld(), xmin, ymin, zmin, xmax, ymax, zmax);
 	}
 	
-	public static @NotNull List<Block> getBlocks(World world, int xmin, int ymin, int zmin, int xmax, int ymax, int zmax)
+	public static @NotNull List<Block> getBlocks(@NotNull World world, int xmin, int ymin, int zmin, int xmax, int ymax, int zmax)
 	{
 		List<Block> blocks = new ArrayList<>();
 		
@@ -1093,7 +1088,7 @@ public class MUtil
 		if (one.getBlockX() != two.getBlockX()) return false;
 		if (one.getBlockZ() != two.getBlockZ()) return false;
 		if (one.getBlockY() != two.getBlockY()) return false;
-		return one.getWorld().equals(two.getWorld());
+		return Objects.equals(one.getWorld(), two.getWorld());
 	}
 	
 	public static boolean isSameChunk(@NotNull PlayerMoveEvent event)
@@ -1584,7 +1579,7 @@ public class MUtil
 	// TRANSFORM
 	// -------------------------------------------- //
 
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit, Integer offset)
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit, Integer offset)
 	{
 		// Collection
 		Collection<T> collection = null;
@@ -1671,23 +1666,23 @@ public class MUtil
 		
 		return new ArrayList<>(ret.subList(fromIndex, toIndex));
 	}
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where) { return transform(items, where, null, null, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby) { return transform(items, where, orderby, null, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit) { return transform(items, where, orderby, limit, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit) { return transform(items, where, null, limit, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Predicate<? super T> where, Integer limit, Integer offset) { return transform(items, where, null, limit, offset); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby) { return transform(items, null, orderby, null, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit) { return transform(items, null, orderby, limit, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Comparator<? super T> orderby, Integer limit, Integer offset) { return transform(items, null, orderby, limit, offset); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Integer limit) { return transform(items, null, null, limit, null); }
-	public static <T> @NotNull List<T> transform(Iterable<T> items, Integer limit, Integer offset) { return transform(items, null, null, limit, offset); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where) { return transform(items, where, null, null, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby) { return transform(items, where, orderby, null, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where, Comparator<? super T> orderby, Integer limit) { return transform(items, where, orderby, limit, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where, Integer limit) { return transform(items, where, null, limit, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Predicate<? super T> where, Integer limit, Integer offset) { return transform(items, where, null, limit, offset); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Comparator<? super T> orderby) { return transform(items, null, orderby, null, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Comparator<? super T> orderby, Integer limit) { return transform(items, null, orderby, limit, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Comparator<? super T> orderby, Integer limit, Integer offset) { return transform(items, null, orderby, limit, offset); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Integer limit) { return transform(items, null, null, limit, null); }
+	public static <T> @NotNull List<T> transform(@NotNull Iterable<T> items, Integer limit, Integer offset) { return transform(items, null, null, limit, offset); }
 	
 	// -------------------------------------------- //
 	// SIMPLE CONSTRUCTORS
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public static <T> @NotNull List<T> list(T... items)
+	public static <T> @NotNull List<T> list(T @NotNull ... items)
 	{
 		List<T> ret = new MassiveList<>(items.length);
 		Collections.addAll(ret, items);
@@ -1695,7 +1690,7 @@ public class MUtil
 	}
 	
 	@SafeVarargs
-	public static <T> @NotNull Set<T> set(T... items)
+	public static <T> @NotNull Set<T> set(T @NotNull ... items)
 	{
 		Set<T> ret = new MassiveSet<>(items.length);
 		Collections.addAll(ret, items);
@@ -1703,13 +1698,13 @@ public class MUtil
 	}
 	
 	@Contract("_ -> new")
-	public static @NotNull Set<String> treeset(String... items)
+	public static @NotNull Set<String> treeset(String @NotNull ... items)
 	{
 		return new MassiveTreeSet<String, ComparatorCaseInsensitive>(ComparatorCaseInsensitive.get(), Arrays.asList(items));
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <K, V> @NotNull Map<K, V> map(K key1, V value1, Object... objects)
+	public static <K, V> @NotNull Map<K, V> map(K key1, V value1, Object @NotNull ... objects)
 	{
 		Map<K, V> ret = new MassiveMap<>();
 		
@@ -1812,7 +1807,7 @@ public class MUtil
 		return list.get(index);
 	}
 	
-	public static <T> @NotNull List<T> randomSubset(Collection<T> coll, int count)
+	public static <T> @NotNull List<T> randomSubset(@NotNull Collection<T> coll, int count)
 	{
 		// Clean Input
 		if (count < 0) count = 0;

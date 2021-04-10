@@ -196,7 +196,7 @@ public class ContainerUtil
 	// METHODS > SET
 	// -------------------------------------------- //
 	
-	@Contract("null -> fail")
+	@Contract(value = "null -> fail", mutates = "param1")
 	public static void clear(Object container)
 	{
 		if (container == null) throw new NullPointerException("container");
@@ -217,14 +217,15 @@ public class ContainerUtil
 		
 		throw new IllegalArgumentException(container.getClass().getName() + " is not a container.");
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static void setElements(@NotNull Object container, @NotNull Iterable<?> elements)
 	{
 		clear(container);
 		addElements(container, elements);
 	}
 	
-	@Contract("null, _ -> fail")
+	@Contract(value = "null, _ -> fail", mutates = "param1")
 	@SuppressWarnings("unchecked")
 	public static boolean addElement(Object container, Object element)
 	{
@@ -249,7 +250,7 @@ public class ContainerUtil
 		throw new IllegalArgumentException(container.getClass().getName() + " is not a container.");
 	}
 	
-	@Contract("null, _ -> fail; !null, null -> fail")
+	@Contract(value = "null, _ -> fail; !null, null -> fail", mutates = "param1")
 	public static void addElements(Object container, Iterable<?> elements)
 	{
 		if (container == null) throw new NullPointerException("container");

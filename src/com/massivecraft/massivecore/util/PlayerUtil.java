@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +29,7 @@ public class PlayerUtil extends Engine
 	// -------------------------------------------- //
 	
 	private static PlayerUtil i = new PlayerUtil();
+	@Contract(pure = true)
 	public static PlayerUtil get() { return i; }
 	public PlayerUtil()
 	{

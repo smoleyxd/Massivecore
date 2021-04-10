@@ -63,6 +63,7 @@ public class IdData implements Identified, Named
 		return result;
 	}
 
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object obj)
 	{

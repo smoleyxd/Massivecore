@@ -33,6 +33,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
@@ -84,14 +85,14 @@ public class InventoryUtil
 	// Boundary from is inclusive. Boundary to is exclusive. Just like in copyOfRange.
 	// It does however return the original when possible.
 	@Contract(pure = true)
-	public static <T> T[] range(T[] original, int fromInclusive, int toExclusive)
+	public static <T> T[] range(T @NotNull [] original, @Range(from = 0, to = Integer.MAX_VALUE) int fromInclusive, @Range(from = 0, to = Integer.MAX_VALUE) int toExclusive)
 	{
 		if (fromInclusive == 0 && toExclusive == original.length) return original;
 		return Arrays.copyOfRange(original, fromInclusive, toExclusive);
 	}
 	
 	@SafeVarargs
-	public static <T> T[] concat(T @NotNull [] first, T[]... rest)
+	public static <T> T @NotNull [] concat(T @NotNull [] first, T @NotNull [] @NotNull ... rest)
 	{
 		int totalLength = first.length;
 		for (T[] array : rest)
@@ -117,8 +118,9 @@ public class InventoryUtil
 		// NOTE: In 1.9 zero quantity is a thing.
 		return item;
 	}
-	
-	public static void clean(ItemStack @NotNull [] items)
+
+	@Contract(mutates = "param1")
+	public static void clean(@Nullable ItemStack @NotNull [] items)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
@@ -141,6 +143,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
+	@Contract(mutates = "param1")
 	public static void setHelmet(@Nullable Inventory inventory, ItemStack helmet)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -153,6 +156,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getHelmet(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setHelmet(@Nullable HumanEntity human, ItemStack helmet)
 	{
 		if (human == null) return;
@@ -170,6 +174,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
+	@Contract(mutates = "param1")
 	public static void setChestplate(@Nullable Inventory inventory, ItemStack chestplate)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -182,6 +187,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getChestplate(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setChestplate(@Nullable HumanEntity human, ItemStack chestplate)
 	{
 		if (human == null) return;
@@ -199,6 +205,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
+	@Contract(mutates = "param1")
 	public static void setLeggings(@Nullable Inventory inventory, ItemStack leggings)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -211,6 +218,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getLeggings(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setLeggings(@Nullable HumanEntity human, ItemStack leggings)
 	{
 		if (human == null) return;
@@ -228,6 +236,7 @@ public class InventoryUtil
 		ret = clean(ret);
 		return ret;
 	}
+	@Contract(mutates = "param1")
 	public static void setBoots(@Nullable Inventory inventory, ItemStack boots)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -240,6 +249,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getBoots(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setBoots(@Nullable HumanEntity human, ItemStack boots)
 	{
 		if (human == null) return;
@@ -251,7 +261,7 @@ public class InventoryUtil
 	// DEPRECATED IN FAVOUR OF getMainHand
 	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
 	@Deprecated
-	public static ItemStack getWeapon(Inventory inventory)
+	public static @Nullable ItemStack getWeapon(Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return null;
@@ -267,6 +277,7 @@ public class InventoryUtil
 		if (playerInventory == null) return;
 		playerInventory.setItemInHand(weapon);
 	}
+	@Contract("null -> null")
 	@Deprecated
 	public static ItemStack getWeapon(HumanEntity human)
 	{
@@ -286,7 +297,7 @@ public class InventoryUtil
 	// DEPRECATED IN FAVOUR OF getMainHand
 	
 	@Deprecated
-	public static ItemStack getShield(Inventory inventory)
+	public static @Nullable ItemStack getShield(Inventory inventory)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return null;
@@ -309,6 +320,7 @@ public class InventoryUtil
 		
 		inventory.setItem(INDEX_PLAYER_SHIELD, shield);
 	}
+	@Contract("null -> null")
 	@Deprecated
 	public static ItemStack getShield(HumanEntity human)
 	{
@@ -335,6 +347,7 @@ public class InventoryUtil
 		return ret;
 		
 	}
+	@Contract(mutates = "param1")
 	public static void setMainHand(@Nullable Inventory inventory, ItemStack weapon)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -347,6 +360,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getMainHand(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setMainHand(@Nullable HumanEntity human, ItemStack weapon)
 	{
 		if (human == null) return;
@@ -366,6 +380,7 @@ public class InventoryUtil
 		return ret;
 		
 	}
+	@Contract(mutates = "param1")
 	public static void setOffHand(@Nullable Inventory inventory, ItemStack weapon)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -378,6 +393,7 @@ public class InventoryUtil
 		if (human == null) return null;
 		return getOffHand(human.getInventory());
 	}
+	@Contract(mutates = "param1")
 	public static void setOffHand(@Nullable HumanEntity human, ItemStack weapon)
 	{
 		if (human == null) return;
@@ -405,6 +421,7 @@ public class InventoryUtil
 		
 		throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
 	}
+	@Contract(mutates = "param1")
 	public static void setSlot(@Nullable Inventory inventory, ItemStack item, @NotNull EquipmentSlot slot)
 	{
 		switch (slot) {
@@ -471,7 +488,8 @@ public class InventoryUtil
 		clean(ret);
 		return ret;
 	}
-	public static void setContentsAll(@Nullable Inventory inventory, ItemStack[] all)
+	@Contract(mutates = "param1")
+	public static void setContentsAll(@Nullable Inventory inventory, ItemStack @NotNull [] all)
 	{
 		if (inventory == null) return;
 		ItemStack[] contents = inventory.getContents();
@@ -515,7 +533,8 @@ public class InventoryUtil
 		clean(ret);
 		return ret;
 	}
-	public static void setContentsStorage(@Nullable Inventory inventory, ItemStack[] storage)
+	@Contract(mutates = "param1")
+	public static void setContentsStorage(@Nullable Inventory inventory, ItemStack @NotNull [] storage)
 	{
 		if (inventory == null) return;
 		ItemStack[] contents = inventory.getContents();
@@ -543,6 +562,7 @@ public class InventoryUtil
 		clean(ret);
 		return ret;
 	}
+	@Contract(mutates = "param1")
 	public static void setContentsArmor(@Nullable Inventory inventory, ItemStack[] armor)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
@@ -569,7 +589,8 @@ public class InventoryUtil
 		clean(ret);
 		return ret;
 	}
-	public static void setContentsExtra(@Nullable Inventory intentory, ItemStack[] extra)
+	@Contract(mutates = "param1")
+	public static void setContentsExtra(@Nullable Inventory intentory, ItemStack @NotNull [] extra)
 	{
 		PlayerInventory playerInventory = asPlayerInventory(intentory);
 		if (playerInventory == null) return;
@@ -1076,7 +1097,7 @@ public class InventoryUtil
 		itemStack.setItemMeta(meta);
 	}
 	
-	public static boolean isRepairable(Material material)
+	public static boolean isRepairable(@NotNull Material material)
 	{
 		ItemMeta meta = createMeta(new ItemStack(material));
 		if (meta == null) return false;
@@ -1110,7 +1131,7 @@ public class InventoryUtil
 		return new ItemStack(itemStack);
 	}
 	
-	public static ItemStack @NotNull [] clone(ItemStack @NotNull [] itemStacks)
+	public static ItemStack @NotNull [] clone(@Nullable ItemStack @NotNull [] itemStacks)
 	{
 		ItemStack[] ret = new ItemStack[itemStacks.length];
 		for (int i = 0; i < itemStacks.length; i++)
@@ -1331,7 +1352,8 @@ public class InventoryUtil
 		if ( ! meta.hasLore()) return null;
 		return meta.getLore();
 	}
-	
+
+	@Contract(mutates = "param1")
 	public static void setLore(@Nullable ItemStack item, @Nullable Collection<String> lore)
 	{
 		ItemMeta meta = createMeta(item);
@@ -1340,12 +1362,14 @@ public class InventoryUtil
 		meta.setLore(lore == null ? null : new MassiveList<>(lore));
 		item.setItemMeta(meta);
 	}
-	
-	public static void setLore(@Nullable ItemStack item, String... lore)
+
+	@Contract(mutates = "param1")
+	public static void setLore(@Nullable ItemStack item, String @NotNull ... lore)
 	{
 		setLore(item, Arrays.asList(lore));
 	}
 
+	@Contract(mutates = "param1")
 	public static void addLore(@Nullable ItemStack item, Collection<String> lore)
 	{
 		List<String> lines = getLore(item);
@@ -1354,7 +1378,8 @@ public class InventoryUtil
 		InventoryUtil.setLore(item, lines);
 	}
 
-	public static void addLore(ItemStack item, String... lore)
+	@Contract(mutates = "param1")
+	public static void addLore(@Nullable ItemStack item, String @NotNull ... lore)
 	{
 		addLore(item, Arrays.asList(lore));
 	}
@@ -1383,6 +1408,7 @@ public class InventoryUtil
 		return ret;
 	}
 
+	@Contract(mutates = "param")
 	public static void sortLore(@Nullable ItemStack item)
 	{
 		if (item == null) return;
@@ -1405,7 +1431,7 @@ public class InventoryUtil
 	// -------------------------------------------- //
 
 	// Return true on change
-	@Contract("_, null -> fail")
+	@Contract(value = "_, null -> fail", mutates = "param1")
 	public static boolean removeLoreMatching(@Nullable ItemStack item, Predicate<String> predicate)
 	{
 		if (predicate == null) throw new NullPointerException("predicate");
@@ -1423,12 +1449,14 @@ public class InventoryUtil
 		return false;
 	}
 
-	public static boolean removeLoreWithPrefix(@Nullable ItemStack item, String prefix)
+	@Contract(mutates = "param1")
+	public static boolean removeLoreWithPrefix(@Nullable ItemStack item, @NotNull String prefix)
 	{
 		return removeLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
-	
-	public static boolean removeLoreWithSuffix(@Nullable ItemStack item, String suffix)
+
+	@Contract(mutates = "param1")
+	public static boolean removeLoreWithSuffix(@Nullable ItemStack item, @NotNull String suffix)
 	{
 		return removeLoreMatching(item, PredicateStringEndsWith.get(suffix));
 	}
@@ -1444,12 +1472,12 @@ public class InventoryUtil
 		return lore.stream().filter(predicate).collect(Collectors.toList());
 	}
 
-	public static List<String> getLoreWithPrefix(ItemStack item, String prefix)
+	public static List<String> getLoreWithPrefix(ItemStack item, @NotNull String prefix)
 	{
 		return getLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
 	
-	public static List<String> getLoreWithSuffix(ItemStack item, String suffix)
+	public static List<String> getLoreWithSuffix(ItemStack item, @NotNull String suffix)
 	{
 		return getLoreMatching(item, PredicateStringEndsWith.get(suffix));
 	}

@@ -32,7 +32,7 @@ public class PermissionUtil
 	// TODO: Place them all here. Were there some in MUtil?
 	
 	@Contract("_, null -> null")
-	public static <T> T pickFirstVal(Permissible permissible, Map<String, T> perm2val)
+	public static <T> T pickFirstVal(@NotNull Permissible permissible, Map<String, T> perm2val)
 	{
 		if (perm2val == null) return null;
 		T ret = null;
@@ -46,7 +46,7 @@ public class PermissionUtil
 		return ret;
 	}
 	
-	public static @NotNull String createPermissionId(Plugin plugin, @NotNull Enum<?> e)
+	public static @NotNull String createPermissionId(@NotNull Plugin plugin, @NotNull Enum<?> e)
 	{
 		return createPermissionId(plugin, e.name());
 	}
@@ -75,7 +75,7 @@ public class PermissionUtil
 		}
 	}
 	
-	public static void ensureHas(Permissible permissible, @NotNull Permission permission)
+	public static void ensureHas(@NotNull Permissible permissible, @NotNull Permission permission)
 	{
 		ensureHas(permissible, permission.getName());
 	}
@@ -128,12 +128,12 @@ public class PermissionUtil
 	
 	// According to MassiveCraft names are changeable and ids are not.
 	// Bukkit permissions lack names. They do however have ids. 
-	public static String getPermissionId(@NotNull Permission permission)
+	public static @NotNull String getPermissionId(@NotNull Permission permission)
 	{
 		return permission.getName();
 	}
 	
-	public static String getPermissionDescription(@NotNull Permission permission)
+	public static @NotNull String getPermissionDescription(@NotNull Permission permission)
 	{
 		return permission.getDescription();
 	}
@@ -144,7 +144,7 @@ public class PermissionUtil
 		return permission.getDefault();
 	}
 	
-	public static Map<String, Boolean> getPermissionChildren(@NotNull Permission permission)
+	public static @NotNull Map<String, Boolean> getPermissionChildren(@NotNull Permission permission)
 	{
 		return permission.getChildren();
 	}

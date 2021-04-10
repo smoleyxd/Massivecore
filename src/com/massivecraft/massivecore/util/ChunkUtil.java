@@ -14,7 +14,7 @@ public class ChunkUtil
 	// GET AREAS
 	// -------------------------------------------- //
 
-	public static @NotNull Set<PS> getChunksCircle(@NotNull PS center, int radius)
+	public static @NotNull Set<@NotNull PS> getChunksCircle(@NotNull PS center, int radius)
 	{
 		// Common Startup
 		final Set<PS> chunks = new MassiveSet<>();
@@ -40,7 +40,7 @@ public class ChunkUtil
 		return chunks;
 	}
 
-	public static @NotNull Set<PS> getChunksSquare(@NotNull PS center, int radius)
+	public static @NotNull Set<@NotNull PS> getChunksSquare(@NotNull PS center, int radius)
 	{
 		// Common Startup
 		final Set<PS> chunks = new MassiveSet<>();
@@ -72,7 +72,7 @@ public class ChunkUtil
 	}
 
 	@Contract("null, _, _ -> fail; !null, null, _ -> fail")
-	public static void floodSearch(Set<PS> set, Predicate<PS> matcher, int max)
+	public static void floodSearch(Set<@NotNull PS> set, Predicate<PS> matcher, int max)
 	{
 		// Clean
 		if (set == null) throw new NullPointerException("set");

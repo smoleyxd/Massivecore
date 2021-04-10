@@ -99,14 +99,17 @@ public class IdUtil implements Listener, Runnable
 	
 	// The full set
 	private static Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+	@Contract(pure = true)
 	public static Set<IdData> getDatas() { return datas; }
 	
 	// Id Index
 	private static Map<String, IdData> idToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	@Contract(pure = true)
 	public static Map<String, IdData> getIdToData() { return idToData;  }
 	
 	// Name Index
 	private static Map<String, IdData> nameToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	@Contract(pure = true)
 	public static Map<String, IdData> getNameToData() { return nameToData; }
 	
 	// -------------------------------------------- //
@@ -115,6 +118,7 @@ public class IdUtil implements Listener, Runnable
 	// Used for chat tab completion, argument readers, etc.
 
 	private static SenderMap maintainedIds = new SenderMap();
+	@Contract(pure = true)
 	public static SenderMap getMaintainedIds() { return maintainedIds; }
 	public static @NotNull @UnmodifiableView Set<String> getIds(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{
@@ -122,6 +126,7 @@ public class IdUtil implements Listener, Runnable
 	}
 	
 	private static SenderMap maintainedNames = new SenderMap();
+	@Contract(pure = true)
 	public static SenderMap getMaintainedNames() { return maintainedNames; }
 	public static @NotNull @UnmodifiableView Set<String> getNames(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{

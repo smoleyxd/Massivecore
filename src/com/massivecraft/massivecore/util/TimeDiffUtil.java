@@ -188,32 +188,32 @@ public class TimeDiffUtil
 		return Txt.implodeCommaAnd(parts, comma, and);
 	}
 	
-	public static String formatedVerboose(TimeUnit unit, long count)
+	public static String formatedVerboose(@NotNull TimeUnit unit, long count)
 	{
 		return formated(unit, count, FORMAT_ENTRY_VERBOOSE);
 	}
 	
-	public static String formatedVerboose(Map<TimeUnit, Long> unitcounts, String color)
+	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
 		return formated(unitcounts, FORMAT_ENTRY_VERBOOSE, FORMAT_COMMA_VERBOOSE, FORMAT_AND_VERBOOSE, color);
 	}
 	
-	public static String formatedVerboose(Map<TimeUnit, Long> unitcounts)
+	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
 		return formatedVerboose(unitcounts, "<i>");
 	}
 	
-	public static String formatedMinimal(TimeUnit unit, long count)
+	public static String formatedMinimal(@NotNull TimeUnit unit, long count)
 	{
 		return formated(unit, count, FORMAT_ENTRY_MINIMAL);
 	}
 	
-	public static String formatedMinimal(Map<TimeUnit, Long> unitcounts, String color)
+	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
 		return formated(unitcounts, FORMAT_ENTRY_MINIMAL, FORMAT_COMMA_MINIMAL, FORMAT_AND_MINIMAL, color);
 	}
 	
-	public static String formatedMinimal(Map<TimeUnit, Long> unitcounts)
+	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
 		return formatedMinimal(unitcounts, "");
 	}

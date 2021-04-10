@@ -99,7 +99,7 @@ public class RecipeUtil
 		return recipe;
 	}
 	
-	public static ShapelessRecipe addShapeless(ItemStack result, Object... objects)
+	public static ShapelessRecipe addShapeless(ItemStack result, Object @NotNull ... objects)
 	{
 		ShapelessRecipe recipe = createShapeless(result, objects);
 		Bukkit.getServer().addRecipe(recipe);

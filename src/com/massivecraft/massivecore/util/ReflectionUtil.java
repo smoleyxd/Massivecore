@@ -52,7 +52,7 @@ public class ReflectionUtil
 	// MAKE ACCESSIBLE
 	// -------------------------------------------- //
 
-	@Contract("null -> fail")
+	@Contract(value = "null -> fail", mutates = "param1")
 	public static void makeAccessible(Field field)
 	{
 		try
@@ -70,7 +70,7 @@ public class ReflectionUtil
 		}
 	}
 
-	@Contract("null -> fail")
+	@Contract(value = "null -> fail", mutates = "param1")
 	public static void makeAccessible(Method method)
 	{
 		try
@@ -84,7 +84,7 @@ public class ReflectionUtil
 		}
 	}
 
-	@Contract("null -> fail")
+	@Contract(value = "null -> fail", mutates = "param1")
 	public static void makeAccessible(Constructor<?> constructor)
 	{
 		try
@@ -222,7 +222,7 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	@Contract("null -> fail")
+	@Contract("null -> fail; !null -> new")
 	public static <T> @NotNull T newInstance(Class<?> clazz)
 	{
 		try
@@ -281,7 +281,8 @@ public class ReflectionUtil
 	// ANNOTATION
 	// -------------------------------------------- //
 	
-	public static <T extends Annotation> T getAnnotation(Field field, Class<T> annotationClass)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public static <T extends Annotation> @Nullable T getAnnotation(Field field, Class<T> annotationClass)
 	{
 		// Fail Fast
 		if (field == null) throw new NullPointerException("field");
@@ -302,7 +303,8 @@ public class ReflectionUtil
 	// FIELD > GET
 	// -------------------------------------------- //
 	
-	public static Field getField(Class<?> clazz, String name)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public static @NotNull Field getField(Class<?> clazz, String name)
 	{
 		if (clazz == null) throw new NullPointerException("clazz");
 		if (name == null) throw new NullPointerException("name");
@@ -319,7 +321,7 @@ public class ReflectionUtil
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T getField(Field field, Object object)
+	public static <T> T getField(@NotNull Field field, Object object)
 	{
 		try
 		{
@@ -335,7 +337,7 @@ public class ReflectionUtil
 	// FIELD > SET
 	// -------------------------------------------- //
 	
-	public static void setField(Field field, Object object, Object value)
+	public static void setField(@NotNull Field field, Object object, Object value)
 	{
 		try
 		{
@@ -351,13 +353,13 @@ public class ReflectionUtil
 	// FIELD > SIMPLE
 	// -------------------------------------------- //
 	
-	public static <T> T getField(Class<?> clazz, String name, Object object)
+	public static <T> T getField(@NotNull Class<?> clazz, @NotNull String name, Object object)
 	{
 		Field field = getField(clazz, name);
 		return getField(field, object);
 	}
 	
-	public static void setField(Class<?> clazz, String name, Object object, Object value)
+	public static void setField(@NotNull Class<?> clazz, @NotNull String name, Object object, Object value)
 	{
 		Field field = getField(clazz, name);
 		setField(field, object, value);
@@ -367,14 +369,14 @@ public class ReflectionUtil
 	// FIELD > TRANSFER
 	// -------------------------------------------- //
 	
-	public static void transferField(Class<?> clazz, Object from, Object to, String name)
+	public static void transferField(@NotNull Class<?> clazz, Object from, Object to, @NotNull String name)
 	{
 		Field field = getField(clazz, name);
 		Object value = getField(field, from);
 		setField(field, to, value);
 	}
 	
-	public static void transferFields(Class<?> clazz, Object from, Object to, List<String> fieldNames)
+	public static void transferFields(@NotNull Class<?> clazz, Object from, Object to, @Nullable List<@NotNull String> fieldNames)
 	{
 		if (fieldNames == null)
 		{
@@ -391,7 +393,7 @@ public class ReflectionUtil
 		}
 	}
 	
-	public static void transferFields(Class<?> clazz, Object from, Object to)
+	public static void transferFields(@NotNull Class<?> clazz, Object from, Object to)
 	{
 		transferFields(clazz, from, to, null);
 	}
@@ -400,7 +402,7 @@ public class ReflectionUtil
 	// SUPERCLASSES
 	// -------------------------------------------- //
 	
-	public static List<Class<?>> getSuperclasses(Class<?> clazz, boolean includeSelf)
+	public static @NotNull List<@NotNull Class<?>> getSuperclasses(@NotNull Class<?> clazz, boolean includeSelf)
 	{
 		// Create
 		List<Class<?>> ret = new ArrayList<>();
@@ -417,7 +419,7 @@ public class ReflectionUtil
 		return ret;
 	}
 	
-	public static Class<?> getSuperclassPredicate(Class<?> clazz, boolean includeSelf, Predicate<Class<?>> predicate)
+	public static @Nullable Class<?> getSuperclassPredicate(@NotNull Class<?> clazz, boolean includeSelf, @NotNull Predicate<Class<?>> predicate)
 	{
 		for (Class<?> superClazz : getSuperclasses(clazz, includeSelf))
 		{
@@ -426,7 +428,7 @@ public class ReflectionUtil
 		return null;
 	}
 	
-	public static Class<?> getSuperclassDeclaringMethod(Class<?> clazz, boolean includeSelf, final String methodName)
+	public static Class<?> getSuperclassDeclaringMethod(@NotNull Class<?> clazz, boolean includeSelf, final String methodName)
 	{
 		return getSuperclassPredicate(clazz, includeSelf, clazz1 -> {
 			for (Method method : clazz1.getDeclaredMethods())
@@ -437,7 +439,7 @@ public class ReflectionUtil
 		});
 	}
 	
-	public static Class<?> getSuperclassDeclaringField(Class<?> clazz, boolean includeSelf, final String fieldName)
+	public static Class<?> getSuperclassDeclaringField(@NotNull Class<?> clazz, boolean includeSelf, final String fieldName)
 	{
 		return getSuperclassPredicate(clazz, includeSelf, clazz1 -> {
 			for (Field field : clazz1.getDeclaredFields())
@@ -453,7 +455,7 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 
 	@SuppressWarnings("unchecked")
-	public static List<Class<?>> getPackageClasses(String packageName, ClassLoader classLoader, boolean recursive, Predicate<Class<?>>... predicates)
+	public static @NotNull List<Class<?>> getPackageClasses(String packageName, ClassLoader classLoader, boolean recursive, Predicate<Class<?>>... predicates)
 	{
 		// Create ret
 		List<Class<?>> ret = new MassiveList<>();
@@ -508,7 +510,8 @@ public class ReflectionUtil
 	// AS RUNTIME EXCEPTION
 	// -------------------------------------------- //
 
-	public static RuntimeException asRuntimeException(Throwable t)
+	@Contract("null -> new")
+	public static @NotNull RuntimeException asRuntimeException(Throwable t)
 	{
 		// Runtime
 		if (t instanceof RuntimeException) return (RuntimeException) t;
@@ -526,6 +529,7 @@ public class ReflectionUtil
 	
 	// Example: "v1_9_R4"
 	private static String versionRaw = Bukkit.getServer().getClass().getPackage().getName().substring(23);
+	@Contract(pure = true)
 	public static String getVersionRaw() { return versionRaw; }
 	
 	public static String getVersionRawPart(int index)
@@ -537,21 +541,24 @@ public class ReflectionUtil
 	
 	// Example: 1
 	private static int versionMajor = Integer.parseInt(getVersionRawPart(0).substring(1));
+	@Contract(pure = true)
 	public static int getVersionMajor() { return versionMajor; }
 	
 	// Example: 9
 	private static int versionMinor = Integer.parseInt(getVersionRawPart(1));
+	@Contract(pure = true)
 	public static int getVersionMinor() { return versionMinor; }
 	
 	// Example: 4
 	private static int versionRelease = Integer.parseInt(getVersionRawPart(2).substring(1));
+	@Contract(pure = true)
 	public static int getVersionRelease() { return versionRelease; }
 	
 	// -------------------------------------------- //
 	// FORCE LOAD CLASSES
 	// -------------------------------------------- //
 	
-	public static void forceLoadClasses(@NotNull Class<?>... classes)
+	public static void forceLoadClasses(@NotNull Class<?> @NotNull ... classes)
 	{
 		for (Class<?> clazz : classes)
 		{
@@ -591,7 +598,7 @@ public class ReflectionUtil
 	// TYPE CHECKS
 	// -------------------------------------------- //
 	
-	public static boolean isRawTypeAssignableFromAny(Type goal, Type... subjects)
+	public static boolean isRawTypeAssignableFromAny(Type goal, Type @NotNull ... subjects)
 	{
 		// Cache this value since it will save us calculations
 		Class<?> classGoal = classify(goal);
