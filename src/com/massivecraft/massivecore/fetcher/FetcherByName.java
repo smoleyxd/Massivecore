@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class FetcherByName implements Callable<Map<String, IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public FetcherByName(Collection<String> names)
 	{
 		this.names = names;

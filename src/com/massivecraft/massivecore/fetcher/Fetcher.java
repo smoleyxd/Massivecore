@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Fetcher implements Callable<Set<IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 
+	@Contract(pure = true)
 	public Fetcher(Collection<Object> objects)
 	{
 		this.objects = objects;

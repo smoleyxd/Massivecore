@@ -49,11 +49,13 @@ public class FetcherByNameSingle implements Callable<Map<String, IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public FetcherByNameSingle(Collection<String> names)
 	{
 		this(names, true);
 	}
 	
+	@Contract(pure = true)
 	public FetcherByNameSingle(Collection<String> names, boolean rateLimiting)
 	{
 		this.names = names;

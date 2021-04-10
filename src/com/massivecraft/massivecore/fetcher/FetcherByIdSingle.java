@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,6 +41,7 @@ public class FetcherByIdSingle implements Callable<Map<UUID, IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public FetcherByIdSingle(Collection<UUID> ids)
 	{
 		this.ids = ids;
