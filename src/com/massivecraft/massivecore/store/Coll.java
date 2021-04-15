@@ -672,6 +672,10 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		String message = Txt.parse("<b>[Unreported Modification] %s", change);
 		
 		this.getPlugin().log(message);
+		
+		// Differences
+		this.getPlugin().log(Txt.parse("<b>[LastRaw] <r>%s", lastRaw.toString()));
+		this.getPlugin().log(Txt.parse("<b>[CurrentRaw] <r>%s", currentRaw.toString()));
 	}
 	
 	@Override
