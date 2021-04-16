@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Objects;
 
 public class ComparatorHashCode extends ComparatorAbstract<Object>
@@ -9,6 +11,7 @@ public class ComparatorHashCode extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorHashCode i = new ComparatorHashCode();
+	@Contract(pure = true)
 	public static ComparatorHashCode get() { return i; }
 	
 	// -------------------------------------------- //

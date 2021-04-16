@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -28,25 +29,25 @@ public class WriterItemStackMetaRecipes extends WriterAbstractItemStackMetaField
 	// -------------------------------------------- //
 
 	@Override
-	public List<String> getA(DataItemStack ca, ItemStack d)
+	public List<String> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getRecipes();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, List<String> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, List<String> fa, ItemStack d)
 	{
 		ca.setRecipes(fa);
 	}
 	
 	@Override
-	public List<NamespacedKey> getB(KnowledgeBookMeta cb, ItemStack d)
+	public List<NamespacedKey> getB(@NotNull KnowledgeBookMeta cb, ItemStack d)
 	{
 		return cb.getRecipes();
 	}
 	
 	@Override
-	public void setB(KnowledgeBookMeta cb, List<NamespacedKey> fb, ItemStack d)
+	public void setB(@NotNull KnowledgeBookMeta cb, List<NamespacedKey> fb, ItemStack d)
 	{
 		cb.setRecipes(fb);
 	}

@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterBannerPatternId extends WriterAbstractBannerPattern<String, PatternType>
 {
@@ -23,19 +24,19 @@ public class WriterBannerPatternId extends WriterAbstractBannerPattern<String, P
 	// -------------------------------------------- //
 	
 	@Override
-	public String getA(DataBannerPattern ca, Object d)
+	public String getA(@NotNull DataBannerPattern ca, Object d)
 	{
 		return ca.getId();
 	}
 	
 	@Override
-	public void setA(DataBannerPattern ca, String fa, Object d)
+	public void setA(@NotNull DataBannerPattern ca, String fa, Object d)
 	{
 		ca.setId(fa);
 	}
 	
 	@Override
-	public PatternType getB(Pattern cb, Object d)
+	public PatternType getB(@NotNull Pattern cb, Object d)
 	{
 		return cb.getPattern();
 	}

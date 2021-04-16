@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaLodestoneTracked extends WriterAbstractItemStackMetaField<CompassMeta, Boolean, Boolean>
 {
@@ -29,15 +30,15 @@ public class WriterItemStackMetaLodestoneTracked extends WriterAbstractItemStack
 	// -------------------------------------------- //
 	
 	@Override
-	public Boolean getA(DataItemStack ca, ItemStack d) { return ca.isLodestoneTracked(); }
+	public Boolean getA(@NotNull DataItemStack ca, ItemStack d) { return ca.isLodestoneTracked(); }
 	
 	@Override
-	public void setA(DataItemStack ca, Boolean fa, ItemStack d) { ca.setLodestoneTracked(fa); }
+	public void setA(@NotNull DataItemStack ca, Boolean fa, ItemStack d) { ca.setLodestoneTracked(fa); }
 	
 	@Override
-	public Boolean getB(CompassMeta cb, ItemStack d) { return cb.isLodestoneTracked(); }
+	public Boolean getB(@NotNull CompassMeta cb, ItemStack d) { return cb.isLodestoneTracked(); }
 	
 	@Override
-	public void setB(CompassMeta cb, Boolean fb, ItemStack d) { cb.setLodestoneTracked(fb); }
+	public void setB(@NotNull CompassMeta cb, Boolean fb, ItemStack d) { cb.setLodestoneTracked(fb); }
 	
 }

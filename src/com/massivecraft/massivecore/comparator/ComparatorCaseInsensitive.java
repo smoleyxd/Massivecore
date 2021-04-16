@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+
 public class ComparatorCaseInsensitive extends ComparatorAbstract<String>
 {
 	// -------------------------------------------- //
@@ -7,6 +9,7 @@ public class ComparatorCaseInsensitive extends ComparatorAbstract<String>
 	// -------------------------------------------- //
 	
 	private static ComparatorCaseInsensitive i = new ComparatorCaseInsensitive();
+	@Contract(pure = true)
 	public static ComparatorCaseInsensitive get() { return i; }
 
 	// -------------------------------------------- //

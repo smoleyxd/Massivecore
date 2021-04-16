@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.TypeStringCommand;
 import com.massivecraft.massivecore.mixin.MixinCommand;
+import org.jetbrains.annotations.Contract;
 
 public class CmdMassiveCoreClick extends MassiveCoreCommand
 {
@@ -12,6 +13,7 @@ public class CmdMassiveCoreClick extends MassiveCoreCommand
 	// -------------------------------------------- //
 	
 	private static CmdMassiveCoreClick i = new CmdMassiveCoreClick();
+	@Contract(pure = true)
 	public static CmdMassiveCoreClick get() { return i; }
 	
 	// -------------------------------------------- //

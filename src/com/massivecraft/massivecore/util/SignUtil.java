@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -37,7 +40,8 @@ public class SignUtil
 	// "special title": The title part without the padding.
 	// "special padding": The special prefix and suffix.
 	
-	public static String getSanitizedSpecialTitle(String title)
+	@Contract("null -> fail")
+	public static @NotNull String getSanitizedSpecialTitle(String title)
 	{
 		if (title == null) throw new NullPointerException("title");
 		
@@ -48,7 +52,8 @@ public class SignUtil
 		return title;
 	}
 	
-	public static String getSpecialLine(String title)
+	@Contract("null -> fail")
+	public static @NotNull String getSpecialLine(String title)
 	{
 		if (title == null) throw new NullPointerException("title");
 		
@@ -57,7 +62,8 @@ public class SignUtil
 		return SPECIAL_PREFIX_STRICT + title + SPECIAL_SUFFIX_STRICT;
 	}
 	
-	public static String getSpecialTitle(String line, boolean strict)
+	@Contract("null, _ -> fail")
+	public static @Nullable String getSpecialTitle(String line, boolean strict)
 	{
 		if (line == null) throw new NullPointerException("line");
 		
@@ -83,21 +89,24 @@ public class SignUtil
 		return title;
 	}
 	
-	public static String getSpecialTitle(String[] lines, boolean strict)
+	@Contract("null, _ -> fail")
+	public static @Nullable String getSpecialTitle(String[] lines, boolean strict)
 	{
 		if (lines == null) throw new NullPointerException("lines");
 		String line = lines[0];
 		return getSpecialTitle(line, strict);
 	}
 	
-	public static String getSpecialTitle(Sign sign, boolean strict)
+	@Contract("null, _ -> fail")
+	public static @Nullable String getSpecialTitle(Sign sign, boolean strict)
 	{
 		if (sign == null) throw new NullPointerException("sign");
 		String[] lines = sign.getLines();
 		return getSpecialTitle(lines, strict);
 	}
 	
-	public static String getSpecialTitle(Block block, boolean strict)
+	@Contract("null, _ -> fail")
+	public static @Nullable String getSpecialTitle(Block block, boolean strict)
 	{
 		if (block == null) throw new NullPointerException("block");
 		Sign sign = getSign(block);
@@ -110,6 +119,7 @@ public class SignUtil
 	// -------------------------------------------- //
 	// Returns true if the result is a special sign of with the specified title.
 	
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail; !null, !null, null -> fail")
 	public static boolean handleSpecialPermissionFix(SignChangeEvent event, String title, String permissionId)
 	{
 		if (event == null) throw new NullPointerException("event");
@@ -143,7 +153,7 @@ public class SignUtil
 	// -------------------------------------------- //
 	// These methods are used for detecting special sign pillars
 	
-	public static Block getSpecialPillarTop(Block block)
+	public static @Nullable Block getSpecialPillarTop(@NotNull Block block)
 	{
 		World world = block.getWorld();
 		int maxHeight = world.getMaxHeight();
@@ -157,7 +167,8 @@ public class SignUtil
 		return null;
 	}
 	
-	public static List<Block> getSpecialPillarFromTop(Block block)
+	@Contract("null -> fail")
+	public static @NotNull List<Block> getSpecialPillarFromTop(Block block)
 	{
 		if (block == null) throw new NullPointerException("block");
 		if (getSpecialTitle(block, true) == null) throw new InvalidParameterException("block");
@@ -174,7 +185,8 @@ public class SignUtil
 		return ret;
 	}
 	
-	public static List<Block> getSpecialPillar(Block block)
+	@Contract("null -> fail")
+	public static @Nullable List<Block> getSpecialPillar(Block block)
 	{
 		if (block == null) throw new NullPointerException("block");
 		
@@ -184,7 +196,8 @@ public class SignUtil
 		return getSpecialPillarFromTop(block);
 	}
 	
-	public static List<String> getSpecialPillarLines(Block block, String title)
+	@Contract("null, _ -> fail")
+	public static @Nullable List<String> getSpecialPillarLines(Block block, @Nullable String title)
 	{
 		if (block == null) throw new NullPointerException("block");
 		
@@ -207,7 +220,8 @@ public class SignUtil
 		// Action.LEFT_CLICK_BLOCK, // We must allow breaking the sign. 
 		Action.RIGHT_CLICK_BLOCK
 	);
-	public static List<String> getSpecialPillarLines(PlayerInteractEvent event, String title)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public static @Nullable List<String> getSpecialPillarLines(PlayerInteractEvent event, String title)
 	{
 		// Arguments
 		if (event == null) throw new NullPointerException("event");
@@ -239,6 +253,7 @@ public class SignUtil
 	// IS SIGN
 	// -------------------------------------------- //
 
+	@Contract("null -> fail")
 	public static boolean isSign(Material material)
 	{
 		if (material == null) throw new NullPointerException("material");
@@ -246,6 +261,7 @@ public class SignUtil
 		return ReferenceMaterial.getMaterialsSign().contains(material);
 	}
 	
+	@Contract("null -> fail")
 	public static boolean isSign(Block block)
 	{
 		if (block == null) throw new NullPointerException("block");
@@ -257,7 +273,7 @@ public class SignUtil
 	// GET SIGN
 	// -------------------------------------------- //
 	
-	public static Sign getSign(Block block)
+	public static @Nullable Sign getSign(@NotNull Block block)
 	{
 		BlockState blockState = block.getState();
 		if ( ! (blockState instanceof Sign)) return null;
@@ -268,7 +284,8 @@ public class SignUtil
 	// GET LINES
 	// -------------------------------------------- //
 	
-	public static List<String> getLines(List<Block> blocks)
+	@Contract("null -> fail")
+	public static @NotNull List<String> getLines(List<@NotNull Block> blocks)
 	{
 		if (blocks == null) throw new NullPointerException("blocks");
 		
@@ -284,7 +301,8 @@ public class SignUtil
 		return ret;
 	}
 	
-	public static List<String> getLines(Block block)
+	@Contract("null -> fail")
+	public static @Nullable List<String> getLines(Block block)
 	{
 		if (block == null) throw new NullPointerException("block");
 		
@@ -294,7 +312,8 @@ public class SignUtil
 		return getLines(sign);
 	}
 	
-	public static List<String> getLines(Sign sign)
+	@Contract("null -> fail")
+	public static @NotNull List<String> getLines(Sign sign)
 	{
 		if (sign == null) throw new NullPointerException("sign");
 		

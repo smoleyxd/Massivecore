@@ -7,6 +7,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.UUID;
@@ -18,6 +20,7 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// -------------------------------------------- //
 	
 	private static final AdapterUUID i = new AdapterUUID();
+	@Contract(pure = true)
 	public static AdapterUUID get() { return i; }
 	
 	// -------------------------------------------- //
@@ -25,13 +28,13 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// -------------------------------------------- //
 	
 	@Override
-	public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context)
+	public JsonElement serialize(@NotNull UUID src, Type typeOfSrc, JsonSerializationContext context)
 	{
 		return convertUUIDToJsonPrimitive(src);
 	}
 	
 	@Override
-	public UUID deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+	public UUID deserialize(@NotNull JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 	{
 		return convertJsonElementToUUID(json);
 	}
@@ -40,22 +43,24 @@ public class AdapterUUID implements JsonDeserializer<UUID>, JsonSerializer<UUID>
 	// STATIC LOGIC
 	// -------------------------------------------- //
 	
-	public static String convertUUIDToString(UUID uuid)
+	@Contract(pure = true)
+	public static String convertUUIDToString(@NotNull UUID uuid)
 	{
 		return uuid.toString();
 	}
 	
-	public static JsonPrimitive convertUUIDToJsonPrimitive(UUID uuid)
+	@Contract("_ -> new")
+	public static @NotNull JsonPrimitive convertUUIDToJsonPrimitive(@NotNull UUID uuid)
 	{
 		return new JsonPrimitive(convertUUIDToString(uuid));
 	}
 	
-	public static UUID convertStringToUUID(String string)
+	public static @NotNull UUID convertStringToUUID(@NotNull String string)
 	{
 		return UUID.fromString(string);
 	}
 	
-	public static UUID convertJsonElementToUUID(JsonElement jsonElement)
+	public static @NotNull UUID convertJsonElementToUUID(@NotNull JsonElement jsonElement)
 	{
 		return convertStringToUUID(jsonElement.getAsString());
 	}

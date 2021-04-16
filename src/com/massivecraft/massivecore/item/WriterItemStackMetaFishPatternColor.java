@@ -4,6 +4,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaFishPatternColor extends WriterAbstractItemStackMetaField<TropicalFishBucketMeta, DyeColor, DyeColor>
 {
@@ -24,26 +25,26 @@ public class WriterItemStackMetaFishPatternColor extends WriterAbstractItemStack
 	// -------------------------------------------- //
 
 	@Override
-	public DyeColor getA(DataItemStack ca, ItemStack d)
+	public DyeColor getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getFishPatternColor();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, DyeColor fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, DyeColor fa, ItemStack d)
 	{
 		ca.setFishPatternColor(fa);
 	}
 
 	@Override
-	public DyeColor getB(TropicalFishBucketMeta cb, ItemStack d)
+	public DyeColor getB(@NotNull TropicalFishBucketMeta cb, ItemStack d)
 	{
 		if (cb.hasVariant()) return cb.getPatternColor();
 		return null;
 	}
 
 	@Override
-	public void setB(TropicalFishBucketMeta cb, DyeColor fb, ItemStack d)
+	public void setB(@NotNull TropicalFishBucketMeta cb, DyeColor fb, ItemStack d)
 	{
 		if (fb == null)
 		{

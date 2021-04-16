@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinVisibility extends Mixin
 {
@@ -12,6 +13,7 @@ public class MixinVisibility extends Mixin
 	
 	private static MixinVisibility d = new MixinVisibility();
 	private static MixinVisibility i = d;
+	@Contract(pure = true)
 	public static MixinVisibility get() { return i; }
 	
 	// -------------------------------------------- //

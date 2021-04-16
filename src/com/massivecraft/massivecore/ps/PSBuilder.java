@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.ps;
 
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
 
 public class PSBuilder
 {
@@ -87,7 +88,7 @@ public class PSBuilder
 		this.velocityZ = velocityZ;
 	}
 	
-	public PSBuilder(PS ps)
+	public PSBuilder(@NotNull PS ps)
 	{
 		this(ps.getWorld(), ps.getBlockX(), ps.getBlockY(), ps.getBlockZ(), ps.getLocationX(), ps.getLocationY(), ps.getLocationZ(), ps.getChunkX(), ps.getChunkZ(), ps.getPitch(), ps.getYaw(), ps.getVelocityX(), ps.getVelocityY(), ps.getVelocityZ());
 	}

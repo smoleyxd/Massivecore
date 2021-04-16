@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -20,6 +22,7 @@ public class EngineMassiveCorePlayerLeave extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCorePlayerLeave i = new EngineMassiveCorePlayerLeave();
+	@Contract(pure = true)
 	public static EngineMassiveCorePlayerLeave get() { return i; }
 	
 	@Override
@@ -35,7 +38,7 @@ public class EngineMassiveCorePlayerLeave extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void runKick(PlayerKickEvent event)
+	public void runKick(@NotNull PlayerKickEvent event)
 	{
 		final Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -48,7 +51,7 @@ public class EngineMassiveCorePlayerLeave extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void runQuit(PlayerQuitEvent event)
+	public void runQuit(@NotNull PlayerQuitEvent event)
 	{
 		final Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;

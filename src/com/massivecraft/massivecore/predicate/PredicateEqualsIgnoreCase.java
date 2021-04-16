@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.predicate;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 // Inspired by: String#regionMatches(ignoreCase, toffset, other, ooffset, len)
 public class PredicateEqualsIgnoreCase implements Predicate<String>
 {
@@ -14,7 +17,9 @@ public class PredicateEqualsIgnoreCase implements Predicate<String>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static PredicateEqualsIgnoreCase get(String prefix) { return new PredicateEqualsIgnoreCase(prefix); }
+	@Contract("_ -> new")
+	public static @NotNull PredicateEqualsIgnoreCase get(@NotNull String prefix) { return new PredicateEqualsIgnoreCase(prefix); }
+	@Contract("null -> fail")
 	public PredicateEqualsIgnoreCase(String str)
 	{
 		if (str == null) throw new NullPointerException("str");

@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.AuthorNagException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredListener;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.logging.Level;
@@ -33,7 +34,7 @@ public class EventUtil
 		}
 	}
 	
-	public static void callEventAt(Event event, EventPriority priority)
+	public static void callEventAt(@NotNull Event event, EventPriority priority)
 	{
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners().clone();
@@ -54,7 +55,7 @@ public class EventUtil
 		}
 	}
 	
-	public static void callEventAfter(Event event, Listener listener, EventPriority priority)
+	public static void callEventAfter(@NotNull Event event, Listener listener, EventPriority priority)
 	{
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners().clone();
@@ -85,7 +86,7 @@ public class EventUtil
 	/**
 	 * This is the for-loop part of SimplePluginManager#fireEvent
 	 */
-	public static void fireEventRegistration(Event event, RegisteredListener registration)
+	public static void fireEventRegistration(@NotNull Event event, @NotNull RegisteredListener registration)
 	{
 		if (!registration.getPlugin().isEnabled()) return;
 

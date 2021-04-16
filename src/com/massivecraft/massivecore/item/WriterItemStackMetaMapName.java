@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MapMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaMapName extends WriterAbstractItemStackMetaField<MapMeta, String, String>
 {
@@ -24,25 +25,25 @@ public class WriterItemStackMetaMapName extends WriterAbstractItemStackMetaField
 	// -------------------------------------------- //
 
 	@Override
-	public String getA(DataItemStack ca, ItemStack d)
+	public String getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getMapName();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, String fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, String fa, ItemStack d)
 	{
 		ca.setMapName(fa);
 	}
 
 	@Override
-	public String getB(MapMeta cb, ItemStack d)
+	public String getB(@NotNull MapMeta cb, ItemStack d)
 	{
 		return cb.hasLocationName() ? cb.getLocationName() : null;
 	}
 
 	@Override
-	public void setB(MapMeta cb, String fb, ItemStack d)
+	public void setB(@NotNull MapMeta cb, String fb, ItemStack d)
 	{
 		cb.setLocationName(fb);
 	}

@@ -5,6 +5,8 @@ import com.massivecraft.massivecore.command.type.enumeration.TypeSound;
 import com.massivecraft.massivecore.command.type.primitive.TypeStringId;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeId<T> extends TypeTransformer<T, String> 
 {
@@ -15,7 +17,8 @@ public class TypeId<T> extends TypeTransformer<T, String>
 	private static TypeId<Sound> iSound = TypeId.get(TypeSound.get());
 	public static TypeId<Sound> getSound() { return iSound; }
 	
-	public static <T> TypeId<T> get(Type<T> inner) { return new TypeId<>(inner); }
+	@Contract("_ -> new")
+	public static <T> @NotNull TypeId<T> get(Type<T> inner) { return new TypeId<>(inner); }
 	public TypeId(Type<T> inner)
 	{
 		super(inner, TypeStringId.get());

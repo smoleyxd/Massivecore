@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class CommandEditItemStacksOpen<O> extends CommandEditItemStacksAbstract<
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditItemStacksOpen(EditSettings<O> settings, Property<O, List<ItemStack>> property)
+	public CommandEditItemStacksOpen(@NotNull EditSettings<O> settings, @NotNull Property<O, List<ItemStack>> property)
 	{
 		// Super	
 		super(settings, property);
@@ -45,7 +46,7 @@ public class CommandEditItemStacksOpen<O> extends CommandEditItemStacksAbstract<
 	
 	protected Set<UUID> playerIds = new MassiveSet<>();
 	
-	public void setEditing(Player player, boolean editing)
+	public void setEditing(@NotNull Player player, boolean editing)
 	{
 		UUID playerId = player.getUniqueId();
 		
@@ -59,7 +60,7 @@ public class CommandEditItemStacksOpen<O> extends CommandEditItemStacksAbstract<
 		}
 	}
 	
-	public boolean isEditing(Player player)
+	public boolean isEditing(@NotNull Player player)
 	{
 		UUID playerId = player.getUniqueId();
 		
@@ -72,7 +73,7 @@ public class CommandEditItemStacksOpen<O> extends CommandEditItemStacksAbstract<
 	
 	// Not Cancellable
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onInventoryClose(InventoryCloseEvent event)
+	public void onInventoryClose(@NotNull InventoryCloseEvent event)
 	{
 		// If a player closes an inventory ...
 		if (MUtil.isntPlayer(event.getPlayer())) return;

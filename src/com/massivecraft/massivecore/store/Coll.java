@@ -17,6 +17,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonSyntaxException;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -564,7 +565,8 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		return modification;
 	}
 	
-	private Modification getActualModification(String id, Modification modification,  Entry<JsonObject, Long> remoteEntry)
+	@Contract("null, _, _ -> fail")
+	private Modification getActualModification(String id, Modification modification, Entry<JsonObject, Long> remoteEntry)
 	{
 		if (id == null) throw new NullPointerException("id");
 

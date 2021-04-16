@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.nms;
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 
@@ -55,7 +57,7 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static Class<?> getClassCraftItemStack() throws ClassNotFoundException
+	public static @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
 	{
 		if (ServerType.get() == ServerType.FORGE)
 		{
@@ -67,7 +69,7 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 		}
 	}
 	
-	public static Class<?> getClassCraftItemStackCatch()
+	public static @Nullable Class<?> getClassCraftItemStackCatch()
 	{
 		try
 		{

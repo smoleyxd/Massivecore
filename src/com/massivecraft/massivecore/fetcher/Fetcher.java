@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.fetcher;
 
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +34,7 @@ public class Fetcher implements Callable<Set<IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 
+	@Contract(pure = true)
 	public Fetcher(Collection<Object> objects)
 	{
 		this.objects = objects;
@@ -51,7 +54,7 @@ public class Fetcher implements Callable<Set<IdAndName>>
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Set<IdAndName> fetch(Collection<?> objects) throws Exception
+	public static @NotNull Set<IdAndName> fetch(@NotNull Collection<?> objects) throws Exception
 	{
 		// Separate names and ids
 		final Set<String> names = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);

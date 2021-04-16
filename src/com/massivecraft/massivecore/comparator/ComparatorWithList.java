@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class ComparatorWithList<T> extends ComparatorAbstract<T>
@@ -8,7 +11,8 @@ public class ComparatorWithList<T> extends ComparatorAbstract<T>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <T> ComparatorWithList<T> get(List<T> list) { return new ComparatorWithList<>(list); }
+	@Contract("_ -> new")
+	public static <T> @NotNull ComparatorWithList<T> get(List<T> list) { return new ComparatorWithList<>(list); }
 	
 	// -------------------------------------------- //
 	// FIELDS

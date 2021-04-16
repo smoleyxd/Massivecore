@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaUnbreakable extends WriterAbstractItemStackMetaField<ItemMeta, Boolean, Boolean>
 {
@@ -21,19 +22,19 @@ public class WriterItemStackMetaUnbreakable extends WriterAbstractItemStackMetaF
 	// -------------------------------------------- //
 
 	@Override
-	public Boolean getA(DataItemStack ca, ItemStack d)
+	public Boolean getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.isUnbreakable();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Boolean fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Boolean fa, ItemStack d)
 	{
 		ca.setUnbreakable(fa);
 	}
 
 	@Override
-	public Boolean getB(ItemMeta cb, ItemStack d)
+	public Boolean getB(@NotNull ItemMeta cb, ItemStack d)
 	{
 		try {
 			return cb.isUnbreakable();
@@ -43,7 +44,7 @@ public class WriterItemStackMetaUnbreakable extends WriterAbstractItemStackMetaF
 	}
 
 	@Override
-	public void setB(ItemMeta cb, Boolean fb, ItemStack d)
+	public void setB(@NotNull ItemMeta cb, Boolean fb, ItemStack d)
 	{
 		try {
 			cb.setUnbreakable(fb);

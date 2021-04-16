@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -32,25 +33,25 @@ public class WriterItemStackMetaSuspiciousStewEffects extends WriterAbstractItem
 	// -------------------------------------------- //
 	
 	@Override
-	public List<DataPotionEffect> getA(DataItemStack ca, ItemStack d)
+	public List<DataPotionEffect> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getPotionEffects();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, List<DataPotionEffect> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, List<DataPotionEffect> fa, ItemStack d)
 	{
 		ca.setPotionEffects(fa);
 	}
 	
 	@Override
-	public List<PotionEffect> getB(SuspiciousStewMeta cb, ItemStack d)
+	public List<PotionEffect> getB(@NotNull SuspiciousStewMeta cb, ItemStack d)
 	{
 		return cb.getCustomEffects();
 	}
 	
 	@Override
-	public void setB(SuspiciousStewMeta cb, List<PotionEffect> fb, ItemStack d)
+	public void setB(@NotNull SuspiciousStewMeta cb, List<PotionEffect> fb, ItemStack d)
 	{
 		for (PotionEffect potionEffect : fb)
 		{

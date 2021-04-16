@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.util;
 import org.apache.commons.lang.mutable.MutableBoolean;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Random;
@@ -32,7 +34,7 @@ public class SmokeUtil
 	// -------------------------------------------- //
 	
 	// Single ========
-	public static void spawnSingle(Location location, int direction)
+	public static void spawnSingle(@Nullable Location location, int direction)
 	{
 		if (location == null) return;
 		location.getWorld().playEffect(location, Effect.SMOKE, direction);
@@ -57,7 +59,7 @@ public class SmokeUtil
 		}
 	}
 	
-	public static void spawnCloudSimple(Collection<Location> locations)
+	public static void spawnCloudSimple(@NotNull Collection<Location> locations)
 	{
 		for (Location location : locations)
 		{
@@ -75,7 +77,7 @@ public class SmokeUtil
 		}
 	}
 	
-	public static void spawnCloudRandom(Collection<Location> locations, float thickness)
+	public static void spawnCloudRandom(@NotNull Collection<Location> locations, float thickness)
 	{
 		for (Location location : locations)
 		{
@@ -91,7 +93,7 @@ public class SmokeUtil
 	}
 	
 	public static final MutableBoolean fakeExplosion = new MutableBoolean(false);
-	public static void fakeExplosion(Location location, float power)
+	public static void fakeExplosion(@NotNull Location location, float power)
 	{
 		synchronized (fakeExplosion)
 		{

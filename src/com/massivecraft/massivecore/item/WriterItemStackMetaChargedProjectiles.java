@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -28,19 +29,19 @@ public class WriterItemStackMetaChargedProjectiles extends WriterAbstractItemSta
 	// -------------------------------------------- //
 
 	@Override
-	public Map<Integer, DataItemStack> getA(DataItemStack ca, ItemStack d)
+	public Map<Integer, DataItemStack> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getChargedProjectiles();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Map<Integer, DataItemStack> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Map<Integer, DataItemStack> fa, ItemStack d)
 	{
 		ca.setChargedProjectiles(fa);
 	}
 
 	@Override
-	public ItemStack[] getB(CrossbowMeta cb, ItemStack d)
+	public ItemStack[] getB(@NotNull CrossbowMeta cb, ItemStack d)
 	{
 		// Null
 		if (cb == null) return null;
@@ -49,7 +50,7 @@ public class WriterItemStackMetaChargedProjectiles extends WriterAbstractItemSta
 	}
 
 	@Override
-	public void setB(CrossbowMeta crossbowMeta, ItemStack[] chargedProjectiles, ItemStack d)
+	public void setB(@NotNull CrossbowMeta crossbowMeta, ItemStack[] chargedProjectiles, ItemStack d)
 	{
 		// Null
 		if (crossbowMeta == null) return;

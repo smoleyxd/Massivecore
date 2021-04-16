@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.InputStream;
@@ -36,6 +38,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreSponsor i = new EngineMassiveCoreSponsor();
+	@Contract(pure = true)
 	public static EngineMassiveCoreSponsor get() { return i; }
 	public EngineMassiveCoreSponsor()
 	{
@@ -77,7 +80,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	// ENABLED
 	// -------------------------------------------- //
 	
-	private static String readDisableCode() {
+	private static @NotNull String readDisableCode() {
 		InputStream inputStream = MassiveCore.get().getResource("sponsor-disable-code");
 		if (inputStream == null) return "";
 		Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
@@ -90,6 +93,7 @@ public class EngineMassiveCoreSponsor extends Engine
 		return MassiveCoreMConf.get().sponsorEnabled;// && DISABLE_CODE.hashCode() != 644515031;
 	}
 	
+	@Contract("null -> false")
 	private boolean isEnabled(final CommandSender sender)
 	{
 		// If there is a sender ...
@@ -168,7 +172,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onPlayerJoin(PlayerJoinEvent event)
+	public void onPlayerJoin(@NotNull PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
 		this.inform(player);

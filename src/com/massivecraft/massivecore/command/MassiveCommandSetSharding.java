@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.event.EventMassiveCoreCommandSet;
 import com.massivecraft.massivecore.mixin.MixinEvent;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.PermissionUtil;
+import org.jetbrains.annotations.Contract;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,11 +23,13 @@ public abstract class MassiveCommandSetSharding<T extends Serializable> extends 
 
 	private String permSetOther;
 	public String getPermSetOther() { return permSetOther; }
+	@Contract(mutates = "this")
 	public void setPermSetOther(String permSetOther) { this.permSetOther = permSetOther; }
 	public boolean hasPermSetOther() { return this.getPermSetOther() != null; }
 	
 	private PlayerValue<T> playerValue;
 	public PlayerValue<T> getPlayerValue() { return playerValue; }
+	@Contract(mutates = "this")
 	public void setPlayerValue(PlayerValue<T> playerValue) { this.playerValue = playerValue; }
 	
 	// -------------------------------------------- //

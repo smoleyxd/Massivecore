@@ -11,6 +11,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -21,6 +22,7 @@ public class AdapterEnchantment implements JsonDeserializer<Enchantment>, JsonSe
     // -------------------------------------------- //
 
     private static AdapterEnchantment i = new AdapterEnchantment();
+    @Contract(pure = true)
     public static AdapterEnchantment get() { return i; }
 
     // -------------------------------------------- //

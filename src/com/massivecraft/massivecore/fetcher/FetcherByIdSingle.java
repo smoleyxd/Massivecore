@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -39,6 +41,7 @@ public class FetcherByIdSingle implements Callable<Map<UUID, IdAndName>>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract(pure = true)
 	public FetcherByIdSingle(Collection<UUID> ids)
 	{
 		this.ids = ids;
@@ -58,7 +61,7 @@ public class FetcherByIdSingle implements Callable<Map<UUID, IdAndName>>
 	// STATIC
 	// -------------------------------------------- //
 	
-	public static Map<UUID, IdAndName> fetch(Collection<UUID> ids) throws Exception
+	public static @NotNull Map<UUID, IdAndName> fetch(@NotNull Collection<UUID> ids) throws Exception
 	{
 		Map<UUID, IdAndName> ret = new HashMap<>();
 		JSONParser jsonParser = new JSONParser();
@@ -92,7 +95,7 @@ public class FetcherByIdSingle implements Callable<Map<UUID, IdAndName>>
 		return ret;
 	}
 	
-	private static HttpURLConnection createConnection(UUID id) throws Exception
+	private static @NotNull HttpURLConnection createConnection(@NotNull UUID id) throws Exception
 	{
 		URL url = new URL(PROFILE_URL + id.toString().replace("-", ""));
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();

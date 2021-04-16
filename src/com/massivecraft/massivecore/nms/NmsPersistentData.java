@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.mixin.Mixin;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -26,11 +27,11 @@ public class NmsPersistentData extends Mixin
 	// CREATE
 	// -------------------------------------------- //
 	
-	public Map<String, Object> getPersistentData(PersistentDataContainer persistentDataContainer) {
+	public Map<String, Object> getPersistentData(@NotNull PersistentDataContainer persistentDataContainer) {
 		return null;
 	}
 	
-	public void setPersistentData(PersistentDataContainer persistentDataContainer, Map<String, Object> data) {
+	public void setPersistentData(@NotNull PersistentDataContainer persistentDataContainer, Map<String, Object> data) {
 	
 	}
 	

@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -21,6 +23,7 @@ public class AdapterEntry implements JsonDeserializer<Entry<?, ?>>, JsonSerializ
 	// -------------------------------------------- //
 	
 	private static final AdapterEntry i = new AdapterEntry();
+	@Contract(pure = true)
 	public static AdapterEntry get() { return i; }
 
 	// -------------------------------------------- //
@@ -78,15 +81,15 @@ public class AdapterEntry implements JsonDeserializer<Entry<?, ?>>, JsonSerializ
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static Type getKeyType(Type type)
+	public static Type getKeyType(@NotNull Type type)
 	{
 		return getType(type, 0);
 	}
-	public static Type getValueType(Type type)
+	public static Type getValueType(@NotNull Type type)
 	{
 		return getType(type, 1);
 	}
-	public static Type getType(Type type, int index)
+	public static Type getType(@NotNull Type type, int index)
 	{
 		ParameterizedType ptype = (ParameterizedType)type;
 		Type[] types = ptype.getActualTypeArguments();

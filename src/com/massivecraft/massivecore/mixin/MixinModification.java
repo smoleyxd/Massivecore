@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.mixin;
 
 import com.massivecraft.massivecore.store.Coll;
 import com.massivecraft.massivecore.store.Entity;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class MixinModification extends Mixin
 {
@@ -11,13 +13,14 @@ public class MixinModification extends Mixin
 	
 	private static MixinModification d = new MixinModification();
 	private static MixinModification i = d;
+	@Contract(pure = true)
 	public static MixinModification get() { return i; }
 	
 	// -------------------------------------------- //
 	// METHODS
 	// -------------------------------------------- //
 	
-	public void syncModification(Entity<?> entity)
+	public void syncModification(@NotNull Entity<?> entity)
 	{
 		this.syncModification(entity.getColl(), entity.getId());
 	}

@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -86,7 +88,7 @@ public class WebUtil
 	// -------------------------------------------- //
 	
 	// This one should be run async since it's very slow.
-	public static List<String> getLines(URL url) throws IOException
+	public static @NotNull List<String> getLines(URL url) throws IOException
 	{
 		HttpURLConnection uc = null;
 		InputStream is;
@@ -124,7 +126,7 @@ public class WebUtil
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static HttpURLConnection openHttpUrlConnection(URL url) throws IOException
+	public static @NotNull HttpURLConnection openHttpUrlConnection(@NotNull URL url) throws IOException
 	{
 		// Create Ret
 		HttpURLConnection ret = (HttpURLConnection) url.openConnection();

@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.money;
 
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Collection;
 
@@ -19,6 +20,7 @@ public class Money
 	// EXTRACT
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static String accountName(Object account)
 	{
 		// It's OK to send to or from null...

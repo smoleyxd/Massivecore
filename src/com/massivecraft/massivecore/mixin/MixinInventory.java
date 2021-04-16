@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.Contract;
 
 public class MixinInventory extends Mixin
 {
@@ -14,6 +15,7 @@ public class MixinInventory extends Mixin
 	
 	private static MixinInventory d = new MixinInventory();
 	private static MixinInventory i = d;
+	@Contract(pure = true)
 	public static MixinInventory get() { return i; }
 	
 	// -------------------------------------------- //

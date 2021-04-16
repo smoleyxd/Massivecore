@@ -14,6 +14,9 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +31,8 @@ public class PermissionUtil
 	// TODO: Gather more versions spread out over plugins,
 	// TODO: Place them all here. Were there some in MUtil?
 	
-	public static <T> T pickFirstVal(Permissible permissible, Map<String, T> perm2val)
+	@Contract("_, null -> null")
+	public static <T> T pickFirstVal(@NotNull Permissible permissible, Map<String, T> perm2val)
 	{
 		if (perm2val == null) return null;
 		T ret = null;
@@ -42,12 +46,12 @@ public class PermissionUtil
 		return ret;
 	}
 	
-	public static String createPermissionId(Plugin plugin, Enum<?> e)
+	public static @NotNull String createPermissionId(@NotNull Plugin plugin, @NotNull Enum<?> e)
 	{
 		return createPermissionId(plugin, e.name());
 	}
 
-	public static String createPermissionId(Plugin plugin, String enumName)
+	public static @NotNull String createPermissionId(@NotNull Plugin plugin, @NotNull String enumName)
 	{
 		return plugin.getName().toLowerCase() + "." + enumName.toLowerCase().replace('_', '.');
 	}
@@ -59,7 +63,7 @@ public class PermissionUtil
 	// TODO: This methodology I don't believe in any more.
 	// TODO: Rework and improve technology.
 	
-	public static void ensureHas(Permissible permissible, String permissionName)
+	public static void ensureHas(@NotNull Permissible permissible, String permissionName)
 	{
 		if (permissible.hasPermission(permissionName))
 		{
@@ -71,7 +75,7 @@ public class PermissionUtil
 		}
 	}
 	
-	public static void ensureHas(Permissible permissible, Permission permission)
+	public static void ensureHas(@NotNull Permissible permissible, @NotNull Permission permission)
 	{
 		ensureHas(permissible, permission.getName());
 	}
@@ -80,6 +84,7 @@ public class PermissionUtil
 	// AS
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static String asPermissionId(Object object)
 	{
 		if (object == null) return null;
@@ -91,6 +96,7 @@ public class PermissionUtil
 		throw new IllegalArgumentException(object.toString());
 	}
 	
+	@Contract("null -> null")
 	public static Permission asPermission(Object object)
 	{
 		if (object == null) return null;
@@ -107,7 +113,8 @@ public class PermissionUtil
 	// Our own constructor for name symmetry.
 	// Supplying null means using the default values.
 	
-	public static Permission constructPermission(String id, String description, PermissionDefault standard, Map<String, Boolean> children)
+	@Contract("null, _, _, _ -> fail; !null, _, _, _ -> new")
+	public static @NotNull Permission constructPermission(String id, String description, PermissionDefault standard, Map<String, Boolean> children)
 	{
 		if (id == null) throw new NullPointerException("id");
 		return new Permission(id, description, standard, children);
@@ -121,23 +128,23 @@ public class PermissionUtil
 	
 	// According to MassiveCraft names are changeable and ids are not.
 	// Bukkit permissions lack names. They do however have ids. 
-	public static String getPermissionId(Permission permission)
+	public static @NotNull String getPermissionId(@NotNull Permission permission)
 	{
 		return permission.getName();
 	}
 	
-	public static String getPermissionDescription(Permission permission)
+	public static @NotNull String getPermissionDescription(@NotNull Permission permission)
 	{
 		return permission.getDescription();
 	}
 	
 	// Default is a reserved Java keyword. Standard will work better.
-	public static PermissionDefault getPermissionStandard(Permission permission)
+	public static @NotNull PermissionDefault getPermissionStandard(@NotNull Permission permission)
 	{
 		return permission.getDefault();
 	}
 	
-	public static Map<String, Boolean> getPermissionChildren(Permission permission)
+	public static @NotNull Map<String, Boolean> getPermissionChildren(@NotNull Permission permission)
 	{
 		return permission.getChildren();
 	}
@@ -155,6 +162,7 @@ public class PermissionUtil
 
 	// ONE FIELD
 	
+	@Contract("null, _ -> fail; !null, null -> false")
 	public static boolean setPermissionDescription(Permission permission, String description)
 	{
 		if (permission == null) throw new NullPointerException("permission");
@@ -170,6 +178,7 @@ public class PermissionUtil
 		return true;
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> false")
 	public static boolean setPermissionStandard(Permission permission, PermissionDefault standard)
 	{
 		if (permission == null) throw new NullPointerException("permission");
@@ -186,6 +195,7 @@ public class PermissionUtil
 		return true;
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> false")
 	public static boolean setPermissionChildren(Permission permission, Map<String, Boolean> children)
 	{
 		if (permission == null) throw new NullPointerException("permission");
@@ -342,7 +352,7 @@ public class PermissionUtil
 	// The action should fit into the format for a denied message such as:
 	// You don't have permission to FLY TO THE MOON.
 	
-	public static String getPermissionAction(Object permission)
+	public static String getPermissionAction(@Nullable Object permission)
 	{
 		Permission permissionBukkit = asPermission(permission);
 		if (permissionBukkit == null) return Lang.PERM_DEFAULT_DESCRIPTION;
@@ -380,6 +390,7 @@ public class PermissionUtil
 	// PERMISSION > HAS
 	// -------------------------------------------- //	
 	
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail")
 	public static boolean hasPermission(Permissible permissible, Object permission, boolean verbose)
 	{
 		// Fail Fast
@@ -401,6 +412,7 @@ public class PermissionUtil
 		return false;
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public static boolean hasPermission(Permissible permissible, Object permission)
 	{
 		return hasPermission(permissible, permission, false);
@@ -422,7 +434,8 @@ public class PermissionUtil
 	// The Bukkit version recalculates permissions which does not make any sense.
 	// An empty attachment is not going to affect the effective permissions.
 	// Thus we make use of our own attachment creator that does not waste CPU.
-	public static PermissionAttachment createPermissibleAttachment(Permissible permissible, Plugin plugin)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public static @Nullable PermissionAttachment createPermissibleAttachment(Permissible permissible, Plugin plugin)
 	{
 		if (permissible == null) throw new NullPointerException("permissible");
 		if (plugin == null) throw new NullPointerException("plugin");
@@ -436,7 +449,7 @@ public class PermissionUtil
 		return ret;
 	}
 	
-	public static List<PermissionAttachment> getPermissibleAttachments(Permissible permissible)
+	public static @Nullable List<PermissionAttachment> getPermissibleAttachments(Permissible permissible)
 	{
 		PermissibleBase base = getPermissibleBase(permissible);
 		if (base == null) return null;
@@ -446,7 +459,7 @@ public class PermissionUtil
 	// This method returns the first attachment belonging to the plugin.
 	// The thought process here is that plugins rarely need more than one attachment.
 	// With that in mind we offer this per plugin singleton getter.
-	public static PermissionAttachment getPermissibleAttachment(Permissible permissible, Plugin plugin, boolean creative)
+	public static @Nullable PermissionAttachment getPermissibleAttachment(Permissible permissible, Plugin plugin, boolean creative)
 	{
 		List<PermissionAttachment> attachments = getPermissibleAttachments(permissible);
 		if (attachments == null) return null;
@@ -479,6 +492,7 @@ public class PermissionUtil
 		return NmsPermissions.get().getAttachmentPermissions(attachment);
 	}	
 	
+	@Contract("null, _ -> fail; !null, null -> false")
 	public static boolean setAttachmentPermissions(PermissionAttachment attachment, Map<String, Boolean> permissions)
 	{
 		if (attachment == null) throw new NullPointerException("attachment");

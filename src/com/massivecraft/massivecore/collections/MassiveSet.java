@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -49,7 +51,7 @@ public class MassiveSet<E> extends LinkedHashSet<E>
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public MassiveSet(E... elements)
+	public MassiveSet(E @NotNull ... elements)
 	{
 		this(Arrays.asList(elements));
 	}
@@ -67,7 +69,7 @@ public class MassiveSet<E> extends LinkedHashSet<E>
 	}
 	
 	@Override
-	public boolean retainAll(Collection<?> c)
+	public boolean retainAll(@NotNull Collection<?> c)
 	{
 		if (c instanceof List) c = new HashSet<Object>(c);
 		return super.retainAll(c);

@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -87,7 +88,7 @@ public class NmsChat116R1P extends NmsChatAbstract
 	// -------------------------------------------- //
 	
 	@Override
-	public void sendChatMson(Object sendeeObject, Mson mson)
+	public void sendChatMson(Object sendeeObject, @NotNull Mson mson)
 	{
 		CommandSender sendee = IdUtil.getSender(sendeeObject);
 		if (sendee == null) return;

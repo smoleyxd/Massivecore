@@ -1,5 +1,9 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
+
 import java.util.Collection;
 
 /**
@@ -18,7 +22,7 @@ public class MassiveListDef<E> extends MassiveList<E> implements Def
 	// CONSTRUCT: SUPER
 	// -------------------------------------------- //
 	
-	public MassiveListDef(int initialCapacity)
+	public MassiveListDef(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity)
 	{
 		super(initialCapacity);
 	}
@@ -28,13 +32,13 @@ public class MassiveListDef<E> extends MassiveList<E> implements Def
 		super();
 	}
 	
-	public MassiveListDef(Collection<? extends E> c)
+	public MassiveListDef(@Nullable Collection<? extends E> c)
 	{
 		super(c);
 	}
 	
 	@SafeVarargs
-	public MassiveListDef(E... elements)
+	public MassiveListDef(E @NotNull ... elements)
 	{
 		super(elements);
 	}

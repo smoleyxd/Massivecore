@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -82,6 +83,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 	
 	private Map<World, Map<UUID, Object>> worldMaps = new WeakHashMap<>();
 	
+	@Contract("null -> fail")
 	private Map<UUID, Object> getWorldMap(Object handle)
 	{
 		if (handle == null) throw new NullPointerException("handle");
@@ -89,6 +91,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 		return ReflectionUtil.getField(this.fieldNmsWorldServerEntitiesByUuid, handle);
 	}
 	
+	@Contract("null -> fail")
 	private Map<UUID, Object> getWorldMap(World world)
 	{
 		if (world == null) throw new NullPointerException("world");

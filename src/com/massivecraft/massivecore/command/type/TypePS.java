@@ -11,6 +11,9 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +26,7 @@ public class TypePS extends TypeAbstract<PS>
 	// -------------------------------------------- //
 	
 	private static TypePS i = new TypePS();
+	@Contract(pure = true)
 	public static TypePS get() { return i; }
 	public TypePS() { super(PS.class); }
 	
@@ -230,7 +234,7 @@ public class TypePS extends TypeAbstract<PS>
 		return null;
 	}
 	
-	public static String getValue(String entry, String... prefixes)
+	public static @Nullable String getValue(String entry, String @NotNull ... prefixes)
 	{
 		for (String prefix : prefixes)
 		{

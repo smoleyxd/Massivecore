@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 
@@ -36,7 +37,7 @@ public class AdapterPolymorphic<T> implements JsonDeserializer<T>, JsonSerialize
 	}
 
 	@Override
-	public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+	public T deserialize(@NotNull JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 	{
 		if (!json.isJsonObject())
 		{

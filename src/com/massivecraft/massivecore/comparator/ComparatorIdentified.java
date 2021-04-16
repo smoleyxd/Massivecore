@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
 import com.massivecraft.massivecore.Identified;
+import org.jetbrains.annotations.Contract;
 
 public class ComparatorIdentified extends ComparatorAbstract<Object>
 {
@@ -9,6 +10,7 @@ public class ComparatorIdentified extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorIdentified i = new ComparatorIdentified();
+	@Contract(pure = true)
 	public static ComparatorIdentified get() { return i; }
 	
 	// -------------------------------------------- //

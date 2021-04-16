@@ -12,6 +12,8 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +32,8 @@ public abstract class TypeSenderIdAbstract<T> extends TypeAbstract<T>
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
-	
+
+	@Contract("_, null, _, _ -> fail; _, !null, null, _ -> fail; _, !null, !null, null -> fail")
 	public TypeSenderIdAbstract(Class<?> clazz, SenderIdSource source, SenderPresence presence, SenderType type)
 	{
 		super(clazz);
@@ -43,17 +46,17 @@ public abstract class TypeSenderIdAbstract<T> extends TypeAbstract<T>
 		this.type = type;
 	}
 	
-	public TypeSenderIdAbstract(Class<?> clazz, SenderIdSource source, SenderPresence presence)
+	public TypeSenderIdAbstract(Class<?> clazz, @NotNull SenderIdSource source, @NotNull SenderPresence presence)
 	{
 		this(clazz, source, presence, SenderType.ANY);
 	}
 	
-	public TypeSenderIdAbstract(Class<?> clazz, SenderIdSource source, SenderType type)
+	public TypeSenderIdAbstract(Class<?> clazz, @NotNull SenderIdSource source, @NotNull SenderType type)
 	{
 		this(clazz, source, SenderPresence.ANY, type);
 	}
 	
-	public TypeSenderIdAbstract(Class<?> clazz, SenderIdSource source)
+	public TypeSenderIdAbstract(Class<?> clazz, @NotNull SenderIdSource source)
 	{
 		this(clazz, source, SenderPresence.ANY);
 	}

@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.util.IdData;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +37,7 @@ public class NmsSkullMeta extends Mixin
 	// RAW
 	// -------------------------------------------- //
 	
-	public String getName(SkullMeta meta)
+	public String getName(@NotNull SkullMeta meta)
 	{
 		return meta.getOwningPlayer().getName();
 	}
@@ -46,7 +47,7 @@ public class NmsSkullMeta extends Mixin
 		throw notImplemented();
 	}
 	
-	public void set(SkullMeta meta, String name, UUID id)
+	public void set(@NotNull SkullMeta meta, String name, UUID id)
 	{
 		throw notImplemented();
 	}
@@ -97,7 +98,7 @@ public class NmsSkullMeta extends Mixin
 		return null;
 	}
 	
-	public void setGameProfile(SkullMeta meta, Object gameProfile)
+	public void setGameProfile(@NotNull SkullMeta meta, Object gameProfile)
 	{
 		// No-op here
 	}
@@ -112,7 +113,7 @@ public class NmsSkullMeta extends Mixin
 		return Collections.emptyList();
 	}
 	
-	public void setGameProfileProperties(Object propertyMap, Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
+	public void setGameProfileProperties(@NotNull Object propertyMap, @NotNull Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
 	{
 		// No-op here
 	}

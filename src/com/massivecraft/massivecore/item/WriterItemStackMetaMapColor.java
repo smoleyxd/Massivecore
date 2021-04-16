@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MapMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaMapColor extends WriterAbstractItemStackMetaField<MapMeta, Integer, Color>
 {
@@ -27,25 +28,25 @@ public class WriterItemStackMetaMapColor extends WriterAbstractItemStackMetaFiel
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public Integer getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getMapColor();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Integer fa, ItemStack d)
 	{
 		ca.setMapColor(fa);
 	}
 
 	@Override
-	public Color getB(MapMeta cb, ItemStack d)
+	public Color getB(@NotNull MapMeta cb, ItemStack d)
 	{
 		return cb.hasColor() ? cb.getColor() : null;
 	}
 
 	@Override
-	public void setB(MapMeta cb, Color fb, ItemStack d)
+	public void setB(@NotNull MapMeta cb, Color fb, ItemStack d)
 	{
 		cb.setColor(fb);
 	}

@@ -4,6 +4,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.jetbrains.annotations.NotNull;
 
 public class NmsRepairable113R1P extends NmsRepairable
 {
@@ -25,13 +26,13 @@ public class NmsRepairable113R1P extends NmsRepairable
 	// -------------------------------------------- //
 
 	@Override
-	public boolean isRepairable(ItemStack itemStack)
+	public boolean isRepairable(@NotNull ItemStack itemStack)
 	{
 		return itemStack.getItemMeta() instanceof Repairable;
 	}
 
 	@Override
-    protected void repairInner(ItemStack itemStack) {
+    protected void repairInner(@NotNull ItemStack itemStack) {
 	    ItemMeta meta = itemStack.getItemMeta();
         if (meta instanceof Damageable) {
             ((Damageable) meta).setDamage(0);

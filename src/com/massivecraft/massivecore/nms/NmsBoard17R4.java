@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableSet;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -77,13 +78,13 @@ public class NmsBoard17R4 extends NmsBoard
 	// In 1.7 there were no options.
 	
 	@Override
-	public TeamOptionValue getOption(Team team, TeamOptionKey key)
+	public TeamOptionValue getOption(@NotNull Team team, @NotNull TeamOptionKey key)
 	{
 		return null;
 	}
 	
 	@Override
-	public void setOption(Team team, TeamOptionKey key, TeamOptionValue value)
+	public void setOption(@NotNull Team team, @NotNull TeamOptionKey key, @NotNull TeamOptionValue value)
 	{
 		
 	}
@@ -93,7 +94,7 @@ public class NmsBoard17R4 extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public void addMember(Team team, String key)
+	public void addMember(@NotNull Team team, String key)
 	{
 		Object handle = this.getBoardHandleValidated(team);
 		
@@ -101,7 +102,7 @@ public class NmsBoard17R4 extends NmsBoard
 	}
 	
 	@Override
-	public boolean removeMember(Team team, String key)
+	public boolean removeMember(@NotNull Team team, String key)
 	{
 		Object handle = this.getBoardHandleValidated(team);
 		
@@ -115,7 +116,7 @@ public class NmsBoard17R4 extends NmsBoard
 	}
 	
 	@Override
-	public boolean isMember(Team team, String key)
+	public boolean isMember(@NotNull Team team, String key)
 	{
 		this.getBoardHandleValidated(team);
 		
@@ -124,7 +125,7 @@ public class NmsBoard17R4 extends NmsBoard
 		return members.contains(key);
 	}
 	
-	public Set<String> getMembers(Team team)
+	public Set<String> getMembers(@NotNull Team team)
 	{
 		this.getBoardHandleValidated(team);
 		
@@ -145,7 +146,7 @@ public class NmsBoard17R4 extends NmsBoard
 		return ReflectionUtil.invokeMethod(this.methodNmsScoreboardTeamGetPlayerNameSet, handle);
 	}
 	
-	protected <T> T getBoardHandleValidated(Team team)
+	protected <T> T getBoardHandleValidated(@NotNull Team team)
 	{
 		Scoreboard board = team.getScoreboard();
 		T handle = NmsBasics.get().getHandle(board);
@@ -159,7 +160,7 @@ public class NmsBoard17R4 extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public Team getKeyTeam(Scoreboard board, String key)
+	public Team getKeyTeam(@NotNull Scoreboard board, @NotNull String key)
 	{
 		if (board == null) throw new NullPointerException("board");
 		if (key == null) throw new NullPointerException("key");

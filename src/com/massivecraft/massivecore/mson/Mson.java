@@ -19,6 +19,10 @@ import org.apache.commons.lang.mutable.MutableInt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -121,14 +125,14 @@ public class Mson implements Serializable
 	// It does not make sense for something which doesn't have extras
 	// to not have text, because then it doesn't show up at all.
 	private final String text;
-	public String getText() { return this.text; }
+	public @NotNull String getText() { return this.text; }
 
 	// FIELD: Color of the mson
 	private final String color;
-	public String getColor() { return this.color; }
-	public String getEffectiveColor() { return color != null ? color : getInheritedColor(); }
-	public String getInheritedColor() { return hasParent() ? getParent().getEffectiveColor() : null; }
-	public ChatColor getEffectiveColorCode() {
+	public @Nullable String getColor() { return this.color; }
+	public @Nullable String getEffectiveColor() { return color != null ? color : getInheritedColor(); }
+	public @Nullable String getInheritedColor() { return hasParent() ? getParent().getEffectiveColor() : null; }
+	public @Nullable ChatColor getEffectiveColorCode() {
 		if (color != null) {
 			try
 			{
@@ -145,58 +149,58 @@ public class Mson implements Serializable
 
 	// FIELD: bold
 	private final Boolean bold;
-	public Boolean isBold() { return bold; }
-	public Boolean isEffectiveBold() { return bold != null ? bold : isInheritedBold(); }
-	public Boolean isInheritedBold() { return hasParent() ? getParent().isEffectiveBold() : null; }
+	public @Nullable Boolean isBold() { return bold; }
+	public @Nullable Boolean isEffectiveBold() { return bold != null ? bold : isInheritedBold(); }
+	public @Nullable Boolean isInheritedBold() { return hasParent() ? getParent().isEffectiveBold() : null; }
 
 	// FIELD: italic
 	private final Boolean italic;
-	public Boolean isItalic() { return this.italic; }
-	public Boolean isEffectiveItalic() { return italic != null ? italic : isInheritedItalic(); }
-	protected Boolean isInheritedItalic() { return hasParent() ? getParent().isEffectiveItalic() : null; }
+	public @Nullable Boolean isItalic() { return this.italic; }
+	public @Nullable Boolean isEffectiveItalic() { return italic != null ? italic : isInheritedItalic(); }
+	protected @Nullable Boolean isInheritedItalic() { return hasParent() ? getParent().isEffectiveItalic() : null; }
 
 	// FIELD: underlined
 	private final Boolean underlined;
-	public Boolean isUnderlined() { return this.underlined; }
-	public Boolean isEffectiveUnderlined() { return underlined != null ? underlined : isInheritedUnderlined(); }
-	protected Boolean isInheritedUnderlined() { return hasParent() ? getParent().isEffectiveUnderlined() : null; }
+	public @Nullable Boolean isUnderlined() { return this.underlined; }
+	public @Nullable Boolean isEffectiveUnderlined() { return underlined != null ? underlined : isInheritedUnderlined(); }
+	protected @Nullable Boolean isInheritedUnderlined() { return hasParent() ? getParent().isEffectiveUnderlined() : null; }
 
 	// FIELD: strikethrough
 	private final Boolean strikethrough;
-	public Boolean isStrikethrough() { return this.strikethrough; }
-	public Boolean isEffectiveStrikethrough() { return strikethrough != null ? strikethrough : isInheritedStrikethrough(); }
-	protected Boolean isInheritedStrikethrough() { return hasParent() ? getParent().isEffectiveStrikethrough() : null; }
+	public @Nullable Boolean isStrikethrough() { return this.strikethrough; }
+	public @Nullable Boolean isEffectiveStrikethrough() { return strikethrough != null ? strikethrough : isInheritedStrikethrough(); }
+	protected @Nullable Boolean isInheritedStrikethrough() { return hasParent() ? getParent().isEffectiveStrikethrough() : null; }
 
 	// FIELD: obfuscated
 	private final Boolean obfuscated;
-	public Boolean isObfuscated() { return this.obfuscated; }
-	public Boolean isEffectiveObfuscated() { return obfuscated != null ? obfuscated : isInheritedObfuscated(); }
-	protected Boolean isInheritedObfuscated() { return hasParent() ? getParent().isEffectiveObfuscated() : null; }
+	public @Nullable Boolean isObfuscated() { return this.obfuscated; }
+	public @Nullable Boolean isEffectiveObfuscated() { return obfuscated != null ? obfuscated : isInheritedObfuscated(); }
+	protected @Nullable Boolean isInheritedObfuscated() { return hasParent() ? getParent().isEffectiveObfuscated() : null; }
 
 	// FIELD: The Events which happen when you click, hover over or shift-click the message
 	protected final MsonEvent clickEvent;
 	protected final MsonEvent hoverEvent;
-	public MsonEvent getEvent(MsonEventType type) { return type.get(this); }
-	public MsonEvent getEffectiveEvent(MsonEventType type) { return type.get(this) != null ? type.get(this) : getInheritedEvent(type); }
-	protected MsonEvent getInheritedEvent(MsonEventType type) { return this.hasParent() ? this.getParent().getEffectiveEvent(type) : null; }
+	public MsonEvent getEvent(@NotNull MsonEventType type) { return type.get(this); }
+	public @Nullable MsonEvent getEffectiveEvent(@NotNull MsonEventType type) { return type.get(this) != null ? type.get(this) : getInheritedEvent(type); }
+	protected @Nullable MsonEvent getInheritedEvent(@NotNull MsonEventType type) { return this.hasParent() ? this.getParent().getEffectiveEvent(type) : null; }
 
 	private final String insertion;
-	public String getInsertion() { return this.insertion; }
-	public String getEffectiveInsertion() { return insertion != null ? insertion : getInheritedInsertion(); }
-	protected String getInheritedInsertion() { return this.hasParent() ? this.getParent().getEffectiveInsertion() : null; }
+	public @Nullable String getInsertion() { return this.insertion; }
+	public @Nullable String getEffectiveInsertion() { return insertion != null ? insertion : getInheritedInsertion(); }
+	protected @Nullable String getInheritedInsertion() { return this.hasParent() ? this.getParent().getEffectiveInsertion() : null; }
 
 	// The other parts of the message
 	private final List<Mson> extra;
-	public List<Mson> getExtra() { return this.extra; }
+	public @Nullable List<Mson> getExtra() { return this.extra; }
 	public boolean hasExtra() { return this.getExtra() != null; }
 
 	// Parent & Root
 	private final transient Mson parent;
-	public Mson getParent() { return this.parent; }
+	public @Nullable Mson getParent() { return this.parent; }
 	public boolean hasParent() { return this.getParent() != null; }
 
 	public boolean isRoot() { return this.getParent() == null; }
-	public Mson getRoot()
+	public @NotNull Mson getRoot()
 	{
 		Mson root = this;
 		while (true)
@@ -268,70 +272,78 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	// WITH FIELDS
 	// -------------------------------------------- //
+
+	@Contract("_ -> new")
+	public @NotNull Mson text(@NotNull String text) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson color(@Nullable String color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson color(@Nullable ChatColor color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson bold(@Nullable Boolean bold) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson italic(@Nullable Boolean italic) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson underlined(@Nullable Boolean underlined) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson strikethrough(@Nullable Boolean strikethrough) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
+	public @NotNull Mson obfuscated(@Nullable Boolean obfuscated) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	
-	public Mson text(String text) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson color(String color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson color(ChatColor color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson bold(Boolean bold) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson italic(Boolean italic) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson underlined(Boolean underlined) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson strikethrough(Boolean strikethrough) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson obfuscated(Boolean obfuscated) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	
-	private Mson createTooltip(Boolean override, String created)
+	private @NotNull Mson createTooltip(Boolean override, String created)
 	{
 		if (created == null) override = false;
 		if (override == null) override = (this.getTooltip() == null && this.getItem() == null);
 		return override ? this.tooltip(created) : this;
 	}
 	
-	public Mson event(Boolean tooltip, MsonEventType type, MsonEvent event)
+	public @NotNull Mson event(Boolean tooltip, @Nullable MsonEventType type, @NotNull MsonEvent event)
 	{
 		if (type == null) type = event.getType();
 		Mson ret = type.set(this, event);
 		String created = event.createTooltip();
 		return ret.createTooltip(tooltip, created);
 	}
-	public Mson event(Boolean tooltip, MsonEvent event)
+	public @NotNull Mson event(Boolean tooltip, @NotNull MsonEvent event)
 	{
 		return this.event(tooltip, null, event);
 	}
-	public Mson event(MsonEventType type, MsonEvent event)
+	public @NotNull Mson event(@Nullable MsonEventType type, @NotNull MsonEvent event)
 	{
 		return this.event(null, type, event);
 	}
-	public Mson event(MsonEvent event)
+	public @NotNull Mson event(@NotNull MsonEvent event)
 	{
 		return this.event(null, null, event);
 	}
 	
-	public Mson insertionString(String insertionString, Boolean tooltip)
+	public @NotNull Mson insertionString(String insertionString, Boolean tooltip)
 	{
 		String prefix =  Txt.parse("<h>Shift-Click Insert: <c>");
 		Mson ret = Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 		return ret.createTooltip(tooltip, prefix + insertionString);
 	}
-	public Mson insertionString (String insertionString) { return this.insertionString(insertionString, null); }
-	public Mson extra(Mson extra) { return extra(new Mson[] {extra}); }
-	public Mson extra(List<Mson> extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
-	public Mson extra(Mson[] extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra == null ? null : ImmutableList.copyOf(extra), parent); }
-	public Mson parent(Mson parent) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	public @NotNull Mson insertionString (String insertionString) { return this.insertionString(insertionString, null); }
+	public @NotNull Mson extra(Mson extra) { return extra(new Mson[] {extra}); }
+	public @NotNull Mson extra(@Nullable List<Mson> extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	public @NotNull Mson extra(Mson @Nullable [] extra) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra == null ? null : ImmutableList.copyOf(extra), parent); }
+	public @NotNull Mson parent(@Nullable Mson parent) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	
 	// -------------------------------------------- //
 	// ADD
 	// -------------------------------------------- //
 	
-	public Mson add(Object part)
+	public @NotNull Mson add(Object part)
 	{
 		return this.add(new Object[]{part});
 	}
 	
-	public Mson add(Object... parts)
+	public @NotNull Mson add(Object @NotNull ... parts)
 	{
 		return this.add(Arrays.asList(parts));
 	}
 	
-	public Mson add(Iterable<?> parts)
+	public @NotNull Mson add(@NotNull Iterable<?> parts)
 	{
 		List<Mson> extra = new MassiveList<>(this.getExtra());
 		List<Mson> msons = msons(parts);
@@ -343,32 +355,32 @@ public class Mson implements Serializable
 	// CONVENIENCE MSON EVENT
 	// -------------------------------------------- //
 
-	public Mson link(String link) { return this.event(MsonEvent.link(link)); }
+	public @NotNull Mson link(String link) { return this.event(MsonEvent.link(link)); }
 	
-	public Mson suggest(String suggest) { return this.event(MsonEvent.suggest(suggest)); }
-	public Mson suggest(MassiveCommand command, String... args) { return this.event(MsonEvent.suggest(command, args)); }
-	public Mson suggest(MassiveCommand command, Iterable<String> args) { return this.event(MsonEvent.suggest(command, args)); }
+	public @NotNull Mson suggest(String suggest) { return this.event(MsonEvent.suggest(suggest)); }
+	public @NotNull Mson suggest(@NotNull MassiveCommand command, String... args) { return this.event(MsonEvent.suggest(command, args)); }
+	public @NotNull Mson suggest(@NotNull MassiveCommand command, Iterable<String> args) { return this.event(MsonEvent.suggest(command, args)); }
 	
-	public Mson command(String command) { return this.event(MsonEvent.command(command)); }
-	public Mson command(MassiveCommand command, String... args) { return this.event(MsonEvent.command(command, args)); }
-	public Mson command(MassiveCommand command, Iterable<String> args) { return this.event(MsonEvent.command(command, args)); }
+	public @NotNull Mson command(String command) { return this.event(MsonEvent.command(command)); }
+	public @NotNull Mson command(@NotNull MassiveCommand command, String... args) { return this.event(MsonEvent.command(command, args)); }
+	public @NotNull Mson command(@NotNull MassiveCommand command, Iterable<String> args) { return this.event(MsonEvent.command(command, args)); }
 	
-	public Mson tooltip(String tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
-	public Mson tooltip(String... tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
-	public Mson tooltip(Collection<String> tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
-	public Mson tooltipParse(String tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
-	public Mson tooltipParse(String... tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
-	public Mson tooltipParse(Collection<String> tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
+	public @NotNull Mson tooltip(String tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
+	public @NotNull Mson tooltip(String @NotNull ... tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
+	public @NotNull Mson tooltip(@NotNull Collection<String> tooltip) { return this.event(MsonEvent.tooltip(tooltip)); }
+	public @NotNull Mson tooltipParse(String tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
+	public @NotNull Mson tooltipParse(String @NotNull ... tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
+	public @NotNull Mson tooltipParse(@NotNull Collection<String> tooltip) { return this.event(MsonEvent.tooltipParse(tooltip)); }
 	
-	public Mson item(ItemStack item) { return this.event(MsonEvent.item(item)); }
+	public @NotNull Mson item(@NotNull ItemStack item) { return this.event(MsonEvent.item(item)); }
 	
-	public String getLink() { return this.getEventValue(MsonEventAction.OPEN_URL); }
-	public String getSuggest() { return this.getEventValue(MsonEventAction.SUGGEST_COMMAND); }
-	public String getCommand() { return this.getEventValue(MsonEventAction.RUN_COMMAND); }
-	public String getTooltip() { return this.getEventValue(MsonEventAction.SHOW_TEXT); }
-	public String getItem() { return this.getEventValue(MsonEventAction.SHOW_ITEM); }
+	public @Nullable String getLink() { return this.getEventValue(MsonEventAction.OPEN_URL); }
+	public @Nullable String getSuggest() { return this.getEventValue(MsonEventAction.SUGGEST_COMMAND); }
+	public @Nullable String getCommand() { return this.getEventValue(MsonEventAction.RUN_COMMAND); }
+	public @Nullable String getTooltip() { return this.getEventValue(MsonEventAction.SHOW_TEXT); }
+	public @Nullable String getItem() { return this.getEventValue(MsonEventAction.SHOW_ITEM); }
 	
-	protected String getEventValue(MsonEventAction targetAction)
+	protected @Nullable String getEventValue(@NotNull MsonEventAction targetAction)
 	{
 		MsonEventType type = targetAction.getType();
 		
@@ -387,7 +399,7 @@ public class Mson implements Serializable
 	// CONVENIENCE STYLE
 	// -------------------------------------------- //
 	
-	public Mson style(ChatColor... styles)
+	public @NotNull Mson style(ChatColor @NotNull ... styles)
 	{
 		Mson ret = this;
 		for (ChatColor style : styles)
@@ -396,8 +408,9 @@ public class Mson implements Serializable
 		}
 		return ret;
 	}
-	
-	public Mson style(ChatColor style)
+
+	@Contract("null -> fail")
+	public @NotNull Mson style(ChatColor style)
 	{
 		if (style == null) throw new NullPointerException("style");
 		
@@ -411,15 +424,16 @@ public class Mson implements Serializable
 		
 		throw new UnsupportedOperationException(style.name());
 	}
-	
-	public Mson removeStyles()
+
+	@Contract(pure = true)
+	public @NotNull Mson removeStyles()
 	{
 		// NOTE: We can't use null.
 		// Since we want to override color and format in parents.
 		return Mson.valueOf(text, ChatColor.WHITE, false, false, false, false, false, clickEvent, hoverEvent, insertion, extra, parent);
 	}
 
-	public Mson stripStyle()
+	public @NotNull Mson stripStyle()
 	{
 		Mson ret = Mson.valueOf(text, (String)null, null, null, null, null, null, clickEvent, hoverEvent, insertion, null, parent);
 		
@@ -440,7 +454,7 @@ public class Mson implements Serializable
 	
 	// This will set all style and behaviour to the effective value.
 	// So parents won't affect this.
-	public Mson enforced()
+	public @NotNull Mson enforced()
 	{
 		return valueOf(
 			this.getText(),
@@ -463,28 +477,41 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	// Empty
-	public static Mson mson()
+	@Contract(pure = true)
+	public static @NotNull Mson mson()
 	{
 		return EMPTY;
 	}
 	
 	// Text
-	Mson(String text)
+	Mson(@NotNull String text)
 	{
 		this(text, (String) null, null, null, null, null, null, null, null, null, null, null);
 	}
 	
-	public static Mson mson(String text)
+	@Contract("_ -> new")
+	public static @NotNull Mson mson(@NotNull String text)
 	{
 		return new Mson(text);
 	}
-	
+
 	// Full
-	Mson(String text, String color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	Mson(@NotNull String text,
+		 @Nullable String color,
+		 @Nullable Boolean bold,
+		 @Nullable Boolean italic,
+		 @Nullable Boolean underlined,
+		 @Nullable Boolean strikethrough,
+		 @Nullable Boolean obfuscated,
+		 @Nullable MsonEvent clickEvent,
+		 @Nullable MsonEvent hoverEvent,
+		 @Nullable String insertionString,
+		 @Nullable List<Mson> extra,
+		 @Nullable Mson parent)
 	{
 		// Text
 		this.text = Objects.requireNonNull(text);
-		
+
 		// Color
 		if (color != null) {
 			if (!color.startsWith("#")) {
@@ -494,37 +521,37 @@ public class Mson implements Serializable
 			color = color.toLowerCase();
 		}
 		this.color = color;
-		
+
 		// Format
 		this.bold = bold;
 		this.italic = italic;
 		this.underlined = underlined;
 		this.strikethrough = strikethrough;
 		this.obfuscated = obfuscated;
-		
+
 		// Set Events
 		this.clickEvent = clickEvent;
 		this.hoverEvent = hoverEvent;
-		
+
 		// Validate Events
 		MsonEventType type;
 		MsonEvent event;
-		
+
 		type = MsonEventType.CLICK;
 		event = this.getEvent(type);
 		if (event != null && event.getType() != type) throw new IllegalArgumentException(event.getAction().name() + " is not of type " + type);
-		
+
 		type = MsonEventType.HOVER;
 		event = this.getEvent(type);
 		if (event != null && event.getType() != type) throw new IllegalArgumentException(event.getAction().name() + " is not of type " + type);
-		
-		
+
+
 		// Insertionstring
 		this.insertion = insertionString;
-		
+
 		// Mojang doesn't allow zero sized arrays, but null is fine. So null.
 		if (extra != null && extra.size() == 0) extra = null;
-		
+
 		// Extra
 		if (extra != null)
 		{
@@ -541,39 +568,53 @@ public class Mson implements Serializable
 		{
 			this.extra = null;
 		}
-		
+
 		// Parent
 		if (this == parent) throw new IllegalArgumentException("Parent can't be oneself.");
 		this.parent = parent;
 	}
-	
-	Mson(String text, ChatColor color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+
+	Mson(@NotNull String text,
+		 @Nullable ChatColor color,
+		 @Nullable Boolean bold,
+		 @Nullable Boolean italic,
+		 @Nullable Boolean underlined,
+		 @Nullable Boolean strikethrough,
+		 @Nullable Boolean obfuscated,
+		 @Nullable MsonEvent clickEvent,
+		 @Nullable MsonEvent hoverEvent,
+		 @Nullable String insertionString,
+		 @Nullable List<Mson> extra,
+		 @Nullable Mson parent)
 	{
 		this(text, color == null ? null : color.name().toLowerCase(), bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
 	
-	public static Mson valueOf(String text, ChatColor color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	@Contract("_, _, _, _, _, _, _, _, _, _, _, _ -> new")
+	public static @NotNull Mson valueOf(@NotNull String text, @Nullable ChatColor color, @Nullable Boolean bold, @Nullable Boolean italic, @Nullable Boolean underlined, @Nullable Boolean strikethrough, @Nullable Boolean obfuscated, @Nullable MsonEvent clickEvent, @Nullable MsonEvent hoverEvent, @Nullable String insertionString, @Nullable List<Mson> extra, @Nullable Mson parent)
 	{
 		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
 	
-	public static Mson valueOf(String text, String color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough, Boolean obfuscated, MsonEvent clickEvent, MsonEvent hoverEvent, String insertionString, List<Mson> extra, Mson parent)
+	@Contract("_, _, _, _, _, _, _, _, _, _, _, _ -> new")
+	public static @NotNull Mson valueOf(@NotNull String text, @Nullable String color, @Nullable Boolean bold, @Nullable Boolean italic, @Nullable Boolean underlined, @Nullable Boolean strikethrough, @Nullable Boolean obfuscated, @Nullable MsonEvent clickEvent, @Nullable MsonEvent hoverEvent, @Nullable String insertionString, @Nullable List<Mson> extra, @Nullable Mson parent)
 	{
 		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
 	
 	// Object
-	public static Mson mson(Object part)
+	public static @NotNull Mson mson(@NotNull Object part)
 	{
 		return Mson.getMson(part);
 	}
 	
-	public static Mson mson(Object... parts)
+	public static @NotNull Mson mson(Object @NotNull ... parts)
 	{
 		return Mson.getMson(parts);
 	}
 
-	private static Mson getMson(Object part)
+	@Contract("null -> fail")
+	private static @NotNull Mson getMson(Object part)
 	{
 		if (part == null) throw new NullPointerException("part");
 
@@ -607,14 +648,16 @@ public class Mson implements Serializable
 		}
 	}
 	
-	public static List<Mson> msons(Object... parts)
+	@Contract("null -> fail")
+	public static @NotNull List<Mson> msons(Object... parts)
 	{
 		if (parts == null) throw new NullPointerException("parts");
 		
 		return msons(Arrays.asList(parts));
 	}
 
-	public static List<Mson> msons(Iterable<?> parts)
+	@Contract("null -> fail")
+	public static @NotNull List<@NotNull Mson> msons(Iterable<?> parts)
 	{
 		if (parts == null) throw new NullPointerException("parts");
 
@@ -632,7 +675,7 @@ public class Mson implements Serializable
 	// PARSE & FORMAT
 	// -------------------------------------------- //
 	
-	public static Mson fromParsedMessages(Collection<String> messages)
+	public static @NotNull Mson fromParsedMessages(@NotNull Collection<@NotNull String> messages)
 	{
 		List<Mson> extra = new MassiveList<>(messages.size());
 		for (String message : messages)
@@ -642,7 +685,8 @@ public class Mson implements Serializable
 		return mson(extra);
 	}
 	
-	public static Mson fromParsedMessage(String message)
+	@Contract("null -> fail")
+	public static @NotNull Mson fromParsedMessage(String message)
 	{
 		if (message == null) throw new NullPointerException("message");
 
@@ -723,7 +767,8 @@ public class Mson implements Serializable
 		return Mson.mson(msons);
 	}
 
-	private static String ensureStartsWithColorCode(String message)
+	@Contract(pure = true)
+	private static @NotNull String ensureStartsWithColorCode(@NotNull String message)
 	{
 		if ( ! message.startsWith("\u00A7"))
 		{
@@ -733,11 +778,12 @@ public class Mson implements Serializable
 	}
 
 	// Parse redirects, convert to Mson directly
-	public static Mson parse(String string) { return Mson.fromParsedMessage(Txt.parse(string)); }
-	public static Mson parse(Collection<String> strings) { return Mson.fromParsedMessages(Txt.parse(strings)); }
-	public static Mson parse(String format, Object... args) { return Mson.fromParsedMessage(Txt.parse(format, args)); }
+	public static @NotNull Mson parse(@NotNull String string) { return Mson.fromParsedMessage(Txt.parse(string)); }
+	public static @NotNull Mson parse(@NotNull Collection<@NotNull String> strings) { return Mson.fromParsedMessages(Txt.parse(strings)); }
+	public static @NotNull Mson parse(String format, Object... args) { return Mson.fromParsedMessage(Txt.parse(format, args)); }
 
-	public static Mson format(String format, Object... args)
+	@Contract("_, _ -> new")
+	public static @NotNull Mson format(String format, Object... args)
 	{
 		return Mson.mson(String.format(format, args));
 	}
@@ -747,7 +793,7 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	// Case
-	public Mson toLowerCase()
+	public @NotNull Mson toLowerCase()
 	{
 		Mson ret = this.text(this.getText().toLowerCase());
 		
@@ -766,7 +812,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	public Mson toUpperCase()
+	public @NotNull Mson toUpperCase()
 	{
 		Mson ret = this.text(this.getText().toUpperCase());
 		
@@ -785,7 +831,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	public Mson uppercaseFirst()
+	public @NotNull Mson uppercaseFirst()
 	{
 		if ( ! this.getText().isEmpty())
 		{
@@ -820,7 +866,7 @@ public class Mson implements Serializable
 	}
 	
 	// Whitespace
-	public Mson trim()
+	public @NotNull Mson trim()
 	{
 		Mson ret = this.text(this.getText().trim());
 		
@@ -840,7 +886,7 @@ public class Mson implements Serializable
 	}
 	
 	// Length
-	public int length()
+	public @Range(from = 0, to = Integer.MAX_VALUE) int length()
 	{
 		int ret = this.getText().length();
 		if (this.hasExtra())
@@ -854,6 +900,7 @@ public class Mson implements Serializable
 	}
 	
 	// Contains
+	@Contract("null -> fail")
 	public boolean contains(CharSequence sequence)
 	{
 		if (sequence == null) throw new NullPointerException("sequence");
@@ -870,6 +917,7 @@ public class Mson implements Serializable
 		
 		return false;
 	}
+	@Contract("null -> fail")
 	public boolean contains(Pattern pattern)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
@@ -886,15 +934,17 @@ public class Mson implements Serializable
 		
 		return false;
 	}
-	
-	public List<Mson> split(String regex)
+
+	@Contract("null -> fail")
+	public @NotNull List<@NotNull Mson> split(String regex)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		
 		return this.split(Pattern.compile(regex));
 	}
-	
-	public List<Mson> split(Pattern pattern)
+
+	@Contract("null -> fail")
+	public @NotNull List<@NotNull Mson> split(Pattern pattern)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		
@@ -904,7 +954,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	private Mson splitInner(Pattern pattern, List<Mson> ret, Mson recent)
+	private @NotNull Mson splitInner(@NotNull Pattern pattern, @NotNull List<@NotNull Mson> ret, Mson recent)
 	{
 		String[] parts = pattern.split(this.getText(), -1);
 		
@@ -965,7 +1015,7 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	// Needed?
-	public Mson replace(char oldChar, char newChar)
+	public @NotNull Mson replace(char oldChar, char newChar)
 	{
 		Mson ret = this.text(this.getText().replace(oldChar, newChar));
 		
@@ -983,16 +1033,18 @@ public class Mson implements Serializable
 
 		return ret;
 	}
-	
-	public Mson replaceAll(String regex, String replacement)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(String regex, String replacement)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		if (replacement == null) throw new NullPointerException("replacement");
 
 		return replaceAll(regex, mson(replacement));
 	}
-	
-	public Mson replaceAll(Pattern pattern, String replacement)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(Pattern pattern, String replacement)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		if (replacement == null) throw new NullPointerException("replacement");
@@ -1001,30 +1053,34 @@ public class Mson implements Serializable
 	}
 
 	// Special replace all
-	
-	public Mson replaceAll(String regex, Mson replacement)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(String regex, Mson replacement)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		if (replacement == null) throw new NullPointerException("replacement");
 		return this.replaceAll(regex, new Mson[]{replacement});
 	}
-	
-	public Mson replaceAll(Pattern pattern, final Mson replacement)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(Pattern pattern, final Mson replacement)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		if (replacement == null) throw new NullPointerException("replacement");
 
 		return this.replaceAll(pattern, new Mson[]{replacement});
 	}
-	
-	public Mson replaceAll(String regex, Mson... replacements)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(String regex, Mson... replacements)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		if (replacements == null) throw new NullPointerException("replacements");
 		return this.replaceAll(Pattern.compile(regex), replacements);
 	}
-	
-	public Mson replaceAll(Pattern pattern, final Mson... replacements)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(Pattern pattern, final @NotNull Mson... replacements)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		if (replacements == null) throw new NullPointerException("replacements");
@@ -1037,15 +1093,16 @@ public class Mson implements Serializable
 		};
 		return this.replaceAll(pattern, replacer);
 	}
-	
-	public Mson replaceAll(String regex, MsonReplacement replacer)
+
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(String regex, MsonReplacement replacer)
 	{
 		if (regex == null) throw new NullPointerException("regex");
 		if (replacer == null) throw new NullPointerException("replacer");
 		return this.replaceAll(Pattern.compile(regex), replacer);
 	}
 	
-	public Mson replaceAll(Pattern pattern, MsonReplacement replacer)
+	public @NotNull Mson replaceAll(Pattern pattern, MsonReplacement replacer)
 	{
 		if (pattern == null) throw new NullPointerException("pattern");
 		if (replacer == null) throw new NullPointerException("replacer");
@@ -1097,7 +1154,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	private static boolean addStringBuffer(List<Mson> msons, StringBuffer buffer)
+	private static boolean addStringBuffer(@NotNull List<Mson> msons, @NotNull StringBuffer buffer)
 	{
 		if (buffer.length() == 0) return false;
 		Mson mson = mson(buffer.toString());
@@ -1105,7 +1162,8 @@ public class Mson implements Serializable
 		return true;
 	}
 
-	public Mson replaceAll(Mson replace, Mson replacement)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull Mson replaceAll(Mson replace, Mson replacement)
 	{
 		if (replace == null) throw new NullPointerException("replace");
 		if (replacement == null) throw new NullPointerException("replacement");
@@ -1132,7 +1190,7 @@ public class Mson implements Serializable
 	// -------------------------------------------- //
 	
 	// Implode simple
-	public static Mson implode(final Object[] list, final Mson glue, final Mson format)
+	public static @NotNull Mson implode(final @Nullable Object @NotNull [] list, final Mson glue, final @Nullable Mson format)
 	{
 		List<Mson> parts = new MassiveList<>();
 		for (int i = 0; i < list.length; i++)
@@ -1154,21 +1212,21 @@ public class Mson implements Serializable
 		return Mson.mson(parts);
 	}
 
-	public static Mson implode(final Object[] list, final Mson glue)
+	public static @NotNull Mson implode(final @Nullable Object @NotNull [] list, final Mson glue)
 	{
 		return implode(list, glue, null);
 	}
-	public static Mson implode(final Collection<?> coll, final Mson glue, final Mson format)
+	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue, final @Nullable Mson format)
 	{
 		return implode(coll.toArray(new Object[0]), glue, format);
 	}
-	public static Mson implode(final Collection<?> coll, final Mson glue)
+	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue)
 	{
 		return implode(coll, glue, null);
 	}
 	
 	// Implode comma and dot
-	public static Mson implodeCommaAndDot(Collection<?> objects, Mson format, Mson comma, Mson and, Mson dot)
+	public static Mson implodeCommaAndDot(@NotNull Collection<?> objects, Mson format, Mson comma, Mson and, Mson dot)
 	{
 		if (objects.size() == 0) return mson();
 		if (objects.size() == 1)
@@ -1191,35 +1249,35 @@ public class Mson implements Serializable
 		return implode(ourObjects, comma, format).add(mson(dot));
 	}
 	
-	public static Mson implodeCommaAndDot(final Collection<?> objects, Mson comma, Mson and, Mson dot)
+	public static Mson implodeCommaAndDot(final @NotNull Collection<?> objects, Mson comma, Mson and, Mson dot)
 	{
 		return implodeCommaAndDot(objects, null, comma, and, dot);
 	}
-	public static Mson implodeCommaAnd(final Collection<?> objects, Mson comma, Mson and)
+	public static Mson implodeCommaAnd(final @NotNull Collection<?> objects, Mson comma, Mson and)
 	{
 		return implodeCommaAndDot(objects, comma, and, mson());
 	}
-	public static Mson implodeCommaAndDot(final Collection<?> objects, ChatColor color)
+	public static Mson implodeCommaAndDot(final @NotNull Collection<?> objects, ChatColor color)
 	{
 		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), DOT.color(color));
 	}
-	public static Mson implodeCommaAnd(final Collection<?> objects, ChatColor color)
+	public static Mson implodeCommaAnd(final @NotNull Collection<?> objects, ChatColor color)
 	{
 		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), mson());
 	}
-	public static Mson implodeCommaAndDot(final Collection<?> objects, String color)
+	public static Mson implodeCommaAndDot(final @NotNull Collection<?> objects, String color)
 	{
 		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), DOT.color(color));
 	}
-	public static Mson implodeCommaAnd(final Collection<?> objects, String  color)
+	public static Mson implodeCommaAnd(final @NotNull Collection<?> objects, String  color)
 	{
 		return implodeCommaAndDot(objects, COMMA_SPACE.color(color), SPACE_AND_SPACE.color(color), mson());
 	}
-	public static Mson implodeCommaAndDot(final Collection<?> objects)
+	public static Mson implodeCommaAndDot(final @NotNull Collection<?> objects)
 	{
 		return implodeCommaAndDot(objects, (String) null);
 	}
-	public static Mson implodeCommaAnd(final Collection<?> objects)
+	public static Mson implodeCommaAnd(final @NotNull Collection<?> objects)
 	{
 		return implodeCommaAnd(objects, (String) null);
 	}
@@ -1235,7 +1293,7 @@ public class Mson implements Serializable
 	// If the centerpiece is multiple Strings it concatenates prefix + suffix and then appends the centerpice at the end.
 	// This algorithm is used in the editor system.
 	
-	public static List<Mson> prepondfix(Mson prefix, List<Mson> msons, Mson suffix)
+	public static @NotNull List<Mson> prepondfix(@Nullable Mson prefix, @NotNull List<Mson> msons, @Nullable Mson suffix)
 	{
 		// Create
 		List<Mson> ret = new MassiveList<>();
@@ -1260,7 +1318,7 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	public static Mson prepondfix(Mson prefix, Mson mson, Mson suffix)
+	public static @NotNull Mson prepondfix(@Nullable Mson prefix, @NotNull Mson mson, @Nullable Mson suffix)
 	{
 		List<Mson> msons = mson.split(Txt.PATTERN_NEWLINE);
 		List<Mson> ret = prepondfix(prefix, msons, suffix);
@@ -1299,13 +1357,13 @@ public class Mson implements Serializable
 		return toJson(this);
 	}
 	
-	public static JsonElement toJson(Mson mson)
+	public static JsonElement toJson(@Nullable Mson mson)
 	{
 		if (mson == null) return JsonNull.INSTANCE;
 		return getGson(true).toJsonTree(mson);
 	}
 	
-	public static Mson fromJson(JsonElement json)
+	public static @Nullable Mson fromJson(@NotNull JsonElement json)
 	{
 		// Escape the null.
 		if (json.isJsonNull())
@@ -1347,7 +1405,7 @@ public class Mson implements Serializable
 		return raw;
 	}
 	
-	public static List<String> toPlain(Iterable<Mson> iterable, boolean styled)
+	public static @NotNull List<@NotNull String> toPlain(@NotNull Iterable<@NotNull Mson> iterable, boolean styled)
 	{
 		List<String> ret = new MassiveList<>();
 		
@@ -1359,14 +1417,14 @@ public class Mson implements Serializable
 		return ret;
 	}
 	
-	public String toPlain(boolean styled)
+	public @NotNull String toPlain(boolean styled)
 	{
 		final StringBuilder ret = new StringBuilder();
 		this.toPlain0(ret, styled);
 		return ret.toString();
 	}
 
-	private void toPlain0(final StringBuilder builder, boolean styled)
+	private void toPlain0(final @NotNull StringBuilder builder, boolean styled)
 	{
 		if ( ! this.getText().isEmpty())
 		{
@@ -1428,6 +1486,7 @@ public class Mson implements Serializable
 		);
 	}
 
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

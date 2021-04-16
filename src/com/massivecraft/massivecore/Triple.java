@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -53,7 +55,8 @@ public class Triple<A, B, C> implements Cloneable, Serializable
 	// FACTORY: VALUE OF
 	// -------------------------------------------- //
 	
-	public static <A, B, C> Triple<A, B, C> valueOf(A first, B second, C third)
+	@Contract(value = "_, _, _ -> new", pure = true)
+	public static <A, B, C> @NotNull Triple<A, B, C> valueOf(A first, B second, C third)
 	{
 		return new Triple<>(first, second, third);
 	}

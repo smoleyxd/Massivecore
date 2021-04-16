@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.command;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MassiveCommandDeprecated extends MassiveCommand
 {
 	// -------------------------------------------- //
@@ -12,7 +14,7 @@ public class MassiveCommandDeprecated extends MassiveCommand
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public MassiveCommandDeprecated(MassiveCommand target, String... aliases)
+	public MassiveCommandDeprecated(MassiveCommand target, String @NotNull ... aliases)
 	{
 		// Fields
 		this.target = target;

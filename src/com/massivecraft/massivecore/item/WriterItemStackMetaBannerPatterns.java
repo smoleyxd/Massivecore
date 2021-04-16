@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -31,25 +32,25 @@ public class WriterItemStackMetaBannerPatterns extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 	
 	@Override
-	public List<DataBannerPattern> getA(DataItemStack ca, ItemStack d)
+	public List<DataBannerPattern> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getBannerPatterns();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, List<DataBannerPattern> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, List<DataBannerPattern> fa, ItemStack d)
 	{
 		ca.setBannerPatterns(fa);
 	}
 	
 	@Override
-	public List<Pattern> getB(BannerMeta cb, ItemStack d)
+	public List<Pattern> getB(@NotNull BannerMeta cb, ItemStack d)
 	{
 		return cb.getPatterns();
 	}
 	
 	@Override
-	public void setB(BannerMeta cb, List<Pattern> fb, ItemStack d)
+	public void setB(@NotNull BannerMeta cb, List<Pattern> fb, ItemStack d)
 	{
 		cb.setPatterns(fb);
 	}

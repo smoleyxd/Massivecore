@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 
@@ -27,7 +28,7 @@ public abstract class WriterAbstractReflect<OA, OB, CA, CB, FA, FB> extends Writ
 	// -------------------------------------------- //
 	
 	@Override
-	public void setB(CB cb, FB fb, Object d)
+	public void setB(@NotNull CB cb, FB fb, Object d)
 	{
 		if (this.field == null) return;
 		ReflectionUtil.setField(this.field, cb, fb);

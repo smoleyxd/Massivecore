@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.item.ContainerGameProfileProperty;
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -118,7 +119,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	}
 	
 	@Override
-	public void set(SkullMeta meta, String name, UUID id)
+	public void set(@NotNull SkullMeta meta, String name, UUID id)
 	{
 		final Object gameProfile = createGameProfile(id, name);
 		setGameProfile(meta, gameProfile);
@@ -140,7 +141,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	}
 	
 	@Override
-	public void setGameProfile(SkullMeta meta, Object gameProfile)
+	public void setGameProfile(@NotNull SkullMeta meta, Object gameProfile)
 	{
 		ReflectionUtil.setField(this.fieldCraftMetaSkullProfile, meta, gameProfile);
 	}
@@ -222,7 +223,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		return ret;
 	}
 	
-	private ContainerGameProfileProperty unsafePropertyToContainer(Object property)
+	private @NotNull ContainerGameProfileProperty unsafePropertyToContainer(Object property)
 	{
 		String name = ReflectionUtil.getField(this.fieldPropertyName, property);
 		String value = ReflectionUtil.getField(this.fieldPropertyValue, property);
@@ -245,7 +246,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	}
 	
 	@Override
-	public void setGameProfileProperties(Object propertyMap, Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
+	public void setGameProfileProperties(@NotNull Object propertyMap, @NotNull Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
 	{
 		clearPropertyMap(propertyMap);
 		for (Map.Entry<String, ContainerGameProfileProperty> entry : properties)
@@ -258,17 +259,17 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 		}
 	}
 	
-	public void clearPropertyMap(Object propertyMap)
+	public void clearPropertyMap(@NotNull Object propertyMap)
 	{
 		ReflectionUtil.invokeMethod(this.methodPropertyMapClear, propertyMap);
 	}
 	
-	public void putPropertyInMap(Object propertyMap, String key, Object value)
+	public void putPropertyInMap(@NotNull Object propertyMap, String key, Object value)
 	{
 		ReflectionUtil.invokeMethod(this.methodPropertyMapPut, propertyMap, key, value);
 	}
 	
-	private <T> T containerToProperty(ContainerGameProfileProperty prop)
+	private <T> @NotNull T containerToProperty(@NotNull ContainerGameProfileProperty prop)
 	{
 		T ret = ReflectionUtil.invokeConstructor(
 			this.constructorProperty,

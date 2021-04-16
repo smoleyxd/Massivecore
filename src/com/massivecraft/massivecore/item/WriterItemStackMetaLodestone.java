@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaField<CompassMeta, PS, PS>
 {
@@ -52,17 +53,17 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	// -------------------------------------------- //
 	
 	@Override
-	public PS getA(DataItemStack ca, ItemStack d) {
+	public PS getA(@NotNull DataItemStack ca, ItemStack d) {
 		return ca.getLodestone();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, PS fa, ItemStack d) {
+	public void setA(@NotNull DataItemStack ca, PS fa, ItemStack d) {
 		ca.setLodestone(fa);
 	}
 	
 	@Override
-	public PS getB(CompassMeta cb, ItemStack d) {
+	public PS getB(@NotNull CompassMeta cb, ItemStack d) {
 		if (!cb.hasLodestone()) return null;
 		
 		PS ps = PS.valueOf(cb.getLodestone());
@@ -76,7 +77,7 @@ public class WriterItemStackMetaLodestone extends WriterAbstractItemStackMetaFie
 	}
 	
 	@Override
-	public void setB(CompassMeta cb, PS fb, ItemStack d) {
+	public void setB(@NotNull CompassMeta cb, PS fb, ItemStack d) {
 		if (fb == null) {
 			cb.setLodestone(null);
 			return;

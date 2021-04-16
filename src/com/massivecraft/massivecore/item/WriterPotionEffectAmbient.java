@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.item;
 
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterPotionEffectAmbient extends WriterAbstractPotionEffect<Boolean, Boolean>
 {
@@ -20,19 +21,19 @@ public class WriterPotionEffectAmbient extends WriterAbstractPotionEffect<Boolea
 	// -------------------------------------------- //
 	
 	@Override
-	public Boolean getA(DataPotionEffect ca, Object d)
+	public Boolean getA(@NotNull DataPotionEffect ca, Object d)
 	{
 		return ca.isAmbient();
 	}
 	
 	@Override
-	public void setA(DataPotionEffect ca, Boolean fa, Object d)
+	public void setA(@NotNull DataPotionEffect ca, Boolean fa, Object d)
 	{
 		ca.setAmbient(fa);
 	}
 	
 	@Override
-	public Boolean getB(PotionEffect cb, Object d)
+	public Boolean getB(@NotNull PotionEffect cb, Object d)
 	{
 		return cb.isAmbient();
 	}

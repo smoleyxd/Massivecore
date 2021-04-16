@@ -9,6 +9,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.NotNull;
 
 // NOTE: This utility targets 1.9 and will crash on older servers.
 public class RecipeUtil
@@ -17,7 +18,7 @@ public class RecipeUtil
 	// POTION
 	// -------------------------------------------- //
 	
-	public static ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
+	public static @NotNull ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
 	{
 		ItemStack ret = new ItemStack(material, amount);
 		PotionMeta meta = InventoryUtil.createMeta(ret);
@@ -46,7 +47,7 @@ public class RecipeUtil
 	// CIRCULAR
 	// -------------------------------------------- //
 	
-	public static void addCircular(ItemStack... items)
+	public static void addCircular(ItemStack @NotNull ... items)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
@@ -61,7 +62,7 @@ public class RecipeUtil
 	// -------------------------------------------- //
 
 	// TODO check this out
-	public static ShapelessRecipe createShapeless(ItemStack result, Object... objects)
+	public static ShapelessRecipe createShapeless(ItemStack result, Object @NotNull ... objects)
 	{
 		ShapelessRecipe recipe = MixinRecipe.get().createShapeless(result);
 		
@@ -98,7 +99,7 @@ public class RecipeUtil
 		return recipe;
 	}
 	
-	public static ShapelessRecipe addShapeless(ItemStack result, Object... objects)
+	public static ShapelessRecipe addShapeless(ItemStack result, Object @NotNull ... objects)
 	{
 		ShapelessRecipe recipe = createShapeless(result, objects);
 		Bukkit.getServer().addRecipe(recipe);

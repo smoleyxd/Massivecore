@@ -4,6 +4,8 @@ import com.massivecraft.massivecore.collections.MassiveTreeSet;
 import com.massivecraft.massivecore.collections.MassiveTreeSetDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -15,6 +17,7 @@ public class AdapterMassiveTreeSet extends AdapterMassiveX<MassiveTreeSet<?, ?>>
 	// -------------------------------------------- //
 	
 	private static final AdapterMassiveTreeSet i = new AdapterMassiveTreeSet();
+	@Contract(pure = true)
 	public static AdapterMassiveTreeSet get() { return i; }
 
 	// -------------------------------------------- //
@@ -23,7 +26,7 @@ public class AdapterMassiveTreeSet extends AdapterMassiveX<MassiveTreeSet<?, ?>>
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public MassiveTreeSet<?, ?> create(Object parent, boolean def, JsonElement json, Type typeOfT, JsonDeserializationContext context)
+	public MassiveTreeSet<?, ?> create(Object parent, boolean def, JsonElement json, @NotNull Type typeOfT, JsonDeserializationContext context)
 	{
 		Object comparator = getComparator(typeOfT);
 		if (def)
@@ -40,7 +43,7 @@ public class AdapterMassiveTreeSet extends AdapterMassiveX<MassiveTreeSet<?, ?>>
 	// GET COMPARATOR
 	// -------------------------------------------- //
 	
-	public static Object getComparator(Type typeOfT)
+	public static @NotNull Object getComparator(@NotNull Type typeOfT)
 	{
 		return getNewArgumentInstance(typeOfT, 1);
 	}

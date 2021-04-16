@@ -7,6 +7,8 @@ import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -104,7 +106,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	// -------------------------------------------- //
 	
 	@Override
-	public int compareTo(DataPotionEffect that)
+	public int compareTo(@NotNull DataPotionEffect that)
 	{
 		return ComparatorSmart.get().compare(
 			this.getId(), that.getId(),
@@ -116,6 +118,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	}
 	
 	// TODO: Use compare instead to avoid bugs?
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

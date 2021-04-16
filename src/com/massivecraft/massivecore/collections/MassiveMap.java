@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -21,12 +24,12 @@ public class MassiveMap<K, V> extends LinkedHashMap<K, V>
 	// CONSTRUCT: BASE
 	// -------------------------------------------- //
 	
-	public MassiveMap(int initialCapacity, float loadFactor)
+	public MassiveMap(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity, float loadFactor)
 	{
 		super(initialCapacity, loadFactor);
 	}
 
-	public MassiveMap(int initialCapacity)
+	public MassiveMap(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity)
 	{
 		super(initialCapacity);
 	}
@@ -43,7 +46,7 @@ public class MassiveMap<K, V> extends LinkedHashMap<K, V>
 		super(m == null ? Collections.EMPTY_MAP : m);
 	}
 
-	public MassiveMap(int initialCapacity, float loadFactor, boolean accessOrder)
+	public MassiveMap(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity, float loadFactor, boolean accessOrder)
 	{
 		super(initialCapacity, loadFactor, accessOrder);
 	}
@@ -52,7 +55,7 @@ public class MassiveMap<K, V> extends LinkedHashMap<K, V>
 	// CONSTRUCT: EXTRA
 	// -------------------------------------------- //
 	
-	public MassiveMap(K key1, V value1, Object... objects)
+	public MassiveMap(K key1, V value1, Object @NotNull ... objects)
 	{
 		this(varargCreate(key1, value1, objects));
 	}
@@ -62,7 +65,7 @@ public class MassiveMap<K, V> extends LinkedHashMap<K, V>
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public static <K, V> MassiveMap<K, V> varargCreate(K key1, V value1, Object... objects)
+	public static <K, V> @NotNull MassiveMap<K, V> varargCreate(K key1, V value1, Object @NotNull ... objects)
 	{
 		MassiveMap<K, V> ret = new MassiveMap<>();
 		

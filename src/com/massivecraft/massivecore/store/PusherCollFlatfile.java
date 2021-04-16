@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.store;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -209,7 +211,7 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public PusherCollFlatfile(Coll<?> coll) throws IOException
+	public PusherCollFlatfile(@NotNull Coll<?> coll) throws IOException
 	{
 		Db db = coll.getDb();
 		if ( ! (db instanceof DbFlatfile)) throw new IllegalArgumentException("Coll doesn't use flatfile database");

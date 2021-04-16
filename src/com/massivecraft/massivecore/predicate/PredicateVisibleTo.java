@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.predicate;
 import com.massivecraft.massivecore.mixin.MixinVisibility;
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
@@ -19,7 +21,8 @@ public class PredicateVisibleTo implements Predicate<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static PredicateVisibleTo get(Object watcherObject) { return new PredicateVisibleTo(watcherObject); }
+	@Contract("_ -> new")
+	public static @NotNull PredicateVisibleTo get(Object watcherObject) { return new PredicateVisibleTo(watcherObject); }
 	public PredicateVisibleTo(Object watcherObject)
 	{
 		this.watcher = new WeakReference<>(IdUtil.getSender(watcherObject));

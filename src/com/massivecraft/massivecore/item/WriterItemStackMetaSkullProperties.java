@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.nms.NmsSkullMeta;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -45,20 +46,20 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	// -------------------------------------------- //
 	
 	@Override
-	public ContainerGameProfile getA(DataItemStack ca, ItemStack d)
+	public ContainerGameProfile getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getContainerGameProfile();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, ContainerGameProfile fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, ContainerGameProfile fa, ItemStack d)
 	{
 		ca.setContainerGameProfile(fa);
 	}
 
 	// This should be getting the GameProfile skull meta
 	@Override
-	public Object getB(SkullMeta cb, ItemStack d)
+	public Object getB(@NotNull SkullMeta cb, ItemStack d)
 	{
 		//if (!cb.hasOwner()) return null;
 		NmsSkullMeta nms = NmsSkullMeta.get();
@@ -68,7 +69,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	// This should set the game profile for the skull meta
 	// fb is the game profile object
 	@Override
-	public void setB(SkullMeta cb, Object fb, ItemStack d)
+	public void setB(@NotNull SkullMeta cb, Object fb, ItemStack d)
 	{
 		if (cb == null) return;
 		

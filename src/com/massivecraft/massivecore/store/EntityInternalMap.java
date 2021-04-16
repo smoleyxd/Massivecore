@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.store;
 
 import com.massivecraft.massivecore.collections.MassiveSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 		this.entityClass = entityClass;
 	}
 	
-	public EntityInternalMap(EntityInternal<?> entity, Class<E> entityClass)
+	public EntityInternalMap(@NotNull EntityInternal<?> entity, @NotNull Class<E> entityClass)
 	{
 		Objects.requireNonNull(entity, "entity");
 		Objects.requireNonNull(entityClass, "entityClass");
@@ -80,7 +81,7 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 	// LOAD
 	// -------------------------------------------- //
 	
-	public EntityInternalMap<E> load(EntityInternalMap<E> that)
+	public EntityInternalMap<E> load(@NotNull EntityInternalMap<E> that)
 	{
 		Objects.requireNonNull(that, "that");
 		
@@ -138,14 +139,14 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 	protected Map<String, Modification> identifiedModifications;
 	
 	@Override
-	public synchronized void putIdentifiedModificationFixed(String id, Modification modification)
+	public synchronized void putIdentifiedModificationFixed(@NotNull String id, Modification modification)
 	{
 		Objects.requireNonNull(id, "id");
 		this.changed();
 	}
 	
 	@Override
-	public synchronized void removeIdentifiedModificationFixed(String id)
+	public synchronized void removeIdentifiedModificationFixed(@NotNull String id)
 	{
 		Objects.requireNonNull(id, "id");
 		this.changed();
@@ -165,7 +166,7 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 	// -------------------------------------------- //
 	
 	@Override
-	public synchronized E removeAtLocalFixed(String id)
+	public synchronized E removeAtLocalFixed(@NotNull String id)
 	{
 		Objects.requireNonNull(id, "id");
 		
@@ -194,7 +195,7 @@ public class EntityInternalMap<E extends EntityInternal<E>> extends EntityContai
 		return this.getIdToEntity().keySet();
 	}
 	
-	public boolean containsKey(String id)
+	public boolean containsKey(@NotNull String id)
 	{
 		Objects.requireNonNull(id, "id");
 		return this.getIdToEntityRaw().containsKey(id);

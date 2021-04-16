@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.command.requirement.RequirementEditorPropertyCreated;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public abstract class CommandEditItemStacksAbstract<O> extends CommandEditAbstra
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditItemStacksAbstract(EditSettings<O> settings, Property<O, List<ItemStack>> property)
+	public CommandEditItemStacksAbstract(@NotNull EditSettings<O> settings, @NotNull Property<O, List<ItemStack>> property)
 	{
 		// Super
 		super(settings, property, true);

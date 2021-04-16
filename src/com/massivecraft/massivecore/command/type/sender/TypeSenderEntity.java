@@ -4,6 +4,8 @@ import com.massivecraft.massivecore.SenderPresence;
 import com.massivecraft.massivecore.SenderType;
 import com.massivecraft.massivecore.store.SenderColl;
 import com.massivecraft.massivecore.store.SenderEntity;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeSenderEntity<T extends SenderEntity<T>> extends TypeSenderIdAbstract<T>
 {
@@ -18,25 +20,25 @@ public class TypeSenderEntity<T extends SenderEntity<T>> extends TypeSenderIdAbs
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	private TypeSenderEntity(SenderColl<T> coll, SenderPresence presence, SenderType type)
+	private TypeSenderEntity(@NotNull SenderColl<T> coll, @NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		super(SenderEntity.class, coll, presence, type);
 		this.coll = coll;
 	}
 	
-	private TypeSenderEntity(SenderColl<T> coll, SenderPresence presence)
+	private TypeSenderEntity(@NotNull SenderColl<T> coll, @NotNull SenderPresence presence)
 	{
 		super(SenderEntity.class, coll, presence);
 		this.coll = coll;
 	}
 	
-	private TypeSenderEntity(SenderColl<T> coll, SenderType type)
+	private TypeSenderEntity(@NotNull SenderColl<T> coll, @NotNull SenderType type)
 	{
 		super(SenderEntity.class, coll, type);
 		this.coll = coll;
 	}
 	
-	private TypeSenderEntity(SenderColl<T> coll)
+	private TypeSenderEntity(@NotNull SenderColl<T> coll)
 	{
 		super(SenderEntity.class, coll);
 		this.coll = coll;
@@ -46,10 +48,14 @@ public class TypeSenderEntity<T extends SenderEntity<T>> extends TypeSenderIdAbs
 	// GET
 	// -------------------------------------------- //
 	
-	public static <T extends SenderEntity<T>> TypeSenderEntity<T> get(SenderColl<T> coll, SenderPresence presence, SenderType type) { return new TypeSenderEntity<>(coll, presence, type); }
-	public static <T extends SenderEntity<T>> TypeSenderEntity<T> get(SenderColl<T> coll, SenderPresence presence) { return new TypeSenderEntity<>(coll, presence); }
-	public static <T extends SenderEntity<T>> TypeSenderEntity<T> get(SenderColl<T> coll, SenderType type) { return new TypeSenderEntity<>(coll, type); }
-	public static <T extends SenderEntity<T>> TypeSenderEntity<T> get(SenderColl<T> coll) { return new TypeSenderEntity<>(coll); }
+	@Contract("_, _, _ -> new")
+	public static <T extends SenderEntity<T>> @NotNull TypeSenderEntity<T> get(@NotNull SenderColl<T> coll, @NotNull SenderPresence presence, @NotNull SenderType type) { return new TypeSenderEntity<>(coll, presence, type); }
+	@Contract("_, _ -> new")
+	public static <T extends SenderEntity<T>> @NotNull TypeSenderEntity<T> get(@NotNull SenderColl<T> coll, @NotNull SenderPresence presence) { return new TypeSenderEntity<>(coll, presence); }
+	@Contract("_, _ -> new")
+	public static <T extends SenderEntity<T>> @NotNull TypeSenderEntity<T> get(@NotNull SenderColl<T> coll, @NotNull SenderType type) { return new TypeSenderEntity<>(coll, type); }
+	@Contract("_ -> new")
+	public static <T extends SenderEntity<T>> @NotNull TypeSenderEntity<T> get(@NotNull SenderColl<T> coll) { return new TypeSenderEntity<>(coll); }
 	
 	// -------------------------------------------- //
 	// OVERRIDE

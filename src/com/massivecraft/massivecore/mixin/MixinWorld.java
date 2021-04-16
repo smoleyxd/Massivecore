@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permissible;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class MixinWorld extends Mixin
 	
 	private static MixinWorld d = new MixinWorld();
 	private static MixinWorld i = d;
+	@Contract(pure = true)
 	public static MixinWorld get() { return i; }
 	
 	// -------------------------------------------- //

@@ -8,6 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -104,7 +107,8 @@ public class TypeStringCommand extends TypeAbstract<String>
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static String[] argAsArgs(String arg)
+	@Contract(pure = true)
+	public static String[] argAsArgs(@NotNull String arg)
 	{
 		return arg.split(" ", -1);
 	}
@@ -120,7 +124,7 @@ public class TypeStringCommand extends TypeAbstract<String>
 		return getKnownCommands().get(name);
 	}
 	
-	public static Command getCommandSmart(String name)
+	public static @Nullable Command getCommandSmart(String name)
 	{
 		Command ret = getCommand(name);
 		if (ret != null) return ret;

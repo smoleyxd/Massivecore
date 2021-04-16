@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +48,7 @@ public class Pager<T>
 	protected List<String> args = null;
 	public boolean hasArgs() { return this.args != null; }
 	public Pager<T> setArgs(List<String> args) { this.args = args; return this; }
-	public Pager<T> setArgs(String... args) { this.setArgs(Arrays.asList(args)); return this; }
+	public Pager<T> setArgs(String @NotNull ... args) { this.setArgs(Arrays.asList(args)); return this; }
 	public List<String> getArgs() { return this.args; }
 	public List<String> getArgsCalc()
 	{
@@ -62,6 +64,7 @@ public class Pager<T>
 	// The page height. The asmount of items per page.
 	protected Integer height = null;
 	public boolean hasHeight() { return this.height != null; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setHeight(Integer height) { this.height = height; return this; }
 	public Integer getHeight() { return this.height; }
 	public Integer getHeightCalc()
@@ -79,25 +82,30 @@ public class Pager<T>
 	// The title to use at the top of the page.
 	protected String title = null;
 	public boolean hasTitle() { return this.title != null; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setTitle(String title) { this.title = title; return this; }
 	public String getTitle() { return this.title; }
 	
 	// The page number we want to show.
 	protected Integer number = null;
 	public boolean hasNumber() { return this.number != null; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setNumber(Integer number) { this.number = number; return this; }
 	public Integer getNumber() { return this.number; }
 	
 	// The items we are paging.
 	protected Collection<? extends T> items = null;
 	public boolean hasItems() { return this.items != null; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setItems(Collection<? extends T> items) { this.items = items; return this; }
 	public Collection<? extends T> getItems() { return this.items; }
 	
 	// The method of converting from item to Mson.
 	protected Msonifier<T> msonifier = null;
 	public boolean hasMsonifier() { return this.msonifier != null; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setMsonifier(Msonifier<T> msonifier) { this.msonifier = msonifier; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Pager<T> setMsonifier(final Stringifier<T> stringifier) { this.msonifier = (item, index) -> Mson.fromParsedMessage(stringifier.toString(item, index)); return this; }
 	public Msonifier<T> getMsonifier() { return this.msonifier; }
 

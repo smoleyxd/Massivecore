@@ -3,6 +3,9 @@ package com.massivecraft.massivecore.command.type;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 public class TypeRange extends TypeInteger
 {
@@ -15,8 +18,10 @@ public class TypeRange extends TypeInteger
 		this.MIN_RANGE = MIN_RANGE;
 		this.MAX_RANGE = MAX_RANGE;
 	}
-	public static TypeRange get(int min, int max) { return new TypeRange(min, max); }
-	public static TypeRange get(int max) { return new TypeRange(0, max); }
+	@Contract("_, _ -> new")
+	public static @NotNull TypeRange get(int min, int max) { return new TypeRange(min, max); }
+	@Contract("_ -> new")
+	public static @NotNull TypeRange get(@Range(from = 1, to = Integer.MAX_VALUE) int max) { return new TypeRange(0, max); }
 	
 	// -------------------------------------------- //
 	// CONSTANT

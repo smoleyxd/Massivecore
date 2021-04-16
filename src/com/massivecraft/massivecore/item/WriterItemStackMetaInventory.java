@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -34,19 +35,19 @@ public class WriterItemStackMetaInventory extends WriterAbstractItemStackMetaFie
 	// -------------------------------------------- //
 
 	@Override
-	public Map<Integer, DataItemStack> getA(DataItemStack ca, ItemStack d)
+	public Map<Integer, DataItemStack> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getInventory();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Map<Integer, DataItemStack> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Map<Integer, DataItemStack> fa, ItemStack d)
 	{
 		ca.setInventory(fa);
 	}
 
 	@Override
-	public ItemStack[] getB(BlockStateMeta cb, ItemStack d)
+	public ItemStack[] getB(@NotNull BlockStateMeta cb, ItemStack d)
 	{
 		// Null
 		if (cb == null) return null;
@@ -69,7 +70,7 @@ public class WriterItemStackMetaInventory extends WriterAbstractItemStackMetaFie
 	}
 
 	@Override
-	public void setB(BlockStateMeta blockStateMeta, ItemStack[] storedInventory, ItemStack d)
+	public void setB(@NotNull BlockStateMeta blockStateMeta, ItemStack[] storedInventory, ItemStack d)
 	{
 		// Null
 		if (blockStateMeta == null) return;

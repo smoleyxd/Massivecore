@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.store;
 import com.massivecraft.massivecore.ConfServer;
 import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,7 +26,7 @@ public class MStore
 	// -------------------------------------------- //
 	
 	private static Map<String, Driver> drivers = new HashMap<>();
-	public static boolean registerDriver(Driver driver)
+	public static boolean registerDriver(@NotNull Driver driver)
 	{
 		if (drivers.containsKey(driver.getDriverName())) return false;
 		drivers.put(driver.getDriverName(), driver);
@@ -78,7 +80,7 @@ public class MStore
 		return resolveAlias(uri);
 	}
 
-	public static Db getDb(String alias)
+	public static @Nullable Db getDb(String alias)
 	{
 		String uri = resolveAlias(alias);
 		Db db = uri2db.get(uri);
@@ -104,7 +106,7 @@ public class MStore
 		return getDb(ConfServer.dburi);
 	}
 
-	public static Db getDb(URI uri)
+	public static @Nullable Db getDb(@NotNull URI uri)
 	{
 		String scheme = uri.getScheme();
 		Driver driver = getDriver(scheme);

@@ -17,6 +17,8 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -48,7 +50,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	private final Method setter;
 	public Method getSetter() { return this.setter; }
 	
-	public static Method calcGetter(Field field)
+	public static @Nullable Method calcGetter(@NotNull Field field)
 	{
 		String name = Txt.upperCaseFirst(field.getName());
 		
@@ -78,7 +80,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		// Fail
 		throw new RuntimeException(field.toString());
 	}
-	public static Method calcSetter(Field field)
+	public static @Nullable Method calcSetter(@NotNull Field field)
 	{
 		String name = Txt.upperCaseFirst(field.getName());
 		
@@ -99,7 +101,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <O> List<PropertyReflection<O, ?>> getAll(Class<O> clazz, Type<O> typeObject)
+	public static <O> @NotNull List<PropertyReflection<O, ?>> getAll(@NotNull Class<O> clazz, Type<O> typeObject)
 	{
 		List<PropertyReflection<O, ?>> ret = new MassiveList<>();
 		
@@ -118,7 +120,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <O, V> PropertyReflection<O, V> get(final Field field, Type<O> typeObject)
+	public static <O, V> @NotNull PropertyReflection<O, V> get(final @NotNull Field field, Type<O> typeObject)
 	{
 		Type<V> typeValue = (Type<V>) RegistryType.getType(field);
 		
@@ -201,7 +203,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	// PROPERTY SETTINGS CALCULATION
 	// -------------------------------------------- //
 	
-	public static boolean isVisible(Field field)
+	public static boolean isVisible(@NotNull Field field)
 	{
 		// Create
 		boolean ret = VISIBLE_DEFAULT;
@@ -217,12 +219,12 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		return ret;
 	}
 	
-	public static boolean isInheritable(Field field)
+	public static boolean isInheritable(@NotNull Field field)
 	{
 		return getAnnotationValue(field, EditorInheritable.class, INHERITABLE_DEFAULT);
 	}
 	
-	public static boolean isEditable(Field field)
+	public static boolean isEditable(@NotNull Field field)
 	{
 		// Create
 		boolean ret = EDITABLE_DEFAULT;
@@ -241,7 +243,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		return ret;
 	}
 	
-	public static boolean isNullable(Field field)
+	public static boolean isNullable(@NotNull Field field)
 	{
 		// Primitive
 		if (field.getType().isPrimitive()) return false;
@@ -251,7 +253,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	}
 	
 	
-	public static String getName(Field field)
+	public static String getName(@NotNull Field field)
 	{
 		// Create
 		String ret;
@@ -271,7 +273,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 	// ANNOTATION UTIL
 	// -------------------------------------------- //
 	
-	public static <U> U getAnnotationValue(Field field, Class<? extends Annotation> clazz, U defaultValue)
+	public static <U> U getAnnotationValue(@NotNull Field field, @NotNull Class<? extends Annotation> clazz, U defaultValue)
 	{
 		// Try for field
 		Annotation annotation = field.getAnnotation(clazz);
@@ -284,7 +286,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		return defaultValue;
 	}
 	
-	private static <U> U invokeAnnotationValue(Annotation annotation, Class<?> clazz)
+	private static <U> U invokeAnnotationValue(Annotation annotation, @NotNull Class<?> clazz)
 	{
 		return ReflectionUtil.invokeMethod(ReflectionUtil.getMethod(clazz, "value"), annotation);
 	}

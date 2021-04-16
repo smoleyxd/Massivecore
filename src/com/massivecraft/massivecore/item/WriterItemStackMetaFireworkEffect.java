@@ -4,6 +4,7 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaFireworkEffect extends WriterAbstractItemStackMetaField<FireworkEffectMeta, DataFireworkEffect, FireworkEffect>
 {
@@ -29,25 +30,25 @@ public class WriterItemStackMetaFireworkEffect extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 
 	@Override
-	public DataFireworkEffect getA(DataItemStack ca, ItemStack d)
+	public DataFireworkEffect getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getFireworkEffect();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, DataFireworkEffect fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, DataFireworkEffect fa, ItemStack d)
 	{
 		ca.setFireworkEffect(fa);
 	}
 
 	@Override
-	public FireworkEffect getB(FireworkEffectMeta cb, ItemStack d)
+	public FireworkEffect getB(@NotNull FireworkEffectMeta cb, ItemStack d)
 	{
 		return cb.getEffect();
 	}
 
 	@Override
-	public void setB(FireworkEffectMeta cb, FireworkEffect fb, ItemStack d)
+	public void setB(@NotNull FireworkEffectMeta cb, FireworkEffect fb, ItemStack d)
 	{
 		cb.setEffect(fb);
 	}

@@ -23,6 +23,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +37,7 @@ public class EngineMassiveCoreDestination extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreDestination i = new EngineMassiveCoreDestination();
+	@Contract(pure = true)
 	public static EngineMassiveCoreDestination get() { return i; }
 	
 	// -------------------------------------------- //
@@ -42,7 +45,7 @@ public class EngineMassiveCoreDestination extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void destinationPs(EventMassiveCoreDestination event)
+	public void destinationPs(@NotNull EventMassiveCoreDestination event)
 	{
 		try
 		{
@@ -58,7 +61,7 @@ public class EngineMassiveCoreDestination extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void destinationArg(EventMassiveCoreDestination event)
+	public void destinationArg(@NotNull EventMassiveCoreDestination event)
 	{
 		final String arg = event.getArg().toLowerCase();
 		final CommandSender sender = event.getSender();
@@ -88,7 +91,7 @@ public class EngineMassiveCoreDestination extends Engine
 	public static final Set<String> ALIASES_WORLD = new MassiveSet<>("world", "w", "spawn", "wspawn", "worldspawn");
 	public static final Set<String> ALIASES_PLAYER = new MassiveSet<>("player", "p", "here", "me", "self");
 	
-	public Destination destinationArg(String arg, CommandSender sender) throws MassiveException
+	public Destination destinationArg(@NotNull String arg, CommandSender sender) throws MassiveException
 	{
 		// Prepare
 		arg = arg.toLowerCase();

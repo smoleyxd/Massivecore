@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.fetcher;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.UUID;
 
 public class IdAndName
@@ -18,6 +20,7 @@ public class IdAndName
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract(value = "null, null -> fail", pure = true)
 	public IdAndName(UUID id, String name)
 	{
 		if (id == null && name == null)
@@ -43,6 +46,7 @@ public class IdAndName
 		return result;
 	}
 
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object obj)
 	{

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish.Pattern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaFishPattern extends WriterAbstractItemStackMetaField<TropicalFishBucketMeta, Pattern, Pattern>
 {
@@ -24,26 +25,26 @@ public class WriterItemStackMetaFishPattern extends WriterAbstractItemStackMetaF
 	// -------------------------------------------- //
 
 	@Override
-	public Pattern getA(DataItemStack ca, ItemStack d)
+	public Pattern getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getFishPattern();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Pattern fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Pattern fa, ItemStack d)
 	{
 		ca.setFishPattern(fa);
 	}
 
 	@Override
-	public Pattern getB(TropicalFishBucketMeta cb, ItemStack d)
+	public Pattern getB(@NotNull TropicalFishBucketMeta cb, ItemStack d)
 	{
 		if (cb.hasVariant()) return cb.getPattern();
 		return null;
 	}
 
 	@Override
-	public void setB(TropicalFishBucketMeta cb, Pattern fb, ItemStack d)
+	public void setB(@NotNull TropicalFishBucketMeta cb, Pattern fb, ItemStack d)
 	{
 		if (fb == null)
 		{

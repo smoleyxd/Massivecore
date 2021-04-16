@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.command.MassiveCommandVersion;
 import com.massivecraft.massivecore.command.editor.CommandEditAbstract;
 import com.massivecraft.massivecore.command.editor.CommandEditSingleton;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class CmdMassiveCore extends MassiveCoreCommand
 	// -------------------------------------------- //
 	
 	private static CmdMassiveCore i = new CmdMassiveCore();
+	@Contract(pure = true)
 	public static CmdMassiveCore get() { return i; }
 	
 	// -------------------------------------------- //

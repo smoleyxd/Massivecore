@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveListDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -15,6 +16,7 @@ public class AdapterMassiveList extends AdapterMassiveX<MassiveList<?>>
 	// -------------------------------------------- //
 	
 	private static final AdapterMassiveList i = new AdapterMassiveList();
+	@Contract(pure = true)
 	public static AdapterMassiveList get() { return i; }
 
 	// -------------------------------------------- //

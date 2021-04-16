@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.store.accessor.Accessor;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.xlib.gson.Gson;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
@@ -104,7 +105,7 @@ public class EntityInternal<E extends EntityInternal<E>> implements Identified
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public E load(E that)
+	public E load(@NotNull E that)
 	{
 		Objects.requireNonNull(that, "that");
 		Accessor.get(this.getClass()).copy(that, this);

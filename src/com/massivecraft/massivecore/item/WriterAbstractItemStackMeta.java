@@ -5,6 +5,8 @@ import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class WriterAbstractItemStackMeta<OB, CB, FA, FB> extends WriterAbstractItemStack<OB, CB, FA, FB>
 {
@@ -26,7 +28,7 @@ public abstract class WriterAbstractItemStackMeta<OB, CB, FA, FB> extends Writer
 		return createItemMeta(this.createItemStack());
 	}
 	
-	public static ItemMeta createItemMeta(ItemStack itemStack)
+	public static ItemMeta createItemMeta(@NotNull ItemStack itemStack)
 	{
 		return itemStack.getItemMeta();
 	}
@@ -35,6 +37,7 @@ public abstract class WriterAbstractItemStackMeta<OB, CB, FA, FB> extends Writer
 	// BANNER
 	// -------------------------------------------- //
 	
+	@Contract("null, _ -> null")
 	public static Banner getBanner(BlockStateMeta meta, boolean creative)
 	{
 		// Null

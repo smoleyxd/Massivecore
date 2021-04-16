@@ -21,6 +21,8 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -106,14 +108,19 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override public <I extends Type<?>> I getInnerType() { return this.getInnerType(0); }
 	
 	@SuppressWarnings({ "unchecked"})
+	@Contract(mutates = "this")
 	@Override public void setInnerTypes(Collection<Type<?>> innerTypes) { this.innerTypes = new MassiveList(innerTypes); }
-	@Override public void setInnerTypes(Type<?>... innerTypes) { this.setInnerTypes(Arrays.asList(innerTypes)); }
-	
+	@Contract(mutates = "this")
+	@Override public void setInnerTypes(Type<?> @NotNull ... innerTypes) { this.setInnerTypes(Arrays.asList(innerTypes)); }
+
+	@Contract(mutates = "this")
 	@Override public void setInnerType(Type<?> innerType) { this.setInnerTypes(innerType); }
 	
 	private List<Integer> userOrder = null;
+	@Contract(mutates = "this")
 	@Override public void setUserOrder(List<Integer> userOrder) { this.userOrder = userOrder; }
-	@Override public void setUserOrder(Integer... userOrder) { this.setUserOrder(Arrays.asList(userOrder)); }
+	@Contract(mutates = "this")
+	@Override public void setUserOrder(Integer @NotNull ... userOrder) { this.setUserOrder(Arrays.asList(userOrder)); }
 	@Override public List<Integer> getUserOrder()
 	{
 		if (this.userOrder == null)
@@ -149,11 +156,14 @@ public abstract class TypeAbstract<T> implements Type<T>
 	public <I extends Property<T, ?>> List<I> getInnerProperties() { return (List<I>) this.innerProperties; }
 	@SuppressWarnings("unchecked")
 	public <I extends Property<T, ?>> I getInnerProperty(int index) { return (I) this.getInnerProperties().get(index); }
-	
+
+	@Contract(mutates = "this")
 	public <I extends Property<T, ?>> void setInnerProperties(Collection<I> innerProperties) { this.innerProperties = new MassiveList<>(innerProperties); }
 	@SafeVarargs
-	public final <I extends Property<T, ?>> void setInnerProperties(I... innerProperties) { this.setInnerProperties(Arrays.asList(innerProperties)); }
-	public void setInnerProperties(Class<T> clazz) { this.setInnerProperties(PropertyReflection.getAll(clazz, this)); }
+	@Contract(mutates = "this")
+	public final <I extends Property<T, ?>> void setInnerProperties(I @NotNull ... innerProperties) { this.setInnerProperties(Arrays.asList(innerProperties)); }
+	@Contract(mutates = "this")
+	public void setInnerProperties(@NotNull Class<T> clazz) { this.setInnerProperties(PropertyReflection.getAll(clazz, this)); }
 	
 	// -------------------------------------------- //
 	// WRITE SHOW
@@ -184,6 +194,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	protected ChatColor visualColor = COLOR_DEFAULT;
 	@Override
+	@Contract(mutates = "this")
 	public void setVisualColor(ChatColor color)
 	{
 		this.visualColor = color;
@@ -211,6 +222,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	protected boolean visualMsonOverridden = calcVisualMsonOverridden();
 	public boolean isVisualMsonOverridden() { return this.visualMsonOverridden; }
+	@Contract(mutates = "this")
 	public void setVisualMsonOverridden(boolean visualMsonOverridden) { this.visualMsonOverridden = visualMsonOverridden; }
 	public boolean calcVisualMsonOverridden()
 	{
@@ -433,12 +445,12 @@ public abstract class TypeAbstract<T> implements Type<T>
 	
 	// This method performs an initial cleanup of suggestions.
 	// Currently we just throw away nulls and empty strings.
-	private static void cleanSuggestions(List<String> suggestions)
+	private static void cleanSuggestions(@NotNull List<String> suggestions)
 	{
 		suggestions.removeIf(suggestion -> suggestion == null || suggestion.isEmpty());
 	}
 	
-	public static List<String> prepareForSpaces(List<String> suggestions, String arg)
+	public static @NotNull List<String> prepareForSpaces(List<String> suggestions, String arg)
 	{
 		// This will get the common prefix for all passed in suggestions.
 		// This will allow us to tab complete some things with spaces
@@ -474,7 +486,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 		return ret;
 	}
 	
-	private static String getPrefix(List<String> suggestions)
+	private static @NotNull String getPrefix(@NotNull List<String> suggestions)
 	{
 		String prefix = null;
 		
@@ -491,6 +503,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	
 	// This method return a new string only including the first characters that are equal.
+	@Contract("null, _ -> param2; _, !null -> !null")
 	private static String getOkay(String original, String compared)
 	{
 		if (original == null) return compared;
@@ -511,7 +524,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 		return ret.toString();
 	}
 	
-	private static List<String> withoutPreAndSuffix(List<String> suggestions, String prefix)
+	@Contract("_, _ -> new")
+	private static @NotNull List<String> withoutPreAndSuffix(@NotNull List<String> suggestions, String prefix)
 	{
 		MassiveSet<String> ret = new MassiveSet<>(suggestions.size());
 		boolean includesPrefix = false; // Sometimes a suggestion is equal to the prefix.
@@ -584,6 +598,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	@SuppressWarnings("unchecked")
 	@Override
+	@Contract(mutates = "this")
 	public void setContainerComparator(Comparator<?> comparator) { this.elementComparator = (Comparator<Object>) comparator; }
 	
 	@Override
@@ -631,7 +646,7 @@ public abstract class TypeAbstract<T> implements Type<T>
 	}
 	
 	@Override 
-	public boolean equalsInner(T type1, T type2)
+	public boolean equalsInner(@NotNull T type1, T type2)
 	{
 		return type1.equals(type2);
 	}

@@ -6,6 +6,7 @@ import org.bukkit.block.Banner;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -34,19 +35,19 @@ public class WriterItemStackMetaShieldPatterns extends WriterAbstractItemStackMe
 	// -------------------------------------------- //
 	
 	@Override
-	public List<DataBannerPattern> getA(DataItemStack ca, ItemStack d)
+	public List<DataBannerPattern> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getBannerPatterns();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, List<DataBannerPattern> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, List<DataBannerPattern> fa, ItemStack d)
 	{
 		ca.setBannerPatterns(fa);
 	}
 	
 	@Override
-	public List<Pattern> getB(BlockStateMeta cb, ItemStack d)
+	public List<Pattern> getB(@NotNull BlockStateMeta cb, ItemStack d)
 	{
 		// Get
 		Banner banner = getBanner(cb, false);
@@ -61,7 +62,7 @@ public class WriterItemStackMetaShieldPatterns extends WriterAbstractItemStackMe
 	}
 	
 	@Override
-	public void setB(BlockStateMeta cb, List<Pattern> fb, ItemStack d)
+	public void setB(@NotNull BlockStateMeta cb, List<Pattern> fb, ItemStack d)
 	{
 		// Get
 		boolean creative = (fb != null && !fb.isEmpty());

@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.command.type.sender.TypeSender;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PropertyUsed<V> extends Property<CommandSender, V>
 {
@@ -9,14 +11,14 @@ public class PropertyUsed<V> extends Property<CommandSender, V>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public PropertyUsed(EditSettings<V> settings, V used)
+	public PropertyUsed(@NotNull EditSettings<V> settings, @Nullable V used)
 	{
 		super(TypeSender.get(), settings.getObjectType(), "used " + settings.getObjectType().getName());
 		this.addRequirements(settings.getUsedRequirements());
 		this.used = used;
 	}
 	
-	public PropertyUsed(EditSettings<V> settings)
+	public PropertyUsed(@NotNull EditSettings<V> settings)
 	{
 		this(settings, null);
 	}

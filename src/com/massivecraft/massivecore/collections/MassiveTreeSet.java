@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -39,7 +41,7 @@ public class MassiveTreeSet<E, C extends Comparator<? super E>> extends TreeSet<
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public MassiveTreeSet(Object comparator, E... elements)
+	public MassiveTreeSet(Object comparator, E @NotNull ... elements)
 	{
 		this(comparator, Arrays.asList(elements));
 	}

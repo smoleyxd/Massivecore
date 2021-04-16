@@ -6,6 +6,9 @@ import com.massivecraft.massivecore.util.DiscUtil;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParser;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -149,7 +152,7 @@ public class DriverFlatfile extends DriverAbstract
 		return loadFile(file);
 	}
 	
-	public static Entry<JsonObject, Long> loadFile(File file)
+	public static @NotNull Entry<JsonObject, Long> loadFile(@NotNull File file)
 	{
 		long mtime = file.lastModified();
 		JsonObject raw = loadFileJsonObject(file);
@@ -157,14 +160,14 @@ public class DriverFlatfile extends DriverAbstract
 		return new SimpleEntry<>(raw, mtime);
 	}
 	
-	public static JsonObject loadFileJsonObject(File file)
+	public static @Nullable JsonObject loadFileJsonObject(File file)
 	{
 		JsonElement ret = loadFileJson(file);
 		if (ret == null) return null;
 		return ret.getAsJsonObject();
 	}
 
-	public static JsonElement loadFileJson(File file)
+	public static @Nullable JsonElement loadFileJson(File file)
 	{
 		String content = DiscUtil.readCatch(file);
 		if (content == null) return null;
@@ -278,11 +281,12 @@ public class DriverFlatfile extends DriverAbstract
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static File getDirectory(Coll<?> coll)
+	public static File getDirectory(@NotNull Coll<?> coll)
 	{
 		return (File) coll.getCollDriverObject();
 	}
 	
+	@Contract("null -> null")
 	public static String idFromFile(File file)
 	{
 		if (file == null) return null;
@@ -290,7 +294,7 @@ public class DriverFlatfile extends DriverAbstract
 		return name.substring(0, name.length() - 5);
 	}
 	
-	public static File fileFromId(Coll<?> coll, String id)
+	public static @NotNull File fileFromId(Coll<?> coll, String id)
 	{
 		File collDir = getDirectory(coll);
 		return new File(collDir, id + DOTJSON);

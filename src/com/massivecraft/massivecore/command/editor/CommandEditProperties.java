@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.command.type.Type;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandEditProperties<O, V> extends CommandEditAbstract<O, V>
 {
@@ -8,7 +9,7 @@ public class CommandEditProperties<O, V> extends CommandEditAbstract<O, V>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditProperties(EditSettings<O> parentSettings, Property<O, V> childProperty)
+	public CommandEditProperties(@NotNull EditSettings<O> parentSettings, @NotNull Property<O, V> childProperty)
 	{
 		// Super
 		super(parentSettings, childProperty, null);

@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.predicate;
 
 import com.massivecraft.massivecore.Registerable;
+import org.jetbrains.annotations.NotNull;
 
 public class PredicateIsRegistered implements Predicate<Registerable>
 {
@@ -16,7 +17,7 @@ public class PredicateIsRegistered implements Predicate<Registerable>
 	// -------------------------------------------- //
 
 	@Override
-	public boolean apply(Registerable registerable)
+	public boolean apply(@NotNull Registerable registerable)
 	{
 		return registerable.isRegistered();
 	}

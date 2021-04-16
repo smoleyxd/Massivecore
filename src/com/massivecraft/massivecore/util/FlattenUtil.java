@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.collections.MassiveList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +15,7 @@ public class FlattenUtil
 	// Throw it in here, we'll flatten it out for you and give you back a nice, nonnull, list.
 	// NOTE: This should never return null
 	// No matter what we put it, it should give us a List back
-	public static List<Object> flatten(Object packed)
+	public static @NotNull List<@Nullable Object> flatten(@Nullable Object packed)
 	{
 		// Null Check
 		if (packed == null) return Collections.singletonList(null);

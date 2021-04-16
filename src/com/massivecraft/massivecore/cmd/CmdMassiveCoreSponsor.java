@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.MassiveCorePerm;
 import com.massivecraft.massivecore.command.MassiveCommandToggle;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import org.jetbrains.annotations.Contract;
 
 public class CmdMassiveCoreSponsor extends MassiveCommandToggle
 {
@@ -12,6 +13,7 @@ public class CmdMassiveCoreSponsor extends MassiveCommandToggle
 	// -------------------------------------------- //
 	
 	private static CmdMassiveCoreSponsor i = new CmdMassiveCoreSponsor();
+	@Contract(pure = true)
 	public static CmdMassiveCoreSponsor get() { return i; }
 	
 	// -------------------------------------------- //
