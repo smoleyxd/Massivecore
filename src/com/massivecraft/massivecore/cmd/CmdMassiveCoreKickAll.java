@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.command.type.primitive.TypeString;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class CmdMassiveCoreKickAll extends MassiveCoreCommand
 {
@@ -16,6 +17,7 @@ public class CmdMassiveCoreKickAll extends MassiveCoreCommand
 
 	private static CmdMassiveCoreKickAll i = new CmdMassiveCoreKickAll();
 
+	@Contract(pure = true)
 	public static CmdMassiveCoreKickAll get()
 	{
 		return i;

@@ -4,6 +4,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.bukkit.scoreboard.Team.Option;
 import org.bukkit.scoreboard.Team.OptionStatus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -31,7 +32,7 @@ public class NmsBoard19R1P extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public TeamOptionValue getOption(Team team, TeamOptionKey key)
+	public TeamOptionValue getOption(@NotNull Team team, @NotNull TeamOptionKey key)
 	{
 		Option bukkitKey = convert(key, Option.values());
 		OptionStatus bukkitValue = team.getOption(bukkitKey);
@@ -39,7 +40,7 @@ public class NmsBoard19R1P extends NmsBoard
 	}
 	
 	@Override
-	public void setOption(Team team, TeamOptionKey key, TeamOptionValue value)
+	public void setOption(@NotNull Team team, @NotNull TeamOptionKey key, @NotNull TeamOptionValue value)
 	{
 		Option bukkitKey = convert(key, Option.values());
 		OptionStatus bukkitValue = convert(value, OptionStatus.values());
@@ -51,25 +52,25 @@ public class NmsBoard19R1P extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public void addMember(Team team, String key)
+	public void addMember(@NotNull Team team, String key)
 	{
 		team.addEntry(key);
 	}
 	
 	@Override
-	public boolean removeMember(Team team, String key)
+	public boolean removeMember(@NotNull Team team, String key)
 	{
 		return team.removeEntry(key);
 	}
 	
 	@Override
-	public boolean isMember(Team team, String key)
+	public boolean isMember(@NotNull Team team, String key)
 	{
 		return team.hasEntry(key);
 	}
 	
 	@Override
-	public Set<String> getMembers(Team team)
+	public Set<String> getMembers(@NotNull Team team)
 	{
 		return team.getEntries();
 	}
@@ -79,7 +80,7 @@ public class NmsBoard19R1P extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public Team getKeyTeam(Scoreboard board, String key)
+	public Team getKeyTeam(@NotNull Scoreboard board, @NotNull String key)
 	{
 		return board.getEntryTeam(key);
 	}

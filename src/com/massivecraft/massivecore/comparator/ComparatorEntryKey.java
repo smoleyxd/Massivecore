@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Comparator;
 import java.util.Map.Entry;
 
@@ -9,7 +12,8 @@ public class ComparatorEntryKey<K, V> extends ComparatorAbstractTransformer<Entr
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <K, V> ComparatorEntryKey<K, V> get(Comparator<K> comparator) { return new ComparatorEntryKey<>(comparator); }
+	@Contract("_ -> new")
+	public static <K, V> @NotNull ComparatorEntryKey<K, V> get(Comparator<K> comparator) { return new ComparatorEntryKey<>(comparator); }
 	public ComparatorEntryKey(Comparator<K> comparator)
 	{
 		super(comparator);
@@ -20,7 +24,7 @@ public class ComparatorEntryKey<K, V> extends ComparatorAbstractTransformer<Entr
 	// -------------------------------------------- //
 
 	@Override
-	public K transform(Entry<K, V> type)
+	public K transform(@NotNull Entry<K, V> type)
 	{
 		return type.getKey();
 	}

@@ -10,6 +10,8 @@ import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -21,6 +23,7 @@ public class AdapterCacheEntity implements JsonDeserializer<CacheEntity<?,?>>, J
 	// -------------------------------------------- //
 	
 	private static AdapterCacheEntity i = new AdapterCacheEntity();
+	@Contract(pure = true)
 	public static AdapterCacheEntity get() { return i; }
 	
 	// -------------------------------------------- //
@@ -55,12 +58,12 @@ public class AdapterCacheEntity implements JsonDeserializer<CacheEntity<?,?>>, J
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static Type getCollType(Type type)
+	public static Type getCollType(@NotNull Type type)
 	{
 		return getType(type, 0);
 	}
 	
-	public static Type getType(Type type, int index)
+	public static Type getType(@NotNull Type type, int index)
 	{
 		ParameterizedType ptype = (ParameterizedType)type;
 		Type[] types = ptype.getActualTypeArguments();

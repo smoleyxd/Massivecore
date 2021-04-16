@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.command.requirement;
 import com.massivecraft.massivecore.command.MassiveCommand;
 import com.massivecraft.massivecore.util.PermissionUtil;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class RequirementHasPerm extends RequirementAbstract
 {
@@ -12,7 +14,8 @@ public class RequirementHasPerm extends RequirementAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static RequirementHasPerm get(Object permission) { return new RequirementHasPerm(permission); }
+	@Contract("_ -> new")
+	public static @NotNull RequirementHasPerm get(Object permission) { return new RequirementHasPerm(permission); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -35,7 +38,7 @@ public class RequirementHasPerm extends RequirementAbstract
 	// -------------------------------------------- //
 	
 	@Override
-	public boolean apply(CommandSender sender, MassiveCommand command)
+	public boolean apply(@NotNull CommandSender sender, MassiveCommand command)
 	{
 		return sender.hasPermission(this.permissionId);
 	}

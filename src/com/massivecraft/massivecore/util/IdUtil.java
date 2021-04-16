@@ -23,6 +23,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -95,14 +99,17 @@ public class IdUtil implements Listener, Runnable
 	
 	// The full set
 	private static Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+	@Contract(pure = true)
 	public static Set<IdData> getDatas() { return datas; }
 	
 	// Id Index
 	private static Map<String, IdData> idToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	@Contract(pure = true)
 	public static Map<String, IdData> getIdToData() { return idToData;  }
 	
 	// Name Index
 	private static Map<String, IdData> nameToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	@Contract(pure = true)
 	public static Map<String, IdData> getNameToData() { return nameToData; }
 	
 	// -------------------------------------------- //
@@ -111,15 +118,17 @@ public class IdUtil implements Listener, Runnable
 	// Used for chat tab completion, argument readers, etc.
 
 	private static SenderMap maintainedIds = new SenderMap();
+	@Contract(pure = true)
 	public static SenderMap getMaintainedIds() { return maintainedIds; }
-	public static Set<String> getIds(SenderPresence presence, SenderType type)
+	public static @NotNull @UnmodifiableView Set<String> getIds(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		return maintainedIds.getValues(presence, type);
 	}
 	
 	private static SenderMap maintainedNames = new SenderMap();
+	@Contract(pure = true)
 	public static SenderMap getMaintainedNames() { return maintainedNames; }
-	public static Set<String> getNames(SenderPresence presence, SenderType type)
+	public static @NotNull @UnmodifiableView Set<String> getNames(@NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		return maintainedNames.getValues(presence, type);
 	}
@@ -131,11 +140,14 @@ public class IdUtil implements Listener, Runnable
 	// It's assumed that the getName() returns the name which is also the id.
 	
 	private static Map<String, CommandSender> registryIdToSender = new ConcurrentHashMap<>();
-	public static Map<String, CommandSender> getRegistryIdToSender() { return Collections.unmodifiableMap(registryIdToSender); }
+	@Contract(value = " -> new", pure = true)
+	public static @NotNull @UnmodifiableView Map<String, CommandSender> getRegistryIdToSender() { return Collections.unmodifiableMap(registryIdToSender); }
 	
 	private static Map<CommandSender, String> registrySenderToId = new ConcurrentHashMap<>();
-	public static Map<CommandSender, String> getRegistrySenderToId() { return Collections.unmodifiableMap(registrySenderToId); }
+	@Contract(value = " -> new", pure = true)
+	public static @NotNull @UnmodifiableView Map<CommandSender, String> getRegistrySenderToId() { return Collections.unmodifiableMap(registrySenderToId); }
 	
+	@Contract("null -> fail")
 	public static void register(CommandSender sender)
 	{
 		if (sender == null) throw new NullPointerException("sender");
@@ -152,6 +164,7 @@ public class IdUtil implements Listener, Runnable
 		event.run();
 	}
 	
+	@Contract("null -> fail")
 	public static void unregister(CommandSender sender)
 	{
 		if (sender == null) throw new NullPointerException("sender");
@@ -174,7 +187,7 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// Used for retrieving the full set of senders currently present on this server.
 	
-	public static Set<CommandSender> getLocalSenders()
+	public static @NotNull Set<CommandSender> getLocalSenders()
 	{
 		Set<CommandSender> ret = new MassiveSet<>();
 		
@@ -195,7 +208,8 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	
 	// Returns the name corresponding to the removed id.
-	private static String removeId(String id)
+	@Contract("null -> fail")
+	private static @Nullable String removeId(String id)
 	{
 		if (id == null) throw new NullPointerException("id");
 		
@@ -208,7 +222,8 @@ public class IdUtil implements Listener, Runnable
 	}
 	
 	// Returns the id corresponding to the removed name.
-	private static String removeName(String name)
+	@Contract("null -> fail")
+	private static @Nullable String removeName(String name)
 	{
 		if (name == null) throw new NullPointerException("name");
 		
@@ -220,6 +235,7 @@ public class IdUtil implements Listener, Runnable
 		return data.getId();
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	private static void addData(IdData data, SenderPresence presence)
 	{
 		if (data == null) throw new NullPointerException("data");
@@ -248,26 +264,30 @@ public class IdUtil implements Listener, Runnable
 		}
 	}
 
+	@Contract("null, null -> fail")
 	public static void update(String id, String name)
 	{
 		update(id, name, null);
 	}
 	
+	@Contract("null, null, _ -> fail")
 	public static void update(String id, String name, long millis)
 	{
 		update(id, name, millis, null);
 	}
 
+	@Contract("null, null, _ -> fail")
 	public static void update(final String id, final String name, SenderPresence presence)
 	{
 		update(id, name, System.currentTimeMillis(), presence);
 	}
 
-	public static void update(IdData data)
+	public static void update(@NotNull IdData data)
 	{
 		update(data.getId(), data.getName(), data.getMillis(), null);
 	}
 
+	@Contract("null, null, _, _ -> fail")
 	public static void update(final String id, final String name, final long millis, SenderPresence presence)
 	{
 		// First Null Check
@@ -310,7 +330,7 @@ public class IdUtil implements Listener, Runnable
 		addData(data, presence);
 	}
 	
-	private static void removeIdAndNameRecurse(String id, String name)
+	private static void removeIdAndNameRecurse(@Nullable String id, @Nullable String name)
 	{
 		String otherId = null;
 		String otherName = null;
@@ -382,7 +402,7 @@ public class IdUtil implements Listener, Runnable
 	// Online or not? We just use the mixin to get the actuall value.
 	
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void playerLoginLowest(PlayerLoginEvent event)
+	public void playerLoginLowest(@NotNull PlayerLoginEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -401,7 +421,7 @@ public class IdUtil implements Listener, Runnable
 	
 	// Can't be cancelled
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void playerJoinLowest(PlayerJoinEvent event)
+	public void playerJoinLowest(@NotNull PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -416,7 +436,7 @@ public class IdUtil implements Listener, Runnable
 	
 	// Can't be cancelled
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void playerLeaveMonitor(EventMassiveCorePlayerLeave event)
+	public void playerLeaveMonitor(@NotNull EventMassiveCorePlayerLeave event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -449,6 +469,7 @@ public class IdUtil implements Listener, Runnable
 	// Get data from a senderObject (any of: CommandSender, UUID, String id, String name)
 	// These methods avoid using the data cache if possible.
 	
+	@Contract("null -> null")
 	public static IdData getData(Object senderObject)
 	{
 		// Null Return
@@ -503,16 +524,18 @@ public class IdUtil implements Listener, Runnable
 		return null;
 	}
 	
-	public static ConsoleCommandSender getConsole()
+	public static @NotNull ConsoleCommandSender getConsole()
 	{
 		return Bukkit.getConsoleSender();
 	}
-	
+
+	@Contract("null -> null")
 	public static Player getPlayer(Object senderObject)
 	{
 		return getAsPlayer(getSender(senderObject));
 	}
 	
+	@Contract("null -> null")
 	public static CommandSender getSender(Object senderObject)
 	{
 		// Null Return
@@ -578,6 +601,7 @@ public class IdUtil implements Listener, Runnable
 		return null;
 	}
 	
+	@Contract("null -> null")
 	public static UUID getUuid(Object senderObject)
 	{
 		// Null Return
@@ -642,6 +666,7 @@ public class IdUtil implements Listener, Runnable
 	}
 
 	// This method always returns null or a lower case String.
+	@Contract("null -> null")
 	public static String getId(Object senderObject)
 	{
 		// Null Return
@@ -689,7 +714,8 @@ public class IdUtil implements Listener, Runnable
 		return null;
 	}
 	
-	public static String getIdFromSender(CommandSender sender)
+	@Contract("null -> !null")
+	public static @Nullable String getIdFromSender(CommandSender sender)
 	{
 		if (sender instanceof Player)
 		{
@@ -713,11 +739,13 @@ public class IdUtil implements Listener, Runnable
 		return sender.getName().toLowerCase();
 	}
 	
-	public static String getIdFromUuid(UUID uuid)
+	@Contract(pure = true)
+	public static String getIdFromUuid(@NotNull UUID uuid)
 	{
 		return uuid.toString();
 	}
 
+	@Contract("null -> null")
 	public static String getName(Object senderObject)
 	{
 		// Null Return
@@ -767,6 +795,7 @@ public class IdUtil implements Listener, Runnable
 		return null;
 	}
 
+	@Contract("null -> null")
 	public static OfflinePlayer getOfflinePlayer(Object senderObject)
 	{
 		// Null Return
@@ -781,13 +810,14 @@ public class IdUtil implements Listener, Runnable
 
 		return Bukkit.getOfflinePlayer(uuid);
 	}
-	
-	public static String getNameFromSender(CommandSender sender)
+
+	public static String getNameFromSender(@NotNull CommandSender sender)
 	{
 		if (sender instanceof ConsoleCommandSender) return CONSOLE_ID;
 		return sender.getName();
 	}
-	
+
+	@Contract("null -> false")
 	public static boolean isOnline(Object senderObject)
 	{
 		// Fix the id ...
@@ -801,7 +831,8 @@ public class IdUtil implements Listener, Runnable
 		// ... return by (case insensitive) set contains.
 		return IdUtil.getIds(SenderPresence.ONLINE, SenderType.ANY).contains(id);
 	}
-	
+
+	@Contract("null -> null")
 	public static Long getMillis(Object senderObject)
 	{
 		IdData data = getData(senderObject);
@@ -818,7 +849,8 @@ public class IdUtil implements Listener, Runnable
 		// NOTE: Assuming all custom ids isn't a valid player name or id.
 		return MUtil.isValidPlayerName(string) || MUtil.isUuid(string);
 	}
-	
+
+	@Contract("null -> false")
 	public static boolean isPlayer(Object senderObject)
 	{
 		String id = IdUtil.getId(senderObject);
@@ -826,11 +858,13 @@ public class IdUtil implements Listener, Runnable
 		return isPlayerId(id);
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	public static boolean isConsoleId(String string)
 	{
 		return CONSOLE_ID.equals(string);
 	}
-	
+
+	@Contract("null -> false")
 	public static boolean isConsole(Object senderObject)
 	{
 		String id = IdUtil.getId(senderObject);
@@ -842,18 +876,21 @@ public class IdUtil implements Listener, Runnable
 	// GET AS
 	// -------------------------------------------- //
 	
+	@Contract(value = "null -> null", pure = true)
 	public static CommandSender getAsSender(Object object)
 	{
 		if (!(object instanceof CommandSender)) return null;
 		return (CommandSender) object;
 	}
 	
+	@Contract(value = "null -> null", pure = true)
 	public static Player getAsPlayer(Object object)
 	{
 		if (!(object instanceof Player)) return null;
 		return (Player) object;
 	}
 	
+	@Contract(value = "null -> null", pure = true)
 	public static ConsoleCommandSender getAsConsole(Object object)
 	{
 		if (!(object instanceof ConsoleCommandSender)) return null;
@@ -863,15 +900,17 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// CONVENIENCE GAME-MODE
 	// -------------------------------------------- //
-	
-	public static GameMode getGameMode(Object object, GameMode def)
+
+	@Contract("null, _ -> param2")
+	public static GameMode getGameMode(@Nullable Object object, GameMode def)
 	{
 		Player player = getPlayer(object);
 		if (player == null) return def;
 		return player.getGameMode();
 	}
 
-	public static boolean isGameMode(Object object, GameMode gm, boolean def)
+	@Contract("null, _, _ -> param3")
+	public static boolean isGameMode(@Nullable Object object, GameMode gm, boolean def)
 	{
 		Player player = getPlayer(object);
 		if (player == null) return def;
@@ -947,7 +986,7 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// This data source is simply based on the players currently online
 	
-	public static Set<IdData> getLocalPlayerDatas()
+	public static @NotNull Set<@NotNull IdData> getLocalPlayerDatas()
 	{
 		Set<IdData> ret = new MassiveSet<>();
 		

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.BookMeta.Generation;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaGeneration extends WriterAbstractItemStackMetaField<BookMeta, Generation, Generation>
 {
@@ -25,25 +26,25 @@ public class WriterItemStackMetaGeneration extends WriterAbstractItemStackMetaFi
 	// -------------------------------------------- //
 
 	@Override
-	public Generation getA(DataItemStack ca, ItemStack d)
+	public Generation getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getGeneration();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Generation fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Generation fa, ItemStack d)
 	{
 		ca.setGeneration(fa);
 	}
 
 	@Override
-	public Generation getB(BookMeta cb, ItemStack d)
+	public Generation getB(@NotNull BookMeta cb, ItemStack d)
 	{
 		return cb.getGeneration();
 	}
 
 	@Override
-	public void setB(BookMeta cb, Generation fb, ItemStack d)
+	public void setB(@NotNull BookMeta cb, Generation fb, ItemStack d)
 	{
 		cb.setGeneration(fb);
 	}

@@ -1,6 +1,9 @@
 package com.massivecraft.massivecore.mson;
 
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public enum MsonEventAction
 {
@@ -21,14 +24,15 @@ public enum MsonEventAction
 	// PROPERTIES
 	// -------------------------------------------- //
 
-	public MsonEventType getType()
+	@Contract(pure = true)
+	public @NotNull MsonEventType getType()
 	{
 		if (this == SHOW_TEXT) return MsonEventType.HOVER;
 		if (this == SHOW_ITEM) return MsonEventType.HOVER;
 		return MsonEventType.CLICK;
 	}
 	
-	public String getTooltipPrefix()
+	public @Nullable String getTooltipPrefix()
 	{
 		if (this == SUGGEST_COMMAND) return Txt.parse("<h>Suggest: <c>");
 		if (this == RUN_COMMAND) return Txt.parse("<h>Command: <c>");

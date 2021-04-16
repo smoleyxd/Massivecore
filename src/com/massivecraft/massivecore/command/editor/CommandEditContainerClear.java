@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.util.ContainerUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandEditContainerClear<O, V> extends CommandEditContainerAbstract<O, V>
 {	
@@ -9,7 +10,7 @@ public class CommandEditContainerClear<O, V> extends CommandEditContainerAbstrac
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerClear(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerClear(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property);

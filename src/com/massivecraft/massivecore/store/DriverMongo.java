@@ -11,6 +11,7 @@ import com.massivecraft.massivecore.xlib.mongodb.client.FindIterable;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoCollection;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
 import com.massivecraft.massivecore.xlib.mongodb.client.model.ReplaceOptions;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -301,7 +302,7 @@ public class DriverMongo extends DriverAbstract
 	// UTIL
 	//----------------------------------------------//
 	
-	protected static MongoCollection fixColl(Coll<?> coll)
+	protected static MongoCollection fixColl(@NotNull Coll<?> coll)
 	{
 		return (MongoCollection) coll.getCollDriverObject();
 	}

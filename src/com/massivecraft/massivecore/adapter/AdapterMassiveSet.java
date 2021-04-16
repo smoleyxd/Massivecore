@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.collections.MassiveSetDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -15,6 +16,7 @@ public class AdapterMassiveSet extends AdapterMassiveX<MassiveSet<?>>
 	// -------------------------------------------- //
 	
 	private static final AdapterMassiveSet i = new AdapterMassiveSet();
+	@Contract(pure = true)
 	public static AdapterMassiveSet get() { return i; }
 
 	// -------------------------------------------- //

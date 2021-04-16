@@ -19,6 +19,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -252,7 +254,8 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		}
 	}
 
-	private static Active asActive(Object object)
+	@Contract("null -> fail")
+	private static @Nullable Active asActive(Object object)
 	{
 		// Active already
 		if (object instanceof Active)
@@ -291,6 +294,7 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		throw new IllegalArgumentException("Neither Active nor Class: " + object);
 	}
 	
+	@Contract("null -> fail")
 	private void deactivate(Collection<? extends Active> actives)
 	{
 		// Fail Fast

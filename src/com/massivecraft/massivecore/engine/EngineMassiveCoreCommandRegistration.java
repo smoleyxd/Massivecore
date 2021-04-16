@@ -10,6 +10,7 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -25,6 +26,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreCommandRegistration i = new EngineMassiveCoreCommandRegistration();
+	@Contract(pure = true)
 	public static EngineMassiveCoreCommandRegistration get() { return i; }
 	public EngineMassiveCoreCommandRegistration()
 	{
@@ -154,6 +156,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	// UTIL
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static MassiveCommand getMassiveCommand(Command command)
 	{
 		if (command == null) return null;

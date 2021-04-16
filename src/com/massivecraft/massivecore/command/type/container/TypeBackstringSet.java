@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.command.type.container;
 
 import com.massivecraft.massivecore.collections.BackstringSet;
 import com.massivecraft.massivecore.command.type.Type;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -17,7 +19,8 @@ public class TypeBackstringSet<E extends Enum<E>> extends TypeContainer<Set<E>, 
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <E extends Enum<E>> TypeBackstringSet<E> get(Type<E> innerType)
+	@Contract("_ -> new")
+	public static <E extends Enum<E>> @NotNull TypeBackstringSet<E> get(Type<E> innerType)
 	{
 		return new TypeBackstringSet<>(innerType);
 	}

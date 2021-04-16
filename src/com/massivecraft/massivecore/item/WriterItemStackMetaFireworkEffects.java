@@ -4,6 +4,7 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -31,25 +32,25 @@ public class WriterItemStackMetaFireworkEffects extends WriterAbstractItemStackM
 	// -------------------------------------------- //
 	
 	@Override
-	public List<DataFireworkEffect> getA(DataItemStack ca, ItemStack d)
+	public List<DataFireworkEffect> getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getFireworkEffects();
 	}
 	
 	@Override
-	public void setA(DataItemStack ca, List<DataFireworkEffect> fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, List<DataFireworkEffect> fa, ItemStack d)
 	{
 		ca.setFireworkEffects(fa);
 	}
 	
 	@Override
-	public List<FireworkEffect> getB(FireworkMeta cb, ItemStack d)
+	public List<FireworkEffect> getB(@NotNull FireworkMeta cb, ItemStack d)
 	{
 		return cb.getEffects();
 	}
 	
 	@Override
-	public void setB(FireworkMeta cb, List<FireworkEffect> fb, ItemStack d)
+	public void setB(@NotNull FireworkMeta cb, List<FireworkEffect> fb, ItemStack d)
 	{
 		cb.addEffects(fb);
 	}

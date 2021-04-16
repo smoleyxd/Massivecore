@@ -8,6 +8,8 @@ import com.massivecraft.massivecore.command.type.sender.TypeSender;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +24,7 @@ public class EditSettings<O>
 	
 	private EditSettings<?> parent = null;
 	public EditSettings<?> getParent() { return this.parent; }
+	@Contract(mutates = "this")
 	public void setParent(EditSettings<?> parent) { this.parent = parent; }
 	public boolean hasParent() { return this.getParent() != null; }
 	
@@ -64,6 +67,7 @@ public class EditSettings<O>
 	// This property is used to get the object we are editing from the sender.
 	protected Property<CommandSender, O> usedProperty;
 	public Property<CommandSender, O> getUsedProperty() { return this.usedProperty; }
+	@Contract(mutates = "this")
 	public void setUsedProperty(Property<CommandSender, O> usedProperty) { this.usedProperty = usedProperty; }
 	
 	// The Internal EditSettings<CommandSender> for setting the used.
@@ -84,16 +88,22 @@ public class EditSettings<O>
 	// Requirements to edit the used object.
 	private List<Requirement> usedRequirements = new MassiveList<>();
 	public List<Requirement> getUsedRequirements() { return this.usedRequirements; }
+	@Contract(mutates = "this")
 	public void setUsedRequirements(List<Requirement> requirements) { this.usedRequirements = requirements; }
+	@Contract(mutates = "this")
 	public void addUsedRequirements(Collection<Requirement> requirements) { this.usedRequirements.addAll(requirements); }
-	public void addUsedRequirements(Requirement... requirements) { this.addUsedRequirements(Arrays.asList(requirements)); }
+	@Contract(mutates = "this")
+	public void addUsedRequirements(Requirement @NotNull ... requirements) { this.addUsedRequirements(Arrays.asList(requirements)); }
 	
 	// Requirements to edit properties. Common stuff shared by all properties.
 	private List<Requirement> propertyRequirements = new MassiveList<>();
 	public List<Requirement> getPropertyRequirements() { return this.propertyRequirements; }
+	@Contract(mutates = "this")
 	public void setPropertyRequirements(List<Requirement> requirements) { this.propertyRequirements = requirements; }
+	@Contract(mutates = "this")
 	public void addPropertyRequirements(Collection<Requirement> requirements) { this.propertyRequirements.addAll(requirements); }
-	public void addPropertyRequirements(Requirement... requirements) { this.addPropertyRequirements(Arrays.asList(requirements)); }
+	@Contract(mutates = "this")
+	public void addPropertyRequirements(Requirement @NotNull ... requirements) { this.addPropertyRequirements(Arrays.asList(requirements)); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT > NORMAL
@@ -114,7 +124,7 @@ public class EditSettings<O>
 	// CONSTRUCT > DELEGATE
 	// -------------------------------------------- //
 	
-	public <P> EditSettings(final EditSettings<P> parentSettings, final Property<P, O> childProperty)
+	public <P> EditSettings(final EditSettings<P> parentSettings, final @NotNull Property<P, O> childProperty)
 	{
 		this(childProperty.getValueType());
 		

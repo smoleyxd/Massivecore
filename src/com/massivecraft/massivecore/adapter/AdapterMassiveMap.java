@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.MassiveMapDef;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class AdapterMassiveMap extends AdapterMassiveX<MassiveMap<?, ?>>
 	// -------------------------------------------- //
 	
 	private static final AdapterMassiveMap i = new AdapterMassiveMap();
+	@Contract(pure = true)
 	public static AdapterMassiveMap get() { return i; }
 
 	// -------------------------------------------- //

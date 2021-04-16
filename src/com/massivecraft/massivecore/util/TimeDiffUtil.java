@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.util;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -23,17 +26,19 @@ public class TimeDiffUtil
 	// MILLIS
 	// -------------------------------------------- //
 	
-	public static long millis(TimeUnit timeUnit, long count)
+	@Contract(pure = true)
+	public static long millis(@NotNull TimeUnit timeUnit, long count)
 	{
 		return timeUnit.millis*count;
 	}
 	
-	public static long millis(TimeUnit timeUnit)
+	@Contract(pure = true)
+	public static long millis(@NotNull TimeUnit timeUnit)
 	{
 		return millis(timeUnit, 1);
 	}
 	
-	public static long millis(Map<TimeUnit, Long> unitcounts, long count)
+	public static long millis(@NotNull Map<TimeUnit, Long> unitcounts, long count)
 	{
 		long ret = 0;
 		for (Entry<TimeUnit, Long> entry : unitcounts.entrySet())
@@ -43,18 +48,18 @@ public class TimeDiffUtil
 		return ret;
 	}
 	
-	public static long millis(Map<TimeUnit, Long> unitcounts)
+	public static long millis(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
 		return millis(unitcounts, 1);
 	}
 	
-	public static long millis(String formated, long count) throws Exception
+	public static long millis(@NotNull String formated, long count) throws Exception
 	{
 		Map<TimeUnit, Long> unitcount = unitcounts(formated);
 		return millis(unitcount, count);
 	}
 	
-	public static long millis(String formated) throws Exception
+	public static long millis(@NotNull String formated) throws Exception
 	{
 		return millis(formated, 1);
 	}
@@ -63,7 +68,8 @@ public class TimeDiffUtil
 	// UNITCOUNT
 	// -------------------------------------------- //
 	
-	public static LinkedHashMap<TimeUnit, Long> unitcounts(String formated) throws Exception
+	@Contract("null -> fail")
+	public static @NotNull LinkedHashMap<TimeUnit, Long> unitcounts(String formated) throws Exception
 	{
 		if (formated == null) throw new NullPointerException("The string can't be null.");
 		
@@ -108,7 +114,7 @@ public class TimeDiffUtil
 		return ret;
 	}
 	
-	public static LinkedHashMap<TimeUnit, Long> unitcounts(long millis, TreeSet<TimeUnit> units)
+	public static @NotNull LinkedHashMap<TimeUnit, Long> unitcounts(long millis, @NotNull TreeSet<TimeUnit> units)
 	{
 		// Create non-negative millis decumulator
 		long millisLeft = Math.abs(millis);
@@ -126,12 +132,12 @@ public class TimeDiffUtil
 		return ret;
 	}
 	
-	public static LinkedHashMap<TimeUnit, Long> unitcounts(long millis)
+	public static @NotNull LinkedHashMap<TimeUnit, Long> unitcounts(long millis)
 	{
 		return unitcounts(millis, TimeUnit.getAll());
 	}
 	
-	public static LinkedHashMap<TimeUnit, Long> limit(LinkedHashMap<TimeUnit, Long> unitcounts, int limit)
+	public static @NotNull LinkedHashMap<TimeUnit, Long> limit(@NotNull LinkedHashMap<TimeUnit, Long> unitcounts, int limit)
 	{
 		LinkedHashMap<TimeUnit, Long> ret = new LinkedHashMap<>();
 		
@@ -159,12 +165,12 @@ public class TimeDiffUtil
 	public static final String FORMAT_COMMA_MINIMAL = "%s";
 	public static final String FORMAT_AND_MINIMAL = "%s";
 	
-	public static String formated(TimeUnit unit, long count, String formatEntry)
+	public static String formated(@NotNull TimeUnit unit, long count, String formatEntry)
 	{
 		return String.format(formatEntry, count, unit.getUnitString(count), unit.getNameString(count));
 	}
 	
-	public static String formated(Map<TimeUnit, Long> unitcounts, String entryFormat, String commaFormat, String andFormat, String color)
+	public static String formated(@NotNull Map<TimeUnit, Long> unitcounts, String entryFormat, String commaFormat, String andFormat, String color)
 	{
 		String comma = String.format(commaFormat, Txt.parse(color));
 		String and = String.format(andFormat, Txt.parse(color));
@@ -182,32 +188,32 @@ public class TimeDiffUtil
 		return Txt.implodeCommaAnd(parts, comma, and);
 	}
 	
-	public static String formatedVerboose(TimeUnit unit, long count)
+	public static String formatedVerboose(@NotNull TimeUnit unit, long count)
 	{
 		return formated(unit, count, FORMAT_ENTRY_VERBOOSE);
 	}
 	
-	public static String formatedVerboose(Map<TimeUnit, Long> unitcounts, String color)
+	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
 		return formated(unitcounts, FORMAT_ENTRY_VERBOOSE, FORMAT_COMMA_VERBOOSE, FORMAT_AND_VERBOOSE, color);
 	}
 	
-	public static String formatedVerboose(Map<TimeUnit, Long> unitcounts)
+	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
 		return formatedVerboose(unitcounts, "<i>");
 	}
 	
-	public static String formatedMinimal(TimeUnit unit, long count)
+	public static String formatedMinimal(@NotNull TimeUnit unit, long count)
 	{
 		return formated(unit, count, FORMAT_ENTRY_MINIMAL);
 	}
 	
-	public static String formatedMinimal(Map<TimeUnit, Long> unitcounts, String color)
+	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
 		return formated(unitcounts, FORMAT_ENTRY_MINIMAL, FORMAT_COMMA_MINIMAL, FORMAT_AND_MINIMAL, color);
 	}
 	
-	public static String formatedMinimal(Map<TimeUnit, Long> unitcounts)
+	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
 		return formatedMinimal(unitcounts, "");
 	}

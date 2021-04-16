@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.predicate;
 
 import com.massivecraft.massivecore.collections.MassiveList;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,14 +18,16 @@ public class PredicateElementRegexes implements Predicate<StackTraceElement>
 	
 	private List<Pattern> patterns = Collections.emptyList();
 	public List<Pattern> getPatterns() { return this.patterns; }
+	@Contract(mutates = "this")
 	public void setPatterns(Collection<Pattern> patterns) { this.patterns = new MassiveList<>(patterns); }
-	public void setPatterns(Iterable<String> regexes) { this.setPatterns(asPatterns(regexes));}
+	@Contract(mutates = "this")
+	public void setPatterns(@NotNull Iterable<String> regexes) { this.setPatterns(asPatterns(regexes));}
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public PredicateElementRegexes(String... regexes)
+	public PredicateElementRegexes(String @NotNull ... regexes)
 	{
 		this.setPatterns(Arrays.asList(regexes));
 	}
@@ -48,7 +52,7 @@ public class PredicateElementRegexes implements Predicate<StackTraceElement>
 	// UTIL
 	// -------------------------------------------- //
 	
-	protected List<Pattern> asPatterns(Iterable<String> regexes)
+	protected @NotNull List<Pattern> asPatterns(@NotNull Iterable<String> regexes)
 	{
 		// Create
 		List<Pattern> ret = new MassiveList<>();

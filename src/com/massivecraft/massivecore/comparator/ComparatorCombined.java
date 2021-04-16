@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -10,9 +13,11 @@ public class ComparatorCombined<T> extends ComparatorAbstract<T>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@Contract("_ -> new")
 	@SafeVarargs
-	public static <T> ComparatorCombined<T> get(Comparator<? super T>... comparators) { return new ComparatorCombined<>(comparators); }
-	public static <T> ComparatorCombined<T> get(List<Comparator<? super T>> comparators) { return new ComparatorCombined<>(comparators); }
+	public static <T> @NotNull ComparatorCombined<T> get(Comparator<? super T>... comparators) { return new ComparatorCombined<>(comparators); }
+	@Contract("_ -> new")
+	public static <T> @NotNull ComparatorCombined<T> get(List<Comparator<? super T>> comparators) { return new ComparatorCombined<>(comparators); }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -27,7 +32,7 @@ public class ComparatorCombined<T> extends ComparatorAbstract<T>
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public ComparatorCombined(Comparator<? super T>... comparators)
+	public ComparatorCombined(Comparator<? super T> @NotNull ... comparators)
 	{
 		this(Arrays.asList(comparators));
 	}

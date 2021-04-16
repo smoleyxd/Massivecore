@@ -14,6 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class MixinTeleport extends Mixin
 {
@@ -23,6 +25,7 @@ public class MixinTeleport extends Mixin
 	
 	private static MixinTeleport d = new MixinTeleport();
 	private static MixinTeleport i = d;
+	@Contract(pure = true)
 	public static MixinTeleport get() { return i; }
 
 	// -------------------------------------------- //
@@ -49,7 +52,7 @@ public class MixinTeleport extends Mixin
 	// CORE LOGIC
 	// -------------------------------------------- //
 	
-	public static void teleportPlayer(Player player, PS ps) throws TeleporterException
+	public static void teleportPlayer(@NotNull Player player, @NotNull PS ps) throws TeleporterException
 	{
 		// Base the PS location on the entity location
 		ps = ps.getEntity(true);

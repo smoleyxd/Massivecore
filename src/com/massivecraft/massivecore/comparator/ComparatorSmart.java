@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+
 public class ComparatorSmart extends ComparatorAbstract<Object>
 {
 	// -------------------------------------------- //
@@ -7,6 +9,7 @@ public class ComparatorSmart extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorSmart i = new ComparatorSmart();
+	@Contract(pure = true)
 	public static ComparatorSmart get() { return i; }
 	public ComparatorSmart()
 	{

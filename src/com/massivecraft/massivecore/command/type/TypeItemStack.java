@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -27,7 +28,7 @@ public class TypeItemStack extends TypeAbstract<ItemStack>
 	private static TypeItemStack i = new TypeItemStack();
 	public static TypeItemStack get() { return i; }
 	
-	public static TypeItemStack get(Material... materialWhitelist)
+	public static @NotNull TypeItemStack get(Material... materialWhitelist)
 	{
 		ExceptionSet materialsAllowed = new ExceptionSet(false, materialWhitelist);
 		return new TypeItemStack(materialsAllowed);

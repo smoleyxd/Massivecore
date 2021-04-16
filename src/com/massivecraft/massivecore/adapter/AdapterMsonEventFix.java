@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
 import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 
@@ -18,6 +19,7 @@ public class AdapterMsonEventFix implements JsonDeserializer<MsonEvent>, JsonSer
 	// -------------------------------------------- //
 
 	private static final AdapterMsonEventFix i = new AdapterMsonEventFix();
+	@Contract(pure = true)
 	public static AdapterMsonEventFix get() { return i; }
 	
 	// -------------------------------------------- //

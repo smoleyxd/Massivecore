@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.command.requirement;
 
 import com.massivecraft.massivecore.command.MassiveCommand;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,13 +19,15 @@ public class RequirementAnd extends RequirementAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static RequirementAnd get(Requirement... requirements) { return new RequirementAnd(requirements); }
-	public RequirementAnd(Requirement... requirements)
+	@Contract("_ -> new")
+	public static @NotNull RequirementAnd get(Requirement @NotNull ... requirements) { return new RequirementAnd(requirements); }
+	public RequirementAnd(Requirement @NotNull ... requirements)
 	{
 		this(Arrays.asList(requirements));
 	}
 	
-	public static RequirementAnd get(Collection<Requirement> requirements) { return new RequirementAnd(requirements); }
+	@Contract("_ -> new")
+	public static @NotNull RequirementAnd get(Collection<Requirement> requirements) { return new RequirementAnd(requirements); }
 	public RequirementAnd(Collection<Requirement> requirements)
 	{
 		this.requirements = Collections.unmodifiableList(new ArrayList<>(requirements));
@@ -34,7 +38,7 @@ public class RequirementAnd extends RequirementAbstract
 	// -------------------------------------------- //
 	
 	private final List<Requirement> requirements;
-	public List<Requirement> getRequirements() { return this.requirements; }
+	public @NotNull List<Requirement> getRequirements() { return this.requirements; }
 	
 	// -------------------------------------------- //
 	// OVERRIDE

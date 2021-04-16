@@ -31,6 +31,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta.Generation;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -424,6 +427,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// CONVERT ONE
 	// -------------------------------------------- //
 	
+	@Contract("null -> null; !null -> new")
 	public static DataItemStack fromBukkit(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
@@ -442,6 +446,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return ret;
 	}
 	
+	@Contract("null -> null")
 	public static ItemStack toBukkit(DataItemStack dataItemStack)
 	{
 		if (dataItemStack == null) return null;
@@ -452,7 +457,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// CONVERT MANY
 	// -------------------------------------------- //
 	
-	public static void fromBukkit(Iterable<ItemStack> itemStacks, Collection<DataItemStack> dataItemStacks)
+	public static void fromBukkit(@NotNull Iterable<ItemStack> itemStacks, @NotNull Collection<DataItemStack> dataItemStacks)
 	{
 		for (ItemStack itemStack : itemStacks)
 		{
@@ -460,7 +465,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		}
 	}
 	
-	public static List<DataItemStack> fromBukkit(Iterable<ItemStack> itemStacks)
+	public static @NotNull List<DataItemStack> fromBukkit(@NotNull Iterable<ItemStack> itemStacks)
 	{
 		// Create
 		List<DataItemStack> ret = new MassiveList<>();
@@ -472,7 +477,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return ret;
 	}
 	
-	public static <V> void fromBukkitKeys(Map<ItemStack, V> itemStacks, Map<DataItemStack, V> dataItemStacks)
+	public static <V> void fromBukkitKeys(@NotNull Map<ItemStack, V> itemStacks, @NotNull Map<DataItemStack, V> dataItemStacks)
 	{
 		for (Entry<ItemStack, V> entry : itemStacks.entrySet())
 		{
@@ -480,7 +485,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		}
 	}
 	
-	public static <V> Map<DataItemStack, V> fromBukkitKeys(Map<ItemStack, V> itemStacks)
+	public static <V> @NotNull Map<DataItemStack, V> fromBukkitKeys(@NotNull Map<ItemStack, V> itemStacks)
 	{
 		// Create
 		Map<DataItemStack, V> ret = new MassiveMap<>();
@@ -492,7 +497,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return ret;
 	}
 	
-	public static <K> void fromBukkitValues(Map<K, ItemStack> itemStacks, Map<K, DataItemStack> dataItemStacks)
+	public static <K> void fromBukkitValues(@NotNull Map<K, ItemStack> itemStacks, @NotNull Map<K, DataItemStack> dataItemStacks)
 	{
 		for (Entry<K, ItemStack> entry : itemStacks.entrySet())
 		{
@@ -500,7 +505,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		}
 	}
 	
-	public static <K> Map<K, DataItemStack> fromBukkitValues(Map<K, ItemStack> itemStacks)
+	public static <K> @NotNull Map<K, DataItemStack> fromBukkitValues(@NotNull Map<K, ItemStack> itemStacks)
 	{
 		// Create
 		Map<K, DataItemStack> ret = new MassiveMap<>();
@@ -512,6 +517,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return ret;
 	}
 	
+	@Contract("null -> null")
 	public static Map<Integer, DataItemStack> fromBukkitContents(ItemStack[] contents)
 	{
 		// Catch NullEmpty
@@ -533,6 +539,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return ret;
 	}
 	
+	@Contract("null -> null")
 	public static ItemStack[] toBukkitContents(Map<Integer, DataItemStack> contents)
 	{
 		// Catch NullEmpty
@@ -558,6 +565,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// UTILITY
 	// -------------------------------------------- //
 	
+	@Contract("null -> false")
 	public static boolean isSomething(DataItemStack dataItemStack)
 	{
 		if (dataItemStack == null) return false;
@@ -566,6 +574,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return true;
 	}
 	
+	@Contract("null -> true")
 	public static boolean isNothing(DataItemStack dataItemStack)
 	{
 		return ! isSomething(dataItemStack);
@@ -576,7 +585,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	
 	@Override
-	public int compareTo(DataItemStack that)
+	public int compareTo(@NotNull DataItemStack that)
 	{
 		return ComparatorSmart.get().compare(
 			this.getId(), that.getId(),
@@ -619,6 +628,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		);
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{
@@ -672,7 +682,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 		return this.equals(that);
 	}
 	
-	public boolean isSimilar(DataItemStack that)
+	public boolean isSimilar(@NotNull DataItemStack that)
 	{
 		// A copy of the equals logic above. However we comment out:
 		// * Count
@@ -774,6 +784,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// -------------------------------------------- //
 	
 	// We treat null and empty collections the same.
+	@Contract("null -> true")
 	public static boolean isNothing(Object object)
 	{
 		if (object == null) return true;
@@ -783,6 +794,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	}
 	
 	// Return the value unless the value is nothing then return standard instead.
+	@Contract("null, _ -> param2")
 	public static <T> T get(T value, T standard)
 	{
 		if (isNothing(value)) return standard;
@@ -792,7 +804,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// Return the value unless the value is nothing or standard then return null instead.
 	// Perform shallow copy on supported collections.
 	@SuppressWarnings("unchecked")
-	public static <R, T> R set(T value, T standard)
+	public static <R, T> @Nullable R set(T value, T standard)
 	{
 		if (isNothing(value)) return null;
 		if (value.equals(standard)) return null;

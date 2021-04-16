@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.command.type.Type;
 import com.massivecraft.massivecore.command.type.TypeTransformer;
 import com.massivecraft.massivecore.item.Converter;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeConverter<A, B> extends TypeTransformer<A, B> 
 {
@@ -21,7 +22,7 @@ public class TypeConverter<A, B> extends TypeTransformer<A, B>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public TypeConverter(Type<A> typeA, Type<B> typeB, Converter<A, B> a2b, Converter<B, A> b2a)
+	public TypeConverter(Type<A> typeA, @NotNull Type<B> typeB, Converter<A, B> a2b, Converter<B, A> b2a)
 	{
 		super(typeA, typeB);
 		this.a2b = a2b;

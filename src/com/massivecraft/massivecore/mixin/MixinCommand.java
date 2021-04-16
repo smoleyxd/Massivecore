@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
 
 public class MixinCommand extends Mixin
 {
@@ -12,6 +13,7 @@ public class MixinCommand extends Mixin
 	
 	private static MixinCommand d = new MixinCommand();
 	private static MixinCommand i = d;
+	@Contract(pure = true)
 	public static MixinCommand get() { return i; }
 	
 	// -------------------------------------------- //

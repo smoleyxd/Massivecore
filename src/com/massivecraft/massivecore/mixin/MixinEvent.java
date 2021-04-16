@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.mixin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.Contract;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ public class MixinEvent extends Mixin
 	
 	private static MixinEvent d = new MixinEvent();
 	private static MixinEvent i = d;
+	@Contract(pure = true)
 	public static MixinEvent get() { return i; }
 	
 	// -------------------------------------------- //

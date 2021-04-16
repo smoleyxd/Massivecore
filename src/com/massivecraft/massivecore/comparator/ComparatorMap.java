@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -11,6 +13,7 @@ public class ComparatorMap extends ComparatorAbstract<Object>
 	// -------------------------------------------- //
 	
 	private static ComparatorMap i = new ComparatorMap();
+	@Contract(pure = true)
 	public static ComparatorMap get() { return i; }
 	
 	// -------------------------------------------- //

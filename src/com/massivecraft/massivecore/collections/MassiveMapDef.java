@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
+
 import java.util.Map;
 
 /**
@@ -18,12 +21,12 @@ public class MassiveMapDef<K, V> extends MassiveMap<K, V> implements Def
 	// CONSTRUCT: SUPER
 	// -------------------------------------------- //
 	
-	public MassiveMapDef(int initialCapacity, float loadFactor)
+	public MassiveMapDef(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity, float loadFactor)
 	{
 		super(initialCapacity, loadFactor);
 	}
 
-	public MassiveMapDef(int initialCapacity)
+	public MassiveMapDef(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity)
 	{
 		super(initialCapacity);
 	}
@@ -38,12 +41,12 @@ public class MassiveMapDef<K, V> extends MassiveMap<K, V> implements Def
 		super(m);
 	}
 
-	public MassiveMapDef(int initialCapacity, float loadFactor, boolean accessOrder)
+	public MassiveMapDef(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity, float loadFactor, boolean accessOrder)
 	{
 		super(initialCapacity, loadFactor, accessOrder);
 	}
 	
-	public MassiveMapDef(K key1, V value1, Object... objects)
+	public MassiveMapDef(K key1, V value1, Object @NotNull ... objects)
 	{
 		super(key1, value1, objects);
 	}

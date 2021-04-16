@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinDisplayName extends Mixin
 {
@@ -13,6 +14,7 @@ public class MixinDisplayName extends Mixin
 	
 	private static MixinDisplayName d = new MixinDisplayName();
 	private static MixinDisplayName i = d;
+	@Contract(pure = true)
 	public static MixinDisplayName get() { return i; }
 	
 	// -------------------------------------------- //

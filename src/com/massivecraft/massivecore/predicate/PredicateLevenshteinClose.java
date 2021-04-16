@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.predicate;
 
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class PredicateLevenshteinClose implements Predicate<String>
 {
@@ -15,14 +17,18 @@ public class PredicateLevenshteinClose implements Predicate<String>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static PredicateLevenshteinClose get(String token) { return new PredicateLevenshteinClose(token); }
-	public static PredicateLevenshteinClose get(String token, int levenshteinMax) { return new PredicateLevenshteinClose(token, levenshteinMax); }
+	@Contract("_ -> new")
+	public static @NotNull PredicateLevenshteinClose get(@NotNull String token) { return new PredicateLevenshteinClose(token); }
+	@Contract(value = "_, _ -> new", pure = true)
+	public static @NotNull PredicateLevenshteinClose get(@NotNull String token, int levenshteinMax) { return new PredicateLevenshteinClose(token, levenshteinMax); }
 	
+	@Contract("null -> fail")
 	public PredicateLevenshteinClose(String token)
 	{
 		this(token, getLevenshteinMax(token));
 	}
 	
+	@Contract(value = "null, _ -> fail", pure = true)
 	public PredicateLevenshteinClose(String token, int levenshteinMax)
 	{
 		if (token == null) throw new NullPointerException("token");

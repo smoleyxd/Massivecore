@@ -10,6 +10,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import org.bukkit.DyeColor;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
 import java.util.Iterator;
@@ -21,6 +22,7 @@ public class AdapterBannerPatterns implements JsonDeserializer<MassiveListDef<Da
 	// -------------------------------------------- //
 
 	private static final AdapterBannerPatterns i = new AdapterBannerPatterns();
+	@Contract(pure = true)
 	public static AdapterBannerPatterns get() { return i; }
 	
 	// -------------------------------------------- //

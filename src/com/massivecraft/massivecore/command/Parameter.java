@@ -6,6 +6,8 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import static com.massivecraft.massivecore.mson.Mson.mson;
 
@@ -26,13 +28,16 @@ public class Parameter<T>
 	
 	protected Type<T> type;
 	public Type<T> getType() { return type; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setType(Type<T> type) { this.type = type; return this; }
 	
 	protected String name;
 	public String getName() { return name; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setName(String name) { this.name = name; return this; }
 	
 	protected String defaultDesc = null;
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setDefaultDesc(String defaultDesc) { this.defaultDesc = defaultDesc; return this; }
 	public String getDefaultDesc()
 	{
@@ -43,6 +48,7 @@ public class Parameter<T>
 	
 	protected T defaultValue = null;
 	public T getDefaultValue() { return defaultValue; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setDefaultValue(T defaultValue)
 	{
 		this.defaultValue = defaultValue;
@@ -54,6 +60,7 @@ public class Parameter<T>
 	// So we must keep track of this field too.
 	protected boolean defaultValueSet = false;
 	public boolean isDefaultValueSet() { return this.defaultValueSet; }
+	@Contract(mutates = "this")
 	public void setDefaultValueSet(boolean defaultValueSet) { this.defaultValueSet = defaultValueSet; }
 	
 	
@@ -65,6 +72,7 @@ public class Parameter<T>
 	// That might the case if the arg is a player. and default is oneself.
 	protected boolean requiredFromConsole = false;
 	public boolean isRequiredFromConsole() { return requiredFromConsole; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setRequiredFromConsole(boolean requiredFromConsole) { this.requiredFromConsole = requiredFromConsole; return this; }
 	
 	// An optional description of this argument.
@@ -74,6 +82,7 @@ public class Parameter<T>
 	// 3. "the amount of money to pay"
 	protected String desc = null;
 	public String getDesc() { return desc; }
+	@Contract(value = "_ -> this", mutates = "this")
 	public Parameter<T> setDesc(String desc) { this.desc = desc; return this; }
 	
 	public boolean hasDesc() { return this.getDesc() != null; }
@@ -86,6 +95,7 @@ public class Parameter<T>
 	// description must not be set in the constructor.
 	
 	// All
+	@Contract("_, null, _, _, _ -> fail; _, !null, _, null, _ -> fail")
 	public Parameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name, String defaultDesc)
 	{
 		// Null checks
@@ -101,7 +111,7 @@ public class Parameter<T>
 	
 	// Without defaultValue
 	@SuppressWarnings("unchecked")
-	public Parameter(Type<T> type, boolean requiredFromConsole, String name, String defaultDesc)
+	public Parameter(@NotNull Type<T> type, boolean requiredFromConsole, @NotNull String name, String defaultDesc)
 	{
 		this((T) DEFAULT_VALUE_DEFAULT, type, requiredFromConsole, name, defaultDesc);
 		
@@ -110,43 +120,43 @@ public class Parameter<T>
 	}
 	
 	// Without reqFromConsole.
-	public Parameter(T defaultValue, Type<T> type, String name, String defaultDesc)
+	public Parameter(T defaultValue, @NotNull Type<T> type, @NotNull String name, String defaultDesc)
 	{
 		this(defaultValue, type, REQUIRED_FROM_CONSOLE_DEFAULT, name, defaultDesc);
 	}
 	
 	// Without defaultDesc.
-	public Parameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name)
+	public Parameter(T defaultValue, @NotNull Type<T> type, boolean requiredFromConsole, @NotNull String name)
 	{
 		this(defaultValue, type, requiredFromConsole, name, DEFAULT_DESC_DEFAULT);
 	}
 	
 	// Without defaultValue & reqFromConsole.
-	public Parameter(Type<T> type, String name, String defaultDesc)
+	public Parameter(@NotNull Type<T> type, @NotNull String name, String defaultDesc)
 	{
 		this(type, REQUIRED_FROM_CONSOLE_DEFAULT, name, defaultDesc);
 	}
 
 	// Without defaultValue & defaultDesc.
-	public Parameter(Type<T> type, boolean requiredFromConsole, String name)
+	public Parameter(@NotNull Type<T> type, boolean requiredFromConsole, @NotNull String name)
 	{
 		this(type, requiredFromConsole, name, DEFAULT_DESC_DEFAULT);
 	}
 
 	// Without reqFromConsole and defaultDesc.
-	public Parameter(T defaultValue, Type<T> type, String name)
+	public Parameter(T defaultValue, @NotNull Type<T> type, @NotNull String name)
 	{
 		this(defaultValue, type, REQUIRED_FROM_CONSOLE_DEFAULT, name, DEFAULT_DESC_DEFAULT);
 	}
 	
 	// Without defaultValue, reqFromConsole and defaultDesc.
-	public Parameter(Type<T> type, String name)
+	public Parameter(@NotNull Type<T> type, @NotNull String name)
 	{
 		this(type, REQUIRED_FROM_CONSOLE_DEFAULT, name, DEFAULT_DESC_DEFAULT);
 	}
 	
 	// Without defaultValue, name, reqFromConsole and defaultDesc.
-	public Parameter(Type<T> type)
+	public Parameter(@NotNull Type<T> type)
 	{
 		this(type, REQUIRED_FROM_CONSOLE_DEFAULT, type.getName(), DEFAULT_DESC_DEFAULT);
 	}
@@ -193,6 +203,7 @@ public class Parameter<T>
 	// COMMONLY USED PARAMETERS
 	// -------------------------------------------- //
 
+	@Contract(" -> new")
 	public static Parameter<Integer> getPage()
 	{
 		// We can't use a singleton because people might want to set a description.

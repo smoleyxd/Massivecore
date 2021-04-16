@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.util;
 
 import com.massivecraft.massivecore.Identified;
 import com.massivecraft.massivecore.Named;
+import org.jetbrains.annotations.Contract;
 
 public class IdData implements Identified, Named
 {
@@ -31,11 +32,13 @@ public class IdData implements Identified, Named
 		millis = 0;
 	}
 	
+	@Contract("null, null -> fail")
 	public IdData(String id, String name)
 	{
 		this(id, name, System.currentTimeMillis());
 	}
 	
+	@Contract(value = "null, null, _ -> fail")
 	public IdData(String id, String name, long millis)
 	{
 		if (id == null && name == null) throw new NullPointerException("Either id or name must be set. They can't both be null!");
@@ -60,6 +63,7 @@ public class IdData implements Identified, Named
 		return result;
 	}
 
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object obj)
 	{

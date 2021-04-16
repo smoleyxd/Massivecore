@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaColor extends WriterAbstractItemStackMetaField<LeatherArmorMeta, Integer, Color>
 {
@@ -27,25 +28,25 @@ public class WriterItemStackMetaColor extends WriterAbstractItemStackMetaField<L
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public Integer getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getColor();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Integer fa, ItemStack d)
 	{
 		ca.setColor(fa);
 	}
 
 	@Override
-	public Color getB(LeatherArmorMeta cb, ItemStack d)
+	public Color getB(@NotNull LeatherArmorMeta cb, ItemStack d)
 	{
 		return cb.getColor();
 	}
 
 	@Override
-	public void setB(LeatherArmorMeta cb, Color fb, ItemStack d)
+	public void setB(@NotNull LeatherArmorMeta cb, Color fb, ItemStack d)
 	{
 		cb.setColor(fb);
 	}

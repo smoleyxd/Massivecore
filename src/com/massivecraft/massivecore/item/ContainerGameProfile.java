@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ public class ContainerGameProfile
 		return DataItemStack.get(this.gameProfileProperties, GAMEPROFILEPROPERTIESDEFAULT);
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

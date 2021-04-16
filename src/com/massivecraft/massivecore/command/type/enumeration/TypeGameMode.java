@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.type.enumeration;
 
 import com.massivecraft.massivecore.collections.MassiveSet;
 import org.bukkit.GameMode;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Set;
 
@@ -39,6 +40,7 @@ public class TypeGameMode extends TypeEnum<GameMode>
 	// -------------------------------------------- //
 	// The reason we can not simply do ".ordinal()" is Survival and Creative has the wrong order.
 	
+	@Contract("null -> fail")
 	public static int getIntegerId(GameMode gameMode)
 	{
 		if (gameMode == null) throw new NullPointerException("gameMode");

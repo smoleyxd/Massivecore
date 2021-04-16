@@ -12,6 +12,7 @@ import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -36,7 +37,7 @@ public class CommandEditAbstract<O, V> extends MassiveCommand
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditAbstract(EditSettings<O> settings, Property<O, V> property, Boolean write)
+	public CommandEditAbstract(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property, Boolean write)
 	{
 		// Fields
 		this.settings = settings;

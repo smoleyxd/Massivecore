@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.predicate;
 import com.massivecraft.massivecore.Integration;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -20,7 +21,7 @@ public class PredicateIntegration implements Predicate<Integration>
 	// -------------------------------------------- //
 	
 	@Override
-	public boolean apply(Integration integration)
+	public boolean apply(@NotNull Integration integration)
 	{
 		return isPluginNamesPresent(integration.getPluginNames()) && isClassNamesPresent(integration.getClassNames());
 	}
@@ -29,7 +30,7 @@ public class PredicateIntegration implements Predicate<Integration>
 	// PLUGINS
 	// -------------------------------------------- //
 	
-	public static boolean isPluginNamesPresent(Collection<String> pluginNames)
+	public static boolean isPluginNamesPresent(@NotNull Collection<String> pluginNames)
 	{
 		for (String pluginName : pluginNames)
 		{
@@ -50,7 +51,7 @@ public class PredicateIntegration implements Predicate<Integration>
 	// CLASSES
 	// -------------------------------------------- //
 	
-	public static boolean isClassNamesPresent(Collection<String> classNames)
+	public static boolean isClassNamesPresent(@NotNull Collection<String> classNames)
 	{
 		for (String className : classNames)
 		{

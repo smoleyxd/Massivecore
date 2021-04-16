@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.comparator.ComparatorPrioritized;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.FlattenUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -38,13 +39,13 @@ public class PriorityLines implements Prioritized, Comparable<PriorityLines>
 	
 	public void setLine(Object line) { this.setLines(line); }
 
-	public List<Mson> getLinesMson() { return new MassiveList<>(this.lines); }
+	public @NotNull List<Mson> getLinesMson() { return new MassiveList<>(this.lines); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public PriorityLines(int priority, Object... lines)
+	public PriorityLines(int priority, Object @NotNull ... lines)
 	{
 		this.priority = priority;
 		this.setLines(lines);

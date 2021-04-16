@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -168,6 +171,7 @@ public class Txt
 	// PARSE
 	// -------------------------------------------- //
 	
+	@Contract("null -> null; !null -> !null")
 	public static String parse(String string)
 	{
 		if (string == null) return null;
@@ -186,7 +190,7 @@ public class Txt
 		return String.format(parse(string), args);
 	}
 	
-	public static ArrayList<String> parse(Collection<String> strings)
+	public static @NotNull ArrayList<String> parse(@NotNull Collection<String> strings)
 	{
 		ArrayList<String> ret = new ArrayList<>(strings.size());
 		for (String string : strings)
@@ -200,13 +204,14 @@ public class Txt
 	// SPLIT AT LINEBREAKS
 	// -------------------------------------------- //
 	
+	@Contract("null -> null; !null -> new")
 	public static ArrayList<String> wrap(final String string)
 	{
 		if (string == null) return null;
 		return new ArrayList<>(Arrays.asList(PATTERN_NEWLINE.split(string)));
 	}
 	
-	public static ArrayList<String> wrap(final Collection<String> strings)
+	public static @NotNull ArrayList<String> wrap(final @NotNull Collection<String> strings)
 	{
 		ArrayList<String> ret = new ArrayList<>();
 		for (String string : strings)
@@ -219,13 +224,14 @@ public class Txt
 	// -------------------------------------------- //
 	// Parse and Wrap combo
 	// -------------------------------------------- //
-	
+
+	@Contract("null -> null; !null -> !null")
 	public static ArrayList<String> parseWrap(final String string)
 	{
 		return wrap(parse(string));
 	}
 	
-	public static ArrayList<String> parseWrap(final Collection<String> strings)
+	public static @NotNull ArrayList<String> parseWrap(final @NotNull Collection<String> strings)
 	{
 		return wrap(parse(strings));
 	}
@@ -234,7 +240,7 @@ public class Txt
 	// Standard utils like UCFirst, implode and repeat.
 	// -------------------------------------------- //
 	
-	public static List<String> camelsplit(String string)
+	public static @NotNull List<String> camelsplit(String string)
 	{
 		List<String> ret = Arrays.asList(PATTERN_UPPERCASE_ZEROWIDTH.split(string));
 		// In version before Java 8 zero width matches in the beginning created a leading empty string.
@@ -243,12 +249,14 @@ public class Txt
 		return ret;
 	}
 	
+	@Contract("null -> null; !null -> !null")
 	public static String upperCaseFirst(String string)
 	{
 		if (string == null) return null;
 		if (string.length() == 0) return string;
 		return string.substring(0, 1).toUpperCase() + string.substring(1);
 	}
+	@Contract("null -> null; !null -> !null")
 	public static String lowerCaseFirst(String string)
 	{
 		if (string == null) return null;
@@ -256,7 +264,7 @@ public class Txt
 		return string.substring(0, 1).toLowerCase() + string.substring(1);
 	}
 	
-	public static String repeat(String string, int times)
+	public static @NotNull String repeat(@Nullable String string, int times)
 	{
 		// Create Ret
 		StringBuilder ret = new StringBuilder(times);
@@ -271,7 +279,7 @@ public class Txt
 		return ret.toString();
 	}
 	
-	public static String implode(final Object[] list, final String glue, final String format)
+	public static @NotNull String implode(final Object @NotNull [] list, final String glue, final @Nullable String format)
 	{
 		StringBuilder ret = new StringBuilder();
 		for (int i=0; i<list.length; i++)
@@ -294,20 +302,20 @@ public class Txt
 		}
 		return ret.toString();
 	}
-	public static String implode(final Object[] list, final String glue)
+	public static @NotNull String implode(final Object @NotNull [] list, final String glue)
 	{
 		return implode(list, glue, null);
 	}
-	public static String implode(final Collection<?> coll, final String glue, final String format)
+	public static @NotNull String implode(final @NotNull Collection<?> coll, final String glue, final @Nullable String format)
 	{
 		return implode(coll.toArray(new Object[0]), glue, format);
 	}
-	public static String implode(final Collection<?> coll, final String glue)
+	public static @NotNull String implode(final @NotNull Collection<?> coll, final String glue)
 	{
 		return implode(coll, glue, null);
 	}
 	
-	public static String implodeCommaAndDot(final Collection<?> objects, final String format, final String comma, final String and, final String dot)
+	public static @NotNull String implodeCommaAndDot(final @NotNull Collection<?> objects, final @Nullable String format, final String comma, final String and, final String dot)
 	{
 		if (objects.size() == 0) return "";
 		if (objects.size() == 1)
@@ -331,33 +339,33 @@ public class Txt
 		return implode(ourObjects, comma, format)+dot;
 	}
 	
-	public static String implodeCommaAndDot(final Collection<?> objects, final String comma, final String and, final String dot)
+	public static @NotNull String implodeCommaAndDot(final @NotNull Collection<?> objects, final String comma, final String and, final String dot)
 	{
 		return implodeCommaAndDot(objects, null, comma, and, dot);
 	}
 	
-	public static String implodeCommaAnd(final Collection<?> objects, final String comma, final String and)
+	public static @NotNull String implodeCommaAnd(final @NotNull Collection<?> objects, final String comma, final String and)
 	{
 		return implodeCommaAndDot(objects, comma, and, "");
 	}
-	public static String implodeCommaAndDot(final Collection<?> objects, final String color)
+	public static @NotNull String implodeCommaAndDot(final @NotNull Collection<?> objects, final String color)
 	{
 		return implodeCommaAndDot(objects, color+", ", color+" and ", color+".");
 	}
-	public static String implodeCommaAnd(final Collection<?> objects, final String color)
+	public static @NotNull String implodeCommaAnd(final @NotNull Collection<?> objects, final String color)
 	{
 		return implodeCommaAndDot(objects, color+", ", color+" and ", "");
 	}
-	public static String implodeCommaAndDot(final Collection<?> objects)
+	public static @NotNull String implodeCommaAndDot(final @NotNull Collection<?> objects)
 	{
 		return implodeCommaAndDot(objects, "");
 	}
-	public static String implodeCommaAnd(final Collection<?> objects)
+	public static @NotNull String implodeCommaAnd(final @NotNull Collection<?> objects)
 	{
 		return implodeCommaAnd(objects, "");
 	}
 	
-	public static Integer indexOfFirstDigit(final String str)
+	public static Integer indexOfFirstDigit(final @NotNull String str)
 	{
 		Integer ret = null;
 		for (int i = 0; i < str.length(); i++)
@@ -373,12 +381,14 @@ public class Txt
 		return ret;
 	}
 	
-	public static String removeLeadingCommandDust(String string)
+	@Contract(pure = true)
+	public static @NotNull String removeLeadingCommandDust(@NotNull String string)
 	{
 		return string.replaceAll("^[/\\s]+", "");
 	}
 	
-	public static Entry<String, String> divideOnFirstSpace(String string)
+	@Contract("_ -> new")
+	public static @NotNull Entry<String, String> divideOnFirstSpace(@NotNull String string)
 	{
 		String[] parts = string.split("\\s+", 2);
 		String first = parts[0];
@@ -390,13 +400,14 @@ public class Txt
 		return new SimpleEntry<>(first, second);
 	}
 	
+	@Contract("null -> false")
 	public static boolean isVowel(String str)
 	{
 		if (str == null || str.length() == 0) return false;
 		return vowel.contains(str.substring(0, 1));
 	}
 	
-	public static String aan(String noun)
+	public static @NotNull String aan(String noun)
 	{
 		return isVowel(noun) ? "an" : "a";
 	}
@@ -421,7 +432,7 @@ public class Txt
 	// -------------------------------------------- //
 
 	protected static Pattern PATTERN_ENUM_SPLIT = Pattern.compile("[\\s_]+");
-	public static String getNicedEnumString(String str, String glue)
+	public static @NotNull String getNicedEnumString(@NotNull String str, String glue)
 	{
 		List<String> parts = new ArrayList<>();
 		for (String part : PATTERN_ENUM_SPLIT.split(str.toLowerCase()))
@@ -431,28 +442,28 @@ public class Txt
 		return implode(parts, glue);
 	}
 
-	public static String getNicedEnumString(String str)
+	public static @NotNull String getNicedEnumString(@NotNull String str)
 	{
 		return getNicedEnumString(str, "");
 	}
 
-	public static <T extends Enum<T>> String getNicedEnum(T enumObject, String glue)
+	public static <T extends Enum<T>> @NotNull String getNicedEnum(@NotNull T enumObject, String glue)
 	{
 		return getNicedEnumString(enumObject.name(), glue);
 	}
 
 
-	public static <T extends Enum<T>> String getNicedEnum(T enumObject)
+	public static <T extends Enum<T>> @NotNull String getNicedEnum(@NotNull T enumObject)
 	{
 		return getNicedEnumString(enumObject.name());
 	}
 
-	public static String getMaterialName(Material material)
+	public static @NotNull String getMaterialName(@NotNull Material material)
 	{
 		return getNicedEnum(material, " ");
 	}
 	
-	public static String getItemName(ItemStack itemStack)
+	public static @NotNull String getItemName(@Nullable ItemStack itemStack)
 	{
 		if (InventoryUtil.isNothing(itemStack)) return Txt.parse("<silver><em>Nothing");
 		
@@ -489,7 +500,7 @@ public class Txt
 	
 	private final static String titleizeLine = repeat("_", 52);
 	private final static int titleizeBalance = -1;
-	public static Mson titleize(Object obj)
+	public static @NotNull Mson titleize(Object obj)
 	{
 		Mson title = mson(obj);
 		if (title.getColor() == null) title = title.color(ChatColor.DARK_GREEN);
@@ -515,12 +526,13 @@ public class Txt
 			return center;
 	}
 	
-	public static Mson getMessageEmpty()
+	@Contract(" -> new")
+	public static @NotNull Mson getMessageEmpty()
 	{
 		return mson("Sorry, no pages available.").color(ChatColor.YELLOW);
 	}
 	
-	public static Mson getMessageInvalid(int size)
+	public static @NotNull Mson getMessageInvalid(int size)
 	{
 		if (size == 0)
 		{
@@ -536,7 +548,7 @@ public class Txt
 		}
 	}
 	
-	public static Mson titleizeMson(Object obj, int pagecount, int pageHumanBased, MassiveCommand command, List<String> args)
+	public static @NotNull Mson titleizeMson(Object obj, int pagecount, int pageHumanBased, @Nullable MassiveCommand command, List<String> args)
 	{
 		if (command == null)
 		{
@@ -576,33 +588,33 @@ public class Txt
 		}
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title)
 	{
 		return getPage(lines, pageHumanBased, title, null, null, null);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, CommandSender sender)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @Nullable CommandSender sender)
 	{
 		return getPage(lines, pageHumanBased, title, sender, null, null);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, MassiveCommand command)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @NotNull MassiveCommand command)
 	{
 		return getPage(lines, pageHumanBased, title, command, command.getArgs());
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @NotNull MassiveCommand command, List<String> args)
 	{
 		return getPage(lines, pageHumanBased, title, command.sender, command, args);
 	}
 	
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, CommandSender sender, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, @Nullable CommandSender sender, @Nullable MassiveCommand command, @Nullable List<String> args)
 	{
 		return getPage(lines, pageHumanBased, title, (sender == null || sender instanceof Player) ? Txt.PAGEHEIGHT_PLAYER : Txt.PAGEHEIGHT_CONSOLE, command, args);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Mson> getPage(List<?> lines, int pageHumanBased, Object title, int pageheight, MassiveCommand command, List<String> args)
+	public static @NotNull List<Mson> getPage(@NotNull List<?> lines, int pageHumanBased, Object title, int pageheight, @Nullable MassiveCommand command, @Nullable List<String> args)
 	{
 		// Create Ret
 		List<Mson> ret = new MassiveList<>();
@@ -656,7 +668,7 @@ public class Txt
 		return ret;
 	}
 	
-	private static Mson getFlipSection(int pagecount, int pageHumanBased, List<String> args, MassiveCommand command)
+	private static @NotNull Mson getFlipSection(int pagecount, int pageHumanBased, List<String> args, MassiveCommand command)
 	{
 		// Construct Mson
 		Mson start = mson(String.valueOf(pageHumanBased)).color(ChatColor.GOLD);
@@ -687,7 +699,7 @@ public class Txt
 		);
 	}
 	
-	private static Mson setFlipPageCommand(Mson mson, int pageHumanBased, int destinationPage, List<String> args, MassiveCommand command)
+	private static @NotNull Mson setFlipPageCommand(@NotNull Mson mson, int pageHumanBased, int destinationPage, @Nullable List<String> args, MassiveCommand command)
 	{
 		// Create the command line
 		String number = String.valueOf(destinationPage);
@@ -735,7 +747,7 @@ public class Txt
 	// Describing Time
 	// -------------------------------------------- //
 	
-	public static String getTimeDeltaDescriptionRelNow(long millis)
+	public static @NotNull String getTimeDeltaDescriptionRelNow(long millis)
 	{
 		String ret = "";
 		
@@ -773,7 +785,7 @@ public class Txt
 	// FORMATTING CANDY
 	// -------------------------------------------- //
 	
-	public static String parenthesize(String string)
+	public static @NotNull String parenthesize(String string)
 	{
 		return Txt.parse("<silver>(%s<silver>)", string);
 	}
@@ -786,6 +798,7 @@ public class Txt
 	// The UFT-8 "smart" alternatives look quite bad.
 	// http://www.fileformat.info/info/unicode/block/general_punctuation/list.htm
 	
+	@Contract("null -> null; !null -> !null")
 	public static String removeSmartQuotes(String string)
 	{
 		if (string == null) return null;
@@ -818,7 +831,7 @@ public class Txt
 	// String comparison
 	// -------------------------------------------- //
 	
-	public static String getBestCIStart(Collection<String> candidates, String start)
+	public static String getBestCIStart(@NotNull Collection<@NotNull String> candidates, @NotNull String start)
 	{
 		String ret = null;
 		int best = 0;
@@ -849,7 +862,7 @@ public class Txt
 	// FILTER
 	// -------------------------------------------- //
 	
-	public static <T> List<T> getFiltered(Iterable<T> elements, Predicate<T> predicate)
+	public static <T> @NotNull List<T> getFiltered(@NotNull Iterable<T> elements, @NotNull Predicate<T> predicate)
 	{
 		// Create Ret
 		List<T> ret = new ArrayList<>();
@@ -865,17 +878,17 @@ public class Txt
 		return ret;
 	}
 	
-	public static <T> List<T> getFiltered(T[] elements, Predicate<T> predicate)
+	public static <T> @NotNull List<T> getFiltered(T @NotNull [] elements, @NotNull Predicate<T> predicate)
 	{
 		return getFiltered(Arrays.asList(elements), predicate);
 	}
 	
-	public static List<String> getStartsWithIgnoreCase(Iterable<String> elements, String prefix)
+	public static @NotNull List<String> getStartsWithIgnoreCase(@NotNull Iterable<String> elements, String prefix)
 	{
 		return getFiltered(elements, PredicateStartsWithIgnoreCase.get(prefix));
 	}
 	
-	public static List<String> getStartsWithIgnoreCase(String[] elements, String prefix)
+	public static @NotNull List<String> getStartsWithIgnoreCase(String @NotNull [] elements, String prefix)
 	{
 		return getStartsWithIgnoreCase(Arrays.asList(elements), prefix);
 	}
@@ -884,7 +897,7 @@ public class Txt
 	// Tokenization
 	// -------------------------------------------- //
 	
-	public static List<String> tokenizeArguments(String str)
+	public static @NotNull List<@NotNull String> tokenizeArguments(@NotNull String str)
 	{
 		List<String> ret = new ArrayList<>();
 		StringBuilder token = null;
@@ -950,7 +963,7 @@ public class Txt
 	// If the centerpiece is multiple Strings it concatenates prefix + suffix and then appends the centerpice at the end.
 	// This algorithm is used in the editor system.
 	
-	public static List<String> prepondfix(String prefix, List<String> strings, String suffix)
+	public static @NotNull List<String> prepondfix(@Nullable String prefix, @NotNull List<String> strings, @Nullable String suffix)
 	{
 		// Create
 		List<String> ret = new MassiveList<>();
@@ -972,7 +985,7 @@ public class Txt
 		return ret;
 	}
 	
-	public static String prepondfix(String prefix, String string, String suffix)
+	public static @NotNull String prepondfix(@Nullable String prefix, String string, @Nullable String suffix)
 	{
 		List<String> strings = Arrays.asList(PATTERN_NEWLINE.split(string));
 		List<String> ret = prepondfix(prefix, strings, suffix);

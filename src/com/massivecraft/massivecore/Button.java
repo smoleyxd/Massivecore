@@ -10,6 +10,9 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.mson.MsonEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,7 +26,8 @@ public class Button
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	public static Button get() { return new Button(); }
+	@Contract(" -> new")
+	public static @NotNull Button get() { return new Button(); }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -49,28 +53,34 @@ public class Button
 	// This is the text inside the button.
 	private String name = null;
 	public String getName() { return this.name; }
-	public Button setName(String name) { this.name = name; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setName(String name) { this.name = name; return this; }
 	
 	// Padding right, left or none. 
 	public Boolean paddingRight = null;
 	public Boolean isPaddingRight() { return this.paddingRight; }
-	public Button setPaddingRight(Boolean paddingRight) { this.paddingRight = paddingRight; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setPaddingRight(Boolean paddingRight) { this.paddingRight = paddingRight; return this; }
 	
 	// Verbose visible as grey. Otherwise hidden.
 	public boolean verbose = true;
 	public boolean isVerbose() { return this.verbose; }
-	public Button setVerbose(boolean verbose) { this.verbose = verbose; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setVerbose(boolean verbose) { this.verbose = verbose; return this; }
 	
 	// When you just want to error really hard!
 	private String error = null;
 	public String getError() { return this.error; }
-	public Button setError(String error) { this.error = error; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setError(String error) { this.error = error; return this; }
 	
 	// Requirements to always be validated.
-	private final List<Requirement> requirements = new MassiveList<>();
-	public List<Requirement> getRequirements() { return this.requirements; }
-	public Button addRequirements(Collection<Requirement> requirements) { this.requirements.addAll(requirements); return this; }
-	public Button addRequirements(Requirement... requirements) { this.addRequirements(Arrays.asList(requirements)); return this; }
+	private final List<@NotNull Requirement> requirements = new MassiveList<>();
+	public List<@NotNull Requirement> getRequirements() { return this.requirements; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button addRequirements(@NotNull Collection<@NotNull Requirement> requirements) { this.requirements.addAll(requirements); return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button addRequirements(@NotNull Requirement @NotNull ... requirements) { this.addRequirements(Arrays.asList(requirements)); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > COMMAND
@@ -78,20 +88,25 @@ public class Button
 	
 	private CommandSender sender = null;
 	public CommandSender getSender() { return this.sender; }
-	public Button setSender(CommandSender sender) { this.sender = sender; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setSender(CommandSender sender) { this.sender = sender; return this; }
 	
 	private MassiveCommand command = null;
 	public MassiveCommand getCommand() { return this.command; }
-	public Button setCommand(MassiveCommand command) { this.command = command; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setCommand(MassiveCommand command) { this.command = command; return this; }
 	
 	private List<String> args = new MassiveList<>();
 	public List<String> getArgs() { return this.args; }
-	public Button setArgs(Collection<String> args) { this.args = new MassiveList<>(args); return this; }
-	public Button setArgs(String... args) { this.setArgs(Arrays.asList(args)); return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setArgs(@Nullable Collection<String> args) { this.args = new MassiveList<>(args); return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setArgs(String @NotNull ... args) { this.setArgs(Arrays.asList(args)); return this; }
 	
 	public boolean clicking = true;
 	public boolean isClicking() { return this.clicking; }
-	public Button setClicking(boolean clicking) { this.clicking = clicking; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setClicking(boolean clicking) { this.clicking = clicking; return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > LINK
@@ -99,7 +114,8 @@ public class Button
 	
 	private String link = null;
 	public String getLink() { return this.link; }
-	public Button setLink(String link) { this.link = link; return this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public @NotNull Button setLink(String link) { this.link = link; return this; }
 	
 	// -------------------------------------------- //
 	// RENDER

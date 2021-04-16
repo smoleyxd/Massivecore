@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.comparator;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Comparator;
 
 public class ComparatorReversed<T> extends ComparatorAbstractWrapper<T, T>
@@ -8,7 +11,8 @@ public class ComparatorReversed<T> extends ComparatorAbstractWrapper<T, T>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <T> ComparatorReversed<T> get(Comparator<T> comparator) { return new ComparatorReversed<>(comparator); }
+	@Contract("_ -> new")
+	public static <T> @NotNull ComparatorReversed<T> get(Comparator<T> comparator) { return new ComparatorReversed<>(comparator); }
 	public ComparatorReversed(Comparator<T> comparator)
 	{
 		super(comparator);

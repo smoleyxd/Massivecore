@@ -1,5 +1,9 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,7 +26,7 @@ public class MassiveList<E> extends ArrayList<E>
 	// CONSTRUCT: BASE
 	// -------------------------------------------- //
 	
-	public MassiveList(int initialCapacity)
+	public MassiveList(@Range(from = 0, to = Integer.MAX_VALUE) int initialCapacity)
 	{
 		super(initialCapacity);
 	}
@@ -33,7 +37,7 @@ public class MassiveList<E> extends ArrayList<E>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public MassiveList(Collection<? extends E> c)
+	public MassiveList(@Nullable Collection<? extends E> c)
 	{
 		// Support Null
 		super(c == null ? Collections.EMPTY_LIST : c);
@@ -44,7 +48,7 @@ public class MassiveList<E> extends ArrayList<E>
 	// -------------------------------------------- //
 	
 	@SafeVarargs
-	public MassiveList(E... elements)
+	public MassiveList(E @NotNull ... elements)
 	{
 		this(Arrays.asList(elements));
 	}
@@ -55,14 +59,14 @@ public class MassiveList<E> extends ArrayList<E>
 	// This will greatly reduce the complexity in cases with big sizes.
 	
 	@Override
-	public boolean removeAll(Collection<?> c)
+	public boolean removeAll(@NotNull Collection<?> c)
 	{
 		if (c instanceof List) c = new HashSet<Object>(c);
 		return super.removeAll(c);
 	}
 	
 	@Override
-	public boolean retainAll(Collection<?> c)
+	public boolean retainAll(@NotNull Collection<?> c)
 	{
 		if (c instanceof List) c = new HashSet<Object>(c);
 		return super.retainAll(c);

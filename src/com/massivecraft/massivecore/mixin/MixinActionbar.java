@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.nms.NmsChat;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinActionbar extends Mixin
 {
@@ -12,6 +13,7 @@ public class MixinActionbar extends Mixin
 	
 	private static MixinActionbar d = new MixinActionbar();
 	private static MixinActionbar i = d;
+	@Contract(pure = true)
 	public static MixinActionbar get() { return i; }
 	
 	// -------------------------------------------- //

@@ -13,6 +13,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +31,7 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCorePlayerUpdate i = new EngineMassiveCorePlayerUpdate();
+	@Contract(pure = true)
 	public static EngineMassiveCorePlayerUpdate get() { return i; }
 	
 	// -------------------------------------------- //
@@ -55,31 +58,31 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	
 	// NOTE: Can't be cancelled
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void update(PlayerJoinEvent event)
+	public void update(@NotNull PlayerJoinEvent event)
 	{
 		update(event.getPlayer(), true);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void update(EventMassiveCoreAfterPlayerTeleport event)
+	public void update(@NotNull EventMassiveCoreAfterPlayerTeleport event)
 	{
 		update(event.getPlayer(), true);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void update(EventMassiveCoreAfterPlayerRespawn event)
+	public void update(@NotNull EventMassiveCoreAfterPlayerRespawn event)
 	{
 		update(event.getPlayer(), true);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void update(PlayerChangedWorldEvent event)
+	public void update(@NotNull PlayerChangedWorldEvent event)
 	{
 		update(event.getPlayer(), true);
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void update(PlayerMoveEvent event)
+	public void update(@NotNull PlayerMoveEvent event)
 	{
 		// Only on block change!
 		if (MUtil.isSameBlock(event)) return;
@@ -93,17 +96,17 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	
 	public static Map<UUID, Long> idToLastFlyActive = new HashMap<>();
 	
-	public static Long getLastFlyActive(Player player)
+	public static Long getLastFlyActive(@NotNull Player player)
 	{
 		return idToLastFlyActive.get(player.getUniqueId());
 	}
 	
-	public static void setLastFlyActive(Player player, Long millis)
+	public static void setLastFlyActive(@NotNull Player player, Long millis)
 	{
 		idToLastFlyActive.put(player.getUniqueId(), millis);
 	}
 	
-	public static boolean isFlyActiveRecently(Player player)
+	public static boolean isFlyActiveRecently(@NotNull Player player)
 	{
 		Long lastActive = getLastFlyActive(player);
 		if (lastActive == null) return false;
@@ -115,7 +118,7 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void fixNoCheatPlusBug(EntityDamageEvent event)
+	public void fixNoCheatPlusBug(@NotNull EntityDamageEvent event)
 	{
 		// If a player ...
 		if (MUtil.isntPlayer(event.getEntity())) return;

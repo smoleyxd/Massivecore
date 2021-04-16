@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class CommandEditContainerRemoveIndex<O, V> extends CommandEditContainerA
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditContainerRemoveIndex(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditContainerRemoveIndex(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property);
@@ -25,7 +26,7 @@ public class CommandEditContainerRemoveIndex<O, V> extends CommandEditContainerA
 	// -------------------------------------------- //
 	
 	@Override
-	public void alterElements(List<Object> elements) throws MassiveException
+	public void alterElements(@NotNull List<Object> elements) throws MassiveException
 	{
 		// Args
 		int index = this.readArg();

@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.mixin.Mixin;
 import com.massivecraft.massivecore.util.InventoryUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class NmsRepairable extends Mixin
 {
@@ -27,7 +28,7 @@ public class NmsRepairable extends Mixin
 	// REPAIR
 	// -------------------------------------------- //
 
-	public boolean isRepairable(ItemStack itemStack)
+	public boolean isRepairable(@NotNull ItemStack itemStack)
 	{
 		throw notImplemented();
 	}
@@ -45,7 +46,7 @@ public class NmsRepairable extends Mixin
 		repairInner(itemStack);
 	}
 
-	protected void repairInner(ItemStack itemStack) {
+	protected void repairInner(@NotNull ItemStack itemStack) {
 		throw notImplemented();
 	}
 

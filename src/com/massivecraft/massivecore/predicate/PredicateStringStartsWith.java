@@ -1,18 +1,23 @@
 package com.massivecraft.massivecore.predicate;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public class PredicateStringStartsWith implements Predicate<String>
 {
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 
-	private final String prefix;
+	private final @NotNull String prefix;
 
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public static PredicateStringStartsWith get(String prefix) { return new PredicateStringStartsWith(prefix); }
+	@Contract("_ -> new")
+	public static @NotNull PredicateStringStartsWith get(@NotNull String prefix) { return new PredicateStringStartsWith(prefix); }
+	@Contract("null -> fail")
 	public PredicateStringStartsWith(String prefix)
 	{
 		if (prefix == null) throw new NullPointerException("prefix");

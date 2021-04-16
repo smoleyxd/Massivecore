@@ -4,15 +4,18 @@ import com.massivecraft.massivecore.xlib.guava.collect.BiMap;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableBiMap;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.Contract;
 
 public class PotionUtil
 {
+	@Contract("null -> null")
 	public static PotionData toPotionData(String potionString)
 	{
 		if (potionString == null) return null;
 		return POTION_ID_TO_DATA.get(potionString);
 	}
 	
+	@Contract("null -> null")
 	public static String toPotionString(PotionData potionData)
 	{
 		if (potionData == null) return null;

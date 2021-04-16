@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.command.editor;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.Parameter;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandEditShow<O, V> extends CommandEditAbstract<O, V>
 {	
@@ -9,7 +10,7 @@ public class CommandEditShow<O, V> extends CommandEditAbstract<O, V>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditShow(EditSettings<O> settings, Property<O, V> property)
+	public CommandEditShow(@NotNull EditSettings<O> settings, @NotNull Property<O, V> property)
 	{
 		// Super	
 		super(settings, property, false);

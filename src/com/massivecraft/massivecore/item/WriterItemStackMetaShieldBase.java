@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Banner;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaField<BlockStateMeta, DyeColor, DyeColor>
 {
@@ -25,19 +26,19 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 	// -------------------------------------------- //
 
 	@Override
-	public DyeColor getA(DataItemStack ca, ItemStack d)
+	public DyeColor getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getBannerBase();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, DyeColor fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, DyeColor fa, ItemStack d)
 	{
 		ca.setBannerBase(fa);
 	}
 
 	@Override
-	public DyeColor getB(BlockStateMeta cb, ItemStack d)
+	public DyeColor getB(@NotNull BlockStateMeta cb, ItemStack d)
 	{
 		// Get
 		Banner banner = getBanner(cb, false);
@@ -48,7 +49,7 @@ public class WriterItemStackMetaShieldBase extends WriterAbstractItemStackMetaFi
 	}
 
 	@Override
-	public void setB(BlockStateMeta cb, DyeColor fb, ItemStack d)
+	public void setB(@NotNull BlockStateMeta cb, DyeColor fb, ItemStack d)
 	{
 		// Get
 		boolean creative = (fb != null);

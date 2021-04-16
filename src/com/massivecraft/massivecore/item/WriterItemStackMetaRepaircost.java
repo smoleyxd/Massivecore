@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaRepaircost extends WriterAbstractItemStackMetaField<Repairable, Integer, Integer>
 {
@@ -23,25 +24,25 @@ public class WriterItemStackMetaRepaircost extends WriterAbstractItemStackMetaFi
 	// -------------------------------------------- //
 
 	@Override
-	public Integer getA(DataItemStack ca, ItemStack d)
+	public Integer getA(@NotNull DataItemStack ca, ItemStack d)
 	{
 		return ca.getRepaircost();
 	}
 
 	@Override
-	public void setA(DataItemStack ca, Integer fa, ItemStack d)
+	public void setA(@NotNull DataItemStack ca, Integer fa, ItemStack d)
 	{
 		ca.setRepaircost(fa);
 	}
 
 	@Override
-	public Integer getB(Repairable cb, ItemStack d)
+	public Integer getB(@NotNull Repairable cb, ItemStack d)
 	{
 		return cb.getRepairCost();
 	}
 
 	@Override
-	public void setB(Repairable cb, Integer fb, ItemStack d)
+	public void setB(@NotNull Repairable cb, Integer fb, ItemStack d)
 	{
 		cb.setRepairCost(fb);
 	}

@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.mixin;
 
 import com.massivecraft.massivecore.nms.NmsRepairable;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 
 public class MixinRepairable extends Mixin
 {
@@ -11,6 +12,7 @@ public class MixinRepairable extends Mixin
 	
 	private static MixinRepairable d = new MixinRepairable();
 	private static MixinRepairable i = d;
+	@Contract(pure = true)
 	public static MixinRepairable get() { return i; }
 	
 	// -------------------------------------------- //

@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.command.editor.EditSettings;
 import com.massivecraft.massivecore.command.editor.Property;
 import com.massivecraft.massivecore.mson.Mson;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,7 @@ public class TypeWrapper<T> extends TypeAbstract<T>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public TypeWrapper(Type<T> innerType)
+	public TypeWrapper(@NotNull Type<T> innerType)
 	{
 		super(innerType.getClazz());
 		this.setInnerType(innerType);

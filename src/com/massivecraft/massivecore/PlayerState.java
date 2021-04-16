@@ -2,6 +2,7 @@ package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.engine.EngineMassiveCorePlayerState;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 import java.util.UUID;
 
@@ -37,12 +38,14 @@ public enum PlayerState
 	// STATIC
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public static PlayerState get(UUID id)
 	{
 		if (id == null) throw new NullPointerException("id");
 		return EngineMassiveCorePlayerState.get().getState(id);
 	}
 	
+	@Contract("null -> fail")
 	public static PlayerState get(Player player)
 	{
 		if (player == null) throw new NullPointerException("player");		

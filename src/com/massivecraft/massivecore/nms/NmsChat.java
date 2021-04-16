@@ -8,6 +8,7 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
 public class NmsChat extends Mixin
@@ -65,7 +66,7 @@ public class NmsChat extends Mixin
 
 	}
 	
-	public void sendTitleMson(Object sendeeObject, int ticksIn, int ticksStay, int ticksOut, Mson msonMain, Mson msonSub)
+	public void sendTitleMson(Object sendeeObject, int ticksIn, int ticksStay, int ticksOut, @NotNull Mson msonMain, @NotNull Mson msonSub)
 	{
 		String rawMain = msonMain.toRaw();
 		String rawSub = msonSub.toRaw();
@@ -102,7 +103,7 @@ public class NmsChat extends Mixin
 		
 	}
 	
-	public void sendActionbarMson(Object sendeeObject, Mson mson)
+	public void sendActionbarMson(Object sendeeObject, @NotNull Mson mson)
 	{
 		String message = mson.toRaw();
 		
@@ -134,7 +135,7 @@ public class NmsChat extends Mixin
 	// MESSAGE TO RAW
 	// -------------------------------------------- //
 
-	public static String messageToRaw(String message)
+	public static @NotNull String messageToRaw(String message)
 	{
 		message = JSONObject.escape(message);
 		message = "{\"text\": \"" + message + "\"}";

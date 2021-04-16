@@ -1,6 +1,8 @@
 package com.massivecraft.massivecore.command.type.combined;
 
 import com.massivecraft.massivecore.command.type.Type;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.Arrays;
@@ -20,7 +22,8 @@ public class TypeEntry<K, V> extends TypeCombined<Entry<K, V>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <K, V> TypeEntry<K, V> get(Type<K> keyType, Type<V> valueType) { return new TypeEntry<>(keyType, valueType); }
+	@Contract("_, _ -> new")
+	public static <K, V> @NotNull TypeEntry<K, V> get(Type<K> keyType, Type<V> valueType) { return new TypeEntry<>(keyType, valueType); }
 	public TypeEntry(Type<K> keyType, Type<V> valueType)
 	{
 		super(Entry.class, keyType, valueType);
@@ -58,7 +61,7 @@ public class TypeEntry<K, V> extends TypeCombined<Entry<K, V>>
 	}
 	
 	@Override
-	public boolean equalsInner(Entry<K, V> type1, Entry<K, V> type2)
+	public boolean equalsInner(@NotNull Entry<K, V> type1, Entry<K, V> type2)
 	{
 		// Compare Keys
 		K key1 = type1.getKey();

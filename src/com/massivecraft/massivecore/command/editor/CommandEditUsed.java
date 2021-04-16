@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.command.editor;
 
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandEditUsed<O> extends CommandEditSimple<CommandSender, O>
 {
@@ -8,7 +9,7 @@ public class CommandEditUsed<O> extends CommandEditSimple<CommandSender, O>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CommandEditUsed(EditSettings<O> settings)
+	public CommandEditUsed(@NotNull EditSettings<O> settings)
 	{
 		// Super
 		super(settings.getUsedSettings(), settings.getUsedProperty());

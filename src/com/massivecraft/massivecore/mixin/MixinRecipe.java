@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
 
 public class MixinRecipe extends Mixin
 {
@@ -14,6 +15,7 @@ public class MixinRecipe extends Mixin
 	
 	private static MixinRecipe d = new MixinRecipe();
 	private static MixinRecipe i = d;
+	@Contract(pure = true)
 	public static MixinRecipe get() { return i; }
 	
 	// -------------------------------------------- //

@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.mixin.Mixin;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -51,12 +52,12 @@ public class NmsBoard extends Mixin
 	// OPTIONS
 	// -------------------------------------------- //
 	
-	public TeamOptionValue getOption(Team team, TeamOptionKey key)
+	public TeamOptionValue getOption(@NotNull Team team, @NotNull TeamOptionKey key)
 	{
 		throw notImplemented();
 	}
 	
-	public void setOption(Team team, TeamOptionKey key, TeamOptionValue value)
+	public void setOption(@NotNull Team team, @NotNull TeamOptionKey key, @NotNull TeamOptionValue value)
 	{
 		throw notImplemented();
 	}
@@ -65,22 +66,22 @@ public class NmsBoard extends Mixin
 	// MEMBERS
 	// -------------------------------------------- //
 	
-	public void addMember(Team team, String key)
+	public void addMember(@NotNull Team team, String key)
 	{
 		throw notImplemented();
 	}
 	
-	public boolean removeMember(Team team, String key)
+	public boolean removeMember(@NotNull Team team, String key)
 	{
 		throw notImplemented();
 	}
 	
-	public boolean isMember(Team team, String key)
+	public boolean isMember(@NotNull Team team, String key)
 	{
 		throw notImplemented();
 	}
 	
-	public Set<String> getMembers(Team team)
+	public Set<String> getMembers(@NotNull Team team)
 	{
 		throw notImplemented();
 	}
@@ -89,7 +90,7 @@ public class NmsBoard extends Mixin
 	// KEY TEAM
 	// -------------------------------------------- //
 	
-	public Team getKeyTeam(Scoreboard board, String key)
+	public Team getKeyTeam(@NotNull Scoreboard board, @NotNull String key)
 	{
 		throw notImplemented();
 	}
@@ -119,7 +120,7 @@ public class NmsBoard extends Mixin
 	// ENUM CONVERT
 	// -------------------------------------------- //
 	
-	protected static <T extends Enum<T>> T convert(Enum<?> from, T[] to)
+	protected static <T extends Enum<T>> T convert(@NotNull Enum<?> from, T @NotNull [] to)
 	{
 		return to[from.ordinal()];
 	}

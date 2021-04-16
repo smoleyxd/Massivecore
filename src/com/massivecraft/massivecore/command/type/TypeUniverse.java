@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.command.type;
 
 import com.massivecraft.massivecore.Aspect;
 import com.massivecraft.massivecore.Multiverse;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -24,8 +26,10 @@ public class TypeUniverse extends TypeAbstractChoice<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static TypeUniverse get(Aspect aspect) { return new TypeUniverse(aspect); }
-	public static TypeUniverse get(Multiverse multiverse) { return new TypeUniverse(multiverse); }
+	@Contract("_ -> new")
+	public static @NotNull TypeUniverse get(Aspect aspect) { return new TypeUniverse(aspect); }
+	@Contract("_ -> new")
+	public static @NotNull TypeUniverse get(Multiverse multiverse) { return new TypeUniverse(multiverse); }
 	
 	public TypeUniverse(Aspect aspect) { super(String.class); this.aspect = aspect; }
 	public TypeUniverse(Multiverse multiverse) { super(String.class); this.multiverse = multiverse; }

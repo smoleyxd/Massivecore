@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Collections;
 import java.util.Set;
@@ -18,6 +19,7 @@ public class EngineMassiveCoreTeleportMixinCause extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreTeleportMixinCause i = new EngineMassiveCoreTeleportMixinCause();
+	@Contract(pure = true)
 	public static EngineMassiveCoreTeleportMixinCause get() { return i; }
 	
 	// -------------------------------------------- //

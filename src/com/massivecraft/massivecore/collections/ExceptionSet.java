@@ -4,6 +4,8 @@ import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.type.container.TypeMassiveTreeSetInsensitive;
 import com.massivecraft.massivecore.comparator.ComparatorCaseInsensitive;
 import com.massivecraft.massivecore.util.MUtil;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +39,7 @@ public class ExceptionSet
 	}
 	
 	@SafeVarargs
-	public <O> ExceptionSet(boolean standard, O... exceptions)
+	public <O> ExceptionSet(boolean standard, O @NotNull ... exceptions)
 	{
 		this.standard = standard;
 		if (exceptions.length == 0) return;
@@ -89,12 +91,12 @@ public class ExceptionSet
 	// STRINGIFY ALL
 	// -------------------------------------------- //
 	
-	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(Object... exceptions)
+	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(Object @NotNull ... exceptions)
 	{
 		return stringifyAll(Arrays.asList(exceptions));
 	}
 	
-	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(Iterable<?> exceptions)
+	public MassiveTreeSet<String, ComparatorCaseInsensitive> stringifyAll(@NotNull Iterable<?> exceptions)
 	{
 		MassiveTreeSet<String, ComparatorCaseInsensitive> ret = new MassiveTreeSet<>(ComparatorCaseInsensitive.get());
 		
@@ -111,6 +113,7 @@ public class ExceptionSet
 	// EQUALS & HASH CODE
 	// -------------------------------------------- //
 	
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

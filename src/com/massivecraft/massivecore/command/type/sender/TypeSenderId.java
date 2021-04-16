@@ -4,6 +4,8 @@ import com.massivecraft.massivecore.SenderPresence;
 import com.massivecraft.massivecore.SenderType;
 import com.massivecraft.massivecore.store.SenderIdSource;
 import com.massivecraft.massivecore.store.SenderIdSourceMixinAllSenderIds;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeSenderId extends TypeSenderIdAbstract<String>
 {
@@ -11,22 +13,22 @@ public class TypeSenderId extends TypeSenderIdAbstract<String>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	private TypeSenderId(SenderIdSource source, SenderPresence presence, SenderType type)
+	private TypeSenderId(@NotNull SenderIdSource source, @NotNull SenderPresence presence, @NotNull SenderType type)
 	{
 		super(String.class, source, presence, type);
 	}
 	
-	private TypeSenderId(SenderIdSource source, SenderPresence presence)
+	private TypeSenderId(@NotNull SenderIdSource source, @NotNull SenderPresence presence)
 	{
 		super(String.class, source, presence);
 	}
 	
-	private TypeSenderId(SenderIdSource source, SenderType type)
+	private TypeSenderId(@NotNull SenderIdSource source, @NotNull SenderType type)
 	{
 		super(String.class, source, type);
 	}
 	
-	private TypeSenderId(SenderIdSource source)
+	private TypeSenderId(@NotNull SenderIdSource source)
 	{
 		super(String.class, source);
 	}
@@ -42,10 +44,14 @@ public class TypeSenderId extends TypeSenderIdAbstract<String>
 	// GET
 	// -------------------------------------------- //
 	
-	public static TypeSenderId get(SenderIdSource source, SenderPresence presence, SenderType type) { return new TypeSenderId(source, presence, type); }
-	public static TypeSenderId get(SenderIdSource source, SenderPresence presence) { return new TypeSenderId(source, presence); }
-	public static TypeSenderId get(SenderIdSource source, SenderType type) { return new TypeSenderId(source, type); }
-	public static TypeSenderId get(SenderIdSource source) { return new TypeSenderId(source); }
+	@Contract("_, _, _ -> new")
+	public static @NotNull TypeSenderId get(@NotNull SenderIdSource source, @NotNull SenderPresence presence, @NotNull SenderType type) { return new TypeSenderId(source, presence, type); }
+	@Contract("_, _ -> new")
+	public static @NotNull TypeSenderId get(@NotNull SenderIdSource source, @NotNull SenderPresence presence) { return new TypeSenderId(source, presence); }
+	@Contract("_, _ -> new")
+	public static @NotNull TypeSenderId get(@NotNull SenderIdSource source, @NotNull SenderType type) { return new TypeSenderId(source, type); }
+	@Contract("_ -> new")
+	public static @NotNull TypeSenderId get(@NotNull SenderIdSource source) { return new TypeSenderId(source); }
 	
 	// -------------------------------------------- //
 	// OVERRIDE

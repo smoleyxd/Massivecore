@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.command;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.primitive.TypeBooleanOn;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public abstract class MassiveCommandToggle extends MassiveCommand
 	
 	protected String info = null;
 	public String getInfo() { return this.info; }
+	@Contract(mutates = "this")
 	public void setInfo(String info) { this.info = info; }
 	public String getInfoSuffix()
 	{

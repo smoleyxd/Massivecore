@@ -10,6 +10,8 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -39,10 +41,14 @@ public final class SoundEffect implements Serializable
 	// FIELDS: WITH
 	// -------------------------------------------- //
 	
-	public SoundEffect withSoundId(String soundId) { return new SoundEffect(soundId, volume, pitch); }
-	public SoundEffect withSound(Sound sound) { return new SoundEffect(TypeSound.get().getId(sound), volume, pitch); }
-	public SoundEffect withVolume(float volume) { return new SoundEffect(soundId, volume, pitch); }
-	public SoundEffect withPitch(float pitch) { return new SoundEffect(soundId, volume, pitch); }
+	@Contract(value = "_ -> new", pure = true)
+	public @NotNull SoundEffect withSoundId(String soundId) { return new SoundEffect(soundId, volume, pitch); }
+	@Contract("_ -> new")
+	public @NotNull SoundEffect withSound(Sound sound) { return new SoundEffect(TypeSound.get().getId(sound), volume, pitch); }
+	@Contract(value = "_ -> new", pure = true)
+	public @NotNull SoundEffect withVolume(float volume) { return new SoundEffect(soundId, volume, pitch); }
+	@Contract(value = "_ -> new", pure = true)
+	public @NotNull SoundEffect withPitch(float pitch) { return new SoundEffect(soundId, volume, pitch); }
 	
 	// -------------------------------------------- //
 	// CONSTUCT
@@ -65,12 +71,14 @@ public final class SoundEffect implements Serializable
 	// VALUE OF
 	// -------------------------------------------- //
 	
-	public static SoundEffect valueOf(String soundId, float volume, float pitch)
+	@Contract(value = "_, _, _ -> new", pure = true)
+	public static @NotNull SoundEffect valueOf(String soundId, float volume, float pitch)
 	{
 		return new SoundEffect(soundId, volume, pitch);
 	}
 	
-	public static SoundEffect valueOf(Sound sound, float volume, float pitch)
+	@Contract("_, _, _ -> new")
+	public static @NotNull SoundEffect valueOf(Sound sound, float volume, float pitch)
 	{
 		return valueOf(TypeSound.get().getId(sound), volume, pitch);
 	}
@@ -79,12 +87,14 @@ public final class SoundEffect implements Serializable
 	// RUN
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public void run(Location location)
 	{
 		if (location == null) throw new NullPointerException("location");
 		location.getWorld().playSound(location, this.getSound(), this.getVolume(), this.getPitch());
 	}
 	
+	@Contract("null, _ -> fail")
 	public void run(HumanEntity human, Location location)
 	{
 		if (human == null) throw new NullPointerException("human");
@@ -93,6 +103,7 @@ public final class SoundEffect implements Serializable
 		player.playSound(location, this.getSound(), this.getVolume(), this.getPitch());
 	}
 	
+	@Contract("null -> fail")
 	public void run(HumanEntity human)
 	{
 		if (human == null) throw new NullPointerException("human");
@@ -104,7 +115,7 @@ public final class SoundEffect implements Serializable
 	// RUN ALL
 	// -------------------------------------------- //
 	
-	public static void runAll(Collection<SoundEffect> soundEffects, Location location)
+	public static void runAll(@NotNull Collection<SoundEffect> soundEffects, @NotNull Location location)
 	{
 		for (SoundEffect soundEffect : soundEffects)
 		{
@@ -112,7 +123,7 @@ public final class SoundEffect implements Serializable
 		}
 	}
 	
-	public static void runAll(Collection<SoundEffect> soundEffects, HumanEntity human, Location location)
+	public static void runAll(@NotNull Collection<SoundEffect> soundEffects, @NotNull HumanEntity human, Location location)
 	{
 		for (SoundEffect soundEffect : soundEffects)
 		{
@@ -120,7 +131,7 @@ public final class SoundEffect implements Serializable
 		}
 	}
 	
-	public static void runAll(Collection<SoundEffect> soundEffects, HumanEntity human)
+	public static void runAll(@NotNull Collection<SoundEffect> soundEffects, @NotNull HumanEntity human)
 	{
 		for (SoundEffect soundEffect : soundEffects)
 		{

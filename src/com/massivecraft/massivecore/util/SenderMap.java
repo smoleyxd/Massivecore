@@ -3,6 +3,9 @@ package com.massivecraft.massivecore.util;
 import com.massivecraft.massivecore.SenderPresence;
 import com.massivecraft.massivecore.SenderType;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableList;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnmodifiableView;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -47,7 +50,8 @@ public final class SenderMap
 	// GET
 	// -------------------------------------------- //
 	
-	public Set<String> getValues(SenderPresence presence, SenderType type)
+	@Contract("null, _ -> fail; !null, null -> fail")
+	public @NotNull @UnmodifiableView Set<String> getValues(SenderPresence presence, SenderType type)
 	{
 		if (presence == null) throw new NullPointerException("presence");
 		if (type == null) throw new NullPointerException("type");
@@ -60,6 +64,7 @@ public final class SenderMap
 		return innerMap.get(presence).get(type);
 	}
 	
+	@Contract("null -> fail")
 	public SenderPresence getPresence(String value)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -84,6 +89,7 @@ public final class SenderMap
 	// CONTAINS
 	// -------------------------------------------- //
 	
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail; !null, !null, null -> fail")
 	public boolean contains(String value, SenderPresence presence, SenderType type)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -112,6 +118,7 @@ public final class SenderMap
 	// ADD
 	// -------------------------------------------- //
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public void addValue(String value, SenderPresence presence)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -120,6 +127,7 @@ public final class SenderMap
 		addValue(value, getPresences(presence));
 	}
 	
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public void addValue(String value, List<SenderPresence> presences)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -128,6 +136,7 @@ public final class SenderMap
 		addValue(value, presences, getSenderTypes(value));
 	}
 	
+	@Contract("null, _, _ -> fail; !null, null, _ -> fail; !null, !null, null -> fail")
 	public void addValue(String value, List<SenderPresence> presences, List<SenderType> types)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -149,6 +158,7 @@ public final class SenderMap
 	// REMOVE
 	// -------------------------------------------- //
 	
+	@Contract("null -> fail")
 	public boolean removeValueCompletely(String value)
 	{
 		if (value == null) throw new NullPointerException("value");
@@ -174,7 +184,8 @@ public final class SenderMap
 	
 	// This accepts the most strict presence,
 	// and returns all other which also match.
-	public static List<SenderPresence> getPresences(SenderPresence presence)
+	@Contract("null -> fail")
+	public static @NotNull List<@NotNull SenderPresence> getPresences(SenderPresence presence)
 	{
 		if (presence == null) throw new NullPointerException("presence");
 		switch (presence)
@@ -190,7 +201,8 @@ public final class SenderMap
 	public static final List<SenderType> PLAYER_TYPES = ImmutableList.of(SenderType.PLAYER, SenderType.ANY);
 	public static final List<SenderType> NONPLAYER_TYPES = ImmutableList.of(SenderType.NONPLAYER, SenderType.ANY);
 	
-	public static List<SenderType> getSenderTypes(String value)
+	@Contract("null -> fail")
+	public static @NotNull List<@NotNull SenderType> getSenderTypes(String value)
 	{
 		if (value == null) throw new NullPointerException("value");
 		if (isPlayerValue(value)) return PLAYER_TYPES;

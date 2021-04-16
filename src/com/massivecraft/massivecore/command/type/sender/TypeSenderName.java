@@ -5,6 +5,8 @@ import com.massivecraft.massivecore.SenderType;
 import com.massivecraft.massivecore.store.SenderIdSource;
 import com.massivecraft.massivecore.store.SenderIdSourceMixinAllSenderIds;
 import com.massivecraft.massivecore.util.IdUtil;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeSenderName extends TypeSenderIdAbstract<String>
 {
@@ -43,10 +45,14 @@ public class TypeSenderName extends TypeSenderIdAbstract<String>
 	// GET
 	// -------------------------------------------- //
 	
-	public static TypeSenderName get(SenderIdSource source, SenderPresence presence, SenderType type) { return new TypeSenderName(source, presence, type); }
-	public static TypeSenderName get(SenderIdSource source, SenderPresence presence) { return new TypeSenderName(source, presence); }
-	public static TypeSenderName get(SenderIdSource source, SenderType type) { return new TypeSenderName(source, type); }
-	public static TypeSenderName get(SenderIdSource source) { return new TypeSenderName(source); }
+	@Contract("_, _, _ -> new")
+	public static @NotNull TypeSenderName get(SenderIdSource source, SenderPresence presence, SenderType type) { return new TypeSenderName(source, presence, type); }
+	@Contract("_, _ -> new")
+	public static @NotNull TypeSenderName get(SenderIdSource source, SenderPresence presence) { return new TypeSenderName(source, presence); }
+	@Contract("_, _ -> new")
+	public static @NotNull TypeSenderName get(SenderIdSource source, SenderType type) { return new TypeSenderName(source, type); }
+	@Contract("_ -> new")
+	public static @NotNull TypeSenderName get(SenderIdSource source) { return new TypeSenderName(source); }
 	
 	// -------------------------------------------- //
 	// OVERRIDE

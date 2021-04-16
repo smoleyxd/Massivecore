@@ -26,6 +26,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -55,6 +58,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// When registering again we use the fresh and current aliases.
 	
 	private static final transient Set<MassiveCommand> allInstances = new MassiveSet<>();
+	@Contract(pure = true)
 	public static Set<MassiveCommand> getAllInstances() { return allInstances; }
 	
 	// -------------------------------------------- //
@@ -302,7 +306,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		parent.removeChild(this);
 		this.parent = null;
 	}
-	
+
+	@Contract(mutates = "this,param1")
 	public void setParent(MassiveCommand parent)
 	{
 		// NoChange
@@ -323,6 +328,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addChild(MassiveCommand child)
 	{
 		// NoChange
@@ -331,7 +337,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		// Apply
 		return this.addChild(child, this.getChildren().size());
 	}
-	
+
+	@Contract(value = "_, _ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addChildAfter(MassiveCommand child, MassiveCommand after)
 	{
 		int index = this.getChildren().indexOf(after);
@@ -366,6 +373,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_, _ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addChild(MassiveCommand child, int index)
 	{
 		if (!this.hasChildren() && !(child instanceof MassiveCommandHelp))
@@ -448,7 +456,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return ret;
 	}
 	
-	private static Set<MassiveCommand> getRelevantCommands(Iterable<MassiveCommand> commands, CommandSender sender)
+	private static @NotNull Set<MassiveCommand> getRelevantCommands(@NotNull Iterable<@NotNull MassiveCommand> commands, CommandSender sender)
 	{
 		Set<MassiveCommand> ret = new MassiveSet<>();
 		for (MassiveCommand command : commands)
@@ -459,7 +467,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return ret;
 	}
 	
-	private static Set<MassiveCommand> getPrioritizedCommands(Iterable<MassiveCommand> commands)
+	private static @NotNull Set<MassiveCommand> getPrioritizedCommands(@NotNull Iterable<@NotNull MassiveCommand> commands)
 	{
 		Set<MassiveCommand> ret = new MassiveSet<>();
 		long highestPriority = Long.MIN_VALUE;
@@ -504,12 +512,16 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	public List<String> getAliases() { return this.aliases; }
 	
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T setAliases(Collection<String> aliases) { this.aliases = new MassiveList<>(aliases); return (T) this; }
-	public <T extends MassiveCommand> T setAliases(String... aliases) { return this.setAliases(Arrays.asList(aliases)); }
+	@Contract(value = "_ -> this", mutates = "this")
+	public <T extends MassiveCommand> T setAliases(String @NotNull ... aliases) { return this.setAliases(Arrays.asList(aliases)); }
 	
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addAliases(Collection<String> aliases) { this.aliases.addAll(aliases); return (T) this; }
-	public <T extends MassiveCommand> T addAliases(String... aliases) { return this.addAliases(Arrays.asList(aliases)); }
+	@Contract(value = "_ -> this", mutates = "this")
+	public <T extends MassiveCommand> T addAliases(String @NotNull ... aliases) { return this.addAliases(Arrays.asList(aliases)); }
 	
 	// -------------------------------------------- //
 	// PARAMETERS
@@ -598,6 +610,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// -------------------------------------------- //
 	
 	// The actual parameter.
+	@Contract(value = "_, _ -> param1", mutates = "this")
 	public <T> Parameter<T> addParameter(Parameter<T> parameter, boolean concatFromHere)
 	{
 		// Concat safety.
@@ -622,12 +635,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	}
 	
 	// The actual parameter without concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Parameter<T> parameter)
 	{
 		return this.addParameter(parameter, false);
 	}
 	
 	// All
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name, String defaultDesc, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, requiredFromConsole, name, defaultDesc), concatFromHere);
@@ -636,24 +651,28 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// WITHOUT 1
 	
 	// Without defaultValue
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, boolean requiredFromConsole, String name, String defaultDesc, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(type, requiredFromConsole, name, defaultDesc), concatFromHere);
 	}
 	
 	// Without reqFromConsole.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, String name, String defaultDesc, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, name, defaultDesc),  concatFromHere);
 	}
 
 	// Without defaultDesc.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, requiredFromConsole, name), concatFromHere);
 	}
 	
 	// Without concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name, String defaultDesc)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, requiredFromConsole, name, defaultDesc), false);
@@ -662,36 +681,42 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// WITHOUT 2
 	
 	// Without defaultValue & reqFromConsole
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, String name, String defaultDesc, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(type, name, defaultDesc), concatFromHere);
 	}
 	
 	// Without defaultValue & defaultDesc
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, boolean requiredFromConsole, String name, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(type, requiredFromConsole, name), concatFromHere);
 	}
 	
 	// Without defaultValue & concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, boolean requiredFromConsole, String name, String defaultDesc)
 	{
 		return this.addParameter(new Parameter<>(type, requiredFromConsole, name, defaultDesc));
 	}
 
 	// Without reqFromConsole & defaultDesc.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, String name, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, name), concatFromHere);
 	}
 
 	// Without reqFromConsole & concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, String name, String defaultDesc)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, name, defaultDesc));
 	}
 	
 	// Without defaultDesc & concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, boolean requiredFromConsole, String name)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, requiredFromConsole, name));
@@ -700,24 +725,28 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// WITHOUT 3
 	
 	// Without defaultValue, reqFromConsole & defaultDesc.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, String name, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(type, name), concatFromHere);
 	}
 	
 	// Without defaultValue, reqFromConsole & concat .
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, String name, String defaultDesc)
 	{
 		return this.addParameter(new Parameter<>(type, name, defaultDesc));
 	}
 	
 	// Without defaultValue, defaultDesc & concat .
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, boolean requiredFromConsole, String name)
 	{
 		return this.addParameter(new Parameter<>(type, requiredFromConsole, name));
 	}
 	
 	// Without reqFromConsole, defaultDesc & concat .
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(T defaultValue, Type<T> type, String name)
 	{
 		return this.addParameter(new Parameter<>(defaultValue, type, name));
@@ -726,12 +755,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// WITHOUT 4
 
 	// Without defaultValue, reqFromConsole, defaultDesc & concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, String name)
 	{
 		return this.addParameter(new Parameter<>(type, name));
 	}
 	
 	// Without defaultValue, name, reqFromConsole & defaultDesc.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type, boolean concatFromHere)
 	{
 		return this.addParameter(new Parameter<>(type), concatFromHere);
@@ -740,6 +771,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// Without 5
 	
 	// Without defaultValue, name, reqFromConsole, defaultDesc & concat.
+	@Contract(mutates = "this")
 	public <T> Parameter<T> addParameter(Type<T> type)
 	{
 		return this.addParameter(new Parameter<>(type));
@@ -752,9 +784,11 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// The code is located in the MassiveCoreBukkitCommand.
 
 	public boolean isTokenizing() { return this.tokenizing; }
+	@Contract(mutates = "this")
 	public void setTokenizing(boolean tokenizing) { this.tokenizing = tokenizing; }
 	
 	public boolean isUnsmart() { return this.unsmart; }
+	@Contract(mutates = "this")
 	public void setUnsmart(boolean unsmart) { this.unsmart = unsmart; }
 	
 	// -------------------------------------------- //
@@ -764,13 +798,16 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// The end result is still raw arguments but their order and composition is better adapted to our parameters.
 	
 	public boolean isOverflowSensitive() { return this.overflowSensitive; }
+	@Contract(mutates = "this")
 	public void setOverflowSensitive(boolean overflowSensitive) { this.overflowSensitive = overflowSensitive; }
 	
 	public boolean isConcatenating() { return this.concatenating; }
+	@Contract(mutates = "this")
 	public void setConcatenating(boolean concatenating) { this.concatenating = concatenating; }
 	public int getConcatenationIndex() { return this.getParameters().size() - 1; }
 	
 	public boolean isSwapping() { return this.swapping; }
+	@Contract(mutates = "this")
 	public void setSwapping(boolean swapping) { this.swapping = swapping; }
 	
 	// -------------------------------------------- //
@@ -852,11 +889,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	
 	public List<Requirement> getRequirements() { return this.requirements; }
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T setRequirements(List<Requirement> requirements) { this.requirements = requirements; return (T) this; }
 	@SuppressWarnings("unchecked")
+	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addRequirements(Collection<Requirement> requirements) { this.requirements.addAll(requirements); return (T) this; }
 	@SuppressWarnings("unchecked")
-	public <T extends MassiveCommand> T addRequirements(Requirement... requirements) { this.addRequirements(Arrays.asList(requirements)); return (T) this; }
+	@Contract(value = "_ -> this", mutates = "this")
+	public <T extends MassiveCommand> T addRequirements(Requirement @NotNull ... requirements) { this.addRequirements(Arrays.asList(requirements)); return (T) this; }
 	
 	public boolean isRequirementsMet(CommandSender sender, boolean verboose)
 	{
@@ -871,7 +911,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// -------------------------------------------- //
 	// HELP
 	// -------------------------------------------- //
-	
+
+	@Contract(mutates = "this")
 	public void setDesc(String desc) { this.desc = desc; }
 	public String getDesc()
 	{
@@ -904,7 +945,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		}
 		
 	public void setHelp(List<?> val) { this.help = val; }
-	public void setHelp(Object... val) { this.help = Arrays.asList(val); }
+	public void setHelp(Object @NotNull ... val) { this.help = Arrays.asList(val); }
 	public List<?> getHelp() { return this.help; }
 	
 	public Visibility getVisibility() { return this.visibility; }
@@ -1011,7 +1052,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			.forEach(MassiveCommand::setup);
 	}
 	
-	private static Class<?> getClassOrEnclosing(Object object)
+	private static @NotNull Class<?> getClassOrEnclosing(@NotNull Object object)
 	{
 		Class<?> clazz =  object.getClass();
 		Class<?> enclosingClass = clazz.getEnclosingClass();
@@ -1077,7 +1118,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		throw new RuntimeException("Could not find permission matching: " + permName);
 	}
 
-	protected static <T extends Enum<T>> T getPerm(String permName, boolean lenient, Class<T> permClass)
+	protected static <T extends Enum<T>> @Nullable T getPerm(String permName, boolean lenient, Class<T> permClass)
 	{
 		permName = getPermCompareString(permName, lenient);
 		for (T perm : TypeEnum.getEnumValues(permClass))
@@ -1088,7 +1129,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return null;
 	}
 
-	protected static String getPermCompareString(String permName, boolean lenient)
+	@Contract("_, false -> param1")
+	protected static @NotNull String getPermCompareString(@NotNull String permName, boolean lenient)
 	{
 		if (lenient)
 		{
@@ -1229,7 +1271,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// CALL VALIDATION
 	// -------------------------------------------- //
 	
-	public boolean isArgsValid(List<String> args, CommandSender sender)
+	public boolean isArgsValid(@NotNull List<String> args, CommandSender sender)
 	{
 		if (args.size() < this.getParameterCountRequired(sender))
 		{
@@ -1308,7 +1350,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		return this.getTemplateWithArgs(sender, MUtil.list(args));
 	}
 
-	public Mson getTemplateWithArgs(CommandSender sender, List<String> args)
+	public Mson getTemplateWithArgs(CommandSender sender, @NotNull List<String> args)
 	{
 		Mson ret = this.getTemplateChain(true, sender);
 
@@ -1391,7 +1433,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// GET COMMAND LINE
 	// -------------------------------------------- //
 	
-	public String getCommandLine(String... args)
+	public String getCommandLine(String @NotNull ... args)
 	{
 		return getCommandLine(Arrays.asList(args));
 	}
@@ -1438,7 +1480,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
  	// -------------------------------------------- //
 	// TAB
 	// -------------------------------------------- //
-	
+
+	@Contract("null, _ -> fail; !null, null -> fail")
 	public List<String> getTabCompletions(List<String> args, CommandSender sender)
 	{
 		if (args == null) throw new NullPointerException("args");
@@ -1455,7 +1498,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		}
 	}
 	
-	protected List<String> getTabCompletionsChild(List<String> args, CommandSender sender)
+	protected List<String> getTabCompletionsChild(@NotNull List<String> args, CommandSender sender)
 	{
 		// If this isn't the last argument ...
 		if (args.size() != 1)
@@ -1533,22 +1576,23 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	
 	// CONVENIENCE MSON
 	
-	public static Mson mson()
+	@Contract(pure = true)
+	public static @NotNull Mson mson()
 	{
 		return Mson.mson();
 	}
 	
-	public static Mson mson(Object... parts)
+	public static @NotNull Mson mson(Object @NotNull ... parts)
 	{
 		return Mson.mson(parts);
 	}
-	
-	public static List<Mson> msons(Object... parts)
+
+	public static @NotNull List<Mson> msons(Object @NotNull ... parts)
 	{
 		return Mson.msons(parts);
 	}
 	
-	public static List<Mson> msons(Collection<?> parts)
+	public static @NotNull List<Mson> msons(@NotNull Collection<?> parts)
 	{
 		return Mson.msons(parts);
 	}

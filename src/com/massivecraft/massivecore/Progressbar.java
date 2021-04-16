@@ -2,6 +2,8 @@ package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.Txt;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,16 +63,26 @@ public class Progressbar
 	// -------------------------------------------- //
 	// FIELDS: WITH
 	// -------------------------------------------- //
-	
+
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withQuota(double quota) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withWidth(int width) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withLeft(String left) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withSolid(String solid) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withBetween(String between) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withEmpty(String empty) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withRight(String right) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withSolidsPerEmpty(double solidsPerEmpty) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withColorTag(String colorTag) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
+	@Contract(value = "_ -> new", pure = true)
 	public Progressbar withRoofToColor(Map<Double, String> roofToColor) { return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor); }
 	
 	// -------------------------------------------- //
@@ -95,7 +107,8 @@ public class Progressbar
 	// FACTORY: VALUE OF
 	// -------------------------------------------- //
 	
-	public static Progressbar valueOf(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
+	@Contract(value = "_, _, _, _, _, _, _, _, _, _ -> new", pure = true)
+	public static @NotNull Progressbar valueOf(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
 	{
 		return new Progressbar(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor);
 	}
@@ -118,12 +131,12 @@ public class Progressbar
 	// STATIC UTIL
 	// -------------------------------------------- //
 	
-	public static String render(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
+	public static @NotNull String render(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
 	{
 		return Txt.implode(renderList(quota, width, left, solid, between, empty, right, solidsPerEmpty, colorTag, roofToColor), "");
 	}
 	
-	public static List<String> renderList(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
+	public static @NotNull List<String> renderList(double quota, int width, String left, String solid, String between, String empty, String right, double solidsPerEmpty, String colorTag, Map<Double, String> roofToColor)
 	{
 		// Create Ret
 		List<String> ret = new ArrayList<>();
@@ -182,6 +195,7 @@ public class Progressbar
 		return ret;
 	}
 	
+	@Contract("null, _, _ -> null")
 	public static String colorParse(String string, String colorTag, String color)
 	{
 		if (string == null) return null;
@@ -190,6 +204,7 @@ public class Progressbar
 		return string;
 	}
 	
+	@Contract(pure = true)
 	public static double limit(double quota)
 	{
 		if (quota > 1) return 1;
@@ -197,7 +212,7 @@ public class Progressbar
 		return quota;
 	}
 	
-	public static <T> T pick(double quota, Map<Double, T> roofToValue)
+	public static <T> T pick(double quota, @NotNull Map<Double, T> roofToValue)
 	{
 		Double currentRoof = null;
 		T ret = null;

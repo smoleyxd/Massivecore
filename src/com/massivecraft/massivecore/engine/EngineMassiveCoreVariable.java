@@ -18,6 +18,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +33,7 @@ public class EngineMassiveCoreVariable extends Engine
 	// -------------------------------------------- //
 	
 	private static EngineMassiveCoreVariable i = new EngineMassiveCoreVariable();
+	@Contract(pure = true)
 	public static EngineMassiveCoreVariable get() { return i; }
 	
 	// -------------------------------------------- //
@@ -37,7 +41,7 @@ public class EngineMassiveCoreVariable extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void variable(PlayerCommandPreprocessEvent event)
+	public void variable(@NotNull PlayerCommandPreprocessEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -46,7 +50,7 @@ public class EngineMassiveCoreVariable extends Engine
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)
-	public void variable(AsyncPlayerChatEvent event)
+	public void variable(@NotNull AsyncPlayerChatEvent event)
 	{
 		Player player = event.getPlayer();
 		if (MUtil.isntPlayer(player)) return;
@@ -65,6 +69,7 @@ public class EngineMassiveCoreVariable extends Engine
 	// VARIABLE BOOK
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static String getBookText(CommandSender sender)
 	{
 		if ( ! (sender instanceof HumanEntity)) return null;
@@ -73,6 +78,7 @@ public class EngineMassiveCoreVariable extends Engine
 		return getBookText(item);
 	}
 	
+	@Contract("null -> null")
 	public static String getBookText(ItemStack item)
 	{
 		if (item == null) return null;
@@ -109,7 +115,7 @@ public class EngineMassiveCoreVariable extends Engine
 	
 	public static final Map<String, String> idToBuffer = new HashMap<>();
 	
-	public static String getBuffer(Object senderObject)
+	public static @Nullable String getBuffer(Object senderObject)
 	{
 		String id = IdUtil.getId(senderObject);
 		if (id == null) return null;

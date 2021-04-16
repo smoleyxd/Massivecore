@@ -3,6 +3,8 @@ package com.massivecraft.massivecore.collections;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.RegistryType;
 import com.massivecraft.massivecore.command.type.Type;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractSet;
 import java.util.Arrays;
@@ -26,12 +28,14 @@ public class BackstringSet<T> extends AbstractSet<T>
 	// CONVTERT
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	private T convertFromString(String string) throws MassiveException
 	{
 		if (string == null) return null;
 		return this.type.read(string);
 	}
 	
+	@Contract("null -> null")
 	@SuppressWarnings("unchecked")
 	private String convertToString(Object object)
 	{
@@ -68,7 +72,7 @@ public class BackstringSet<T> extends AbstractSet<T>
 		}
 	}
 	
-	public BackstringSet(Type<T> type, Object... objects)
+	public BackstringSet(Type<T> type, Object @NotNull ... objects)
 	{
 		this(type, Arrays.asList(objects));
 	}
@@ -78,7 +82,7 @@ public class BackstringSet<T> extends AbstractSet<T>
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("unchecked")
-	public BackstringSet(Class<T> clazz)
+	public BackstringSet(@NotNull Class<T> clazz)
 	{
 		this((Type<T>) RegistryType.getType(clazz));
 	}
@@ -150,6 +154,7 @@ public class BackstringSet<T> extends AbstractSet<T>
 		return this.stringSet.size();
 	}
 
+	@Contract(pure = true)
 	@Override
 	public boolean contains(Object object)
 	{
@@ -162,12 +167,14 @@ public class BackstringSet<T> extends AbstractSet<T>
 	{
 		return this.addObject(object);
 	}
-	
+
+	@Contract(mutates = "this")
 	public boolean addString(String string)
 	{
 		return this.addObject(string);
 	}
-	
+
+	@Contract(mutates = "this")
 	private boolean addObject(Object object)
 	{
 		String string = this.convertToString(object);

@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.command.type.primitive;
 
 import com.massivecraft.massivecore.command.type.TypeAbstract;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,7 +18,8 @@ public class TypeObject<T> extends TypeAbstract<T>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	public static <T> TypeObject<T> get(Class<T> clazz) { return new TypeObject<>(clazz); }
+	@Contract("_ -> new")
+	public static <T> @NotNull TypeObject<T> get(Class<T> clazz) { return new TypeObject<>(clazz); }
 	
 	public TypeObject(Class<T> clazz)
 	{

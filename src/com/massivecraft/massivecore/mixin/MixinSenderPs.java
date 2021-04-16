@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 
 public class MixinSenderPs extends Mixin
 {
@@ -12,6 +13,7 @@ public class MixinSenderPs extends Mixin
 	
 	private static MixinSenderPs d = new MixinSenderPs();
 	private static MixinSenderPs i = d;
+	@Contract(pure = true)
 	public static MixinSenderPs get() { return i; }
 	
 	// -------------------------------------------- //

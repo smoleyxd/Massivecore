@@ -8,6 +8,9 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -53,7 +56,7 @@ public final class MsonEvent implements Serializable
 		this.setAction(action);
 	}
 	
-	private static MsonEventAction guessAction(String value)
+	private static @NotNull MsonEventAction guessAction(@NotNull String value)
 	{
 		if (value.startsWith("{id:")) return MsonEventAction.SHOW_ITEM;
 		if (value.startsWith("/")) return MsonEventAction.SUGGEST_COMMAND;
@@ -81,7 +84,7 @@ public final class MsonEvent implements Serializable
 	// TOOLTIP
 	// -------------------------------------------- //
 	
-	public String createTooltip()
+	public @Nullable String createTooltip()
 	{
 		String prefix = this.getAction().getTooltipPrefix();
 		if (prefix == null) return null;
@@ -92,77 +95,92 @@ public final class MsonEvent implements Serializable
 	// FACTORY
 	// -------------------------------------------- //
 
-	public static MsonEvent valueOf(MsonEventAction action, String value)
+	@Contract(value = "_, _ -> new", pure = true)
+	public static @NotNull MsonEvent valueOf(MsonEventAction action, String value)
 	{
 		return new MsonEvent(action, value);
 	}
 
 	// clickEvents
-	public static MsonEvent link(String url)
+	@Contract(value = "_ -> new", pure = true)
+	public static @NotNull MsonEvent link(String url)
 	{
 		return MsonEvent.valueOf(MsonEventAction.OPEN_URL, url);
 	}
 
-	public static MsonEvent suggest(String replace)
+	@Contract(value = "_ -> new", pure = true)
+	public static @NotNull MsonEvent suggest(String replace)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SUGGEST_COMMAND, replace);
 	}
-	public static MsonEvent suggest(MassiveCommand cmd, String... args)
+	@Contract("_, _ -> new")
+	public static @NotNull MsonEvent suggest(@NotNull MassiveCommand cmd, String... args)
 	{
 		return MsonEvent.suggest(cmd.getCommandLine(args));
 	}
-	public static MsonEvent suggest(MassiveCommand cmd, Iterable<String> args)
+	@Contract("_, _ -> new")
+	public static @NotNull MsonEvent suggest(@NotNull MassiveCommand cmd, Iterable<String> args)
 	{
 		return MsonEvent.suggest(cmd.getCommandLine(args));
 	}
 	
-	public static MsonEvent command(String cmd)
+	@Contract(value = "_ -> new", pure = true)
+	public static @NotNull MsonEvent command(String cmd)
 	{
 		return MsonEvent.valueOf(MsonEventAction.RUN_COMMAND, cmd);
 	}
-	public static MsonEvent command(MassiveCommand cmd, String... args)
+	@Contract("_, _ -> new")
+	public static @NotNull MsonEvent command(@NotNull MassiveCommand cmd, String... args)
 	{
 		return MsonEvent.command(cmd.getCommandLine(args));
 	}
-	public static MsonEvent command(MassiveCommand cmd, Iterable<String> args)
+	@Contract("_, _ -> new")
+	public static @NotNull MsonEvent command(@NotNull MassiveCommand cmd, Iterable<String> args)
 	{
 		return MsonEvent.command(cmd.getCommandLine(args));
 	}
 
 	// showText
-	public static MsonEvent tooltip(String hoverText)
+	@Contract(value = "_ -> new", pure = true)
+	public static @NotNull MsonEvent tooltip(String hoverText)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, hoverText);
 	}
 
-	public static MsonEvent tooltip(String... hoverTexts)
+	@Contract("_ -> new")
+	public static @NotNull MsonEvent tooltip(String @NotNull ... hoverTexts)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, Txt.implode(hoverTexts, "\n"));
 	}
 
-	public static MsonEvent tooltip(Collection<String> hoverTexts)
+	@Contract("_ -> new")
+	public static @NotNull MsonEvent tooltip(@NotNull Collection<String> hoverTexts)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, Txt.implode(hoverTexts, "\n"));
 	}
 	
 	// showTextParsed
-	public static MsonEvent tooltipParse(String hoverText)
+	@Contract("_ -> new")
+	public static @NotNull MsonEvent tooltipParse(String hoverText)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, Txt.parse(hoverText));
 	}
 
-	public static MsonEvent tooltipParse(String... hoverTexts)
+	@Contract("_ -> new")
+	public static @NotNull MsonEvent tooltipParse(String @NotNull ... hoverTexts)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, Txt.parse(Txt.implode(hoverTexts, "\n")));
 	}
 
-	public static MsonEvent tooltipParse(Collection<String> hoverTexts)
+	@Contract("_ -> new")
+	public static @NotNull MsonEvent tooltipParse(@NotNull Collection<String> hoverTexts)
 	{
 		return MsonEvent.valueOf(MsonEventAction.SHOW_TEXT, Txt.parse(Txt.implode(hoverTexts, "\n")));
 	}
 	
 	// showItem
-	public static MsonEvent item(ItemStack item)
+	@Contract("null -> fail")
+	public static @NotNull MsonEvent item(ItemStack item)
 	{
 		if (item == null) throw new NullPointerException("item");
 		item = getItemSanitizedForTooltip(item);
@@ -170,7 +188,8 @@ public final class MsonEvent implements Serializable
 		return MsonEvent.valueOf(MsonEventAction.SHOW_ITEM, value);
 	}
 	
-	private static ItemStack getItemSanitizedForTooltip(ItemStack item)
+	@Contract("null -> fail")
+	private static @NotNull ItemStack getItemSanitizedForTooltip(ItemStack item)
 	{
 		if (item == null) throw new NullPointerException("item");
 		
@@ -194,7 +213,7 @@ public final class MsonEvent implements Serializable
 	// CONVENIENCE
 	// -------------------------------------------- //
 
-	public MsonEventType getType() { return this.getAction().getType(); }
+	public @NotNull MsonEventType getType() { return this.getAction().getType(); }
 	
 	// -------------------------------------------- //
 	// JSON
@@ -223,6 +242,7 @@ public final class MsonEvent implements Serializable
 		);
 	}
 
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public boolean equals(Object object)
 	{

@@ -1,5 +1,8 @@
 package com.massivecraft.massivecore.util;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,9 +38,10 @@ public class TimeUnit implements Comparable<TimeUnit>
 	// -------------------------------------------- //
 		
 	private static final TreeSet<TimeUnit> all = new TreeSet<>();
-	public static TreeSet<TimeUnit> getAll() { return new TreeSet<>(all); }
+	@Contract(" -> new")
+	public static @NotNull TreeSet<TimeUnit> getAll() { return new TreeSet<>(all); }
 	
-	public static TreeSet<TimeUnit> getAllBut(TimeUnit... timeUnits)
+	public static @NotNull TreeSet<TimeUnit> getAllBut(TimeUnit @NotNull ... timeUnits)
 	{
 		TreeSet<TimeUnit> ret = new TreeSet<>(all);
 		for (TimeUnit timeUnit : timeUnits)
@@ -47,26 +51,28 @@ public class TimeUnit implements Comparable<TimeUnit>
 		return ret;
 	}
 	
-	public static TreeSet<TimeUnit> getAllButMillis()
+	public static @NotNull TreeSet<TimeUnit> getAllButMillis()
 	{
 		return getAllBut(MILLISECOND);
 	}
 	
-	public static TreeSet<TimeUnit> getAllButMillisAndSeconds()
+	public static @NotNull TreeSet<TimeUnit> getAllButMillisAndSeconds()
 	{
 		return getAllBut(MILLISECOND, SECOND);
 	}
 	
-	public static TreeSet<TimeUnit> getAllButMillisSecondsAndMinutes()
+	public static @NotNull TreeSet<TimeUnit> getAllButMillisSecondsAndMinutes()
 	{
 		return getAllBut(MILLISECOND, SECOND, MINUTE);
 	}
 	
-	public static TreeSet<TimeUnit> getSpecific(TimeUnit... timeUnits)
+	@Contract("_ -> new")
+	public static @NotNull TreeSet<TimeUnit> getSpecific(TimeUnit @NotNull ... timeUnits)
 	{
 		return new TreeSet<>(Arrays.asList(timeUnits));
 	}
 	
+	@Contract("null -> null")
 	public static TimeUnit get(String timeUnitString)
 	{
 		if (timeUnitString == null) return null;
@@ -116,7 +122,7 @@ public class TimeUnit implements Comparable<TimeUnit>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	private TimeUnit(long millis, String singularName, String pluralName, String singularUnit, String pluralUnit, String... aliases)
+	private TimeUnit(long millis, String singularName, String pluralName, String singularUnit, String pluralUnit, String @NotNull ... aliases)
 	{
 		this.millis = millis;
 		this.singularName = singularName;
@@ -153,11 +159,12 @@ public class TimeUnit implements Comparable<TimeUnit>
 	}
 	
 	@Override
-	public int compareTo(TimeUnit that)
+	public int compareTo(@NotNull TimeUnit that)
 	{
 		return Long.compare(this.millis, that.millis) * -1;
 	}
 	
+	@Contract(value = "null -> false", pure = true)
 	@Override
 	public final boolean equals(Object other)
 	{

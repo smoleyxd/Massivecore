@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,13 +36,13 @@ public class Integration extends Engine
 	private List<String> pluginNames = Collections.emptyList();
 	public List<String> getPluginNames() { return this.pluginNames; }
 	public Integration setPluginNames(Collection<String> pluginNames) { this.pluginNames = new MassiveList<>(pluginNames); return this; }
-	public Integration setPluginNames(String... pluginNames) { return this.setPluginNames(Arrays.asList(pluginNames)); }
+	public Integration setPluginNames(String @NotNull ... pluginNames) { return this.setPluginNames(Arrays.asList(pluginNames)); }
 	public Integration setPluginName(String pluginName) { return this.setPluginNames(pluginName); }
 	
 	private List<String> classNames = Collections.emptyList();
 	public List<String> getClassNames() { return this.classNames; }
 	public Integration setClassNames(Collection<String> classNames) { this.classNames = new MassiveList<>(classNames); return this; }
-	public Integration setClassNames(String... classNames) { return this.setClassNames(Arrays.asList(classNames)); }
+	public Integration setClassNames(String @NotNull ... classNames) { return this.setClassNames(Arrays.asList(classNames)); }
 	public Integration setClassName(String className) { return this.setClassNames(className); }
 	
 	// -------------------------------------------- //
@@ -163,7 +164,7 @@ public class Integration extends Engine
 	// -------------------------------------------- //
 	
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void onPluginDisable(PluginDisableEvent event)
+	public void onPluginDisable(@NotNull PluginDisableEvent event)
 	{
 		if (this.getPlugin().equals(event.getPlugin()))
 		{

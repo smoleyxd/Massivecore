@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -104,7 +105,7 @@ public abstract class NmsChatAbstract extends NmsChat
 	// -------------------------------------------- //
 	
 	@Override
-	public void sendChatMson(Object sendeeObject, Mson mson)
+	public void sendChatMson(Object sendeeObject, @NotNull Mson mson)
 	{
 		CommandSender sendee = IdUtil.getSender(sendeeObject);
 		if (sendee == null) return;

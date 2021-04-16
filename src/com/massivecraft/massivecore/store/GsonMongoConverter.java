@@ -10,6 +10,9 @@ import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.internal.LazilyParsedNumber;
 import com.massivecraft.massivecore.xlib.mongodb.BasicDBList;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -37,7 +40,8 @@ public final class GsonMongoConverter
 		return key;
 	}
 	
-	public static Document gson2MongoObject(JsonElement inElement, Document out)
+	@Contract("_, _ -> param2")
+	public static Document gson2MongoObject(@NotNull JsonElement inElement, Document out)
 	{
 		JsonObject in = inElement.getAsJsonObject();
 		for (Entry<String, JsonElement> entry : in.entrySet())
@@ -60,12 +64,13 @@ public final class GsonMongoConverter
 		return out;
 	}
 	
-	public static Document gson2MongoObject(JsonElement inElement)
+	@Contract("_ -> new")
+	public static Document gson2MongoObject(@NotNull JsonElement inElement)
 	{
 		return gson2MongoObject(inElement, new Document());
 	}
 	
-	public static BasicDBList gson2MongoArray(JsonElement inElement)
+	public static @NotNull BasicDBList gson2MongoArray(@NotNull JsonElement inElement)
 	{
 		JsonArray in = inElement.getAsJsonArray();
 		BasicDBList out = new BasicDBList();
@@ -88,7 +93,7 @@ public final class GsonMongoConverter
 		return out;
 	}
 	
-	public static Object gson2MongoPrimitive(JsonElement inElement)
+	public static @Nullable Object gson2MongoPrimitive(@NotNull JsonElement inElement)
 	{
 		if (inElement.isJsonNull()) return null;
 		JsonPrimitive in = inElement.getAsJsonPrimitive();
@@ -142,7 +147,7 @@ public final class GsonMongoConverter
 		return key;
 	}
 	
-	public static JsonObject mongo2GsonObject(Document in)
+	public static @NotNull JsonObject mongo2GsonObject(@NotNull Document in)
 	{
 		//if (!(inObject instanceof BasicDBObject)) throw new IllegalArgumentException("Expected BasicDBObject as argument type!");
 		//BasicDBObject in = (BasicDBObject)inObject;
@@ -168,7 +173,7 @@ public final class GsonMongoConverter
 		return jsonObject;
 	}
 	
-	public static JsonArray mongo2GsonArray(ArrayList in)
+	public static @NotNull JsonArray mongo2GsonArray(@NotNull ArrayList in)
 	{
 		
 		JsonArray jsonArray = new JsonArray();

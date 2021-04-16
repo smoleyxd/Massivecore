@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
+import org.jetbrains.annotations.NotNull;
 
 public class WriterBannerPatternColor extends WriterAbstractBannerPattern<DyeColor, DyeColor>
 {
@@ -24,19 +25,19 @@ public class WriterBannerPatternColor extends WriterAbstractBannerPattern<DyeCol
 	// -------------------------------------------- //
 	
 	@Override
-	public DyeColor getA(DataBannerPattern ca, Object d)
+	public DyeColor getA(@NotNull DataBannerPattern ca, Object d)
 	{
 		return ca.getColor();
 	}
 	
 	@Override
-	public void setA(DataBannerPattern ca, DyeColor fa, Object d)
+	public void setA(@NotNull DataBannerPattern ca, DyeColor fa, Object d)
 	{
 		ca.setColor(fa);
 	}
 	
 	@Override
-	public DyeColor getB(Pattern cb, Object d)
+	public DyeColor getB(@NotNull Pattern cb, Object d)
 	{
 		return cb.getColor();
 	}

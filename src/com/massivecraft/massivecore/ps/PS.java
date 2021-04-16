@@ -16,6 +16,9 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -173,22 +176,36 @@ public final class PS implements Serializable, Comparable<PS>
 	// FIELDS: WITH
 	// -------------------------------------------- //
 	
-	public PS withWorld(String world) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withBlockX(Integer blockX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withBlockY(Integer blockY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withBlockZ(Integer blockZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withLocationX(Double locationX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withLocationY(Double locationY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withLocationZ(Double locationZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withChunkX(Integer chunkX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withChunkZ(Integer chunkZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withPitch(Float pitch) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withYaw(Float yaw) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withVelocityX(Double velocityX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withVelocityY(Double velocityY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
-	public PS withVelocityZ(Double velocityZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withWorld(String world) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withBlockX(Integer blockX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withBlockY(Integer blockY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withBlockZ(Integer blockZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withLocationX(Double locationX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withLocationY(Double locationY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withLocationZ(Double locationZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withChunkX(Integer chunkX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withChunkZ(Integer chunkZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withPitch(Float pitch) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withYaw(Float yaw) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withVelocityX(Double velocityX) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withVelocityY(Double velocityY) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
+	@Contract("_ -> new")
+	public @NotNull PS withVelocityZ(Double velocityZ) { return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ); }
 	
-	public PS with(PS ps)
+	public PS with(@NotNull PS ps)
 	{
 		PSBuilder builder = this.builder();
 		
@@ -263,6 +280,7 @@ public final class PS implements Serializable, Comparable<PS>
 		this.velocityZ = throwIfStrange(velocityZ, NAME_VERBOOSE_VELOCITYZ);
 	}
 	
+	@Contract("null, _ -> null")
 	public static Double throwIfStrange(Double d, String name)
 	{
 		if (d == null) return null;
@@ -271,6 +289,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return d;
 	}
 	
+	@Contract("null, _ -> null")
 	public static Float throwIfStrange(Float f, String name)
 	{
 		if (f == null) return null;
@@ -283,7 +302,8 @@ public final class PS implements Serializable, Comparable<PS>
 	// BUILDER
 	// -------------------------------------------- //
 	
-	public PSBuilder builder()
+	@Contract(" -> new")
+	public @NotNull PSBuilder builder()
 	{
 		return new PSBuilder(this);
 	}
@@ -292,11 +312,13 @@ public final class PS implements Serializable, Comparable<PS>
 	// FACTORY: VALUE OF
 	// -------------------------------------------- //
 	
-	public static PS valueOf(String world, Integer blockX, Integer blockY, Integer blockZ, Double locationX, Double locationY, Double locationZ, Integer chunkX, Integer chunkZ, Float pitch, Float yaw, Double velocityX, Double velocityY, Double velocityZ)
+	@Contract("_, _, _, _, _, _, _, _, _, _, _, _, _, _ -> new")
+	public static @NotNull PS valueOf(String world, Integer blockX, Integer blockY, Integer blockZ, Double locationX, Double locationY, Double locationZ, Integer chunkX, Integer chunkZ, Float pitch, Float yaw, Double velocityX, Double velocityY, Double velocityZ)
 	{
 		return new PS(world, blockX, blockY, blockZ, locationX, locationY, locationZ, chunkX, chunkZ, pitch, yaw, velocityX, velocityY, velocityZ);
 	}
 	
+	@Contract("null -> null; !null -> !null")
 	public static PS valueOf(Location location)
 	{
 		if (location == null) return null;
@@ -309,6 +331,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return valueOf(world, null, null, null, locationX, locationY, locationZ, null, null, pitch, yaw, null, null, null);
 	}
 	
+	@Contract("null -> null; !null -> !null")
 	public static PS valueOf(Vector velocity)
 	{
 		if (velocity == null) return null;
@@ -318,6 +341,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return valueOf(null, null, null, null, null, null, null, null, null, null, null, velocityX, velocityY, velocityZ);
 	}
 	
+	@Contract("null -> null; !null -> !null")
 	public static PS valueOf(Entity entity)
 	{
 		if (entity == null) return null;
@@ -338,6 +362,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return valueOf(world, null, null, null, locationX, locationY, locationZ, null, null, pitch, yaw, velocityX, velocityY, velocityZ);
 	}
 	
+	@Contract("null -> null; !null -> !null")
 	public static PS valueOf(Block block)
 	{
 		if (block == null) return null;
@@ -348,10 +373,12 @@ public final class PS implements Serializable, Comparable<PS>
 		return valueOf(world, blockX, blockY, blockZ, null, null, null, null, null, null, null, null, null, null);
 	}
 	
-	public static PS valueOf(String world, int chunkX, int chunkZ)
+	@Contract("_, _, _ -> new")
+	public static @NotNull PS valueOf(String world, int chunkX, int chunkZ)
 	{
 		return valueOf(world, null, null, null, null, null, null, chunkX, chunkZ, null, null, null, null, null);
 	}
+	@Contract("null -> null; !null -> !null")
 	public static PS valueOf(Chunk chunk)
 	{
 		if (chunk == null) return null;
@@ -360,12 +387,14 @@ public final class PS implements Serializable, Comparable<PS>
 		int chunkZ = chunk.getZ();
 		return valueOf(world, chunkX, chunkZ);
 	}
-	public static PS valueOf(int chunkX, int chunkZ)
+	@Contract("_, _ -> new")
+	public static @NotNull PS valueOf(int chunkX, int chunkZ)
 	{
 		return valueOf(null, null, null, null, null, null, null, chunkX, chunkZ, null, null, null, null, null);
 	}
 	
 	
+	@Contract("null -> null")
 	public static PS valueOf(final JsonElement jsonElement)
 	{
 		if (jsonElement == null) return null;
@@ -483,13 +512,20 @@ public final class PS implements Serializable, Comparable<PS>
 	public Double getVelocityY(boolean calc) { return getVelocityCoord(calc, locationY, blockY, null, velocityY); }
 	public Double getVelocityZ(boolean calc) { return getVelocityCoord(calc, locationZ, blockZ, chunkZ, velocityZ); }
 	
+	@Contract(value = "false, _, _, _ -> param3; true, _, !null, _ -> param3", pure = true)
 	public static Integer getBlockCoord(boolean calc, Double location, Integer block, Integer chunk) { if (calc) return calcBlockCoord(location, block, chunk); return block; }
+	@Contract(value = "false, _, _, _ -> param2; true, !null, _, _ -> param2", pure = true)
 	public static Double getLocationCoord(boolean calc, Double location, Integer block, Integer chunk) { if (calc) return calcLocationCoord(location, block, chunk); return location; }
+	@Contract(value = "false, _, _, _ -> param4; true, _, _, !null -> param4", pure = true)
 	public static Integer getChunkCoord(boolean calc, Double location, Integer block, Integer chunk) { if (calc) return calcChunkCoord(location, block, chunk); return chunk; }
+	@Contract(value = "false, _ -> param2; true, !null -> param2", pure = true)
 	public static Float getPitch(boolean calc, Float pitch) { if (calc) return calcPitch(pitch); return pitch; }
+	@Contract(value = "false, _ -> param2; true, !null -> param2", pure = true)
 	public static Float getYaw(boolean calc, Float yaw) { if (calc) return calcYaw(yaw); return yaw; }
+	@Contract(value = "false, _, _, _, _ -> param5; true, _, _, _, !null -> param5", pure = true)
 	public static Double getVelocityCoord(boolean calc, Double location, Integer block, Integer chunk, Double velocity) { if (calc) return calcVelocityCoord(location, block, chunk, velocity); return velocity; }
 	
+	@Contract(value = "_, !null, _ -> param2; null, null, null -> null", pure = true)
 	public static Integer calcBlockCoord(Double location, Integer block, Integer chunk)
 	{
 		if (block != null) return block;
@@ -497,6 +533,7 @@ public final class PS implements Serializable, Comparable<PS>
 		if (chunk != null) return chunk * 16;
 		return null;
 	}
+	@Contract(value = "!null, _, _ -> param1; null, null, null -> null", pure = true)
 	public static Double calcLocationCoord(Double location, Integer block, Integer chunk)
 	{
 		if (location != null) return location;
@@ -504,6 +541,7 @@ public final class PS implements Serializable, Comparable<PS>
 		if (chunk != null) return chunk * 16D;
 		return null;
 	}
+	@Contract(value = "_, _, !null -> param3; null, null, null -> null", pure = true)
 	public static Integer calcChunkCoord(Double location, Integer block, Integer chunk)
 	{
 		if (chunk != null) return chunk;
@@ -511,16 +549,19 @@ public final class PS implements Serializable, Comparable<PS>
 		if (block != null) return block >> 4;
 		return null;
 	}
+	@Contract(value = "!null -> param1", pure = true)
 	public static Float calcPitch(Float pitch)
 	{
 		if (pitch != null) return pitch;
 		return DEFAULT_BUKKIT_PITCH;
 	}
+	@Contract(value = "!null -> param1", pure = true)
 	public static Float calcYaw(Float yaw)
 	{
 		if (yaw != null) return yaw;
 		return DEFAULT_BUKKIT_YAW;
 	}
+	@Contract(value = "_, _, _, !null -> param4; !null, _, _, null -> param1; null, null, null, null -> null", pure = true)
 	public static Double calcVelocityCoord(Double location, Integer block, Integer chunk, Double velocity)
 	{
 		if (velocity != null) return velocity;
@@ -636,22 +677,27 @@ public final class PS implements Serializable, Comparable<PS>
 	// AS BUKKIT EQUIVALENT
 	// -------------------------------------------- //
 	
-	public World asBukkitWorld() throws IllegalStateException { return this.asBukkitWorld(false); }
-	public World asBukkitWorld(boolean calc) throws IllegalStateException { return asBukkitWorld(this.getWorld(calc)); }
+	public @NotNull World asBukkitWorld() throws IllegalStateException { return this.asBukkitWorld(false); }
+	public @NotNull World asBukkitWorld(boolean calc) throws IllegalStateException { return asBukkitWorld(this.getWorld(calc)); }
 	
-	public Block asBukkitBlock() throws IllegalStateException { return this.asBukkitBlock(false); }
-	public Block asBukkitBlock(boolean calc) throws IllegalStateException { return asBukkitBlock(this.getBlock(calc)); }
+	public @NotNull Block asBukkitBlock() throws IllegalStateException { return this.asBukkitBlock(false); }
+	public @NotNull Block asBukkitBlock(boolean calc) throws IllegalStateException { return asBukkitBlock(this.getBlock(calc)); }
 	
-	public Location asBukkitLocation() throws IllegalStateException { return this.asBukkitLocation(false); }
-	public Location asBukkitLocation(boolean calc) throws IllegalStateException { return asBukkitLocation(this.getLocation(calc)); }
+	@Contract(" -> new")
+	public @NotNull Location asBukkitLocation() throws IllegalStateException { return this.asBukkitLocation(false); }
+	@Contract("_ -> new")
+	public @NotNull Location asBukkitLocation(boolean calc) throws IllegalStateException { return asBukkitLocation(this.getLocation(calc)); }
 	
-	public Chunk asBukkitChunk() throws IllegalStateException { return this.asBukkitChunk(false); }
-	public Chunk asBukkitChunk(boolean calc) throws IllegalStateException { return asBukkitChunk(this.getChunk(calc)); }
+	public @NotNull Chunk asBukkitChunk() throws IllegalStateException { return this.asBukkitChunk(false); }
+	public @NotNull Chunk asBukkitChunk(boolean calc) throws IllegalStateException { return asBukkitChunk(this.getChunk(calc)); }
 	
-	public Vector asBukkitVelocity() throws IllegalStateException { return this.asBukkitVelocity(false); }
-	public Vector asBukkitVelocity(boolean calc) throws IllegalStateException { return asBukkitVelocity(this.getVelocity(calc)); }
+	@Contract(" -> new")
+	public @NotNull Vector asBukkitVelocity() throws IllegalStateException { return this.asBukkitVelocity(false); }
+	@Contract("_ -> new")
+	public @NotNull Vector asBukkitVelocity(boolean calc) throws IllegalStateException { return asBukkitVelocity(this.getVelocity(calc)); }
 	
-	public static World asBukkitWorld(String world) throws IllegalStateException, NullPointerException
+	@Contract("null -> fail")
+	public static @NotNull World asBukkitWorld(String world) throws IllegalStateException, NullPointerException
 	{
 		if (world == null) throw new NullPointerException(NAME_FULL_WORLD + SPACE_WASNT_SET);
 		World ret = Bukkit.getWorld(world);
@@ -659,7 +705,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return ret;
 	}
 	
-	public static Block asBukkitBlock(PS ps) throws IllegalStateException
+	public static @NotNull Block asBukkitBlock(@NotNull PS ps) throws IllegalStateException
 	{
 		World world = ps.asBukkitWorld();
 		
@@ -675,7 +721,8 @@ public final class PS implements Serializable, Comparable<PS>
 		return world.getBlockAt(blockX, blockY, blockZ);
 	}
 	
-	public static Location asBukkitLocation(PS ps) throws IllegalStateException
+	@Contract("_ -> new")
+	public static @NotNull Location asBukkitLocation(@NotNull PS ps) throws IllegalStateException
 	{
 		World world = ps.asBukkitWorld();
 		
@@ -697,7 +744,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return new Location(world, locationX, locationY, locationZ, yaw, pitch);
 	}
 	
-	public static Chunk asBukkitChunk(PS ps) throws IllegalStateException
+	public static @NotNull Chunk asBukkitChunk(@NotNull PS ps) throws IllegalStateException
 	{
 		World world = ps.asBukkitWorld();
 		
@@ -710,7 +757,8 @@ public final class PS implements Serializable, Comparable<PS>
 		return world.getChunkAt(chunkX, chunkZ);
 	}
 	
-	public static Vector asBukkitVelocity(PS ps) throws IllegalStateException
+	@Contract("_ -> new")
+	public static @NotNull Vector asBukkitVelocity(@NotNull PS ps) throws IllegalStateException
 	{
 		Double velocityX = ps.getVelocityX();
 		if (velocityX == null) throw new IllegalStateException(NAME_FULL_VELOCITYX + SPACE_WASNT_SET);
@@ -728,6 +776,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// ASSORTED
 	// -------------------------------------------- //
 	
+	@Contract("null -> null; !null -> !null")
 	public static String calcWorldName(World world)
 	{
 		if (world == null) return null;
@@ -737,6 +786,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// Because of something in the physics engine players actually
 	// have a small negative velocityY even when standing still.
 	// We remove this redundant small negative value.
+	@Contract(value = "null -> null", pure = true)
 	public static Double trimEntityVelocityY(Double velocityY)
 	{
 		if (velocityY == null) return null;
@@ -755,12 +805,12 @@ public final class PS implements Serializable, Comparable<PS>
 		return this.toString(PSFormatFormal.get());
 	}
 	
-	public String toString(PSFormat format)
+	public String toString(@NotNull PSFormat format)
 	{
 		return format.format(this);
 	}
 	
-	public static String toString(PS ps, PSFormat format)
+	public static String toString(PS ps, @NotNull PSFormat format)
 	{
 		return format.format(ps);
 	}
@@ -769,6 +819,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// PARTIAL COMPARES
 	// -------------------------------------------- //
 	
+	@Contract("null, _ -> null; !null, null -> null")
 	public static Double locationDistanceSquared(PS one, PS two)
 	{
 		if (one == null) return null;
@@ -800,13 +851,14 @@ public final class PS implements Serializable, Comparable<PS>
 		return Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2);
 	}
 	
-	public static Double locationDistance(PS one, PS two)
+	public static @Nullable Double locationDistance(PS one, PS two)
 	{
 		Double ret = locationDistanceSquared(one, two);
 		if (ret == null) return null;
 		return Math.sqrt(ret);
 	}
 	
+	@Contract("null, _ -> false; !null, null -> false")
 	public static boolean inSameWorld(PS one, PS two)
 	{
 		if (one == null) return false;
@@ -821,6 +873,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return w1.equalsIgnoreCase(w2);
 	}
 	
+	@Contract("null, _, _ -> false; !null, null, _ -> false")
 	public static boolean inSameUniverse(PS one, PS two, Multiverse multiverse)
 	{
 		if (one == null) return false;
@@ -838,7 +891,8 @@ public final class PS implements Serializable, Comparable<PS>
 		return m1.equalsIgnoreCase(m2);
 	}
 
-	public static boolean inSameUniverse(PS one, PS two, Aspect aspect)
+	@Contract("null, _, _ -> false; !null, null, _ -> false")
+	public static boolean inSameUniverse(PS one, PS two, @NotNull Aspect aspect)
 	{
 		return inSameUniverse(one, two, aspect.getMultiverse());
 	}
@@ -847,7 +901,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// GET SETS
 	// -------------------------------------------- //
 	
-	public static Set<PS> getDistinctChunks(Collection<PS> pss)
+	public static @NotNull Set<PS> getDistinctChunks(@NotNull Collection<PS> pss)
 	{
 		Set<PS> ret = new MassiveSet<>();
 		for (PS ps : pss)
@@ -857,7 +911,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return ret;
 	}
 	
-	public static Set<String> getDistinctWorlds(Collection<PS> pss)
+	public static @NotNull Set<String> getDistinctWorlds(@NotNull Collection<PS> pss)
 	{
 		Set<String> ret = new MassiveSet<>();
 		for (PS ps : pss)
@@ -890,7 +944,7 @@ public final class PS implements Serializable, Comparable<PS>
 		return PS.calcHashCode(this);
 	}
 	
-	public static int calcHashCode(PS ps)
+	public static int calcHashCode(@NotNull PS ps)
 	{
 		return Objects.hash(
 			ps.world,
@@ -943,7 +997,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// -------------------------------------------- //
 	
 	@Override
-	public int compareTo(PS that)
+	public int compareTo(@NotNull PS that)
 	{
 		return ComparatorSmart.get().compare(
 			this.world, that.world,

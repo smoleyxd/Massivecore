@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore;
 
+import org.jetbrains.annotations.Contract;
+
 public enum SenderPresence
 {
 	// IMP NOTE: These must be sorted, with the most strict first
@@ -15,15 +17,18 @@ public enum SenderPresence
 	// GET FROM ONLINE VALUE
 	// -------------------------------------------- //
 	
+	@Contract("null -> null")
 	public static SenderPresence fromOnline(Boolean online)
 	{
 		if (online == null) return null;
 		return fromOnline(online.booleanValue());
 	}
 	
+	@Contract(pure = true)
 	public static SenderPresence fromOnline(boolean online)
 	{
 		return online ? ONLINE : OFFLINE;
 	}
 	
 }
+ 

@@ -1,5 +1,7 @@
 package com.massivecraft.massivecore.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.Comparator;
 
@@ -30,7 +32,7 @@ public class MassiveTreeSetDef<E, C extends Comparator<? super E>> extends Massi
 	}
 	
 	@SafeVarargs
-	public MassiveTreeSetDef(Object comparator, E... elements)
+	public MassiveTreeSetDef(Object comparator, E @NotNull ... elements)
 	{
 		super(comparator, elements);
 	}

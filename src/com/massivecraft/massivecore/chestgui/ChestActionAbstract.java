@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ChestActionAbstract implements ChestAction
 {
@@ -12,7 +13,7 @@ public class ChestActionAbstract implements ChestAction
 	// -------------------------------------------- //
 	
 	@Override
-	public boolean onClick(InventoryClickEvent event)
+	public boolean onClick(@NotNull InventoryClickEvent event)
 	{
 		Player player = IdUtil.getAsPlayer(event.getWhoClicked());
 		if (MUtil.isntPlayer(player)) return false;
