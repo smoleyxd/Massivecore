@@ -674,8 +674,8 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		this.getPlugin().log(message);
 		
 		// Differences
-		this.getPlugin().log(Txt.parse("<b>[LastRaw] <r>%s", lastRaw.toString()));
-		this.getPlugin().log(Txt.parse("<b>[CurrentRaw] <r>%s", currentRaw.toString()));
+		this.getPlugin().log(Txt.parse("<b>[LastRaw] <reset>%s", lastRaw.toString().replace('§','&')));
+		this.getPlugin().log(Txt.parse("<b>[CurrentRaw] <reset>%s", currentRaw.toString().replace('§','&')));
 	}
 	
 	@Override
