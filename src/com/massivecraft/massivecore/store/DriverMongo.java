@@ -4,12 +4,13 @@ import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
-import com.massivecraft.massivecore.xlib.mongodb.MongoClient;
-import com.massivecraft.massivecore.xlib.mongodb.MongoClientURI;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoClient;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoClients;
 import com.massivecraft.massivecore.xlib.mongodb.MongoNamespace;
 import com.massivecraft.massivecore.xlib.mongodb.client.FindIterable;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoCollection;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
+import com.massivecraft.massivecore.xlib.mongodb.ConnectionString;
 import com.massivecraft.massivecore.xlib.mongodb.client.model.ReplaceOptions;
 import org.jetbrains.annotations.NotNull;
 
@@ -309,16 +310,16 @@ public class DriverMongo extends DriverAbstract
 	
 	protected MongoDatabase getDbInner(String uri)
 	{
-		MongoClientURI muri = new MongoClientURI(uri);
+		ConnectionString connectionString = new ConnectionString(uri);
 		
 		try
 		{
 			// TODO: Create one of these per collection? Really? Perhaps I should cache.
-			MongoClient mongoClient = new MongoClient(muri);
+			MongoClient mongoClient = MongoClients.create(connectionString);
 			
-			MongoDatabase db = mongoClient.getDatabase(muri.getDatabase());
+			MongoDatabase db = mongoClient.getDatabase(connectionString.getDatabase());
 			
-			if (muri.getUsername() == null) return db;
+			if (connectionString.getUsername() == null) return db;
 
 			return db;
 		}
