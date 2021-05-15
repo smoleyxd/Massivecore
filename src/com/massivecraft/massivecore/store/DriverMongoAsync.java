@@ -86,12 +86,19 @@ public class DriverMongoAsync extends DriverAbstract
 	@Override
 	public Set<String> getCollnames(Db db)
 	{
-		Set<String> collNames = db.getCollnames();
+		// Subscribe and get...
+		ObservableSubscriber<String> subscriber = new ObservableSubscriber<>();
+		((DbMongoAsync) db).db.listCollectionNames().subscribe(subscriber);
+		Set<String> collNames = new HashSet<>(subscriber.get());
 		
+		// Build set...
 		Set<String> ret = new HashSet<>(collNames);
 		
+		// Filter...
 		ret.remove("system.indexes");
 		ret.remove("system.users");
+		
+		// Return
 		return ret;
 	}
 	
