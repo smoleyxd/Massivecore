@@ -1,4 +1,4 @@
-package com.massivecraft.massivecore.store.subscribers;
+package com.massivecraft.massivecore.store.subscriber;
 
 public class PrintToStringSubscriber<T> extends ConsumerSubscriber<T>
 {

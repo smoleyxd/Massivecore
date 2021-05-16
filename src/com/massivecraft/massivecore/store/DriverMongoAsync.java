@@ -2,7 +2,7 @@ package com.massivecraft.massivecore.store;
 
 import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.collections.MassiveMap;
-import com.massivecraft.massivecore.store.subscribers.ObservableSubscriber;
+import com.massivecraft.massivecore.store.subscriber.ObservableSubscriber;
 import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.mongodb.ConnectionString;
@@ -47,7 +47,7 @@ public class DriverMongoAsync extends DriverAbstract
 	
 	protected static DriverMongoAsync i = new DriverMongoAsync();
 	public static DriverMongoAsync get() { return i; }
-	DriverMongoAsync() { super("mongodbasync"); }
+	DriverMongoAsync() { super("asyncmongodb"); }
 	
 	// -------------------------------------------- //
 	// IMPLEMENTATION
@@ -63,7 +63,7 @@ public class DriverMongoAsync extends DriverAbstract
 	@Override
 	public boolean dropDb(Db db)
 	{
-		// If the db isnt a mongo db...
+		// If the db is a mongo db...
 		if (!(db instanceof DbMongoAsync)) throw new IllegalArgumentException("db");
 		
 		// Cast to mongo db...
@@ -74,7 +74,9 @@ public class DriverMongoAsync extends DriverAbstract
 			// Subscribe and await...
 			ObservableSubscriber subscriber = new ObservableSubscriber();
 			dbMongo.db.drop().subscribe(subscriber);
+			if (subscriber.getError() != null) throw subscriber.getError();
 			subscriber.await();
+			
 			return true;
 		}
 		catch (Exception e)
@@ -89,6 +91,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and get...
 		ObservableSubscriber<String> subscriber = new ObservableSubscriber<>();
 		((DbMongoAsync) db).db.listCollectionNames().subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		Set<String> collNames = new HashSet<>(subscriber.get());
 		
 		// Build set...
@@ -117,6 +120,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and rename...
 		ObservableSubscriber subscriber = new ObservableSubscriber();
 		mdb.getCollection(from).renameCollection(new MongoNamespace(mdb.getName(), to)).subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		subscriber.await();
 		
 		return true;
@@ -131,6 +135,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find(new Document(ID_FIELD, id)).first().subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		List<Document> documents = subscriber.get();
 		
 		// If it isnt 0, must contain the document
@@ -146,6 +151,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find(new Document(ID_FIELD, id)).projection(dboKeysMtime).first().subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		List<Document> documents = subscriber.get();
 		
 		// If doesnt = 0...
@@ -189,6 +195,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find().projection(dboKeysId).subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		List<Document> found = subscriber.get();
 		
 		// Get the ids of the documents...
@@ -212,6 +219,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find().projection(dboKeysIdandMtime).subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		List<Document> found = subscriber.get();
 		
 		ret = new HashMap<>(found.size());
@@ -244,6 +252,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find(new Document(ID_FIELD, id)).first().subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		if (subscriber.get().size() == 0) return null;
 		Document raw = subscriber.get().get(0);
 		
@@ -263,6 +272,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and find...
 		ObservableSubscriber<Document> subscriber = new ObservableSubscriber<>();
 		dbcoll.find().subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		List<Document> found = subscriber.get();
 		
 		// Create Ret
@@ -336,6 +346,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscibe and replace...
 		ObservableSubscriber<UpdateResult> subscriber = new ObservableSubscriber<>();
 		dbcoll.replaceOne(new Document(ID_FIELD, id), doc, replaceOptions).subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		subscriber.await();
 		
 		// Return the mtime
@@ -354,6 +365,7 @@ public class DriverMongoAsync extends DriverAbstract
 		// Subscribe and delete
 		ObservableSubscriber<DeleteResult> subscriber = new ObservableSubscriber<>();
 		dbcoll.deleteOne(new Document(ID_FIELD, id)).subscribe(subscriber);
+		if (subscriber.getError() != null) throw subscriber.getError();
 		subscriber.await();
 	}
 	

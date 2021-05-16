@@ -1,4 +1,4 @@
-package com.massivecraft.massivecore.store.subscribers;
+package com.massivecraft.massivecore.store.subscriber;
 
 import com.massivecraft.massivecore.xlib.reactivestreams.Subscription;
 

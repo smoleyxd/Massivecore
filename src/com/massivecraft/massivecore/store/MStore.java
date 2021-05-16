@@ -38,8 +38,7 @@ public class MStore
 		// TODO: There has to be a better way to do this?
 		//  If you just specify in the URI mongodb+srv,
 		//  it defaults to sync even if async is selected.
-		if (ConfServer.dburi.equals("mongodbasync") &&
-				id.contains("srv"))
+		if (ConfServer.dburi.equals("mongodbasync"))
 			return drivers.get("async" + id);
 		return drivers.get(id);
 	}
