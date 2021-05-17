@@ -379,6 +379,11 @@ public class DriverMongoAsync extends DriverAbstract
 		return (MongoCollection<Document>) coll.getCollDriverObject();
 	}
 	
+	// TODO: This seems to be a SPoF...
+	//  Essentially, if the connection fails to the Db,
+	//  say, the MongoDB server goes down,
+	//  it hangs the thread as the connection is made in sync
+	//  while everything else like getting data is actually async
 	protected MongoDatabase getDbInner(String uri)
 	{
 		ConnectionString muri = new ConnectionString(uri);
