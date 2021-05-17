@@ -2,7 +2,7 @@ package com.massivecraft.massivecore.store;
 
 import com.massivecraft.massivecore.xlib.mongodb.reactivestreams.client.MongoDatabase;
 
-public class DbMongoAsync extends DbAbstract
+public class DbReactiveStreams extends DbAbstract
 {
 	
 	// -------------------------------------------- //
@@ -11,14 +11,14 @@ public class DbMongoAsync extends DbAbstract
 	
 	public MongoDatabase db;
 	
-	protected DriverMongoAsync driver;
-	@Override public DriverMongoAsync getDriver() { return driver; }
+	protected DriverReactiveStreams driver;
+	@Override public DriverReactiveStreams getDriver() { return driver; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCTORS
 	// -------------------------------------------- //
 	
-	public DbMongoAsync(DriverMongoAsync driver, MongoDatabase db)
+	public DbReactiveStreams(DriverReactiveStreams driver, MongoDatabase db)
 	{
 		this.driver = driver;
 		this.db = db;

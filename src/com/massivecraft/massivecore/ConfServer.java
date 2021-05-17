@@ -31,7 +31,7 @@ public class ConfServer extends SimpleConfig
 		"default", "flatfile",
 		"flatfile", "flatfile://mstore",
 		"mongodb", "mongodb://localhost:27017/mstore",
-		"mongodbasync", "mongodb://localhost:27017/mstore"
+		"reactivestreams", "mongodb://localhost:27017/mstore"
 	);
 	
 }

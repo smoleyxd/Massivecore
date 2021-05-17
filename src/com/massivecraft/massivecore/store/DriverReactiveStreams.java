@@ -23,9 +23,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
-public class DriverMongoAsync extends DriverAbstract
+public class DriverReactiveStreams extends DriverAbstract
 {
 	
 	// -------------------------------------------- //
@@ -41,13 +42,15 @@ public class DriverMongoAsync extends DriverAbstract
 	
 	public final static ReplaceOptions replaceOptions = new ReplaceOptions().upsert(true);
 	
+	private MongoDatabase db = null;
+	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	protected static DriverMongoAsync i = new DriverMongoAsync();
-	public static DriverMongoAsync get() { return i; }
-	DriverMongoAsync() { super("asyncmongodb"); }
+	protected static DriverReactiveStreams i = new DriverReactiveStreams();
+	public static DriverReactiveStreams get() { return i; }
+	DriverReactiveStreams() { super("reactivestreams"); }
 	
 	// -------------------------------------------- //
 	// IMPLEMENTATION
@@ -56,18 +59,21 @@ public class DriverMongoAsync extends DriverAbstract
 	@Override
 	public Db getDb(String uri)
 	{
-		MongoDatabase db = this.getDbInner(uri);
-		return new DbMongoAsync(this, db);
+		ConnectionString muri = new ConnectionString(uri);
+		if (this.db == null) this.db = this.getDbInner(muri); // First set, cache for speed
+		MongoDatabase db = this.db;
+		if (!Objects.equals(muri.getDatabase(), this.db.getName())) db = this.getDbInner(muri);
+		return new DbReactiveStreams(this, db);
 	}
 	
 	@Override
 	public boolean dropDb(Db db)
 	{
 		// If the db is a mongo db...
-		if (!(db instanceof DbMongoAsync)) throw new IllegalArgumentException("db");
+		if (!(db instanceof DbReactiveStreams)) throw new IllegalArgumentException("db");
 		
 		// Cast to mongo db...
-		DbMongoAsync dbMongo = (DbMongoAsync) db;
+		DbReactiveStreams dbMongo = (DbReactiveStreams) db;
 		
 		try
 		{
@@ -89,7 +95,7 @@ public class DriverMongoAsync extends DriverAbstract
 	{
 		// Subscribe and get...
 		ObservableSubscriber<String> subscriber = new ObservableSubscriber<>();
-		((DbMongoAsync) db).db.listCollectionNames().subscribe(subscriber);
+		((DbReactiveStreams) db).db.listCollectionNames().subscribe(subscriber);
 		Set<String> collNames = new HashSet<>(subscriber.get());
 		
 		// Build set...
@@ -113,7 +119,7 @@ public class DriverMongoAsync extends DriverAbstract
 		if (this.getCollnames(db).contains(to)) return false;
 		
 		// Get the database...
-		MongoDatabase mdb = ((DbMongoAsync) db).db;
+		MongoDatabase mdb = ((DbReactiveStreams) db).db;
 		
 		// Subscribe and rename...
 		ObservableSubscriber subscriber = new ObservableSubscriber();
@@ -379,18 +385,10 @@ public class DriverMongoAsync extends DriverAbstract
 		return (MongoCollection<Document>) coll.getCollDriverObject();
 	}
 	
-	// TODO: This seems to be a SPoF...
-	//  Essentially, if the connection fails to the Db,
-	//  say, the MongoDB server goes down,
-	//  it hangs the thread as the connection is made in sync
-	//  while everything else like getting data is actually async
-	protected MongoDatabase getDbInner(String uri)
+	protected MongoDatabase getDbInner(ConnectionString muri)
 	{
-		ConnectionString muri = new ConnectionString(uri);
-		
 		try
 		{
-			// TODO: Create one of these per collection? Really? Perhaps I should cache.
 			MongoClient mongoClient = MongoClients.create(muri);
 			MongoDatabase db = mongoClient.getDatabase(muri.getDatabase());
 			

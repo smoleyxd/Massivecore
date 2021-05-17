@@ -37,18 +37,20 @@ public class MStore
 	{
 		// TODO: There has to be a better way to do this?
 		//  If you just specify in the URI mongodb+srv,
-		//  it defaults to sync even if async is selected.
-		if (ConfServer.dburi.equals("mongodbasync"))
-			return drivers.get("async" + id);
+		//  it defaults to sync even if reactivestreams is selected.
+		if (ConfServer.dburi.equals("reactivestreams") &&
+		id.contains("+srv")) return drivers.get("reactivestreams+srv");
+		if (ConfServer.dburi.equals("reactivestreams"))
+			return drivers.get("reactivestreams");
 		return drivers.get(id);
 	}
 	
 	static
 	{
 		registerDriver(DriverMongo.get());
-		registerDriver(DriverMongoAsync.get());
+		registerDriver(DriverReactiveStreams.get());
 		registerDriver(DriverMongoSrv.get());
-		registerDriver(DriverMongoAsyncSrv.get());
+		registerDriver(DriverReactiveStreamsSrv.get());
 		registerDriver(DriverFlatfile.get());
 	}
 	
