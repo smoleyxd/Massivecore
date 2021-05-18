@@ -78,9 +78,7 @@ public class DriverReactiveStreams extends DriverAbstract
 		try
 		{
 			// Subscribe and await...
-			ObservableSubscriber subscriber = new ObservableSubscriber();
-			dbMongo.db.drop().subscribe(subscriber);
-			subscriber.await();
+			dbMongo.db.drop().subscribe(new ObservableSubscriber<>());
 			
 			return true;
 		}
@@ -122,9 +120,7 @@ public class DriverReactiveStreams extends DriverAbstract
 		MongoDatabase mdb = ((DbReactiveStreams) db).db;
 		
 		// Subscribe and rename...
-		ObservableSubscriber subscriber = new ObservableSubscriber();
-		mdb.getCollection(from).renameCollection(new MongoNamespace(mdb.getName(), to)).subscribe(subscriber);
-		subscriber.await();
+		mdb.getCollection(from).renameCollection(new MongoNamespace(mdb.getName(), to)).subscribe(new ObservableSubscriber<>());
 		
 		return true;
 	}
@@ -341,9 +337,7 @@ public class DriverReactiveStreams extends DriverAbstract
 		GsonMongoConverter.gson2MongoObject(data, doc);
 		
 		// Subscibe and replace...
-		ObservableSubscriber<UpdateResult> subscriber = new ObservableSubscriber<>();
-		dbcoll.replaceOne(new Document(ID_FIELD, id), doc, replaceOptions).subscribe(subscriber);
-		subscriber.await();
+		dbcoll.replaceOne(new Document(ID_FIELD, id), doc, replaceOptions).subscribe(new ObservableSubscriber<>());
 		
 		// Return the mtime
 		return mtime;
@@ -359,9 +353,7 @@ public class DriverReactiveStreams extends DriverAbstract
 		dbcoll = dbcoll.withWriteConcern(MassiveCoreMConf.get().getMongoDbWriteConcernDelete());
 		
 		// Subscribe and delete
-		ObservableSubscriber<DeleteResult> subscriber = new ObservableSubscriber<>();
-		dbcoll.deleteOne(new Document(ID_FIELD, id)).subscribe(subscriber);
-		subscriber.await();
+		dbcoll.deleteOne(new Document(ID_FIELD, id)).subscribe(new ObservableSubscriber<>());
 	}
 	
 	@Override
