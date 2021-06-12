@@ -2,7 +2,14 @@ package com.massivecraft.massivecore.adapter;
 
 import com.massivecraft.massivecore.store.EntityInternal;
 import com.massivecraft.massivecore.store.EntityInternalMap;
-import com.massivecraft.massivecore.xlib.gson.*;
+import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
+import com.massivecraft.massivecore.xlib.gson.JsonDeserializer;
+import com.massivecraft.massivecore.xlib.gson.JsonElement;
+import com.massivecraft.massivecore.xlib.gson.JsonNull;
+import com.massivecraft.massivecore.xlib.gson.JsonObject;
+import com.massivecraft.massivecore.xlib.gson.JsonParseException;
+import com.massivecraft.massivecore.xlib.gson.JsonSerializationContext;
+import com.massivecraft.massivecore.xlib.gson.JsonSerializer;
 import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.ParameterizedType;

@@ -1,9 +1,9 @@
 package com.massivecraft.massivecore.chestgui;
 
+import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.SoundEffect;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveMap;
-import com.massivecraft.massivecore.MassiveCoreMConf;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;

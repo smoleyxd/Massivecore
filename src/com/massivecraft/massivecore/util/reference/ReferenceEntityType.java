@@ -1,6 +1,5 @@
 package com.massivecraft.massivecore.util.reference;
 
-import com.massivecraft.massivecore.collections.BackstringSet;
 import org.bukkit.entity.EntityType;
 
 import java.util.Set;
