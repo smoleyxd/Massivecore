@@ -28,10 +28,14 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	// -------------------------------------------- //
 	
 	// net.minecraft.server.level.WorldServer
-	private Class<?> classNmsEntityLookup;
+	private Class<?> classNmsWorldServer;
 	
 	// net.minecraft.server.level.WorldServer#entitiesByUUID
-	private Field fieldNmsEntityLookupC;
+	private Field fieldNmsWorldServerG;
+	
+	private Class<?> classNmsPersistentEntitySectionManager;
+	
+	private Method classNmsPersistentEntitySectionManagerD;
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -42,8 +46,10 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	{
 		NmsBasics.get().require();
 		
-		this.classNmsEntityLookup = PackageType.MINECRAFT_WORLD_LEVEL_ENTITY.getClass("EntityLookup");
-		this.fieldNmsEntityLookupC = ReflectionUtil.getField(this.classNmsEntityLookup, "c");
+		this.classNmsWorldServer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("WorldServer");
+		this.fieldNmsWorldServerG = ReflectionUtil.getField(this.classNmsWorldServer, "G");
+		this.classNmsPersistentEntitySectionManager = ReflectionUtil.getField(fieldNmsWorldServerG, null).getClass();
+		this.classNmsPersistentEntitySectionManagerD = ReflectionUtil.getMethod(classNmsPersistentEntitySectionManager, "d");
 	}
 	
 	// -------------------------------------------- //
@@ -89,7 +95,7 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	{
 		if (handle == null) throw new NullPointerException("handle");
 		
-		return ReflectionUtil.getField(this.fieldNmsEntityLookupC, handle);
+		return ReflectionUtil.getField(this.fieldNmsWorldServerG, handle);
 	}
 	
 	@Contract("null -> fail")

@@ -89,15 +89,15 @@ public class NmsChat117R1P extends NmsChat
 		
 		// Title times
 		this.classTitleAnimationPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitlesAnimationPacket");
-		this.constructorTitleAnimationPacket = ReflectionUtil.getConstructor(int.class, int.class, int.class);
+		this.constructorTitleAnimationPacket = ReflectionUtil.getConstructor(classTitleAnimationPacket, int.class, int.class, int.class);
 		
 		// Title main text
 		this.classTitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitleTextPacket"); //
-		this.constructorTitleTextPacket = ReflectionUtil.getConstructor(this.classIChatBaseComponent);
+		this.constructorTitleTextPacket = ReflectionUtil.getConstructor(classTitleTextPacket, this.classIChatBaseComponent);
 		
 		// Title subtitle text
 		this.classTitleSubtitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetSubtitleTextPacket");
-		this.constructorTitleSubtitleTextPacket = ReflectionUtil.getConstructor(this.classIChatBaseComponent);
+		this.constructorTitleSubtitleTextPacket = ReflectionUtil.getConstructor(classTitleSubtitleTextPacket, this.classIChatBaseComponent);
 		
 		// Get Chat packet and it's constructor
 		this.classPacketPlayOutChat = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("PacketPlayOutChat");
@@ -152,7 +152,6 @@ public class NmsChat117R1P extends NmsChat
 		
 		Object component;
 		Object packet;
-		Enum<?> action;
 		
 		// in, stay, out
 		packet = ReflectionUtil.invokeConstructor(this.constructorTitleAnimationPacket, ticksIn, ticksStay, ticksOut);
