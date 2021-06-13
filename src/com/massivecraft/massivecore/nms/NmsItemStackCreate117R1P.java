@@ -8,21 +8,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class NmsItemStackCreate17R4P extends NmsItemStackCreate
+public class NmsItemStackCreate117R1P extends NmsItemStackCreate
 {
+	
 	// -------------------------------------------- //
-	// INSTANCE & CONSTRUCT
+	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static NmsItemStackCreate17R4P i = new NmsItemStackCreate17R4P();
-	public static NmsItemStackCreate17R4P get () { return i; }
+	private static NmsItemStackCreate117R1P i = new NmsItemStackCreate117R1P();
+	public static NmsItemStackCreate117R1P get () { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// net.minecraft.server.ItemStack
+	// net.minecraft.world.item.ItemStack
 	private Class<?> classNmsItemStack;
 	
 	// org.bukkit.craftbukkit.inventory.CraftItemStack
@@ -65,7 +65,7 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 		}
 		else
 		{
-			return PackageType.MINECRAFT_SERVER_VERSION.getClass("ItemStack");
+			return PackageType.MINECRAFT_WORLD_ITEM.getClass("ItemStack");
 		}
 	}
 	

@@ -37,11 +37,11 @@ public class NmsChat116R1P extends NmsChatAbstract
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classChatSerializer = PackageType.MINECRAFT_SERVER.getClass("IChatBaseComponent$ChatSerializer");
+		this.classChatSerializer = PackageType.MINECRAFT_SERVER_VERSION.getClass("IChatBaseComponent$ChatSerializer");
 		this.methodChatSerializer = ReflectionUtil.getMethod(this.classChatSerializer, "a", String.class);
-		this.classEnumTitleAction = PackageType.MINECRAFT_SERVER.getClass("PacketPlayOutTitle$EnumTitleAction");
+		this.classEnumTitleAction = PackageType.MINECRAFT_SERVER_VERSION.getClass("PacketPlayOutTitle$EnumTitleAction");
 		
-		this.classChatMessageType = PackageType.MINECRAFT_SERVER.getClass("ChatMessageType");
+		this.classChatMessageType = PackageType.MINECRAFT_SERVER_VERSION.getClass("ChatMessageType");
 		
 		setupCommon();
 		
@@ -68,16 +68,16 @@ public class NmsChat116R1P extends NmsChatAbstract
 			else if (e.name().equalsIgnoreCase("TIMES")) this.enumEnumTitleActionTimes = e;
 		}
 		
-		this.classIChatBaseComponent = PackageType.MINECRAFT_SERVER.getClass("IChatBaseComponent");
+		this.classIChatBaseComponent = PackageType.MINECRAFT_SERVER_VERSION.getClass("IChatBaseComponent");
 		
 		// Get title packet and it's constructor
-		this.classPacketPlayOutTitle = PackageType.MINECRAFT_SERVER.getClass("PacketPlayOutTitle");
+		this.classPacketPlayOutTitle = PackageType.MINECRAFT_SERVER_VERSION.getClass("PacketPlayOutTitle");
 		this.constructorPacketPlayOutTitle = ReflectionUtil.getConstructor(this.classPacketPlayOutTitle, this.classEnumTitleAction, this.classIChatBaseComponent);
 		
 		this.constructorPacketPlayOutTitleTimes = ReflectionUtil.getConstructor(this.classPacketPlayOutTitle, this.classEnumTitleAction, this.classIChatBaseComponent, int.class, int.class, int.class);
 		
 		// Get Chat packet and it's constructor
-		this.classPacketPlayOutChat = PackageType.MINECRAFT_SERVER.getClass("PacketPlayOutChat");
+		this.classPacketPlayOutChat = PackageType.MINECRAFT_SERVER_VERSION.getClass("PacketPlayOutChat");
 		
 		// 1.16 Constructor Params changes
 		this.constructorPacketPlayOutChat = ReflectionUtil.getConstructor(this.classPacketPlayOutChat, this.classIChatBaseComponent, this.classChatMessageType, UUID.class);

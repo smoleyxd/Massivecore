@@ -39,7 +39,7 @@ public class NmsPermissions17R4P extends NmsPermissions
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classCraftHumanEntity = PackageType.CRAFTBUKKIT_ENTITY.getClass("CraftHumanEntity");
+		this.classCraftHumanEntity = PackageType.CRAFTBUKKIT_VERSION_ENTITY.getClass("CraftHumanEntity");
 		this.fieldCraftHumanEntityBase = ReflectionUtil.getField(this.classCraftHumanEntity, "perm");
 		
 		this.fieldPermissibleBaseAttachments = ReflectionUtil.getField(PermissibleBase.class, "attachments");

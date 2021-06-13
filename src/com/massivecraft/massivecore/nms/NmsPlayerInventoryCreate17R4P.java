@@ -34,11 +34,11 @@ public class NmsPlayerInventoryCreate17R4P extends NmsPlayerInventoryCreate
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classNmsPlayerInventory = ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("PlayerInventory");
-		this.classNmsEntityHuman = ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("EntityHuman");
+		this.classNmsPlayerInventory = ReflectionUtils.PackageType.MINECRAFT_SERVER_VERSION.getClass("PlayerInventory");
+		this.classNmsEntityHuman = ReflectionUtils.PackageType.MINECRAFT_SERVER_VERSION.getClass("EntityHuman");
 		this.constructorNmsPlayerInventory = ReflectionUtils.getConstructor(this.classNmsPlayerInventory, this.classNmsEntityHuman);
 		
-		this.classCraftInventoryPlayer = ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftInventoryPlayer");
+		this.classCraftInventoryPlayer = ReflectionUtils.PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftInventoryPlayer");
 		this.constructorCraftInventoryPlayer = ReflectionUtils.getConstructor(this.classCraftInventoryPlayer, this.classNmsPlayerInventory);
 	}
 	

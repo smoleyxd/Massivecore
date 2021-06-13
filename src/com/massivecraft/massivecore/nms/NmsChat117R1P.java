@@ -5,55 +5,53 @@ import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.UUID;
 
-public abstract class NmsChatAbstract extends NmsChat
+public class NmsChat117R1P extends NmsChat
 {
+	
+	// -------------------------------------------- //
+	// INSTANCE & CONSTRUCT
+	// -------------------------------------------- //
+	
+	private static NmsChat117R1P i = new NmsChat117R1P();
+	public static NmsChat117R1P get() { return i; }
+	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// EnumTitleAction
-	protected Class<?> classEnumTitleAction;
-	protected Enum<?> enumEnumTitleActionMain;
-	protected Enum<?> enumEnumTitleActionSub;
-	protected Enum<?> enumEnumTitleActionTimes;
-
 	// ChatSerializer
 	protected Class<?> classChatSerializer;
 	protected Method methodChatSerializer;
 	
 	// IChatBaseComponent
 	protected Class<?> classIChatBaseComponent;
-
-	// PacketPlayOutTitle
-	protected Class<?> classPacketPlayOutTitle;
-	protected Constructor<?> constructorPacketPlayOutTitle;
-	protected Constructor<?> constructorPacketPlayOutTitleTimes;
-
+	
 	// PacketPlayOutChat
 	protected Class<?> classPacketPlayOutChat;
 	protected Constructor<?> constructorPacketPlayOutChat;
 	protected Constructor<?> constructorPacketPlayOutChatType;
 	
-	// -------------------------------------------- //
-	// PROVOKE
-	// -------------------------------------------- //
+	// PacketPlayOutTitle
+	protected Class<?> classTitleAnimationPacket;
+	protected Class<?> classTitleTextPacket;
+	protected Class<?> classTitleSubtitleTextPacket;
+	protected Constructor<?> constructorTitleAnimationPacket;
+	protected Constructor<?> constructorTitleTextPacket;
+	protected Constructor<?> constructorTitleSubtitleTextPacket;
 	
-	@Override
-	public Class<ArmorStand> provoke() throws Throwable
-	{
-		// Require NmsBasics
-		NmsBasics.get().require();
-				
-		// Require 1.8
-		return ArmorStand.class;
-	}
+	protected Class<?> classChatMessageType;
+	
+	protected Enum<?> enumChatMessageTypeGameInfo;
+	protected Enum<?> enumChatMessageTypeSystem;
+	
+	protected UUID systemUUID = new UUID(0,0);
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -62,39 +60,56 @@ public abstract class NmsChatAbstract extends NmsChat
 	@Override
 	public void setup() throws Throwable
 	{
-		throw notImplemented();
+		this.classChatSerializer = PackageType.MINECRAFT_NETWORK_CHAT.getClass("IChatBaseComponent$ChatSerializer");
+		this.methodChatSerializer = ReflectionUtil.getMethod(this.classChatSerializer, "a", String.class);
+		this.classTitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitleTextPacket");
+		this.classTitleSubtitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetSubtitleTextPacket");
+		this.classTitleAnimationPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitlesAnimationPacket");
+		
+		this.classChatMessageType = PackageType.MINECRAFT_NETWORK_CHAT.getClass("ChatMessageType");
+		
+		setupCommon();
+		
+		this.enumChatMessageTypeSystem = (Enum<?>) this.classChatMessageType.getEnumConstants()[1];
+		this.enumChatMessageTypeGameInfo = (Enum<?>) this.classChatMessageType.getEnumConstants()[2];
+		// CHAT(0),
+		// SYSTEM(1),
+		// GAME_INFO(2);
+		this.constructorPacketPlayOutChatType = ReflectionUtil.getConstructor(this.classPacketPlayOutChat, this.classIChatBaseComponent, this.classChatMessageType, UUID.class);
 	}
 	
 	// -------------------------------------------- //
 	// SETUP COMMON
 	// -------------------------------------------- //
 	
-	protected void setupCommon() throws Throwable {
-		for (Object object : this.classEnumTitleAction.getEnumConstants())
-		{
-			Enum<?> e = (Enum<?>) object;
-			if (e.name().equalsIgnoreCase("TITLE")) this.enumEnumTitleActionMain = e;
-			else if (e.name().equalsIgnoreCase("SUBTITLE")) this.enumEnumTitleActionSub = e;
-			else if (e.name().equalsIgnoreCase("TIMES")) this.enumEnumTitleActionTimes = e;
-		}
+	protected void setupCommon() throws Throwable
+	{
 		
-		this.classIChatBaseComponent = PackageType.MINECRAFT_SERVER_VERSION.getClass("IChatBaseComponent");
+		this.classIChatBaseComponent = PackageType.MINECRAFT_NETWORK_CHAT.getClass("IChatBaseComponent");
 		
-		// Get title packet and it's constructor
-		this.classPacketPlayOutTitle = PackageType.MINECRAFT_SERVER_VERSION.getClass("PacketPlayOutTitle");
-		this.constructorPacketPlayOutTitle = ReflectionUtil.getConstructor(this.classPacketPlayOutTitle, this.classEnumTitleAction, this.classIChatBaseComponent);
+		// Title times
+		this.classTitleAnimationPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitlesAnimationPacket");
+		this.constructorTitleAnimationPacket = ReflectionUtil.getConstructor(int.class, int.class, int.class);
 		
-		this.constructorPacketPlayOutTitleTimes = ReflectionUtil.getConstructor(this.classPacketPlayOutTitle, this.classEnumTitleAction, this.classIChatBaseComponent, int.class, int.class, int.class);
+		// Title main text
+		this.classTitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetTitleTextPacket"); //
+		this.constructorTitleTextPacket = ReflectionUtil.getConstructor(this.classIChatBaseComponent);
+		
+		// Title subtitle text
+		this.classTitleSubtitleTextPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("ClientboundSetSubtitleTextPacket");
+		this.constructorTitleSubtitleTextPacket = ReflectionUtil.getConstructor(this.classIChatBaseComponent);
 		
 		// Get Chat packet and it's constructor
-		this.classPacketPlayOutChat = PackageType.MINECRAFT_SERVER_VERSION.getClass("PacketPlayOutChat");
-		this.constructorPacketPlayOutChat = ReflectionUtil.getConstructor(this.classPacketPlayOutChat, this.classIChatBaseComponent);
+		this.classPacketPlayOutChat = PackageType.MINECRAFT_NETWORK_PROTOCOL_GAME.getClass("PacketPlayOutChat");
+		
+		// 1.16 Constructor Params changes
+		this.constructorPacketPlayOutChat = ReflectionUtil.getConstructor(this.classPacketPlayOutChat, this.classIChatBaseComponent, this.classChatMessageType, UUID.class);
 	}
 	
 	// -------------------------------------------- //
 	// TO COMPONENT
 	// -------------------------------------------- //
-
+	
 	protected Object toComponent(String raw)
 	{
 		return ReflectionUtil.invokeMethod(this.methodChatSerializer, null, raw);
@@ -140,15 +155,14 @@ public abstract class NmsChatAbstract extends NmsChat
 		Enum<?> action;
 		
 		// in, stay, out
-		packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutTitleTimes, this.enumEnumTitleActionTimes, null, ticksIn, ticksStay, ticksOut);
+		packet = ReflectionUtil.invokeConstructor(this.constructorTitleAnimationPacket, ticksIn, ticksStay, ticksOut);
 		NmsBasics.get().sendPacket(player, packet);
-
+		
 		// main
 		if (rawMain != null)
 		{
 			component = toComponent(rawMain);
-			action = this.enumEnumTitleActionMain;
-			packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutTitle, action, component);
+			packet = ReflectionUtil.invokeConstructor(this.constructorTitleTextPacket, component);
 			NmsBasics.get().sendPacket(player, packet);
 		}
 		
@@ -156,8 +170,7 @@ public abstract class NmsChatAbstract extends NmsChat
 		if (rawSub != null)
 		{
 			component = toComponent(rawSub);
-			action = this.enumEnumTitleActionSub;
-			packet = ReflectionUtil.invokeConstructor(constructorPacketPlayOutTitle, action, component);
+			packet = ReflectionUtil.invokeConstructor(this.constructorTitleSubtitleTextPacket, component);
 			NmsBasics.get().sendPacket(player, packet);
 		}
 	}
@@ -180,5 +193,6 @@ public abstract class NmsChatAbstract extends NmsChat
 	public <T> T constructActionBarPacket(Object component) {
 		return ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChatType, component, (byte)2);
 	}
+	
 	
 }

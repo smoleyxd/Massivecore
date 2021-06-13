@@ -16,6 +16,7 @@ public class NmsBasics extends Mixin
 	// -------------------------------------------- //
 	
 	private static NmsBasics d = new NmsBasics().setAlternatives(
+		NmsBasics117R1P.class,
 		NmsBasics17R4P.class
 	);
 	

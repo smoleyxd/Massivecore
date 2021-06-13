@@ -41,6 +41,7 @@ import com.massivecraft.massivecore.mixin.MixinEvent;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.mson.MsonEvent;
 import com.massivecraft.massivecore.nms.NmsBasics;
+import com.massivecraft.massivecore.nms.NmsItemStackCreate;
 import com.massivecraft.massivecore.nms.NmsItemStackCreate17R4P;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.ps.PSAdapter;
@@ -172,7 +173,7 @@ public class MassiveCore extends MassivePlugin
 		
 		// ItemStack
 		ret.registerTypeAdapter(ItemStack.class, AdapterItemStack.get());
-		Class<?> classCraftItemStack = NmsItemStackCreate17R4P.getClassCraftItemStackCatch();
+		Class<?> classCraftItemStack = NmsItemStackCreate.get().getClass();
 		if (classCraftItemStack != null) ret.registerTypeAdapter(classCraftItemStack, AdapterItemStack.get());
 		
 		// Inventory

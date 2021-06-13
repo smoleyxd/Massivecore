@@ -42,11 +42,11 @@ public class NmsPersistentData116R3P extends NmsPersistentData
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classNBTTagCompound = PackageType.MINECRAFT_SERVER.getClass("NBTTagCompound");
+		this.classNBTTagCompound = PackageType.MINECRAFT_SERVER_VERSION.getClass("NBTTagCompound");
 		
-		this.classCraftNBTTagConfigSerializer = PackageType.CRAFTBUKKIT_UTIL.getClass("CraftNBTTagConfigSerializer");
+		this.classCraftNBTTagConfigSerializer = PackageType.CRAFTBUKKIT_VERSION_UTIL.getClass("CraftNBTTagConfigSerializer");
 		
-		this.classCraftPersistentDataContainer = PackageType.CRAFTBUKKIT_PERSISTENCE.getClass("CraftPersistentDataContainer");
+		this.classCraftPersistentDataContainer = PackageType.CRAFTBUKKIT_VERSION_PERSISTENCE.getClass("CraftPersistentDataContainer");
 		
 		this.serializePersistentData = ReflectionUtils.getMethod(classCraftPersistentDataContainer, "serialize");
 		this.deserializeNBT = ReflectionUtils.getMethod(classCraftNBTTagConfigSerializer, "deserialize", Object.class);

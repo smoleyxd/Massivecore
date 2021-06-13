@@ -57,8 +57,8 @@ public class NmsBoard17R4 extends NmsBoard
 	{
 		NmsBasics.get().require();
 		
-		this.classNmsScoreboard = PackageType.MINECRAFT_SERVER.getClass("Scoreboard");
-		this.classNmsScoreboardTeam = PackageType.MINECRAFT_SERVER.getClass("ScoreboardTeam");
+		this.classNmsScoreboard = PackageType.MINECRAFT_SERVER_VERSION.getClass("Scoreboard");
+		this.classNmsScoreboardTeam = PackageType.MINECRAFT_SERVER_VERSION.getClass("ScoreboardTeam");
 		
 		this.methodNmsScoreboardGetTeam = ReflectionUtil.getMethod(this.classNmsScoreboard, "getTeam", String.class);
 		this.methodNmsScoreboardAddPlayerToTeam = ReflectionUtil.getMethod(this.classNmsScoreboard, "addPlayerToTeam", String.class, String.class);
@@ -67,8 +67,8 @@ public class NmsBoard17R4 extends NmsBoard
 					
 		this.methodNmsScoreboardTeamGetPlayerNameSet = ReflectionUtil.getMethod(this.classNmsScoreboardTeam, "getPlayerNameSet");
 		
-		this.classCraftScoreboard = PackageType.CRAFTBUKKIT_SCOREBOARD.getClass("CraftScoreboard");
-		this.classCraftTeam = PackageType.CRAFTBUKKIT_SCOREBOARD.getClass("CraftTeam");
+		this.classCraftScoreboard = PackageType.CRAFTBUKKIT_VERSION_SCOREBOARD.getClass("CraftScoreboard");
+		this.classCraftTeam = PackageType.CRAFTBUKKIT_VERSION_SCOREBOARD.getClass("CraftTeam");
 		this.constructorCraftTeam = ReflectionUtil.getConstructor(this.classCraftTeam, this.classCraftScoreboard, this.classNmsScoreboardTeam);
 	}
 	

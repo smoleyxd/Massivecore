@@ -7,15 +7,15 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class NmsItemStackTooltip18R1P extends NmsItemStackTooltip
+public class NmsItemStackTooltip117R1P extends NmsItemStackTooltip
 {
+	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsItemStackTooltip18R1P i = new NmsItemStackTooltip18R1P();
-	public static NmsItemStackTooltip18R1P get () { return i; }
+	private static NmsItemStackTooltip117R1P i = new NmsItemStackTooltip117R1P();
+	public static NmsItemStackTooltip117R1P get () { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -24,7 +24,7 @@ public class NmsItemStackTooltip18R1P extends NmsItemStackTooltip
 	// org.bukkit.craftbukkit.inventory.CraftItemStack
 	private Class<?> classCraftItemStack;
 	
-	// net.minecraft.server.ItemStack
+	// net.minecraft.world.item.ItemStack
 	private Class<?> classNmsItemStack;
 	
 	// net.minecraft.serverNBTTagCompound
@@ -58,8 +58,8 @@ public class NmsItemStackTooltip18R1P extends NmsItemStackTooltip
 	public void setup() throws Throwable
 	{
 		this.classCraftItemStack = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftItemStack");
-		this.classNmsItemStack = PackageType.MINECRAFT_SERVER_VERSION.getClass("ItemStack");
-		this.classNmsNbtTagCompound = PackageType.MINECRAFT_SERVER_VERSION.getClass("NBTTagCompound");
+		this.classNmsItemStack = PackageType.MINECRAFT_WORLD_ITEM.getClass("ItemStack");
+		this.classNmsNbtTagCompound = PackageType.MINECRAFT_NBT.getClass("NBTTagCompound");
 		
 		this.methodCraftItemStackAsNmsCopy = ReflectionUtil.getMethod(this.classCraftItemStack, "asNMSCopy", ItemStack.class);
 		this.methodNmsItemStackSave = ReflectionUtil.getMethod(this.classNmsItemStack, "save", classNmsNbtTagCompound);

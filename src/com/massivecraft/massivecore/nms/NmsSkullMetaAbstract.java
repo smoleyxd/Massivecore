@@ -72,7 +72,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classCraftMetaSkull = PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftMetaSkull");
+		this.classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
 		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(this.classCraftMetaSkull, "profile");
 		
 		this.classGameProfile = Class.forName(this.getGameProfileClassName());

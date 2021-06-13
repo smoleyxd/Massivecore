@@ -19,9 +19,9 @@ public class NmsChat18R1 extends NmsChatAbstract
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classChatSerializer = PackageType.MINECRAFT_SERVER.getClass("ChatSerializer");
+		this.classChatSerializer = PackageType.MINECRAFT_SERVER_VERSION.getClass("ChatSerializer");
 		this.methodChatSerializer = ReflectionUtil.getMethod(this.classChatSerializer, "a", String.class);
-		this.classEnumTitleAction = PackageType.MINECRAFT_SERVER.getClass("EnumTitleAction");
+		this.classEnumTitleAction = PackageType.MINECRAFT_SERVER_VERSION.getClass("EnumTitleAction");
 		
 		setupCommon();
 		

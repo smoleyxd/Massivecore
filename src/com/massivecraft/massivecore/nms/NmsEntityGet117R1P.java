@@ -8,29 +8,30 @@ import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class NmsEntityGet18R1P extends NmsEntityGet
+public class NmsEntityGet117R1P extends NmsEntityGet
 {
+	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsEntityGet18R1P i = new NmsEntityGet18R1P();
-	public static NmsEntityGet18R1P get () { return i; }
+	private static NmsEntityGet117R1P i = new NmsEntityGet117R1P();
+	public static NmsEntityGet117R1P get () { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// net.minecraft.server.WorldServer
-	private Class<?> classNmsWorldServer;
+	// net.minecraft.server.level.WorldServer
+	private Class<?> classNmsEntityLookup;
 	
-	// net.minecraft.server.WorldServer#entitiesByUUID
-	private Field fieldNmsWorldServerEntitiesByUuid;
+	// net.minecraft.server.level.WorldServer#entitiesByUUID
+	private Field fieldNmsEntityLookupC;
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -41,8 +42,8 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 	{
 		NmsBasics.get().require();
 		
-		this.classNmsWorldServer = PackageType.MINECRAFT_SERVER_VERSION.getClass("WorldServer");
-		this.fieldNmsWorldServerEntitiesByUuid = ReflectionUtil.getField(this.classNmsWorldServer, "entitiesByUUID");
+		this.classNmsEntityLookup = PackageType.MINECRAFT_WORLD_LEVEL_ENTITY.getClass("EntityLookup");
+		this.fieldNmsEntityLookupC = ReflectionUtil.getField(this.classNmsEntityLookup, "c");
 	}
 	
 	// -------------------------------------------- //
@@ -57,7 +58,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 		for (World world : Bukkit.getWorlds())
 		{
 			Entity ret = this.getEntity(world, uuid);
-			if (ret != null) return ret; 
+			if (ret != null) return ret;
 		}
 		
 		return null;
@@ -76,7 +77,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 		
 		return NmsBasics.get().getBukkit(nmsEntity);
 	}
-
+	
 	// -------------------------------------------- //
 	// INTERNAL
 	// -------------------------------------------- //
@@ -88,7 +89,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 	{
 		if (handle == null) throw new NullPointerException("handle");
 		
-		return ReflectionUtil.getField(this.fieldNmsWorldServerEntitiesByUuid, handle);
+		return ReflectionUtil.getField(this.fieldNmsEntityLookupC, handle);
 	}
 	
 	@Contract("null -> fail")
