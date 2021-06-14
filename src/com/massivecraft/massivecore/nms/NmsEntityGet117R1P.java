@@ -30,12 +30,14 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	// net.minecraft.server.level.WorldServer
 	private Class<?> classNmsWorldServer;
 	
-	// net.minecraft.server.level.WorldServer#entitiesByUUID
-	private Field fieldNmsWorldServerG;
+	// net.minecraft.server.level.WorldServer#getEntities()
+	private Method methodNmsWorldServerGetEntities;
 	
-	private Class<?> classNmsPersistentEntitySectionManager;
+	// net.minecraft.world.level.entity.LevelEntityGetter
+	private Class<?> classNmsLevelEntityGetter;
 	
-	private Method classNmsPersistentEntitySectionManagerD;
+	// net.minecraft.world.level.entity.LevelEntityGetter#a(UUID)
+	private Method methodNmsLevelEntityGetterGet;
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -47,9 +49,10 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 		NmsBasics.get().require();
 		
 		this.classNmsWorldServer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("WorldServer");
-		this.fieldNmsWorldServerG = ReflectionUtil.getField(this.classNmsWorldServer, "G");
-		this.classNmsPersistentEntitySectionManager = ReflectionUtil.getField(fieldNmsWorldServerG, null).getClass();
-		this.classNmsPersistentEntitySectionManagerD = ReflectionUtil.getMethod(classNmsPersistentEntitySectionManager, "d");
+		this.methodNmsWorldServerGetEntities = ReflectionUtil.getMethod(this.classNmsWorldServer, "getEntities");
+		
+		this.classNmsLevelEntityGetter = PackageType.MINECRAFT_WORLD_LEVEL_ENTITY.getClass("LevelEntityGetter");
+		this.methodNmsLevelEntityGetterGet = ReflectionUtil.getMethod(this.classNmsLevelEntityGetter, "a", UUID.class);
 	}
 	
 	// -------------------------------------------- //
@@ -76,41 +79,11 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 		if (world == null) throw new NullPointerException("world");
 		if (uuid == null) return null;
 		
-		Map<UUID, Object> worldMap = this.getWorldMap(world);
-		
-		Object nmsEntity = worldMap.get(uuid);
+		Object nmsLevelEntityGetter = ReflectionUtil.invokeMethod(methodNmsWorldServerGetEntities, world);
+		Object nmsEntity = ReflectionUtil.invokeMethod(methodNmsLevelEntityGetterGet, nmsLevelEntityGetter, uuid);
 		if (nmsEntity == null) return null;
 		
 		return NmsBasics.get().getBukkit(nmsEntity);
-	}
-	
-	// -------------------------------------------- //
-	// INTERNAL
-	// -------------------------------------------- //
-	
-	private Map<World, Map<UUID, Object>> worldMaps = new WeakHashMap<>();
-	
-	@Contract("null -> fail")
-	private Map<UUID, Object> getWorldMap(Object handle)
-	{
-		if (handle == null) throw new NullPointerException("handle");
-		
-		return ReflectionUtil.getField(this.fieldNmsWorldServerG, handle);
-	}
-	
-	@Contract("null -> fail")
-	private Map<UUID, Object> getWorldMap(World world)
-	{
-		if (world == null) throw new NullPointerException("world");
-		
-		Map<UUID, Object> ret = this.worldMaps.get(world);
-		if (ret == null)
-		{
-			Object handle = NmsBasics.get().getHandle(world);
-			ret = this.getWorldMap(handle);
-			this.worldMaps.put(world, ret);
-		}
-		return ret;
 	}
 	
 }

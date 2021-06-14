@@ -132,13 +132,13 @@ public class NmsBasics117R1P extends NmsBasics
 		// CONNECTION & PACKET
 		
 		this.classNmsPlayer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("EntityPlayer");
-		this.fieldNmsPlayerPlayerConnection = ReflectionUtil.getField(this.classNmsPlayer, "playerConnection");
+		this.fieldNmsPlayerPlayerConnection = ReflectionUtil.getField(this.classNmsPlayer, "b");
 		this.classNmsPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL.getClass("Packet");
 		this.classNmsPlayerConnection = PackageType.MINECRAFT_SERVER_NETWORK.getClass("PlayerConnection");
 		this.methodPlayerConnectionsendPacket = ReflectionUtil.getMethod(this.classNmsPlayerConnection, "sendPacket", this.classNmsPacket);
 		
 		// PING
-		this.fieldNmsPlayerPing = ReflectionUtil.getField(this.classNmsPlayer, "ping");
+		this.fieldNmsPlayerPing = ReflectionUtil.getField(this.classNmsPlayer, "e");
 	}
 	
 	// -------------------------------------------- //
