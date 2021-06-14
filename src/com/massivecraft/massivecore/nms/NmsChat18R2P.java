@@ -9,7 +9,7 @@ public class NmsChat18R2P extends NmsChatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsChat18R2P i = new NmsChat18R2P();
+	private static final NmsChat18R2P i = new NmsChat18R2P();
 	public static NmsChat18R2P get() { return i; }
 	
 	// -------------------------------------------- //

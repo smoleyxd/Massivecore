@@ -9,7 +9,7 @@ public class NmsChat112R1P extends NmsChatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsChat112R1P i = new NmsChat112R1P();
+	private static final NmsChat112R1P i = new NmsChat112R1P();
 	public static NmsChat112R1P get() { return i; }
 	
 	// -------------------------------------------- //

@@ -17,7 +17,7 @@ public class NmsChat extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsChat d = new NmsChat().setAlternatives(
+	private static final NmsChat d = new NmsChat().setAlternatives(
 		NmsChat117R1P.class,
 		NmsChat116R1P.class,
 		NmsChat112R1P.class,
@@ -30,6 +30,7 @@ public class NmsChat extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsChat i = d;
 	public static NmsChat get() { return i; }
 	
