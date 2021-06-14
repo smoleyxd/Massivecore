@@ -6,6 +6,7 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class NmsChat117R1P extends NmsChat
 		
 		if (sendee instanceof Player player)
 		{
-			player.spigot().sendMessage(ChatMessageType.CHAT, TextComponent.fromLegacyText(mson.toRaw()));
+			player.spigot().sendMessage(ChatMessageType.CHAT, ComponentSerializer.parse(mson.toRaw()));
 		}
 		else
 		{
