@@ -28,6 +28,7 @@ import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta.Generation;
@@ -106,6 +107,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Map<Integer, DataItemStack> DEFAULT_CHARGEDPROJECTILES = Collections.emptyMap();
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
+	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -410,6 +412,15 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private List<DataItemStack> bundle = null;
 	public List<DataItemStack> getBundle() { return get(this.bundle, DEFAULT_BUNDLE); }
 	public DataItemStack setBundle(List<DataItemStack> bundle) { this.bundle = set(bundle, DEFAULT_BUNDLE); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > AXOLOTL BUCKET
+	// -------------------------------------------- //
+	// Since 1.17
+	
+	private Axolotl.Variant axolotlVariant = null;
+	public Axolotl.Variant getAxolotlVariant() { return get(this.axolotlVariant, DEFAULT_AXOLOTL_VARIANT); }
+	public DataItemStack setAxolotlVariant(Axolotl.Variant axolotlVariant) { this.axolotlVariant = set(axolotlVariant, DEFAULT_AXOLOTL_VARIANT); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

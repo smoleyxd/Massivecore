@@ -91,7 +91,10 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaSuspiciousStewEffects.class,
 			
 			// BUNDLE (1.17+)
-			WriterItemStackMetaBundleItems.class
+			WriterItemStackMetaBundleItems.class,
+			
+			// AXOLOTL BUCKET (1.17+)
+			WriterItemStackMetaAxolotlVariant.class
 		);
 	}
 	
