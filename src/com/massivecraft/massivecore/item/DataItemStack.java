@@ -105,6 +105,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient DyeColor DEFAULT_FISH_BODY_COLOR = null;
 	public static final transient Map<Integer, DataItemStack> DEFAULT_CHARGEDPROJECTILES = Collections.emptyMap();
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
+	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -401,6 +402,16 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setLodestoneTracked(Boolean bool) { this.lodestoneTracked = set(bool, DEFAULT_TRACKING_LODESTONE); return this; }
 	
 	// -------------------------------------------- //
+	// FIELDS > BUNDLE
+	// -------------------------------------------- //
+	// SINCE: 1.17
+	
+	@EditorVisible(false)
+	private List<DataItemStack> bundle = null;
+	public List<DataItemStack> getBundle() { return get(this.bundle, DEFAULT_BUNDLE); }
+	public DataItemStack setBundle(List<DataItemStack> bundle) { this.bundle = set(bundle, DEFAULT_BUNDLE); return this; }
+	
+	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
@@ -465,6 +476,14 @@ public class DataItemStack implements Comparable<DataItemStack>
 		}
 	}
 	
+	public static void toBukkit(@NotNull Iterable<DataItemStack> dataItemStacks, @NotNull Collection<ItemStack> itemStacks)
+	{
+		for (DataItemStack dataItemStack : dataItemStacks)
+		{
+			itemStacks.add(toBukkit(dataItemStack));
+		}
+	}
+	
 	public static @NotNull List<DataItemStack> fromBukkit(@NotNull Iterable<ItemStack> itemStacks)
 	{
 		// Create
@@ -472,6 +491,18 @@ public class DataItemStack implements Comparable<DataItemStack>
 		
 		// Fill
 		fromBukkit(itemStacks, ret);
+		
+		// Return
+		return ret;
+	}
+	
+	public static @NotNull List<ItemStack> toBukkit(@NotNull Iterable<DataItemStack> dataItemStacks)
+	{
+		// Create
+		List<ItemStack> ret = new MassiveList<>();
+		
+		// Fill
+		toBukkit(dataItemStacks, ret);
 		
 		// Return
 		return ret;

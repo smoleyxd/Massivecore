@@ -88,7 +88,10 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaRecipes.class,
 			
 			// SUSPICIOUS STEW
-			WriterItemStackMetaSuspiciousStewEffects.class
+			WriterItemStackMetaSuspiciousStewEffects.class,
+			
+			// BUNDLE (1.17+)
+			WriterItemStackMetaBundleItems.class
 		);
 	}
 	
