@@ -16,7 +16,7 @@ variables:
   # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: " -s .m2/settings.xml --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
-# This template uses jdk11 for verifying and deploying images
+# This template uses jdk16 for verifying and deploying images
 image: maven:3.8-openjdk-16
 
 # Cache downloaded dependencies and plugins between builds.
@@ -35,12 +35,12 @@ cache:
   except:
     - master
 
-# Verify merge requests using jdk11
-verify:jdk11:
+# Verify merge requests using jdk16
+verify:jdk16:
   <<: *verify
 
 # For `master` branch run `mvn deploy` automatically.
-deploy:jdk11:
+deploy:jdk16:
   stage: deploy
   script:
     - 'mvn $MAVEN_CLI_OPTS deploy'
