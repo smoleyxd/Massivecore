@@ -173,7 +173,7 @@ public class MassiveCore extends MassivePlugin
 		
 		// ItemStack
 		ret.registerTypeAdapter(ItemStack.class, AdapterItemStack.get());
-		Class<?> classCraftItemStack = NmsItemStackCreate.get().getClass();
+		Class<?> classCraftItemStack = NmsItemStackCreate.get().getClassCraftItemStackCatch();
 		if (classCraftItemStack != null) ret.registerTypeAdapter(classCraftItemStack, AdapterItemStack.get());
 		
 		// Inventory

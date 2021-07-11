@@ -2,6 +2,8 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.mixin.Mixin;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class NmsItemStackCreate extends Mixin
 {
@@ -29,6 +31,27 @@ public class NmsItemStackCreate extends Mixin
 	public ItemStack create()
 	{
 		throw notImplemented();
+	}
+	
+	// -------------------------------------------- //
+	// UTIL
+	// -------------------------------------------- //
+	
+	public @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
+	{
+		throw notImplemented();
+	}
+	
+	public @Nullable Class<?> getClassCraftItemStackCatch()
+	{
+		try
+		{
+			return getClassCraftItemStack();
+		}
+		catch (Throwable t)
+		{
+			return null;
+		}
 	}
 	
 }

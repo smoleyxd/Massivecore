@@ -57,7 +57,8 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 	// UTIL
 	// -------------------------------------------- //
 	
-	public static @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
+	@Override
+	public @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
 	{
 		if (ServerType.get() == ServerType.FORGE)
 		{
@@ -66,18 +67,6 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 		else
 		{
 			return PackageType.MINECRAFT_SERVER_VERSION.getClass("ItemStack");
-		}
-	}
-	
-	public static @Nullable Class<?> getClassCraftItemStackCatch()
-	{
-		try
-		{
-			return getClassCraftItemStack();
-		}
-		catch (Throwable t)
-		{
-			return null;
 		}
 	}
 	
