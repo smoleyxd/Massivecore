@@ -5,6 +5,7 @@ import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.command.CommandSender;
@@ -55,7 +56,13 @@ public class NmsChat117R1P extends NmsChat
 		Player player = IdUtil.getPlayer(sendeeObject);
 		if (player == null) return;
 		
-		player.sendTitle(rawMain, rawSub, ticksIn, ticksStay, ticksOut);
+		player.sendTitle(
+			BaseComponent.toLegacyText(ComponentSerializer.parse(rawMain)),
+			BaseComponent.toLegacyText(ComponentSerializer.parse(rawSub)),
+			ticksIn,
+			ticksStay,
+			ticksOut
+		);
 	}
 	
 	// -------------------------------------------- //
@@ -68,6 +75,9 @@ public class NmsChat117R1P extends NmsChat
 		Player player = IdUtil.getPlayer(sendeeObject);
 		if (player == null) return;
 		
-		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(raw));
+		player.spigot().sendMessage(
+			ChatMessageType.ACTION_BAR,
+			TextComponent.fromLegacyText(raw)
+		);
 	}
 }
