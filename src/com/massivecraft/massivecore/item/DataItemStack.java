@@ -115,7 +115,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 4;
+	private int version = 5;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
