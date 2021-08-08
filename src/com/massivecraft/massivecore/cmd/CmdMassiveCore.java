@@ -36,7 +36,6 @@ public class CmdMassiveCore extends MassiveCoreCommand
 	public CommandEditAbstract<MassiveCoreMConf, MassiveCoreMConf> cmdMassiveCoreConfig = new CommandEditSingleton<>(MassiveCoreMConf.get()).addRequirements(RequirementHasPerm.get(MassiveCorePerm.CONFIG));
 	public CmdMassiveCoreSponsor cmdMassiveCoreSponsor = new CmdMassiveCoreSponsor();
 	public CmdMassiveCoreClick cmdMassiveCoreClick = new CmdMassiveCoreClick();
-	public CmdMassiveCoreKickAll cmdMassiveCoreKickAll = new CmdMassiveCoreKickAll();
 	public MassiveCommandVersion cmdMassiveCoreVersion = new MassiveCommandVersion(MassiveCore.get()).addRequirements(RequirementHasPerm.get(MassiveCorePerm.VERSION));
 	
 	// -------------------------------------------- //

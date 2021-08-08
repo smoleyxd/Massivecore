@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerKickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,16 +50,25 @@ public class EventMassiveCorePlayerLeave extends Event implements Runnable
 	private final String message;
 	public String getMessage() { return this.message; }
 	
+	private final PlayerKickEvent kickEvent;
+	public PlayerKickEvent getKickEvent() { return this.kickEvent; }
+	
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public EventMassiveCorePlayerLeave(Player player, boolean preDisconnect, String caller, String message)
+	public EventMassiveCorePlayerLeave(Player player, boolean preDisconnect, String caller, String message, PlayerKickEvent kickEvent)
 	{
 		this.player = player;
 		this.preDisconnect = preDisconnect;
 		this.caller = caller;
 		this.message = message;
+		this.kickEvent = kickEvent;
+	}
+	
+	public EventMassiveCorePlayerLeave(Player player, boolean preDisconnect, String caller, String message)
+	{
+		this(player, preDisconnect, caller, message, null);
 	}
 	
 	// -------------------------------------------- //
