@@ -57,8 +57,8 @@ public class Txt
 	public static final long millisPerYear = 365 * millisPerDay;
 	
 	public static final Set<String> vowel = MUtil.set(
-		"A", "E", "I", "O", "U", "Y", "Å", "Ä", "Ö", "Æ", "Ø",
-		"a", "e", "i", "o", "u", "y", "å", "ä", "ö", "æ", "ø"
+		"A", "E", "I", "O", "U", "Å", "Ä", "Ö", "Æ", "Ø",
+		"a", "e", "i", "o", "u", "å", "ä", "ö", "æ", "ø"
 	); 
 	
 	public static final Map<String, Long> unitMillis = MUtil.map(
