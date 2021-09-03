@@ -2,24 +2,29 @@ package com.massivecraft.massivecore.item;
 
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @EditorMethods(true)
-public class ContainerGameProfile
+public class ContainerGameProfile implements Comparable<ContainerGameProfile>
 {
+	// -------------------------------------------- //
+	// DEFAULTS
+	// -------------------------------------------- //
+	
 	public static final transient List<Map.Entry<String, ContainerGameProfileProperty>> GAMEPROFILEPROPERTIESDEFAULT = new MassiveList<>();
 	public static final transient String UUID_DEFAULT = null; // TODO should there be a default uuid which isn't null?
 	public static final transient String NAME_DEFAULT = null;
 	
-	
-	public ContainerGameProfile()
-	{
-		// Construct
-	}
+	// -------------------------------------------- //
+	// FIELDS
+	// -------------------------------------------- //
 	
 	private String uuid = null;
 	public String getUuid() { return DataItemStack.get(this.uuid, UUID_DEFAULT); }
@@ -30,15 +35,30 @@ public class ContainerGameProfile
 	public void setName(String name) { this.name = DataItemStack.set(name, NAME_DEFAULT); }
 	
 	private List<Map.Entry<String, ContainerGameProfileProperty>> gameProfileProperties = null;
+	public List<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties() { return DataItemStack.get(this.gameProfileProperties, GAMEPROFILEPROPERTIESDEFAULT); }
+	public void setGameProfileProperties(List<Map.Entry<String, ContainerGameProfileProperty>> properties) { this.gameProfileProperties = DataItemStack.set(properties, GAMEPROFILEPROPERTIESDEFAULT); }
 	
-	public void setGameProfileProperties(List<Map.Entry<String, ContainerGameProfileProperty>> properties)
+	// -------------------------------------------- //
+	// CONSTRUCT
+	// -------------------------------------------- //
+	
+	public ContainerGameProfile()
 	{
-		this.gameProfileProperties = DataItemStack.set(properties, GAMEPROFILEPROPERTIESDEFAULT);
+		// Construct
 	}
 	
-	public List<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties()
+	// -------------------------------------------- //
+	// COMPARE & EQUALS & HASHCODE
+	// -------------------------------------------- //
+	
+	@Override
+	public int compareTo(@NotNull ContainerGameProfile that)
 	{
-		return DataItemStack.get(this.gameProfileProperties, GAMEPROFILEPROPERTIESDEFAULT);
+		return ComparatorSmart.get().compare(
+			this.getUuid(), that.getUuid(),
+			this.getName(), that.getName(),
+			this.getGameProfileProperties(), that.getGameProfileProperties()
+		);
 	}
 	
 	@Contract(value = "null -> false", pure = true)
@@ -52,6 +72,16 @@ public class ContainerGameProfile
 			this.getUuid(), that.getUuid(),
 			this.getName(), that.getName(),
 			this.getGameProfileProperties(), that.getGameProfileProperties()
+		);
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(
+			this.getName(),
+			this.getUuid(),
+			this.getGameProfileProperties()
 		);
 	}
 	
