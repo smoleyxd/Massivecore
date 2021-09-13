@@ -419,8 +419,7 @@ public class MUtil
 	public static boolean isPlayer(Object object)
 	{
 		if (!(object instanceof Player)) return false;
-		if (isNpc(object)) return false;
-		return true;
+		return !isNpc(object);
 	}
 	@Contract("null -> true")
 	public static boolean isntPlayer(Object object)
