@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.store;
 
+import com.massivecraft.massivecore.Identified;
 import com.massivecraft.massivecore.Named;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateEqualsIgnoreCase;
@@ -29,6 +30,7 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 		String ret = null;
 		if (oid instanceof String) ret = (String) oid;
 		else if (oid.getClass() == this.getEntityClass()) ret = ((Entity<?>) oid).getId();
+		else if (oid instanceof Identified) ret = ((Identified) oid).getId();
 		if (ret == null) return null;
 		
 		return this.isLowercasing() ? ret.toLowerCase() : ret;
