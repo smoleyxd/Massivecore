@@ -643,8 +643,6 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
-			this.getLodestone(), that.getLodestone(),
-			this.isLodestoneTracked(), that.isLodestoneTracked(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
 			this.getMapId(), that.getMapId(),
@@ -666,7 +664,9 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishBodyColor(), that.getFishBodyColor(),
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
-			this.getRecipes(), that.getRecipes()
+			this.getRecipes(), that.getRecipes(),
+			this.getLodestone(), that.getLodestone(),
+			this.isLodestoneTracked(), that.isLodestoneTracked()
 		);
 	}
 	
