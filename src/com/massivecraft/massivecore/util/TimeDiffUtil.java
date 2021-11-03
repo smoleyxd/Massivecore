@@ -165,57 +165,104 @@ public class TimeDiffUtil
 	public static final String FORMAT_COMMA_MINIMAL = "%s";
 	public static final String FORMAT_AND_MINIMAL = "%s";
 	
-	public static String formated(@NotNull TimeUnit unit, long count, String formatEntry)
+	public static String formatted(@NotNull TimeUnit unit, long count, String formatEntry)
 	{
 		return String.format(formatEntry, count, unit.getUnitString(count), unit.getNameString(count));
 	}
 	
-	public static String formated(@NotNull Map<TimeUnit, Long> unitcounts, String entryFormat, String commaFormat, String andFormat, String color)
+	public static String formatted(@NotNull Map<TimeUnit, Long> unitcounts, String entryFormat, String commaFormat, String andFormat, String color)
 	{
 		String comma = String.format(commaFormat, Txt.parse(color));
 		String and = String.format(andFormat, Txt.parse(color));
 		
 		if (unitcounts.isEmpty())
 		{
-			return formated(TimeUnit.SECOND, 0, entryFormat);
+			return formatted(TimeUnit.SECOND, 0, entryFormat);
 		}
 		
 		List<String> parts = new ArrayList<>();
 		for (Entry<TimeUnit, Long> entry : unitcounts.entrySet())
 		{
-			parts.add(formated(entry.getKey(), entry.getValue(), entryFormat));
+			parts.add(formatted(entry.getKey(), entry.getValue(), entryFormat));
 		}
 		return Txt.implodeCommaAnd(parts, comma, and);
 	}
 	
+	public static String formattedVerbose(@NotNull TimeUnit unit, long count)
+	{
+		return formatted(unit, count, FORMAT_ENTRY_VERBOOSE);
+	}
+	
+	public static String formattedVerbose(@NotNull Map<TimeUnit, Long> unitcounts, String color)
+	{
+		return formatted(unitcounts, FORMAT_ENTRY_VERBOOSE, FORMAT_COMMA_VERBOOSE, FORMAT_AND_VERBOOSE, color);
+	}
+	
+	public static String formattedVerbose(@NotNull Map<TimeUnit, Long> unitcounts)
+	{
+		return formattedVerbose(unitcounts, "<i>");
+	}
+	
+	public static String formattedMinimal(@NotNull TimeUnit unit, long count)
+	{
+		return formatted(unit, count, FORMAT_ENTRY_MINIMAL);
+	}
+	
+	public static String formattedMinimal(@NotNull Map<TimeUnit, Long> unitcounts, String color)
+	{
+		return formatted(unitcounts, FORMAT_ENTRY_MINIMAL, FORMAT_COMMA_MINIMAL, FORMAT_AND_MINIMAL, color);
+	}
+	
+	public static String formattedMinimal(@NotNull Map<TimeUnit, Long> unitcounts)
+	{
+		return formattedMinimal(unitcounts, "");
+	}
+	
+	@Deprecated
+	public static String formated(@NotNull TimeUnit unit, long count, String formatEntry)
+	{
+		return formatted(unit, count, formatEntry);
+	}
+	
+	@Deprecated
+	public static String formated(@NotNull Map<TimeUnit, Long> unitcounts, String entryFormat, String commaFormat, String andFormat, String color)
+	{
+		return formatted(unitcounts, entryFormat, commaFormat, andFormat, color);
+	}
+	
+	@Deprecated
 	public static String formatedVerboose(@NotNull TimeUnit unit, long count)
 	{
-		return formated(unit, count, FORMAT_ENTRY_VERBOOSE);
+		return formattedVerbose(unit, count);
 	}
 	
+	@Deprecated
 	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
-		return formated(unitcounts, FORMAT_ENTRY_VERBOOSE, FORMAT_COMMA_VERBOOSE, FORMAT_AND_VERBOOSE, color);
+		return formattedVerbose(unitcounts, color);
 	}
 	
+	@Deprecated
 	public static String formatedVerboose(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
-		return formatedVerboose(unitcounts, "<i>");
+		return formattedVerbose(unitcounts);
 	}
 	
+	@Deprecated
 	public static String formatedMinimal(@NotNull TimeUnit unit, long count)
 	{
-		return formated(unit, count, FORMAT_ENTRY_MINIMAL);
+		return formattedMinimal(unit, count);
 	}
 	
+	@Deprecated
 	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
-		return formated(unitcounts, FORMAT_ENTRY_MINIMAL, FORMAT_COMMA_MINIMAL, FORMAT_AND_MINIMAL, color);
+		return formattedMinimal(unitcounts, color);
 	}
 	
+	@Deprecated
 	public static String formatedMinimal(@NotNull Map<TimeUnit, Long> unitcounts)
 	{
-		return formatedMinimal(unitcounts, "");
+		return formattedMinimal(unitcounts);
 	}
-	
 }
