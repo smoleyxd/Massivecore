@@ -157,8 +157,15 @@ public class TimeDiffUtil
 	// FORMAT
 	// -------------------------------------------- //
 	
+	public static final String FORMAT_ENTRY_VERBOSE = Txt.parse("<v>%1$d <k>%3$s");
+	public static final String FORMAT_COMMA_VERBOSE = "%s, ";
+	public static final String FORMAT_AND_VERBOSE = " %sand ";
+	
+	@Deprecated
 	public static final String FORMAT_ENTRY_VERBOOSE = Txt.parse("<v>%1$d <k>%3$s");
+	@Deprecated
 	public static final String FORMAT_COMMA_VERBOOSE = "%s, ";
+	@Deprecated
 	public static final String FORMAT_AND_VERBOOSE = " %sand ";
 	
 	public static final String FORMAT_ENTRY_MINIMAL = Txt.parse("<v>%1$d<k>%2$s");
@@ -190,12 +197,12 @@ public class TimeDiffUtil
 	
 	public static String formattedVerbose(@NotNull TimeUnit unit, long count)
 	{
-		return formatted(unit, count, FORMAT_ENTRY_VERBOOSE);
+		return formatted(unit, count, FORMAT_ENTRY_VERBOSE);
 	}
 	
 	public static String formattedVerbose(@NotNull Map<TimeUnit, Long> unitcounts, String color)
 	{
-		return formatted(unitcounts, FORMAT_ENTRY_VERBOOSE, FORMAT_COMMA_VERBOOSE, FORMAT_AND_VERBOOSE, color);
+		return formatted(unitcounts, FORMAT_ENTRY_VERBOSE, FORMAT_COMMA_VERBOSE, FORMAT_AND_VERBOSE, color);
 	}
 	
 	public static String formattedVerbose(@NotNull Map<TimeUnit, Long> unitcounts)

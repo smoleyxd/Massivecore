@@ -128,7 +128,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 	// CONVENIENCE: PERMISSION
 	// -------------------------------------------- //
 	
-	public Boolean hasPermission(Object permission, Boolean unsure, boolean verboose)
+	public Boolean hasPermission(Object permission, Boolean unsure, boolean verbose)
 	{
 		// Null
 		if (permission == null) throw new NullPointerException("permission");
@@ -147,7 +147,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 		}
 		
 		// Check
-		return PermissionUtil.hasPermission(sender, permission, verboose);
+		return PermissionUtil.hasPermission(sender, permission, verbose);
 	}
 	
 	public Boolean hasPermission(Object permission, Boolean unsure)

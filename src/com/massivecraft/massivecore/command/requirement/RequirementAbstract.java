@@ -40,19 +40,19 @@ public abstract class RequirementAbstract implements Requirement, Serializable
 	// BULK
 	// -------------------------------------------- //
 	
-	public static boolean isRequirementsMet(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
+	public static boolean isRequirementsMet(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verbose)
 	{
-		String error = getRequirementsError(requirements, sender, command, verboose);
-		if (error != null && verboose) MixinMessage.get().messageOne(sender, error);
+		String error = getRequirementsError(requirements, sender, command, verbose);
+		if (error != null && verbose) MixinMessage.get().messageOne(sender, error);
 		return error == null;
 	}
 	
-	public static @Nullable String getRequirementsError(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verboose)
+	public static @Nullable String getRequirementsError(@NotNull Iterable<@NotNull Requirement> requirements, CommandSender sender, MassiveCommand command, boolean verbose)
 	{
 		for (Requirement requirement : requirements)
 		{
 			if (requirement.apply(sender, command)) continue;
-			if ( ! verboose) return "";
+			if ( ! verbose) return "";
 			return requirement.createErrorMessage(sender, command);
 		}
 		return null;

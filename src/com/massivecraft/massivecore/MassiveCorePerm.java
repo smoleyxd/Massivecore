@@ -74,9 +74,9 @@ public enum MassiveCorePerm implements Identified
 	// HAS
 	// -------------------------------------------- //
 	
-	public boolean has(Permissible permissible, boolean verboose)
+	public boolean has(Permissible permissible, boolean verbose)
 	{
-		return PermissionUtil.hasPermission(permissible, this, verboose);
+		return PermissionUtil.hasPermission(permissible, this, verbose);
 	}
 	
 	public boolean has(Permissible permissible)

@@ -82,11 +82,11 @@ public class Cooldown
 	// HAS
 	// -------------------------------------------- //
 	
-	public boolean has(Player commandSender, boolean verboose)
+	public boolean has(Player commandSender, boolean verbose)
 	{
 		long millis = this.getCooldownMillis(commandSender);
 		if (millis <= 0) return false;
-		if (!verboose) return true;
+		if (!verbose) return true;
 		
 		StringBuilder sb = new StringBuilder();
 		

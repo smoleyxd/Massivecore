@@ -114,12 +114,12 @@ public class MixinWorld extends Mixin
 		world.setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 	
-	public boolean trySetWorldSpawnWp(CommandSender sender, String worldId, PS goal, boolean verbooseChange, boolean verbooseSame)
+	public boolean trySetWorldSpawnWp(CommandSender sender, String worldId, PS goal, boolean verboseChange, boolean verboseSame)
 	{
 		World world = Bukkit.getWorld(worldId);
 		if (world == null)
 		{
-			if (verbooseChange || verbooseSame)
+			if (verboseChange || verboseSame)
 			{
 				MixinMessage.get().msgOne(sender, "<b>Unknown world <h>%s<b>.", worldId);
 			}
@@ -135,7 +135,7 @@ public class MixinWorld extends Mixin
 		// No change?
 		if (MUtil.equals(goal, current))
 		{
-			if (verbooseSame)
+			if (verboseSame)
 			{
 				MixinMessage.get().msgOne(sender, "<i>Spawn location is already <h>%s <i>for <h>%s<i>.", currentFormatted, worldDisplayName);
 			}
@@ -143,7 +143,7 @@ public class MixinWorld extends Mixin
 		}
 		
 		// Report
-		if (verbooseChange)
+		if (verboseChange)
 		{
 			MixinMessage.get().msgOne(sender, "<i>Changing spawn location from <h>%s <i>to <h>%s <i>for <h>%s<i>.", currentFormatted, goalFormatted, worldDisplayName);
 		}
