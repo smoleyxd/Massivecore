@@ -7,10 +7,7 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
 import java.util.WeakHashMap;
 
 public class Cooldown
@@ -85,11 +82,11 @@ public class Cooldown
 	// HAS
 	// -------------------------------------------- //
 	
-	public boolean has(Player commandSender, boolean verboose)
+	public boolean has(Player commandSender, boolean verbose)
 	{
 		long millis = this.getCooldownMillis(commandSender);
 		if (millis <= 0) return false;
-		if (!verboose) return true;
+		if (!verbose) return true;
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -105,7 +102,7 @@ public class Cooldown
 		
 		LinkedHashMap<TimeUnit, Long> unitcounts = TimeDiffUtil.unitcounts(millis);
 		unitcounts = TimeDiffUtil.limit(unitcounts, 1);
-		String formatted = TimeDiffUtil.formatedVerboose(unitcounts, "<b>");
+		String formatted = TimeDiffUtil.formattedVerbose(unitcounts, "<b>");
 		
 		sb.append(formatted);
 		

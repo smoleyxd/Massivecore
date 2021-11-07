@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.WeakHashMap;
 
 public class ConfirmationUtil
@@ -174,6 +175,7 @@ public class ConfirmationUtil
 
 		List<String> args = new MassiveList<>(command.getArgs());
 		args.set(idx, getConfirmationString(command, sender));
+		args.removeIf(Objects::isNull);
 		Mson template = command.getTemplateWithArgs(sender, args);
 		MassiveException ex = new MassiveException();
 		ex.addMsg("<b>To <h>%s <b>confirm it by typing:", command.getDesc());

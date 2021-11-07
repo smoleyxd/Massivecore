@@ -898,14 +898,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	@Contract(value = "_ -> this", mutates = "this")
 	public <T extends MassiveCommand> T addRequirements(Requirement @NotNull ... requirements) { this.addRequirements(Arrays.asList(requirements)); return (T) this; }
 	
-	public boolean isRequirementsMet(CommandSender sender, boolean verboose)
+	public boolean isRequirementsMet(CommandSender sender, boolean verbose)
 	{
-		return RequirementAbstract.isRequirementsMet(this.getRequirements(), sender, this, verboose);
+		return RequirementAbstract.isRequirementsMet(this.getRequirements(), sender, this, verbose);
 	}
 	
-	public String getRequirementsError(CommandSender sender, boolean verboose)
+	public String getRequirementsError(CommandSender sender, boolean verbose)
 	{
-		return RequirementAbstract.getRequirementsError(this.getRequirements(), sender, this, verboose);
+		return RequirementAbstract.getRequirementsError(this.getRequirements(), sender, this, verbose);
 	}
 	
 	// -------------------------------------------- //

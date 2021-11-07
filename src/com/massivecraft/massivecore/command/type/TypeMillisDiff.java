@@ -34,7 +34,7 @@ public class TypeMillisDiff extends TypeAbstractException<Long>
 	{
 		String prefix = Txt.parse(value < 0 ? "<b>negative " : "");
 		LinkedHashMap<TimeUnit, Long> unitcounts = TimeDiffUtil.unitcounts(value);
-		return prefix + TimeDiffUtil.formatedVerboose(unitcounts);
+		return prefix + TimeDiffUtil.formattedVerbose(unitcounts);
 	}
 	
 	@Override

@@ -147,10 +147,10 @@ public class Mixin extends Engine
 	public void setActive(boolean active)
 	{
 		boolean verbose = MassiveCoreMConf.get() != null && MassiveCoreMConf.get().debugEnabled;
-		this.setActiveVerboose(active, verbose);
+		this.setActiveVerbose(active, verbose);
 	}
 	
-	public void setActiveVerboose(boolean active, boolean verbose)
+	public void setActiveVerbose(boolean active, boolean verbose)
 	{
 		// NoChange
 		if (this.isActive() == active) return;
@@ -162,13 +162,13 @@ public class Mixin extends Engine
 		after.setPluginSoft(this.getPlugin());
 		
 		// Deactivate Before
-		if (before != this) before.setActiveVerboose(false, false);
+		if (before != this) before.setActiveVerbose(false, false);
 		
 		// Set Instance
 		this.setInstance(after);
 		
 		// Activate After
-		if (after != this) after.setActiveVerboose(true, verbose);
+		if (after != this) after.setActiveVerbose(true, verbose);
 		
 		// This
 		if (after != this) return;
@@ -182,6 +182,12 @@ public class Mixin extends Engine
 		
 		// Super
 		super.setActive(active);
+	}
+	
+	@Deprecated
+	public void setActiveVerboose(boolean active, boolean verbose)
+	{
+		setActiveVerbose(active, verbose);
 	}
 	
 	// -------------------------------------------- //

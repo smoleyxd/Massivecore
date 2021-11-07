@@ -49,7 +49,7 @@ public abstract class MassiveCommandToggle extends MassiveCommand
 	public String getName() throws MassiveException
 	{
 		List<String> aliases = this.getAliases();
-		return Txt.upperCaseFirst(aliases.get(aliases.size() - 1));
+		return Txt.upperCaseFirst(aliases.get(0));
 	}
 	
 	// -------------------------------------------- //

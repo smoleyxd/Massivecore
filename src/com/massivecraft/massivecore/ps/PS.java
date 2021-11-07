@@ -89,19 +89,48 @@ public final class PS implements Serializable, Comparable<PS>
 	public static final transient String NAME_FULL_VELOCITYY = "velocityY";
 	public static final transient String NAME_FULL_VELOCITYZ = "velocityZ";
 	
+	public static final transient String NAME_VERBOSE_WORLD = "World";
+	public static final transient String NAME_VERBOSE_BLOCKX = "Block X";
+	public static final transient String NAME_VERBOSE_BLOCKY = "Block Y";
+	public static final transient String NAME_VERBOSE_BLOCKZ = "Block Z";
+	public static final transient String NAME_VERBOSE_LOCATIONX = "Location X";
+	public static final transient String NAME_VERBOSE_LOCATIONY = "Location Y";
+	public static final transient String NAME_VERBOSE_LOCATIONZ = "Location Z";
+	public static final transient String NAME_VERBOSE_CHUNKX = "Chunk X";
+	public static final transient String NAME_VERBOSE_CHUNKZ = "Chunk Z";
+	public static final transient String NAME_VERBOSE_PITCH = "Pitch";
+	public static final transient String NAME_VERBOSE_YAW = "Yaw";
+	public static final transient String NAME_VERBOSE_VELOCITYX = "Velocity X";
+	public static final transient String NAME_VERBOSE_VELOCITYY = "Velocity Y";
+	public static final transient String NAME_VERBOSE_VELOCITYZ = "Velocity Z";
+	
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_WORLD = "World";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_BLOCKX = "Block X";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_BLOCKY = "Block Y";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_BLOCKZ = "Block Z";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_LOCATIONX = "Location X";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_LOCATIONY = "Location Y";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_LOCATIONZ = "Location Z";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_CHUNKX = "Chunk X";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_CHUNKZ = "Chunk Z";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_PITCH = "Pitch";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_YAW = "Yaw";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_VELOCITYX = "Velocity X";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_VELOCITYY = "Velocity Y";
+	@Deprecated
 	public static final transient String NAME_VERBOOSE_VELOCITYZ = "Velocity Z";
 	
 	public static final transient String SPACE_WASNT_SET = " wasn't set";
@@ -268,16 +297,16 @@ public final class PS implements Serializable, Comparable<PS>
 		this.blockX = blockX;
 		this.blockY = blockY;
 		this.blockZ = blockZ;
-		this.locationX = throwIfStrange(locationX, NAME_VERBOOSE_LOCATIONX);
-		this.locationY = throwIfStrange(locationY, NAME_VERBOOSE_LOCATIONY);
-		this.locationZ = throwIfStrange(locationZ, NAME_VERBOOSE_LOCATIONZ);
+		this.locationX = throwIfStrange(locationX, NAME_VERBOSE_LOCATIONX);
+		this.locationY = throwIfStrange(locationY, NAME_VERBOSE_LOCATIONY);
+		this.locationZ = throwIfStrange(locationZ, NAME_VERBOSE_LOCATIONZ);
 		this.chunkX = chunkX;
 		this.chunkZ = chunkZ;
-		this.pitch = throwIfStrange(pitch, NAME_VERBOOSE_PITCH);
-		this.yaw = throwIfStrange(yaw, NAME_VERBOOSE_YAW);
-		this.velocityX = throwIfStrange(velocityX, NAME_VERBOOSE_VELOCITYX);
-		this.velocityY = throwIfStrange(velocityY, NAME_VERBOOSE_VELOCITYY);
-		this.velocityZ = throwIfStrange(velocityZ, NAME_VERBOOSE_VELOCITYZ);
+		this.pitch = throwIfStrange(pitch, NAME_VERBOSE_PITCH);
+		this.yaw = throwIfStrange(yaw, NAME_VERBOSE_YAW);
+		this.velocityX = throwIfStrange(velocityX, NAME_VERBOSE_VELOCITYX);
+		this.velocityY = throwIfStrange(velocityY, NAME_VERBOSE_VELOCITYY);
+		this.velocityZ = throwIfStrange(velocityZ, NAME_VERBOSE_VELOCITYZ);
 	}
 	
 	@Contract("null, _ -> null")
