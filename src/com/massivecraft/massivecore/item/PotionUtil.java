@@ -79,32 +79,17 @@ public class PotionUtil
 	
 	public static String friendlyPotionEffectName(PotionEffectType unfriendlyPotionEffectType)
 	{
-		String unfriendlyPotionEffectTypeString = unfriendlyPotionEffectType.getName();
+		if (PotionEffectType.FAST_DIGGING.equals(unfriendlyPotionEffectType)) return "Haste";
+		else if (PotionEffectType.DAMAGE_RESISTANCE.equals(unfriendlyPotionEffectType)) return "Resistance";
+		else if (PotionEffectType.CONFUSION.equals(unfriendlyPotionEffectType)) return "Nausea";
+		else if (PotionEffectType.HARM.equals(unfriendlyPotionEffectType)) return "Instant Damage";
+		else if (PotionEffectType.HEAL.equals(unfriendlyPotionEffectType)) return "Instant Health";
+		else if (PotionEffectType.INCREASE_DAMAGE.equals(unfriendlyPotionEffectType)) return "Strength";
+		else if (PotionEffectType.JUMP.equals(unfriendlyPotionEffectType)) return "Jump Boost";
+		else if (PotionEffectType.SLOW.equals(unfriendlyPotionEffectType)) return "Slowness";
+		else if (PotionEffectType.SLOW_DIGGING.equals(unfriendlyPotionEffectType)) return "Mining Fatigue";
+		else if (PotionEffectType.UNLUCK.equals(unfriendlyPotionEffectType)) return "Bad Luck";
 		
-		switch (unfriendlyPotionEffectTypeString)
-		{
-			case "FAST_DIGGING":
-				return "Haste";
-			case "DAMAGE_RESISTANCE":
-				return "Resistance";
-			case "CONFUSION":
-				return "Nausea";
-			case "HARM":
-				return "Instant Damage";
-			case "HEAL":
-				return "Instant Health";
-			case "INCREASE_DAMAGE":
-				return "Strength";
-			case "JUMP":
-				return "Jump Boost";
-			case "SLOW":
-				return "Slowness";
-			case "SLOW_DIGGING":
-				return "Mining Fatigue";
-			case "UNLUCK":
-				return "Bad Luck";
-			default:
-				return Txt.getNicedEnumString(unfriendlyPotionEffectTypeString, " ");
-		}
+		return Txt.getNicedEnumString(unfriendlyPotionEffectType.getName(), " ");
 	}
 }

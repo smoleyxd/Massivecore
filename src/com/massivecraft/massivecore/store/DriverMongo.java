@@ -4,10 +4,11 @@ import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.xlib.bson.Document;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
-import com.massivecraft.massivecore.xlib.mongodb.MongoClient;
-import com.massivecraft.massivecore.xlib.mongodb.MongoClientURI;
+import com.massivecraft.massivecore.xlib.mongodb.ConnectionString;
 import com.massivecraft.massivecore.xlib.mongodb.MongoNamespace;
 import com.massivecraft.massivecore.xlib.mongodb.client.FindIterable;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoClient;
+import com.massivecraft.massivecore.xlib.mongodb.client.MongoClients;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoCollection;
 import com.massivecraft.massivecore.xlib.mongodb.client.MongoDatabase;
 import com.massivecraft.massivecore.xlib.mongodb.client.model.ReplaceOptions;
@@ -21,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 public class DriverMongo extends DriverAbstract
@@ -104,16 +106,16 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public boolean containsId(Coll<?> coll, String id)
 	{
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		return dbcoll.find(new Document(ID_FIELD, id)).first() != null;
 	}
 	
 	@Override
 	public long getMtime(Coll<?> coll, String id)
 	{
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		
-		Document found = (Document) dbcoll.find(new Document(ID_FIELD, id)).projection(dboKeysMtime).first();
+		Document found = dbcoll.find(new Document(ID_FIELD, id)).projection(dboKeysMtime).first();
 		if (found == null) return 0;
 		
 		// In case there is no _mtime set we assume 1337.
@@ -145,14 +147,14 @@ public class DriverMongo extends DriverAbstract
 	{
 		List<String> ret;
 		
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		
-		FindIterable found = dbcoll.find().projection(dboKeysId);
+		FindIterable<Document> found = dbcoll.find().projection(dboKeysId);
 		
 		ret = new ArrayList<>((int) dbcoll.countDocuments());
 		
-		for (Object doc : found) {
-			ret.add(((Document)doc).get(ID_FIELD).toString());
+		for (Document doc : found) {
+			ret.add(doc.get(ID_FIELD).toString());
 		}
 		
 		return ret;
@@ -163,16 +165,15 @@ public class DriverMongo extends DriverAbstract
 	{
 		Map<String, Long> ret;
 		
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		
-		FindIterable found = dbcoll.find().projection(dboKeysIdandMtime);
+		FindIterable<Document> found = dbcoll.find().projection(dboKeysIdandMtime);
 		
 		ret = new HashMap<>((int)dbcoll.countDocuments());
 		
-		for (Object doc : found) {
-			Document raw = (Document) doc;
-			Object remoteId = raw.get(ID_FIELD);
-			Object mtime = raw.get(MTIME_FIELD);
+		for (Document doc : found) {
+			Object remoteId = doc.get(ID_FIELD);
+			Object mtime = doc.get(MTIME_FIELD);
 			
 			mtime = cleanMtime(mtime);
 			
@@ -190,8 +191,8 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public Entry<JsonObject, Long> load(Coll<?> coll, String id)
 	{
-		MongoCollection dbcoll = fixColl(coll);
-		Document raw = (Document) dbcoll.find(new Document(ID_FIELD, id)).first();
+		MongoCollection<Document> dbcoll = fixColl(coll);
+		Document raw = dbcoll.find(new Document(ID_FIELD, id)).first();
 		return loadRaw(raw);
 	}
 	
@@ -225,25 +226,23 @@ public class DriverMongo extends DriverAbstract
 		Map<String, Entry<JsonObject, Long>> ret;
 		
 		// Fix Coll
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		
 		// Find All
-		FindIterable found = dbcoll.find();
+		FindIterable<Document> found = dbcoll.find();
 		
 		// Create Ret
 		ret = new MassiveMap<>((int) dbcoll.countDocuments());
 		
 		// For Each Found
-		for (Object doc : found) {
-			Document raw = (Document) doc;
-			
+		for (Document doc : found) {
 			// Get ID
-			Object rawId = raw.remove(ID_FIELD);
+			Object rawId = doc.remove(ID_FIELD);
 			if (rawId == null) continue;
 			String id = rawId.toString();
 			
 			// Get Entry
-			Entry<JsonObject, Long> entry = loadRaw(raw);
+			Entry<JsonObject, Long> entry = loadRaw(doc);
 			// NOTE: The entry can be a failed one with null and 0.
 			// NOTE: We add it anyways since it's an informative failure.
 			// NOTE: This is supported by our defined specification.
@@ -279,7 +278,7 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public void delete(Coll<?> coll, String id)
 	{
-		MongoCollection dbcoll = fixColl(coll);
+		MongoCollection<Document> dbcoll = fixColl(coll);
 		dbcoll = dbcoll.withWriteConcern(MassiveCoreMConf.get().getMongoDbWriteConcernDelete());
 		
 		dbcoll.deleteOne(new Document(ID_FIELD, id));
@@ -302,21 +301,22 @@ public class DriverMongo extends DriverAbstract
 	// UTIL
 	//----------------------------------------------//
 	
-	protected static MongoCollection fixColl(@NotNull Coll<?> coll)
+	protected static MongoCollection<Document> fixColl(@NotNull Coll<?> coll)
 	{
-		return (MongoCollection) coll.getCollDriverObject();
+		//noinspection unchecked
+		return (MongoCollection<Document>) coll.getCollDriverObject();
 	}
 	
 	protected MongoDatabase getDbInner(String uri)
 	{
-		MongoClientURI muri = new MongoClientURI(uri);
+		ConnectionString muri = new ConnectionString(uri);
 		
 		try
 		{
 			// TODO: Create one of these per collection? Really? Perhaps I should cache.
-			MongoClient mongoClient = new MongoClient(muri);
+			MongoClient mongoClient = MongoClients.create(muri);
 			
-			MongoDatabase db = mongoClient.getDatabase(muri.getDatabase());
+			MongoDatabase db = mongoClient.getDatabase(Objects.requireNonNull(muri.getDatabase()));
 			
 			if (muri.getUsername() == null) return db;
 
