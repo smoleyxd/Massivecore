@@ -13,7 +13,7 @@ public class TypeRange extends TypeInteger
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private TypeRange(int MIN_RANGE, int MAX_RANGE)
+	protected TypeRange(int MIN_RANGE, int MAX_RANGE)
 	{
 		this.MIN_RANGE = MIN_RANGE;
 		this.MAX_RANGE = MAX_RANGE;
