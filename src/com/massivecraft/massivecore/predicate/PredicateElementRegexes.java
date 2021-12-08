@@ -40,7 +40,8 @@ public class PredicateElementRegexes implements Predicate<StackTraceElement>
 	public boolean apply(StackTraceElement element)
 	{
 		if (element == null) return false;
-		String string = element.toString();
+		String[] parts = element.toString().split("//",2);
+		String string = parts[parts.length-1];
 		for (Pattern pattern : this.getPatterns())
 		{
 			if (pattern.matcher(string).matches()) return true;
