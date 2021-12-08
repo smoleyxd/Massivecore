@@ -1,20 +1,13 @@
 package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.mson.Mson;
-import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.IdUtil;
-import com.massivecraft.massivecore.util.ReflectionUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.UUID;
 
 public class NmsChat117R1P extends NmsChat
 {
@@ -77,7 +70,7 @@ public class NmsChat117R1P extends NmsChat
 		
 		player.spigot().sendMessage(
 			ChatMessageType.ACTION_BAR,
-			TextComponent.fromLegacyText(raw)
+			ComponentSerializer.parse(raw)
 		);
 	}
 }
