@@ -91,7 +91,7 @@ public class MixinTeleport extends Mixin
 		{
 			return;
 		}
-		IntegrationSpartan.get().disableVelocityProtection(player, 10);
+		IntegrationSpartan.get().disableVelocityProtection(player);
 		player.setVelocity(velocity);
 	}
 	

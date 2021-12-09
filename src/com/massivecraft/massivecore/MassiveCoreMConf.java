@@ -203,5 +203,12 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	public Map<String, Integer> lorePrioritiesPrefix = new MassiveMap<>();
 	public Map<String, Integer> lorePrioritiesSuffix = new MassiveMap<>();
 	public Map<String, Integer> lorePrioritiesRegex = new MassiveMap<>();
+	
+	// -------------------------------------------- //
+	// SPARTAN
+	// -------------------------------------------- //
+	// Specific Settings for Spartan Integration
+	
+	public int velocityBypassTicks = 200;
 
 }
