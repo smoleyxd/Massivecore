@@ -5,13 +5,9 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.Contract;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.UUID;
-import java.util.WeakHashMap;
 
 public class NmsEntityGet117R1P extends NmsEntityGet
 {
@@ -27,17 +23,8 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// net.minecraft.server.level.WorldServer
-	private Class<?> classNmsWorldServer;
-	
-	// net.minecraft.server.level.WorldServer#getEntities()
-	private Method methodNmsWorldServerGetEntities;
-	
-	// net.minecraft.world.level.entity.LevelEntityGetter
-	private Class<?> classNmsLevelEntityGetter;
-	
-	// net.minecraft.world.level.entity.LevelEntityGetter#a(UUID)
-	private Method methodNmsLevelEntityGetterGet;
+	// net.minecraft.server.level.WorldServer#getEntity(UUID uuid)
+	private Method methodNmsWorldServerGetEntity;
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -48,11 +35,9 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 	{
 		NmsBasics.get().require();
 		
-		this.classNmsWorldServer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("WorldServer");
-		this.methodNmsWorldServerGetEntities = ReflectionUtil.getMethod(this.classNmsWorldServer, "getEntities");
-		
-		this.classNmsLevelEntityGetter = PackageType.MINECRAFT_WORLD_LEVEL_ENTITY.getClass("LevelEntityGetter");
-		this.methodNmsLevelEntityGetterGet = ReflectionUtil.getMethod(this.classNmsLevelEntityGetter, "a", UUID.class);
+		// net.minecraft.server.level.WorldServer
+		Class<?> classNmsWorldServer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("WorldServer");
+		this.methodNmsWorldServerGetEntity = ReflectionUtil.getMethod(classNmsWorldServer, "getEntity", UUID.class);
 	}
 	
 	// -------------------------------------------- //
@@ -79,8 +64,8 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 		if (world == null) throw new NullPointerException("world");
 		if (uuid == null) return null;
 		
-		Object nmsLevelEntityGetter = ReflectionUtil.invokeMethod(methodNmsWorldServerGetEntities, world);
-		Object nmsEntity = ReflectionUtil.invokeMethod(methodNmsLevelEntityGetterGet, nmsLevelEntityGetter, uuid);
+		Object worldHandle = NmsBasics.get().getHandle(world);
+		Object nmsEntity = ReflectionUtil.invokeMethod(methodNmsWorldServerGetEntity, worldHandle, uuid);
 		if (nmsEntity == null) return null;
 		
 		return NmsBasics.get().getBukkit(nmsEntity);
