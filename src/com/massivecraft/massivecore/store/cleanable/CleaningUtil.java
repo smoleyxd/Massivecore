@@ -51,7 +51,7 @@ public class CleaningUtil
 		int total = current + count;
 		double percentage = (((double) count) / total) * 100D;
 		if (!MUtil.isFinite(percentage)) percentage = 0D;
-		String message = Txt.parse("<i>Removed <h>%d<i>/<h>%d (%.2f%%) <i>entities from <h>%s <i>took <v>%.2fms<i>.", count, total, percentage, coll.getName(), nano/1000D);
+		String message = Txt.parse("<i>Removed <h>%d<i>/<h>%d (%.2f%%) <i>entities from <h>%s <i>took <v>%.2fms<i>.", count, total, percentage, coll.getName(), nano/1000000D);
 		for (CommandSender recipient : recipients)
 		{
 			MixinMessage.get().messageOne(recipient, message);
