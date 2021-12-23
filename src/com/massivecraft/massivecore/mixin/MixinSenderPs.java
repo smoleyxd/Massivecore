@@ -11,7 +11,8 @@ public class MixinSenderPs extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinSenderPs d = new MixinSenderPs();
+	private static final MixinSenderPs d = new MixinSenderPs();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinSenderPs i = d;
 	@Contract(pure = true)
 	public static MixinSenderPs get() { return i; }

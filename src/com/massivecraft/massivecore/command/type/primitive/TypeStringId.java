@@ -8,7 +8,7 @@ public class TypeStringId extends TypeString
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeStringId i = new TypeStringId();
+	private static final TypeStringId i = new TypeStringId();
 	public static TypeStringId get() { return i; }
 	public TypeStringId()
 	{

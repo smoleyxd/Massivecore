@@ -10,7 +10,7 @@ public class ComparatorEntry extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorEntry i = new ComparatorEntry();
+	private static final ComparatorEntry i = new ComparatorEntry();
 	@Contract(pure = true)
 	public static ComparatorEntry get() { return i; }
 	

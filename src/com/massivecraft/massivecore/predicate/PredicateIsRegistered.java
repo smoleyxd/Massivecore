@@ -9,7 +9,7 @@ public class PredicateIsRegistered implements Predicate<Registerable>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateIsRegistered i = new PredicateIsRegistered();
+	private static final PredicateIsRegistered i = new PredicateIsRegistered();
 	public static PredicateIsRegistered get() { return i; }
 	
 	// -------------------------------------------- //

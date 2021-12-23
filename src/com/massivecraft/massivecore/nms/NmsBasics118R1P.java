@@ -13,16 +13,16 @@ import org.bukkit.scoreboard.Team;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class NmsBasics17R4P extends NmsBasics
+public class NmsBasics118R1P extends NmsBasics
 {
+	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsBasics17R4P i = new NmsBasics17R4P();
-	public static NmsBasics17R4P get() { return i; }
+	private static NmsBasics118R1P i = new NmsBasics118R1P();
+	public static NmsBasics118R1P get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -68,22 +68,22 @@ public class NmsBasics17R4P extends NmsBasics
 	private Field fieldCraftBlockEntityStateHandle;
 	
 	// GET BUKKIT
-	// net.minecraft.server.Entity
+	// net.minecraft.world.entity.Entity
 	private Class<?> classNmsEntity;
-	// net.minecraft.server.Entity#getBukkitEntity()
+	// net.minecraft.world.entity.Entity#getBukkitEntity()
 	private Method methodNmsEntityGetBukkitEntity;
 	
 	// CONNECTION & PACKET
 	
-	// net.minecraft.server.EntityPlayer
+	// net.minecraft.server.level.EntityPlayer
 	private Class<?> classNmsPlayer;
-	// net.minecraft.server.EntityPlayer#playerConnection
+	// net.minecraft.server.level.EntityPlayer#playerConnection
 	private Field fieldNmsPlayerPlayerConnection;
-	// net.minecraft.server.Packet
+	// net.minecraft.network.protocol.Packet
 	private Class<?> classNmsPacket;
-	// net.minecraft.server.PlayerConnection
+	// net.minecraft.server.network.PlayerConnection
 	private Class<?> classNmsPlayerConnection;
-	// net.minecraft.server.PlayerConnection#sendPacket(Packet)
+	// net.minecraft.server.network.PlayerConnection#sendPacket(Packet)
 	private Method methodPlayerConnectionsendPacket;
 	
 	// PING
@@ -127,19 +127,19 @@ public class NmsBasics17R4P extends NmsBasics
 		}
 		
 		// GET BUKKIT
-		this.classNmsEntity = PackageType.MINECRAFT_SERVER_VERSION.getClass("Entity");
+		this.classNmsEntity = PackageType.MINECRAFT_WORLD_ENTITY.getClass("Entity");
 		this.methodNmsEntityGetBukkitEntity = ReflectionUtil.getMethod(this.classNmsEntity, "getBukkitEntity");
 		
 		// CONNECTION & PACKET
 		
-		this.classNmsPlayer = PackageType.MINECRAFT_SERVER_VERSION.getClass("EntityPlayer");
-		this.fieldNmsPlayerPlayerConnection = ReflectionUtil.getField(this.classNmsPlayer, "playerConnection");
-		this.classNmsPacket = PackageType.MINECRAFT_SERVER_VERSION.getClass("Packet");
-		this.classNmsPlayerConnection = PackageType.MINECRAFT_SERVER_VERSION.getClass("PlayerConnection");
-		this.methodPlayerConnectionsendPacket = ReflectionUtil.getMethod(this.classNmsPlayerConnection, "sendPacket", this.classNmsPacket);
+		this.classNmsPlayer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("EntityPlayer");
+		this.fieldNmsPlayerPlayerConnection = ReflectionUtil.getField(this.classNmsPlayer, "b");
+		this.classNmsPacket = PackageType.MINECRAFT_NETWORK_PROTOCOL.getClass("Packet");
+		this.classNmsPlayerConnection = PackageType.MINECRAFT_SERVER_NETWORK.getClass("PlayerConnection");
+		this.methodPlayerConnectionsendPacket = ReflectionUtil.getMethod(this.classNmsPlayerConnection, "a", this.classNmsPacket);
 		
 		// PING
-		this.fieldNmsPlayerPing = ReflectionUtil.getField(this.classNmsPlayer, "ping");
+		this.fieldNmsPlayerPing = ReflectionUtil.getField(this.classNmsPlayer, "e");
 	}
 	
 	// -------------------------------------------- //

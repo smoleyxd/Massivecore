@@ -28,7 +28,7 @@ public class PlayerUtil extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PlayerUtil i = new PlayerUtil();
+	private static final PlayerUtil i = new PlayerUtil();
 	@Contract(pure = true)
 	public static PlayerUtil get() { return i; }
 	public PlayerUtil()
@@ -64,7 +64,7 @@ public class PlayerUtil extends Engine
 	// LAST MOVE & STAND STILL (MILLIS)
 	// -------------------------------------------- //
 	
-	private static Map<UUID, Long> idToLastMoveMillis = new HashMap<>();
+	private static final Map<UUID, Long> idToLastMoveMillis = new HashMap<>();
 	
 	public static void setLastMoveMillis(@Nullable Player player, long millis)
 	{
@@ -122,7 +122,7 @@ public class PlayerUtil extends Engine
 	// LAST DAMAGE & NO DAMAGE (MILLIS)
 	// -------------------------------------------- //
 	
-	private static Map<UUID, Long> idToLastDamageMillis = new HashMap<>();
+	private static final Map<UUID, Long> idToLastDamageMillis = new HashMap<>();
 	
 	public static void setLastDamageMillis(@Nullable Player player, long millis)
 	{
@@ -141,8 +141,7 @@ public class PlayerUtil extends Engine
 	{
 		if (event.getDamage() <= 0) return;
 			
-		if ( ! (event.getEntity() instanceof Player)) return;
-		Player player = (Player)event.getEntity();
+		if ( ! (event.getEntity() instanceof Player player)) return;
 		
 		setLastDamageMillis(player);
 	}
@@ -182,7 +181,7 @@ public class PlayerUtil extends Engine
 	// Some times when players die the PlayerDeathEvent is fired twice.
 	// We want to ignore the extra calls.
 	
-	private static Map<UUID, PlayerDeathEvent> idToDeathEvent = new HashMap<>();
+	private static final Map<UUID, PlayerDeathEvent> idToDeathEvent = new HashMap<>();
 	
 	public static boolean isDuplicateDeathEvent(@NotNull PlayerDeathEvent event)
 	{
@@ -213,7 +212,7 @@ public class PlayerUtil extends Engine
 	// -------------------------------------------- //
 	// An entity damage by entity event is considered to be a duplicate if the damager already damaged the damagee this tick.
 	
-	private static Map<String, EntityDamageByEntityEvent> idToDamageEvent = new HashMap<>();
+	private static final Map<String, EntityDamageByEntityEvent> idToDamageEvent = new HashMap<>();
 	
 	public static boolean isDuplicateDamageEvent(@NotNull EntityDamageByEntityEvent event)
 	{
@@ -221,7 +220,7 @@ public class PlayerUtil extends Engine
 		Entity damager = MUtil.getLiableDamager(event);
 		Entity damagee = event.getEntity();
 		if (damager == null) return false;
-		final String id = damager.getUniqueId().toString() + damagee.getUniqueId().toString();
+		final String id = damager.getUniqueId() + damagee.getUniqueId().toString();
 		
 		// ... get current ...
 		EntityDamageByEntityEvent current = idToDamageEvent.get(id);
@@ -247,7 +246,7 @@ public class PlayerUtil extends Engine
 	// -------------------------------------------- //
 	// An entity damage by entity event is considered to be a duplicate if the damager already damaged the damagee this tick.
 	
-	private static Map<UUID, PlayerAnimationEvent> idToArmSwingEvent = new HashMap<>();
+	private static final Map<UUID, PlayerAnimationEvent> idToArmSwingEvent = new HashMap<>();
 	
 	public static boolean isDuplicateArmSwingEvent(@NotNull PlayerAnimationEvent event)
 	{
@@ -287,14 +286,7 @@ public class PlayerUtil extends Engine
 	 */
 	public static void sendHealthFoodUpdatePacket(@NotNull Player player)
 	{
-		// No need for nms anymore.
-		// We can trigger this packet through the use of this bukkit api method:
 		player.setHealthScaled(player.isHealthScaled());
-		/*
-		CraftPlayer cplayer = (CraftPlayer)player;
-		EntityPlayer eplayer = cplayer.getHandle();
-		eplayer.playerConnection.sendPacket(new PacketPlayOutUpdateHealth(cplayer.getScaledHealth(), eplayer.getFoodData().a(), eplayer.getFoodData().e()));
-		*/
 	}
 	
 }

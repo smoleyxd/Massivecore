@@ -10,8 +10,8 @@ public class PredicateLevenshteinClose implements Predicate<String>
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private String token;
-	private int levenshteinMax;
+	private final String token;
+	private final int levenshteinMax;
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

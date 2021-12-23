@@ -13,14 +13,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 
-public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer<T>, JsonSerializer<T>
+public record AdapterLowercaseEnum<T extends Enum<T>>(Class<T> clazz) implements JsonDeserializer<T>, JsonSerializer<T>
 {
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private final Class<T> clazz;
-	public Class<T> getClazz() { return this.clazz; }
+	public Class<T> getClazz() {return this.clazz;}
 	
 	// -------------------------------------------- //
 	// INSTANCE
@@ -37,13 +36,12 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 	// -------------------------------------------- //
 	
 	@Contract("null -> fail")
-	public AdapterLowercaseEnum(Class<T> clazz)
+	public AdapterLowercaseEnum
 	{
 		if (clazz == null) throw new IllegalArgumentException("clazz is null");
-		if ( ! clazz.isEnum()) throw new IllegalArgumentException("clazz is not enum");
-		this.clazz = clazz;
+		if (!clazz.isEnum()) throw new IllegalArgumentException("clazz is not enum");
 	}
-			
+	
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
@@ -57,7 +55,7 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 		String comparable = this.getComparable(src);
 		return new JsonPrimitive(comparable);
 	}
-
+	
 	@Override
 	public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 	{
@@ -67,7 +65,7 @@ public class AdapterLowercaseEnum<T extends Enum<T>> implements JsonDeserializer
 		
 		return this.getEnumValueFrom(json);
 	}
-
+	
 	// -------------------------------------------- //
 	// GET ENUM VALUE FROM
 	// -------------------------------------------- //

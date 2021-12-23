@@ -225,7 +225,7 @@ public abstract class Property<O, V> implements Named
 	
 	public String getDisplayName()
 	{
-		return ChatColor.AQUA.toString() + this.getName();
+		return ChatColor.AQUA + this.getName();
 	}
 	
 	public List<Mson> getShowLines(O object, CommandSender sender)

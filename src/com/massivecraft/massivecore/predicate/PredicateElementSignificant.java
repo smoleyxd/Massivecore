@@ -8,7 +8,7 @@ public class PredicateElementSignificant extends PredicateElementRegexes
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateElementSignificant i = new PredicateElementSignificant();
+	private static final PredicateElementSignificant i = new PredicateElementSignificant();
 	public static PredicateElementSignificant get() { return i; }
 	public PredicateElementSignificant()
 	{

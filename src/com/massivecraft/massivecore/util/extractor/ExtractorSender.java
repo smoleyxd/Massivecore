@@ -6,7 +6,7 @@ public class ExtractorSender implements Extractor
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ExtractorSender i = new ExtractorSender();
+	private static final ExtractorSender i = new ExtractorSender();
 	public static ExtractorSender get() { return i; }
 	
 	// -------------------------------------------- //

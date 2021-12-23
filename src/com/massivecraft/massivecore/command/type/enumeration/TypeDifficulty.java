@@ -8,7 +8,7 @@ public class TypeDifficulty extends TypeEnum<Difficulty>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDifficulty i = new TypeDifficulty();
+	private static final TypeDifficulty i = new TypeDifficulty();
 	public static TypeDifficulty get() { return i; }
 	public TypeDifficulty()
 	{

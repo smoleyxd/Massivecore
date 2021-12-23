@@ -172,8 +172,7 @@ public class WebUtil
 	
 	public static void trustConnection(URLConnection connection)
 	{
-		if ( ! (connection instanceof HttpsURLConnection)) return;
-		HttpsURLConnection httpsConnection = (HttpsURLConnection) connection;
+		if ( ! (connection instanceof HttpsURLConnection httpsConnection)) return;
 		httpsConnection.setSSLSocketFactory(TRUSTING_SOCKET_FACTORY);
 	}
 	

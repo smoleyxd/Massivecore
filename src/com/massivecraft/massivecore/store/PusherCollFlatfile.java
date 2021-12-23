@@ -188,7 +188,7 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 	
 	public void register(Path path) throws IOException
 	{
-		if (Files.notExists(path)) throw new IllegalArgumentException(path.toString() + " does not exist.");
+		if (Files.notExists(path)) throw new IllegalArgumentException(path + " does not exist.");
 		WatchKey key = path.register(watcher, EVENT_TYPES);
 		//System.out.format("register: %s\n", path);
 		keys.put(key, path);
@@ -197,7 +197,8 @@ public class PusherCollFlatfile extends Thread implements PusherColl
 	public void registerAll(final Path start) throws IOException
 	{
 		// register directory and sub-directories
-		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
+		Files.walkFileTree(start, new SimpleFileVisitor<>()
+		{
 			@Override
 			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException
 			{

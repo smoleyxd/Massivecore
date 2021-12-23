@@ -125,7 +125,7 @@ public class BackstringSet<T> extends AbstractSet<T>
 		
 		// Return
 		final Iterator<T> temporaryIterator = temporaryList.iterator();
-		return new Iterator<T>()
+		return new Iterator<>()
 		{
 			@Override
 			public boolean hasNext()

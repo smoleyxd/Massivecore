@@ -11,7 +11,7 @@ public class TypeAspect extends TypeEntity<Aspect>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeAspect i = new TypeAspect();
+	private static final TypeAspect i = new TypeAspect();
 	public static TypeAspect get() { return i; }
 	public TypeAspect()
 	{

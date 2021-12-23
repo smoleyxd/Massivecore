@@ -16,7 +16,7 @@ public class PredicateIntegrationFactions extends PredicateIntegration
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateIntegrationFactions i = new PredicateIntegrationFactions();
+	private static final PredicateIntegrationFactions i = new PredicateIntegrationFactions();
 	public static PredicateIntegrationFactions get() { return i; }
 	
 	// -------------------------------------------- //

@@ -13,7 +13,7 @@ public class PredicateIntegration implements Predicate<Integration>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateIntegration i = new PredicateIntegration();
+	private static final PredicateIntegration i = new PredicateIntegration();
 	public static PredicateIntegration get() { return i; }
 	
 	// -------------------------------------------- //

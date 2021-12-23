@@ -12,7 +12,7 @@ public class NmsPersistentData extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsPersistentData d = new NmsPersistentData().setAlternatives(
+	private static final NmsPersistentData d = new NmsPersistentData().setAlternatives(
 		NmsPersistentData117R1P.class,
 		NmsPersistentData116R3P.class
 	);
@@ -21,6 +21,7 @@ public class NmsPersistentData extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPersistentData i = d;
 	public static NmsPersistentData get() { return i; }
 	

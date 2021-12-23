@@ -8,7 +8,7 @@ public class ComparatorComparable extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static transient ComparatorComparable i = new ComparatorComparable();
+	private static final transient ComparatorComparable i = new ComparatorComparable();
 	@Contract(pure = true)
 	public static ComparatorComparable get() { return i; }
 	

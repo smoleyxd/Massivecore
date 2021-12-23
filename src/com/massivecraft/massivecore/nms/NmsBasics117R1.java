@@ -13,15 +13,16 @@ import org.bukkit.scoreboard.Team;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class NmsBasics117R1P extends NmsBasics
+public class NmsBasics117R1 extends NmsBasics
 {
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsBasics117R1P i = new NmsBasics117R1P();
-	public static NmsBasics117R1P get() { return i; }
+	@SuppressWarnings("FieldMayBeFinal")
+	private static NmsBasics117R1 i = new NmsBasics117R1();
+	public static NmsBasics117R1 get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS

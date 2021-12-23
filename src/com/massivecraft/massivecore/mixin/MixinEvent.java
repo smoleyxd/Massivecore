@@ -12,7 +12,8 @@ public class MixinEvent extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinEvent d = new MixinEvent();
+	private static final MixinEvent d = new MixinEvent();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinEvent i = d;
 	@Contract(pure = true)
 	public static MixinEvent get() { return i; }

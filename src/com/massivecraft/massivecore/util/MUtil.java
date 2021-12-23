@@ -90,7 +90,7 @@ public class MUtil
 	// CONSTANTS
 	// -------------------------------------------- //
 	
-	private static Method methodGetOnlinePlayers;
+	private static final Method methodGetOnlinePlayers;
 	
 	static
 	{
@@ -170,9 +170,8 @@ public class MUtil
 			Collection<Player> playersCollection = (Collection<Player>)playersObject;
 			return playersCollection;
 		}
-		else if (playersObject instanceof Player[])
+		else if (playersObject instanceof Player[] playersArray)
 		{
-			Player[] playersArray = (Player[])playersObject;
 			return Arrays.asList(playersArray);
 		}
 		else
@@ -336,8 +335,7 @@ public class MUtil
 	@Contract("null -> null")
 	public static String getIp(CommandSender sender)
 	{
-		if (!(sender instanceof Player)) return null;
-		Player player = (Player)sender;
+		if (!(sender instanceof Player player)) return null;
 		
 		InetSocketAddress address = player.getAddress();
 		if (address != null) return getIp(address);
@@ -397,8 +395,7 @@ public class MUtil
 	@Contract("null -> false")
 	public static boolean isNpc(Object object)
 	{
-		if ( ! (object instanceof Metadatable)) return false;
-		Metadatable metadatable = (Metadatable)object;
+		if ( ! (object instanceof Metadatable metadatable)) return false;
 		try
 		{
 			return metadatable.hasMetadata("NPC");
@@ -608,14 +605,7 @@ public class MUtil
 			}
 			else
 			{
-				if (fileName != null)
-				{
-					ret.append(fileName);
-				}
-				else
-				{
-					ret.append("Unknown Source");
-				}
+				ret.append(Objects.requireNonNullElse(fileName, "Unknown Source"));
 			}
 		}
 		
@@ -803,32 +793,31 @@ public class MUtil
 	
 	public static int getChatColorCode(@NotNull ChatColor chatColor)
 	{
-		switch (chatColor)
-		{
-			case BLACK: return 0x00;
-			case DARK_BLUE: return 0x1;
-			case DARK_GREEN: return 0x2;
-			case DARK_AQUA: return 0x3;
-			case DARK_RED: return 0x4;
-			case DARK_PURPLE: return 0x5;
-			case GOLD: return 0x6;
-			case GRAY: return 0x7;
-			case DARK_GRAY: return 0x8;
-			case BLUE: return 0x9;
-			case GREEN: return 0xA;
-			case AQUA: return 0xB;
-			case RED: return 0xC;
-			case LIGHT_PURPLE: return 0xD;
-			case YELLOW: return 0xE;
-			case WHITE: return 0xF;
-			case MAGIC: return 0x10;
-			case BOLD: return 0x11;
-			case STRIKETHROUGH: return 0x12;
-			case UNDERLINE: return 0x13;
-			case ITALIC: return 0x14;
-			case RESET: return 0x15;
-		}
-		throw new IllegalArgumentException("The chat color " + chatColor.name() + " is not yet supported!");
+		return switch (chatColor)
+				   {
+					   case BLACK -> 0x00;
+					   case DARK_BLUE -> 0x1;
+					   case DARK_GREEN -> 0x2;
+					   case DARK_AQUA -> 0x3;
+					   case DARK_RED -> 0x4;
+					   case DARK_PURPLE -> 0x5;
+					   case GOLD -> 0x6;
+					   case GRAY -> 0x7;
+					   case DARK_GRAY -> 0x8;
+					   case BLUE -> 0x9;
+					   case GREEN -> 0xA;
+					   case AQUA -> 0xB;
+					   case RED -> 0xC;
+					   case LIGHT_PURPLE -> 0xD;
+					   case YELLOW -> 0xE;
+					   case WHITE -> 0xF;
+					   case MAGIC -> 0x10;
+					   case BOLD -> 0x11;
+					   case STRIKETHROUGH -> 0x12;
+					   case UNDERLINE -> 0x13;
+					   case ITALIC -> 0x14;
+					   case RESET -> 0x15;
+				   };
 	}
 	
 	@Contract(pure = true)
@@ -866,27 +855,25 @@ public class MUtil
 	@Contract(pure = true)
 	public static ChatColor getChatColor(@NotNull DyeColor dyeColor)
 	{
-		switch (dyeColor)
-		{
-			case WHITE: return ChatColor.WHITE;
-			case ORANGE: return ChatColor.GOLD;
-			case MAGENTA: return ChatColor.LIGHT_PURPLE;
-			case LIGHT_BLUE: return ChatColor.AQUA;
-			case YELLOW: return ChatColor.YELLOW;
-			case LIME: return ChatColor.GREEN;
-			case PINK: return ChatColor.LIGHT_PURPLE;
-			case GRAY: return ChatColor.DARK_GRAY;
-			case LIGHT_GRAY: return ChatColor.GRAY;
-			case CYAN: return ChatColor.DARK_AQUA;
-			case PURPLE: return ChatColor.DARK_PURPLE;
-			case BLUE: return ChatColor.BLUE;
-			case BROWN: return ChatColor.GRAY;
-			case GREEN: return ChatColor.DARK_GREEN;
-			case RED: return ChatColor.RED;
-			case BLACK: return ChatColor.BLACK;
-		}
-		
-		throw new IllegalArgumentException("The dye color " + dyeColor + " is not yet supported!");
+		return switch (dyeColor)
+				   {
+					   case WHITE -> ChatColor.WHITE;
+					   case ORANGE -> ChatColor.GOLD;
+					   case MAGENTA -> ChatColor.LIGHT_PURPLE;
+					   case LIGHT_BLUE -> ChatColor.AQUA;
+					   case YELLOW -> ChatColor.YELLOW;
+					   case LIME -> ChatColor.GREEN;
+					   case PINK -> ChatColor.LIGHT_PURPLE;
+					   case GRAY -> ChatColor.DARK_GRAY;
+					   case LIGHT_GRAY -> ChatColor.GRAY;
+					   case CYAN -> ChatColor.DARK_AQUA;
+					   case PURPLE -> ChatColor.DARK_PURPLE;
+					   case BLUE -> ChatColor.BLUE;
+					   case BROWN -> ChatColor.GRAY;
+					   case GREEN -> ChatColor.DARK_GREEN;
+					   case RED -> ChatColor.RED;
+					   case BLACK -> ChatColor.BLACK;
+				   };
 	}
 	
 	// -------------------------------------------- //
@@ -1124,29 +1111,28 @@ public class MUtil
 	@Contract(pure = true)
 	public static @Nullable Float getYaw(@NotNull BlockFace face)
 	{
-		switch (face)
-		{
-			case NORTH: return 0f;
-			case EAST: return 90f;
-			case SOUTH: return 180f;
-			case WEST: return 270f;
-			case UP: return null;
-			case DOWN: return null;
-			case NORTH_EAST: return 45f;
-			case NORTH_WEST: return 315f;
-			case SOUTH_EAST: return 135f;
-			case SOUTH_WEST: return 225f;
-			case WEST_NORTH_WEST: return 292.5f;
-			case NORTH_NORTH_WEST: return 337.5f;
-			case NORTH_NORTH_EAST: return 22.5f;
-			case EAST_NORTH_EAST: return 67.5f;
-			case EAST_SOUTH_EAST: return 112.5f;
-			case SOUTH_SOUTH_EAST: return 157.5f;
-			case SOUTH_SOUTH_WEST: return 202.5f;
-			case WEST_SOUTH_WEST: return 247.5f;
-			case SELF: return null;
-		}
-		return null;
+		return switch (face)
+				   {
+					   case NORTH -> 0f;
+					   case EAST -> 90f;
+					   case SOUTH -> 180f;
+					   case WEST -> 270f;
+					   case UP -> null;
+					   case DOWN -> null;
+					   case NORTH_EAST -> 45f;
+					   case NORTH_WEST -> 315f;
+					   case SOUTH_EAST -> 135f;
+					   case SOUTH_WEST -> 225f;
+					   case WEST_NORTH_WEST -> 292.5f;
+					   case NORTH_NORTH_WEST -> 337.5f;
+					   case NORTH_NORTH_EAST -> 22.5f;
+					   case EAST_NORTH_EAST -> 67.5f;
+					   case EAST_SOUTH_EAST -> 112.5f;
+					   case SOUTH_SOUTH_EAST -> 157.5f;
+					   case SOUTH_SOUTH_WEST -> 202.5f;
+					   case WEST_SOUTH_WEST -> 247.5f;
+					   case SELF -> null;
+				   };
 	}
 	
 	// -------------------------------------------- //
@@ -1193,8 +1179,7 @@ public class MUtil
 	public static boolean isSword(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		return isSword(lentity.getEquipment().getItemInMainHand());
 	}
 	
@@ -1230,8 +1215,7 @@ public class MUtil
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		return isAxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
@@ -1261,8 +1245,7 @@ public class MUtil
 	public static boolean isUnarmed(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		return isUnarmed(lentity.getEquipment().getItemInMainHand());
 	}
 	
@@ -1303,8 +1286,7 @@ public class MUtil
 	public static boolean isPickaxe(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		return isPickaxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
@@ -1331,8 +1313,7 @@ public class MUtil
 	public static boolean isSpade(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		return isSpade(lentity.getEquipment().getItemInMainHand());
 	}
 	
@@ -1359,8 +1340,7 @@ public class MUtil
 	public static boolean isHoe(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
 		EntityEquipment inv = lentity.getEquipment();
 		if (inv == null) return false;
 		return isHoe(inv.getItemInMainHand()) || isHoe(inv.getItemInOffHand());
@@ -1476,12 +1456,10 @@ public class MUtil
 	@Contract("null -> null")
 	public static Entity getLiableDamager(EntityDamageEvent event)
 	{
-		if (!(event instanceof EntityDamageByEntityEvent)) return null;
-		EntityDamageByEntityEvent edbeEvent = (EntityDamageByEntityEvent)event;
+		if (!(event instanceof EntityDamageByEntityEvent edbeEvent)) return null;
 		Entity ret = edbeEvent.getDamager();
-		if (ret instanceof Projectile)
+		if (ret instanceof Projectile projectile)
 		{
-			Projectile projectile = (Projectile)ret;
 			ProjectileSource projectileSource = projectile.getShooter();
 			if (projectileSource instanceof Entity) ret = (Entity)projectileSource;
 		}
@@ -1940,20 +1918,6 @@ public class MUtil
 	// -------------------------------------------- //
 	// SORTING
 	// -------------------------------------------- //
-	
-	//http://stackoverflow.com/questions/2864840/treemap-sort-by-value
-	/*public static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
-		SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
-			new Comparator<Map.Entry<K,V>>() {
-				@Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
-					int res = e1.getValue().compareTo(e2.getValue());
-					return res != 0 ? res : 1; // Special fix to preserve items with equal values
-				}
-			}
-		);
-		sortedEntries.addAll(map.entrySet());
-		return sortedEntries;
-	}*/
 	
 	// http://stackoverflow.com/questions/2864840/treemap-sort-by-value
 	public static <K,V extends Comparable<? super V>> @NotNull SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map)

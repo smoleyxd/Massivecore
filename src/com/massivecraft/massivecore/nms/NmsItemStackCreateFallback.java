@@ -9,6 +9,7 @@ public class NmsItemStackCreateFallback extends NmsItemStackCreate
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsItemStackCreateFallback i = new NmsItemStackCreateFallback();
 	public static NmsItemStackCreateFallback get () { return i; }
 	

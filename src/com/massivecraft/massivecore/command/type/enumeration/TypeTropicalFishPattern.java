@@ -8,7 +8,7 @@ public class TypeTropicalFishPattern extends TypeEnum<TropicalFish.Pattern>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeTropicalFishPattern i = new TypeTropicalFishPattern();
+	private static final TypeTropicalFishPattern i = new TypeTropicalFishPattern();
 	public static TypeTropicalFishPattern get() { return i; }
 	public TypeTropicalFishPattern()
 	{

@@ -8,7 +8,7 @@ public class ComparatorIdentifiedSmart extends ComparatorIdentified
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorIdentifiedSmart i = new ComparatorIdentifiedSmart();
+	private static final ComparatorIdentifiedSmart i = new ComparatorIdentifiedSmart();
 	@Contract(pure = true)
 	public static ComparatorIdentifiedSmart get() { return i; }
 	public ComparatorIdentifiedSmart()

@@ -15,6 +15,7 @@ public class NmsEntityDamageEvent17R4P extends NmsEntityDamageEvent
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsEntityDamageEvent17R4P i = new NmsEntityDamageEvent17R4P();
 	public static NmsEntityDamageEvent17R4P get() { return i; }
 	

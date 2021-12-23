@@ -12,7 +12,7 @@ public class ComparatorMap extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorMap i = new ComparatorMap();
+	private static final ComparatorMap i = new ComparatorMap();
 	@Contract(pure = true)
 	public static ComparatorMap get() { return i; }
 	

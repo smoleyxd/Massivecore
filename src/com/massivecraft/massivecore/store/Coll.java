@@ -32,6 +32,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class Coll<E extends Entity<E>> extends CollAbstract<E>
 {
 	// -------------------------------------------- //
@@ -55,8 +56,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		List<SenderColl<?>> ret = new ArrayList<>();
 		for (Coll<?> coll : getInstances())
 		{
-			if ( ! (coll instanceof SenderColl)) continue;
-			SenderColl<?> senderColl = (SenderColl<?>)coll;
+			if ( ! (coll instanceof SenderColl<?> senderColl)) continue;
 			ret.add(senderColl);
 		}
 		return ret;
@@ -517,43 +517,39 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		
 		switch (modification)
 		{
-			case LOCAL_ALTER:
-			case LOCAL_ATTACH:
+			case LOCAL_ALTER, LOCAL_ATTACH -> {
 				this.saveToRemoteFixed(id);
 				if (this.isActive())
 				{
 					this.addSyncCountFixed(TOTAL, false);
 					this.addSyncCountFixed(id, false);
 				}
-			break;
-			case LOCAL_DETACH:
+			}
+			case LOCAL_DETACH -> {
 				this.removeAtRemoteFixed(id);
 				if (this.isActive())
 				{
 					this.addSyncCountFixed(TOTAL, false);
 					this.addSyncCountFixed(id, false);
 				}
-			break;
-			case REMOTE_ALTER:
-			case REMOTE_ATTACH:
+			}
+			case REMOTE_ALTER, REMOTE_ATTACH -> {
 				this.loadFromRemoteFixed(id, remoteEntry);
 				if (this.isActive())
 				{
 					this.addSyncCountFixed(TOTAL, true);
 					this.addSyncCountFixed(id, true);
 				}
-			break;
-			case REMOTE_DETACH:
+			}
+			case REMOTE_DETACH -> {
 				this.removeAtLocalFixed(id);
 				if (this.isActive())
 				{
 					this.addSyncCountFixed(TOTAL, true);
 					this.addSyncCountFixed(id, true);
 				}
-			break;
-			default:
-				this.removeIdentifiedModificationFixed(id);
-			break;
+			}
+			default -> this.removeIdentifiedModificationFixed(id);
 		}
 
 		E entity = this.getFixed(id);
@@ -879,8 +875,7 @@ public class Coll<E extends Entity<E>> extends CollAbstract<E>
 		String me = this.getClass().getName();
 		for (Plugin plugin : Bukkit.getPluginManager().getPlugins())
 		{
-			if (!(plugin instanceof MassivePlugin)) continue;
-			MassivePlugin mplugin = (MassivePlugin)plugin;
+			if (!(plugin instanceof MassivePlugin mplugin)) continue;
 			String you = mplugin.getDescription().getMain();
 			
 			String prefix = StringUtils.getCommonPrefix(new String[]{me, you});

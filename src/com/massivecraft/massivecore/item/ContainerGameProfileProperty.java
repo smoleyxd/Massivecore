@@ -13,8 +13,7 @@ public class ContainerGameProfileProperty
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof ContainerGameProfileProperty)) return false;
-		ContainerGameProfileProperty that = (ContainerGameProfileProperty)object;
+		if ( ! (object instanceof ContainerGameProfileProperty that)) return false;
 		
 		return MUtil.equals(
 			this.name, that.name,

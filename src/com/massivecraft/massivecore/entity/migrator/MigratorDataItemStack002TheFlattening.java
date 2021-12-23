@@ -24,7 +24,7 @@ public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorDataItemStack002TheFlattening i = new MigratorDataItemStack002TheFlattening();
+	private static final MigratorDataItemStack002TheFlattening i = new MigratorDataItemStack002TheFlattening();
 	
 	public static MigratorDataItemStack002TheFlattening get()
 	{

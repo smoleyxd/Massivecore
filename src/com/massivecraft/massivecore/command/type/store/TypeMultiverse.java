@@ -11,7 +11,7 @@ public class TypeMultiverse extends TypeEntity<Multiverse>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeMultiverse i = new TypeMultiverse();
+	private static final TypeMultiverse i = new TypeMultiverse();
 	public static TypeMultiverse get() { return i; }
 	public TypeMultiverse()
 	{

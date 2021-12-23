@@ -12,7 +12,7 @@ public class TypeStringConfirmation extends TypeAbstract<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 
-	private static TypeStringConfirmation i = new TypeStringConfirmation();
+	private static final TypeStringConfirmation i = new TypeStringConfirmation();
 	public static TypeStringConfirmation get() { return i; }
 	public TypeStringConfirmation() { super(String.class); }
 	

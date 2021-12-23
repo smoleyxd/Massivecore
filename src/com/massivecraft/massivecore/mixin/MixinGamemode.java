@@ -11,7 +11,8 @@ public class MixinGamemode extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinGamemode d = new MixinGamemode();
+	private static final MixinGamemode d = new MixinGamemode();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinGamemode i = d;
 	@Contract(pure = true)
 	public static MixinGamemode get() { return i; }

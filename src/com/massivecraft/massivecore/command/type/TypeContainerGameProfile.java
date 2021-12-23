@@ -8,7 +8,7 @@ public class TypeContainerGameProfile extends TypeReflection<ContainerGameProfil
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static TypeContainerGameProfile i = new TypeContainerGameProfile();
+	private static final TypeContainerGameProfile i = new TypeContainerGameProfile();
 	public static TypeContainerGameProfile get() { return i; }
 	
 	// -------------------------------------------- //

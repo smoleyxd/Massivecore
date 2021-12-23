@@ -8,7 +8,7 @@ public class ComparatorNull extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorNull i = new ComparatorNull();
+	private static final ComparatorNull i = new ComparatorNull();
 	@Contract(pure = true)
 	public static ComparatorNull get() { return i; }
 	

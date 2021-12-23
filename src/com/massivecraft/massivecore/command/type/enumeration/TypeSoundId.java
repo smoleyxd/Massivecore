@@ -9,7 +9,7 @@ public class TypeSoundId extends TypeId<Sound>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeSoundId i = new TypeSoundId();
+	private static final TypeSoundId i = new TypeSoundId();
 	public static TypeSoundId get() { return i; }
 	public TypeSoundId()
 	{

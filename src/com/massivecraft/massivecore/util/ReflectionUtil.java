@@ -508,7 +508,7 @@ public class ReflectionUtil
 	// -------------------------------------------- //
 	
 	// Example: "v1_9_R4"
-	private static String versionRaw = Bukkit.getServer().getClass().getPackage().getName().substring(23);
+	private static final String versionRaw = Bukkit.getServer().getClass().getPackage().getName().substring(23);
 	@Contract(pure = true)
 	public static String getVersionRaw() { return versionRaw; }
 	
@@ -520,17 +520,17 @@ public class ReflectionUtil
 	}
 	
 	// Example: 1
-	private static int versionMajor = Integer.parseInt(getVersionRawPart(0).substring(1));
+	private static final int versionMajor = Integer.parseInt(getVersionRawPart(0).substring(1));
 	@Contract(pure = true)
 	public static int getVersionMajor() { return versionMajor; }
 	
 	// Example: 9
-	private static int versionMinor = Integer.parseInt(getVersionRawPart(1));
+	private static final int versionMinor = Integer.parseInt(getVersionRawPart(1));
 	@Contract(pure = true)
 	public static int getVersionMinor() { return versionMinor; }
 	
 	// Example: 4
-	private static int versionRelease = Integer.parseInt(getVersionRawPart(2).substring(1));
+	private static final int versionRelease = Integer.parseInt(getVersionRawPart(2).substring(1));
 	@Contract(pure = true)
 	public static int getVersionRelease() { return versionRelease; }
 	

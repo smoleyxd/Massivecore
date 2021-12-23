@@ -15,8 +15,9 @@ public class NmsBasics extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsBasics d = new NmsBasics().setAlternatives(
-		NmsBasics117R1P.class,
+	private static final NmsBasics d = new NmsBasics().setAlternatives(
+		NmsBasics118R1P.class,
+		NmsBasics117R1.class,
 		NmsBasics17R4P.class
 	);
 	
@@ -24,6 +25,7 @@ public class NmsBasics extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsBasics i = d;
 	public static NmsBasics get() { return i; }
 	

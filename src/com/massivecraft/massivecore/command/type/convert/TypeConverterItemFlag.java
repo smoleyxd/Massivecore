@@ -12,7 +12,7 @@ public class TypeConverterItemFlag extends TypeConverter<ItemFlag, String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeConverterItemFlag i = new TypeConverterItemFlag();
+	private static final TypeConverterItemFlag i = new TypeConverterItemFlag();
 	public static TypeConverterItemFlag get() { return i; }
 	
 	public TypeConverterItemFlag()

@@ -11,7 +11,8 @@ public class MixinCommand extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinCommand d = new MixinCommand();
+	private static final MixinCommand d = new MixinCommand();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinCommand i = d;
 	@Contract(pure = true)
 	public static MixinCommand get() { return i; }

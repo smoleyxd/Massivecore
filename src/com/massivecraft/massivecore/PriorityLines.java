@@ -84,8 +84,7 @@ public class PriorityLines implements Prioritized, Comparable<PriorityLines>
 	@Override
 	public boolean equals(Object object)
 	{
-		if (!(object instanceof PriorityLines)) return false;
-		PriorityLines that = (PriorityLines)object;
+		if (!(object instanceof PriorityLines that)) return false;
 		return MUtil.equals(
 			this.getPriority(), that.getPriority(),
 			this.getLines(), that.getLines()

@@ -5,8 +5,11 @@ import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.ps.PSFormatHumanSpace;
 import com.massivecraft.massivecore.util.Txt;
 
+import java.io.Serial;
+
 public abstract class DestinationAbstract implements Destination
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

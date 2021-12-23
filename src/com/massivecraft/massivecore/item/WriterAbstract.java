@@ -45,7 +45,7 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// For that reason the dependencies are activated just after the setup logic.
 	// Examples would be WriterPotionEffect and WriterFireworkEffect.
 	// They are implicitly required for some ItemStack field writers. 
-	private List<Class<?>> dependencyClasses = new MassiveList<>();
+	private final List<Class<?>> dependencyClasses = new MassiveList<>();
 	public List<Class<?>> getDependencyClasses() { return this.dependencyClasses; }
 	@Contract(mutates = "this")
 	public void addDependencyClasses(Class<?> @NotNull ... dependencyClasses) { this.getDependencyClasses().addAll(Arrays.asList(dependencyClasses)); }
@@ -53,14 +53,14 @@ public abstract class WriterAbstract<OA, OB, CA, CB, FA, FB, D> extends Engine
 	// This is the writer classes scheduled to be used at setup.
 	// We do not yet know if they are compatible with this Minecraft version.
 	// All, some or none of them may fail.
-	private List<Class<?>> writerClasses = new MassiveList<>();
+	private final List<Class<?>> writerClasses = new MassiveList<>();
 	public List<Class<?>> getWriterClasses() { return this.writerClasses; }
 	@Contract(mutates = "this")
 	public void addWriterClasses(Class<?> @NotNull ... writerClasses) { this.getWriterClasses().addAll(Arrays.asList(writerClasses)); }
 	
 	// These are the actually functional child writers.
 	// This list should only contain writers that passed the setup routine.
-	private List<WriterAbstract<CA, CB, ?, ?, ?, ?, D>> writers = new MassiveList<>();
+	private final List<WriterAbstract<CA, CB, ?, ?, ?, ?, D>> writers = new MassiveList<>();
 	public List<WriterAbstract<CA, CB, ?, ?, ?, ?, D>> getWriters() { return this.writers; }
 
 	// Here is the logic to perform the dependency and child writer setup.

@@ -11,7 +11,7 @@ public class NmsItemStackCreate extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsItemStackCreate d = new NmsItemStackCreate().setAlternatives(
+	private static final NmsItemStackCreate d = new NmsItemStackCreate().setAlternatives(
 		NmsItemStackCreate117R1P.class,
 		NmsItemStackCreate17R4P.class,
 		NmsItemStackCreateFallback.class
@@ -21,6 +21,7 @@ public class NmsItemStackCreate extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsItemStackCreate i = d;
 	public static NmsItemStackCreate get() { return i; }
 	

@@ -14,7 +14,7 @@ public class NmsEntityDamageEvent extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsEntityDamageEvent d = new NmsEntityDamageEvent().setAlternatives(
+	private static final NmsEntityDamageEvent d = new NmsEntityDamageEvent().setAlternatives(
 		NmsEntityDamageEvent17R4P.class
 	);
 	
@@ -22,6 +22,7 @@ public class NmsEntityDamageEvent extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsEntityDamageEvent i = d;
 	public static NmsEntityDamageEvent get() { return i; }
 	

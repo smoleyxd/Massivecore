@@ -10,7 +10,7 @@ public class ComparatorHandleIdentityTeam extends ComparatorAbstractTransformer<
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorHandleIdentityTeam i = new ComparatorHandleIdentityTeam();
+	private static final ComparatorHandleIdentityTeam i = new ComparatorHandleIdentityTeam();
 	public static ComparatorHandleIdentityTeam get() { return i; }
 	public ComparatorHandleIdentityTeam()
 	{

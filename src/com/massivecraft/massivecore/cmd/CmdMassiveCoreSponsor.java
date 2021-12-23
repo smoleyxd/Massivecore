@@ -12,7 +12,7 @@ public class CmdMassiveCoreSponsor extends MassiveCommandToggle
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreSponsor i = new CmdMassiveCoreSponsor();
+	private static final CmdMassiveCoreSponsor i = new CmdMassiveCoreSponsor();
 	@Contract(pure = true)
 	public static CmdMassiveCoreSponsor get() { return i; }
 	

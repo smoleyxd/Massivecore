@@ -130,7 +130,8 @@ public class EditSettings<O>
 		
 		this.setParent(parentSettings);
 		
-		PropertyUsed<O> usedProperty = new PropertyUsed<O>(this) {
+		PropertyUsed<O> usedProperty = new PropertyUsed<>(this)
+		{
 			
 			@Override
 			public O getRaw(CommandSender sender)

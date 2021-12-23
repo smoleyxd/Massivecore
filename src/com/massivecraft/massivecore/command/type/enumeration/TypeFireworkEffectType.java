@@ -8,7 +8,7 @@ public class TypeFireworkEffectType extends TypeEnum<Type>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeFireworkEffectType i = new TypeFireworkEffectType();
+	private static final TypeFireworkEffectType i = new TypeFireworkEffectType();
 	public static TypeFireworkEffectType get() { return i; }
 	public TypeFireworkEffectType()
 	{

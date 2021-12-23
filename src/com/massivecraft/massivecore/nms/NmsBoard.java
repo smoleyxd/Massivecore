@@ -16,7 +16,7 @@ public class NmsBoard extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsBoard d = new NmsBoard().setAlternatives(
+	private static final NmsBoard d = new NmsBoard().setAlternatives(
 		NmsBoard19R1P.class,
 		NmsBoard18R1P.class,
 		NmsBoard17R4.class
@@ -26,6 +26,7 @@ public class NmsBoard extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsBoard i = d;
 	public static NmsBoard get() { return i; }
 	

@@ -69,8 +69,7 @@ public class IdData implements Identified, Named
 	{
 		if (this == obj) return true;
 		if (obj == null) return false;
-		if (!(obj instanceof IdData)) return false;
-		IdData other = (IdData) obj;
+		if (!(obj instanceof IdData other)) return false;
 		if (id == null)
 		{
 			if (other.id != null) return false;

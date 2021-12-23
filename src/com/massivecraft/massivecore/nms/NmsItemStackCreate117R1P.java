@@ -4,7 +4,6 @@ import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 
@@ -15,6 +14,7 @@ public class NmsItemStackCreate117R1P extends NmsItemStackCreate
 	// INSTANCE
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsItemStackCreate117R1P i = new NmsItemStackCreate117R1P();
 	public static NmsItemStackCreate117R1P get () { return i; }
 	
@@ -60,14 +60,7 @@ public class NmsItemStackCreate117R1P extends NmsItemStackCreate
 	@Override
 	public @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
 	{
-		if (ServerType.get() == ServerType.FORGE)
-		{
-			return PackageType.MINECRAFT_ITEM.getClass("ItemStack");
-		}
-		else
-		{
-			return PackageType.MINECRAFT_WORLD_ITEM.getClass("ItemStack");
-		}
+		return PackageType.MINECRAFT_WORLD_ITEM.getClass("ItemStack");
 	}
 	
 }

@@ -150,6 +150,7 @@ public class PotionEffectWrap
 	public @NotNull String getListLine()
 	{
 		// Create Ret
+		//noinspection StringBufferReplaceableByString
 		StringBuilder ret = new StringBuilder();
 		
 		// Type Name (ID)

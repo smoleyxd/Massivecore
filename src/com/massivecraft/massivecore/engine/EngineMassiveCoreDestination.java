@@ -36,7 +36,7 @@ public class EngineMassiveCoreDestination extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreDestination i = new EngineMassiveCoreDestination();
+	private static final EngineMassiveCoreDestination i = new EngineMassiveCoreDestination();
 	@Contract(pure = true)
 	public static EngineMassiveCoreDestination get() { return i; }
 	

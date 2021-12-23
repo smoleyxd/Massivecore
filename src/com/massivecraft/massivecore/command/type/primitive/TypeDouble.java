@@ -8,7 +8,7 @@ public class TypeDouble extends TypeAbstractNumber<Double>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDouble i = new TypeDouble();
+	private static final TypeDouble i = new TypeDouble();
 	public static TypeDouble get() { return i; }
 	public TypeDouble() { super(Double.class); }
 	

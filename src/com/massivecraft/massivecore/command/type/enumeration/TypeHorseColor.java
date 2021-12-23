@@ -8,7 +8,7 @@ public class TypeHorseColor extends TypeEnum<Color>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeHorseColor i = new TypeHorseColor();
+	private static final TypeHorseColor i = new TypeHorseColor();
 	public static TypeHorseColor get() { return i; }
 	public TypeHorseColor()
 	{

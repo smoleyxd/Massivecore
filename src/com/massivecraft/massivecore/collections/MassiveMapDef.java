@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.collections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.io.Serial;
 import java.util.Map;
 
 /**
@@ -15,6 +16,7 @@ public class MassiveMapDef<K, V> extends MassiveMap<K, V> implements Def
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

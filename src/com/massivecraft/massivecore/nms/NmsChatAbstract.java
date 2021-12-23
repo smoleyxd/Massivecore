@@ -110,9 +110,8 @@ public abstract class NmsChatAbstract extends NmsChat
 		CommandSender sendee = IdUtil.getSender(sendeeObject);
 		if (sendee == null) return;
 		
-		if (sendee instanceof Player)
+		if (sendee instanceof Player player)
 		{
-			Player player = (Player)sendee;
 			String raw = mson.toRaw();
 			Object component = toComponent(raw);
 			Object packet = ReflectionUtil.invokeConstructor(this.constructorPacketPlayOutChat, component);

@@ -9,7 +9,7 @@ public class ComparatorIdentified extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorIdentified i = new ComparatorIdentified();
+	private static final ComparatorIdentified i = new ComparatorIdentified();
 	@Contract(pure = true)
 	public static ComparatorIdentified get() { return i; }
 	

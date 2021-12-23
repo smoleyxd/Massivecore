@@ -22,12 +22,8 @@ public abstract class ModificationPollerAbstract extends Thread
 		{
 			try
 			{
-				//System.out.println("Polling locally: " + MassiveCoreMConf.get().millisBetweenLocalPoll);
 				this.identify();
-				
-				//String message = Txt.parse("<i>LocalModificationThread iteration took <h>%dms<i>.", after-before);
-				//MassiveCore.get().log(message);
-				
+				//noinspection BusyWait
 				Thread.sleep(this.getMillisBetweenPoll());
 			}
 			catch (InterruptedException e)

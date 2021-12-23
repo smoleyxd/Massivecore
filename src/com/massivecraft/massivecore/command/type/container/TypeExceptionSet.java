@@ -9,7 +9,7 @@ public class TypeExceptionSet extends TypeReflection<ExceptionSet>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeExceptionSet i = new TypeExceptionSet();
+	private static final TypeExceptionSet i = new TypeExceptionSet();
 	public static TypeExceptionSet get() { return i; }
 	public TypeExceptionSet()
 	{

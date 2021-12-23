@@ -36,7 +36,7 @@ public class DriverFlatfile extends DriverAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static DriverFlatfile i = new DriverFlatfile();
+	private static final DriverFlatfile i = new DriverFlatfile();
 	public static DriverFlatfile get() { return i; }
 	private DriverFlatfile() { super(NAME); }
 	
@@ -56,8 +56,7 @@ public class DriverFlatfile extends DriverAbstract
 	@Override
 	public boolean dropDb(Db db)
 	{
-		if ( ! (db instanceof DbFlatfile)) throw new IllegalArgumentException("db");
-		DbFlatfile dbFlatfile = (DbFlatfile)db;
+		if ( ! (db instanceof DbFlatfile dbFlatfile)) throw new IllegalArgumentException("db");
 		
 		try
 		{
@@ -227,7 +226,7 @@ public class DriverFlatfile extends DriverAbstract
 		file.delete();
 	}
 	
-	private boolean supportsPusher = this.supportsPusherCalc();
+	private final boolean supportsPusher = this.supportsPusherCalc();
 	private boolean supportsPusherCalc()
 	{
 		boolean ret = false;

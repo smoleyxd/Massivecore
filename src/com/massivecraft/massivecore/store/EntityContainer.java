@@ -106,13 +106,6 @@ public interface EntityContainer<E>
 	// ATTACH AND DETACH
 	// -------------------------------------------- //
 	
-	/*String attach(E entity);
-	String attach(E entity, Object oid);
-	
-	E detachEntity(E entity);
-	E detachId(Object oid);
-	E detachIdFixed(String id);*/
-	
 	void preAttach(E entity, String id);
 	void postAttach(E entity, String id);
 	

@@ -8,7 +8,7 @@ public class TypePotionEffectType extends TypeAbstractChoice<PotionEffectType>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypePotionEffectType i = new TypePotionEffectType();
+	private static final TypePotionEffectType i = new TypePotionEffectType();
 	public static TypePotionEffectType get() { return i; }
 	public TypePotionEffectType()
 	{

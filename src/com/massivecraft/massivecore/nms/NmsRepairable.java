@@ -12,7 +12,7 @@ public class NmsRepairable extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsRepairable d = new NmsRepairable().setAlternatives(
+	private static final NmsRepairable d = new NmsRepairable().setAlternatives(
 		NmsRepairable113R1P.class,
 		NmsRepairable17R4P.class
 	);
@@ -21,6 +21,7 @@ public class NmsRepairable extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsRepairable i = d;
 	public static NmsRepairable get() { return i; }
 

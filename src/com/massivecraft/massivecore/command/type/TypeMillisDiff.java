@@ -15,7 +15,7 @@ public class TypeMillisDiff extends TypeAbstractException<Long>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeMillisDiff i = new TypeMillisDiff();
+	private static final TypeMillisDiff i = new TypeMillisDiff();
 	public static TypeMillisDiff get() { return i; }
 	public TypeMillisDiff() { super(Long.class); }
 	

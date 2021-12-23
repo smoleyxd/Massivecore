@@ -32,7 +32,7 @@ public class EngineMassiveCoreVariable extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreVariable i = new EngineMassiveCoreVariable();
+	private static final EngineMassiveCoreVariable i = new EngineMassiveCoreVariable();
 	@Contract(pure = true)
 	public static EngineMassiveCoreVariable get() { return i; }
 	
@@ -72,8 +72,7 @@ public class EngineMassiveCoreVariable extends Engine
 	@Contract("null -> null")
 	public static String getBookText(CommandSender sender)
 	{
-		if ( ! (sender instanceof HumanEntity)) return null;
-		HumanEntity human = (HumanEntity)sender;
+		if ( ! (sender instanceof HumanEntity human)) return null;
 		ItemStack item = InventoryUtil.getMainHand(human);
 		return getBookText(item);
 	}
@@ -84,8 +83,7 @@ public class EngineMassiveCoreVariable extends Engine
 		if (item == null) return null;
 		if ( ! item.hasItemMeta()) return null;
 		ItemMeta itemMeta = item.getItemMeta();
-		if ( ! (itemMeta instanceof BookMeta)) return null;
-		BookMeta bookMeta = (BookMeta)itemMeta;
+		if ( ! (itemMeta instanceof BookMeta bookMeta)) return null;
 		if ( ! bookMeta.hasPages()) return null;
 		List<String> pages = bookMeta.getPages();
 		String ret = Txt.implode(pages, " ");

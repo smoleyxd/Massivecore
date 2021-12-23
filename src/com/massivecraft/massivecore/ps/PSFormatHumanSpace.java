@@ -8,7 +8,7 @@ public class PSFormatHumanSpace extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatHumanSpace i = new PSFormatHumanSpace();
+	private static final PSFormatHumanSpace i = new PSFormatHumanSpace();
 	public static PSFormatHumanSpace get()	{ return i; }
 	private PSFormatHumanSpace()
 	{

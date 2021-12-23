@@ -30,7 +30,7 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreScheduledTeleport i = new EngineMassiveCoreScheduledTeleport();
+	private static final EngineMassiveCoreScheduledTeleport i = new EngineMassiveCoreScheduledTeleport();
 	@Contract(pure = true)
 	public static EngineMassiveCoreScheduledTeleport get() { return i; }
 	public EngineMassiveCoreScheduledTeleport()

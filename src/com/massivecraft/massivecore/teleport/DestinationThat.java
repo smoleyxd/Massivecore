@@ -4,8 +4,11 @@ import com.massivecraft.massivecore.ps.PS;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.io.Serial;
+
 public class DestinationThat extends DestinationPlayer
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

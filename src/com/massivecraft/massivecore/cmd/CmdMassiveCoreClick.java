@@ -12,7 +12,7 @@ public class CmdMassiveCoreClick extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreClick i = new CmdMassiveCoreClick();
+	private static final CmdMassiveCoreClick i = new CmdMassiveCoreClick();
 	@Contract(pure = true)
 	public static CmdMassiveCoreClick get() { return i; }
 	

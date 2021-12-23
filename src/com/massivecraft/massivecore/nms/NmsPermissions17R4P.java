@@ -18,6 +18,7 @@ public class NmsPermissions17R4P extends NmsPermissions
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPermissions17R4P i = new NmsPermissions17R4P();
 	public static NmsPermissions17R4P get() { return i; }
 	

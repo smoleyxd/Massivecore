@@ -14,7 +14,7 @@ public class TestTypeEnchantment extends Test
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TestTypeEnchantment i = new TestTypeEnchantment();
+	private static final TestTypeEnchantment i = new TestTypeEnchantment();
 	public static TestTypeEnchantment get() { return i; }
 	
 	// -------------------------------------------- //

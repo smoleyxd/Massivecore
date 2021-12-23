@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.util.MUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Triple<A, B, C> implements Cloneable, Serializable
@@ -12,6 +13,7 @@ public class Triple<A, B, C> implements Cloneable, Serializable
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -68,8 +70,7 @@ public class Triple<A, B, C> implements Cloneable, Serializable
 	@Override
 	public boolean equals(Object object)
 	{
-		if (!(object instanceof Triple<?, ?, ?>)) return false;
-		Triple<?, ?, ?> that = (Triple<?, ?, ?>)object;
+		if (!(object instanceof Triple<?, ?, ?> that)) return false;
 		return MUtil.equals(
 			this.getFirst(), that.getFirst(),
 			this.getSecond(), that.getSecond(),

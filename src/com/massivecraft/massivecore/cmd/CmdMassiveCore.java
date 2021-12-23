@@ -17,7 +17,7 @@ public class CmdMassiveCore extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCore i = new CmdMassiveCore();
+	private static final CmdMassiveCore i = new CmdMassiveCore();
 	@Contract(pure = true)
 	public static CmdMassiveCore get() { return i; }
 	

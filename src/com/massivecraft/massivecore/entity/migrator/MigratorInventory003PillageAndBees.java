@@ -31,7 +31,7 @@ public class MigratorInventory003PillageAndBees extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorInventory003PillageAndBees i = new MigratorInventory003PillageAndBees();
+	private static final MigratorInventory003PillageAndBees i = new MigratorInventory003PillageAndBees();
 	public static MigratorInventory003PillageAndBees get() { return i; }
 	private MigratorInventory003PillageAndBees()
 	{

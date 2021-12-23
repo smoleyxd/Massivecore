@@ -209,6 +209,6 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	// -------------------------------------------- //
 	// Specific Settings for Spartan Integration
 	
-	public int velocityBypassTicks = 200;
+	public int velocityBypassTicks = 100;
 
 }

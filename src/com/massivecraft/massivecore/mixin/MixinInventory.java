@@ -13,7 +13,8 @@ public class MixinInventory extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinInventory d = new MixinInventory();
+	private static final MixinInventory d = new MixinInventory();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinInventory i = d;
 	@Contract(pure = true)
 	public static MixinInventory get() { return i; }

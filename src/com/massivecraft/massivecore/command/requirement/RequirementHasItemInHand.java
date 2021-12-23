@@ -8,15 +8,18 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+
 public class RequirementHasItemInHand extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static RequirementHasItemInHand i = new RequirementHasItemInHand(TypeItemStack.get());
+	private static final RequirementHasItemInHand i = new RequirementHasItemInHand(TypeItemStack.get());
 	public static RequirementHasItemInHand get() { return i; }
 	
 	@Contract("_ -> new")

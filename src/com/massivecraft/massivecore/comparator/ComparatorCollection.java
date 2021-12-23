@@ -13,7 +13,7 @@ public class ComparatorCollection extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorCollection i = new ComparatorCollection();
+	private static final ComparatorCollection i = new ComparatorCollection();
 	@Contract(pure = true)
 	public static ComparatorCollection get() { return i; }
 	

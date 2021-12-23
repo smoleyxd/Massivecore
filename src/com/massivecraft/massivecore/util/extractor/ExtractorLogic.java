@@ -141,8 +141,6 @@ public class ExtractorLogic
 	
 	public static String playerNameFromObject(Object o)
 	{
-		//if (SenderUtil.isPlayerId(senderId)) return senderId;
-		//return null;
 		return senderNameFromObject(o);
 	}
 	
@@ -175,9 +173,8 @@ public class ExtractorLogic
 	
 	public static String worldNameFromObject(Object o)
 	{
-		if (o instanceof String)
+		if (o instanceof String string)
 		{
-			String string = (String)o;
 			if (MUtil.isUuid(string))
 			{
 				String ret = worldNameViaPsMixin(string);

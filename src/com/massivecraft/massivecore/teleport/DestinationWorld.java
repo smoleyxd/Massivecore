@@ -7,8 +7,11 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.Serial;
+
 public class DestinationWorld extends DestinationAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -34,8 +37,7 @@ public class DestinationWorld extends DestinationAbstract
 	
 	public DestinationWorld(CommandSender sender)
 	{
-		if ( ! (sender instanceof Player)) return;
-		Player player = (Player)sender;
+		if ( ! (sender instanceof Player player)) return;
 		this.setWorld(player.getWorld());
 	}
 	

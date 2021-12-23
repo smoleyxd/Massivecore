@@ -11,7 +11,7 @@ public class MigratorDataItemStack003PillageAndBees extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorDataItemStack003PillageAndBees i = new MigratorDataItemStack003PillageAndBees();
+	private static final MigratorDataItemStack003PillageAndBees i = new MigratorDataItemStack003PillageAndBees();
 	
 	public static MigratorDataItemStack003PillageAndBees get()
 	{
@@ -38,21 +38,11 @@ public class MigratorDataItemStack003PillageAndBees extends MigratorRoot
 		
 		switch (legacy)
 		{
-			case "CACTUS_GREEN":
-				entity.addProperty("id", "GREEN_DYE");
-				break;
-			case "DANDELION_YELLOW":
-				entity.addProperty("id", "YELLOW_DYE");
-				break;
-			case "ROSE_RED":
-				entity.addProperty("id", "RED_DYE");
-				break;
-			case "SIGN":
-				entity.addProperty("id", "OAK_SIGN");
-				break;
-			case "WALL_SIGN":
-				entity.addProperty("id", "OAK_WALL_SIGN");
-				break;
+			case "CACTUS_GREEN" -> entity.addProperty("id", "GREEN_DYE");
+			case "DANDELION_YELLOW" -> entity.addProperty("id", "YELLOW_DYE");
+			case "ROSE_RED" -> entity.addProperty("id", "RED_DYE");
+			case "SIGN" -> entity.addProperty("id", "OAK_SIGN");
+			case "WALL_SIGN" -> entity.addProperty("id", "OAK_WALL_SIGN");
 		}
 	}
 	

@@ -14,6 +14,7 @@ public class NmsPlayerInventoryCreate117R1P extends NmsPlayerInventoryCreate
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPlayerInventoryCreate117R1P i = new NmsPlayerInventoryCreate117R1P();
 	public static NmsPlayerInventoryCreate117R1P get () { return i; }
 

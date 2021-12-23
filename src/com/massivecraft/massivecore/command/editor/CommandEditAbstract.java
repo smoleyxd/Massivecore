@@ -76,10 +76,9 @@ public class CommandEditAbstract<O, V> extends MassiveCommand
 			// If there is only one visible child, and it is a show command ....
 			// Note: We use the visible children because HelpCommand is always present, but often invisible.
 			List<MassiveCommand> children = this.getVisibleChildren(this.sender);
-			if (children.size() == 1 && children.get(0) instanceof CommandEditShow)
+			if (children.size() == 1 && children.get(0) instanceof CommandEditShow<?, ?> cmd)
 			{
 				// ... skip directly to it.
-				CommandEditShow<?, ?> cmd = (CommandEditShow<?, ?>) children.get(0);
 				cmd.execute(this.sender, this.args);
 			}
 			else

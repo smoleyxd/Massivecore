@@ -11,7 +11,8 @@ public class MixinModification extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinModification d = new MixinModification();
+	private static final MixinModification d = new MixinModification();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinModification i = d;
 	@Contract(pure = true)
 	public static MixinModification get() { return i; }

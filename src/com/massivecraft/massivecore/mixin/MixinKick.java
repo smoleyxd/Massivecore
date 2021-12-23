@@ -10,7 +10,8 @@ public class MixinKick extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinKick d = new MixinKick();
+	private static final MixinKick d = new MixinKick();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinKick i = d;
 	@Contract(pure = true)
 	public static MixinKick get() { return i; }

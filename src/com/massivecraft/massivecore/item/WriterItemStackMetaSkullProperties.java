@@ -21,7 +21,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	{
 		super(SkullMeta.class);
 		this.setMaterial(Material.PLAYER_HEAD);
-		this.setConverterFrom(new Converter<Object, ContainerGameProfile>()
+		this.setConverterFrom(new Converter<>()
 		{
 			@Override
 			public ContainerGameProfile convert(Object fb)
@@ -30,7 +30,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 				return gameProfileToContainer(fb);
 			}
 		});
-		this.setConverterTo(new Converter<ContainerGameProfile, Object>()
+		this.setConverterTo(new Converter<>()
 		{
 			@Override
 			public Object convert(ContainerGameProfile fa)

@@ -8,7 +8,7 @@ public class TypeFloat extends TypeAbstractNumber<Float>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeFloat i = new TypeFloat();
+	private static final TypeFloat i = new TypeFloat();
 	public static TypeFloat get() { return i; }
 	public TypeFloat() { super(Float.class); }
 	

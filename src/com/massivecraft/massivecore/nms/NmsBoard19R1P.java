@@ -14,6 +14,7 @@ public class NmsBoard19R1P extends NmsBoard
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsBoard19R1P i = new NmsBoard19R1P();
 	public static NmsBoard19R1P get() { return i; }
 	

@@ -22,7 +22,7 @@ public class EngineMassiveCoreLorePriority extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreLorePriority i = new EngineMassiveCoreLorePriority();
+	private static final EngineMassiveCoreLorePriority i = new EngineMassiveCoreLorePriority();
 	@Contract(pure = true)
 	public static EngineMassiveCoreLorePriority get() { return i; }
 	

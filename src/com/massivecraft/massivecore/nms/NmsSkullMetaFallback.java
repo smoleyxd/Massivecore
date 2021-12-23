@@ -12,6 +12,7 @@ public class NmsSkullMetaFallback extends NmsSkullMeta
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsSkullMetaFallback i = new NmsSkullMetaFallback();
 	public static NmsSkullMetaFallback get () { return i; }
 	

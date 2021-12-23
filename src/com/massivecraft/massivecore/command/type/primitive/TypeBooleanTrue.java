@@ -6,7 +6,7 @@ public class TypeBooleanTrue extends TypeBooleanAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeBooleanTrue i = new TypeBooleanTrue();
+	private static final TypeBooleanTrue i = new TypeBooleanTrue();
 	public static TypeBooleanTrue get() { return i; }
 	public TypeBooleanTrue()
 	{

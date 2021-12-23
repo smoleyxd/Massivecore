@@ -12,7 +12,7 @@ public class TypeLlamaColor extends TypeEnum<Color>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeLlamaColor i = new TypeLlamaColor();
+	private static final TypeLlamaColor i = new TypeLlamaColor();
 	public static TypeLlamaColor get() { return i; }
 	public TypeLlamaColor()
 	{
@@ -32,20 +32,13 @@ public class TypeLlamaColor extends TypeEnum<Color>
 	@Contract(pure = true)
 	private @NotNull ChatColor getChatColor(@NotNull Color color)
 	{
-		switch (color)
-		{
-			case CREAMY:
-				return ChatColor.GRAY;
-			
-			case BROWN:
-				return ChatColor.GOLD;
-			
-			case GRAY:
-				return ChatColor.DARK_GRAY;
-			
-			default:
-				return ChatColor.WHITE;
-		}
+		return switch (color)
+				   {
+					   case CREAMY -> ChatColor.GRAY;
+					   case BROWN -> ChatColor.GOLD;
+					   case GRAY -> ChatColor.DARK_GRAY;
+					   default -> ChatColor.WHITE;
+				   };
 	}
 	
 }

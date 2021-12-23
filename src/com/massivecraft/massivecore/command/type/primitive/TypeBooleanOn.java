@@ -6,7 +6,7 @@ public class TypeBooleanOn extends TypeBooleanAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeBooleanOn i = new TypeBooleanOn();
+	private static final TypeBooleanOn i = new TypeBooleanOn();
 	public static TypeBooleanOn get() { return i; }
 	public TypeBooleanOn()
 	{

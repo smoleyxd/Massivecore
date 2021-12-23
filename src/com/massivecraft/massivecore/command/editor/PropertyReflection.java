@@ -128,7 +128,7 @@ public class PropertyReflection<O, V> extends Property<O, V>
 		// We also only do it for things with properties, so the edited message works and shows the actual visual.
 		if (typeValue.hasInnerProperties())
 		{
-			typeValue = new TypeWrapper<V>(typeValue)
+			typeValue = new TypeWrapper<>(typeValue)
 			{
 				@Override
 				public Mson getVisualMsonInner(V value, CommandSender sender)

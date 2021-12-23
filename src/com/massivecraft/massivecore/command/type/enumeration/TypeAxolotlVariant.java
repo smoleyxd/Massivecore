@@ -8,7 +8,7 @@ public class TypeAxolotlVariant extends TypeEnum<Axolotl.Variant>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeAxolotlVariant i = new TypeAxolotlVariant();
+	private static final TypeAxolotlVariant i = new TypeAxolotlVariant();
 	public static TypeAxolotlVariant get() { return i; }
 	public TypeAxolotlVariant()
 	{

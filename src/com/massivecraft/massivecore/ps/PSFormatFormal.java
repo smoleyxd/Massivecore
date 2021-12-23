@@ -6,7 +6,7 @@ public class PSFormatFormal extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatFormal i = new PSFormatFormal();
+	private static final PSFormatFormal i = new PSFormatFormal();
 	public static PSFormatFormal get()	{ return i; }
 	private PSFormatFormal()
 	{

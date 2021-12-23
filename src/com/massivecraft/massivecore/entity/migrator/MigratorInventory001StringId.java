@@ -31,7 +31,7 @@ public class MigratorInventory001StringId extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorInventory001StringId i = new MigratorInventory001StringId();
+	private static final MigratorInventory001StringId i = new MigratorInventory001StringId();
 	public static MigratorInventory001StringId get() { return i; }
 	private MigratorInventory001StringId()
 	{

@@ -13,7 +13,8 @@ public class MixinRecipe extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinRecipe d = new MixinRecipe();
+	private static final MixinRecipe d = new MixinRecipe();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinRecipe i = d;
 	@Contract(pure = true)
 	public static MixinRecipe get() { return i; }

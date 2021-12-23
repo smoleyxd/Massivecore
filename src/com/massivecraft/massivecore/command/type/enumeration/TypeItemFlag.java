@@ -8,7 +8,7 @@ public class TypeItemFlag extends TypeEnum<ItemFlag>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeItemFlag i = new TypeItemFlag();
+	private static final TypeItemFlag i = new TypeItemFlag();
 	public static TypeItemFlag get() { return i; }
 	public TypeItemFlag()
 	{

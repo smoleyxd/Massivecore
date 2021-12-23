@@ -8,7 +8,7 @@ public class TypeSpawnReason extends TypeEnum<SpawnReason>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeSpawnReason i = new TypeSpawnReason();
+	private static final TypeSpawnReason i = new TypeSpawnReason();
 	public static TypeSpawnReason get() { return i; }
 	public TypeSpawnReason()
 	{

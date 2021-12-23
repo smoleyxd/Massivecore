@@ -14,7 +14,7 @@ public class TypeId<T> extends TypeTransformer<T, String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeId<Sound> iSound = TypeId.get(TypeSound.get());
+	private static final TypeId<Sound> iSound = TypeId.get(TypeSound.get());
 	public static TypeId<Sound> getSound() { return iSound; }
 	
 	@Contract("_ -> new")

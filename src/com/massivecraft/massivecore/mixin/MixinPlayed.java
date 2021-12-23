@@ -15,7 +15,8 @@ public class MixinPlayed extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinPlayed d = new MixinPlayed();
+	private static final MixinPlayed d = new MixinPlayed();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinPlayed i = d;
 	@Contract(pure = true)
 	public static MixinPlayed get() { return i; }

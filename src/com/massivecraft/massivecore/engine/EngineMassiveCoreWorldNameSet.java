@@ -20,7 +20,7 @@ public class EngineMassiveCoreWorldNameSet extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreWorldNameSet i = new EngineMassiveCoreWorldNameSet();
+	private static final EngineMassiveCoreWorldNameSet i = new EngineMassiveCoreWorldNameSet();
 	@Contract(pure = true)
 	public static EngineMassiveCoreWorldNameSet get() { return i; }
 	

@@ -9,7 +9,8 @@ public class MixinChatFilter extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinChatFilter d = new MixinChatFilter();
+	private static final MixinChatFilter d = new MixinChatFilter();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinChatFilter i = d;
 	@Contract(pure = true)
 	public static MixinChatFilter get() { return i; }

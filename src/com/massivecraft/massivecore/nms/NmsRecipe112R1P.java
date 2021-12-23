@@ -15,6 +15,7 @@ public class NmsRecipe112R1P extends NmsRecipe
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsRecipe112R1P i = new NmsRecipe112R1P();
 	public static NmsRecipe112R1P get() { return i; }
 	

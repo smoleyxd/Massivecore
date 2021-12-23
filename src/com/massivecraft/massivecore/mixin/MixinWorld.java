@@ -20,7 +20,8 @@ public class MixinWorld extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinWorld d = new MixinWorld();
+	private static final MixinWorld d = new MixinWorld();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinWorld i = d;
 	@Contract(pure = true)
 	public static MixinWorld get() { return i; }

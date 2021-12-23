@@ -11,7 +11,7 @@ public class CmdMassiveCoreBuffer extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreBuffer i = new CmdMassiveCoreBuffer() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesBuffer; } };
+	private static final CmdMassiveCoreBuffer i = new CmdMassiveCoreBuffer() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesBuffer; } };
 	@Contract(pure = true)
 	public static CmdMassiveCoreBuffer get() { return i; }
 	

@@ -13,7 +13,7 @@ public class TypeBackstringSet<E extends Enum<E>> extends TypeContainer<Set<E>, 
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private Class<? extends Enum> innerTypeClass;
+	private final Class<? extends Enum> innerTypeClass;
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

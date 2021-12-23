@@ -8,7 +8,7 @@ public class TypeBiome extends TypeEnum<Biome>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeBiome i = new TypeBiome();
+	private static final TypeBiome i = new TypeBiome();
 	public static TypeBiome get() { return i; }
 	public TypeBiome()
 	{

@@ -4,7 +4,6 @@ import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 
@@ -15,6 +14,7 @@ public class NmsItemStackCreate17R4P extends NmsItemStackCreate
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsItemStackCreate17R4P i = new NmsItemStackCreate17R4P();
 	public static NmsItemStackCreate17R4P get () { return i; }
 	

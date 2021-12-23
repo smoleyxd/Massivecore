@@ -14,7 +14,7 @@ public class SenderIdSourceMixinAllSenderIds implements SenderIdSource
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static SenderIdSourceMixinAllSenderIds i = new SenderIdSourceMixinAllSenderIds();
+	private static final SenderIdSourceMixinAllSenderIds i = new SenderIdSourceMixinAllSenderIds();
 	public static SenderIdSourceMixinAllSenderIds get() { return i; }
 	
 	// -------------------------------------------- //

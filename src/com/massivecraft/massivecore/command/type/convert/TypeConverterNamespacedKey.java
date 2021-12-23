@@ -12,7 +12,7 @@ public class TypeConverterNamespacedKey extends TypeConverter<NamespacedKey, Str
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeConverterNamespacedKey i = new TypeConverterNamespacedKey();
+	private static final TypeConverterNamespacedKey i = new TypeConverterNamespacedKey();
 	public static TypeConverterNamespacedKey get() { return i; }
 	
 	public TypeConverterNamespacedKey()

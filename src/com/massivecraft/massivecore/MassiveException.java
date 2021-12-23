@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.mson.Mson;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -14,6 +15,7 @@ public class MassiveException extends Exception
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

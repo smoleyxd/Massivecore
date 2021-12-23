@@ -19,6 +19,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsEntityGet18R1P i = new NmsEntityGet18R1P();
 	public static NmsEntityGet18R1P get () { return i; }
 	
@@ -81,7 +82,7 @@ public class NmsEntityGet18R1P extends NmsEntityGet
 	// INTERNAL
 	// -------------------------------------------- //
 	
-	private Map<World, Map<UUID, Object>> worldMaps = new WeakHashMap<>();
+	private final Map<World, Map<UUID, Object>> worldMaps = new WeakHashMap<>();
 	
 	@Contract("null -> fail")
 	private Map<UUID, Object> getWorldMap(Object handle)

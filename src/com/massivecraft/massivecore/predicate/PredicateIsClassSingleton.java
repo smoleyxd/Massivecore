@@ -8,7 +8,7 @@ public class PredicateIsClassSingleton implements Predicate<Class<?>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateIsClassSingleton i = new PredicateIsClassSingleton();
+	private static final PredicateIsClassSingleton i = new PredicateIsClassSingleton();
 	public static PredicateIsClassSingleton get() { return i; }
 	
 	// -------------------------------------------- //

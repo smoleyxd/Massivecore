@@ -28,10 +28,10 @@ public class SignUtil
 	// -------------------------------------------- //
 	
 	public final static String SPECIAL_PREFIX_LENIENT = "[";
-	public final static String SPECIAL_PREFIX_STRICT = SPECIAL_PREFIX_LENIENT + ChatColor.DARK_GREEN.toString();
+	public final static String SPECIAL_PREFIX_STRICT = SPECIAL_PREFIX_LENIENT + ChatColor.DARK_GREEN;
 	
 	public final static String SPECIAL_SUFFIX_LENIENT = "]";
-	public final static String SPECIAL_SUFFIX_STRICT = ChatColor.BLACK.toString() + SPECIAL_SUFFIX_LENIENT;
+	public final static String SPECIAL_SUFFIX_STRICT = ChatColor.BLACK + SPECIAL_SUFFIX_LENIENT;
 	
 	// -------------------------------------------- //
 	// SPECIAL LINE, TITLE & PADDING

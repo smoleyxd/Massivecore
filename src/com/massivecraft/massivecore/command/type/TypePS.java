@@ -25,7 +25,7 @@ public class TypePS extends TypeAbstract<PS>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypePS i = new TypePS();
+	private static final TypePS i = new TypePS();
 	@Contract(pure = true)
 	public static TypePS get() { return i; }
 	public TypePS() { super(PS.class); }

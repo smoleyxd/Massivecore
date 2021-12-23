@@ -10,7 +10,7 @@ public class TypeStringParsed extends TypeString
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeStringParsed i = new TypeStringParsed();
+	private static final TypeStringParsed i = new TypeStringParsed();
 	public static TypeStringParsed get() { return i; }
 	
 	// -------------------------------------------- //

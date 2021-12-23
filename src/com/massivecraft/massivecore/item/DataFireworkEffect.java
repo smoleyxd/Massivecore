@@ -124,8 +124,7 @@ public class DataFireworkEffect implements Comparable<DataFireworkEffect>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof DataFireworkEffect)) return false;
-		DataFireworkEffect that = (DataFireworkEffect)object;
+		if ( ! (object instanceof DataFireworkEffect that)) return false;
 		
 		return MUtil.equals(
 			this.hasFlicker(), that.hasFlicker(),

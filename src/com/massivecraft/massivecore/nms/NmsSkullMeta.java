@@ -20,7 +20,7 @@ public class NmsSkullMeta extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsSkullMeta d = new NmsSkullMeta().setAlternatives(
+	private static final NmsSkullMeta d = new NmsSkullMeta().setAlternatives(
 		NmsSkullMeta18R1P.class,
 		NmsSkullMeta17R4.class,
 		NmsSkullMetaFallback.class
@@ -30,6 +30,7 @@ public class NmsSkullMeta extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsSkullMeta i = d;
 	public static NmsSkullMeta get() { return i; }
 	

@@ -6,6 +6,7 @@ public class NmsSkullMeta17R4 extends NmsSkullMetaAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsSkullMeta17R4 i = new NmsSkullMeta17R4();
 	public static NmsSkullMeta17R4 get () { return i; }
 	

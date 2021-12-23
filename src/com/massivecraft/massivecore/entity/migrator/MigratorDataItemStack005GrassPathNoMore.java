@@ -4,7 +4,6 @@ import com.massivecraft.massivecore.item.DataItemStack;
 import com.massivecraft.massivecore.store.migrator.MigratorRoot;
 import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
-import org.bukkit.Material;
 
 public class MigratorDataItemStack005GrassPathNoMore extends MigratorRoot
 {
@@ -12,7 +11,7 @@ public class MigratorDataItemStack005GrassPathNoMore extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorDataItemStack005GrassPathNoMore i = new MigratorDataItemStack005GrassPathNoMore();
+	private static final MigratorDataItemStack005GrassPathNoMore i = new MigratorDataItemStack005GrassPathNoMore();
 	
 	public static MigratorDataItemStack005GrassPathNoMore get()
 	{

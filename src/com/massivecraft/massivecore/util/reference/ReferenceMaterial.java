@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class ReferenceMaterial {
 
-    private static Set<Material> pickaxeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> pickaxeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_PICKAXE",
             "DIAMOND_PICKAXE",
@@ -19,7 +19,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getPickaxeMaterials() { return pickaxeMaterials; }
 
-    private static Set<Material> swordMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> swordMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_SWORD",
             "DIAMOND_SWORD",
@@ -32,7 +32,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getSwordMaterials() { return swordMaterials; }
 
-    private static Set<Material> axeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> axeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_AXE",
             "DIAMOND_AXE",
@@ -45,7 +45,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getAxeMaterials() { return axeMaterials; }
 
-    private static Set<Material> spadeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> spadeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_SHOVEL",
             "DIAMOND_SHOVEL",
@@ -61,7 +61,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getSpadeMaterials() { return spadeMaterials; }
 
-    private static Set<Material> hoeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> hoeMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_HOE",
             "DIAMOND_HOE",
@@ -73,7 +73,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getHoeMaterials() { return hoeMaterials; }
 
-    private static Set<Material> helmetMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> helmetMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_HELMET",
             "DIAMOND_HELMET",
@@ -86,7 +86,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getHelmetMaterials() { return helmetMaterials; }
 
-    private static Set<Material> chestplateMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> chestplateMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_CHESTPLATE",
             "DIAMOND_CHESTPLATE",
@@ -98,7 +98,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getChestplateMaterials() { return chestplateMaterials; }
 
-    private static Set<Material> leggingsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> leggingsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_LEGGINGS",
             "DIAMOND_LEGGINGS",
@@ -110,7 +110,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getLeggingsMaterials() { return leggingsMaterials; }
 
-    private static Set<Material> bootsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> bootsMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "NETHERITE_BOOTS",
             "DIAMOND_BOOTS",
@@ -122,7 +122,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getBootsMaterials() { return bootsMaterials; }
 
-    private static Set<Material> foodMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> foodMaterials = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "APPLE",
             "BAKED_POTATO",
@@ -169,7 +169,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getFoodMaterials() { return foodMaterials; }
 
-    private static Set<Material> materialsVegetation = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> materialsVegetation = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "ACACIA_LEAVES",
             "ACACIA_SAPLING",
@@ -273,7 +273,7 @@ public class ReferenceMaterial {
     );
     public static Set<Material> getMaterialsVegetation() { return materialsVegetation; }
 
-    private static Set<Material> materialsSign = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<Material> materialsSign = ProviderOptimizedCollectionSafe.enumSetOf(
             Material.class,
             "SIGN", // Minecraft 1.?
             "SIGN_POST", // Minecraft 1.?

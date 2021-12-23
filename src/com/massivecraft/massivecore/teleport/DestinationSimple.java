@@ -2,8 +2,11 @@ package com.massivecraft.massivecore.teleport;
 
 import com.massivecraft.massivecore.ps.PS;
 
+import java.io.Serial;
+
 public class DestinationSimple extends DestinationAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

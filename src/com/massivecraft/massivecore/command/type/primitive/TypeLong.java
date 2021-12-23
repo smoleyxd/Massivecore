@@ -8,7 +8,7 @@ public class TypeLong extends TypeAbstractNumber<Long>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeLong i = new TypeLong();
+	private static final TypeLong i = new TypeLong();
 	public static TypeLong get() { return i; }
 	public TypeLong() { super(Long.class); }
 	

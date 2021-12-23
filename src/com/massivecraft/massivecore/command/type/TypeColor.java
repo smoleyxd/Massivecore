@@ -18,7 +18,7 @@ public class TypeColor extends TypeAbstract<Color>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeColor i = new TypeColor();
+	private static final TypeColor i = new TypeColor();
 	public static TypeColor get() { return i; }
 	public TypeColor() { super(Color.class); }
 	
@@ -31,7 +31,7 @@ public class TypeColor extends TypeAbstract<Color>
 	{
 		DyeColor dyeColor = DyeColor.getByColor(value);
 		if (dyeColor != null) return MUtil.getChatColor(dyeColor) + Txt.getNicedEnum(dyeColor);
-		return ChatColor.RED.toString() + value.getRed() + " " + ChatColor.GREEN.toString() + value.getGreen() + " " + ChatColor.BLUE.toString() + value.getBlue(); 
+		return ChatColor.RED.toString() + value.getRed() + " " + ChatColor.GREEN + value.getGreen() + " " + ChatColor.BLUE + value.getBlue();
 	}
 	
 	// -------------------------------------------- //

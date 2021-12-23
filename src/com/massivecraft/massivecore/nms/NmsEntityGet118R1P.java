@@ -9,15 +9,16 @@ import org.bukkit.entity.Entity;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class NmsEntityGet117R1P extends NmsEntityGet
+public class NmsEntityGet118R1P extends NmsEntityGet
 {
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsEntityGet117R1P i = new NmsEntityGet117R1P();
-	public static NmsEntityGet117R1P get () { return i; }
+	@SuppressWarnings("FieldMayBeFinal")
+	private static NmsEntityGet118R1P i = new NmsEntityGet118R1P();
+	public static NmsEntityGet118R1P get () { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -37,7 +38,7 @@ public class NmsEntityGet117R1P extends NmsEntityGet
 		
 		// net.minecraft.server.level.WorldServer
 		Class<?> classNmsWorldServer = PackageType.MINECRAFT_SERVER_LEVEL.getClass("WorldServer");
-		this.methodNmsWorldServerGetEntity = ReflectionUtil.getMethod(classNmsWorldServer, "getEntity", UUID.class);
+		this.methodNmsWorldServerGetEntity = ReflectionUtil.getMethod(classNmsWorldServer, "a", UUID.class);
 	}
 	
 	// -------------------------------------------- //

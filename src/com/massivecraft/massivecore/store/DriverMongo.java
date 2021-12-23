@@ -62,8 +62,7 @@ public class DriverMongo extends DriverAbstract
 	@Override
 	public boolean dropDb(Db db)
 	{
-		if (!(db instanceof DbMongo)) throw new IllegalArgumentException("db");
-		DbMongo dbMongo = (DbMongo) db;
+		if (!(db instanceof DbMongo dbMongo)) throw new IllegalArgumentException("db");
 		
 		try
 		{

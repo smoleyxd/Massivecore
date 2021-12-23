@@ -21,7 +21,7 @@ public class AdapterEnchantment implements JsonDeserializer<Enchantment>, JsonSe
     // INSTANCE & CONSTRUCT
     // -------------------------------------------- //
 
-    private static AdapterEnchantment i = new AdapterEnchantment();
+    private static final AdapterEnchantment i = new AdapterEnchantment();
     @Contract(pure = true)
     public static AdapterEnchantment get() { return i; }
 

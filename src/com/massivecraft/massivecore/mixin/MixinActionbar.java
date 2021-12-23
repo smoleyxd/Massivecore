@@ -11,7 +11,8 @@ public class MixinActionbar extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinActionbar d = new MixinActionbar();
+	private static final MixinActionbar d = new MixinActionbar();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinActionbar i = d;
 	@Contract(pure = true)
 	public static MixinActionbar get() { return i; }

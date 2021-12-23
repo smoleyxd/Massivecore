@@ -24,7 +24,8 @@ public class MixinTeleport extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinTeleport d = new MixinTeleport();
+	private static final MixinTeleport d = new MixinTeleport();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinTeleport i = d;
 	@Contract(pure = true)
 	public static MixinTeleport get() { return i; }

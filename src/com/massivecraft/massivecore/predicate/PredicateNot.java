@@ -3,14 +3,14 @@ package com.massivecraft.massivecore.predicate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class PredicateNot<T> implements Predicate<T>
+public record PredicateNot<T>(@NotNull Predicate<? super T> predicate) implements Predicate<T>
 {
 	// -------------------------------------------- //
 	// INSTANCE
 	// -------------------------------------------- //
 	
 	@Contract(value = "_ -> new", pure = true)
-	public static <T> @NotNull PredicateNot<T> get(@NotNull Predicate<? super T> predicate) { return new PredicateNot<>(predicate); }
+	public static <T> @NotNull PredicateNot<T> get(@NotNull Predicate<? super T> predicate) {return new PredicateNot<>(predicate);}
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -25,8 +25,8 @@ public class PredicateNot<T> implements Predicate<T>
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private final @NotNull Predicate<? super T> predicate;
-	public @NotNull Predicate<? super T> getPredicate() { return this.predicate; }
+	public @NotNull
+	Predicate<? super T> getPredicate() {return this.predicate;}
 	
 	// -------------------------------------------- //
 	// OVERRIDE

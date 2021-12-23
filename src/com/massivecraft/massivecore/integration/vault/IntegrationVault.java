@@ -9,7 +9,7 @@ public class IntegrationVault extends Integration
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static IntegrationVault i = new IntegrationVault();
+	private static final IntegrationVault i = new IntegrationVault();
 	public static IntegrationVault get() { return i; }
 	private IntegrationVault()
 	{

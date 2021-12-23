@@ -12,7 +12,7 @@ public class TypeConverterColor extends TypeConverter<Color, Integer>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeConverterColor i = new TypeConverterColor();
+	private static final TypeConverterColor i = new TypeConverterColor();
 	public static TypeConverterColor get() { return i; }
 	
 	public TypeConverterColor()

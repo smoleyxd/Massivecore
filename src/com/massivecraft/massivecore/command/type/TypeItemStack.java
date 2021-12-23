@@ -25,7 +25,7 @@ public class TypeItemStack extends TypeAbstract<ItemStack>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeItemStack i = new TypeItemStack();
+	private static final TypeItemStack i = new TypeItemStack();
 	public static TypeItemStack get() { return i; }
 	
 	public static @NotNull TypeItemStack get(Material... materialWhitelist)
@@ -76,8 +76,7 @@ public class TypeItemStack extends TypeAbstract<ItemStack>
 	@Override
 	public ItemStack read(String arg, CommandSender sender) throws MassiveException
 	{
-		if ( ! (sender instanceof Player)) throw new MassiveException().addMsg("<b>You must be a player to hold an item in your main hand.");
-		Player player = (Player)sender;
+		if ( ! (sender instanceof Player player)) throw new MassiveException().addMsg("<b>You must be a player to hold an item in your main hand.");
 		
 		ItemStack ret = InventoryUtil.getMainHand(player);
 		if (InventoryUtil.isNothing(ret)) throw new MassiveException().addMsg("<b>You must hold an item in your main hand.");

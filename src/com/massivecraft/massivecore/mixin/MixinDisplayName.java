@@ -12,7 +12,8 @@ public class MixinDisplayName extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinDisplayName d = new MixinDisplayName();
+	private static final MixinDisplayName d = new MixinDisplayName();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinDisplayName i = d;
 	@Contract(pure = true)
 	public static MixinDisplayName get() { return i; }

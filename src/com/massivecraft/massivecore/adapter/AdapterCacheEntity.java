@@ -22,7 +22,7 @@ public class AdapterCacheEntity implements JsonDeserializer<CacheEntity<?,?>>, J
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static AdapterCacheEntity i = new AdapterCacheEntity();
+	private static final AdapterCacheEntity i = new AdapterCacheEntity();
 	@Contract(pure = true)
 	public static AdapterCacheEntity get() { return i; }
 	

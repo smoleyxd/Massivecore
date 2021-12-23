@@ -399,8 +399,7 @@ public abstract class EntityContainerAbstract<E extends EntityInternal<E>> imple
 		{
 			if (entity == null) continue;
 			
-			if ( ! (entity instanceof Named)) continue;
-			Named named = (Named)entity;
+			if ( ! (entity instanceof Named named)) continue;
 			
 			if (predicate.apply(named.getName())) return entity;
 		}

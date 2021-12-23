@@ -5,15 +5,18 @@ import com.massivecraft.massivecore.command.editor.CommandEditAbstract;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 
+import java.io.Serial;
+
 public class RequirementEditorUse extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static RequirementEditorUse i = new RequirementEditorUse();
+	private static final RequirementEditorUse i = new RequirementEditorUse();
 	public static RequirementEditorUse get() { return i; }
 	
 	// -------------------------------------------- //
@@ -23,16 +26,14 @@ public class RequirementEditorUse extends RequirementAbstract
 	@Override
 	public boolean apply(CommandSender sender, MassiveCommand command)
 	{
-		if ( ! (command instanceof CommandEditAbstract)) return false;
-		CommandEditAbstract<?, ?> commandEditor = (CommandEditAbstract<?, ?>)command;
+		if ( ! (command instanceof CommandEditAbstract<?, ?> commandEditor)) return false;
 		return commandEditor.getSettings().getUsed(sender) != null;
 	}
 	
 	@Override
 	public String createErrorMessage(CommandSender sender, MassiveCommand command)
 	{
-		if ( ! (command instanceof CommandEditAbstract)) return Txt.parse("<b>This is not an editor!");
-		CommandEditAbstract<?, ?> commandEditor = (CommandEditAbstract<?, ?>)command;
+		if ( ! (command instanceof CommandEditAbstract<?, ?> commandEditor)) return Txt.parse("<b>This is not an editor!");
 		
 		String noun = commandEditor.getSettings().getObjectType().getName();
 		String aan = Txt.aan(noun);

@@ -15,7 +15,7 @@ public class NmsPermissions extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsPermissions d = new NmsPermissions().setAlternatives(
+	private static final NmsPermissions d = new NmsPermissions().setAlternatives(
 		NmsPermissions17R4P.class
 	);
 	
@@ -23,6 +23,7 @@ public class NmsPermissions extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPermissions i = d;
 	public static NmsPermissions get() { return i; }
 	

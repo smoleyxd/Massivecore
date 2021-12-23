@@ -8,7 +8,7 @@ public class TypeEventPriority extends TypeEnum<EventPriority>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeEventPriority i = new TypeEventPriority();
+	private static final TypeEventPriority i = new TypeEventPriority();
 	public static TypeEventPriority get() { return i; }
 	public TypeEventPriority()
 	{

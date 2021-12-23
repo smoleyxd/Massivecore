@@ -9,7 +9,7 @@ public class ComparatorNamed extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorNamed i = new ComparatorNamed();
+	private static final ComparatorNamed i = new ComparatorNamed();
 	@Contract(pure = true)
 	public static ComparatorNamed get() { return i; }
 	

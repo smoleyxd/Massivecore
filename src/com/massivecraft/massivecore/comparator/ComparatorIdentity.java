@@ -8,7 +8,7 @@ public class ComparatorIdentity extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorIdentity i = new ComparatorIdentity();
+	private static final ComparatorIdentity i = new ComparatorIdentity();
 	@Contract(pure = true)
 	public static ComparatorIdentity get() { return i; }
 

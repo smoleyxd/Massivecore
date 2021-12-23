@@ -117,8 +117,7 @@ public class ExceptionSet
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof ExceptionSet)) return false;
-		ExceptionSet that = (ExceptionSet)object;
+		if ( ! (object instanceof ExceptionSet that)) return false;
 		
 		return MUtil.equals(
 			this.standard, that.standard,

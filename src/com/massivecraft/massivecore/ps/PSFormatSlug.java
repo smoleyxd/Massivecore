@@ -8,7 +8,7 @@ public class PSFormatSlug extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatSlug i = new PSFormatSlug();
+	private static final PSFormatSlug i = new PSFormatSlug();
 	public static PSFormatSlug get()	{ return i; }
 	private PSFormatSlug()
 	{

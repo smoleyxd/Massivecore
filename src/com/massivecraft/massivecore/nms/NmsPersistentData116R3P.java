@@ -17,6 +17,7 @@ public class NmsPersistentData116R3P extends NmsPersistentData
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPersistentData116R3P i = new NmsPersistentData116R3P();
 	public static NmsPersistentData116R3P get () { return i; }
 

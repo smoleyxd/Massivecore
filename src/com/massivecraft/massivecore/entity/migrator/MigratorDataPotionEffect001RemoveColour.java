@@ -9,7 +9,7 @@ public class MigratorDataPotionEffect001RemoveColour extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorDataPotionEffect001RemoveColour i = new MigratorDataPotionEffect001RemoveColour();
+	private static final MigratorDataPotionEffect001RemoveColour i = new MigratorDataPotionEffect001RemoveColour();
 	public static MigratorDataPotionEffect001RemoveColour get() { return i; }
 	private MigratorDataPotionEffect001RemoveColour()
 	{

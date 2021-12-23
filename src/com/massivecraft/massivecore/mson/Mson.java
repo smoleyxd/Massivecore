@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +42,7 @@ public class Mson implements Serializable
 	// CONSTANTS: TECHY
 	// -------------------------------------------- //
 
+	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
 	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<vhex>(\u00A7x(?:\u00A7[a-fA-F0-9]){6})))|(?=(?<!\u00A7x(?:\u00A7[a-fA-F0-9]){0,5})(?<code>\u00A7[0-9a-fk-or]))|(?=<(?<mhex>(#[a-fA-F0-9]{6}))>)");
@@ -622,14 +624,12 @@ public class Mson implements Serializable
 		{
 			return (Mson) part;
 		}
-		else if (part instanceof String)
+		else if (part instanceof String text)
 		{
-			String text = (String) part;
 			return mson(text);
 		}
-		else if (part instanceof Collection<?>)
+		else if (part instanceof Collection<?> parts)
 		{
-			Collection<?> parts = (Collection<?>) part;
 			List<Mson> msons = Mson.msons(parts);
 			
 			if (msons.isEmpty()) return mson();
@@ -637,9 +637,8 @@ public class Mson implements Serializable
 			
 			return mson().extra(msons);
 		}
-		else if (part instanceof Object[])
+		else if (part instanceof Object[] parts)
 		{
-			Object[] parts = (Object[]) part;
 			return getMson(Arrays.asList(parts));
 		}
 		else
@@ -1491,8 +1490,7 @@ public class Mson implements Serializable
 	public boolean equals(Object object)
 	{
 		if (this == object) return true;
-		if ( ! (object instanceof Mson)) return false;
-		Mson that = (Mson)object;
+		if ( ! (object instanceof Mson that)) return false;
 		return MUtil.equals(
 			this.text, that.text,
 			this.color, that.color,

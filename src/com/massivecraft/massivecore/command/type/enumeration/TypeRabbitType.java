@@ -8,7 +8,7 @@ public class TypeRabbitType extends TypeEnum<Type>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeRabbitType i = new TypeRabbitType();
+	private static final TypeRabbitType i = new TypeRabbitType();
 	public static TypeRabbitType get() { return i; }
 	public TypeRabbitType()
 	{

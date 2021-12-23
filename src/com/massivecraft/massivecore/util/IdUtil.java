@@ -73,7 +73,7 @@ public class IdUtil implements Listener, Runnable
 	// A few things needs an instantiated class though.
 	// Such as the event listeners.
 	
-	private static IdUtil i = new IdUtil();
+	private static final IdUtil i = new IdUtil();
 	public static IdUtil get() { return i; }
 	
 	// -------------------------------------------- //
@@ -98,17 +98,17 @@ public class IdUtil implements Listener, Runnable
 	// IdData storage. Maintaining relation between name and id.
 	
 	// The full set
-	private static Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+	private static final Set<IdData> datas = Collections.newSetFromMap(new ConcurrentHashMap<>());
 	@Contract(pure = true)
 	public static Set<IdData> getDatas() { return datas; }
 	
 	// Id Index
-	private static Map<String, IdData> idToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	private static final Map<String, IdData> idToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
 	@Contract(pure = true)
 	public static Map<String, IdData> getIdToData() { return idToData;  }
 	
 	// Name Index
-	private static Map<String, IdData> nameToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
+	private static final Map<String, IdData> nameToData = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
 	@Contract(pure = true)
 	public static Map<String, IdData> getNameToData() { return nameToData; }
 	
@@ -117,7 +117,7 @@ public class IdUtil implements Listener, Runnable
 	// -------------------------------------------- //
 	// Used for chat tab completion, argument readers, etc.
 
-	private static SenderMap maintainedIds = new SenderMap();
+	private static final SenderMap maintainedIds = new SenderMap();
 	@Contract(pure = true)
 	public static SenderMap getMaintainedIds() { return maintainedIds; }
 	public static @NotNull @UnmodifiableView Set<String> getIds(@NotNull SenderPresence presence, @NotNull SenderType type)
@@ -125,7 +125,7 @@ public class IdUtil implements Listener, Runnable
 		return maintainedIds.getValues(presence, type);
 	}
 	
-	private static SenderMap maintainedNames = new SenderMap();
+	private static final SenderMap maintainedNames = new SenderMap();
 	@Contract(pure = true)
 	public static SenderMap getMaintainedNames() { return maintainedNames; }
 	public static @NotNull @UnmodifiableView Set<String> getNames(@NotNull SenderPresence presence, @NotNull SenderType type)
@@ -139,11 +139,11 @@ public class IdUtil implements Listener, Runnable
 	// For registering extra custom CommandSender implementations.
 	// It's assumed that the getName() returns the name which is also the id.
 	
-	private static Map<String, CommandSender> registryIdToSender = new ConcurrentHashMap<>();
+	private static final Map<String, CommandSender> registryIdToSender = new ConcurrentHashMap<>();
 	@Contract(value = " -> new", pure = true)
 	public static @NotNull @UnmodifiableView Map<String, CommandSender> getRegistryIdToSender() { return Collections.unmodifiableMap(registryIdToSender); }
 	
-	private static Map<CommandSender, String> registrySenderToId = new ConcurrentHashMap<>();
+	private static final Map<CommandSender, String> registrySenderToId = new ConcurrentHashMap<>();
 	@Contract(value = " -> new", pure = true)
 	public static @NotNull @UnmodifiableView Map<CommandSender, String> getRegistrySenderToId() { return Collections.unmodifiableMap(registrySenderToId); }
 	
@@ -485,9 +485,8 @@ public class IdUtil implements Listener, Runnable
 		if (CONSOLE_ID.equals(senderObject)) return CONSOLE_DATA;
 		
 		// SenderEntity Recurse
-		if (senderObject instanceof SenderEntity<?>)
+		if (senderObject instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)senderObject;
 			return getData(senderEntity.getId());
 		}
 		
@@ -551,9 +550,8 @@ public class IdUtil implements Listener, Runnable
 		if (CONSOLE_ID.equals(senderObject)) return getConsole();
 		
 		// SenderEntity Recurse
-		if (senderObject instanceof SenderEntity<?>)
+		if (senderObject instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)senderObject;
 			return getSender(senderEntity.getId());
 		}
 		
@@ -570,10 +568,9 @@ public class IdUtil implements Listener, Runnable
 		}
 		
 		// UUID
-		if (senderObject instanceof UUID)
+		if (senderObject instanceof UUID uuid)
 		{
 			// Attempt finding player
-			UUID uuid = (UUID)senderObject;
 			Player player = Bukkit.getPlayer(uuid);
 			if (player != null) return player;
 			
@@ -582,10 +579,9 @@ public class IdUtil implements Listener, Runnable
 		}
 		
 		// String
-		if (senderObject instanceof String)
+		if (senderObject instanceof String string)
 		{
 			// Recurse as UUID
-			String string = (String)senderObject;
 			UUID uuid = MUtil.asUuid(string);
 			if (uuid != null) return getSender(uuid);
 			
@@ -617,9 +613,8 @@ public class IdUtil implements Listener, Runnable
 		if (CONSOLE_ID.equals(senderObject)) return null;
 		
 		// SenderEntity Recurse
-		if (senderObject instanceof SenderEntity<?>)
+		if (senderObject instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)senderObject;
 			return getUuid(senderEntity.getId());
 		}
 		
@@ -627,9 +622,8 @@ public class IdUtil implements Listener, Runnable
 		if (senderObject instanceof Player) return ((Player)senderObject).getUniqueId();
 		
 		// CommandSender
-		if (senderObject instanceof CommandSender)
+		if (senderObject instanceof CommandSender sender)
 		{
-			CommandSender sender = (CommandSender)senderObject;
 			String id = sender.getName();
 			return MUtil.asUuid(id);
 		}
@@ -641,10 +635,9 @@ public class IdUtil implements Listener, Runnable
 		// Handled at "Already Done"
 		
 		// String
-		if (senderObject instanceof String)
+		if (senderObject instanceof String string)
 		{
 			// Is UUID
-			String string = (String)senderObject;
 			UUID uuid = MUtil.asUuid(string);
 			if (uuid != null) return uuid;
 			
@@ -682,9 +675,8 @@ public class IdUtil implements Listener, Runnable
 		if (CONSOLE_ID.equals(senderObject)) return CONSOLE_ID;
 		
 		// SenderEntity Recurse
-		if (senderObject instanceof SenderEntity<?>)
+		if (senderObject instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)senderObject;
 			return getId(senderEntity.getId());
 		}
 		
@@ -761,9 +753,8 @@ public class IdUtil implements Listener, Runnable
 		if (CONSOLE_ID.equals(senderObject)) return CONSOLE_ID;
 		
 		// SenderEntity Recurse
-		if (senderObject instanceof SenderEntity<?>)
+		if (senderObject instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)senderObject;
 			return getName(senderEntity.getId());
 		}
 		

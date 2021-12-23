@@ -30,7 +30,7 @@ public class EngineMassiveCorePlayerUpdate extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCorePlayerUpdate i = new EngineMassiveCorePlayerUpdate();
+	private static final EngineMassiveCorePlayerUpdate i = new EngineMassiveCorePlayerUpdate();
 	@Contract(pure = true)
 	public static EngineMassiveCorePlayerUpdate get() { return i; }
 	

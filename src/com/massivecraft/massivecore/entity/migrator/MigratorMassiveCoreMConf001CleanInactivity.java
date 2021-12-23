@@ -10,7 +10,7 @@ public class MigratorMassiveCoreMConf001CleanInactivity extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorMassiveCoreMConf001CleanInactivity i = new MigratorMassiveCoreMConf001CleanInactivity();
+	private static final MigratorMassiveCoreMConf001CleanInactivity i = new MigratorMassiveCoreMConf001CleanInactivity();
 	public static MigratorMassiveCoreMConf001CleanInactivity get() { return i; }
 	private MigratorMassiveCoreMConf001CleanInactivity()
 	{

@@ -25,7 +25,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreCommandRegistration i = new EngineMassiveCoreCommandRegistration();
+	private static final EngineMassiveCoreCommandRegistration i = new EngineMassiveCoreCommandRegistration();
 	@Contract(pure = true)
 	public static EngineMassiveCoreCommandRegistration get() { return i; }
 	public EngineMassiveCoreCommandRegistration()
@@ -160,8 +160,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	public static MassiveCommand getMassiveCommand(Command command)
 	{
 		if (command == null) return null;
-		if (!(command instanceof MassiveCoreBukkitCommand)) return null;
-		MassiveCoreBukkitCommand mcbc = (MassiveCoreBukkitCommand)command;
+		if (!(command instanceof MassiveCoreBukkitCommand mcbc)) return null;
 		return mcbc.getMassiveCommand();
 	}
 	

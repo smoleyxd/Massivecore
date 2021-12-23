@@ -16,6 +16,7 @@ public class NmsRepairable17R4P extends NmsRepairable
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsRepairable17R4P i = new NmsRepairable17R4P();
 	public static NmsRepairable17R4P get() { return i; }
 	

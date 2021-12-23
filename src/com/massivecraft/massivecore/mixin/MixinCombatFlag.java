@@ -8,7 +8,8 @@ public class MixinCombatFlag extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinCombatFlag d = new MixinCombatFlag();
+	private static final MixinCombatFlag d = new MixinCombatFlag();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinCombatFlag i = d;
 	@Contract(pure = true)
 	public static MixinCombatFlag get() { return i; }

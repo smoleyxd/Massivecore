@@ -15,6 +15,7 @@ import java.util.Objects;
 import static com.massivecraft.massivecore.item.DataItemStack.get;
 import static com.massivecraft.massivecore.item.DataItemStack.set;
 
+@SuppressWarnings("FieldMayBeFinal")
 @EditorMethods(true)
 public class DataPotionEffect implements Comparable<DataPotionEffect>
 {
@@ -122,8 +123,7 @@ public class DataPotionEffect implements Comparable<DataPotionEffect>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof DataPotionEffect)) return false;
-		DataPotionEffect that = (DataPotionEffect)object;
+		if ( ! (object instanceof DataPotionEffect that)) return false;
 		
 		return MUtil.equals(
 			this.getId(), that.getId(),

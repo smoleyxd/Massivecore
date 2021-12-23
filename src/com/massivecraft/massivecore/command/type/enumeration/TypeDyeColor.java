@@ -11,7 +11,7 @@ public class TypeDyeColor extends TypeEnum<DyeColor>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDyeColor i = new TypeDyeColor();
+	private static final TypeDyeColor i = new TypeDyeColor();
 	public static TypeDyeColor get() { return i; }
 	public TypeDyeColor()
 	{

@@ -1,7 +1,10 @@
 package com.massivecraft.massivecore.mixin;
 
+import java.io.Serial;
+
 public class TeleporterException extends Exception
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	public TeleporterException()

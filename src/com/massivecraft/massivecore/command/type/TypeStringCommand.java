@@ -28,7 +28,7 @@ public class TypeStringCommand extends TypeAbstract<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeStringCommand i = new TypeStringCommand();
+	private static final TypeStringCommand i = new TypeStringCommand();
 	public static TypeStringCommand get() { return i; }
 	
 	// -------------------------------------------- //

@@ -65,11 +65,7 @@ public class PermissionUtil
 	
 	public static void ensureHas(@NotNull Permissible permissible, String permissionName)
 	{
-		if (permissible.hasPermission(permissionName))
-		{
-			return;
-		}
-		else
+		if (!permissible.hasPermission(permissionName))
 		{
 			permissible.addAttachment(MassiveCore.get(), permissionName, true);
 		}
@@ -402,9 +398,8 @@ public class PermissionUtil
 		
 		if (permissible.hasPermission(permissionId)) return true;
 		
-		if (verbose && permissible instanceof CommandSender)
+		if (verbose && permissible instanceof CommandSender sender)
 		{
-			CommandSender sender = (CommandSender)permissible;
 			String message = getPermissionDeniedMessage(permission);
 			MixinMessage.get().messageOne(sender, message);
 		}

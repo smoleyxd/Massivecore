@@ -8,7 +8,7 @@ public class TypeShort extends TypeAbstractNumber<Short>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeShort i = new TypeShort();
+	private static final TypeShort i = new TypeShort();
 	public static TypeShort get() { return i; }
 	public TypeShort() { super(Short.class); }
 	

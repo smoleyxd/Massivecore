@@ -8,7 +8,7 @@ public class PredicateElementGarbage extends PredicateElementRegexes
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateElementGarbage i = new PredicateElementGarbage();
+	private static final PredicateElementGarbage i = new PredicateElementGarbage();
 	public static PredicateElementGarbage get() { return i; }
 	public PredicateElementGarbage()
 	{

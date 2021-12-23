@@ -12,7 +12,7 @@ public class NmsRecipe extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsRecipe d = new NmsRecipe().setAlternatives(
+	private static final NmsRecipe d = new NmsRecipe().setAlternatives(
 		NmsRecipe112R1P.class,
 		NmsRecipe17R4P.class
 	);
@@ -21,6 +21,7 @@ public class NmsRecipe extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsRecipe i = d;
 	public static NmsRecipe get() { return i; }
 	

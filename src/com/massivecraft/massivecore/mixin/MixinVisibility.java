@@ -11,7 +11,8 @@ public class MixinVisibility extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinVisibility d = new MixinVisibility();
+	private static final MixinVisibility d = new MixinVisibility();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinVisibility i = d;
 	@Contract(pure = true)
 	public static MixinVisibility get() { return i; }

@@ -31,7 +31,7 @@ public class MigratorInventory005GrassPathNoMore extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorInventory005GrassPathNoMore i = new MigratorInventory005GrassPathNoMore();
+	private static final MigratorInventory005GrassPathNoMore i = new MigratorInventory005GrassPathNoMore();
 	public static MigratorInventory005GrassPathNoMore get() { return i; }
 	private MigratorInventory005GrassPathNoMore()
 	{

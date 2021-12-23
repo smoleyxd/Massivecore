@@ -188,14 +188,13 @@ public final class SenderMap
 	public static @NotNull List<@NotNull SenderPresence> getPresences(SenderPresence presence)
 	{
 		if (presence == null) throw new NullPointerException("presence");
-		switch (presence)
-		{
-			case LOCAL : return LOCAL_PRESENCES;
-			case ONLINE : return ONLINE_PRESENCES;
-			case OFFLINE : return OFFLINE_PRESENCES;
-			case ANY : throw new UnsupportedOperationException("SenderPresence.ANY is not supported. You must know wether it is online or offline.");
-		}
-		throw new UnsupportedOperationException("Unknown SenderPresence: " + null);
+		return switch (presence)
+				   {
+					   case LOCAL -> LOCAL_PRESENCES;
+					   case ONLINE -> ONLINE_PRESENCES;
+					   case OFFLINE -> OFFLINE_PRESENCES;
+					   case ANY -> throw new UnsupportedOperationException("SenderPresence.ANY is not supported. You must know wether it is online or offline.");
+				   };
 	}
 	
 	public static final List<SenderType> PLAYER_TYPES = ImmutableList.of(SenderType.PLAYER, SenderType.ANY);

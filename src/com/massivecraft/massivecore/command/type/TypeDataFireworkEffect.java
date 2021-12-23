@@ -9,7 +9,7 @@ public class TypeDataFireworkEffect extends TypeObject<DataFireworkEffect>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDataFireworkEffect i = new TypeDataFireworkEffect();
+	private static final TypeDataFireworkEffect i = new TypeDataFireworkEffect();
 	public static TypeDataFireworkEffect get() { return i; }
 	public TypeDataFireworkEffect()
 	{

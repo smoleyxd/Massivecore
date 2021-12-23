@@ -6,15 +6,18 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.Serial;
+
 public class RequirementIsPlayer extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static RequirementIsPlayer i = new RequirementIsPlayer();
+	private static final RequirementIsPlayer i = new RequirementIsPlayer();
 	public static RequirementIsPlayer get() { return i; }
 	
 	// -------------------------------------------- //

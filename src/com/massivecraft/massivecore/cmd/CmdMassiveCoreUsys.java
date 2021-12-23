@@ -11,7 +11,7 @@ public class CmdMassiveCoreUsys extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreUsys i = new CmdMassiveCoreUsys() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesUsys; } };
+	private static final CmdMassiveCoreUsys i = new CmdMassiveCoreUsys() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesUsys; } };
 	@Contract(pure = true)
 	public static CmdMassiveCoreUsys get() { return i; }
 	

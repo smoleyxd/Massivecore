@@ -202,9 +202,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override
 	public ChatColor getVisualColor(T value, CommandSender sender)
 	{
-		if (value instanceof Colorized)
+		if (value instanceof Colorized colorized)
 		{
-			Colorized colorized = (Colorized) value;
 			return colorized.getColor();
 		}
 		return this.visualColor;
@@ -258,9 +257,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override
 	public String getVisualInner(T value, CommandSender sender)
 	{
-		if (value instanceof SenderEntity<?>)
+		if (value instanceof SenderEntity<?> senderEntity)
 		{
-			SenderEntity<?> senderEntity = (SenderEntity<?>)value;
 			String ret = senderEntity.getDisplayName(sender);
 			return ret == null ? NULL : ret;
 		}
@@ -293,9 +291,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override
 	public String getNameInner(T value)
 	{
-		if (value instanceof Named)
+		if (value instanceof Named named)
 		{
-			Named named = (Named) value;
 			return named.getName();
 		}
 		
@@ -329,9 +326,8 @@ public abstract class TypeAbstract<T> implements Type<T>
 	@Override
 	public String getIdInner(T value)
 	{
-		if (value instanceof Identified)
+		if (value instanceof Identified identified)
 		{
-			Identified identified = (Identified)value;
 			return identified.getId();
 		}
 		else if (value instanceof String || value instanceof Number || value instanceof Boolean)

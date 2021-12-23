@@ -12,7 +12,7 @@ public class TypeConverterEnchant extends TypeConverter<Enchantment, String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeConverterEnchant i = new TypeConverterEnchant();
+	private static final TypeConverterEnchant i = new TypeConverterEnchant();
 	public static TypeConverterEnchant get() { return i; }
 	
 	public TypeConverterEnchant()

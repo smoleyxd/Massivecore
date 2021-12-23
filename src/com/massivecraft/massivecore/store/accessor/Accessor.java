@@ -22,7 +22,7 @@ public class Accessor
 	private final Class<?> clazz;
 	public Class<?> getClazz() { return this.clazz; }
 		
-	private Map<String, FieldAccessor> fieldToAccessor = new MassiveMap<>();
+	private final Map<String, FieldAccessor> fieldToAccessor = new MassiveMap<>();
 	public Map<String, FieldAccessor> getFieldToAccessor() { return this.fieldToAccessor; }
 	
 	public FieldAccessor getFieldAccessor(String fieldName)
@@ -46,7 +46,7 @@ public class Accessor
 	// CONSTRUCT / FACTORY
 	// -------------------------------------------- //
 	
-	private static Map<Class<?>, Accessor> classToAccessor = new HashMap<>();
+	private static final Map<Class<?>, Accessor> classToAccessor = new HashMap<>();
 	
 	public static Accessor get(Class<?> clazz)
 	{

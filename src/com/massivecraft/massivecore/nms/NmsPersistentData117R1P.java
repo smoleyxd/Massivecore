@@ -17,6 +17,7 @@ public class NmsPersistentData117R1P extends NmsPersistentData
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPersistentData117R1P i = new NmsPersistentData117R1P();
 	public static NmsPersistentData117R1P get () { return i; }
 	

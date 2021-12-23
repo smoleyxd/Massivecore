@@ -11,7 +11,7 @@ public class CmdMassiveCoreStore extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreStore i = new CmdMassiveCoreStore() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesMstore; } };
+	private static final CmdMassiveCoreStore i = new CmdMassiveCoreStore() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesMstore; } };
 	@Contract(pure = true)
 	public static CmdMassiveCoreStore get() { return i; }
 	

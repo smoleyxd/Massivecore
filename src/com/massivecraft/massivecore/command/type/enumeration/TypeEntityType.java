@@ -11,7 +11,7 @@ public class TypeEntityType extends TypeEnum<EntityType>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeEntityType i = new TypeEntityType();
+	private static final TypeEntityType i = new TypeEntityType();
 	public static TypeEntityType get() { return i; }
 	public TypeEntityType()
 	{

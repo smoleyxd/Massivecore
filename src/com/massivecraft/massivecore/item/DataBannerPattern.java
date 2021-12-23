@@ -102,8 +102,7 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof DataBannerPattern)) return false;
-		DataBannerPattern that = (DataBannerPattern)object;
+		if ( ! (object instanceof DataBannerPattern that)) return false;
 		
 		return MUtil.equals(
 			this.getId(), that.getId(),

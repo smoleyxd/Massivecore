@@ -24,7 +24,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCorePlayerState i = new EngineMassiveCorePlayerState();
+	private static final EngineMassiveCorePlayerState i = new EngineMassiveCorePlayerState();
 	@Contract(pure = true)
 	public static EngineMassiveCorePlayerState get() { return i; }
 	
@@ -48,7 +48,7 @@ public class EngineMassiveCorePlayerState extends Engine
 	// STATE STORAGE
 	// -------------------------------------------- //
 	
-	private Map<UUID, PlayerState> idToState = new ConcurrentHashMap<>();
+	private final Map<UUID, PlayerState> idToState = new ConcurrentHashMap<>();
 
 	@Contract("null -> fail")
 	public PlayerState getState(Player player)

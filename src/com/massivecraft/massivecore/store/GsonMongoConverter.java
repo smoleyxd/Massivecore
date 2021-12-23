@@ -149,9 +149,6 @@ public final class GsonMongoConverter
 	
 	public static @NotNull JsonObject mongo2GsonObject(@NotNull Document in)
 	{
-		//if (!(inObject instanceof BasicDBObject)) throw new IllegalArgumentException("Expected BasicDBObject as argument type!");
-		//BasicDBObject in = (BasicDBObject)inObject;
-		
 		JsonObject jsonObject = new JsonObject();
 		for (Entry<String, Object> entry : in.entrySet())
 		{

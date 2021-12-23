@@ -2,10 +2,8 @@ package com.massivecraft.massivecore.item;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Axolotl.Variant;
-import org.bukkit.entity.TropicalFish.Pattern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
-import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
 public class WriterItemStackMetaAxolotlVariant extends WriterAbstractItemStackMetaField<AxolotlBucketMeta, Variant, Variant>

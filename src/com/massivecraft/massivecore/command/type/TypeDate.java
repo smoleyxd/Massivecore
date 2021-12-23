@@ -20,7 +20,7 @@ public class TypeDate extends TypeAbstractSimple<Date>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDate i = new TypeDate();
+	private static final TypeDate i = new TypeDate();
 	public static TypeDate get() { return i; }
 	public TypeDate() { super(Date.class); }
 	

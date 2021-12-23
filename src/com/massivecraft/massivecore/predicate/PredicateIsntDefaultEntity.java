@@ -9,7 +9,7 @@ public class PredicateIsntDefaultEntity implements Predicate<Entity<?>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PredicateIsntDefaultEntity i = new PredicateIsntDefaultEntity();
+	private static final PredicateIsntDefaultEntity i = new PredicateIsntDefaultEntity();
 	public static PredicateIsntDefaultEntity get() { return i; }
 	
 	// -------------------------------------------- //

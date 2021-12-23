@@ -22,7 +22,7 @@ public class EngineMassiveCoreClean extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreClean i = new EngineMassiveCoreClean();
+	private static final EngineMassiveCoreClean i = new EngineMassiveCoreClean();
 	@Contract(pure = true)
 	public static EngineMassiveCoreClean get() { return i; }
 	public EngineMassiveCoreClean()

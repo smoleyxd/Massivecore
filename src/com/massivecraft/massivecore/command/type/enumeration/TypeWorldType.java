@@ -11,7 +11,7 @@ public class TypeWorldType extends TypeEnum<WorldType>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeWorldType i = new TypeWorldType();
+	private static final TypeWorldType i = new TypeWorldType();
 	public static TypeWorldType get() { return i; }
 	public TypeWorldType()
 	{

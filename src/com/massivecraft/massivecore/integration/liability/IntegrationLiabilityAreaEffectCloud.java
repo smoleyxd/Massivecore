@@ -10,7 +10,7 @@ public class IntegrationLiabilityAreaEffectCloud extends Integration
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static IntegrationLiabilityAreaEffectCloud i = new IntegrationLiabilityAreaEffectCloud();
+	private static final IntegrationLiabilityAreaEffectCloud i = new IntegrationLiabilityAreaEffectCloud();
 	public static IntegrationLiabilityAreaEffectCloud get() { return i; }
 	
 	public IntegrationLiabilityAreaEffectCloud()

@@ -65,8 +65,7 @@ public class ContainerGameProfile implements Comparable<ContainerGameProfile>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof ContainerGameProfile)) return false;
-		ContainerGameProfile that = (ContainerGameProfile)object;
+		if ( ! (object instanceof ContainerGameProfile that)) return false;
 		
 		return MUtil.equals(
 			this.getUuid(), that.getUuid(),

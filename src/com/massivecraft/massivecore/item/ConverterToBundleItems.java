@@ -3,7 +3,6 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Map;
 
 public class ConverterToBundleItems extends Converter<List<DataItemStack>, List<ItemStack>>
 {

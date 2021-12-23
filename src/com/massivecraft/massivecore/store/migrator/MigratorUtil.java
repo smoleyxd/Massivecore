@@ -33,7 +33,7 @@ public class MigratorUtil
 	// MIGRATOR REGISTRY
 	// -------------------------------------------- //
 
-	private static Map<Class<?>, Map<Integer, MigratorRoot>> migrators = new HashMap<>();
+	private static final Map<Class<?>, Map<Integer, MigratorRoot>> migrators = new HashMap<>();
 
 	public static boolean isActive(MigratorRoot migrator)
 	{
@@ -93,7 +93,7 @@ public class MigratorUtil
 	// TARGET VERSION
 	// -------------------------------------------- //
 	
-	private static Map<Class<?>, Integer> targetVersions = new HashMap<>();
+	private static final Map<Class<?>, Integer> targetVersions = new HashMap<>();
 	
 	// ADD
 	public static void setTargetVersion(Class<?> clazz, int targetVersion)
@@ -129,7 +129,7 @@ public class MigratorUtil
 	// JSON REPRESENTATION
 	// -------------------------------------------- //
 	
-	private static Map<Class<?>, Type> jsonRepresentation = new HashMap<>();
+	private static final Map<Class<?>, Type> jsonRepresentation = new HashMap<>();
 	
 	// ADD
 	public static void addJsonRepresentation(Class<?> clazz, Type representation)
@@ -155,9 +155,8 @@ public class MigratorUtil
 
 	private static boolean isParameterizedInternalMap(Type type)
 	{
-		if (!(type instanceof ParameterizedType)) return false;
-
-		ParameterizedType parameterizedType = (ParameterizedType) type;
+		if (!(type instanceof ParameterizedType parameterizedType)) return false;
+		
 		return parameterizedType.getRawType().equals(EntityInternalMap.class);
 
 	}
@@ -448,9 +447,8 @@ public class MigratorUtil
 	{
 		if (jsonType instanceof ParameterizedType) return (ParameterizedType) jsonType;
 
-		if (jsonType instanceof Class<?>)
+		if (jsonType instanceof Class<?> clazz)
 		{
-			Class<?> clazz = (Class<?>) jsonType;
 			Type superClass = clazz.getGenericSuperclass();
 
 			// The exception throwing and catching is in order to catch the inheritance structure

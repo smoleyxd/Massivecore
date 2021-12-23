@@ -2,6 +2,7 @@ package com.massivecraft.massivecore;
 
 import com.massivecraft.massivecore.util.MUtil;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map.Entry;
 
@@ -11,6 +12,7 @@ public class Couple<A, B> implements Entry<A, B>, Cloneable, Serializable
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -84,8 +86,7 @@ public class Couple<A, B> implements Entry<A, B>, Cloneable, Serializable
 	@Override
 	public boolean equals(Object object)
 	{
-		if (!(object instanceof Couple<?, ?>)) return false;
-		Couple<?, ?> that = (Couple<?, ?>)object;
+		if (!(object instanceof Couple<?, ?> that)) return false;
 		return MUtil.equals(
 			this.getFirst(), that.getFirst(),
 			this.getSecond(), that.getSecond()

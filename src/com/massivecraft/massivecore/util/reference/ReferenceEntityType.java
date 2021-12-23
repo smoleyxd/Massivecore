@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class ReferenceEntityType {
 
-    private static Set<EntityType> typesUndead = ProviderOptimizedCollectionSafe.enumSetOf(
+    private static final Set<EntityType> typesUndead = ProviderOptimizedCollectionSafe.enumSetOf(
             EntityType.class,
             "DROWNED",
             "EVOKER",

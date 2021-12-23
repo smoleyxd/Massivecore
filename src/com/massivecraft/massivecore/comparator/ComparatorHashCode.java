@@ -10,7 +10,7 @@ public class ComparatorHashCode extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorHashCode i = new ComparatorHashCode();
+	private static final ComparatorHashCode i = new ComparatorHashCode();
 	@Contract(pure = true)
 	public static ComparatorHashCode get() { return i; }
 	

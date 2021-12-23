@@ -10,7 +10,8 @@ public class MixinRepairable extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinRepairable d = new MixinRepairable();
+	private static final MixinRepairable d = new MixinRepairable();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinRepairable i = d;
 	@Contract(pure = true)
 	public static MixinRepairable get() { return i; }

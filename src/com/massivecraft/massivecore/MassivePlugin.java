@@ -231,9 +231,8 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		}
 
 		// Try array
-		if (object instanceof Object[])
+		if (object instanceof Object[] array)
 		{
-			Object[] array = (Object[]) object;
 			activateOne(Arrays.asList(array));
 			return;
 		}
@@ -264,9 +263,8 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		}
 
 		// Try string as class name
-		if (object instanceof String)
+		if (object instanceof String string)
 		{
-			String string = (String)object;
 			try
 			{
 				object = Class.forName(string);
@@ -279,9 +277,8 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		}
 
 		// Try class
-		if (object instanceof Class<?>)
+		if (object instanceof Class<?> clazz)
 		{
-			Class<?> clazz = (Class<?>)object;
 			if ( ! Active.class.isAssignableFrom(clazz)) throw new IllegalArgumentException("Not Active Class: " + clazz);
 
 			Object instance = ReflectionUtil.getSingletonInstance(clazz);

@@ -8,8 +8,11 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+
 public class RequirementEditorPropertyCreated extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -61,8 +64,7 @@ public class RequirementEditorPropertyCreated extends RequirementAbstract
 	@Override
 	public String createErrorMessage(CommandSender sender, MassiveCommand command)
 	{
-		if ( ! (command instanceof CommandEditAbstract)) return Txt.parse("<b>This is not an editor!");
-		CommandEditAbstract<?, ?> commandEditor = (CommandEditAbstract<?, ?>)command;
+		if ( ! (command instanceof CommandEditAbstract<?, ?> commandEditor)) return Txt.parse("<b>This is not an editor!");
 		
 		Property<?, ?> property = commandEditor.getProperty();
 		return Txt.parse("<b>You must " + (this.isCreatedTarget() ? "create" : "delete") + " " + (property != null ? property.getName() : "the property")  + " before you " + getDesc(command) + ".");

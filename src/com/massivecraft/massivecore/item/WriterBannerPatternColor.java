@@ -15,9 +15,6 @@ public class WriterBannerPatternColor extends WriterAbstractBannerPattern<DyeCol
 	public WriterBannerPatternColor()
 	{
 		super("color");
-		// FIXME what is needed when a converter isn't used?
-		//this.setConverterTo(ConverterToDyeColor.get());
-		//this.setConverterFrom(ConverterFromDyeColor.get());
 	}
 	
 	// -------------------------------------------- //

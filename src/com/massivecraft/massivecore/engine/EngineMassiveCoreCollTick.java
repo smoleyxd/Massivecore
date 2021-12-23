@@ -11,7 +11,7 @@ public class EngineMassiveCoreCollTick extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreCollTick i = new EngineMassiveCoreCollTick();
+	private static final EngineMassiveCoreCollTick i = new EngineMassiveCoreCollTick();
 	@Contract(pure = true)
 	public static EngineMassiveCoreCollTick get() { return i; }
 	public EngineMassiveCoreCollTick()

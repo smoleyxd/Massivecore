@@ -12,7 +12,7 @@ public class TypeSenderColl extends TypeAbstractChoice<SenderColl<?>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeSenderColl i = new TypeSenderColl();
+	private static final TypeSenderColl i = new TypeSenderColl();
 	public static TypeSenderColl get() { return i; }
 	public TypeSenderColl() { super(Coll.class); }
 	

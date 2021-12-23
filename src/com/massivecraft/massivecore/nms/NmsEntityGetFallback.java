@@ -12,6 +12,7 @@ public class NmsEntityGetFallback extends NmsEntityGet
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsEntityGetFallback i = new NmsEntityGetFallback();
 	public static NmsEntityGetFallback get () { return i; }
 	

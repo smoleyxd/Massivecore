@@ -9,8 +9,11 @@ import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.Serial;
+
 public class DestinationPlayer extends DestinationAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

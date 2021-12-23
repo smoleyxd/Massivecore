@@ -13,7 +13,7 @@ public class PSAdapter implements JsonDeserializer<PS>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSAdapter i = new PSAdapter();
+	private static final PSAdapter i = new PSAdapter();
 	public static PSAdapter get()	{ return i; }
 	private PSAdapter() {}
 	

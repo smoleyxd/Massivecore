@@ -12,6 +12,7 @@ public class NmsRepairable113R1P extends NmsRepairable
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsRepairable113R1P i = new NmsRepairable113R1P();
 	public static NmsRepairable113R1P get() { return i; }
 

@@ -13,11 +13,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
 public final class SoundEffect implements Serializable
 {
+	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -157,8 +159,7 @@ public final class SoundEffect implements Serializable
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof SoundEffect)) return false;
-		SoundEffect other = (SoundEffect) obj;
+		if (!(obj instanceof SoundEffect other)) return false;
 		if (Float.floatToIntBits(pitch) != Float.floatToIntBits(other.pitch)) return false;
 		if (soundId == null)
 		{

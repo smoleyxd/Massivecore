@@ -33,7 +33,7 @@ public class EngineMassiveCoreDatabase extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreDatabase i = new EngineMassiveCoreDatabase();
+	private static final EngineMassiveCoreDatabase i = new EngineMassiveCoreDatabase();
 	@Contract(pure = true)
 	public static EngineMassiveCoreDatabase get() { return i; }
 	

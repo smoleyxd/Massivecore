@@ -27,7 +27,7 @@ public class ConfirmationUtil
 	// STORE
 	// -------------------------------------------- //
 
-	private static Map<Object, WeakHashMap<CommandSender, String>> objectToConfirmationMap = new HashMap<>();
+	private static final Map<Object, WeakHashMap<CommandSender, String>> objectToConfirmationMap = new HashMap<>();
 
 	// -------------------------------------------- //
 	// DERP

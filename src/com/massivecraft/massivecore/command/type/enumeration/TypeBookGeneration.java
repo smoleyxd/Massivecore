@@ -8,7 +8,7 @@ public class TypeBookGeneration extends TypeEnum<Generation>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeBookGeneration i = new TypeBookGeneration();
+	private static final TypeBookGeneration i = new TypeBookGeneration();
 	public static TypeBookGeneration get() { return i; }
 	public TypeBookGeneration()
 	{

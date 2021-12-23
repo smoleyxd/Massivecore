@@ -8,7 +8,7 @@ public class TypeParrotVariant extends TypeEnum<Parrot.Variant>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeParrotVariant i = new TypeParrotVariant();
+	private static final TypeParrotVariant i = new TypeParrotVariant();
 	public static TypeParrotVariant get() { return i; }
 	public TypeParrotVariant()
 	{

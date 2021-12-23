@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map.Entry;
@@ -54,6 +55,7 @@ public final class PS implements Serializable, Comparable<PS>
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
 	public static final transient float DEFAULT_BUKKIT_PITCH = 0F;
@@ -442,24 +444,12 @@ public final class PS implements Serializable, Comparable<PS>
 				
 				switch (key)
 				{
-					case "world":
-						builder.world(value.getAsString());
-						break;
-					case "x":
-						builder.locationX(value.getAsDouble());
-						break;
-					case "y":
-						builder.locationY(value.getAsDouble());
-						break;
-					case "z":
-						builder.locationZ(value.getAsDouble());
-						break;
-					case "pitch":
-						builder.pitch(value.getAsFloat());
-						break;
-					case "yaw":
-						builder.yaw(value.getAsFloat());
-						break;
+					case "world" -> builder.world(value.getAsString());
+					case "x" -> builder.locationX(value.getAsDouble());
+					case "y" -> builder.locationY(value.getAsDouble());
+					case "z" -> builder.locationZ(value.getAsDouble());
+					case "pitch" -> builder.pitch(value.getAsFloat());
+					case "yaw" -> builder.yaw(value.getAsFloat());
 				}
 			}
 		}
@@ -473,48 +463,20 @@ public final class PS implements Serializable, Comparable<PS>
 				
 				switch (key)
 				{
-					case NAME_SERIALIZED_WORLD:
-						builder.world(value.getAsString());
-						break;
-					case NAME_SERIALIZED_BLOCKX:
-						builder.blockX(value.getAsInt());
-						break;
-					case NAME_SERIALIZED_BLOCKY:
-						builder.blockY(value.getAsInt());
-						break;
-					case NAME_SERIALIZED_BLOCKZ:
-						builder.blockZ(value.getAsInt());
-						break;
-					case NAME_SERIALIZED_LOCATIONX:
-						builder.locationX(value.getAsDouble());
-						break;
-					case NAME_SERIALIZED_LOCATIONY:
-						builder.locationY(value.getAsDouble());
-						break;
-					case NAME_SERIALIZED_LOCATIONZ:
-						builder.locationZ(value.getAsDouble());
-						break;
-					case NAME_SERIALIZED_CHUNKX:
-						builder.chunkX(value.getAsInt());
-						break;
-					case NAME_SERIALIZED_CHUNKZ:
-						builder.chunkZ(value.getAsInt());
-						break;
-					case NAME_SERIALIZED_PITCH:
-						builder.pitch(value.getAsFloat());
-						break;
-					case NAME_SERIALIZED_YAW:
-						builder.yaw(value.getAsFloat());
-						break;
-					case NAME_SERIALIZED_VELOCITYX:
-						builder.velocityX(value.getAsDouble());
-						break;
-					case NAME_SERIALIZED_VELOCITYY:
-						builder.velocityY(value.getAsDouble());
-						break;
-					case NAME_SERIALIZED_VELOCITYZ:
-						builder.velocityZ(value.getAsDouble());
-						break;
+					case NAME_SERIALIZED_WORLD -> builder.world(value.getAsString());
+					case NAME_SERIALIZED_BLOCKX -> builder.blockX(value.getAsInt());
+					case NAME_SERIALIZED_BLOCKY -> builder.blockY(value.getAsInt());
+					case NAME_SERIALIZED_BLOCKZ -> builder.blockZ(value.getAsInt());
+					case NAME_SERIALIZED_LOCATIONX -> builder.locationX(value.getAsDouble());
+					case NAME_SERIALIZED_LOCATIONY -> builder.locationY(value.getAsDouble());
+					case NAME_SERIALIZED_LOCATIONZ -> builder.locationZ(value.getAsDouble());
+					case NAME_SERIALIZED_CHUNKX -> builder.chunkX(value.getAsInt());
+					case NAME_SERIALIZED_CHUNKZ -> builder.chunkZ(value.getAsInt());
+					case NAME_SERIALIZED_PITCH -> builder.pitch(value.getAsFloat());
+					case NAME_SERIALIZED_YAW -> builder.yaw(value.getAsFloat());
+					case NAME_SERIALIZED_VELOCITYX -> builder.velocityX(value.getAsDouble());
+					case NAME_SERIALIZED_VELOCITYY -> builder.velocityY(value.getAsDouble());
+					case NAME_SERIALIZED_VELOCITYZ -> builder.velocityZ(value.getAsDouble());
 				}
 			}
 		}
@@ -1000,8 +962,7 @@ public final class PS implements Serializable, Comparable<PS>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof PS)) return false;
-		PS that = (PS)object;
+		if ( ! (object instanceof PS that)) return false;
 		
 		return MUtil.equals(
 			this.world, that.world,

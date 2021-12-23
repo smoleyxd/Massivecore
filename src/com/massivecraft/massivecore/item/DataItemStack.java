@@ -56,6 +56,7 @@ import java.util.Set;
  * It is mainly used by the ItemStackAdapter and InventoryAdapter.
  * It can also be used directly, for example in maps, since it provides a stable equals and hash code method (as opposed to Bukkit). 
  */
+@SuppressWarnings("FieldMayBeFinal")
 @EditorMethods(true)
 public class DataItemStack implements Comparable<DataItemStack>
 {
@@ -674,8 +675,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	@Override
 	public boolean equals(Object object)
 	{
-		if ( ! (object instanceof DataItemStack)) return false;
-		DataItemStack that = (DataItemStack)object;
+		if ( ! (object instanceof DataItemStack that)) return false;
 		return MUtil.equals(
 			this.getId(), that.getId(),
 			this.getCount(), that.getCount(),

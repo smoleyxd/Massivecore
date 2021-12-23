@@ -21,7 +21,7 @@ public class CmdMassiveCoreCmdurl extends MassiveCoreCommand
 	// INSTANCE
 	// -------------------------------------------- //
 	
-	private static CmdMassiveCoreCmdurl i = new CmdMassiveCoreCmdurl() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesCmdurl; } };
+	private static final CmdMassiveCoreCmdurl i = new CmdMassiveCoreCmdurl() { public List<String> getAliases() { return MassiveCoreMConf.get().aliasesCmdurl; } };
 	@Contract(pure = true)
 	public static CmdMassiveCoreCmdurl get() { return i; }
 	

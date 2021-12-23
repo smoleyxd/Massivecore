@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.collections;
 
+import java.io.Serial;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,6 +15,7 @@ public class MassiveTreeMap<K, V, C extends Comparator<? super K>> extends TreeM
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

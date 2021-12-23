@@ -11,7 +11,7 @@ public class ConfServer extends SimpleConfig
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static transient ConfServer i = new ConfServer();
+	private static final transient ConfServer i = new ConfServer();
 	public static ConfServer get() { return i; }
 	public ConfServer() { super(MassiveCore.get()); }
 	

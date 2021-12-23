@@ -23,7 +23,7 @@ public class EngineMassiveCoreChestGui extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreChestGui i = new EngineMassiveCoreChestGui();
+	private static final EngineMassiveCoreChestGui i = new EngineMassiveCoreChestGui();
 	@Contract(pure = true)
 	public static EngineMassiveCoreChestGui get() { return i; }
 	

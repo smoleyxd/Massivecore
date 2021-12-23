@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
@@ -16,6 +17,7 @@ public class MassiveListDef<E> extends MassiveList<E> implements Def
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

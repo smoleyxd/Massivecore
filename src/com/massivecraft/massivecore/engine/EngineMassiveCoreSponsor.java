@@ -37,7 +37,7 @@ public class EngineMassiveCoreSponsor extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreSponsor i = new EngineMassiveCoreSponsor();
+	private static final EngineMassiveCoreSponsor i = new EngineMassiveCoreSponsor();
 	@Contract(pure = true)
 	public static EngineMassiveCoreSponsor get() { return i; }
 	public EngineMassiveCoreSponsor()
@@ -160,9 +160,8 @@ public class EngineMassiveCoreSponsor extends Engine
 		}
 		
 		// Sound
-		if (sender instanceof Player)
+		if (sender instanceof Player player)
 		{
-			Player player = (Player)sender;
 			SoundEffect.runAll(MassiveCoreMSponsorInfo.get().ingameSoundEffects, player);
 		}
 	}

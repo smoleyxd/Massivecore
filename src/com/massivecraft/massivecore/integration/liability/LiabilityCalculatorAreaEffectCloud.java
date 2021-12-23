@@ -14,9 +14,8 @@ public class LiabilityCalculatorAreaEffectCloud
 	public static Entity liability(EntityDamageByEntityEvent event)
 	{
 		Entity liable = event.getDamager();
-		if (!(liable instanceof AreaEffectCloud)) return null;
+		if (!(liable instanceof AreaEffectCloud cloud)) return null;
 		
-		AreaEffectCloud cloud = (AreaEffectCloud) liable;
 		ProjectileSource source = cloud.getSource();
 		return source instanceof Entity ? (Entity) source : null;
 	}

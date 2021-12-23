@@ -15,7 +15,7 @@ public class TypeNamespacedKey extends TypeAbstract<NamespacedKey>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeNamespacedKey i = new TypeNamespacedKey();
+	private static final TypeNamespacedKey i = new TypeNamespacedKey();
 	public static TypeNamespacedKey get() { return i; }
 	public TypeNamespacedKey() { super(NamespacedKey.class); }
 	

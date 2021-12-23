@@ -9,7 +9,7 @@ public class ComparatorPrioritized extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorPrioritized i = new ComparatorPrioritized();
+	private static final ComparatorPrioritized i = new ComparatorPrioritized();
 	@Contract(pure = true)
 	public static ComparatorPrioritized get() { return i; }
 	

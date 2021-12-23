@@ -12,7 +12,7 @@ public class TypeMaterial extends TypeEnum<Material>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeMaterial i = new TypeMaterial();
+	private static final TypeMaterial i = new TypeMaterial();
 	public static TypeMaterial get() { return i; }
 	public TypeMaterial()
 	{

@@ -11,7 +11,7 @@ public class TypeWorldId extends TypeAbstractChoice<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeWorldId i = new TypeWorldId();
+	private static final TypeWorldId i = new TypeWorldId();
 	public static TypeWorldId get() { return i; }
 	public TypeWorldId() { super(String.class); }
 	

@@ -8,7 +8,7 @@ public class TypePotionEffectWrap extends TypeCombined<PotionEffectWrap>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypePotionEffectWrap i = new TypePotionEffectWrap();
+	private static final TypePotionEffectWrap i = new TypePotionEffectWrap();
 	public static TypePotionEffectWrap get() { return i; }
 
 	public TypePotionEffectWrap()

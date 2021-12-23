@@ -76,7 +76,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeEnchantment i = new TypeEnchantment();
+	private static final TypeEnchantment i = new TypeEnchantment();
 	public static TypeEnchantment get() { return i; }
 	private TypeEnchantment()
 	{

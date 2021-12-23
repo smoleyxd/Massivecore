@@ -11,7 +11,7 @@ public class TypeColl extends TypeAbstractChoice<Coll<?>>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeColl i = new TypeColl();
+	private static final TypeColl i = new TypeColl();
 	public static TypeColl get() { return i; }
 	public TypeColl() { super(Coll.class); }
 	

@@ -12,7 +12,7 @@ public class TypeConverterFireworkEffectType extends TypeConverter<Type, String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeConverterFireworkEffectType i = new TypeConverterFireworkEffectType();
+	private static final TypeConverterFireworkEffectType i = new TypeConverterFireworkEffectType();
 	public static TypeConverterFireworkEffectType get() { return i; }
 	
 	public TypeConverterFireworkEffectType()

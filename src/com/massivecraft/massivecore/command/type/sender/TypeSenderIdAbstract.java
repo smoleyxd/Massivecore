@@ -74,14 +74,12 @@ public abstract class TypeSenderIdAbstract<T> extends TypeAbstract<T>
 	@Override
 	public String getName()
 	{
-		switch (presence)
-		{
-			case LOCAL:
-			case ONLINE: return "online player";
-			case OFFLINE: return "offline player";
-			case ANY: return "player";
-		}
-		throw new UnsupportedOperationException("Unknown SenderPresence: " + presence);
+		return switch (presence)
+				   {
+					   case LOCAL, ONLINE -> "online player";
+					   case OFFLINE -> "offline player";
+					   case ANY -> "player";
+				   };
 	}
 	
 	@Override

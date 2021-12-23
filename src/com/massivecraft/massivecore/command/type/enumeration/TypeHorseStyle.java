@@ -8,7 +8,7 @@ public class TypeHorseStyle extends TypeEnum<Style>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeHorseStyle i = new TypeHorseStyle();
+	private static final TypeHorseStyle i = new TypeHorseStyle();
 	public static TypeHorseStyle get() { return i; }
 	public TypeHorseStyle()
 	{

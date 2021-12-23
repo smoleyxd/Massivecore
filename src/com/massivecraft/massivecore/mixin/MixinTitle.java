@@ -11,7 +11,8 @@ public class MixinTitle extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinTitle d = new MixinTitle();
+	private static final MixinTitle d = new MixinTitle();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinTitle i = d;
 	@Contract(pure = true)
 	public static MixinTitle get() { return i; }

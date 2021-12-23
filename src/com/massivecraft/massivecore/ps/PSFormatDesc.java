@@ -8,7 +8,7 @@ public class PSFormatDesc extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatDesc i = new PSFormatDesc();
+	private static final PSFormatDesc i = new PSFormatDesc();
 	public static PSFormatDesc get()	{ return i; }
 	private PSFormatDesc()
 	{

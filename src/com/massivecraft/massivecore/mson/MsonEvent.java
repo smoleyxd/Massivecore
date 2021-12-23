@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public final class MsonEvent implements Serializable
 	// CONSTANTS
 	// -------------------------------------------- //
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	// -------------------------------------------- //
@@ -68,14 +70,14 @@ public final class MsonEvent implements Serializable
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	protected MsonEvent(MsonEventAction action, String value)
+	private MsonEvent(MsonEventAction action, String value)
 	{
 		this.action = action;
 		this.value = value;
 	}
 	
 	// NoArg Constructor for GSON 
-	protected MsonEvent()
+	private MsonEvent()
 	{
 		this(null, null);
 	}
@@ -197,9 +199,8 @@ public final class MsonEvent implements Serializable
 		
 		ItemMeta meta = item.getItemMeta();
 		
-		if (meta instanceof BookMeta)
+		if (meta instanceof BookMeta book)
 		{
-			BookMeta book = (BookMeta)meta;
 			book.setPages();
 			item = item.clone();
 			item.setItemMeta(meta);
@@ -247,8 +248,7 @@ public final class MsonEvent implements Serializable
 	public boolean equals(Object object)
 	{
 		if (this == object) return true;
-		if ( ! (object instanceof MsonEvent)) return false;
-		MsonEvent that = (MsonEvent) object;
+		if ( ! (object instanceof MsonEvent that)) return false;
 		return MUtil.equals(
 			this.action, that.action,
 			this.value, that.value

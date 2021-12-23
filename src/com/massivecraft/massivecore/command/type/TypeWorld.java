@@ -13,7 +13,7 @@ public class TypeWorld extends TypeAbstractChoice<World>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeWorld i = new TypeWorld();
+	private static final TypeWorld i = new TypeWorld();
 	public static TypeWorld get() { return i; }
 	public TypeWorld() { super(World.class); }
 	

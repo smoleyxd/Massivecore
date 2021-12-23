@@ -6,7 +6,7 @@ public class ExtractorPlayer implements Extractor
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ExtractorPlayer i = new ExtractorPlayer();
+	private static final ExtractorPlayer i = new ExtractorPlayer();
 	public static ExtractorPlayer get() { return i; }
 	
 	// -------------------------------------------- //

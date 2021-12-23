@@ -9,7 +9,7 @@ public class NmsPlayerInventoryCreate extends Mixin
 	// DEFAULT
 	// -------------------------------------------- //
 	
-	private static NmsPlayerInventoryCreate d = new NmsPlayerInventoryCreate().setAlternatives(
+	private static final NmsPlayerInventoryCreate d = new NmsPlayerInventoryCreate().setAlternatives(
 		NmsPlayerInventoryCreate117R1P.class,
 		NmsPlayerInventoryCreate17R4P.class
 	);
@@ -18,6 +18,7 @@ public class NmsPlayerInventoryCreate extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
+	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsPlayerInventoryCreate i = d;
 	public static NmsPlayerInventoryCreate get() { return i; }
 	

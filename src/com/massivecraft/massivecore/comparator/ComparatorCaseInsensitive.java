@@ -8,7 +8,7 @@ public class ComparatorCaseInsensitive extends ComparatorAbstract<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorCaseInsensitive i = new ComparatorCaseInsensitive();
+	private static final ComparatorCaseInsensitive i = new ComparatorCaseInsensitive();
 	@Contract(pure = true)
 	public static ComparatorCaseInsensitive get() { return i; }
 

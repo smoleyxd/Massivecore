@@ -14,7 +14,7 @@ public class TypeDestination extends TypeAbstract<Destination>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDestination i = new TypeDestination();
+	private static final TypeDestination i = new TypeDestination();
 	public static TypeDestination get() { return i; }
 	public TypeDestination() { super(Destination.class); }
 	

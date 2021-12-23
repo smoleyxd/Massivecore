@@ -11,7 +11,7 @@ public class TypePermission extends TypeAbstractChoice<Permission>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypePermission i = new TypePermission();
+	private static final TypePermission i = new TypePermission();
 	public static TypePermission get() { return i; }
 	public TypePermission() { super(Permission.class); }
 	

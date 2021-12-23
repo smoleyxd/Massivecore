@@ -18,7 +18,7 @@ public class EngineMassiveCoreTeleportMixinCause extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreTeleportMixinCause i = new EngineMassiveCoreTeleportMixinCause();
+	private static final EngineMassiveCoreTeleportMixinCause i = new EngineMassiveCoreTeleportMixinCause();
 	@Contract(pure = true)
 	public static EngineMassiveCoreTeleportMixinCause get() { return i; }
 	
@@ -30,7 +30,7 @@ public class EngineMassiveCoreTeleportMixinCause extends Engine
 	public boolean isMixinCausedTeleportIncoming() { return this.mixinCausedTeleportIncoming; }
 	public void setMixinCausedTeleportIncoming(boolean mixinCausedTeleportIncoming) { this.mixinCausedTeleportIncoming = mixinCausedTeleportIncoming; }
 	
-	private Set<PlayerTeleportEvent> mixinCausedTeleportEvents = Collections.newSetFromMap(new ConcurrentHashMap<>());
+	private final Set<PlayerTeleportEvent> mixinCausedTeleportEvents = Collections.newSetFromMap(new ConcurrentHashMap<>());
 	
 	// -------------------------------------------- //
 	// TO BE USED

@@ -14,9 +14,9 @@ public class TypeString extends TypeAbstract<String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeString i = new TypeString();
+	private static final TypeString i = new TypeString();
 	public static TypeString get() { return i; }
-	private static TypeString filteredInstance = new TypeString() {
+	private static final TypeString filteredInstance = new TypeString() {
 		@Override
 		public boolean isFiltered()
 		{

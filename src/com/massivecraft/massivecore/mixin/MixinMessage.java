@@ -18,7 +18,8 @@ public class MixinMessage extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinMessage d = new MixinMessage();
+	private static final MixinMessage d = new MixinMessage();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinMessage i = d;
 	@Contract(pure = true)
 	public static MixinMessage get() { return i; }
@@ -171,14 +172,12 @@ public class MixinMessage extends Mixin
 		// For each Message
 		for (Object message : messages)
 		{
-			if (message instanceof String)
+			if (message instanceof String plain)
 			{
-				String plain = (String)message;
 				NmsChat.get().sendChatPlain(sendee, plain);
 			}
-			else if (message instanceof Mson)
+			else if (message instanceof Mson mson)
 			{
-				Mson mson = (Mson)message;
 				NmsChat.get().sendChatMson(sendee, mson);
 			}
 			else

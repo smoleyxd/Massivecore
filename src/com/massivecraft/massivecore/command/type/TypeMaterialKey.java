@@ -11,7 +11,7 @@ public class TypeMaterialKey extends TypeTransformer<Material, String>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeMaterialKey i = new TypeMaterialKey();
+	private static final TypeMaterialKey i = new TypeMaterialKey();
 	public static TypeMaterialKey get() { return i; }
 	
 	public TypeMaterialKey()

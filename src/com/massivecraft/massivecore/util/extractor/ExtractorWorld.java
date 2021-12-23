@@ -6,7 +6,7 @@ public class ExtractorWorld implements Extractor
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ExtractorWorld i = new ExtractorWorld();
+	private static final ExtractorWorld i = new ExtractorWorld();
 	public static ExtractorWorld get() { return i; }
 	
 	// -------------------------------------------- //

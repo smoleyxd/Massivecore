@@ -7,15 +7,16 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 
-public class NmsItemStackTooltip117R1P extends NmsItemStackTooltip
+public class NmsItemStackTooltip117R1 extends NmsItemStackTooltip
 {
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static NmsItemStackTooltip117R1P i = new NmsItemStackTooltip117R1P();
-	public static NmsItemStackTooltip117R1P get () { return i; }
+	@SuppressWarnings("FieldMayBeFinal")
+	private static NmsItemStackTooltip117R1 i = new NmsItemStackTooltip117R1();
+	public static NmsItemStackTooltip117R1 get () { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS

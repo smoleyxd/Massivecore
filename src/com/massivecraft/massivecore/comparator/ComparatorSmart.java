@@ -8,7 +8,7 @@ public class ComparatorSmart extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorSmart i = new ComparatorSmart();
+	private static final ComparatorSmart i = new ComparatorSmart();
 	@Contract(pure = true)
 	public static ComparatorSmart get() { return i; }
 	public ComparatorSmart()

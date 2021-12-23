@@ -6,15 +6,18 @@ import com.massivecraft.massivecore.mixin.MixinTitle;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 
+import java.io.Serial;
+
 public class RequirementTitlesAvailable extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static RequirementTitlesAvailable i = new RequirementTitlesAvailable();
+	private static final RequirementTitlesAvailable i = new RequirementTitlesAvailable();
 	public static RequirementTitlesAvailable get() { return i; }
 	
 	// -------------------------------------------- //

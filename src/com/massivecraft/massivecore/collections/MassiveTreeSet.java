@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.collections;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -17,6 +18,7 @@ public class MassiveTreeSet<E, C extends Comparator<? super E>> extends TreeSet<
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

@@ -38,7 +38,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static transient ComparatorNaturalOrder i = new ComparatorNaturalOrder();
+	private static final transient ComparatorNaturalOrder i = new ComparatorNaturalOrder();
 	@Contract(pure = true)
 	public static ComparatorNaturalOrder get() { return i; }
 	
@@ -168,7 +168,7 @@ public class ComparatorNaturalOrder extends ComparatorAbstract<Object>
 			else if (ca > cb)
 			{
 				if (bias == 0)
-					bias = +1;
+					bias = 1;
 			}
 			else if (ca == 0)
 			{

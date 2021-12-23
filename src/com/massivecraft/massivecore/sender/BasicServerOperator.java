@@ -4,9 +4,9 @@ import org.bukkit.permissions.ServerOperator;
 
 public class BasicServerOperator implements ServerOperator
 {
-	private String name;
+	private final String name;
 	private boolean op;
-	private boolean changeable;
+	private final boolean changeable;
 	
 	public BasicServerOperator(String name, boolean op, boolean opChangeable)
 	{

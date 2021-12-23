@@ -8,7 +8,7 @@ public class TypePermissionDefault extends TypeEnum<PermissionDefault>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypePermissionDefault i = new TypePermissionDefault();
+	private static final TypePermissionDefault i = new TypePermissionDefault();
 	public static TypePermissionDefault get() { return i; }
 	public TypePermissionDefault()
 	{

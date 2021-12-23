@@ -28,7 +28,7 @@ public class Money
 		
 		// ... but if something is supplied we must manage to extract a name.
 		String ret = MUtil.extract(String.class, "accountName", account);
-		if (ret == null) throw new IllegalArgumentException("extraction of accountName from object failed: " + account.toString());
+		if (ret == null) throw new IllegalArgumentException("extraction of accountName from object failed: " + account);
 		return ret;
 	}
 	

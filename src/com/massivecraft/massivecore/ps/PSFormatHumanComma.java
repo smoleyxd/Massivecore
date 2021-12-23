@@ -8,7 +8,7 @@ public class PSFormatHumanComma extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatHumanComma i = new PSFormatHumanComma();
+	private static final PSFormatHumanComma i = new PSFormatHumanComma();
 	public static PSFormatHumanComma get()	{ return i; }
 	private PSFormatHumanComma()
 	{

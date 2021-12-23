@@ -13,7 +13,7 @@ public class MetadataSimple extends MetadataValueAdapter
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private Object value;
+	private final Object value;
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

@@ -7,10 +7,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class RequirementAbstract implements Requirement, Serializable
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	// -------------------------------------------- //

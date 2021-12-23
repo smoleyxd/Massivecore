@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.collections;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
@@ -12,6 +13,7 @@ public class MassiveSetDef<E> extends MassiveSet<E> implements Def
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

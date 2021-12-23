@@ -139,9 +139,8 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 		
 		// Players must be fully joined.
 		// The permission manager may not have updated permissions during the early login/connect stages. 
-		if (sender instanceof Player)
+		if (sender instanceof Player player)
 		{
-			Player player = (Player)sender;
 			PlayerState state = PlayerState.get(player);
 			if (state != PlayerState.JOINED) return unsure;
 		}

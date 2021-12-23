@@ -74,11 +74,11 @@ public class InventoryUtil
 	// -------------------------------------------- //
 	// UTILS
 	// -------------------------------------------- //
-
+	
 	@Contract(value = "null -> null", pure = true)
 	public static PlayerInventory asPlayerInventory(Inventory inventory)
 	{
-		return (inventory instanceof PlayerInventory) ? (PlayerInventory)inventory : null;
+		return (inventory instanceof PlayerInventory) ? (PlayerInventory) inventory : null;
 	}
 	
 	// This is a modified copyOfRange implementation.
@@ -118,7 +118,7 @@ public class InventoryUtil
 		// NOTE: In 1.9 zero quantity is a thing.
 		return item;
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static void clean(@Nullable ItemStack @NotNull [] items)
 	{
@@ -133,7 +133,7 @@ public class InventoryUtil
 	// -------------------------------------------- //
 	
 	// HELMET
-
+	
 	@Contract("null -> null")
 	public static ItemStack getHelmet(Inventory inventory)
 	{
@@ -164,7 +164,7 @@ public class InventoryUtil
 	}
 	
 	// CHESTPLATE
-
+	
 	@Contract("null -> null")
 	public static ItemStack getChestplate(Inventory inventory)
 	{
@@ -195,7 +195,7 @@ public class InventoryUtil
 	}
 	
 	// LEGGINGS
-
+	
 	@Contract("null -> null")
 	public static ItemStack getLeggings(Inventory inventory)
 	{
@@ -226,7 +226,7 @@ public class InventoryUtil
 	}
 	
 	// BOOTS
-
+	
 	@Contract("null -> null")
 	public static ItemStack getBoots(Inventory inventory)
 	{
@@ -268,7 +268,7 @@ public class InventoryUtil
 		ItemStack ret = playerInventory.getItemInHand();
 		ret = clean(ret);
 		return ret;
-
+		
 	}
 	@Deprecated
 	public static void setWeapon(Inventory inventory, ItemStack weapon)
@@ -404,45 +404,45 @@ public class InventoryUtil
 	
 	public static @Nullable ItemStack getSlot(@Nullable Inventory inventory, @NotNull EquipmentSlot slot)
 	{
-		switch (slot) {
-			case HEAD:
-				return getHelmet(inventory);
-			case CHEST:
-				return getChestplate(inventory);
-			case LEGS:
-				return getLeggings(inventory);
-			case FEET:
-				return getBoots(inventory);
-			case HAND:
-				return getMainHand(inventory);
-			case OFF_HAND:
-				return getOffHand(inventory);
-		}
-		
-		throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
+		return switch (slot)
+				   {
+					   case HEAD -> getHelmet(inventory);
+					   case CHEST -> getChestplate(inventory);
+					   case LEGS -> getLeggings(inventory);
+					   case FEET -> getBoots(inventory);
+					   case HAND -> getMainHand(inventory);
+					   case OFF_HAND -> getOffHand(inventory);
+				   };
 	}
 	@Contract(mutates = "param1")
 	public static void setSlot(@Nullable Inventory inventory, ItemStack item, @NotNull EquipmentSlot slot)
 	{
-		switch (slot) {
-			case HEAD:
+		switch (slot)
+		{
+			case HEAD -> {
 				setHelmet(inventory, item);
 				return;
-			case CHEST:
+			}
+			case CHEST -> {
 				setChestplate(inventory, item);
 				return;
-			case LEGS:
+			}
+			case LEGS -> {
 				setLeggings(inventory, item);
 				return;
-			case FEET:
+			}
+			case FEET -> {
 				setBoots(inventory, item);
 				return;
-			case HAND:
+			}
+			case HAND -> {
 				setMainHand(inventory, item);
 				return;
-			case OFF_HAND:
+			}
+			case OFF_HAND -> {
 				setOffHand(inventory, item);
 				return;
+			}
 		}
 		
 		throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
@@ -567,7 +567,7 @@ public class InventoryUtil
 	{
 		PlayerInventory playerInventory = asPlayerInventory(inventory);
 		if (playerInventory == null) return;
-
+		
 		playerInventory.setArmorContents(armor);
 	}
 	
@@ -613,7 +613,7 @@ public class InventoryUtil
 	public static void update(@Nullable HumanEntity human)
 	{
 		if (MUtil.isntPlayer(human)) return;
-		Player player = (Player)human;
+		Player player = (Player) human;
 		player.updateInventory();
 	}
 	
@@ -634,23 +634,23 @@ public class InventoryUtil
 	@Contract(pure = true)
 	public static boolean isOutside(int rawSlot)
 	{
-		return rawSlot < 0; 
+		return rawSlot < 0;
 	}
-
+	
 	@Contract(pure = true)
 	public static boolean isTopInventory(int rawSlot, @NotNull Inventory inventory)
 	{
 		if (isOutside(rawSlot)) return false;
 		return rawSlot < inventory.getSize();
 	}
-
+	
 	@Contract(pure = true)
 	public static boolean isBottomInventory(int rawSlot, @NotNull Inventory inventory)
 	{
 		if (isOutside(rawSlot)) return false;
 		return rawSlot >= inventory.getSize();
 	}
-
+	
 	@Contract(pure = true)
 	public static boolean isOutside(@NotNull InventoryClickEvent event)
 	{
@@ -675,18 +675,16 @@ public class InventoryUtil
 	{
 		return getAlter(event).isAltering();
 	}
-
+	
 	public static InventoryAlter getAlter(@NotNull InventoryInteractEvent event)
 	{
-		if (event instanceof InventoryClickEvent)
+		if (event instanceof InventoryClickEvent clickEvent)
 		{
-			InventoryClickEvent clickEvent = (InventoryClickEvent)event;
 			return getAlter(clickEvent);
 		}
 		
-		if (event instanceof InventoryDragEvent)
+		if (event instanceof InventoryDragEvent dragEvent)
 		{
-			InventoryDragEvent dragEvent = (InventoryDragEvent)event;
 			return getAlter(dragEvent);
 		}
 		
@@ -720,7 +718,7 @@ public class InventoryUtil
 					boolean take = isSomething(current);
 					
 					return InventoryAlter.get(give, take);
-					
+				
 				// Neither give nor take
 				// FIXME merge these cases
 				case NOTHING:
@@ -761,7 +759,7 @@ public class InventoryUtil
 			// This one will possibly take, but we cannot be 100% sure.
 			// We will return TAKE for security reasons.
 			if (action == InventoryAction.COLLECT_TO_CURSOR) return InventoryAlter.TAKE;
-	
+			
 			return InventoryAlter.NONE;
 		}
 	}
@@ -846,7 +844,7 @@ public class InventoryUtil
 	 * This method will return the ItemStack the player is trying to equip.
 	 * If the click event would not result in equipping something null will be returned.
 	 * Note that this algorithm is not perfect. It's an adequate guess.
-	 * 
+	 *
 	 * @param event The InventoryClickEvent to analyze.
 	 * @return The ItemStack the player is trying to equip.
 	 */
@@ -889,18 +887,16 @@ public class InventoryUtil
 	// We never ever clone or modify the ItemStacks in any way. 
 	// This means that the amount within the ItemStack key is irrelevant.
 	// We can also avoid all kinds of oddities related to ItemStack equals and compare in the Bukkit API.
-
+	
 	public static @NotNull List<Entry<ItemStack, Integer>> getChanges(@Nullable InventoryInteractEvent event)
 	{
-		if (event instanceof InventoryClickEvent)
+		if (event instanceof InventoryClickEvent clickEvent)
 		{
-			InventoryClickEvent clickEvent = (InventoryClickEvent)event;
 			return getChangesClick(clickEvent);
 		}
 		
-		if (event instanceof InventoryDragEvent)
+		if (event instanceof InventoryDragEvent dragEvent)
 		{
-			InventoryDragEvent dragEvent = (InventoryDragEvent)event;
 			return getChangesDrag(dragEvent);
 		}
 		
@@ -910,7 +906,7 @@ public class InventoryUtil
 	protected static @NotNull List<Entry<ItemStack, Integer>> getChangesClick(@NotNull InventoryClickEvent event)
 	{
 		// Create
-		List<Entry<ItemStack, Integer>> ret = new MassiveList<>();		
+		List<Entry<ItemStack, Integer>> ret = new MassiveList<>();
 		
 		// Fill
 		final InventoryAlter alter = InventoryUtil.getAlter(event);
@@ -1017,14 +1013,14 @@ public class InventoryUtil
 		System.out.println("event.getCurrentItem() " + event.getCurrentItem());
 		System.out.println("event.getCursor() " + event.getCursor());
 		System.out.println("event.getHotbarButton() " + event.getHotbarButton());
-		System.out.println("getInventory().getType() "+event.getInventory().getType());
+		System.out.println("getInventory().getType() " + event.getInventory().getType());
 		System.out.println("event.getRawSlot() " + event.getRawSlot());
 		System.out.println("event.getResult() " + event.getResult());
 		System.out.println("event.getSlot() " + event.getSlot());
 		System.out.println("event.getSlotType() " + event.getSlotType());
-		System.out.println("getView().getTopInventory().getType() "+event.getView().getTopInventory().getType());
-		System.out.println("getView().getType() "+event.getView().getType());
-		System.out.println("getView().getBottomInventory().getType() "+event.getView().getBottomInventory().getType());
+		System.out.println("getView().getTopInventory().getType() " + event.getView().getTopInventory().getType());
+		System.out.println("getView().getType() " + event.getView().getType());
+		System.out.println("getView().getBottomInventory().getType() " + event.getView().getBottomInventory().getType());
 		System.out.println("event.getWhoClicked() " + event.getWhoClicked());
 		System.out.println("-----");
 		System.out.println("isOutside(event) " + isOutside(event));
@@ -1050,9 +1046,8 @@ public class InventoryUtil
 			if (isSomething(itemStack)) return false;
 		}
 		
-		if (inv instanceof PlayerInventory)
+		if (inv instanceof PlayerInventory pinv)
 		{
-			PlayerInventory pinv = (PlayerInventory)inv;
 			
 			if (isSomething(pinv.getHelmet())) return false;
 			if (isSomething(pinv.getChestplate())) return false;
@@ -1081,16 +1076,16 @@ public class InventoryUtil
 	{
 		return !isNothing(itemStack);
 	}
-
+	
 	// FIXME use modern logic
 	public static void repair(@Nullable ItemStack itemStack)
 	{
 		// Check Null
 		if (isNothing(itemStack)) return;
-
+		
 		ItemMeta meta = getMeta(itemStack);
 		if (meta == null) return;
-
+		
 		if (!(meta instanceof Damageable)) return;
 		
 		((Damageable) meta).setDamage(0);
@@ -1104,7 +1099,7 @@ public class InventoryUtil
 		
 		return (meta instanceof Damageable);
 	}
-
+	
 	@Contract("null -> false")
 	public static boolean isPotion(ItemStack itemStack)
 	{
@@ -1176,7 +1171,7 @@ public class InventoryUtil
 	// -------------------------------------------- //
 	// EQUALS
 	// -------------------------------------------- //
-
+	
 	public static boolean equals(@Nullable ItemStack one, @Nullable ItemStack two)
 	{
 		if (isNothing(one)) return isNothing(two);
@@ -1206,12 +1201,10 @@ public class InventoryUtil
 		if (one == null) return two == null;
 		if (two == null) return false;
 		if (!equals(one.getContents(), two.getContents())) return false;
-		if (one instanceof PlayerInventory)
+		if (one instanceof PlayerInventory pone)
 		{
-			PlayerInventory pone = (PlayerInventory)one;
-			if (two instanceof PlayerInventory)
+			if (two instanceof PlayerInventory ptwo)
 			{
-				PlayerInventory ptwo = (PlayerInventory)two;
 				return equals(pone.getArmorContents(), ptwo.getArmorContents());
 			}
 			else
@@ -1231,13 +1224,10 @@ public class InventoryUtil
 	public static void setAllContents(@NotNull Inventory from, @NotNull Inventory to)
 	{
 		to.setContents(from.getContents());
-		if (from instanceof PlayerInventory)
+		if (from instanceof PlayerInventory pfrom)
 		{
-			PlayerInventory pfrom = (PlayerInventory)from;
-			if (to instanceof PlayerInventory)
+			if (to instanceof PlayerInventory pto)
 			{
-				PlayerInventory pto = (PlayerInventory)to;
-				
 				pto.setHelmet(pfrom.getHelmet());
 				pto.setChestplate(pfrom.getChestplate());
 				pto.setLeggings(pfrom.getLeggings());
@@ -1269,7 +1259,7 @@ public class InventoryUtil
 	// NOTE: Use the roomLeft method first to ensure this method would succeed
 	public static void addItemTimes(@NotNull Inventory inventory, @NotNull ItemStack item, int times)
 	{
-		for (int i = 0 ; i < times ; i++)
+		for (int i = 0; i < times; i++)
 		{
 			inventory.addItem(item.clone());
 		}
@@ -1302,7 +1292,7 @@ public class InventoryUtil
 	public static <T extends ItemMeta> T getMeta(ItemStack item)
 	{
 		if (item == null) return null;
-		if ( ! item.hasItemMeta()) return null;
+		if (!item.hasItemMeta()) return null;
 		return (T) item.getItemMeta();
 	}
 	
@@ -1315,14 +1305,14 @@ public class InventoryUtil
 	}
 	
 	// DISPLAY NAME
-
+	
 	@Contract("null -> null")
 	public static String getDisplayName(ItemStack item)
 	{
 		ItemMeta meta = getMeta(item);
 		if (meta == null) return null;
 		
-		if ( ! meta.hasDisplayName()) return null;
+		if (!meta.hasDisplayName()) return null;
 		return meta.getDisplayName();
 	}
 	
@@ -1334,7 +1324,7 @@ public class InventoryUtil
 		meta.setDisplayName(displayName);
 		item.setItemMeta(meta);
 	}
-
+	
 	@Contract("null, null -> true")
 	public static boolean isDisplayName(ItemStack item, String displayName)
 	{
@@ -1349,10 +1339,10 @@ public class InventoryUtil
 		ItemMeta meta = getMeta(item);
 		if (meta == null) return null;
 		
-		if ( ! meta.hasLore()) return null;
+		if (!meta.hasLore()) return null;
 		return meta.getLore();
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static void setLore(@Nullable ItemStack item, @Nullable Collection<String> lore)
 	{
@@ -1362,13 +1352,13 @@ public class InventoryUtil
 		meta.setLore(lore == null ? null : new MassiveList<>(lore));
 		item.setItemMeta(meta);
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static void setLore(@Nullable ItemStack item, String @NotNull ... lore)
 	{
 		setLore(item, Arrays.asList(lore));
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static void addLore(@Nullable ItemStack item, Collection<String> lore)
 	{
@@ -1377,29 +1367,29 @@ public class InventoryUtil
 		lines.addAll(lore);
 		InventoryUtil.setLore(item, lines);
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static void addLore(@Nullable ItemStack item, String @NotNull ... lore)
 	{
 		addLore(item, Arrays.asList(lore));
 	}
-
+	
 	// -------------------------------------------- //
 	// SORT LORE
 	// -------------------------------------------- //
-
+	
 	public static @NotNull List<String> getSortedLore(@NotNull ItemStack item)
 	{
-		if ( ! createMeta(item).hasLore()) return Collections.emptyList();
-
+		if (!createMeta(item).hasLore()) return Collections.emptyList();
+		
 		EventMassiveCoreLorePriority event = new EventMassiveCoreLorePriority(item);
 		event.run();
-
+		
 		List<Entry<String, Integer>> entries = event.getLore();
 		// Note: Comparator cast is necessary for Maven to compile, even if the IDE doesn't complain.
 		Comparator<Entry<? super String, ? super Integer>> comparator = (Comparator) ComparatorEntryValue.get(ComparatorComparable.get());
 		entries.sort(comparator);
-
+		
 		List<String> ret = new MassiveList<>();
 		for (Entry<String, Integer> entry : entries)
 		{
@@ -1407,13 +1397,13 @@ public class InventoryUtil
 		}
 		return ret;
 	}
-
+	
 	@Contract(mutates = "param")
 	public static void sortLore(@Nullable ItemStack item)
 	{
 		if (item == null) return;
-		if ( ! createMeta(item).hasLore()) return;
-
+		if (!createMeta(item).hasLore()) return;
+		
 		List<String> lore = getSortedLore(item);
 		InventoryUtil.setLore(item, lore);
 	}
@@ -1425,53 +1415,53 @@ public class InventoryUtil
 			sortLore(item);
 		}
 	}
-
+	
 	// -------------------------------------------- //
 	// LORE PREFIX
 	// -------------------------------------------- //
-
+	
 	// Return true on change
 	@Contract(value = "_, null -> fail", mutates = "param1")
 	public static boolean removeLoreMatching(@Nullable ItemStack item, Predicate<String> predicate)
 	{
 		if (predicate == null) throw new NullPointerException("predicate");
-
+		
 		List<String> lore = getLore(item);
 		if (lore == null) return false;
-
+		
 		List<String> newLore = lore.stream().filter(PredicateNot.get(predicate)).collect(Collectors.toList());
 		if (lore.size() != newLore.size())
 		{
 			setLore(item, newLore);
 			return true;
 		}
-
+		
 		return false;
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static boolean removeLoreWithPrefix(@Nullable ItemStack item, @NotNull String prefix)
 	{
 		return removeLoreMatching(item, PredicateStringStartsWith.get(prefix));
 	}
-
+	
 	@Contract(mutates = "param1")
 	public static boolean removeLoreWithSuffix(@Nullable ItemStack item, @NotNull String suffix)
 	{
 		return removeLoreMatching(item, PredicateStringEndsWith.get(suffix));
 	}
-
+	
 	@Contract("_, null -> fail; null, !null -> null")
 	public static List<String> getLoreMatching(ItemStack item, Predicate<String> predicate)
 	{
 		if (predicate == null) throw new NullPointerException("predicate");
-
+		
 		List<String> lore = getLore(item);
 		if (lore == null) return null;
-
+		
 		return lore.stream().filter(predicate).collect(Collectors.toList());
 	}
-
+	
 	public static List<String> getLoreWithPrefix(ItemStack item, @NotNull String prefix)
 	{
 		return getLoreMatching(item, PredicateStringStartsWith.get(prefix));

@@ -10,10 +10,10 @@ public class IdAndName
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private UUID id;
+	private final UUID id;
 	public UUID getId() { return this.id; }
 	
-	private String name;
+	private final String name;
 	public String getName() { return this.name; }
 	
 	// -------------------------------------------- //
@@ -52,8 +52,7 @@ public class IdAndName
 	{
 		if (this == obj) return true;
 		if (obj == null) return false;
-		if (!(obj instanceof IdAndName)) return false;
-		IdAndName other = (IdAndName) obj;
+		if (!(obj instanceof IdAndName other)) return false;
 		
 		if (id == null)
 		{

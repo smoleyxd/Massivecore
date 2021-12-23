@@ -13,8 +13,8 @@ public class TypeWeatherType extends TypeEnum<WeatherType>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeWeatherType i = new TypeWeatherType();
-	public static TypeWeatherType get() { return i; }
+	private static final TypeWeatherType i = new TypeWeatherType();
+	public static TypeWeatherType get() {return i;}
 	public TypeWeatherType()
 	{
 		super(WeatherType.class);
@@ -35,12 +35,11 @@ public class TypeWeatherType extends TypeEnum<WeatherType>
 	@Override
 	public String getNameInner(WeatherType value)
 	{
-		switch (value)
-		{
-			case DOWNFALL: return "Rain";
-			case CLEAR: return "Sun";
-		}
-		throw new RuntimeException();
+		return switch (value)
+				   {
+					   case DOWNFALL -> "Rain";
+					   case CLEAR -> "Sun";
+				   };
 	}
 	
 	@Override
@@ -50,19 +49,19 @@ public class TypeWeatherType extends TypeEnum<WeatherType>
 		
 		switch (value)
 		{
-			case DOWNFALL:
+			case DOWNFALL -> {
 				ret.add("Rain");
 				ret.add("Storm");
-			break;
-			case CLEAR:
+			}
+			case CLEAR -> {
 				ret.add("Sun");
 				ret.add("Sky");
-			break;
+			}
 		}
 		
 		ret.addAll(super.getNamesInner(value));
 		
 		return ret;
 	}
-
+	
 }

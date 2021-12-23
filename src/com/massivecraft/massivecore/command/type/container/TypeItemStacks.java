@@ -15,7 +15,7 @@ public class TypeItemStacks extends TypeList<ItemStack>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeItemStacks i = new TypeItemStacks();
+	private static final TypeItemStacks i = new TypeItemStacks();
 	public static TypeItemStacks get() { return i; }
 	public TypeItemStacks()
 	{

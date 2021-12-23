@@ -12,7 +12,7 @@ public class TypeMaterialId extends TypeTransformer<Material, Integer>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeMaterialId i = new TypeMaterialId();
+	private static final TypeMaterialId i = new TypeMaterialId();
 	public static TypeMaterialId get() { return i; }
 	
 	public TypeMaterialId()

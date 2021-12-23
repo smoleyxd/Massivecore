@@ -12,7 +12,7 @@ public class TypeGameMode extends TypeEnum<GameMode>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeGameMode i = new TypeGameMode();
+	private static final TypeGameMode i = new TypeGameMode();
 	public static TypeGameMode get() { return i; }
 	public TypeGameMode()
 	{
@@ -45,15 +45,14 @@ public class TypeGameMode extends TypeEnum<GameMode>
 	{
 		if (gameMode == null) throw new NullPointerException("gameMode");
 		
-		switch (gameMode)
-		{
-			case SURVIVAL: return 0;
-			case CREATIVE: return 1;
-			case ADVENTURE: return 2;
-			case SPECTATOR: return 3;
-		}
+		return switch (gameMode)
+				   {
+					   case SURVIVAL -> 0;
+					   case CREATIVE -> 1;
+					   case ADVENTURE -> 2;
+					   case SPECTATOR -> 3;
+				   };
 		
-		return gameMode.ordinal();
 	}
 	
 

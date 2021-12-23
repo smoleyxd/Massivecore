@@ -175,8 +175,7 @@ public class SenderColl<E extends SenderEntity<E>> extends Coll<E> implements Se
 	{
 		for (Coll<?> coll : Coll.getInstances())
 		{
-			if (!(coll instanceof SenderColl)) continue;
-			SenderColl<?> senderColl = (SenderColl<?>)coll;
+			if (!(coll instanceof SenderColl<?> senderColl)) continue;
 			senderColl.setSenderReference(senderId, sender);
 		}
 	}

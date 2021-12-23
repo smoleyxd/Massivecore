@@ -8,7 +8,7 @@ public class TypeDataBannerPattern extends TypeCombined<DataBannerPattern>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDataBannerPattern i = new TypeDataBannerPattern();
+	private static final TypeDataBannerPattern i = new TypeDataBannerPattern();
 	public static TypeDataBannerPattern get() { return i; }
 	
 	public TypeDataBannerPattern()

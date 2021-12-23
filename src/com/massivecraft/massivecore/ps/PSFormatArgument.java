@@ -6,7 +6,7 @@ public class PSFormatArgument extends PSFormatAbstract
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static PSFormatArgument i = new PSFormatArgument();
+	private static final PSFormatArgument i = new PSFormatArgument();
 	public static PSFormatArgument get()	{ return i; }
 	private PSFormatArgument()
 	{

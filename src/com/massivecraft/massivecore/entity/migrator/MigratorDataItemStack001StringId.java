@@ -16,7 +16,7 @@ public class MigratorDataItemStack001StringId extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorDataItemStack001StringId i = new MigratorDataItemStack001StringId();
+	private static final MigratorDataItemStack001StringId i = new MigratorDataItemStack001StringId();
 	public static MigratorDataItemStack001StringId get() { return i; }
 	private MigratorDataItemStack001StringId()
 	{

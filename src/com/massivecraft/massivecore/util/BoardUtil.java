@@ -64,7 +64,7 @@ public class BoardUtil extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static BoardUtil i = new BoardUtil();
+	private static final BoardUtil i = new BoardUtil();
 	@Contract(pure = true)
 	public static BoardUtil get() { return i; }
 	public BoardUtil()
@@ -274,15 +274,13 @@ public class BoardUtil extends Engine
 			return (String)key;
 		}
 		
-		if (key instanceof Player)
+		if (key instanceof Player player)
 		{
-			Player player = (Player)key;
 			return player.getName();
 		}
 		
-		if (key instanceof Entity)
+		if (key instanceof Entity entity)
 		{
-			Entity entity = (Entity)key; 
 			UUID uuid = entity.getUniqueId();
 			String string = uuid.toString();
 			string = string.substring(0, 16);

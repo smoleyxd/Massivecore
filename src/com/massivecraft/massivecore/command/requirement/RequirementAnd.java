@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class RequirementAnd extends RequirementAbstract
 {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //
@@ -30,7 +32,7 @@ public class RequirementAnd extends RequirementAbstract
 	public static @NotNull RequirementAnd get(Collection<Requirement> requirements) { return new RequirementAnd(requirements); }
 	public RequirementAnd(Collection<Requirement> requirements)
 	{
-		this.requirements = Collections.unmodifiableList(new ArrayList<>(requirements));
+		this.requirements = List.copyOf(requirements);
 	}
 	
 	// -------------------------------------------- //

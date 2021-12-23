@@ -175,7 +175,7 @@ public class Txt
 	public static String parse(String string)
 	{
 		if (string == null) return null;
-		StringBuffer ret = new StringBuffer();
+		StringBuilder ret = new StringBuilder();
 		Matcher matcher = parsePattern.matcher(string);
 		while (matcher.find())
 		{
@@ -270,10 +270,7 @@ public class Txt
 		StringBuilder ret = new StringBuilder(times);
 		
 		// Fill Ret
-		for (int i = 0; i < times; i++)
-		{
-			ret.append(string);
-		}
+		ret.append(String.valueOf(string).repeat(Math.max(0, times)));
 		
 		// Return Ret
 		return ret.toString();
@@ -474,7 +471,7 @@ public class Txt
 			ItemMeta itemMeta = InventoryUtil.createMeta(itemStack);
 			if (itemMeta.hasDisplayName())
 			{
-				return color.toString() + ChatColor.ITALIC.toString() + itemMeta.getDisplayName();
+				return color.toString() + ChatColor.ITALIC + itemMeta.getDisplayName();
 			}
 		}
 		

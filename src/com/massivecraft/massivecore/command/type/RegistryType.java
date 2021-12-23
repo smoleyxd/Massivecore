@@ -252,13 +252,12 @@ public class RegistryType
 		// Reflection
 		if (fieldType != null)
 		{
-			if (fieldType instanceof ParameterizedType)
+			if (fieldType instanceof ParameterizedType parameterizedType)
 			{
 				// Create
 				List<Type<?>> ret = new MassiveList<>();
 				
 				// Fill
-				ParameterizedType parameterizedType = (ParameterizedType)fieldType;
 				int count = 0;
 				for (java.lang.reflect.Type actualTypeArgument : parameterizedType.getActualTypeArguments())
 				{

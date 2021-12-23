@@ -2,6 +2,7 @@ package com.massivecraft.massivecore.collections;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ public class MassiveSet<E> extends LinkedHashSet<E>
 	// CONSTANTS
 	// -------------------------------------------- //
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// -------------------------------------------- //

@@ -22,7 +22,7 @@ public class EngineMassiveCoreGank extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreGank i = new EngineMassiveCoreGank();
+	private static final EngineMassiveCoreGank i = new EngineMassiveCoreGank();
 	@Contract(pure = true)
 	public static EngineMassiveCoreGank get() { return i; }
 	

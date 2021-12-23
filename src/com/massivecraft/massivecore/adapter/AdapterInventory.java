@@ -96,13 +96,10 @@ public class AdapterInventory implements JsonDeserializer<Inventory>, JsonSerial
 		// Every inventory has a content part.
 		ItemStack[] itemStacks = src.getContents();
 		
-		if (src instanceof PlayerInventory)
+		if (src instanceof PlayerInventory psrc)
 		{
 			// Add the size "player"
 			jsonInventory.addProperty(SIZE, PLAYER);
-			
-			// Cast to PlayerInventory
-			PlayerInventory psrc = (PlayerInventory)src;
 			
 			// Helmet
 			itemStack = psrc.getHelmet();

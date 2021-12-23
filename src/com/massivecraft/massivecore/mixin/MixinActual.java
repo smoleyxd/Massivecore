@@ -10,7 +10,8 @@ public class MixinActual extends Mixin
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MixinActual d = new MixinActual();
+	private static final MixinActual d = new MixinActual();
+	@SuppressWarnings("FieldMayBeFinal")
 	private static MixinActual i = d;
 	@Contract(pure = true)
 	public static MixinActual get() { return i; }

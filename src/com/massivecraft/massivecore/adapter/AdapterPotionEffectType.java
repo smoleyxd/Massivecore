@@ -19,7 +19,7 @@ public class AdapterPotionEffectType implements JsonDeserializer<PotionEffectTyp
     // INSTANCE & CONSTRUCT
     // -------------------------------------------- //
 
-    private static AdapterPotionEffectType i = new AdapterPotionEffectType();
+    private static final AdapterPotionEffectType i = new AdapterPotionEffectType();
     @Contract(pure = true)
     public static AdapterPotionEffectType get() { return i; }
 

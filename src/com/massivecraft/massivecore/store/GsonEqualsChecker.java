@@ -62,10 +62,7 @@ public class GsonEqualsChecker
 		if (one == twoObject) return true;
 		
 		// twoObject must be JsonObject
-		if (!(twoObject instanceof JsonObject)) return false;
-		
-		// Cast to JsonObject
-		JsonObject two = (JsonObject)twoObject;
+		if (!(twoObject instanceof JsonObject two)) return false;
 		
 		// Size must be the same
 		if (one.entrySet().size() != two.entrySet().size()) return false;
@@ -89,10 +86,7 @@ public class GsonEqualsChecker
 		if (one == twoObject) return true;
 		
 		// twoObject must be JsonArray
-		if (!(twoObject instanceof JsonArray)) return false;
-		
-		// Cast to JsonArray
-		JsonArray two = (JsonArray)twoObject;
+		if (!(twoObject instanceof JsonArray two)) return false;
 		
 		// Size must be the same
 		int size = one.size();
@@ -117,10 +111,7 @@ public class GsonEqualsChecker
 		if (one == twoObject) return true;
 		
 		// if twoObject is JsonObject or JsonArray we are not equal.
-		if (!(twoObject instanceof JsonPrimitive)) return false;
-		
-		// Cast to JsonPrimitive
-		JsonPrimitive two = (JsonPrimitive)twoObject;
+		if (!(twoObject instanceof JsonPrimitive two)) return false;
 		
 		// Boolean check
 		if (one.isBoolean())

@@ -3,31 +3,30 @@ package com.massivecraft.massivecore.predicate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class PredicateStringStartsWith implements Predicate<String>
+public record PredicateStringStartsWith(@NotNull String prefix) implements Predicate<String>
 {
-	// -------------------------------------------- //
-	// FIELDS
-	// -------------------------------------------- //
-
-	private final @NotNull String prefix;
-
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
-
+	
 	@Contract("_ -> new")
-	public static @NotNull PredicateStringStartsWith get(@NotNull String prefix) { return new PredicateStringStartsWith(prefix); }
+	public static @NotNull
+	PredicateStringStartsWith get(@NotNull String prefix)
+	{
+		return new PredicateStringStartsWith(prefix);
+	}
+	
 	@Contract("null -> fail")
 	public PredicateStringStartsWith(String prefix)
 	{
 		if (prefix == null) throw new NullPointerException("prefix");
 		this.prefix = prefix.toLowerCase();
 	}
-
+	
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
-
+	
 	@Override
 	public boolean apply(String str)
 	{

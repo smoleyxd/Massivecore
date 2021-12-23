@@ -54,8 +54,7 @@ public class WorldExceptionSet extends ExceptionSet
 	@Override
 	public String stringifyInner(Object object)
 	{
-		if ( ! (object instanceof World)) return null;
-		World world = (World)object;
+		if ( ! (object instanceof World world)) return null;
 		return world.getName();
 	}
 

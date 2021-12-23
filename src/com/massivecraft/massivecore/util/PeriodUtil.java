@@ -13,7 +13,7 @@ public class PeriodUtil
 	// MILLIS STORE
 	// -------------------------------------------- //
 	
-	private static Map<Object, Long> objectToMillis = new HashMap<>();
+	private static final Map<Object, Long> objectToMillis = new HashMap<>();
 	
 	public static long getMillis(Object object)
 	{
@@ -38,7 +38,7 @@ public class PeriodUtil
 	// TICKS STORE
 	// -------------------------------------------- //
 	
-	private static Map<Object, Long> objectToTicks = new HashMap<>();
+	private static final Map<Object, Long> objectToTicks = new HashMap<>();
 	
 	public static long getTicks(Object object)
 	{

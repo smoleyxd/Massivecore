@@ -9,8 +9,8 @@ public class IndexUniqueField<F, O>
 	// FIELDS
 	// -------------------------------------------- //
 	
-	private Map<F, O> f2o;
-	private Map<O, F> o2f;
+	private final Map<F, O> f2o;
+	private final Map<O, F> o2f;
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

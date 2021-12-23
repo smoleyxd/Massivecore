@@ -10,7 +10,7 @@ public class ComparatorHandleIdentityObjective extends ComparatorAbstractTransfo
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static ComparatorHandleIdentityObjective i = new ComparatorHandleIdentityObjective();
+	private static final ComparatorHandleIdentityObjective i = new ComparatorHandleIdentityObjective();
 	public static ComparatorHandleIdentityObjective get() { return i; }
 	public ComparatorHandleIdentityObjective()
 	{

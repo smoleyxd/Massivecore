@@ -24,7 +24,7 @@ public class EngineMassiveCoreCommandSet extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCoreCommandSet i = new EngineMassiveCoreCommandSet();
+	private static final EngineMassiveCoreCommandSet i = new EngineMassiveCoreCommandSet();
 	@Contract(pure = true)
 	public static EngineMassiveCoreCommandSet get() { return i; }
 	

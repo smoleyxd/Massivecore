@@ -8,7 +8,7 @@ public class TypeDataPotionEffect extends TypeCombined<DataPotionEffect>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeDataPotionEffect i = new TypeDataPotionEffect();
+	private static final TypeDataPotionEffect i = new TypeDataPotionEffect();
 	public static TypeDataPotionEffect get() { return i; }
 	public TypeDataPotionEffect()
 	{

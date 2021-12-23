@@ -11,7 +11,7 @@ public class TypeEnvironment extends TypeEnum<Environment>
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static TypeEnvironment i = new TypeEnvironment();
+	private static final TypeEnvironment i = new TypeEnvironment();
 	public static TypeEnvironment get() { return i; }
 	public TypeEnvironment()
 	{

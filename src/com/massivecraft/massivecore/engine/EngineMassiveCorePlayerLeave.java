@@ -21,7 +21,7 @@ public class EngineMassiveCorePlayerLeave extends Engine
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static EngineMassiveCorePlayerLeave i = new EngineMassiveCorePlayerLeave();
+	private static final EngineMassiveCorePlayerLeave i = new EngineMassiveCorePlayerLeave();
 	@Contract(pure = true)
 	public static EngineMassiveCorePlayerLeave get() { return i; }
 	

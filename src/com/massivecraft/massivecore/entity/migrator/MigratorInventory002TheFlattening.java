@@ -31,7 +31,7 @@ public class MigratorInventory002TheFlattening extends MigratorRoot
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
-	private static MigratorInventory002TheFlattening i = new MigratorInventory002TheFlattening();
+	private static final MigratorInventory002TheFlattening i = new MigratorInventory002TheFlattening();
 	public static MigratorInventory002TheFlattening get() { return i; }
 	private MigratorInventory002TheFlattening()
 	{
