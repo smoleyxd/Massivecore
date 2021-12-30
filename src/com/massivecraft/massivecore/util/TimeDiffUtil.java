@@ -59,9 +59,9 @@ public class TimeDiffUtil
 		return millis(unitcount, count);
 	}
 	
-	public static long millis(@NotNull String formated) throws Exception
+	public static long millis(@NotNull String formatted) throws Exception
 	{
-		return millis(formated, 1);
+		return millis(formatted, 1);
 	}
 	
 	// -------------------------------------------- //
