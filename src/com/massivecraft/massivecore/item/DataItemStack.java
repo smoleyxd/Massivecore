@@ -109,6 +109,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
+	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -424,6 +425,14 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setAxolotlVariant(Axolotl.Variant axolotlVariant) { this.axolotlVariant = set(axolotlVariant, DEFAULT_AXOLOTL_VARIANT); return this; }
 	
 	// -------------------------------------------- //
+	// FIELDS > ATTRIBUTE MODIFIERS
+	// -------------------------------------------- //
+	
+	private MassiveTreeSetDef<DataAttributeModifier, ComparatorSmart> attributeModifiers = null;
+	public Set<DataAttributeModifier> getAttributeModifiers() { return get(this.attributeModifiers, DEFAULT_ATTRIBUTE_MODIFIERS); }
+	public DataItemStack setAttributeModifiers(Set<DataAttributeModifier> attributeModifiers) { this.attributeModifiers = set(attributeModifiers, DEFAULT_ATTRIBUTE_MODIFIERS); return this;}
+	
+	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
@@ -644,6 +653,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getGeneration(), that.getGeneration(),
 			this.getPages(), that.getPages(),
 			this.getColor(), that.getColor(),
+			this.getLodestone(), that.getLodestone(),
+			this.isLodestoneTracked(), that.isLodestoneTracked(),
 			this.isScaling(), that.isScaling(),
 			this.getMapColor(), that.getMapColor(),
 			this.getMapId(), that.getMapId(),
@@ -666,8 +677,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getLodestone(), that.getLodestone(),
-			this.isLodestoneTracked(), that.isLodestoneTracked()
+			this.getAttributeModifiers(), that.getAttributeModifiers()
 		);
 	}
 	
@@ -713,7 +723,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishBodyColor(), that.getFishBodyColor(),
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
-			this.getRecipes(), that.getRecipes()
+			this.getRecipes(), that.getRecipes(),
+			this.getAttributeModifiers(), that.getAttributeModifiers()
 		);
 	}
 	
@@ -766,7 +777,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishBodyColor(), that.getFishBodyColor(),
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
-			this.getRecipes(), that.getRecipes()
+			this.getRecipes(), that.getRecipes(),
+			this.getAttributeModifiers(), that.getAttributeModifiers()
 		);
 	}
 	
@@ -817,7 +829,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishBodyColor(),
 			this.getFishPatternColor(),
 			this.getChargedProjectiles(),
-			this.getRecipes()
+			this.getRecipes(),
+			this.getAttributeModifiers()
 		);
 	}
 	
