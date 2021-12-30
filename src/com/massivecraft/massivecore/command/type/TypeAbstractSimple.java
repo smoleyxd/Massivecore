@@ -9,7 +9,7 @@ public abstract class TypeAbstractSimple<T> extends TypeAbstractException<T>
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public TypeAbstractSimple(Class<?> clazz)
+	public TypeAbstractSimple(Class<? extends T> clazz)
 	{
 		super(clazz);
 	}

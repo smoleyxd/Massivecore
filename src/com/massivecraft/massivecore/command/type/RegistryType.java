@@ -7,7 +7,9 @@ import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.WorldExceptionSet;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
+import com.massivecraft.massivecore.command.type.combined.TypeDataAttributeModifier;
 import com.massivecraft.massivecore.command.type.combined.TypeDataBannerPattern;
+import com.massivecraft.massivecore.command.type.combined.TypeDataFireworkEffect;
 import com.massivecraft.massivecore.command.type.combined.TypeDataPotionEffect;
 import com.massivecraft.massivecore.command.type.combined.TypeEntry;
 import com.massivecraft.massivecore.command.type.combined.TypePotionEffectWrap;
@@ -17,6 +19,8 @@ import com.massivecraft.massivecore.command.type.container.TypeExceptionSet;
 import com.massivecraft.massivecore.command.type.container.TypeList;
 import com.massivecraft.massivecore.command.type.container.TypeMap;
 import com.massivecraft.massivecore.command.type.container.TypeSet;
+import com.massivecraft.massivecore.command.type.enumeration.TypeAttribute;
+import com.massivecraft.massivecore.command.type.enumeration.TypeAttributeModifierOperation;
 import com.massivecraft.massivecore.command.type.enumeration.TypeAxolotlVariant;
 import com.massivecraft.massivecore.command.type.enumeration.TypeBiome;
 import com.massivecraft.massivecore.command.type.enumeration.TypeBookGeneration;
@@ -25,6 +29,7 @@ import com.massivecraft.massivecore.command.type.enumeration.TypeDifficulty;
 import com.massivecraft.massivecore.command.type.enumeration.TypeDyeColor;
 import com.massivecraft.massivecore.command.type.enumeration.TypeEntityType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeEnvironment;
+import com.massivecraft.massivecore.command.type.enumeration.TypeEquipmentSlot;
 import com.massivecraft.massivecore.command.type.enumeration.TypeEventPriority;
 import com.massivecraft.massivecore.command.type.enumeration.TypeFireworkEffectType;
 import com.massivecraft.massivecore.command.type.enumeration.TypeGameMode;
@@ -306,6 +311,7 @@ public class RegistryType
 		register(TypeString.get());
 		
 		// Enum
+		register(TypeAttribute.get());
 		register(TypeAxolotlVariant.get());
 		register(TypeBiome.get());
 		register(TypeBookGeneration.get());
@@ -314,6 +320,7 @@ public class RegistryType
 		register(TypeDyeColor.get());
 		register(TypeEntityType.get());
 		register(TypeEnvironment.get());
+		register(TypeEquipmentSlot.get());
 		register(TypeEventPriority.get());
 		register(TypeFireworkEffectType.get());
 		register(TypeGameMode.get());
@@ -321,6 +328,7 @@ public class RegistryType
 		register(TypeHorseStyle.get());
 		register(TypeLlamaColor.get());
 		register(TypeMaterial.get());
+		register(TypeAttributeModifierOperation.get());
 		register(TypeParrotVariant.get());
 		register(TypeParticle.get());
 		register(TypeRabbitType.get());
@@ -336,7 +344,9 @@ public class RegistryType
 		// Bukkit
 		register(TypeDestination.get());
 		register(TypeItemStack.get());
+		register(TypeUUID.get());
 		
+		register(TypeDataAttributeModifier.get());
 		register(TypeDataBannerPattern.get());
 		register(TypePotionEffectType.get());
 		register(TypeNamespacedKey.get());

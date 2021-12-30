@@ -94,7 +94,10 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaBundleItems.class,
 			
 			// AXOLOTL BUCKET (1.17+)
-			WriterItemStackMetaAxolotlVariant.class
+			WriterItemStackMetaAxolotlVariant.class,
+			
+			// ATTRIBUTE MODIFIERS
+			WriterItemStackMetaAttributeModifiers.class
 		);
 	}
 	
