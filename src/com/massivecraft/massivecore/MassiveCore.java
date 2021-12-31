@@ -97,12 +97,15 @@ public class MassiveCore extends MassivePlugin
 	
 	public final static String INSTANCE = "instance";
 	public final static String DEFAULT = "default";
-	public static final String NONE = Txt.parse("<silver>none");
+	public static final String NONE = Txt.parse("<em><silver>none");
 	
 	public final static Set<String> NOTHING = MUtil.treeset("", "none", "null", "nothing");
 	public final static Set<String> REMOVE = MUtil.treeset("clear", "c", "delete", "del", "d", "erase", "e", "remove", "rem", "r", "reset", "res");
 	public final static Set<String> NOTHING_REMOVE = MUtil.treeset("", "none", "null", "nothing", "clear", "c", "delete", "del", "d", "erase", "e", "remove", "rem", "r", "reset", "res");
 	
+	public final static String YES = Txt.parse("<g>Yes");
+	public final static String NO = Txt.parse("<b>No");
+	public final static String ONLINE_RIGHT_NOW = Txt.parse("<g>Online right now");
 	
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
