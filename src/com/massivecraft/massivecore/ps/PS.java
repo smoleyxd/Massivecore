@@ -201,6 +201,10 @@ public final class PS implements Serializable, Comparable<PS>
 	private final Double velocityZ;
 	public Double getVelocityZ() { return this.velocityZ; }
 	
+	public Integer getRegionX() { return this.chunkX == null ? null : this.chunkX >> 5; }
+	
+	public Integer getRegionZ() { return this.chunkZ == null ? null : this.chunkZ >> 5; }
+	
 	// -------------------------------------------- //
 	// FIELDS: WITH
 	// -------------------------------------------- //
@@ -535,6 +539,8 @@ public final class PS implements Serializable, Comparable<PS>
 	public Double getLocationZ(boolean calc) { return getLocationCoord(calc, locationZ, blockZ, chunkZ); }
 	public Integer getChunkX(boolean calc) { return getChunkCoord(calc, locationX, blockX, chunkX); }
 	public Integer getChunkZ(boolean calc) { return getChunkCoord(calc, locationZ, blockZ, chunkZ); }
+	public Integer getRegionX(boolean calc) { return getChunkCoord(calc, locationX, blockX, chunkX) >> 5; }
+	public Integer getRegionZ(boolean calc) { return getChunkCoord(calc, locationZ, blockZ, chunkZ) >> 5; }
 	public Float getPitch(boolean calc) { return getPitch(calc, pitch); }
 	public Float getYaw(boolean calc) { return getYaw(calc, yaw); }
 	public Double getVelocityX(boolean calc) { return getVelocityCoord(calc, locationX, blockX, chunkX, velocityX); }
