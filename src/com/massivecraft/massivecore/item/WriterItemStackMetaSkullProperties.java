@@ -21,7 +21,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	{
 		super(SkullMeta.class);
 		this.setMaterial(Material.PLAYER_HEAD);
-		this.setConverterFrom(new Converter<Object, ContainerGameProfile>()
+		this.setConverterFrom(new Converter<>()
 		{
 			@Override
 			public ContainerGameProfile convert(Object fb)
@@ -30,7 +30,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 				return gameProfileToContainer(fb);
 			}
 		});
-		this.setConverterTo(new Converter<ContainerGameProfile, Object>()
+		this.setConverterTo(new Converter<>()
 		{
 			@Override
 			public Object convert(ContainerGameProfile fa)
@@ -61,7 +61,6 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	@Override
 	public Object getB(@NotNull SkullMeta cb, ItemStack d)
 	{
-		//if (!cb.hasOwner()) return null;
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		return nms.getGameProfile(cb);
 	}
@@ -71,12 +70,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	@Override
 	public void setB(@NotNull SkullMeta cb, Object fb, ItemStack d)
 	{
-		if (cb == null) return;
-		
-		//if (!cb.hasOwner()) return;
-		
 		NmsSkullMeta nms = NmsSkullMeta.get();
-		
 		nms.setGameProfile(cb, fb);
 	}
 	
@@ -86,13 +80,17 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		
 		if (container == null) return nms.createGameProfile(null, "testing");
+		
 		String uuidRaw = container.getUuid();
 		UUID uuid = uuidRaw != null ? UUID.fromString(uuidRaw) : null;
+		
 		String name = container.getName();
+		
 		Object gameprofile = nms.createGameProfile(uuid, name);
 		Object propertyMap = nms.createPropertyMap();
 		nms.setGameProfileProperties(propertyMap, container.getGameProfileProperties());
 		nms.setPropertyMap(gameprofile, propertyMap);
+		
 		return gameprofile;
 	}
 	
@@ -101,8 +99,8 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		
 		ContainerGameProfile ret = new ContainerGameProfile();
-		UUID uuid = nms.getGameProfileId(gameProfile);
 		
+		UUID uuid = nms.getGameProfileId(gameProfile);
 		ret.setUuid(uuid != null ? uuid.toString() : null);
 		
 		String name = nms.getGameProfileName(gameProfile);

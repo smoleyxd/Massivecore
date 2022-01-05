@@ -1,6 +1,7 @@
 package com.massivecraft.massivecore.nms;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +23,9 @@ public class NmsSkullMetaFallback extends NmsSkullMeta
 	@Override
 	public UUID getId(SkullMeta meta)
 	{
-		return null;
+		OfflinePlayer offlinePlayer = meta.getOwningPlayer();
+		if (offlinePlayer == null) return null;
+		return offlinePlayer.getUniqueId();
 	}
 	
 	@Override

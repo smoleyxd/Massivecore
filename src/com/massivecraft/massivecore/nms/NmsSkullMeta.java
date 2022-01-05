@@ -21,8 +21,7 @@ public class NmsSkullMeta extends Mixin
 	// -------------------------------------------- //
 	
 	private static NmsSkullMeta d = new NmsSkullMeta().setAlternatives(
-		NmsSkullMeta18R1P.class,
-		NmsSkullMeta17R4.class,
+		NmsSkullMeta117R1P.class,
 		NmsSkullMetaFallback.class
 	);
 	
