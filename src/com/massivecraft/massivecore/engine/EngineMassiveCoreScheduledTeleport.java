@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -163,4 +164,12 @@ public class EngineMassiveCoreScheduledTeleport extends Engine
 		this.cancelTeleport(player);
 	}
 	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void cancelTeleport(@NotNull PlayerDropItemEvent event)
+	{
+		final Player player = event.getPlayer();
+		if (MUtil.isntPlayer(player)) return;
+		
+		this.cancelTeleport(player);
+	}
 }
