@@ -65,6 +65,7 @@ import com.massivecraft.massivecore.util.SignUtil;
 import com.massivecraft.massivecore.util.SmokeUtil;
 import com.massivecraft.massivecore.util.TimeDiffUtil;
 import com.massivecraft.massivecore.util.TimeUnit;
+import com.massivecraft.massivecore.util.TimeZoneUtil;
 import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.xlib.gson.Gson;
 import com.massivecraft.massivecore.xlib.gson.GsonBuilder;
@@ -225,7 +226,8 @@ public class MassiveCore extends MassivePlugin
 			SignUtil.class,
 			SmokeUtil.class,
 			TimeUnit.class,
-			TimeDiffUtil.class
+			TimeDiffUtil.class,
+			TimeZoneUtil.class
 		);
 	}
 	
