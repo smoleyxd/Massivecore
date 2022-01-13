@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.command.editor.annotation.EditorName;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.type.TypeMillisDiff;
+import com.massivecraft.massivecore.command.type.TypeTimeZone;
 import com.massivecraft.massivecore.command.type.primitive.TypeBooleanOn;
 import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.util.MUtil;
@@ -211,4 +212,10 @@ public class MassiveCoreMConf extends Entity<MassiveCoreMConf>
 	
 	public int velocityBypassTicks = 200;
 
+	// -------------------------------------------- //
+	// TIMEZONE DEFAULT
+	// -------------------------------------------- //
+	
+	@EditorType(TypeTimeZone.class)
+	public String defaultTimeZone = "US/Eastern";
 }
