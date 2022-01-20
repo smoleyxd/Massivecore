@@ -1230,8 +1230,10 @@ public class MUtil
 	public static boolean isAxe(Entity entity)
 	{
 		if (entity == null) return false;
-		if (!(entity instanceof LivingEntity)) return false;
-		LivingEntity lentity = (LivingEntity)entity;
+		if (!(entity instanceof LivingEntity lentity)) return false;
+		
+		if (lentity.getEquipment() == null) return false;
+		
 		return isAxe(lentity.getEquipment().getItemInMainHand());
 	}
 	
