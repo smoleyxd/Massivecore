@@ -2,10 +2,10 @@ package com.massivecraft.massivecore.event;
 
 import org.bukkit.event.HandlerList;
 
-// "Aknowledge" is in our mind the opposite of "Ignore".
+// "Acknowledge" is in our mind the opposite of "Ignore".
 // The purpose of this event is to decide if a unit of communication should be received or ignored.
 // A unit of communication can for example be a chat message or a sound effect.
-public class EventMassiveCoreAknowledge extends EventMassiveCore
+public class EventMassiveCoreAcknowledge extends EventMassiveCore
 {
 	// -------------------------------------------- //
 	// REQUIRED EVENT CODE
@@ -29,7 +29,7 @@ public class EventMassiveCoreAknowledge extends EventMassiveCore
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public EventMassiveCoreAknowledge(Object sender, Object sendee)
+	public EventMassiveCoreAcknowledge(Object sender, Object sendee)
 	{
 		if (sender == null) throw new NullPointerException("sender");
 		if (sendee == null) throw new NullPointerException("sendee");
