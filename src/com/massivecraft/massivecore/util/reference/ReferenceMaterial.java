@@ -142,6 +142,7 @@ public class ReferenceMaterial {
             "COOKED_SALMON",
             "COOKIE",
             "CORNFLOWER",
+            "DRIED_KELP",
             "ENCHANTED_GOLDEN_APPLE",
             "GOLDEN_APPLE",
             "GOLDEN_CARROT",
