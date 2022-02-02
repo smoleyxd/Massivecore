@@ -3,7 +3,7 @@ name: ${project.name}
 version: ${project.version}
 website: ${project.url}
 description: ${project.description}
-authors: [Cayorion]
+authors: [Cayorion, CS_Birb]
 load: STARTUP
 softdepend: [Vault]
 api-version: "1.15"
