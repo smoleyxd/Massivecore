@@ -37,6 +37,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ThrownPotion;
+import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -1520,19 +1521,18 @@ public class MUtil
 	{
 		if (itemStack == null) return null;
 		
-		// If the item is a potion or tipped arrow
-		if (itemStack.getType() != Material.POTION && itemStack.getType() != Material.SPLASH_POTION && itemStack.getType() != Material.LINGERING_POTION && itemStack.getType() != Material.TIPPED_ARROW) return null;
+		// If the item can have potion effects
+		if (!(InventoryUtil.createMeta(itemStack) instanceof PotionMeta meta)) return null;
 
 		List<PotionEffectType> ret = new ArrayList<>();
 		
-		PotionMeta meta = InventoryUtil.createMeta(itemStack);
 		ret.add(meta.getBasePotionData().getType().getEffectType());
 		
-		if (meta.hasCustomEffects())
+		if (!meta.hasCustomEffects()) return ret;
+		
+		for (PotionEffect potionEffect : meta.getCustomEffects())
 		{
-			for (PotionEffect potionEffect : meta.getCustomEffects()) {
-				ret.add(potionEffect.getType());
-			}
+			ret.add(potionEffect.getType());
 		}
 		
 		return ret;
