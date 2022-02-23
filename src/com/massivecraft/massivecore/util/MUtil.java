@@ -1513,9 +1513,7 @@ public class MUtil
 	// -------------------------------------------- //
 	// POTION DERP
 	// -------------------------------------------- //
-
-	// FIXME deal with this
-	// FIXME use modern logic
+	
 	@Contract("null -> null")
 	public static List<PotionEffectType> getPotionEffects(ItemStack itemStack)
 	{
