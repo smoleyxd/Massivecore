@@ -1519,7 +1519,7 @@ public class MUtil
 	public static List<PotionEffectType> getPotionEffects(ItemStack itemStack)
 	{
 		if (itemStack == null) return null;
-		if (itemStack.getType() != Material.POTION) return null;
+		if (itemStack.getType() != Material.POTION && itemStack.getType() != Material.SPLASH_POTION && itemStack.getType() != Material.LINGERING_POTION) return null;
 
 		List<PotionEffectType> ret = new ArrayList<>();
 		
