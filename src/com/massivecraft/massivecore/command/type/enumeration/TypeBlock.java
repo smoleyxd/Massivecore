@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class TypeBlock extends TypeEnum<Material>
+public class TypeBlock extends TypeMaterial
 {
 	// -------------------------------------------- //
 	// INSTANCE
@@ -23,7 +23,6 @@ public class TypeBlock extends TypeEnum<Material>
 	
 	public TypeBlock()
 	{
-		super(Material.class);
 		this.setAll(new MassiveSet<>(Arrays.stream(Material.values()).filter(Material::isBlock).collect(Collectors.toSet())));
 		this.setHelp(
 			Txt.parse("<aqua>https://hub.spigotmc.org/stash/projects/SPIGOT/repos/bukkit/browse/src/main/java/org/bukkit/Material.java")
