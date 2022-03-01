@@ -38,7 +38,7 @@
         </dependency>
         <!-- Spartan -->
         <dependency>
-            <groupId>me.vagdedes.spartan</groupId>
+            <groupId>me.vagdedes</groupId>
             <artifactId>SpartanAPI</artifactId>
         </dependency>
         <!-- JSON -->
