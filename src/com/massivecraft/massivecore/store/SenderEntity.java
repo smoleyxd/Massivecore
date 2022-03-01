@@ -2,7 +2,7 @@ package com.massivecraft.massivecore.store;
 
 import com.massivecraft.massivecore.Named;
 import com.massivecraft.massivecore.PlayerState;
-import com.massivecraft.massivecore.event.EventMassiveCoreAcknowledge;
+import com.massivecraft.massivecore.event.EventMassiveCoreAknowledge;
 import com.massivecraft.massivecore.event.EventMassiveCorePlayerCleanInactivityToleranceMillis;
 import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivecore.mixin.MixinMessage;
@@ -258,7 +258,7 @@ public abstract class SenderEntity<E extends SenderEntity<E>> extends Entity<E> 
 	
 	public boolean isAcknowledging(Object sender)
 	{
-		EventMassiveCoreAcknowledge event = new EventMassiveCoreAcknowledge(sender, this);
+		EventMassiveCoreAknowledge event = new EventMassiveCoreAknowledge(sender, this);
 		event.run();
 		return ! event.isCancelled();
 	}
