@@ -13,7 +13,7 @@ public class SpartanAPIShell
 	public static void disableVelocityProtection(Player p, int ticks)
 	{
 		API.disableVelocityProtection(p, ticks);
-		API.cancelCheck(p, HackType.Clip, ticks);
+		// API.cancelCheck(p, HackType.Clip, ticks);
 		API.cancelCheck(p, HackType.IrregularMovements, ticks);
 		API.cancelCheck(p, HackType.Speed, ticks);
 	}
