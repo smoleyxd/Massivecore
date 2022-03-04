@@ -109,6 +109,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
+	public static final transient String DEFAULT_MYTHIC_TYPE = null;
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -432,6 +433,14 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setAttributeModifiers(Set<DataAttributeModifier> attributeModifiers) { this.attributeModifiers = set(attributeModifiers, DEFAULT_ATTRIBUTE_MODIFIERS); return this;}
 	
 	// -------------------------------------------- //
+	// FIELDS > MYTHICMOBS
+	// -------------------------------------------- //
+	
+	private String mythicType = null;
+	public String getMythicType() { return get(this.mythicType, DEFAULT_MYTHIC_TYPE); }
+	public DataItemStack setMythicType(String mythicType) { this.mythicType = set(mythicType, DEFAULT_MYTHIC_TYPE); return this; }
+	
+	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
@@ -676,7 +685,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -724,7 +734,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -778,7 +789,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -830,7 +842,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(),
 			this.getChargedProjectiles(),
 			this.getRecipes(),
-			this.getAttributeModifiers()
+			this.getAttributeModifiers(),
+			this.getMythicType()
 		);
 	}
 	

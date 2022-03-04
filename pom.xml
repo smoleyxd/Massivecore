@@ -55,6 +55,11 @@
             <version>22.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- MythicMobs -->
+        <dependency>
+            <groupId>io.lumine.xikage</groupId>
+            <artifactId>MythicMobs</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- Build -->
