@@ -4,7 +4,7 @@ import com.massivecraft.massivecore.item.DataItemStack;
 import com.massivecraft.massivecore.item.WriterAbstractItemStackField;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.util.jnbt.CompoundTag;
-import io.lumine.xikage.mythicmobs.util.jnbt.StringTag;
+import io.lumine.xikage.mythicmobs.util.jnbt.CompoundTagBuilder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,8 +44,14 @@ public class WriterItemStackMythicType extends WriterAbstractItemStackField<Stri
 	@Override
 	public void setB(@NotNull ItemStack cb, String fb, ItemStack d)
 	{
-		if (fb == null) return; // TODO - Safely remove the Tag if null
-		MythicMobs.inst().getVolatileCodeHandler().getItemHandler().addNBTData(cb, "MYTHIC_TYPE", new StringTag(fb));
+//		if (fb == null) return; // TODO - Safely remove the Tag if null
+//		MythicMobs.inst().getVolatileCodeHandler().getItemHandler().addNBTData(cb, "MYTHIC_TYPE", new StringTag(fb));
+		
+		CompoundTagBuilder tagCompBuilder = MythicMobs.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb).createBuilder();
+		if (fb == null) tagCompBuilder.remove("MYTHIC_TYPE");
+		else tagCompBuilder.putString("MYTHIC_TYPE", fb);
+		
+		MythicMobs.inst().getVolatileCodeHandler().getItemHandler().setNBTData(cb, tagCompBuilder.build());
 	}
 	
 }
