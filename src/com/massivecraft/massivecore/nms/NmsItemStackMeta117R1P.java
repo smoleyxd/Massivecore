@@ -80,12 +80,16 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	
 	@Override
 	public String fromLegacyToJSON(String message) {
-		return ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromStringOrNullToJSON, null, message);
+		String json = ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromStringOrNullToJSON, null, message);
+		if (json == null) json = "{\"text\":\"\"}";
+		return json;
 	}
 	
 	@Override
 	public String fromJSONToLegacy(String jsonMessage) {
-		return ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromJSONComponent, null, jsonMessage);
+		String legacy = ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromJSONComponent, null, jsonMessage);
+		if (legacy == null) legacy = "";
+		return legacy;
 	}
 	
 }

@@ -43,7 +43,9 @@ public class MigratorDataItemStack006LegacyToJSON extends MigratorRoot
 			for (JsonElement jsonElement : legacyLore)
 			{
 				String loreLine = jsonElement.getAsString();
-				newLore.add(NmsItemStackMeta.get().fromLegacyToJSON(loreLine));
+				loreLine = NmsItemStackMeta.get().fromLegacyToJSON(loreLine);
+				if (loreLine == null || loreLine.isEmpty()) loreLine = "{\"text\":\"\"}";
+				newLore.add(loreLine);
 			}
 			
 			entity.add("lore", newLore);
