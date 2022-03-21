@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.nms.NmsItemStackMeta;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -38,13 +39,13 @@ public class WriterItemStackMetaLore extends WriterAbstractItemStackMetaField<It
 	@Override
 	public List<String> getB(@NotNull ItemMeta cb, ItemStack d)
 	{
-		return cb.getLore();
+		return NmsItemStackMeta.get().getLore(cb);
 	}
 
 	@Override
 	public void setB(@NotNull ItemMeta cb, List<String> fb, ItemStack d)
 	{
-		cb.setLore(fb);		
+		NmsItemStackMeta.get().setLore(cb, fb);
 	}
 	
 }

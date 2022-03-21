@@ -20,6 +20,7 @@ import com.massivecraft.massivecore.command.type.convert.TypeConverterNamespaced
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import com.massivecraft.massivecore.command.type.primitive.TypeObject.TypeObjectRaw;
 import com.massivecraft.massivecore.command.type.primitive.TypeStringParsed;
+import com.massivecraft.massivecore.command.type.primitive.TypeStringParsedJSON;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.InventoryUtil;
@@ -117,7 +118,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 5;
+	private int version = 6;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -150,12 +151,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// FIELDS > UNSPECIFIC
 	// -------------------------------------------- //
 	
-	@EditorType(TypeStringParsed.class)
+	@EditorType(TypeStringParsedJSON.class)
 	private String name = null;
 	public String getName() { return get(this.name, DEFAULT_NAME); }
 	public DataItemStack setName(String name) { this.name = set(name, DEFAULT_NAME); return this; }
 	
-	@EditorTypeInner(TypeStringParsed.class)
+	@EditorTypeInner(TypeStringParsedJSON.class)
 	private MassiveListDef<String> lore = null;
 	public List<String> getLore() { return get(this.lore, DEFAULT_LORE); }
 	public DataItemStack setLore(List<String> lore) { this.lore = set(lore, DEFAULT_LORE); return this; }
