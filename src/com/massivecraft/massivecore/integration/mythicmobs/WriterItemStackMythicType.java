@@ -2,9 +2,9 @@ package com.massivecraft.massivecore.integration.mythicmobs;
 
 import com.massivecraft.massivecore.item.DataItemStack;
 import com.massivecraft.massivecore.item.WriterAbstractItemStackField;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.util.jnbt.CompoundTag;
-import io.lumine.xikage.mythicmobs.util.jnbt.StringTag;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.utils.jnbt.CompoundTag;
+import io.lumine.mythic.core.utils.jnbt.StringTag;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +36,7 @@ public class WriterItemStackMythicType extends WriterAbstractItemStackField<Stri
 	@Override
 	public String getB(@NotNull ItemStack cb, ItemStack d)
 	{
-		CompoundTag tagComp = MythicMobs.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb);
+		CompoundTag tagComp = MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb);
 		if (!tagComp.containsKey("MYTHIC_TYPE")) return null;
 		return tagComp.getString("MYTHIC_TYPE");
 	}
@@ -45,13 +45,13 @@ public class WriterItemStackMythicType extends WriterAbstractItemStackField<Stri
 	public void setB(@NotNull ItemStack cb, String fb, ItemStack d)
 	{
 		if (fb == null) return; // TODO - Safely remove the Tag if null
-		MythicMobs.inst().getVolatileCodeHandler().getItemHandler().addNBTData(cb, "MYTHIC_TYPE", new StringTag(fb));
+		MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().addNBTData(cb, "MYTHIC_TYPE", new StringTag(fb));
 		
-		/*CompoundTagBuilder tagCompBuilder = MythicMobs.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb).createBuilder();
+		/*CompoundTagBuilder tagCompBuilder = MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb).createBuilder();
 		if (fb == null) tagCompBuilder.remove("MYTHIC_TYPE");
 		else tagCompBuilder.putString("MYTHIC_TYPE", fb);
 		
-		MythicMobs.inst().getVolatileCodeHandler().getItemHandler().setNBTData(cb, tagCompBuilder.build());*/
+		MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().setNBTData(cb, tagCompBuilder.build());*/
 	}
 	
 }

@@ -57,7 +57,7 @@
         </dependency>
         <!-- MythicMobs -->
         <dependency>
-            <groupId>io.lumine.xikage</groupId>
+            <groupId>io.lumine.mythic</groupId>
             <artifactId>MythicMobs</artifactId>
         </dependency>
     </dependencies>
