@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.mson.MsonEvent;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateStartsWithIgnoreCase;
+import com.massivecraft.massivecore.ps.PS;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -492,6 +493,25 @@ public class Txt
 		if (InventoryUtil.isSomething(item)) ret = ret.item(item);
 		
 		return ret;
+	}
+	
+	// -------------------------------------------- //
+	// COORDS MSON
+	// -------------------------------------------- //
+	
+	public static Mson createCoordinatesMson(PS ps)
+	{
+		String world = ps.getWorld();
+		String x = String.valueOf(Math.round(ps.getLocationX()));
+		String y = String.valueOf(Math.round(ps.getLocationY()));
+		String z = String.valueOf(Math.round(ps.getLocationZ()));
+		
+		return Mson.mson(Mson.parse("<h>[%s<i>, <h>%s<i>, <h>%s<i>, <h>%s<h>]", world, x, y, z));
+	}
+	
+	public static Mson createCoordinatesMson(Player player)
+	{
+		return createCoordinatesMson(PS.valueOf(player.getLocation()));
 	}
 	
 	// -------------------------------------------- //
