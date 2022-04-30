@@ -29,19 +29,23 @@ public class NmsItemStackMeta extends Mixin
 	// ITEM UTILS
 	// -------------------------------------------- //
 	
-	public String getDisplayName(ItemMeta itemMeta) {
+	public String getDisplayName(ItemMeta itemMeta)
+	{
 		return itemMeta.getDisplayName();
 	}
 	
-	public void setDisplayName(ItemMeta itemMeta, String name) {
+	public void setDisplayName(ItemMeta itemMeta, String name)
+	{
 		itemMeta.setDisplayName(name);
 	}
 	
-	public List<String> getLore(ItemMeta itemMeta) {
+	public List<String> getLore(ItemMeta itemMeta)
+	{
 		return itemMeta.getLore();
 	}
 	
-	public void setLore(ItemMeta itemMeta, List<String> lore) {
+	public void setLore(ItemMeta itemMeta, List<String> lore)
+	{
 		itemMeta.setLore(lore);
 	}
 	
@@ -49,11 +53,13 @@ public class NmsItemStackMeta extends Mixin
 	// JSON / LEGACY UTILS
 	// -------------------------------------------- //
 	
-	public String fromLegacyToJSON(String message) {
+	public String fromLegacyToJSON(String message)
+	{
 		return message;
 	}
 	
-	public String fromJSONToLegacy(String jsonMessage) {
+	public String fromJSONToLegacy(String jsonMessage)
+	{
 		return jsonMessage;
 	}
 	
