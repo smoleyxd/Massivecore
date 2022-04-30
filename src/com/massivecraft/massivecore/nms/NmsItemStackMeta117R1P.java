@@ -65,6 +65,7 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	
 	public void setDisplayName(ItemMeta itemMeta, String name)
 	{
+		if (name.isBlank()) name = null;
 		ReflectionUtil.setField(this.fieldCraftMetaItem_displayName, itemMeta, name);
 	}
 	
