@@ -16,54 +16,51 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
+public class NmsSkullMeta117R1P extends NmsSkullMeta
 {
+	// -------------------------------------------- //
+	// INSTANCE & CONSTRUCT
+	// -------------------------------------------- //
+	
+	@SuppressWarnings("FieldMayBeFinal")
+	private static NmsSkullMeta117R1P i = new NmsSkullMeta117R1P();
+	public static NmsSkullMeta117R1P get () { return i; }
+	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// org.bukkit.craftbukkit.inventory.CraftMetaSkull 
-	public Class<?> classCraftMetaSkull;
-	// org.bukkit.craftbukkit.inventory.CraftMetaSkull#profile
-	public Field fieldCraftMetaSkullProfile;
-	
-	// 17R4: net.minecraft.util.com.mojang.authlib.GameProfile
-	// 18R1P: com.mojang.authlib.GameProfile
-	public Class<?> classGameProfile;
-	// ...#id
-	public Field fieldGameProfileId;
-	// ...#name
-	public Field fieldGameProfileName;
-	// #properties
-	public Field fieldGameProfilePropertyMap;
-	// ...(UUID id, String name);
+	// GameProfile(UUID id, String name);
 	public Constructor<?> constructorGameProfile;
+	// GameProfile#id
+	public Field fieldGameProfileId;
+	// GameProfile#name
+	public Field fieldGameProfileName;
+	// GameProfile#properties
+	public Field fieldGameProfilePropertyMap;
 	
-	public Class<?> classPropertyMap;
-	public Method methodPropertyMapEntries;
+	// PropertyMap()
 	public Constructor<?> constructorPropertyMap;
-	
-	// com.mojang.authlib.properties
-	public Class<?> classProperty;
-	// name, value, signature
-	// (string, string, string)
-	public Constructor<?> constructorProperty;
-	
-	// #name
-	public Field fieldPropertyName;
-	// #value
-	public Field fieldPropertyValue;
-	// #signature
-	public Field fieldPropertySignature;
-	
+	// PropertyMap::entries()
+	public Method methodPropertyMapEntries;
+	// PropertyMap::clear()
 	public Method methodPropertyMapClear;
+	// PropertyMap::put(K key, V value)
 	public Method methodPropertyMapPut;
 	
-	// -------------------------------------------- //
-	// GAME PROFILE CLASS NAME
-	// -------------------------------------------- //
+	// Property(String name, String value, String signature)
+	public Constructor<?> constructorProperty;
+	// Property#name
+	public Field fieldPropertyName;
+	// Property#value
+	public Field fieldPropertyValue;
+	// Property#signature
+	public Field fieldPropertySignature;
 	
-	public abstract String getGameProfileClassName();
+	// CraftMetaSkull#profile
+	public Field fieldCraftMetaSkullProfile;
+	// CraftMetaSkull::setProfile
+	public Method methodCraftMetaSkullSetProfile;
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -72,31 +69,23 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
-		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(this.classCraftMetaSkull, "profile");
+		Class<?> classGameProfile = Class.forName("com.mojang.authlib.GameProfile");
+		this.constructorGameProfile = ReflectionUtil.getConstructor(classGameProfile, UUID.class, String.class);
+		this.fieldGameProfileId = ReflectionUtil.getField(classGameProfile, "id");
+		this.fieldGameProfileName = ReflectionUtil.getField(classGameProfile, "name");
+		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(classGameProfile, "properties");
 		
-		this.classGameProfile = Class.forName(this.getGameProfileClassName());
-		this.fieldGameProfileId = ReflectionUtil.getField(this.classGameProfile, "id");
-		this.fieldGameProfileName = ReflectionUtil.getField(this.classGameProfile, "name");
-		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(this.classGameProfile, "properties");
-		this.classPropertyMap = this.fieldGameProfilePropertyMap.getType();
-		this.constructorPropertyMap = ReflectionUtil.getConstructor(this.classPropertyMap);
-		
-		Class<?> classDeclaringPropertyMapEntries = ReflectionUtil.getSuperclassDeclaringMethod(this.classPropertyMap, true, "entries");
-		this.methodPropertyMapEntries = ReflectionUtil.getMethod(classDeclaringPropertyMapEntries,"entries");
-		
-		this.constructorGameProfile = ReflectionUtil.getConstructor(this.classGameProfile, UUID.class, String.class);
-		this.classProperty = Class.forName("com.mojang.authlib.properties.Property");
-		this.constructorProperty = ReflectionUtil.getConstructor(this.classProperty, String.class, String.class, String.class);
-		this.fieldPropertyName = ReflectionUtil.getField(this.classProperty, "name");
-		this.fieldPropertyValue = ReflectionUtil.getField(this.classProperty, "value");
-		this.fieldPropertySignature = ReflectionUtil.getField(this.classProperty, "signature");
-		
-		Class<?> classDeclaringPropertyMapClear = ReflectionUtil.getSuperclassDeclaringMethod(this.classPropertyMap, true, "clear");
-		this.methodPropertyMapClear = ReflectionUtil.getMethod(classDeclaringPropertyMapClear, "clear");
-		
-		Class<?> classDeclaringPropertyMapPut = ReflectionUtil.getSuperclassDeclaringMethod(this.classPropertyMap, true, "put");
-		Method[] methodsDeclaredInPut = classDeclaringPropertyMapPut.getDeclaredMethods();
+		Class<?> classPropertyMap = Class.forName("com.mojang.authlib.properties.PropertyMap");
+		this.constructorPropertyMap = ReflectionUtil.getConstructor(classPropertyMap);
+		this.methodPropertyMapEntries = ReflectionUtil.getMethod(
+			ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "entries"),
+			"entries"
+		);
+		this.methodPropertyMapClear = ReflectionUtil.getMethod(
+			ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "clear"),
+			"clear"
+		);
+		Method[] methodsDeclaredInPut = ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "put").getDeclaredMethods();
 		for (Method method : methodsDeclaredInPut)
 		{
 			if (!method.getName().equals("put")) continue;
@@ -104,6 +93,16 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 			this.methodPropertyMapPut = method;
 			break;
 		}
+		
+		Class<?> classProperty = Class.forName("com.mojang.authlib.properties.Property");
+		this.constructorProperty = ReflectionUtil.getConstructor(classProperty, String.class, String.class, String.class);
+		this.fieldPropertyName = ReflectionUtil.getField(classProperty, "name");
+		this.fieldPropertyValue = ReflectionUtil.getField(classProperty, "value");
+		this.fieldPropertySignature = ReflectionUtil.getField(classProperty, "signature");
+		
+		Class<?> classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
+		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(classCraftMetaSkull,"profile");
+		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull,"setProfile", classGameProfile);
 	}
 	
 	// -------------------------------------------- //
@@ -143,7 +142,7 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	@Override
 	public void setGameProfile(@NotNull SkullMeta meta, Object gameProfile)
 	{
-		ReflectionUtil.setField(this.fieldCraftMetaSkullProfile, meta, gameProfile);
+		ReflectionUtil.invokeMethod(this.methodCraftMetaSkullSetProfile, meta, gameProfile);
 	}
 	
 	// -------------------------------------------- //
@@ -160,20 +159,6 @@ public abstract class NmsSkullMetaAbstract extends NmsSkullMeta
 	public UUID getGameProfileId(Object gameProfile)
 	{
 		return ReflectionUtil.getField(this.fieldGameProfileId, gameProfile);
-	}
-	
-	// -------------------------------------------- //
-	// GAMEPROFILE > SET
-	// -------------------------------------------- //
-	
-	protected void setGameProfileName(Object gameProfile, String name)
-	{
-		ReflectionUtil.setField(this.fieldGameProfileName, gameProfile, name);
-	}
-	
-	protected void setGameProfileId(Object gameProfile, UUID id)
-	{
-		ReflectionUtil.setField(this.fieldGameProfileId, gameProfile, id);
 	}
 	
 	// -------------------------------------------- //

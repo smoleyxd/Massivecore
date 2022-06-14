@@ -27,7 +27,7 @@ public class TypePatternType extends TypeAbstractChoice<PatternType>
 	// -------------------------------------------- //
 	
 	private final Map<PatternType, String> friendlyNames = MUtil.map(
-		PatternType.BASE, "BaseColor",
+		PatternType.BASE, "Field",
 		PatternType.BORDER, "Bordure",
 		PatternType.BRICKS, "FieldMasoned",
 		PatternType.CIRCLE_MIDDLE, "Roundel",

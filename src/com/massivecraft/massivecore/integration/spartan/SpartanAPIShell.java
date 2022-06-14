@@ -14,8 +14,6 @@ public class SpartanAPIShell
 	{
 		API.cancelCheck(p, HackType.IrregularMovements, ticks);
 		API.cancelCheck(p, HackType.Speed, ticks);
-		API.cancelCheck(p, HackType.Clip, ticks);
-		API.cancelCheck(p, HackType.Fly, ticks);
 		API.disableVelocityProtection(p, ticks);
 	}
 }

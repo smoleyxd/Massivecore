@@ -20,6 +20,7 @@ import com.massivecraft.massivecore.command.type.convert.TypeConverterNamespaced
 import com.massivecraft.massivecore.command.type.primitive.TypeInteger;
 import com.massivecraft.massivecore.command.type.primitive.TypeObject.TypeObjectRaw;
 import com.massivecraft.massivecore.command.type.primitive.TypeStringParsed;
+import com.massivecraft.massivecore.command.type.primitive.TypeStringParsedJSON;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.InventoryUtil;
@@ -110,6 +111,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
+	public static final transient String DEFAULT_MYTHIC_TYPE = null;
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -117,7 +119,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 5;
+	private int version = 6;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -150,12 +152,12 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// FIELDS > UNSPECIFIC
 	// -------------------------------------------- //
 	
-	@EditorType(TypeStringParsed.class)
+	@EditorType(TypeStringParsedJSON.class)
 	private String name = null;
 	public String getName() { return get(this.name, DEFAULT_NAME); }
 	public DataItemStack setName(String name) { this.name = set(name, DEFAULT_NAME); return this; }
 	
-	@EditorTypeInner(TypeStringParsed.class)
+	@EditorTypeInner(TypeStringParsedJSON.class)
 	private MassiveListDef<String> lore = null;
 	public List<String> getLore() { return get(this.lore, DEFAULT_LORE); }
 	public DataItemStack setLore(List<String> lore) { this.lore = set(lore, DEFAULT_LORE); return this; }
@@ -433,6 +435,14 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public DataItemStack setAttributeModifiers(Set<DataAttributeModifier> attributeModifiers) { this.attributeModifiers = set(attributeModifiers, DEFAULT_ATTRIBUTE_MODIFIERS); return this;}
 	
 	// -------------------------------------------- //
+	// FIELDS > MYTHICMOBS
+	// -------------------------------------------- //
+	
+	private String mythicType = null;
+	public String getMythicType() { return get(this.mythicType, DEFAULT_MYTHIC_TYPE); }
+	public DataItemStack setMythicType(String mythicType) { this.mythicType = set(mythicType, DEFAULT_MYTHIC_TYPE); return this; }
+	
+	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
@@ -677,7 +687,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -724,7 +735,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -778,7 +790,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(), that.getFishPatternColor(),
 			this.getChargedProjectiles(), that.getChargedProjectiles(),
 			this.getRecipes(), that.getRecipes(),
-			this.getAttributeModifiers(), that.getAttributeModifiers()
+			this.getAttributeModifiers(), that.getAttributeModifiers(),
+			this.getMythicType(), that.getMythicType()
 		);
 	}
 	
@@ -830,7 +843,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 			this.getFishPatternColor(),
 			this.getChargedProjectiles(),
 			this.getRecipes(),
-			this.getAttributeModifiers()
+			this.getAttributeModifiers(),
+			this.getMythicType()
 		);
 	}
 	

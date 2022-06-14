@@ -38,7 +38,7 @@
         </dependency>
         <!-- Spartan -->
         <dependency>
-            <groupId>me.vagdedes.spartan</groupId>
+            <groupId>me.vagdedes</groupId>
             <artifactId>SpartanAPI</artifactId>
         </dependency>
         <!-- JSON -->
@@ -54,6 +54,11 @@
             <artifactId>annotations</artifactId>
             <version>23.0.0</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- MythicMobs -->
+        <dependency>
+            <groupId>io.lumine.mythic</groupId>
+            <artifactId>MythicMobs</artifactId>
         </dependency>
     </dependencies>
 
