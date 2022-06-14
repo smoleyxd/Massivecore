@@ -10,8 +10,7 @@ public class NmsPlayerInventoryCreate extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsPlayerInventoryCreate d = new NmsPlayerInventoryCreate().setAlternatives(
-		NmsPlayerInventoryCreate117R1P.class,
-		NmsPlayerInventoryCreate17R4P.class
+		NmsPlayerInventoryCreate117R1P.class
 	);
 	
 	// -------------------------------------------- //

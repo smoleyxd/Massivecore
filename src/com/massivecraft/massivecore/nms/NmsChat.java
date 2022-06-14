@@ -19,10 +19,6 @@ public class NmsChat extends Mixin
 	
 	private static final NmsChat d = new NmsChat().setAlternatives(
 		NmsChat117R1P.class,
-		NmsChat116R1P.class,
-		NmsChat112R1P.class,
-		NmsChat18R2P.class,
-		NmsChat18R1.class,
 		NmsChatFallback.class
 	);
 	

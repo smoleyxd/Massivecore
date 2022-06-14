@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.massivecraft.massivesuper</groupId>
         <artifactId>MassiveSuper</artifactId>
-        <version>MC-1.18.1-SNAPSHOT</version>
+        <version>MC-1.19-SNAPSHOT</version>
         <relativePath>../MassiveSuper</relativePath>
     </parent>
 
@@ -88,8 +88,14 @@
                                     <include>com.massivecraft.massivecore:MassiveCoreXlib</include>
                                 </includes>
                             </artifactSet>
-                            <relocations>
-                            </relocations>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>

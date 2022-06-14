@@ -60,8 +60,9 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"channeling", new MassiveList<>("Channeling", "CHANNELING"),
 		"piercing", new MassiveList<>("Piercing", "PIERCING"),
 		"multishot", new MassiveList<>("Multishot", "MULTISHOT"),
-		"quick_charge", new MassiveList<>("Quick Charge", "QUICKCHARGE", "QuickCharge"),
-		"soul_speed", new MassiveList<>("Soul Speed", "SOULSPEED", "SoulSpeed")
+		"quick_charge", new MassiveList<>("Quick Charge", "QUICK_CHARGE", "QuickCharge"),
+		"soul_speed", new MassiveList<>("Soul Speed", "SOUL_SPEED", "SoulSpeed"),
+		"swift_sneak", new MassiveList<>("Swift Sneak", "SWIFT_SNEAK", "SwiftSneak")
 	);
 	
 	public static @NotNull String enchantmentToKey(@NotNull Enchantment enchantment) {

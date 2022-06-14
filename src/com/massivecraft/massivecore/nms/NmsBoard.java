@@ -17,9 +17,7 @@ public class NmsBoard extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsBoard d = new NmsBoard().setAlternatives(
-		NmsBoard19R1P.class,
-		NmsBoard18R1P.class,
-		NmsBoard17R4.class
+		NmsBoard19R1P.class
 	);
 	
 	// -------------------------------------------- //

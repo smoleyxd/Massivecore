@@ -13,8 +13,7 @@ public class NmsRecipe extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsRecipe d = new NmsRecipe().setAlternatives(
-		NmsRecipe112R1P.class,
-		NmsRecipe17R4P.class
+		NmsRecipe112R1P.class
 	);
 	
 	// -------------------------------------------- //
