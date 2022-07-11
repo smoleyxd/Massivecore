@@ -53,15 +53,15 @@ public class TimeDiffUtil
 		return millis(unitcounts, 1);
 	}
 	
-	public static long millis(@NotNull String formated, long count) throws Exception
+	public static long millis(@NotNull String formatted, long count) throws Exception
 	{
-		Map<TimeUnit, Long> unitcount = unitcounts(formated);
+		Map<TimeUnit, Long> unitcount = unitcounts(formatted);
 		return millis(unitcount, count);
 	}
 	
-	public static long millis(@NotNull String formated) throws Exception
+	public static long millis(@NotNull String formatted) throws Exception
 	{
-		return millis(formated, 1);
+		return millis(formatted, 1);
 	}
 	
 	// -------------------------------------------- //
@@ -69,17 +69,17 @@ public class TimeDiffUtil
 	// -------------------------------------------- //
 	
 	@Contract("null -> fail")
-	public static @NotNull LinkedHashMap<TimeUnit, Long> unitcounts(String formated) throws Exception
+	public static @NotNull LinkedHashMap<TimeUnit, Long> unitcounts(String formatted) throws Exception
 	{
-		if (formated == null) throw new NullPointerException("The string can't be null.");
+		if (formatted == null) throw new NullPointerException("The string can't be null.");
 		
-		Matcher matcherFull = patternFull.matcher(formated);
+		Matcher matcherFull = patternFull.matcher(formatted);
 		if (!matcherFull.matches()) throw new NullPointerException("Invalid time diff format.");
 		
 		LinkedHashMap<TimeUnit, Long> ret = new LinkedHashMap<>();
-		if (formated.equals("0")) return ret;
+		if (formatted.equals("0")) return ret;
 		
-		Matcher matcherPart = patternPart.matcher(formated);
+		Matcher matcherPart = patternPart.matcher(formatted);
 		while (matcherPart.find())
 		{
 			// Parse the count
