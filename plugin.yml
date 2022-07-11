@@ -5,7 +5,7 @@ website: ${project.url}
 description: ${project.description}
 authors: [Cayorion, CS_Birb]
 load: STARTUP
-softdepend: [Vault]
+softdepend: [Vault, MythicMobs]
 api-version: "1.15"
 permissions:
 # -------------------------------------------- #
