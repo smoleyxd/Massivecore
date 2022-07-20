@@ -46,6 +46,7 @@ public abstract class TypeNameAbstract extends TypeAbstract<String>
 	public String read(String arg, CommandSender sender) throws MassiveException
 	{
 		if (arg == null) throw new NullPointerException("arg");
+		arg = arg.trim();
 
 		// Allow changing capitalization of the current name if lenient.
 		String current = this.getCurrentName(sender);
