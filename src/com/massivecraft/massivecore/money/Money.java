@@ -92,7 +92,7 @@ public class Money
 	}
 	
 	// -------------------------------------------- //
-	// EXISTANCE
+	// EXISTENCE
 	// -------------------------------------------- //
 	
 	public static boolean exists(Object account)
