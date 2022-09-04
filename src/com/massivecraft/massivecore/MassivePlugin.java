@@ -123,15 +123,15 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 		String massiveVersion = MassiveCore.get().getDescription().getVersion();
 		
 		// ... and if the version numbers are different ...
-		if (thisVersion.equals(massiveVersion)) return;
+		if (thisVersion.split(" ", 2)[0].equals(massiveVersion.split(" ", 2)[0])) return;
 		
 		// ... log a warning message ...
 		String thisName = this.getDescription().getName();
 		String massiveName = MassiveCore.get().getDescription().getName();
 		
 		log(Txt.parse("<b>WARNING: You are using <pink>" + thisName + " <aqua>" + thisVersion + " <b>and <pink>" + massiveName + " <aqua>" + massiveVersion + "<b>!"));
-		log(Txt.parse("<b>WARNING: They must be the exact same version to work properly!"));
-		log(Txt.parse("<b>WARNING: Remember to always update all plugins at the same time!"));
+		log(Txt.parse("<b>WARNING: They must be the same major version to work properly!"));
+		log(Txt.parse("<b>WARNING: Remember to keep all your plugins up to date!"));
 		log(Txt.parse("<b>WARNING: You should stop your server and properly update."));
 		
 		// ... and pause for 10 seconds.
