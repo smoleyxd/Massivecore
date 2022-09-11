@@ -687,6 +687,12 @@ public class Mson implements Serializable
 	@Contract("null -> fail")
 	public static @NotNull Mson fromParsedMessage(String message)
 	{
+		return fromParsedMessage(message, true);
+	}
+	
+	@Contract("null, _ -> fail")
+	public static @NotNull Mson fromParsedMessage(String message, boolean allowMHex)
+	{
 		if (message == null) throw new NullPointerException("message");
 
 		// Everything must have a color.
@@ -742,7 +748,7 @@ public class Mson implements Serializable
 					else if (color == ChatColor.STRIKETHROUGH) strikethrough = true;
 					else if (color == ChatColor.MAGIC) obfuscated = true;
 				}
-				else if (matcher.group("mhex") != null)
+				else if (allowMHex && matcher.group("mhex") != null)
 				{
 					latestColor = matcher.group("mhex");
 					// The group matches just the hex, but we also need to remove the chevrons.
