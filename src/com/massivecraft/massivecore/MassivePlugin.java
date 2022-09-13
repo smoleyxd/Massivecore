@@ -59,7 +59,8 @@ public abstract class MassivePlugin extends JavaPlugin implements Listener, Name
 	
 	public void onLoadPre()
 	{
-		this.logPrefixColored = Txt.parse("<teal>[<aqua>%s %s<teal>] <i>", this.getDescription().getName(), this.getDescription().getVersion());
+		String[] version = this.getDescription().getVersion().split(" ");
+		this.logPrefixColored = Txt.parse("<teal>[<aqua>%s %s<teal>] <i>", this.getDescription().getName(), version[version.length-1]);
 		this.logPrefixPlain = ChatColor.stripColor(this.logPrefixColored);
 	}
 	
