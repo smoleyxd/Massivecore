@@ -112,6 +112,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
 	public static final transient String DEFAULT_MYTHIC_TYPE = null;
+	public static final transient Integer DEFAULT_MYTHIC_ITEM_VERSION = null;
 	
 	// -------------------------------------------- //
 	// FIELDS > VERSION
@@ -441,6 +442,11 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private String mythicType = null;
 	public String getMythicType() { return get(this.mythicType, DEFAULT_MYTHIC_TYPE); }
 	public DataItemStack setMythicType(String mythicType) { this.mythicType = set(mythicType, DEFAULT_MYTHIC_TYPE); return this; }
+	
+	private Integer mythicItemVersion = null;
+	public Integer getMythicItemVersion() { return get(this.mythicItemVersion, DEFAULT_MYTHIC_ITEM_VERSION); }
+	public DataItemStack setMythicItemVersion(Integer mythicItemVersion) { this.mythicItemVersion = set(mythicItemVersion, DEFAULT_MYTHIC_ITEM_VERSION); return this; }
+	
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

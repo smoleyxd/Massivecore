@@ -23,6 +23,7 @@ public class IntegrationMythicMobs extends Integration
 		if (active)
 		{
 			WriterItemStack.get().setupWriter(WriterItemStackMythicType.class, true);
+			WriterItemStack.get().setupWriter(WriterItemStackMythicItemVersion.class, true);
 		}
 	}
 }
