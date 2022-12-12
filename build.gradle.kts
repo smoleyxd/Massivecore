@@ -26,6 +26,7 @@ java {
 // Repositories
 repositories {
     mavenLocal()
+    // FIXME - Only massivecraft private and closed are working here and I think this is a root of the issue
     maven {
         name = "massivecraft-private"
         url = uri(
