@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.papermc.paperweight.util.Git
 import io.papermc.paperweight.util.path
 
@@ -11,6 +10,10 @@ plugins {
     `maven-publish`
     application
     id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+application {
+    mainClass.set("$group.$name")
 }
 
 // Basics
@@ -26,12 +29,11 @@ java {
 // Repositories
 repositories {
     mavenLocal()
-    // FIXME - Only massivecraft private and closed are working here and I think this is a root of the issue
     maven {
-        name = "massivecraft-private"
+        name = "massivecraft"
         url = uri(
             System.getenv("MAVEN_DEPENDENCIES_URL")
-                ?: "https://maven.massivecraft.team/repository/massivecraft-dependencies-private/"
+                ?: "https://maven.massivecraft.team/repository/massivecraft-dependencies/"
         )
         credentials {
             username = System.getenv("MAVEN_DEPENDENCIES_USER")
@@ -53,11 +55,13 @@ dependencyManagement {
 
 // Dependencies
 dependencies {
-    paperweightDevelopmentBundle("com.massivecraft.massivefukkit", "dev-bundle")
+    paperDevBundle(project.dependencyManagement.importedProperties["massiveSpigotVersion"])
 
-    compileOnly("com.massivecraft.massivecore", "MassiveCoreXlib")
+    implementation("com.massivecraft.massivecore", "MassiveCoreXlib")
 
-    compileOnly("net.milkbowl.vault", "VaultAPI")
+    compileOnly("net.milkbowl.vault", "VaultAPI") {
+        exclude("org.bukkit", "bukkit")
+    }
     compileOnly("me.vagdedes", "SpartanAPI")
 
     compileOnly("com.googlecode.json-simple", "json-simple", "1.1.1") {
@@ -66,8 +70,6 @@ dependencies {
 
     compileOnly("org.jetbrains", "annotations", "23.0.0")
     compileOnly("io.lumine.mythic", "MythicMobs")
-
-    shadow("junit", "junit", "3.8.2")
 }
 
 // Tasks
@@ -91,15 +93,6 @@ tasks {
 
     javadoc {
         options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-    }
-
-    named<ShadowJar>("shadowJar") {
-        archiveBaseName.set("shadow")
-        mergeServiceFiles()
-        manifest {
-            attributes(mapOf("Main-Class" to "com.massivecraft.massivecore:MassiveCoreXlib"))
-            // FIXME I need to exclude meta-inf here
-        }
     }
 
     processResources {
