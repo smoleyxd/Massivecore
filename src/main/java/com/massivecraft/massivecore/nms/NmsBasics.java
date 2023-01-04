@@ -16,7 +16,7 @@ public class NmsBasics extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsBasics d = new NmsBasics().setAlternatives(
-		NmsBasics118R1P.class
+		NmsBasics119R1.class
 	);
 	
 	// -------------------------------------------- //
@@ -31,31 +31,37 @@ public class NmsBasics extends Mixin
 	// GET HANDLE
 	// -------------------------------------------- //
 	
+	@Deprecated
 	public <T> T getHandle(Entity entity)
 	{
 		throw this.notImplemented();
 	}
 	
+	@Deprecated
 	public <T> T getHandle(World world)
 	{
 		throw this.notImplemented();
 	}
 	
+	@Deprecated
 	public <T> T getHandle(Scoreboard scoreboard)
 	{
 		throw this.notImplemented();
 	}
 	
+	@Deprecated
 	public <T> T getHandle(Team team)
 	{
 		throw this.notImplemented();
 	}
 	
+	@Deprecated
 	public <T> T getHandle(Objective objective)
 	{
 		throw this.notImplemented();
 	}
 	
+	@Deprecated
 	public <T> T getHandle(Sign sign)
 	{
 		throw this.notImplemented();
@@ -65,7 +71,7 @@ public class NmsBasics extends Mixin
 	// GET BUKKIT
 	// -------------------------------------------- //
 	
-	public <T extends Entity> T getBukkit(Object handle)
+	public Entity getBukkit(Object handle)
 	{
 		throw this.notImplemented();
 	}
@@ -94,9 +100,10 @@ public class NmsBasics extends Mixin
 	// PING
 	// -------------------------------------------- //
 	
+	@Deprecated
 	public int getPing(Player player)
 	{
-		throw this.notImplemented();
+		return player.getPing();
 	}
 	
 }

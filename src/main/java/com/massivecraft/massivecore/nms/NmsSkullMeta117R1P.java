@@ -5,14 +5,15 @@ import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.item.ContainerGameProfileProperty;
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.properties.PropertyMap;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,38 +25,14 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	
 	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsSkullMeta117R1P i = new NmsSkullMeta117R1P();
-	public static NmsSkullMeta117R1P get () { return i; }
+	public static NmsSkullMeta117R1P get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
-	// GameProfile(UUID id, String name);
-	public Constructor<?> constructorGameProfile;
-	// GameProfile#id
-	public Field fieldGameProfileId;
-	// GameProfile#name
-	public Field fieldGameProfileName;
 	// GameProfile#properties
 	public Field fieldGameProfilePropertyMap;
-	
-	// PropertyMap()
-	public Constructor<?> constructorPropertyMap;
-	// PropertyMap::entries()
-	public Method methodPropertyMapEntries;
-	// PropertyMap::clear()
-	public Method methodPropertyMapClear;
-	// PropertyMap::put(K key, V value)
-	public Method methodPropertyMapPut;
-	
-	// Property(String name, String value, String signature)
-	public Constructor<?> constructorProperty;
-	// Property#name
-	public Field fieldPropertyName;
-	// Property#value
-	public Field fieldPropertyValue;
-	// Property#signature
-	public Field fieldPropertySignature;
 	
 	// CraftMetaSkull#profile
 	public Field fieldCraftMetaSkullProfile;
@@ -69,40 +46,13 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	@Override
 	public void setup() throws Throwable
 	{
-		Class<?> classGameProfile = Class.forName("com.mojang.authlib.GameProfile");
-		this.constructorGameProfile = ReflectionUtil.getConstructor(classGameProfile, UUID.class, String.class);
-		this.fieldGameProfileId = ReflectionUtil.getField(classGameProfile, "id");
-		this.fieldGameProfileName = ReflectionUtil.getField(classGameProfile, "name");
+		Class<?> classGameProfile = GameProfile.class;
 		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(classGameProfile, "properties");
 		
-		Class<?> classPropertyMap = Class.forName("com.mojang.authlib.properties.PropertyMap");
-		this.constructorPropertyMap = ReflectionUtil.getConstructor(classPropertyMap);
-		this.methodPropertyMapEntries = ReflectionUtil.getMethod(
-			ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "entries"),
-			"entries"
-		);
-		this.methodPropertyMapClear = ReflectionUtil.getMethod(
-			ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "clear"),
-			"clear"
-		);
-		Method[] methodsDeclaredInPut = ReflectionUtil.getSuperclassDeclaringMethod(classPropertyMap, true, "put").getDeclaredMethods();
-		for (Method method : methodsDeclaredInPut)
-		{
-			if (!method.getName().equals("put")) continue;
-			
-			this.methodPropertyMapPut = method;
-			break;
-		}
-		
-		Class<?> classProperty = Class.forName("com.mojang.authlib.properties.Property");
-		this.constructorProperty = ReflectionUtil.getConstructor(classProperty, String.class, String.class, String.class);
-		this.fieldPropertyName = ReflectionUtil.getField(classProperty, "name");
-		this.fieldPropertyValue = ReflectionUtil.getField(classProperty, "value");
-		this.fieldPropertySignature = ReflectionUtil.getField(classProperty, "signature");
 		
 		Class<?> classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
-		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(classCraftMetaSkull,"profile");
-		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull,"setProfile", classGameProfile);
+		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(classCraftMetaSkull, "profile");
+		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull, "setProfile", classGameProfile);
 	}
 	
 	// -------------------------------------------- //
@@ -129,8 +79,9 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	// -------------------------------------------- //
 	
 	@Override
-	public <T> T createGameProfile(UUID id, String name) {
-		return ReflectionUtil.invokeConstructor(this.constructorGameProfile, id, name);
+	public GameProfile createGameProfile(UUID id, String name)
+	{
+		return new GameProfile(id, name);
 	}
 	
 	@Override
@@ -150,15 +101,17 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	// -------------------------------------------- //
 	
 	@Override
-	public String getGameProfileName(Object gameProfile)
+	public String getGameProfileName(Object profile)
 	{
-		return ReflectionUtil.getField(this.fieldGameProfileName, gameProfile);
+		if (profile instanceof GameProfile gameProfile) return gameProfile.getName();
+		return null;
 	}
 	
 	@Override
-	public UUID getGameProfileId(Object gameProfile)
+	public UUID getGameProfileId(Object profile)
 	{
-		return ReflectionUtil.getField(this.fieldGameProfileId, gameProfile);
+		if (profile instanceof GameProfile gameProfile) return gameProfile.getId();
+		return null;
 	}
 	
 	// -------------------------------------------- //
@@ -166,25 +119,21 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	// -------------------------------------------- //
 	
 	@Override
-	public <T> T getPropertyMap(Object profile)
+	public PropertyMap getPropertyMap(Object profile)
 	{
-		if (profile == null) return (T) this.createPropertyMap();
-		return ReflectionUtil.getField(this.fieldGameProfilePropertyMap, profile);
+		if (!(profile instanceof GameProfile gameProfile))
+			return new PropertyMap();
+		
+		return gameProfile.getProperties();
 	}
 	
 	@Override
 	public void setPropertyMap(Object profile, Object propertyMap)
 	{
-		ReflectionUtil.setField(this.fieldGameProfilePropertyMap, profile, propertyMap);
-	}
-	
-	// -------------------------------------------- //
-	// PROPERTYMAP >
-	// -------------------------------------------- //
-	
-	private Collection<Map.Entry<String, ?>> getPropertiesFromPropertyMap(Object propertyMap)
-	{
-		return ReflectionUtil.invokeMethod(this.methodPropertyMapEntries, propertyMap);
+		if (!(profile instanceof GameProfile gameProfile))
+			throw new IllegalArgumentException("profile provided is not an Authlib GameProfile");
+		
+		ReflectionUtil.setField(this.fieldGameProfilePropertyMap, gameProfile, propertyMap);
 	}
 	
 	// -------------------------------------------- //
@@ -194,29 +143,28 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	@Override
 	public Collection<Map.Entry<String, ContainerGameProfileProperty>> getGameProfileProperties(Object propertyMap)
 	{
-		Collection<Map.Entry<String, ?>> inner = this.getPropertiesFromPropertyMap(propertyMap);
-		if (inner.isEmpty()) return Collections.emptyList();
+		if (!(propertyMap instanceof PropertyMap map))
+			throw new IllegalArgumentException("propertyMap provided is not an Authlib PropertyMap");
 		
 		Collection<Map.Entry<String, ContainerGameProfileProperty>> ret = new MassiveList<>();
-		for (Map.Entry<String, ?> entry : inner)
+		for (Map.Entry<String, Property> entry : map.entries())
 		{
-			Object propertyObject = entry.getValue();
-			ContainerGameProfileProperty propertyTriple = unsafePropertyToContainer(propertyObject);
-			
-			ret.add(Couple.valueOf(entry.getKey(), propertyTriple));
+			ret.add(Couple.valueOf(
+				entry.getKey(),
+				unsafePropertyToContainer(entry.getValue())
+			));
 		}
+		
 		return ret;
 	}
 	
-	private @NotNull ContainerGameProfileProperty unsafePropertyToContainer(Object property)
+	private @NotNull ContainerGameProfileProperty unsafePropertyToContainer(Property property)
 	{
-		String name = ReflectionUtil.getField(this.fieldPropertyName, property);
-		String value = ReflectionUtil.getField(this.fieldPropertyValue, property);
-		String signature = ReflectionUtil.getField(this.fieldPropertySignature, property);
 		ContainerGameProfileProperty ret = new ContainerGameProfileProperty();
-		ret.name = name;
-		ret.value = value;
-		ret.signature = signature;
+		ret.name = property.getName();
+		ret.value = property.getValue();
+		ret.signature = property.getSignature();
+		
 		return ret;
 	}
 	
@@ -227,45 +175,28 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	@Override
 	public Object createPropertyMap()
 	{
-		return ReflectionUtil.invokeConstructor(this.constructorPropertyMap);
+		return new PropertyMap();
 	}
 	
 	@Override
 	public void setGameProfileProperties(@NotNull Object propertyMap, @NotNull Collection<Map.Entry<String, ContainerGameProfileProperty>> properties)
 	{
-		clearPropertyMap(propertyMap);
+		if (!(propertyMap instanceof PropertyMap map)) return;
+		
+		map.clear();
+		
 		for (Map.Entry<String, ContainerGameProfileProperty> entry : properties)
 		{
-			// Create the property objects
-			Object newPropertyObject = containerToProperty(entry.getValue());
-			
+			ContainerGameProfileProperty prop = entry.getValue();
 			// Add the property objects to propertyMap
-			putPropertyInMap(propertyMap, entry.getKey(), newPropertyObject);
+			map.put(
+				entry.getKey(),
+				new Property(
+					prop.name,
+					prop.value,
+					prop.signature
+				)
+			);
 		}
 	}
-	
-	public void clearPropertyMap(@NotNull Object propertyMap)
-	{
-		ReflectionUtil.invokeMethod(this.methodPropertyMapClear, propertyMap);
-	}
-	
-	public void putPropertyInMap(@NotNull Object propertyMap, String key, Object value)
-	{
-		ReflectionUtil.invokeMethod(this.methodPropertyMapPut, propertyMap, key, value);
-	}
-	
-	private <T> @NotNull T containerToProperty(@NotNull ContainerGameProfileProperty prop)
-	{
-		T ret = ReflectionUtil.invokeConstructor(
-			this.constructorProperty,
-			null,
-			null,
-			null
-		);
-		ReflectionUtil.setField(this.fieldPropertyName, ret, prop.name);
-		ReflectionUtil.setField(this.fieldPropertyValue, ret, prop.value);
-		ReflectionUtil.setField(this.fieldPropertySignature, ret, prop.signature);
-		return ret;
-	}
-	
 }

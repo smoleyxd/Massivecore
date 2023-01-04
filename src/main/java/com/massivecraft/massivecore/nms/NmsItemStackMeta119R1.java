@@ -2,14 +2,14 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NmsItemStackMeta117R1P extends NmsItemStackMeta
+public class NmsItemStackMeta119R1 extends NmsItemStackMeta
 {
 	
 	// -------------------------------------------- //
@@ -17,8 +17,8 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsItemStackMeta117R1P i = new NmsItemStackMeta117R1P();
-	public static NmsItemStackMeta117R1P get() { return i; }
+	private static NmsItemStackMeta119R1 i = new NmsItemStackMeta119R1();
+	public static NmsItemStackMeta119R1 get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -28,13 +28,6 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	
 	protected Field fieldCraftMetaItem_displayName;
 	protected Field fieldCraftMetaItem_lore;
-	
-	
-	protected Class<?> classCraftChatMessage;
-	
-	protected Method methodCraftChatMessage_fromStringOrNullToJSON;
-	protected Method methodCraftChatMessage_fromJSONComponent;
-	
 	
 	// -------------------------------------------- //
 	// SETUP
@@ -47,11 +40,6 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 		
 		this.fieldCraftMetaItem_displayName = ReflectionUtil.getField(this.classCraftMetaItem, "displayName");
 		this.fieldCraftMetaItem_lore = ReflectionUtil.getField(this.classCraftMetaItem, "lore");
-		
-		this.classCraftChatMessage = PackageType.CRAFTBUKKIT_VERSION_UTIL.getClass("CraftChatMessage");
-		
-		this.methodCraftChatMessage_fromStringOrNullToJSON = ReflectionUtil.getMethod(this.classCraftChatMessage, "fromStringOrNullToJSON", String.class);
-		this.methodCraftChatMessage_fromJSONComponent = ReflectionUtil.getMethod(this.classCraftChatMessage, "fromJSONComponent", String.class);
 	}
 	
 	// -------------------------------------------- //
@@ -103,7 +91,7 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	@Override
 	public String fromLegacyToJSON(String message)
 	{
-		String json = ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromStringOrNullToJSON, null, message);
+		String json = CraftChatMessage.fromStringOrNullToJSON(message);
 		if (json == null) json = "{\"text\":\"\"}";
 		return json;
 	}
@@ -111,9 +99,7 @@ public class NmsItemStackMeta117R1P extends NmsItemStackMeta
 	@Override
 	public String fromJSONToLegacy(String jsonMessage)
 	{
-		String legacy = ReflectionUtil.invokeMethod(this.methodCraftChatMessage_fromJSONComponent, null, jsonMessage);
-		if (legacy == null) legacy = "";
-		return legacy;
+		return CraftChatMessage.fromJSONComponent(jsonMessage);
 	}
 	
 }

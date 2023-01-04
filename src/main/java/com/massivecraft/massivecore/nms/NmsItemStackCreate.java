@@ -12,7 +12,7 @@ public class NmsItemStackCreate extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsItemStackCreate d = new NmsItemStackCreate().setAlternatives(
-		NmsItemStackCreate117R1P.class,
+		NmsItemStackCreate119R1.class,
 		NmsItemStackCreateFallback.class
 	);
 	
@@ -37,7 +37,7 @@ public class NmsItemStackCreate extends Mixin
 	// UTIL
 	// -------------------------------------------- //
 	
-	public @NotNull Class<?> getClassCraftItemStack() throws ClassNotFoundException
+	public @NotNull Class<?> getClassCraftItemStack()
 	{
 		throw notImplemented();
 	}

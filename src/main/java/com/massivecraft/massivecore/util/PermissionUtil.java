@@ -485,7 +485,7 @@ public class PermissionUtil
 	public static Map<String, Boolean> getAttachmentPermissions(PermissionAttachment attachment)
 	{
 		return NmsPermissions.get().getAttachmentPermissions(attachment);
-	}	
+	}
 	
 	@Contract("null, _ -> fail; !null, null -> false")
 	public static boolean setAttachmentPermissions(PermissionAttachment attachment, Map<String, Boolean> permissions)

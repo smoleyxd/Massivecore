@@ -3,17 +3,12 @@ import io.papermc.paperweight.util.path
 
 // Plugins
 plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     `java-library`
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
     id("net.linguica.maven-settings") version "0.5"
     id("io.papermc.paperweight.userdev") version "1.3.11"
     `maven-publish`
-    application
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-}
-
-application {
-    mainClass.set("$group.$name")
 }
 
 // Basics
@@ -57,11 +52,12 @@ dependencyManagement {
 dependencies {
     paperDevBundle(project.dependencyManagement.importedProperties["massiveSpigotVersion"])
 
-    implementation("com.massivecraft.massivecore", "MassiveCoreXlib")
+    api("com.massivecraft.massivecore", "MassiveCoreXlib")
 
     compileOnly("net.milkbowl.vault", "VaultAPI") {
         exclude("org.bukkit", "bukkit")
     }
+
     compileOnly("me.vagdedes", "SpartanAPI")
 
     compileOnly("com.googlecode.json-simple", "json-simple", "1.1.1") {
@@ -77,6 +73,7 @@ tasks {
     // Configure reobfJar to run when invoking the build task
     build {
         dependsOn(reobfJar)
+        dependsOn(shadowJar)
     }
 
     withType<GenerateModuleMetadata> {
