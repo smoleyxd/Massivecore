@@ -1,3 +1,5 @@
+import groovy.namespace.QName
+import groovy.util.Node
 import io.papermc.paperweight.util.Git
 import io.papermc.paperweight.util.path
 
@@ -137,7 +139,13 @@ publishing {
     publications.create<MavenPublication>("maven") {
         pom.withXml {
             asNode().appendNode("packaging", "jar")
-            val dependenciesNode = asNode().appendNode("dependencies")
+
+            val dependenciesNode: Node = asNode().children().find {
+                if (it !is Node) return@find false
+                val name = it.name()
+                return@find (name == "dependencies" || (name is QName && name.localPart == "dependencies"))
+            } as Node? ?: asNode().appendNode("dependencies")
+
             configurations["compileOnly"].allDependencies.forEach {
                 if (it.group != null) {
                     val dependencyNode = dependenciesNode.appendNode("dependency")
