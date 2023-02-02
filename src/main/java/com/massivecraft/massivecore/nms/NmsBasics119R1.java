@@ -65,6 +65,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@SuppressWarnings("deprecation")
 	public net.minecraft.world.entity.Entity getHandle(Entity entity)
 	{
+		if (entity == null) return null;
 		if (!(entity instanceof CraftEntity craftEntity))
 			throw new IllegalArgumentException("Entity provided is not a CraftEntity");
 		
@@ -75,6 +76,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@SuppressWarnings("deprecation")
 	public net.minecraft.server.level.ServerLevel getHandle(World world)
 	{
+		if (world == null) return null;
 		if (!(world instanceof CraftWorld craftWorld))
 			throw new IllegalArgumentException("World provided is not a CraftWorld");
 		
@@ -85,6 +87,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@SuppressWarnings("deprecation")
 	public net.minecraft.world.scores.Scoreboard getHandle(Scoreboard scoreboard)
 	{
+		if (scoreboard == null) return null;
 		if (!(scoreboard instanceof CraftScoreboard craftScoreboard))
 			throw new IllegalArgumentException("Scoreboard provided is not a CraftScoreboard");
 		
@@ -113,6 +116,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@SuppressWarnings("deprecation")
 	public net.minecraft.world.level.block.entity.SignBlockEntity getHandle(Sign sign)
 	{
+		if (sign == null) return null;
 		if (!(sign instanceof CraftSign craftSign))
 			throw new IllegalArgumentException("Sign provided is not a CraftSign");
 		
@@ -126,6 +130,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@Override
 	public Entity getBukkit(Object handle)
 	{
+		if (handle == null) return null;
 		if (!(handle instanceof net.minecraft.world.entity.Entity entity))
 			throw new IllegalArgumentException("handle provided is not an NMS Entity");
 		
@@ -139,6 +144,7 @@ public class NmsBasics119R1 extends NmsBasics
 	@Override
 	public net.minecraft.network.Connection getConnection(Player player)
 	{
+		if (player == null) return null;
 		if (!(player instanceof CraftPlayer craftPlayer))
 			throw new IllegalArgumentException("player provided is not a CraftPlayer");
 		
