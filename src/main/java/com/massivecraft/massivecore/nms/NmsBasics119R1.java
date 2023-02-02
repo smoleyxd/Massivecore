@@ -111,12 +111,12 @@ public class NmsBasics119R1 extends NmsBasics
 	
 	@Override
 	@SuppressWarnings("deprecation")
-	public net.minecraft.world.level.block.state.BlockState getHandle(Sign sign)
+	public net.minecraft.world.level.block.entity.SignBlockEntity getHandle(Sign sign)
 	{
 		if (!(sign instanceof CraftSign craftSign))
 			throw new IllegalArgumentException("Sign provided is not a CraftSign");
 		
-		return craftSign.getHandle();
+		return craftSign.getTileEntity();
 	}
 	
 	// -------------------------------------------- //
