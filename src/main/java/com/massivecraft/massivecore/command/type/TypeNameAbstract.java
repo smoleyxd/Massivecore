@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.command.type;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.Named;
 import com.massivecraft.massivecore.collections.MassiveSet;
+import com.massivecraft.massivecore.mixin.MixinChatFilter;
 import com.massivecraft.massivecore.util.Txt;
 import org.bukkit.command.CommandSender;
 
@@ -61,6 +62,12 @@ public abstract class TypeNameAbstract extends TypeAbstract<String>
 			String pluralityResolution = disallowed.size() == 1 ? " is" : "s are";
 			throw new MassiveException().addMsg("<b>The following character%s not allowed: <h>%s<b>.", pluralityResolution, characterViolations);
 		}
+		
+		// Check Chat Filter
+		String cleanArg = MixinChatFilter.get().modify(sender, arg);
+		if (cleanArg == null)
+			throw new MassiveException().addMsg("<b>The name \"<h>%s<b>\" is not allowed.", arg);
+		arg = cleanArg;
 		
 		// Allow changing capitalization of the current name if lenient.
 		String current = this.getCurrentName(sender);
