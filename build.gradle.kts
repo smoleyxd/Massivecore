@@ -15,7 +15,7 @@ plugins {
 
 // Basics
 group = "com.massivecraft.${name.toLowerCase()}"
-version = "MC-1.19-SNAPSHOT"
+version = "MC-1.20-SNAPSHOT"
 description = name
 
 // Java Version

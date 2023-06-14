@@ -96,6 +96,9 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// AXOLOTL BUCKET (1.17+)
 			WriterItemStackMetaAxolotlVariant.class,
 			
+			// MUSIC INSTRUMENT (1.20+)
+			WriterItemStackMetaInstrument.class,
+			
 			// ATTRIBUTE MODIFIERS
 			WriterItemStackMetaAttributeModifiers.class
 		);

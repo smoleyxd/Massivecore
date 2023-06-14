@@ -2,13 +2,14 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R1.block.CraftSign;
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_19_R1.scoreboard.CraftScoreboard;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.block.CraftSign;
+import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R1.scoreboard.CraftScoreboard;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -17,7 +18,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.lang.reflect.Field;
 
-public class NmsBasics119R1 extends NmsBasics
+public class NmsBasics120R1 extends NmsBasics
 {
 	
 	// -------------------------------------------- //
@@ -25,8 +26,8 @@ public class NmsBasics119R1 extends NmsBasics
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsBasics119R1 i = new NmsBasics119R1();
-	public static NmsBasics119R1 get() { return i; }
+	private static NmsBasics120R1 i = new NmsBasics120R1();
+	public static NmsBasics120R1 get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -120,7 +121,7 @@ public class NmsBasics119R1 extends NmsBasics
 		if (!(sign instanceof CraftSign craftSign))
 			throw new IllegalArgumentException("Sign provided is not a CraftSign");
 		
-		return craftSign.getTileEntity();
+		return (SignBlockEntity) craftSign.getTileEntity();
 	}
 	
 	// -------------------------------------------- //
@@ -142,20 +143,20 @@ public class NmsBasics119R1 extends NmsBasics
 	// -------------------------------------------- //
 	
 	@Override
-	public net.minecraft.network.Connection getConnection(Player player)
+	public net.minecraft.server.network.ServerGamePacketListenerImpl getConnection(Player player)
 	{
 		if (player == null) return null;
 		if (!(player instanceof CraftPlayer craftPlayer))
 			throw new IllegalArgumentException("player provided is not a CraftPlayer");
 		
-		return craftPlayer.getHandle().networkManager;
+		return craftPlayer.getHandle().connection;
 	}
 	
 	@Override
 	public void sendPacket(Object connection, Object packet)
 	{
-		if (!(connection instanceof net.minecraft.network.Connection nmsConnection))
-			throw new IllegalArgumentException("connection provided is not an NMS Connection");
+		if (!(connection instanceof net.minecraft.server.network.ServerGamePacketListenerImpl nmsConnection))
+			throw new IllegalArgumentException("connection provided is not an NMS ServerGamePacketListenerImpl");
 		
 		if (!(packet instanceof net.minecraft.network.protocol.Packet<?> nmsPacket))
 			throw new IllegalArgumentException("packet provided is not an NMS Packet");

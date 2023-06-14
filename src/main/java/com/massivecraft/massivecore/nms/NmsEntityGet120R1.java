@@ -2,12 +2,12 @@ package com.massivecraft.massivecore.nms;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.entity.Entity;
 
 import java.util.UUID;
 
-public class NmsEntityGet119R1 extends NmsEntityGet
+public class NmsEntityGet120R1 extends NmsEntityGet
 {
 	
 	// -------------------------------------------- //
@@ -15,8 +15,8 @@ public class NmsEntityGet119R1 extends NmsEntityGet
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsEntityGet119R1 i = new NmsEntityGet119R1();
-	public static NmsEntityGet119R1 get () { return i; }
+	private static NmsEntityGet120R1 i = new NmsEntityGet120R1();
+	public static NmsEntityGet120R1 get () { return i; }
 	
 	// -------------------------------------------- //
 	// GET ENTITY

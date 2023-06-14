@@ -3,15 +3,15 @@ package com.massivecraft.massivecore.nms;
 import com.massivecraft.massivecore.MassiveCore;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import org.bukkit.craftbukkit.v1_19_R1.persistence.CraftPersistentDataContainer;
-import org.bukkit.craftbukkit.v1_19_R1.util.CraftNBTTagConfigSerializer;
+import org.bukkit.craftbukkit.v1_20_R1.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.v1_20_R1.util.CraftNBTTagConfigSerializer;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.logging.Level;
 
-public class NmsPersistentData119R1 extends NmsPersistentData
+public class NmsPersistentData120R1 extends NmsPersistentData
 {
 	
 	// -------------------------------------------- //
@@ -19,8 +19,8 @@ public class NmsPersistentData119R1 extends NmsPersistentData
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsPersistentData119R1 i = new NmsPersistentData119R1();
-	public static NmsPersistentData119R1 get () { return i; }
+	private static NmsPersistentData120R1 i = new NmsPersistentData120R1();
+	public static NmsPersistentData120R1 get () { return i; }
 	
 	// -------------------------------------------- //
 	// CREATE

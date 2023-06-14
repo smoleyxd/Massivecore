@@ -12,7 +12,7 @@ public class NmsItemStackCreate extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsItemStackCreate d = new NmsItemStackCreate().setAlternatives(
-		NmsItemStackCreate119R1.class,
+		NmsItemStackCreate120R1.class,
 		NmsItemStackCreateFallback.class
 	);
 	

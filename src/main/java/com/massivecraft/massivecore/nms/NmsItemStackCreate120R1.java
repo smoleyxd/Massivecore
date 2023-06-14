@@ -1,10 +1,10 @@
 package com.massivecraft.massivecore.nms;
 
-import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class NmsItemStackCreate119R1 extends NmsItemStackCreate
+public class NmsItemStackCreate120R1 extends NmsItemStackCreate
 {
 	
 	// -------------------------------------------- //
@@ -12,8 +12,8 @@ public class NmsItemStackCreate119R1 extends NmsItemStackCreate
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsItemStackCreate119R1 i = new NmsItemStackCreate119R1();
-	public static NmsItemStackCreate119R1 get () { return i; }
+	private static NmsItemStackCreate120R1 i = new NmsItemStackCreate120R1();
+	public static NmsItemStackCreate120R1 get () { return i; }
 	
 	// -------------------------------------------- //
 	// CREATE

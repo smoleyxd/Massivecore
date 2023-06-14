@@ -2,14 +2,14 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
-import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_20_R1.util.CraftChatMessage;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NmsItemStackMeta119R1 extends NmsItemStackMeta
+public class NmsItemStackMeta120R1 extends NmsItemStackMeta
 {
 	
 	// -------------------------------------------- //
@@ -17,8 +17,8 @@ public class NmsItemStackMeta119R1 extends NmsItemStackMeta
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsItemStackMeta119R1 i = new NmsItemStackMeta119R1();
-	public static NmsItemStackMeta119R1 get() { return i; }
+	private static NmsItemStackMeta120R1 i = new NmsItemStackMeta120R1();
+	public static NmsItemStackMeta120R1 get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS

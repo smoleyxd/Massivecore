@@ -13,7 +13,7 @@ public class NmsPersistentData extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsPersistentData d = new NmsPersistentData().setAlternatives(
-		NmsPersistentData119R1.class
+		NmsPersistentData120R1.class
 	);
 	
 	// -------------------------------------------- //

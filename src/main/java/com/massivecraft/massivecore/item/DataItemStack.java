@@ -29,6 +29,8 @@ import com.massivecraft.massivecore.xlib.gson.annotations.SerializedName;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.MusicInstrument;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
@@ -110,6 +112,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
+	public static final transient MusicInstrument DEFAULT_MUSIC_INSTRUMENT = MusicInstrument.PONDER;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
 	public static final transient String DEFAULT_MYTHIC_TYPE = null;
 	public static final transient Integer DEFAULT_MYTHIC_ITEM_VERSION = null;
@@ -426,6 +429,16 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private Axolotl.Variant axolotlVariant = null;
 	public Axolotl.Variant getAxolotlVariant() { return get(this.axolotlVariant, DEFAULT_AXOLOTL_VARIANT); }
 	public DataItemStack setAxolotlVariant(Axolotl.Variant axolotlVariant) { this.axolotlVariant = set(axolotlVariant, DEFAULT_AXOLOTL_VARIANT); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > MUSIC INSTRUMENT
+	// -------------------------------------------- //
+	// Since 1.17
+	
+	private NamespacedKey musicInstrument = null;
+	public NamespacedKey getMusicInstrument() { return get(this.musicInstrument, DEFAULT_MUSIC_INSTRUMENT.getKey()); }
+	public DataItemStack setMusicInstrument(NamespacedKey musicInstrument) { this.musicInstrument = set(musicInstrument, DEFAULT_MUSIC_INSTRUMENT.getKey()); return this; }
+	
 	
 	// -------------------------------------------- //
 	// FIELDS > ATTRIBUTE MODIFIERS
