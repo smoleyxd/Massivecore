@@ -37,7 +37,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -352,15 +351,7 @@ public class MUtil
 	public static String getIp(InetSocketAddress address)
 	{
 		if (address == null) return null;
-		
-		String ret = address.toString();
-		String[] parts = ret.split("/");
-		
-		ret = parts[1];
-		parts = ret.split(":");
-		
-		ret = parts[0];
-		return ret;
+		return getIp(address.getAddress());
 	}
 	
 	public static String getIp(@NotNull PlayerLoginEvent event)
@@ -382,11 +373,13 @@ public class MUtil
 	}
 	
 	public static Pattern PATTERN_IPV4 = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+	public static Pattern PATTERN_IPV6 = Pattern.compile("^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]+|::(ffff(:0{1,4})?:)?((25[0-5]|(2[0-4]|1?[0-9])?[0-9])\\.){3}(25[0-5]|(2[0-4]|1?[0-9])?[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1?[0-9])?[0-9])\\.){3}(25[0-5]|(2[0-4]|1?[0-9])?[0-9]))$");
+	
 	@Contract("null -> false")
 	public static boolean isIp(String string)
 	{
 		if (string == null) return false;
-		return PATTERN_IPV4.matcher(string).matches();
+		return PATTERN_IPV4.matcher(string).matches() || PATTERN_IPV6.matcher(string).matches();
 	}
 	
 	// -------------------------------------------- //
