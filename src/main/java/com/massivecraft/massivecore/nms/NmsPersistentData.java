@@ -13,7 +13,7 @@ public class NmsPersistentData extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsPersistentData d = new NmsPersistentData().setAlternatives(
-		NmsPersistentData120R1.class
+		NmsPersistentData120R2.class
 	);
 	
 	// -------------------------------------------- //
@@ -28,12 +28,18 @@ public class NmsPersistentData extends Mixin
 	// CREATE
 	// -------------------------------------------- //
 	
-	public Map<String, Object> getPersistentData(@NotNull PersistentDataContainer persistentDataContainer) {
+	public String getPersistentData(@NotNull PersistentDataContainer persistentDataContainer) {
 		return null;
 	}
 	
-	public void setPersistentData(@NotNull PersistentDataContainer persistentDataContainer, Map<String, Object> data) {
+	public void setPersistentData(@NotNull PersistentDataContainer persistentDataContainer, String data) {
 	
+	}
+	
+	@Deprecated
+	public String mapToString(Map<String, Object> data) {
+		// Temporary approach for MigratorDataItemStack007PersistentDataToString
+		return null;
 	}
 	
 }

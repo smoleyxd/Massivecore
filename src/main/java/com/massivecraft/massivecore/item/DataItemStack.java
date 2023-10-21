@@ -76,7 +76,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_ID = Material.AIR.name();
 	public static final transient Integer DEFAULT_COUNT = 1;
 	public static final transient Integer DEFAULT_DAMAGE = 0;
-	public static final transient Map<String, Object> DEFAULT_PERSISTENTDATA = Collections.emptyMap();
+	public static final transient String DEFAULT_PERSISTENTDATA = null;
 	public static final transient String DEFAULT_NAME = "";
 	public static final transient List<String> DEFAULT_LORE = Collections.emptyList();
 	public static final transient Map<String, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
@@ -123,7 +123,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 6;
+	private int version = 7;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -148,9 +148,9 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorTypeInner({TypeConverterNamespacedKey.class, TypeObjectRaw.class})
-	private MassiveTreeMapDef<String, Object, ComparatorSmart> persistentData = null;
-	public Map<String, Object> getPersistentData() { return get(this.persistentData, DEFAULT_PERSISTENTDATA); }
-	public DataItemStack setPersistentData(Map<String, Object> persistentData) { this.persistentData = set(persistentData, DEFAULT_PERSISTENTDATA); return this; }
+	private String persistentData = null;
+	public String getPersistentData() { return get(this.persistentData, DEFAULT_PERSISTENTDATA); }
+	public DataItemStack setPersistentData(String persistentData) { this.persistentData = set(persistentData, DEFAULT_PERSISTENTDATA); return this; }
 	
 	// -------------------------------------------- //
 	// FIELDS > UNSPECIFIC

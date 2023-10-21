@@ -9,7 +9,7 @@ plugins {
     `java-library`
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
     id("net.linguica.maven-settings") version "0.5"
-    id("io.papermc.paperweight.userdev") version "1.3.11"
+    id("io.papermc.paperweight.userdev") version "1.5.8"
     `maven-publish`
 }
 
@@ -60,7 +60,7 @@ dependencies {
         exclude("org.bukkit", "bukkit")
     }
 
-    compileOnly("me.vagdedes", "SpartanAPI")
+    compileOnly("com.github.Vagdedes", "SpartanAPI")
 
     compileOnly("com.googlecode.json-simple", "json-simple", "1.1.1") {
         exclude("junit", "junit")

@@ -294,7 +294,21 @@ public class ReferenceMaterial {
             "CRIMSON_SIGN", // Minecraft 1.16
             "CRIMSON_WALL_SIGN", // Minecraft 1.16
             "WARPED_SIGN", // Minecraft 1.16
-            "WARPED_WALL_SIGN" // Minecraft 1.16
+            "WARPED_WALL_SIGN", // Minecraft 1.16
+            "ACACIA_HANGING_SIGN", // Minecraft 1.20
+            "BAMBOO_HANGING_SIGN", // Minecraft 1.20
+            "BAMBOO_SIGN", // Minecraft 1.20
+            "BIRCH_HANGING_SIGN", // Minecraft 1.20
+            "CHERRY_HANGING_SIGN", // Minecraft 1.20
+            "CHERRY_SIGN", // Minecraft 1.20
+            "CRIMSON_HANGING_SIGN", // Minecraft 1.20
+            "DARK_OAK_HANGING_SIGN", // Minecraft 1.20
+            "JUNGLE_HANGING_SIGN", // Minecraft 1.20
+            "MANGROVE_HANGING_SIGN", // Minecraft 1.20
+            "MANGROVE_SIGN", // Minecraft 1.20
+            "OAK_HANGING_SIGN", // Minecraft 1.20
+            "SPRUCE_HANGING_SIGN", // Minecraft 1.20
+            "WARPED_HANGING_SIGN" // Minecraft 1.20
     );
     public static Set<Material> getMaterialsSign() { return materialsSign; }
 }

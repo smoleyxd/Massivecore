@@ -5,11 +5,11 @@ import com.massivecraft.massivecore.util.ReflectionUtil;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_20_R1.block.CraftSign;
-import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_20_R1.scoreboard.CraftScoreboard;
+import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R2.block.CraftSign;
+import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R2.scoreboard.CraftScoreboard;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -18,7 +18,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.lang.reflect.Field;
 
-public class NmsBasics120R1 extends NmsBasics
+public class NmsBasics120R2 extends NmsBasics
 {
 	
 	// -------------------------------------------- //
@@ -26,8 +26,8 @@ public class NmsBasics120R1 extends NmsBasics
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsBasics120R1 i = new NmsBasics120R1();
-	public static NmsBasics120R1 get() { return i; }
+	private static NmsBasics120R2 i = new NmsBasics120R2();
+	public static NmsBasics120R2 get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS

@@ -17,15 +17,15 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
-public class NmsSkullMeta117R1P extends NmsSkullMeta
+public class NmsSkullMeta120R2P extends NmsSkullMeta
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsSkullMeta117R1P i = new NmsSkullMeta117R1P();
-	public static NmsSkullMeta117R1P get() { return i; }
+	private static NmsSkullMeta120R2P i = new NmsSkullMeta120R2P();
+	public static NmsSkullMeta120R2P get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -161,9 +161,9 @@ public class NmsSkullMeta117R1P extends NmsSkullMeta
 	private @NotNull ContainerGameProfileProperty unsafePropertyToContainer(Property property)
 	{
 		ContainerGameProfileProperty ret = new ContainerGameProfileProperty();
-		ret.name = property.getName();
-		ret.value = property.getValue();
-		ret.signature = property.getSignature();
+		ret.name = property.name();
+		ret.value = property.value();
+		ret.signature = property.signature();
 		
 		return ret;
 	}

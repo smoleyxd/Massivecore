@@ -13,7 +13,7 @@ public class NmsItemStackMeta extends Mixin
 	
 	@SuppressWarnings("FieldMayBeFinal")
 	private static NmsItemStackMeta d = new NmsItemStackMeta().setAlternatives(
-		NmsItemStackMeta120R1.class,
+		NmsItemStackMeta120R2.class,
 		NmsItemStackMetaFallback.class
 	);
 	
