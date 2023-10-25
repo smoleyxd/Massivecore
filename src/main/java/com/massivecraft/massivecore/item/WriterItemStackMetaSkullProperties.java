@@ -1,5 +1,6 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.nms.NmsSkullMeta;
 import org.bukkit.Material;
@@ -79,12 +80,13 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 	{
 		NmsSkullMeta nms = NmsSkullMeta.get();
 		
-		if (container == null) return nms.createGameProfile(null, "testing");
+		if (container == null) return nms.createGameProfile(UUID.randomUUID(), "testing");
 		
 		String uuidRaw = container.getUuid();
-		UUID uuid = uuidRaw != null ? UUID.fromString(uuidRaw) : null;
+		UUID uuid = uuidRaw != null ? UUID.fromString(uuidRaw) : UUID.randomUUID();
 		
 		String name = container.getName();
+		if (name == null) name = String.format("null_%d", MassiveCore.random.nextInt(10_000));
 		
 		Object gameprofile = nms.createGameProfile(uuid, name);
 		Object propertyMap = nms.createPropertyMap();
