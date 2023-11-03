@@ -1179,6 +1179,9 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 					MassiveCommand child = matches.iterator().next();
 					args.remove(0);
 					child.execute(sender, args);
+					
+					// NOTE: This return statement will jump to the finally block.
+					return;
 				}
 				// Crap!
 				else
@@ -1211,11 +1214,8 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 					}
 				
 					// Message: "Use /Y to see all commands."
-					MixinMessage.get().messageOne(sender, Lang.COMMAND_CHILD_HELP.replaceAll(Lang.COMMAND_REPLACEMENT, this.getTemplate(false, false, sender)).command(this));
+					if (!this.hasParameterForIndex(0)) MixinMessage.get().messageOne(sender, Lang.COMMAND_CHILD_HELP.replaceAll(Lang.COMMAND_REPLACEMENT, this.getTemplate(false, false, sender)).command(this));
 				}
-				
-				// NOTE: This return statement will jump to the finally block.
-				return;
 			}
 			
 			// Self Execution > Arguments Valid
@@ -1271,14 +1271,19 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 	// CALL VALIDATION
 	// -------------------------------------------- //
 	
-	public boolean isArgsValid(@NotNull List<String> args, CommandSender sender)
+	public boolean isArgsValid(@NotNull List<String> args, CommandSender sender, boolean verbose)
 	{
 		if (args.size() < this.getParameterCountRequired(sender))
 		{
-			if (sender != null)
+			if (sender != null && verbose)
 			{
 				MixinMessage.get().msgOne(sender, Lang.COMMAND_TOO_FEW_ARGUMENTS);
 				MixinMessage.get().messageOne(sender, this.getTemplate());
+				for (MassiveCommand child : this.getChildren())
+				{
+					if (!child.isVisibleTo(sender)) continue;
+					MixinMessage.get().messageOne(sender, child.getTemplate());
+				}
 			}
 			return false;
 		}
@@ -1287,7 +1292,7 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		// are already concatenated and thus cannot be too many.
 		if (args.size() > this.getParameterCount(sender) && this.isOverflowSensitive())
 		{
-			if (sender != null)
+			if (sender != null && verbose)
 			{
 				// Get the too many string slice
 				List<String> theTooMany = args.subList(this.getParameterCount(sender), args.size());
@@ -1298,6 +1303,11 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean isArgsValid(@NotNull List<String> args, CommandSender sender)
+	{
+		return isArgsValid(args, sender, true);
 	}
 	
 	public boolean isArgsValid(List<String> args)
@@ -1491,14 +1501,12 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 		if (sender == null) throw new IllegalArgumentException("sender was null");
 		if (args.isEmpty()) throw new IllegalArgumentException("args was empty");
 		
-		if (this.isParent())
-		{
-			return this.getTabCompletionsChild(args, sender);
-		}
-		else
-		{
-			return this.getTabCompletionsArg(args, sender);
-		}
+		List<String> ret = new ArrayList<>();
+		
+		ret.addAll(this.getTabCompletionsChild(args, sender));
+		ret.addAll(this.getTabCompletionsArg(args, sender));
+		
+		return ret;
 	}
 	
 	protected List<String> getTabCompletionsChild(@NotNull List<String> args, CommandSender sender)
@@ -1511,13 +1519,12 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 			if (child == null) return Collections.emptyList();
 			
 			// ... get tab completions for that child.
-			args.remove(0);
+			args = args.subList(1,args.size());
 			return child.getTabCompletions(args, sender);
 		}
 
 		// ... else check the children.
 		List<String> ret = new ArrayList<>();
-		//noinspection ConstantConditions
 		String token = args.get(args.size()-1).toLowerCase();
 		for (MassiveCommand child : this.getChildren())
 		{

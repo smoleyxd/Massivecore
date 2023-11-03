@@ -51,6 +51,8 @@ public class MassiveCommandHelp extends MassiveCommand
 			lines.add(mson(Mson.parse("<a># "), helpline).color(ChatColor.YELLOW));
 		}
 		
+		if (parent.hasParameterForIndex(0)) lines.add(parent.getTemplate(false, false, sender));
+		
 		for (MassiveCommand child : parent.getChildren())
 		{
 			if ( ! child.isVisibleTo(sender)) continue;
