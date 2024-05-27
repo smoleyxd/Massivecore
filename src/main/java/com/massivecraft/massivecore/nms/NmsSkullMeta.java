@@ -98,7 +98,7 @@ public class NmsSkullMeta extends Mixin
 		return null;
 	}
 	
-	public void setGameProfile(@NotNull SkullMeta meta, Object gameProfile)
+	public <T> void setGameProfile(@NotNull SkullMeta meta, T gameProfile)
 	{
 		// No-op here
 	}

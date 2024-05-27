@@ -1183,6 +1183,13 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 					// NOTE: This return statement will jump to the finally block.
 					return;
 				}
+				// Self Execution > Arguments Valid
+				else if (this.isArgsValid(this.getArgs(), this.sender))
+				{
+					// Self Execution > Perform
+					this.perform();
+					return;
+				}
 				// Crap!
 				else
 				{
@@ -1191,6 +1198,14 @@ public class MassiveCommand implements Active, PluginIdentifiableCommand
 					
 					if (matches.isEmpty())
 					{
+						// Self Execution > Arguments Valid
+						if (this.isArgsValid(this.getArgs(), this.sender))
+						{
+							// Self Execution > Perform
+							this.perform();
+							return;
+						}
+						
 						base = Lang.COMMAND_CHILD_NONE;
 						suggestions = this.getChildren(token, true, sender, false);
 					}

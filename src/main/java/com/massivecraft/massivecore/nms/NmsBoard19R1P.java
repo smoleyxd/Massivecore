@@ -23,7 +23,7 @@ public class NmsBoard19R1P extends NmsBoard
 	// -------------------------------------------- //
 	
 	@Override
-	public Option provoke() throws Throwable
+	public Option provoke()
 	{
 		return Option.COLLISION_RULE;
 	}

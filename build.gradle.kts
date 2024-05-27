@@ -5,17 +5,17 @@ import io.papermc.paperweight.util.path
 
 // Plugins
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     `java-library`
-    id("io.spring.dependency-management") version "1.0.13.RELEASE"
+    id("io.spring.dependency-management") version "1.1.5"
     id("net.linguica.maven-settings") version "0.5"
-    id("io.papermc.paperweight.userdev") version "1.5.8"
+    id("io.papermc.paperweight.userdev") version "1.7.1"
     `maven-publish`
 }
 
 // Basics
-group = "com.massivecraft.${name.toLowerCase()}"
-version = "MC-1.20-SNAPSHOT"
+group = "com.massivecraft.${name.lowercase()}"
+version = "MC-1.20.4-SNAPSHOT"
 description = name
 
 // Java Version
@@ -52,7 +52,7 @@ dependencyManagement {
 
 // Dependencies
 dependencies {
-    paperDevBundle(project.dependencyManagement.importedProperties["massiveSpigotVersion"])
+    paperweight.paperDevBundle(project.dependencyManagement.importedProperties["massiveSpigotVersion"])
 
     api("com.massivecraft.massivecore", "MassiveCoreXlib")
 
@@ -66,7 +66,7 @@ dependencies {
         exclude("junit", "junit")
     }
 
-    compileOnly("org.jetbrains", "annotations", "23.0.0")
+    compileOnly("org.jetbrains", "annotations", "24.1.0")
     compileOnly("io.lumine.mythic", "MythicMobs")
 }
 
@@ -111,7 +111,7 @@ tasks {
             "group" to project.group,
             "name" to project.name,
             "version" to "${project.version} ($implementationVersion)",
-            "url" to "${props["massiveBaseUrl"]}/${project.name.toLowerCase()}",
+            "url" to "${props["massiveBaseUrl"]}/${project.name.lowercase()}",
             "description" to "${props["massiveColorInfo"]}${project.name} is a plugin that contains libraries and features that other plugins make use of. ${props["massiveDescriptionSuffix"]}",
         )
     }

@@ -7,6 +7,7 @@ import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.WorldExceptionSet;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
+import com.massivecraft.massivecore.command.type.combined.TypeDataArmorTrim;
 import com.massivecraft.massivecore.command.type.combined.TypeDataAttributeModifier;
 import com.massivecraft.massivecore.command.type.combined.TypeDataBannerPattern;
 import com.massivecraft.massivecore.command.type.combined.TypeDataFireworkEffect;
@@ -345,11 +346,12 @@ public class RegistryType
 		register(TypeItemStack.get());
 		register(TypeUUID.get());
 		
+		register(TypeNamespacedKey.get());
+		register(TypePotionEffectType.get());
+		register(TypeEnchantment.get());
+		register(TypeDataArmorTrim.get());
 		register(TypeDataAttributeModifier.get());
 		register(TypeDataBannerPattern.get());
-		register(TypePotionEffectType.get());
-		register(TypeNamespacedKey.get());
-		register(TypeEnchantment.get());
 		register(TypeDataPotionEffect.get());
 		register(TypeDataFireworkEffect.get());
 		register(TypeDataItemStack.get());

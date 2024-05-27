@@ -1,19 +1,19 @@
 package com.massivecraft.massivecore.nms;
 
 import net.minecraft.world.entity.player.Inventory;
-import org.bukkit.craftbukkit.v1_20_R2.inventory.CraftInventoryPlayer;
+import org.bukkit.craftbukkit.v1_20_R3.inventory.CraftInventoryPlayer;
 import org.bukkit.inventory.PlayerInventory;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class NmsPlayerInventoryCreate120R2 extends NmsPlayerInventoryCreate
+public class NmsPlayerInventoryCreate120R3 extends NmsPlayerInventoryCreate
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsPlayerInventoryCreate120R2 i = new NmsPlayerInventoryCreate120R2();
-	public static NmsPlayerInventoryCreate120R2 get () { return i; }
+	private static NmsPlayerInventoryCreate120R3 i = new NmsPlayerInventoryCreate120R3();
+	public static NmsPlayerInventoryCreate120R3 get () { return i; }
 	
 	// -------------------------------------------- //
 	// CREATE

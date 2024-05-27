@@ -241,6 +241,7 @@ public class BoardUtil extends Engine
 		// Delete scores for temporary objectives.
 		for (Objective objective : getTemporaryObjectives())
 		{
+			if (objective.getTrackedCriteria().isReadOnly()) continue;
 			setObjectiveValue(objective, player, 0);
 		}
 		

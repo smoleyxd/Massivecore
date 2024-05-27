@@ -3,6 +3,7 @@ package com.massivecraft.massivecore.item;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.jetbrains.annotations.NotNull;
@@ -43,13 +44,13 @@ public class WriterItemStackMetaInstrument extends WriterAbstractItemStackMetaFi
 	{
 		MusicInstrument instrument = cb.getInstrument();
 		if (instrument == null) return null;
-		return instrument.getKey();
+		return Registry.INSTRUMENT.getKey(instrument);
 	}
 
 	@Override
 	public void setB(@NotNull MusicInstrumentMeta cb, NamespacedKey fb, ItemStack d)
 	{
-		MusicInstrument instrument = MusicInstrument.getByKey(fb);
+		MusicInstrument instrument = Registry.INSTRUMENT.get(fb);
 		if (instrument == null) return;
 		cb.setInstrument(instrument);
 	}

@@ -34,6 +34,11 @@ public abstract class BasicCommandSender extends PermissibleBase implements Comm
 	}
 	
 	@Override
+	public net.kyori.adventure.text.Component name() {
+		return net.kyori.adventure.text.Component.text(this.getName());
+	}
+	
+	@Override
 	public Server getServer()
 	{
 		return Bukkit.getServer();

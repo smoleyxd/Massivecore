@@ -31,6 +31,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.ItemStack;
@@ -79,6 +80,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient String DEFAULT_PERSISTENTDATA = null;
 	public static final transient String DEFAULT_NAME = "";
 	public static final transient List<String> DEFAULT_LORE = Collections.emptyList();
+	public static final transient Integer DEFAULT_CUSTOM_MODEL = null;
 	public static final transient Map<String, Integer> DEFAULT_ENCHANTS = Collections.emptyMap();
 	public static final transient Integer DEFAULT_REPAIRCOST = 0;
 	public static final transient String DEFAULT_TITLE = null;
@@ -112,7 +114,8 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
-	public static final transient MusicInstrument DEFAULT_MUSIC_INSTRUMENT = MusicInstrument.PONDER;
+	public static final transient NamespacedKey DEFAULT_MUSIC_INSTRUMENT = Registry.INSTRUMENT.getKey(MusicInstrument.PONDER);
+	public static final transient DataArmorTrim DEFAULT_ARMOR_TRIM = null;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();
 	public static final transient String DEFAULT_MYTHIC_TYPE = null;
 	public static final transient Integer DEFAULT_MYTHIC_ITEM_VERSION = null;
@@ -123,7 +126,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	
 	@EditorEditable(false)
 	@EditorVisible(false)
-	private int version = 7;
+	private int version = 8;
 	
 	// -------------------------------------------- //
 	// FIELDS > BASIC
@@ -165,6 +168,10 @@ public class DataItemStack implements Comparable<DataItemStack>
 	private MassiveListDef<String> lore = null;
 	public List<String> getLore() { return get(this.lore, DEFAULT_LORE); }
 	public DataItemStack setLore(List<String> lore) { this.lore = set(lore, DEFAULT_LORE); return this; }
+	
+	private Integer customModel = null;
+	public Integer getCustomModel() { return get(this.customModel, DEFAULT_CUSTOM_MODEL); }
+	public DataItemStack setCustomModel(Integer customModel) { this.customModel = set(customModel, DEFAULT_CUSTOM_MODEL); return this; }
 	
 	// The Bukkit ItemMeta#getEnchants() is not sorted by the enchant id.
 	// There may be some sort of custom sorting order, I'm not sure.
@@ -436,8 +443,17 @@ public class DataItemStack implements Comparable<DataItemStack>
 	// Since 1.17
 	
 	private NamespacedKey musicInstrument = null;
-	public NamespacedKey getMusicInstrument() { return get(this.musicInstrument, DEFAULT_MUSIC_INSTRUMENT.getKey()); }
-	public DataItemStack setMusicInstrument(NamespacedKey musicInstrument) { this.musicInstrument = set(musicInstrument, DEFAULT_MUSIC_INSTRUMENT.getKey()); return this; }
+	public NamespacedKey getMusicInstrument() { return get(this.musicInstrument, DEFAULT_MUSIC_INSTRUMENT); }
+	public DataItemStack setMusicInstrument(NamespacedKey musicInstrument) { this.musicInstrument = set(musicInstrument, DEFAULT_MUSIC_INSTRUMENT); return this; }
+	
+	// -------------------------------------------- //
+	// FIELDS > MUSIC INSTRUMENT
+	// -------------------------------------------- //
+	// Since 1.17
+	
+	private DataArmorTrim armorTrim = null;
+	public DataArmorTrim getArmorTrim() { return get(this.armorTrim, DEFAULT_ARMOR_TRIM); }
+	public DataItemStack setArmorTrim(DataArmorTrim armorTrim) { this.armorTrim = set(armorTrim, DEFAULT_ARMOR_TRIM); return this; }
 	
 	
 	// -------------------------------------------- //

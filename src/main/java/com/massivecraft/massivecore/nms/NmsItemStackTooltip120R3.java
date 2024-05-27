@@ -1,10 +1,10 @@
 package com.massivecraft.massivecore.nms;
 
 import net.minecraft.nbt.CompoundTag;
-import org.bukkit.craftbukkit.v1_20_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_20_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
-public class NmsItemStackTooltip120R2 extends NmsItemStackTooltip
+public class NmsItemStackTooltip120R3 extends NmsItemStackTooltip
 {
 	
 	// -------------------------------------------- //
@@ -12,8 +12,8 @@ public class NmsItemStackTooltip120R2 extends NmsItemStackTooltip
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsItemStackTooltip120R2 i = new NmsItemStackTooltip120R2();
-	public static NmsItemStackTooltip120R2 get () { return i; }
+	private static NmsItemStackTooltip120R3 i = new NmsItemStackTooltip120R3();
+	public static NmsItemStackTooltip120R3 get () { return i; }
 	
 	// -------------------------------------------- //
 	// TOOLTIP

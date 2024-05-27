@@ -49,7 +49,6 @@ public class NmsSkullMeta120R2P extends NmsSkullMeta
 		Class<?> classGameProfile = GameProfile.class;
 		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(classGameProfile, "properties");
 		
-		
 		Class<?> classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
 		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(classCraftMetaSkull, "profile");
 		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull, "setProfile", classGameProfile);

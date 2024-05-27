@@ -46,12 +46,6 @@ public class WriterItemStackMythicType extends WriterAbstractItemStackField<Stri
 	{
 		if (fb == null) return; // TODO - Safely remove the Tag if null
 		MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().addNBTData(cb, "MYTHIC_TYPE", new StringTag(fb));
-		
-		/*CompoundTagBuilder tagCompBuilder = MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().getNBTData(cb).createBuilder();
-		if (fb == null) tagCompBuilder.remove("MYTHIC_TYPE");
-		else tagCompBuilder.putString("MYTHIC_TYPE", fb);
-		
-		MythicBukkit.inst().getVolatileCodeHandler().getItemHandler().setNBTData(cb, tagCompBuilder.build());*/
 	}
 	
 }

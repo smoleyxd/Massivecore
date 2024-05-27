@@ -14,6 +14,7 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// UNSPECIFIC
 			WriterItemStackMetaName.class,
 			WriterItemStackMetaLore.class,
+			WriterItemStackMetaCustomModel.class,
 			WriterItemStackMetaEnchants.class,
 			WriterItemStackMetaRepaircost.class,
 			
@@ -100,7 +101,10 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			WriterItemStackMetaInstrument.class,
 			
 			// ATTRIBUTE MODIFIERS
-			WriterItemStackMetaAttributeModifiers.class
+			WriterItemStackMetaAttributeModifiers.class,
+			
+			// ARMOR TRIMS
+			WriterItemStackMetaArmorTrim.class
 		);
 	}
 	
