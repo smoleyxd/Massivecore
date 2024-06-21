@@ -26,6 +26,7 @@ import com.massivecraft.massivecore.command.type.enumeration.TypeAxolotlVariant;
 import com.massivecraft.massivecore.command.type.enumeration.TypeBiome;
 import com.massivecraft.massivecore.command.type.enumeration.TypeBookGeneration;
 import com.massivecraft.massivecore.command.type.enumeration.TypeChatColor;
+import com.massivecraft.massivecore.command.type.enumeration.TypeDecoratedPotSide;
 import com.massivecraft.massivecore.command.type.enumeration.TypeDifficulty;
 import com.massivecraft.massivecore.command.type.enumeration.TypeDyeColor;
 import com.massivecraft.massivecore.command.type.enumeration.TypeEntityType;
@@ -316,6 +317,7 @@ public class RegistryType
 		register(TypeBiome.get());
 		register(TypeBookGeneration.get());
 		register(TypeChatColor.get());
+		register(TypeDecoratedPotSide.get());
 		register(TypeDifficulty.get());
 		register(TypeDyeColor.get());
 		register(TypeEntityType.get());

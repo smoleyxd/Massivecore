@@ -100,6 +100,9 @@ public class WriterItemStackMeta extends WriterAbstractItemStackMetaMorph<Object
 			// MUSIC INSTRUMENT (1.20+)
 			WriterItemStackMetaInstrument.class,
 			
+			// DECORATED POT SHERDS (1.20+)
+			WriterItemStackMetaPotSherds.class,
+			
 			// ATTRIBUTE MODIFIERS
 			WriterItemStackMetaAttributeModifiers.class,
 			
