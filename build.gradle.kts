@@ -60,8 +60,6 @@ dependencies {
         exclude("org.bukkit", "bukkit")
     }
 
-    compileOnly("com.github.Vagdedes", "SpartanAPI")
-
     compileOnly("com.googlecode.json-simple", "json-simple", "1.1.1") {
         exclude("junit", "junit")
     }

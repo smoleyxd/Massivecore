@@ -3,7 +3,6 @@ package com.massivecraft.massivecore.mixin;
 import com.massivecraft.massivecore.MassiveCoreMConf;
 import com.massivecraft.massivecore.engine.EngineMassiveCoreTeleportMixinCause;
 import com.massivecraft.massivecore.event.EventMassiveCorePlayerPSTeleport;
-import com.massivecraft.massivecore.integration.spartan.IntegrationSpartan;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.teleport.Destination;
 import com.massivecraft.massivecore.teleport.ScheduledTeleport;
@@ -92,7 +91,6 @@ public class MixinTeleport extends Mixin
 		{
 			return;
 		}
-		IntegrationSpartan.get().disableVelocityProtection(player);
 		player.setVelocity(velocity);
 	}
 	
