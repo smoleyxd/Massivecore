@@ -1,7 +1,6 @@
 package com.massivecraft.massivecore.adapter;
 
 import com.massivecraft.massivecore.collections.MassiveListDef;
-import com.massivecraft.massivecore.item.ConverterToNamespacedKey;
 import com.massivecraft.massivecore.item.DataBannerPattern;
 import com.massivecraft.massivecore.xlib.gson.JsonArray;
 import com.massivecraft.massivecore.xlib.gson.JsonDeserializationContext;
@@ -11,7 +10,6 @@ import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonObject;
 import com.massivecraft.massivecore.xlib.gson.JsonParseException;
 import org.bukkit.DyeColor;
-import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Type;
@@ -79,9 +77,8 @@ public class AdapterBannerPatterns implements JsonDeserializer<MassiveListDef<Da
 				DataBannerPattern dataBannerPattern = new DataBannerPattern();
 				
 				JsonElement idElement = iterator.next();
-				NamespacedKey key = ConverterToNamespacedKey.get().convert(idElement.getAsString());
-
-				dataBannerPattern.setId(key);
+				String id = idElement.getAsString();
+				dataBannerPattern.setId(id);
 
 				JsonElement colorElement = iterator.next();
 				// TODO see if I need to define an adapter or if it is fine using the enum adapter

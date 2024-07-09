@@ -1,15 +1,14 @@
 package com.massivecraft.massivecore.command.type.convert;
 
 import com.massivecraft.massivecore.command.type.Type;
-import com.massivecraft.massivecore.command.type.TypeNamespacedKey;
 import com.massivecraft.massivecore.command.type.enumeration.TypePatternType;
+import com.massivecraft.massivecore.command.type.primitive.TypeString;
 import com.massivecraft.massivecore.item.Converter;
 import com.massivecraft.massivecore.item.ConverterFromBannerPatternType;
 import com.massivecraft.massivecore.item.ConverterToBannerPatternType;
-import org.bukkit.NamespacedKey;
 
-// Minecraft 1.21 Compatibility
-public class TypeConverterBannerPatternType<A> extends TypeConverter<A, NamespacedKey>
+// Minecraft 1.7 Compatibility
+public class TypeConverterBannerPatternType<A> extends TypeConverter<A, String> 
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -23,9 +22,9 @@ public class TypeConverterBannerPatternType<A> extends TypeConverter<A, Namespac
 		return (TypeConverterBannerPatternType<T>) i;
 	}
 	
-	public TypeConverterBannerPatternType(Type<A> typeA, Converter<A, NamespacedKey> a2b, Converter<NamespacedKey, A> b2a)
+	public TypeConverterBannerPatternType(Type<A> typeA, Converter<A, String> a2b, Converter<String, A> b2a)
 	{
-		super(typeA, TypeNamespacedKey.get(), a2b, b2a);
+		super(typeA, TypeString.get(), a2b, b2a);
 	}
 
 }

@@ -1,10 +1,8 @@
 package com.massivecraft.massivecore.item;
 
-import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.block.banner.PatternType;
 
-public class ConverterToBannerPatternType extends Converter<NamespacedKey, PatternType>
+public class ConverterToBannerPatternType extends Converter<String, PatternType>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -17,11 +15,11 @@ public class ConverterToBannerPatternType extends Converter<NamespacedKey, Patte
 	// OVERRIDE
 	// -------------------------------------------- //
 	
-    @Override
-	public PatternType convert(NamespacedKey x)
+	@Override
+	public PatternType convert(String x)
 	{
 		if (x == null) return null;
-		return Registry.BANNER_PATTERN.get(x);
+		return PatternType.getByIdentifier(x);
 	}
 
 }
