@@ -366,9 +366,9 @@ public class InventoryUtil
 		if (human == null) return;
 		setMainHand(human.getInventory(), weapon);
 	}
-	
+
 	// OFF HAND
-	
+
 	// NOTE: We make sure to convert AIR into null due to a Bukkit API inconsistency.
 	@Contract("null -> null")
 	public static ItemStack getOffHand(Inventory inventory)
@@ -378,7 +378,7 @@ public class InventoryUtil
 		ItemStack ret = playerInventory.getItemInOffHand();
 		ret = clean(ret);
 		return ret;
-		
+
 	}
 	@Contract(mutates = "param1")
 	public static void setOffHand(@Nullable Inventory inventory, ItemStack weapon)
@@ -412,7 +412,8 @@ public class InventoryUtil
 					   case FEET -> getBoots(inventory);
 					   case HAND -> getMainHand(inventory);
 					   case OFF_HAND -> getOffHand(inventory);
-				   };
+                       case BODY -> throw new RuntimeException("Unsupported EquipmentSlot: " + slot);
+                   };
 	}
 	@Contract(mutates = "param1")
 	public static void setSlot(@Nullable Inventory inventory, ItemStack item, @NotNull EquipmentSlot slot)

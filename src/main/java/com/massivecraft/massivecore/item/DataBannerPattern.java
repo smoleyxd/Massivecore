@@ -1,11 +1,14 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.command.editor.annotation.EditorEditable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
+import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
 import com.massivecraft.massivecore.command.type.convert.TypeConverterBannerPatternType;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
 import org.bukkit.DyeColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.banner.Pattern;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -22,17 +25,25 @@ public class DataBannerPattern implements Comparable<DataBannerPattern>
 	// DEFAULTS
 	// -------------------------------------------- //
 	
-	public static final transient String DEFAULT_ID = null;
+	public static final transient NamespacedKey DEFAULT_ID = null;
 	public static final transient DyeColor DEFAULT_COLOR = DyeColor.WHITE;
+
+	// -------------------------------------------- //
+	// FIELDS > VERSION
+	// -------------------------------------------- //
+
+	@EditorEditable(false)
+	@EditorVisible(false)
+	private int version = 1;
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
 	
 	@EditorType(TypeConverterBannerPatternType.class)
-	private String id = null;
-	public String getId() { return get(this.id, DEFAULT_ID); }
-	public DataBannerPattern setId(String id) { this.id = set(id, DEFAULT_ID); return this; }
+	private NamespacedKey id = null;
+	public NamespacedKey getId() { return get(this.id, DEFAULT_ID); }
+	public DataBannerPattern setId(NamespacedKey id) { this.id = set(id, DEFAULT_ID); return this; }
 
 	private DyeColor color = null;
 	public DyeColor getColor() { return get(this.color, DEFAULT_COLOR); }

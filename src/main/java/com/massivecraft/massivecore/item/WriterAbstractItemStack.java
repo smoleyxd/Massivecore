@@ -1,7 +1,7 @@
 package com.massivecraft.massivecore.item;
 
-import com.massivecraft.massivecore.nms.NmsItemStackCreate;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class WriterAbstractItemStack<OB, CB, FA, FB> extends WriterAbstract<DataItemStack, OB, DataItemStack, CB, FA, FB, ItemStack>
@@ -46,7 +46,7 @@ public abstract class WriterAbstractItemStack<OB, CB, FA, FB> extends WriterAbst
 	
 	public ItemStack createItemStack()
 	{
-		ItemStack ret = NmsItemStackCreate.get().create();
+		ItemStack ret = CraftItemStack.asCraftMirror(null);
 		ret.setType(this.getMaterial());
 		return ret;
 	}

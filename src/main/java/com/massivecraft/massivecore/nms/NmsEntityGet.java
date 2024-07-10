@@ -13,7 +13,7 @@ public class NmsEntityGet extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsEntityGet d = new NmsEntityGet().setAlternatives(
-		NmsEntityGet120R3.class,
+		NmsEntityGet121R1P.class,
 		NmsEntityGetFallback.class
 	);
 	

@@ -8,7 +8,6 @@ import com.massivecraft.massivecore.adapter.AdapterEntityInternalMap;
 import com.massivecraft.massivecore.adapter.AdapterEntry;
 import com.massivecraft.massivecore.adapter.AdapterInventory;
 import com.massivecraft.massivecore.adapter.AdapterItemStack;
-import com.massivecraft.massivecore.adapter.AdapterJsonElement;
 import com.massivecraft.massivecore.adapter.AdapterMassiveList;
 import com.massivecraft.massivecore.adapter.AdapterMassiveMap;
 import com.massivecraft.massivecore.adapter.AdapterMassiveSet;
@@ -41,7 +40,6 @@ import com.massivecraft.massivecore.mixin.MixinEvent;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.mson.MsonEvent;
 import com.massivecraft.massivecore.nms.NmsBasics;
-import com.massivecraft.massivecore.nms.NmsItemStackCreate;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.ps.PSAdapter;
 import com.massivecraft.massivecore.store.Coll;
@@ -68,14 +66,11 @@ import com.massivecraft.massivecore.util.TimeZoneUtil;
 import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.xlib.gson.Gson;
 import com.massivecraft.massivecore.xlib.gson.GsonBuilder;
-import com.massivecraft.massivecore.xlib.gson.JsonArray;
-import com.massivecraft.massivecore.xlib.gson.JsonNull;
-import com.massivecraft.massivecore.xlib.gson.JsonObject;
-import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -133,12 +128,6 @@ public class MassiveCore extends MassivePlugin
 		ret.disableHtmlEscaping();
 		ret.excludeFieldsWithModifiers(Modifier.TRANSIENT);
 		
-		// Raw Adapters
-		ret.registerTypeAdapter(JsonNull.class, AdapterJsonElement.get());
-		ret.registerTypeAdapter(JsonPrimitive.class, AdapterJsonElement.get());
-		ret.registerTypeAdapter(JsonArray.class, AdapterJsonElement.get());
-		ret.registerTypeAdapter(JsonObject.class, AdapterJsonElement.get());
-		
 		// Enumeration Annotation Dodge
 		ret.registerTypeAdapterFactory(AdapterModdedEnumType.ENUM_FACTORY);
 		
@@ -176,8 +165,7 @@ public class MassiveCore extends MassivePlugin
 		
 		// ItemStack
 		ret.registerTypeAdapter(ItemStack.class, AdapterItemStack.get());
-		Class<?> classCraftItemStack = NmsItemStackCreate.get().getClassCraftItemStackCatch();
-		if (classCraftItemStack != null) ret.registerTypeAdapter(classCraftItemStack, AdapterItemStack.get());
+		ret.registerTypeAdapter(CraftItemStack.class, AdapterItemStack.get());
 		
 		// Inventory
 		ret.registerTypeAdapter(Inventory.class, AdapterInventory.get());

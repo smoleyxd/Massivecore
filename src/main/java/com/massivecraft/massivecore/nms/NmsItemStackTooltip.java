@@ -10,7 +10,7 @@ public class NmsItemStackTooltip extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsItemStackTooltip d = new NmsItemStackTooltip().setAlternatives(
-		NmsItemStackTooltip120R3.class,
+		NmsItemStackTooltip121R1P.class,
 		NmsItemStackTooltipFallback.class
 	);
 	

@@ -46,12 +46,11 @@ public class NmsSkullMeta120R2P extends NmsSkullMeta
 	@Override
 	public void setup() throws Throwable
 	{
-		Class<?> classGameProfile = GameProfile.class;
-		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(classGameProfile, "properties");
+		this.fieldGameProfilePropertyMap = ReflectionUtil.getField(GameProfile.class, "properties");
 		
-		Class<?> classCraftMetaSkull = PackageType.CRAFTBUKKIT_VERSION_INVENTORY.getClass("CraftMetaSkull");
+		Class<?> classCraftMetaSkull = PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftMetaSkull");
 		this.fieldCraftMetaSkullProfile = ReflectionUtil.getField(classCraftMetaSkull, "profile");
-		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull, "setProfile", classGameProfile);
+		this.methodCraftMetaSkullSetProfile = ReflectionUtil.getMethod(classCraftMetaSkull, "setProfile", GameProfile.class);
 	}
 	
 	// -------------------------------------------- //

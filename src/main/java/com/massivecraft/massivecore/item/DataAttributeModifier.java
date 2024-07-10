@@ -1,21 +1,24 @@
 package com.massivecraft.massivecore.item;
 
+import com.massivecraft.massivecore.command.editor.annotation.EditorEditable;
 import com.massivecraft.massivecore.command.editor.annotation.EditorMethods;
+import com.massivecraft.massivecore.command.editor.annotation.EditorVisible;
 import com.massivecraft.massivecore.comparator.ComparatorSmart;
 import com.massivecraft.massivecore.util.MUtil;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import static com.massivecraft.massivecore.item.DataItemStack.get;
 import static com.massivecraft.massivecore.item.DataItemStack.set;
 
+@SuppressWarnings("UnstableApiUsage")
 @EditorMethods(true)
 public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 {
@@ -24,10 +27,18 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 	// -------------------------------------------- //
 	
 	public static final transient Attribute DEFAULT_ATTRIBUTE = Attribute.GENERIC_MAX_HEALTH;
-	public static final transient String DEFAULT_NAME = "Modifier";
+	public static final transient NamespacedKey DEFAULT_KEY = NamespacedKey.fromString("Modifier");
 	public static final transient double DEFAULT_AMOUNT = 0;
 	public static final transient Operation DEFAULT_OPERATION = Operation.ADD_NUMBER;
-	public static final transient EquipmentSlot DEFAULT_SLOT = null;
+	public static final transient String DEFAULT_SLOT_GROUP = EquipmentSlotGroup.ANY.toString();
+
+	// -------------------------------------------- //
+	// FIELDS > VERSION
+	// -------------------------------------------- //
+
+	@EditorEditable(false)
+	@EditorVisible(false)
+	private int version = 1;
 	
 	// -------------------------------------------- //
 	// FIELDS
@@ -37,13 +48,9 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 	public Attribute getAttribute() { return get(this.attribute, DEFAULT_ATTRIBUTE); }
 	public DataAttributeModifier setAttribute(@NotNull Attribute attribute) { this.attribute = set(attribute, DEFAULT_ATTRIBUTE); return this; }
 	
-	private UUID uniqueId;
-	public UUID getUniqueId() { return get(this.uniqueId, UUID.randomUUID()); }
-	public DataAttributeModifier setUniqueId(@NotNull UUID uuid) { this.uniqueId = uuid; return this; }
-	
-	private String name;
-	public String getName() { return get(this.name, DEFAULT_NAME); }
-	public DataAttributeModifier setName(@NotNull String name) { this.name = set(name, DEFAULT_NAME); return this; }
+	private NamespacedKey key;
+	public NamespacedKey getKey() { return get(this.key, DEFAULT_KEY); }
+	public DataAttributeModifier setKey(@NotNull NamespacedKey key) { this.key = set(key, DEFAULT_KEY); return this; }
 	
 	private Double amount = null;
 	public double getAmount() { return get(this.amount, DEFAULT_AMOUNT); }
@@ -53,9 +60,9 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 	public Operation getOperation() { return get(this.operation, DEFAULT_OPERATION); }
 	public DataAttributeModifier setOperation(Operation operation) { this.operation = set(operation, DEFAULT_OPERATION); return this; }
 	
-	private EquipmentSlot slot = null;
-	public EquipmentSlot getSlot() { return get(this.slot, DEFAULT_SLOT); }
-	public DataAttributeModifier setSlot(EquipmentSlot slot) { this.slot = set(slot, DEFAULT_SLOT); return this; }
+	private String slot = null;
+	public String getSlot() { return get(this.slot, DEFAULT_SLOT_GROUP); }
+	public DataAttributeModifier setSlot(String slot) { this.slot = set(slot, DEFAULT_SLOT_GROUP); return this; }
 	
 	// -------------------------------------------- //
 	// CONSTRUCT
@@ -105,8 +112,7 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 	{
 		return ComparatorSmart.get().compare(
 			this.getAttribute(), that.getAttribute(),
-			this.getUniqueId(), that.getUniqueId(),
-			this.getName(), that.getName(),
+			this.getKey(), that.getKey(),
 			this.getAmount(), that.getAmount(),
 			this.getOperation(), that.getOperation(),
 			this.getSlot(), that.getSlot()
@@ -122,8 +128,7 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 		
 		return MUtil.equals(
 			this.getAttribute(), that.getAttribute(),
-			this.getUniqueId(), that.getUniqueId(),
-			this.getName(), that.getName(),
+			this.getKey(), that.getKey(),
 			this.getAmount(), that.getAmount(),
 			this.getOperation(), that.getOperation(),
 			this.getSlot(), that.getSlot()
@@ -135,8 +140,7 @@ public class DataAttributeModifier implements Comparable<DataAttributeModifier>
 	{
 		return Objects.hash(
 			this.getAttribute(),
-			this.getUniqueId(),
-			this.getName(),
+			this.getKey(),
 			this.getAmount(),
 			this.getOperation(),
 			this.getSlot()

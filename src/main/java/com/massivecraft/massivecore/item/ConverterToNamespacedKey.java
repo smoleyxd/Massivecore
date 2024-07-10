@@ -15,7 +15,6 @@ public class ConverterToNamespacedKey extends Converter<String, NamespacedKey>
 	// OVERRIDE
 	// -------------------------------------------- //
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public NamespacedKey convert(String x)
 	{

@@ -1,7 +1,11 @@
 package com.massivecraft.massivecore.item;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
+import org.bukkit.inventory.EquipmentSlotGroup;
+
+import java.util.Objects;
 
 
 public abstract class WriterAbstractAttributeModifier<FA, FB> extends WriterAbstractReflect<DataAttributeModifier, AttributeModifier, DataAttributeModifier, AttributeModifier, FA, FB>
@@ -30,13 +34,15 @@ public abstract class WriterAbstractAttributeModifier<FA, FB> extends WriterAbst
 		return new DataAttributeModifier();
 	}
 	
-	@Override
+    @Override
+	@SuppressWarnings({"UnstableApiUsage"})
 	public AttributeModifier createOB()
 	{
-		return new AttributeModifier(
-			"TEST",
+        return new AttributeModifier(
+            Objects.requireNonNull(NamespacedKey.fromString("test")),
 			0d,
-			Operation.ADD_NUMBER
+			Operation.ADD_NUMBER,
+			EquipmentSlotGroup.ANY
 		);
 	}
 	

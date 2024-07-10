@@ -1,10 +1,11 @@
 package com.massivecraft.massivecore.item;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.jetbrains.annotations.NotNull;
 
-public class WriterBannerPatternId extends WriterAbstractBannerPattern<String, PatternType>
+public class WriterBannerPatternId extends WriterAbstractBannerPattern<NamespacedKey, PatternType>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -24,13 +25,13 @@ public class WriterBannerPatternId extends WriterAbstractBannerPattern<String, P
 	// -------------------------------------------- //
 	
 	@Override
-	public String getA(@NotNull DataBannerPattern ca, Object d)
+	public NamespacedKey getA(@NotNull DataBannerPattern ca, Object d)
 	{
 		return ca.getId();
 	}
 	
 	@Override
-	public void setA(@NotNull DataBannerPattern ca, String fa, Object d)
+	public void setA(@NotNull DataBannerPattern ca, NamespacedKey fa, Object d)
 	{
 		ca.setId(fa);
 	}

@@ -100,7 +100,7 @@ public class Mixin extends Engine
 		}
 		catch (Throwable t)
 		{
-			//t.printStackTrace();
+			t.printStackTrace();
 			throw ReflectionUtil.asRuntimeException(t);
 		}
 	}
@@ -273,7 +273,13 @@ public class Mixin extends Engine
 		"120R2P", "Minecraft 1.20.2+ [1_20_R2+]",
 		
 		"120R3", "Minecraft 1.20.4 [1_20_R3]",
-		"120R3P", "Minecraft 1.20.4+ [1_20_R3+]"
+		"120R3P", "Minecraft 1.20.4+ [1_20_R3+]",
+
+		"120R4", "Minecraft 1.20.5 --> 1.20.6 [1_20_R4]",
+		"120R4P", "Minecraft 1.20.5+ [1_20_R4+]",
+
+		"121R1", "Minecraft 1.21 [1_21_R1]",
+		"121R1P", "Minecraft 1.21+ [1_21_R1+]"
 	);
 	
 	public String createName()

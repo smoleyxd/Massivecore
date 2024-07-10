@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,27 +17,26 @@ public class RecipeUtil
 	// POTION
 	// -------------------------------------------- //
 	
-	public static @NotNull ItemStack createPotionItemStack(PotionType type, Material material, boolean upgraded, boolean extended, int amount)
+	public static @NotNull ItemStack createPotionItemStack(PotionType type, Material material, int amount)
 	{
 		ItemStack ret = new ItemStack(material, amount);
 		PotionMeta meta = InventoryUtil.createMeta(ret);
-		PotionData data = new PotionData(type, extended, upgraded);
-		meta.setBasePotionData(data);
+		meta.setBasePotionType(type);
 		ret.setItemMeta(meta);
 		return ret;
 	}
 	
-	public static ShapelessRecipe createPotion(PotionType type, Material material, boolean upgraded, boolean extended, Object... objects)
+	public static ShapelessRecipe createPotion(PotionType type, Material material, Object... objects)
 	{
 		// When brewing you actually get 3 potions.
 		final int amount = 3;
-		ItemStack item = createPotionItemStack(type, material, upgraded, extended, amount);
+		ItemStack item = createPotionItemStack(type, material, amount);
 		return createShapeless(item, objects);
 	}
 	
-	public static ShapelessRecipe addPotion(PotionType type, Material material, boolean upgraded, boolean extended, Object... objects)
+	public static ShapelessRecipe addPotion(PotionType type, Material material, Object... objects)
 	{
-		ShapelessRecipe recipe = createPotion(type, material, upgraded, extended, objects);
+		ShapelessRecipe recipe = createPotion(type, material, objects);
 		Bukkit.getServer().addRecipe(recipe);
 		return recipe;
 	}
@@ -71,29 +69,22 @@ public class RecipeUtil
 		
 		for (Object object : objects)
 		{
-			if (object instanceof Number)
-			{
-				if (object instanceof Integer)
-				{
-					quantity = (Integer) object;
-				}
-			}
-			else if (object instanceof Material)
-			{
-				material = (Material)object;
-				
-				recipe.addIngredient(quantity, material);
-				
-				quantity = 1;
-			}
-			else if (object instanceof RecipeChoice)
-			{
-				recipe.addIngredient((RecipeChoice) object);
-			}
-			else
-			{
-				throw new IllegalArgumentException(String.valueOf(object));
-			}
+            switch (object) {
+                case Number number -> {
+                    if (number instanceof Integer integer) {
+                        quantity = integer;
+                    }
+                }
+                case Material material1 -> {
+                    material = material1;
+
+                    recipe.addIngredient(quantity, material);
+
+                    quantity = 1;
+                }
+                case RecipeChoice recipeChoice -> recipe.addIngredient(recipeChoice);
+                case null, default -> throw new IllegalArgumentException(String.valueOf(object));
+            }
 		}
 		
 		return recipe;

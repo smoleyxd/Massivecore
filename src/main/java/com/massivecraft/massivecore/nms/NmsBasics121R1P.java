@@ -2,14 +2,13 @@ package com.massivecraft.massivecore.nms;
 
 import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_20_R3.block.CraftSign;
-import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_20_R3.scoreboard.CraftScoreboard;
+import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.block.CraftSign;
+import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.scoreboard.CraftScoreboard;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -18,7 +17,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.lang.reflect.Field;
 
-public class NmsBasics120R3 extends NmsBasics
+public class NmsBasics121R1P extends NmsBasics
 {
 	
 	// -------------------------------------------- //
@@ -26,21 +25,17 @@ public class NmsBasics120R3 extends NmsBasics
 	// -------------------------------------------- //
 	
 	@SuppressWarnings("FieldMayBeFinal")
-	private static NmsBasics120R3 i = new NmsBasics120R3();
-	public static NmsBasics120R3 get() { return i; }
+	private static NmsBasics121R1P i = new NmsBasics121R1P();
+	public static NmsBasics121R1P get() { return i; }
 	
 	// -------------------------------------------- //
 	// FIELDS
 	// -------------------------------------------- //
-	
-	// org.bukkit.craftbukkit.scoreboard.CraftTeam
-	private Class<?> classCraftTeam;
-	// org.bukkit.craftbukkit.scoreboard.CraftTeam#team
+
+    // org.bukkit.craftbukkit.scoreboard.CraftTeam#team
 	private Field fieldCraftTeamHandle;
-	
-	// org.bukkit.craftbukkit.scoreboard.CraftObjective
-	private Class<?> classCraftObjective;
-	// org.bukkit.craftbukkit.scoreboard.CraftObjective#objective
+
+    // org.bukkit.craftbukkit.scoreboard.CraftObjective#objective
 	private Field fieldCraftObjectiveHandle;
 	
 	// -------------------------------------------- //
@@ -51,11 +46,13 @@ public class NmsBasics120R3 extends NmsBasics
 	public void setup() throws Throwable
 	{
 		// GET HANDLE
-		this.classCraftTeam = PackageType.CRAFTBUKKIT_VERSION_SCOREBOARD.getClass("CraftTeam");
-		this.fieldCraftTeamHandle = ReflectionUtil.getField(this.classCraftTeam, "team");
-		
-		this.classCraftObjective = PackageType.CRAFTBUKKIT_VERSION_SCOREBOARD.getClass("CraftObjective");
-		this.fieldCraftObjectiveHandle = ReflectionUtil.getField(this.classCraftObjective, "objective");
+        // org.bukkit.craftbukkit.scoreboard.CraftTeam
+        Class<?> classCraftTeam = PackageType.CRAFTBUKKIT_SCOREBOARD.getClass("CraftTeam");
+		this.fieldCraftTeamHandle = ReflectionUtil.getField(classCraftTeam, "team");
+
+        // org.bukkit.craftbukkit.scoreboard.CraftObjective
+        Class<?> classCraftObjective = PackageType.CRAFTBUKKIT_SCOREBOARD.getClass("CraftObjective");
+		this.fieldCraftObjectiveHandle = ReflectionUtil.getField(classCraftObjective, "objective");
 	}
 	
 	// -------------------------------------------- //
@@ -96,7 +93,6 @@ public class NmsBasics120R3 extends NmsBasics
 	}
 	
 	@Override
-	@SuppressWarnings("deprecation")
 	public <T> T getHandle(Team team)
 	{
 		// CraftTeam is not public, annoyingly.
@@ -105,7 +101,6 @@ public class NmsBasics120R3 extends NmsBasics
 	}
 	
 	@Override
-	@SuppressWarnings("deprecation")
 	public <T> T getHandle(Objective objective)
 	{
 		// CraftObjective is not public, annoyingly.
@@ -118,10 +113,10 @@ public class NmsBasics120R3 extends NmsBasics
 	public net.minecraft.world.level.block.entity.SignBlockEntity getHandle(Sign sign)
 	{
 		if (sign == null) return null;
-		if (!(sign instanceof CraftSign craftSign))
+		if (!(sign instanceof CraftSign<? extends net.minecraft.world.level.block.entity.SignBlockEntity> craftSign))
 			throw new IllegalArgumentException("Sign provided is not a CraftSign");
 		
-		return (SignBlockEntity) craftSign.getTileEntity();
+		return craftSign.getTileEntity();
 	}
 	
 	// -------------------------------------------- //

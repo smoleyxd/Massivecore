@@ -41,7 +41,7 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"knockback", new MassiveList<>("Knockback", "KNOCKBACK"),
 		"fire_aspect", new MassiveList<>("Fire Aspect", "FIRE_ASPECT"),
 		"looting", new MassiveList<>("Looting", "LOOT_BONUS_MOBS"),
-		"sweeping", new MassiveList<>("Sweeping Edge", "SWEEPING_EDGE"),
+		"sweeping_edge", new MassiveList<>("Sweeping Edge", "SWEEPING_EDGE", "SweepingEdge"),
 		"efficiency", new MassiveList<>("Efficiency", "DIG_SPEED"),
 		"silk_touch", new MassiveList<>("Silk Touch", "SILK_TOUCH"),
 		"unbreaking", new MassiveList<>("Unbreaking", "DURABILITY"),
@@ -62,7 +62,10 @@ public class TypeEnchantment extends TypeAbstractChoice<Enchantment>
 		"multishot", new MassiveList<>("Multishot", "MULTISHOT"),
 		"quick_charge", new MassiveList<>("Quick Charge", "QUICK_CHARGE", "QuickCharge"),
 		"soul_speed", new MassiveList<>("Soul Speed", "SOUL_SPEED", "SoulSpeed"),
-		"swift_sneak", new MassiveList<>("Swift Sneak", "SWIFT_SNEAK", "SwiftSneak")
+		"swift_sneak", new MassiveList<>("Swift Sneak", "SWIFT_SNEAK", "SwiftSneak"),
+		"density", new MassiveList<>("Density", "DENSITY"),
+		"breach", new MassiveList<>("Breach", "BREACH"),
+		"wind_burst", new MassiveList<>("Wind Burst", "WIND_BURST", "WindBurst")
 	);
 	
 	public static @NotNull String enchantmentToKey(@NotNull Enchantment enchantment) {

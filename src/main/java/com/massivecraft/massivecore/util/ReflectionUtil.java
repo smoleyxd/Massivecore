@@ -6,7 +6,6 @@ import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateAnd;
 import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath;
 import com.massivecraft.massivecore.xlib.guava.reflect.ClassPath.ClassInfo;
-import org.bukkit.Bukkit;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -502,37 +501,6 @@ public class ReflectionUtil
 		// Rest
 		return new IllegalStateException(t.getClass().getSimpleName() + ": " + t.getMessage());
 	}
-	
-	// -------------------------------------------- //
-	// BUKKIT VERSION
-	// -------------------------------------------- //
-	
-	// Example: "v1_9_R4"
-	private static final String versionRaw = Bukkit.getServer().getClass().getPackage().getName().substring(23);
-	@Contract(pure = true)
-	public static String getVersionRaw() { return versionRaw; }
-	
-	public static String getVersionRawPart(int index)
-	{
-		String versionRaw = getVersionRaw();
-		String[] parts = versionRaw.split("_");
-		return parts[index];
-	}
-	
-	// Example: 1
-	private static final int versionMajor = Integer.parseInt(getVersionRawPart(0).substring(1));
-	@Contract(pure = true)
-	public static int getVersionMajor() { return versionMajor; }
-	
-	// Example: 9
-	private static final int versionMinor = Integer.parseInt(getVersionRawPart(1));
-	@Contract(pure = true)
-	public static int getVersionMinor() { return versionMinor; }
-	
-	// Example: 4
-	private static final int versionRelease = Integer.parseInt(getVersionRawPart(2).substring(1));
-	@Contract(pure = true)
-	public static int getVersionRelease() { return versionRelease; }
 	
 	// -------------------------------------------- //
 	// FORCE LOAD CLASSES

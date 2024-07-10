@@ -115,7 +115,7 @@ public class DataItemStack implements Comparable<DataItemStack>
 	public static final transient List<String> DEFAULT_RECIPES = Collections.emptyList();
 	public static final transient List<DataItemStack> DEFAULT_BUNDLE = Collections.emptyList();
 	public static final transient Axolotl.Variant DEFAULT_AXOLOTL_VARIANT = Axolotl.Variant.WILD;
-	public static final transient NamespacedKey DEFAULT_MUSIC_INSTRUMENT = Registry.INSTRUMENT.getKey(MusicInstrument.PONDER);
+	public static final transient NamespacedKey DEFAULT_MUSIC_INSTRUMENT = Registry.INSTRUMENT.getKey(MusicInstrument.PONDER_GOAT_HORN);
 	public static final transient DataArmorTrim DEFAULT_ARMOR_TRIM = null;
 	public static final transient Map<DecoratedPot.Side, Material> DEFAULT_SHERDS = null;
 	public static final transient Set<DataAttributeModifier> DEFAULT_ATTRIBUTE_MODIFIERS = Collections.emptySet();

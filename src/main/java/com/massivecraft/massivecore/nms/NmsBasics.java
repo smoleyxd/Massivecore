@@ -16,7 +16,7 @@ public class NmsBasics extends Mixin
 	// -------------------------------------------- //
 	
 	private static final NmsBasics d = new NmsBasics().setAlternatives(
-		NmsBasics120R3.class
+		NmsBasics121R1P.class
 	);
 	
 	// -------------------------------------------- //
@@ -49,13 +49,11 @@ public class NmsBasics extends Mixin
 		throw this.notImplemented();
 	}
 	
-	@Deprecated
 	public <T> T getHandle(Team team)
 	{
 		throw this.notImplemented();
 	}
 	
-	@Deprecated
 	public <T> T getHandle(Objective objective)
 	{
 		throw this.notImplemented();
