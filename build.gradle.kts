@@ -65,7 +65,7 @@ dependencies {
     }
 
     compileOnly("org.jetbrains", "annotations", "24.1.0")
-    compileOnly("io.lumine.mythic", "MythicMobs")
+    compileOnly("io.lumine", "Mythic-Dist")
 }
 
 // Tasks
