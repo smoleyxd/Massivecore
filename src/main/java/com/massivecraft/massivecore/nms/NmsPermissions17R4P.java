@@ -1,7 +1,7 @@
 package com.massivecraft.massivecore.nms;
 
-import com.massivecraft.massivecore.particleeffect.ReflectionUtils.PackageType;
 import com.massivecraft.massivecore.util.ReflectionUtil;
+import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissibleBase;
@@ -26,7 +26,6 @@ public class NmsPermissions17R4P extends NmsPermissions
 	// FIELDS
 	// -------------------------------------------- //
 	
-	protected Class<?> classCraftHumanEntity;
 	protected Field fieldCraftHumanEntityBase;
 	
 	protected Field fieldPermissibleBaseAttachments;
@@ -40,8 +39,7 @@ public class NmsPermissions17R4P extends NmsPermissions
 	@Override
 	public void setup() throws Throwable
 	{
-		this.classCraftHumanEntity = PackageType.CRAFTBUKKIT_VERSION_ENTITY.getClass("CraftHumanEntity");
-		this.fieldCraftHumanEntityBase = ReflectionUtil.getField(this.classCraftHumanEntity, "perm");
+		this.fieldCraftHumanEntityBase = ReflectionUtil.getField(CraftHumanEntity.class, "perm");
 		
 		this.fieldPermissibleBaseAttachments = ReflectionUtil.getField(PermissibleBase.class, "attachments");
 		

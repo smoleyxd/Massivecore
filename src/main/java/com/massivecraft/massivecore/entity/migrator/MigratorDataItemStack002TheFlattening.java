@@ -77,7 +77,8 @@ public class MigratorDataItemStack002TheFlattening extends MigratorRoot
 	// CONVERSION
 	// -------------------------------------------- //
 	
-	@Override
+	@SuppressWarnings("removal")
+    @Override
 	public void migrateInner(JsonObject entity) {
 		// Get the legacy id
 		JsonElement jsonId = entity.get("id");

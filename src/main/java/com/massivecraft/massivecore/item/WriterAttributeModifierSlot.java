@@ -1,10 +1,11 @@
 package com.massivecraft.massivecore.item;
 
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.NotNull;
 
-public class WriterAttributeModifierSlot extends WriterAbstractAttributeModifier<EquipmentSlot, EquipmentSlot>
+@SuppressWarnings("UnstableApiUsage")
+public class WriterAttributeModifierSlot extends WriterAbstractAttributeModifier<String, EquipmentSlotGroup>
 {
 	// -------------------------------------------- //
 	// INSTANCE & CONSTRUCT
@@ -15,6 +16,8 @@ public class WriterAttributeModifierSlot extends WriterAbstractAttributeModifier
 	public WriterAttributeModifierSlot()
 	{
 		super("slot");
+		this.setConverterTo(ConverterToEquipmentSlotGroup.get());
+		this.setConverterFrom(ConverterFromEquipmentSlotGroup.get());
 	}
 	
 	// -------------------------------------------- //
@@ -22,21 +25,21 @@ public class WriterAttributeModifierSlot extends WriterAbstractAttributeModifier
 	// -------------------------------------------- //
 	
 	@Override
-	public EquipmentSlot getA(@NotNull DataAttributeModifier ca, Object d)
+	public String getA(@NotNull DataAttributeModifier ca, Object d)
 	{
 		return ca.getSlot();
 	}
 	
 	@Override
-	public void setA(@NotNull DataAttributeModifier ca, EquipmentSlot fa, Object d)
+	public void setA(@NotNull DataAttributeModifier ca, String fa, Object d)
 	{
 		ca.setSlot(fa);
 	}
 	
 	@Override
-	public EquipmentSlot getB(@NotNull AttributeModifier cb, Object d)
+	public EquipmentSlotGroup getB(@NotNull AttributeModifier cb, Object d)
 	{
-		return cb.getSlot();
+		return cb.getSlotGroup();
 	}
 	
 }

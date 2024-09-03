@@ -1496,7 +1496,7 @@ public class MUtil
 
 		List<PotionEffectType> ret = new ArrayList<>();
 		
-		ret.add(meta.getBasePotionData().getType().getEffectType());
+		ret.add(meta.getBasePotionType().getEffectType());
 		
 		if (!meta.hasCustomEffects()) return ret;
 		
@@ -1509,10 +1509,10 @@ public class MUtil
 	}
 	
 	public static final Set<PotionEffectType> HARMFUL_POTION_EFFECTS = Collections.unmodifiableSet(MUtil.set(
-		PotionEffectType.SLOW,
-		PotionEffectType.SLOW_DIGGING,
-		PotionEffectType.HARM,
-		PotionEffectType.CONFUSION,
+		PotionEffectType.SLOWNESS,
+		PotionEffectType.MINING_FATIGUE,
+		PotionEffectType.INSTANT_DAMAGE,
+		PotionEffectType.NAUSEA,
 		PotionEffectType.BLINDNESS,
 		PotionEffectType.HUNGER,
 		PotionEffectType.WEAKNESS,

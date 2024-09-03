@@ -11,8 +11,7 @@ public class WriterAttributeModifier extends WriterAbstractAttributeModifier<Obj
 	public WriterAttributeModifier()
 	{
 		this.addWriterClasses(
-			WriterAttributeModifierUniqueId.class,
-			WriterAttributeModifierName.class,
+			WriterAttributeModifierKey.class,
 			WriterAttributeModifierAmount.class,
 			WriterAttributeModifierOperation.class,
 			WriterAttributeModifierSlot.class

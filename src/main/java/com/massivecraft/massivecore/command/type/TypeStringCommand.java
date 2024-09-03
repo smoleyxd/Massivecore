@@ -4,6 +4,7 @@ import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.engine.EngineMassiveCoreCommandRegistration;
 import com.massivecraft.massivecore.util.Txt;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -115,8 +116,7 @@ public class TypeStringCommand extends TypeAbstract<String>
 	
 	public static Map<String, Command> getKnownCommands()
 	{
-		SimpleCommandMap simpleCommandMap = EngineMassiveCoreCommandRegistration.getSimpleCommandMap();
-		return EngineMassiveCoreCommandRegistration.getSimpleCommandMapDotKnownCommands(simpleCommandMap);
+		return Bukkit.getCommandMap().getKnownCommands();
 	}
 	
 	public static Command getCommand(String name)

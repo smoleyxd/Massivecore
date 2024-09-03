@@ -1,5 +1,5 @@
-# This template uses jdk17 for verifying and deploying images
-image: gradle:jdk17
+# This template uses jdk21 for verifying and deploying images
+image: gradle:jdk21
 
 # Define possible stages
 stages:
@@ -35,7 +35,7 @@ publish:
     - './gradlew publish'
 
 # Deploy to Test Server
-deploy:jdk17:
+deploy:jdk21:
   stage: deploy
   script:
     - 'echo "Dummy task to deploy to Test"'

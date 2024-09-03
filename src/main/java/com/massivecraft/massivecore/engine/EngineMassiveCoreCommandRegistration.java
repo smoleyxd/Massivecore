@@ -6,17 +6,13 @@ import com.massivecraft.massivecore.command.MassiveCommand;
 import com.massivecraft.massivecore.command.MassiveCoreBukkitCommand;
 import com.massivecraft.massivecore.util.ReflectionUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
-import org.bukkit.command.SimpleCommandMap;
+import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class EngineMassiveCoreCommandRegistration extends Engine
@@ -56,9 +52,9 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 	
 	public static void updateRegistrations()
 	{
-		// Step #1: Hack into Bukkit and get the SimpleCommandMap and it's knownCommands.
-		SimpleCommandMap simpleCommandMap = getSimpleCommandMap();
-		Map<String, Command> knownCommands = getSimpleCommandMapDotKnownCommands(simpleCommandMap);
+		// Step #1: Get the Bukkit commandMap, and its knockCommands map.
+		CommandMap commandMap = Bukkit.getCommandMap();
+		Map<String, Command> knownCommands = commandMap.getKnownCommands();
 		
 		// Step #2: Create a "name --> target" map that contains the MassiveCommands that /should/ be registered in Bukkit. 
 		Map<String, MassiveCommand> nameTargets = new HashMap<>();
@@ -100,7 +96,7 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 			if (current != null)
 			{
 				knownCommands.remove(name);
-				current.unregister(simpleCommandMap);
+				current.unregister(commandMap);
 			}
 			
 			// ... create a new MassiveCoreBukkitCommand ...
@@ -109,47 +105,30 @@ public class EngineMassiveCoreCommandRegistration extends Engine
 			// ... and finally register it.
 			Plugin plugin = command.getPlugin();
 			String pluginName = plugin.getName();
-			simpleCommandMap.register(pluginName, command);
+			commandMap.register(pluginName, command);
 		}
 		
 		// Step #4: Remove/Unregister MassiveCommands from Bukkit that are but should not be that any longer. 
 		// For each known command ...
-		Iterator<Entry<String, Command>> iter = knownCommands.entrySet().iterator();
-		while (iter.hasNext())
-		{
-			Entry<String, Command> entry = iter.next();
-			String name = entry.getKey();
-			Command command = entry.getValue();
-			
-			// ... that is a MassiveCoreBukkitCommand ...
-			MassiveCommand massiveCommand = getMassiveCommand(command);
-			if (massiveCommand == null) continue;
-			
-			// ... and not a target ...
-			if (nameTargets.containsKey(name)) continue;
-			
-			// ... unregister it.
-			command.unregister(simpleCommandMap);
-			iter.remove();
-		}
+		Set<String> commandsToRemove = new HashSet<>();
+        for (Entry<String, Command> entry : knownCommands.entrySet()) {
+            String name = entry.getKey();
+            Command command = entry.getValue();
+
+            // ... that is a MassiveCoreBukkitCommand ...
+            MassiveCommand massiveCommand = getMassiveCommand(command);
+            if (massiveCommand == null) continue;
+
+            // ... and not a target ...
+            if (nameTargets.containsKey(name)) continue;
+
+            // ... unregister it.
+            command.unregister(commandMap);
+            commandsToRemove.add(name);
+        }
+		commandsToRemove.forEach(knownCommands::remove);
+
 		syncCommands();
-	}
-	
-	// -------------------------------------------- //
-	// GETTERS
-	// -------------------------------------------- //
-	
-	protected static Field SERVER_DOT_COMMAND_MAP = ReflectionUtil.getField(Bukkit.getServer().getClass(), "commandMap");
-	public static SimpleCommandMap getSimpleCommandMap()
-	{
-		Server server = Bukkit.getServer();
-		return ReflectionUtil.getField(SERVER_DOT_COMMAND_MAP, server);
-	}
-	
-	protected static Field SIMPLE_COMMAND_MAP_DOT_KNOWN_COMMANDS = ReflectionUtil.getField(SimpleCommandMap.class, "knownCommands");
-	public static Map<String, Command> getSimpleCommandMapDotKnownCommands(SimpleCommandMap simpleCommandMap)
-	{
-		return ReflectionUtil.getField(SIMPLE_COMMAND_MAP_DOT_KNOWN_COMMANDS, simpleCommandMap);
 	}
 	
 	// -------------------------------------------- //

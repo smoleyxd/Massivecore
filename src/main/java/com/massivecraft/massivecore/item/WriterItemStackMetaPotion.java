@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 public class WriterItemStackMetaPotion extends WriterAbstractItemStackMetaField<PotionMeta, Object, Object>
 {
@@ -56,16 +56,16 @@ public class WriterItemStackMetaPotion extends WriterAbstractItemStackMetaField<
 			
 			// Create & Fill
 			String potionString = ca.getPotion();
-			PotionData potionData = PotionUtil.toPotionData(potionString);
+			PotionType potionType = PotionUtil.toPotionType(potionString);
 			
 			// Set
-			cb.setBasePotionData(potionData);
+			cb.setBasePotionType(potionType);
 		}
 		else
 		{
 			// SERIALIZE
-			PotionData potionData = cb.getBasePotionData();
-			String potionString = PotionUtil.toPotionString(potionData);
+			PotionType potionType = cb.getBasePotionType();
+			String potionString = PotionUtil.toPotionString(potionType);
 			ca.setPotion(potionString);
 		}
 	}

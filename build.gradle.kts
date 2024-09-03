@@ -15,12 +15,12 @@ plugins {
 
 // Basics
 group = "com.massivecraft.${name.lowercase()}"
-version = "MC-1.20.4-SNAPSHOT"
+version = "MC-1.21-SNAPSHOT"
 description = name
 
 // Java Version
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 // Repositories
@@ -50,6 +50,9 @@ dependencyManagement {
     }
 }
 
+// Mojang-mapped Reobf
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
+
 // Dependencies
 dependencies {
     paperweight.paperDevBundle(project.dependencyManagement.importedProperties["massiveSpigotVersion"])
@@ -70,10 +73,16 @@ dependencies {
 
 // Tasks
 tasks {
-    // Configure reobfJar to run when invoking the build task
     build {
-        dependsOn(reobfJar)
         dependsOn(shadowJar)
+    }
+
+    jar {
+        archiveClassifier.set("original")
+    }
+
+    shadowJar {
+        archiveClassifier.set("")
     }
 
     withType<GenerateModuleMetadata> {
@@ -85,7 +94,7 @@ tasks {
 
         // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
         // See https://openjdk.java.net/jeps/247 for more information.
-        options.release.set(17)
+        options.release.set(21)
     }
 
     javadoc {
@@ -114,18 +123,6 @@ tasks {
         )
     }
 }
-
-// ReobfJar Artifacts
-fun addReobfTo(target: NamedDomainObjectProvider<Configuration>, classifier: String? = null) {
-    target.get().let {
-        it.outgoing.artifact(tasks.reobfJar.get().outputJar) {
-            this.classifier = classifier
-        }
-        (components["java"] as AdhocComponentWithVariants).addVariantsFromConfiguration(it) {}
-    }
-}
-addReobfTo(configurations.apiElements)
-addReobfTo(configurations.runtimeElements)
 
 // Jars
 java {

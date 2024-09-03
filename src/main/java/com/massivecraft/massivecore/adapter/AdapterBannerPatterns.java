@@ -55,7 +55,7 @@ public class AdapterBannerPatterns implements JsonDeserializer<MassiveListDef<Da
 		JsonArray array = json.getAsJsonArray();
 		
 		// Empty?
-		if (array.size() == 0) return ret;
+		if (array.isEmpty()) return ret;
 		
 		// First element indicates version
 		JsonElement first = array.get(0);

@@ -15,6 +15,7 @@ import com.massivecraft.massivecore.xlib.gson.JsonElement;
 import com.massivecraft.massivecore.xlib.gson.JsonNull;
 import com.massivecraft.massivecore.xlib.gson.JsonPrimitive;
 import com.massivecraft.massivecore.xlib.guava.collect.ImmutableList;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.mutable.MutableInt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("deprecation")
 public class Mson implements Serializable
 {
 	// -------------------------------------------- //
@@ -45,7 +47,7 @@ public class Mson implements Serializable
 	@Serial
 	private static final transient long serialVersionUID = 1L;
 	
-	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<vhex>(\u00A7x(?:\u00A7[a-fA-F0-9]){6})))|(?=(?<!\u00A7x(?:\u00A7[a-fA-F0-9]){0,5})(?<code>\u00A7[0-9a-fk-or]))|(?=<(?<mhex>(#[a-fA-F0-9]{6}))>)");
+	public static final transient Pattern PATTERN_PARSE_PREFIX = Pattern.compile("(?=(?<vhex>(§x(?:§[a-fA-F0-9]){6})))|(?=(?<!§x(?:§[a-fA-F0-9]){0,5})(?<code>§[0-9a-fk-or]))|(?=<(?<mhex>(#[a-fA-F0-9]{6}))>)");
 	
 	public static final transient AdapterLowercaseEnum<ChatColor> ADAPTER_LOWERCASE_CHAT_COLOR = AdapterLowercaseEnum.get(ChatColor.class);
 	public static final transient AdapterLowercaseEnum<MsonEventAction> ADAPTER_LOWERCASE_MSON_EVENT_ACTION = AdapterLowercaseEnum.get(MsonEventAction.class);
@@ -282,6 +284,8 @@ public class Mson implements Serializable
 	@Contract("_ -> new")
 	public @NotNull Mson color(@Nullable ChatColor color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	@Contract("_ -> new")
+	public @NotNull Mson color(@Nullable NamedTextColor color) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
+	@Contract("_ -> new")
 	public @NotNull Mson bold(@Nullable Boolean bold) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
 	@Contract("_ -> new")
 	public @NotNull Mson italic(@Nullable Boolean italic) { return Mson.valueOf(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertion, extra, parent); }
@@ -517,8 +521,8 @@ public class Mson implements Serializable
 		// Color
 		if (color != null) {
 			if (!color.startsWith("#")) {
-				ChatColor chatColor = ChatColor.valueOf(color.toUpperCase());
-				if (!chatColor.isColor()) throw new IllegalArgumentException(chatColor.name() + " is not a color");
+				NamedTextColor chatColor = NamedTextColor.NAMES.value(color.toLowerCase());
+				if (chatColor == null) throw new IllegalArgumentException(color + " is not a color");
 			}
 			color = color.toLowerCase();
 		}
@@ -552,7 +556,7 @@ public class Mson implements Serializable
 		this.insertion = insertionString;
 
 		// Mojang doesn't allow zero sized arrays, but null is fine. So null.
-		if (extra != null && extra.size() == 0) extra = null;
+		if (extra != null && extra.isEmpty()) extra = null;
 
 		// Extra
 		if (extra != null)
@@ -575,7 +579,7 @@ public class Mson implements Serializable
 		if (this == parent) throw new IllegalArgumentException("Parent can't be oneself.");
 		this.parent = parent;
 	}
-
+	
 	Mson(@NotNull String text,
 		 @Nullable ChatColor color,
 		 @Nullable Boolean bold,
@@ -592,8 +596,30 @@ public class Mson implements Serializable
 		this(text, color == null ? null : color.name().toLowerCase(), bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
 	
+	Mson(@NotNull String text,
+		 @Nullable NamedTextColor color,
+		 @Nullable Boolean bold,
+		 @Nullable Boolean italic,
+		 @Nullable Boolean underlined,
+		 @Nullable Boolean strikethrough,
+		 @Nullable Boolean obfuscated,
+		 @Nullable MsonEvent clickEvent,
+		 @Nullable MsonEvent hoverEvent,
+		 @Nullable String insertionString,
+		 @Nullable List<Mson> extra,
+		 @Nullable Mson parent)
+	{
+		this(text, color == null ? null : color.toString(), bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
+	}
+	
 	@Contract("_, _, _, _, _, _, _, _, _, _, _, _ -> new")
 	public static @NotNull Mson valueOf(@NotNull String text, @Nullable ChatColor color, @Nullable Boolean bold, @Nullable Boolean italic, @Nullable Boolean underlined, @Nullable Boolean strikethrough, @Nullable Boolean obfuscated, @Nullable MsonEvent clickEvent, @Nullable MsonEvent hoverEvent, @Nullable String insertionString, @Nullable List<Mson> extra, @Nullable Mson parent)
+	{
+		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
+	}
+	
+	@Contract("_, _, _, _, _, _, _, _, _, _, _, _ -> new")
+	public static @NotNull Mson valueOf(@NotNull String text, @Nullable NamedTextColor color, @Nullable Boolean bold, @Nullable Boolean italic, @Nullable Boolean underlined, @Nullable Boolean strikethrough, @Nullable Boolean obfuscated, @Nullable MsonEvent clickEvent, @Nullable MsonEvent hoverEvent, @Nullable String insertionString, @Nullable List<Mson> extra, @Nullable Mson parent)
 	{
 		return new Mson(text, color, bold, italic, underlined, strikethrough, obfuscated, clickEvent, hoverEvent, insertionString, extra, parent);
 	}
@@ -724,8 +750,8 @@ public class Mson implements Serializable
 					latestColor = matcher.group("vhex");
 					text = part.substring(latestColor.length());
 					
-					latestColor = latestColor.replace("\u00A7x", "#");
-				  	latestColor = latestColor.replace("\u00A7", "");
+					latestColor = latestColor.replace("§x", "#");
+				  	latestColor = latestColor.replace("§", "");
 				}
 				else if (matcher.group("code") != null)
 				{
@@ -775,7 +801,7 @@ public class Mson implements Serializable
 	@Contract(pure = true)
 	private static @NotNull String ensureStartsWithColorCode(@NotNull String message)
 	{
-		if ( ! message.startsWith("\u00A7"))
+		if ( ! message.startsWith("§"))
 		{
 			message = ChatColor.RESET + message;
 		}
@@ -1161,7 +1187,7 @@ public class Mson implements Serializable
 	
 	private static boolean addStringBuffer(@NotNull List<Mson> msons, @NotNull StringBuffer buffer)
 	{
-		if (buffer.length() == 0) return false;
+		if (buffer.isEmpty()) return false;
 		Mson mson = mson(buffer.toString());
 		msons.add(mson);
 		return true;
@@ -1221,11 +1247,11 @@ public class Mson implements Serializable
 	{
 		return implode(list, glue, null);
 	}
-	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue, final @Nullable Mson format)
+	public static @NotNull Mson implode(final @NotNull Collection<?> coll, final Mson glue, final @Nullable Mson format)
 	{
 		return implode(coll.toArray(new Object[0]), glue, format);
 	}
-	public static @NotNull Mson implode(final @NotNull Collection<@Nullable ?> coll, final Mson glue)
+	public static @NotNull Mson implode(final @NotNull Collection<?> coll, final Mson glue)
 	{
 		return implode(coll, glue, null);
 	}
@@ -1233,7 +1259,7 @@ public class Mson implements Serializable
 	// Implode comma and dot
 	public static Mson implodeCommaAndDot(@NotNull Collection<?> objects, Mson format, Mson comma, Mson and, Mson dot)
 	{
-		if (objects.size() == 0) return mson();
+		if (objects.isEmpty()) return mson();
 		if (objects.size() == 1)
 		{
 			return implode(objects, comma, format);
@@ -1241,8 +1267,8 @@ public class Mson implements Serializable
 		
 		List<Object> ourObjects = new MassiveList<>(objects);
 		
-		Mson ultimateItem = mson(ourObjects.remove(ourObjects.size()-1));
-		Mson penultimateItem = mson(ourObjects.remove(ourObjects.size()-1));
+		Mson ultimateItem = mson(ourObjects.removeLast());
+		Mson penultimateItem = mson(ourObjects.removeLast());
 		if (format != null)
 		{
 			ultimateItem = format.replaceAll("%s", ultimateItem);

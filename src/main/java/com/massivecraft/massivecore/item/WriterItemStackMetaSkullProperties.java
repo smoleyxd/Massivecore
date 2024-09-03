@@ -86,7 +86,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 		UUID uuid = uuidRaw != null ? UUID.fromString(uuidRaw) : UUID.randomUUID();
 		
 		String name = container.getName();
-		if (name == null) name = String.format("null_%d", MassiveCore.random.nextInt(10_000));
+		if (name == null || !isValidPlayerName(name)) name = String.format("null_%d", MassiveCore.random.nextInt(10_000));
 		
 		Object gameprofile = nms.createGameProfile(uuid, name);
 		Object propertyMap = nms.createPropertyMap();
@@ -114,4 +114,7 @@ public class WriterItemStackMetaSkullProperties extends WriterAbstractItemStackM
 		return ret;
 	}
 	
+	public static boolean isValidPlayerName(String name) {
+		return name.length() <= 16 && name.chars().filter(c -> c <= 32 || c >= 127).findAny().isEmpty();
+	}
 }
